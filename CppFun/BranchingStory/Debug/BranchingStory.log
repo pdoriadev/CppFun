@@ -1,0 +1,3 @@
+﻿  BranchingStory.cpp
+C:\Users\peter\devProjects\CppFun\BranchingStory\BranchingStory.cpp(93,27): warning C4018: '<': signed/unsigned mismatch
+  BranchingStory.vcxproj -> C:\Users\peter\devProjects\CppFun\BranchingStory\Debug\BranchingStory.exe

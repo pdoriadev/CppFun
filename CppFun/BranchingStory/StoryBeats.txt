@@ -1,0 +1,19 @@
+ Volume in drive C has no label.
+ Volume Serial Number is E236-FA14
+
+ Directory of C:\Users\peter\devProjects\CppFun\BranchingStory
+
+
+ Directory of C:\Users\peter\devProjects\CppFun\BranchingStory
+
+05/05/2023  03:57 AM                11 $=0.txt
+05/05/2023  03:57 AM                 6 $=1a_0.txt
+05/05/2023  03:57 AM                 6 $=1b_0.txt
+05/05/2023  03:57 AM                 6 $=2a_1a.txt
+05/05/2023  03:57 AM                 6 $=2a_1b.txt
+05/05/2023  03:57 AM                 6 $=2b_1a.txt
+05/05/2023  03:57 AM                 6 $=2b_1b.txt
+05/05/2023  03:57 AM                 6 $=3a_2a-1a_2a-1b_2b-1a_2b-1b.txt
+05/08/2023  10:02 PM                 0 StoryBeats.txt
+               9 File(s)             53 bytes
+               0 Dir(s)  67,148,689,408 bytes free
