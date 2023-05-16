@@ -21,44 +21,55 @@ struct Vector2
 	}
 };
 
-void placeCursor(HANDLE, int, int);   // Function prototypes
-void shiftCursorFromCurrentPos(HANDLE screen, int rowShift, int colShift);
-COORD getConsoleCursorPosition(HANDLE screen);
 void displayPrompts(HANDLE, const Vector2&);
 void getUserInput(HANDLE, Vector2&, const Vector2&);
 void displayData(HANDLE, const Vector2&, const Vector2&);
-void clearCurrentConsoleLine(HANDLE screen);
-_SMALL_RECT getConsoleRect(HANDLE screen);
-void clearConsole(HANDLE screen);
-//bool shouldCreateTriangle(HANDLE screen);
+bool shouldDrawRectangle(HANDLE screen, const Vector2&);
 
 int main()
 {
 	Vector2 input = Vector2(); // input is a Vector2 structure that has 2 member variables
+	Vector2 promptShouldDrawPos = Vector2(0, 25);
 	Vector2 promptStartOutputPos = Vector2(3, 25);
 	Vector2 rectangleStartOutputPos = Vector2(12, 25);
 
-
-
 	// Get the handle to standard output device (the console)
 	HANDLE screen = GetStdHandle(STD_OUTPUT_HANDLE);
-	
+	bool firstDraw = true;
+	bool shouldDrawRect = false;
+	while (firstDraw || shouldDrawRect)
+	{
+		if (firstDraw)
+			firstDraw = false;
+		if (shouldDrawRect)
+			clearConsole(screen);
+
 		displayPrompts(screen, promptStartOutputPos);
 		getUserInput(screen, input, promptStartOutputPos);
 		displayData(screen, input, rectangleStartOutputPos);
-
-		clearConsole(screen);
+		
+		shouldDrawRect = shouldDrawRectangle(screen, promptShouldDrawPos);
+	}
 
 	return 0;
 }
-//
-//bool shouldCreateTriangle()
-//{
-//	char input;
-//	placeCursor()
-//	cin >> input;
-//	if ()
-//}
+
+bool shouldDrawRectangle(HANDLE screen, const Vector2& promptPosition)
+{
+	char input;
+	placeCursor(screen, promptPosition.x, promptPosition.y);
+	std::cout << "Do you want to draw another rectangle? Input 'y' or 'Y' to drawn another rectangle. Input any other character to stop drawing....";
+	std::cout << "INPUT: ";
+	std::cin >> input;
+	if (input == 'y' || input == 'Y')
+	{
+		return true;
+	}
+
+	placeCursor(screen, 25, promptPosition.y);
+	std::cout << "No more rectangles.";
+	return false;
+}
 
 /******************************************************
  *                   displayPrompts                   *
