@@ -2,7 +2,6 @@
 // from the user.
      // Needed to set cursor positions
 #include <string>
-#include <assert.h>
 #include "WinConsoleMethods.h"
 
 struct Vector2
