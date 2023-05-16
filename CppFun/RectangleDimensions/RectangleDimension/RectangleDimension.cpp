@@ -132,30 +132,30 @@ void displayData(HANDLE screen, const Vector2& input, const Vector2& rectangleOu
 	std::string innerRectOutput = "";
 	for (int i = 0; i < input.x; i++)
 	{
-		topAndBottomOutput.append("*");
-		if (i == 0 )
-		{
-			innerRectOutput += '*';
-			continue;
-		}
-		
 		if( i == input.x - 1)
 		{
+			topAndBottomOutput.append("*");
 			innerRectOutput += '*';
 			break;
 		}
+
+		if (i == 0 )
+		{
+			topAndBottomOutput.append("* ");
+			innerRectOutput += "* ";
+			continue;
+		}
 		
-		innerRectOutput += ' ';
+		topAndBottomOutput += "* ";
+		innerRectOutput += "  ";
 	}
-	innerRectOutput;
-	topAndBottomOutput;
 	
 	// Draw Rectangle
 	placeCursor(screen, rectangleOutputStartPos.x + 4, rectangleOutputStartPos.y);
 	std::cout << topAndBottomOutput;
-	for (int i = 1; i < input.y - 2; i++)
+	for (int i = 0; i < input.y - 2; i++)
 	{
-		placeCursor(screen, rectangleOutputStartPos.x + 4 + i, rectangleOutputStartPos.y);
+		placeCursor(screen, rectangleOutputStartPos.x + 4 + 1 + i, rectangleOutputStartPos.y);
 		std::cout << innerRectOutput;
 	}
 	placeCursor(screen, rectangleOutputStartPos.x + 4 + input.y - 1, rectangleOutputStartPos.y);
