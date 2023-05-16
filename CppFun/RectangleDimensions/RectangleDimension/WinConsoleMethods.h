@@ -3,24 +3,13 @@
 #include <iomanip>
 #include <windows.h> 
 
-/******************************************************
-	*                    placeCursor                     *
-	******************************************************/
-void placeCursor(HANDLE screen, int row, int col)
-{                       // COORD is a defined C++ structure that
-	COORD position;     // holds a pair of X and Y coordinates
-	position.Y = row;
-	position.X = col;
-	SetConsoleCursorPosition(screen, position);
-}
+COORD getConsoleCursorPosition(HANDLE screen);
+_SMALL_RECT getConsoleRect(HANDLE screen);
+void placeCursor(HANDLE screen, int row, int col);
+void shiftCursorFromCurrentPos(HANDLE screen, int rowShift, int colShift);
+void clearCurrentConsoleLine(HANDLE screen);
+void clearConsole(HANDLE screen);
 
-void shiftCursorFromCurrentPos(HANDLE screen, int rowShift, int colShift)
-{
-	COORD position = getConsoleCursorPosition(screen);
-	position.Y += rowShift;
-	position.Y += colShift;
-	SetConsoleCursorPosition(screen, position);
-}
 
 COORD getConsoleCursorPosition(HANDLE screen)
 {
@@ -49,6 +38,26 @@ _SMALL_RECT getConsoleRect(HANDLE screen)
 		return invalid;
 	}
 }
+
+/******************************************************
+	*                    placeCursor                     *
+	******************************************************/
+void placeCursor(HANDLE screen, int row, int col)
+{                       // COORD is a defined C++ structure that
+	COORD position;     // holds a pair of X and Y coordinates
+	position.Y = row;
+	position.X = col;
+	SetConsoleCursorPosition(screen, position);
+}
+
+void shiftCursorFromCurrentPos(HANDLE screen, int rowShift, int colShift)
+{
+	COORD position = getConsoleCursorPosition(screen);
+	position.Y += rowShift;
+	position.Y += colShift;
+	SetConsoleCursorPosition(screen, position);
+}
+
 
 void clearCurrentConsoleLine(HANDLE screen)
 {
