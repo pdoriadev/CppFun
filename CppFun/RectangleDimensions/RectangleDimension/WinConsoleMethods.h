@@ -5,8 +5,8 @@
 
 COORD getConsoleCursorPosition(HANDLE screen);
 _SMALL_RECT getConsoleRect(HANDLE screen);
-void placeCursor(HANDLE screen, int row, int col);
-void shiftCursorFromCurrentPos(HANDLE screen, int rowShift, int colShift);
+void placeCursor(HANDLE screen, const int row, const int col);
+void shiftCursorFromCurrentPos(HANDLE screen, const int rowShift, const int colShift);
 void clearCurrentConsoleLine(HANDLE screen);
 void clearConsole(HANDLE screen);
 
@@ -42,7 +42,7 @@ _SMALL_RECT getConsoleRect(HANDLE screen)
 /******************************************************
 	*                    placeCursor                     *
 	******************************************************/
-void placeCursor(HANDLE screen, int row, int col)
+void placeCursor(HANDLE screen, const int row, const int col)
 {                       // COORD is a defined C++ structure that
 	COORD position;     // holds a pair of X and Y coordinates
 	position.Y = row;
@@ -50,7 +50,7 @@ void placeCursor(HANDLE screen, int row, int col)
 	SetConsoleCursorPosition(screen, position);
 }
 
-void shiftCursorFromCurrentPos(HANDLE screen, int rowShift, int colShift)
+void shiftCursorFromCurrentPos(HANDLE screen, const int rowShift, const int colShift)
 {
 	COORD position = getConsoleCursorPosition(screen);
 	position.Y += rowShift;
