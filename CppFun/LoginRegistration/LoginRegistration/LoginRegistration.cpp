@@ -70,10 +70,10 @@ bool loadAllUserData(std::unordered_map<std::string, std::string>& usernamePassw
 std::string getUserInput();
 bool checkGlobalInputCommands(std::string input);
 bool isYes(std::string yesOrNo);
-std::string loginOrCreateAccountPrompt();
+bool loginOrCreateAccountPrompt();
 userProfile* login(std::unordered_map<std::string, std::string>& usernamePasswordMap, std::unordered_map<std::string, userProfile*>& profileMap);
 userProfile* logout();
-userProfile* registerNewUser(std::unordered_map<std::string, std::string>& usernamePasswordMap, std::unordered_map<std::string, userProfile*>& profileMap);
+userProfile* createNewUser(std::unordered_map<std::string, std::string>& usernamePasswordMap, std::unordered_map<std::string, userProfile*>& profileMap);
 bool writeProfileDataToUserProfilesCSV(userProfile* profile);
 userProfile* modifyProfile(std::unordered_map<std::string, std::string>& usernamePasswordMap, std::unordered_map<std::string, userProfile*>& profileMap);
 void quit();
@@ -158,10 +158,13 @@ bool loadAllUserData(std::unordered_map<std::string, std::string>& usernamePassw
             {
                 usernamePasswordMap.insert(std::make_pair(username, password));
                 std::string usernamePasswordCombo = username + password;
-                profileMap.insert(std::make_pair(usernamePasswordCombo, new userProfile(username, password, favoriteColor)));
+                profileMap.insert(std::make_pair(username + password, new userProfile(username, password, favoriteColor)));
+
                 username = "";
                 password = "";
                 favoriteColor = "";
+                extractedWord = "";
+                extractedLine = "";
                 i = 0;
             }
         }
@@ -184,7 +187,7 @@ bool checkGlobalInputCommands(std::string userInput)
     if (quitCommandString.count(userInput) > 0)
     {
         quit();
-        assert(("If this runs, then we didn't quit?!", false));
+        assert(("If this assert executes, then we didn't quit?!", false));
     }
 
     return false;
@@ -201,7 +204,7 @@ bool isYes(std::string yesOrNo)
 }
 
 
-std::string loginOrCreateAccountPrompt()
+bool loginOrCreateAccountPrompt()
 {
     UIController.placeCursor(5, 30);
     std::cout << "============== Login / Create Account ==============";
@@ -240,7 +243,12 @@ std::string loginOrCreateAccountPrompt()
         loginOrCreateInput = "";
         loginOrCreateInput = getUserInput();
     }
-    return loginOrCreateInput;
+
+    if (loginOrCreateInput == "L" || loginOrCreateInput == "l")
+    {
+        return true;
+    }
+    return false;
 }
 
 userProfile * login(std::unordered_map<std::string, std::string>& usernamePasswordMap, std::unordered_map<std::string, userProfile*>& profileMap)
@@ -255,25 +263,64 @@ userProfile * login(std::unordered_map<std::string, std::string>& usernamePasswo
     UIController.clearConsole();
     std::cout << std::endl;
     UIController.placeCursor(5, 30);
+    int LoginMenuTop = UIController.getCursorPosition().Y;
     std::cout << "=========== LOGIN MENU ===========";
+    UIController.shiftCursorFromLastSetPos(1, 0);
 
     while (loginAttempts < maxLoginAttempts)
     {
         loginAttempts++;
-        UIController.shiftCursorFromLastSetPos(2, 0);
+        UIController.clearBelowGivenLine(LoginMenuTop);
+        if (loginAttempts == 1)
+        {
+            UIController.shiftCursorFromLastSetPos(2, 0);
+            usernamePos = UIController.getCursorPosition();
+        }
+        else
+        {
+            UIController.placeCursor(usernamePos.Y, usernamePos.X);
+        }
         std::cout << "Username: ";
-        usernamePos = UIController.getCursorPosition();
         usernameInput = getUserInput();
 
-        UIController.shiftCursorFromLastSetPos(2, 0);
-        std::cout << "\nPassword: ";
-        passwordPos = UIController.getCursorPosition();
+        if (loginAttempts == 1)
+        {
+            UIController.shiftCursorFromLastSetPos(2, 0);
+            passwordPos = UIController.getCursorPosition();
+        }
+        else
+        {
+            UIController.placeCursor(passwordPos.Y, passwordPos.X);
+        }
+        std::cout << "Password: ";
         passwordInput = getUserInput();
 
         if (usernamePasswordMap.count(usernameInput) == 1 && usernamePasswordMap.at(usernameInput) == passwordInput)
         {
             if (profileMap.count(usernameInput + passwordInput) == 1)
             {
+                UIController.shiftCursorFromLastSetPos(2,0);
+                COORD successPos = UIController.getCursorPosition();
+                bool isBlank = false;
+                for (unsigned int i = 0; i < 200; i++)
+                {
+                    if (i % 30 == 0)
+                    {
+                        if (isBlank)
+                        {
+                            UIController.placeCursor(successPos.Y, successPos.X);
+                            std::cout << "Success! Profile found!";
+                        }
+                        else
+                        {
+                            UIController.clearLine();
+                            isBlank == false;
+                        }
+                    }
+                    Sleep(1);
+                }
+                UIController.clearConsole();
+
                 return profileMap.at(usernameInput + passwordInput);
             }
             assert(("Username password combo is valid but could not find matching profile for username password combo", false));
@@ -282,25 +329,31 @@ userProfile * login(std::unordered_map<std::string, std::string>& usernamePasswo
         std::string createAccountOrEnterAgain = "";
         UIController.shiftCursorFromLastSetPos(1, 0);
 
-        std::cout << "Username password combo not found. Would you like to create a new account?"; 
+        std::cout << "Username or Password not found. Attempt to login again or create a new account?"; 
         while (validYesOrNoChars.count(createAccountOrEnterAgain) == 0)
         {
             UIController.shiftCursorFromLastSetPos(2, 0);
             UIController.clearLine();
-            std::cout << "Enter 'y' to create a new account. Enter 'n' to enter your username/password, again.";
+            std::cout << "Enter 'y' to create a new account. Enter 'n' to enter a username/password, again.";
             
             UIController.shiftCursorFromLastSetPos(1, 0);
-            UIController.clearConsole();
+            UIController.clearLine();
             std::cout << "'y' or 'n': ";
             createAccountOrEnterAgain = getUserInput() ;
             
-            UIController.shiftCursorFromLastSetPos(3, 0);
+            UIController.shiftCursorFromLastSetPos(-3, 0);
         }
 
         if (isYes(createAccountOrEnterAgain))
         {
-            return registerNewUser(usernamePasswordMap, profileMap);
+            return createNewUser(usernamePasswordMap, profileMap);
         }        
+        else
+        {
+            UIController.clearToRightOnLineFromPos(usernamePos);
+            UIController.clearToRightOnLineFromPos(passwordPos);
+            UIController.clearBelowGivenLine(passwordPos.Y);
+        }
     }
 
     if (loginAttempts >= maxLoginAttempts)
@@ -325,7 +378,7 @@ userProfile* logout()
     return NULL;
 }
 
-userProfile * registerNewUser(std::unordered_map<std::string, std::string>& usernamePasswordMap, std::unordered_map<std::string, userProfile*>& profileMap)
+userProfile * createNewUser(std::unordered_map<std::string, std::string>& usernamePasswordMap, std::unordered_map<std::string, userProfile*>& profileMap)
 {
     userProfile* profile = NULL;
 
@@ -538,22 +591,20 @@ int main()
     std::unordered_map<std::string, userProfile*> usernamePasswordToProfileMap;
     loadAllUserData(usernamePasswordMap, usernamePasswordToProfileMap);
 
-    UIController = *(new outputController());
 
-    std::string userChoice = loginOrCreateAccountPrompt();
-
+    bool choseToLogin = loginOrCreateAccountPrompt();
     userProfile * profile;
-    if (userChoice == "L" || userChoice == "l")
+    if (choseToLogin)
     {
         profile = login(usernamePasswordMap, usernamePasswordToProfileMap);
         if (profile == NULL)
         {
-            profile = registerNewUser(usernamePasswordMap, usernamePasswordToProfileMap);
+            profile = createNewUser(usernamePasswordMap, usernamePasswordToProfileMap);
         }              
     }
     else
     {
-        profile = registerNewUser(usernamePasswordMap, usernamePasswordToProfileMap);
+        profile = createNewUser(usernamePasswordMap, usernamePasswordToProfileMap);
     }
 
 
