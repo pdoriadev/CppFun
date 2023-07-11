@@ -469,19 +469,6 @@ userProfile * createNewUser(std::unordered_map<std::string, std::string>& userna
         input = "";
         std::cin >> input;
 
-        size_t found = input.find('\b');
-        int numOfBackspaces = 0;
-        while (found != std::string::npos)
-        {
-            numOfBackspaces++;
-        }
-        if (numOfBackspaces > 0 && UIController.getCursorPosition().X - numOfBackspaces < passwordPos.X)
-        {
-            UIController.placeCursor(passwordPos.Y, passwordPos.X);
-            UIController.clearToRightOnLine();
-            continue;
-        }
-
         checkGlobalInputCommands(input);
 
         for (unsigned int i = 0; i < input.length() - 1; i++)
@@ -505,7 +492,7 @@ userProfile * createNewUser(std::unordered_map<std::string, std::string>& userna
             UIController.clearToRightOnLine();
             std::cout << "Passord is too short.";
         }
-        else if (passwordInput.length() < maxPasswordLength)
+        else if (passwordInput.length() > maxPasswordLength)
         {
             completedPasswordInput = false;
             UIController.placeCursor(validMessagePos.Y, validMessagePos.X);
@@ -523,6 +510,11 @@ userProfile * createNewUser(std::unordered_map<std::string, std::string>& userna
     writeProfileDataToUserProfilesCSV(profile);
 
     return profile;
+}
+
+bool isValidPassword(std::string password)
+{
+    
 }
 
 bool writeProfileDataToUserProfilesCSV(userProfile* profile)
