@@ -65,12 +65,26 @@ public:
 
 };
 
+struct validationResult
+{
+    bool isValid = false;
+    std::string validationMessage;
+    validationResult(bool _isValid, std::string _validationMessage)
+    {
+        validationMessage = _validationMessage;
+        isValid = _isValid;
+    }
+};
+
 
 bool loadAllUserData(std::unordered_map<std::string, std::string>& usernamePasswordMap, std::unordered_map<std::string, userProfile*>& profileMap);
 bool loginOrCreateAccountPrompt();
 userProfile* login(std::unordered_map<std::string, std::string>& usernamePasswordMap, std::unordered_map<std::string, userProfile*>& profileMap);
 userProfile* logout();
-userProfile* createNewUser(std::unordered_map<std::string, std::string>& usernamePasswordMap, std::unordered_map<std::string, userProfile*>& profileMap);
+userProfile* createNewProfile(std::unordered_map<std::string, std::string>& usernamePasswordMap, std::unordered_map<std::string, userProfile*>& profileMap);
+validationResult validateUsername(std::string, std::unordered_map<std::string, std::string>& usernamePasswordMap);
+validationResult validatePassword(std::string);
+std::string SelectFavoriteColor();
 bool writeProfileDataToUserProfilesCSV(userProfile* profile);
 userProfile* modifyProfile(std::unordered_map<std::string, std::string>& usernamePasswordMap, std::unordered_map<std::string, userProfile*>& profileMap);
 void quit();
@@ -83,7 +97,8 @@ static outputController UIController;
 static std::unordered_set<std::string> validLoginOrCreateChars{"L", "l", "C", "c"};
 static std::unordered_set<std::string> quitCommandString{ ":q", "Q" };
 static std::unordered_set<std::string> validYesOrNoChars{ "Y", "y", "n", "N"};
-static std::unordered_set<std::string> invalidUsernamePasswordChars{",", "' '", ":"};
+static std::unordered_set<std::string> illegalUsernamePasswordChars{",", "' '", ":"};
+static std::vector<std::string> colors{ "Red", "Yellow", "Blue", "Green", "Orange", "Purple" };
 static unsigned int minUsernameLength = 4;
 static unsigned int maxUsernameLength = 13;
 static unsigned int minPasswordLength = 8;
@@ -307,15 +322,16 @@ userProfile * login(std::unordered_map<std::string, std::string>& usernamePasswo
                 {
                     if (i % 30 == 0)
                     {
-                        if (isBlank)
+                        if (isBlank == false)
                         {
                             UIController.placeCursor(successPos.Y, successPos.X);
                             std::cout << "Success! Profile found!";
+                            isBlank = true;
                         }
                         else
                         {
                             UIController.clearLine();
-                            isBlank == false;
+                            isBlank = false;
                         }
                     }
                     Sleep(1);
@@ -347,7 +363,7 @@ userProfile * login(std::unordered_map<std::string, std::string>& usernamePasswo
 
         if (isYes(createAccountOrEnterAgain))
         {
-            return createNewUser(usernamePasswordMap, profileMap);
+            return createNewProfile(usernamePasswordMap, profileMap);
         }        
         else
         {
@@ -379,9 +395,9 @@ userProfile* logout()
     return NULL;
 }
 
-userProfile * createNewUser(std::unordered_map<std::string, std::string>& usernamePasswordMap, std::unordered_map<std::string, userProfile*>& profileMap)
+userProfile * createNewProfile(std::unordered_map<std::string, std::string>& usernamePasswordMap, std::unordered_map<std::string, userProfile*>& profileMap)
 {
-    userProfile* profile = NULL;
+    userProfile* profile;
 
     UIController.clearConsole();
     UIController.placeCursor(topmostRow, leftmostColumn);
@@ -392,119 +408,119 @@ userProfile * createNewUser(std::unordered_map<std::string, std::string>& userna
     std::cout << "Password must be between " << minPasswordLength << " and " << maxPasswordLength << " characters.";
     UIController.shiftCursorFromLastSetPos(1, 0);
     std::cout << "Illegal characters: ";
-    for (auto i = invalidUsernamePasswordChars.begin(); i != invalidUsernamePasswordChars.end(); i++)
+    for (auto i = illegalUsernamePasswordChars.begin(); i != illegalUsernamePasswordChars.end(); i++)
     {
-        if (invalidUsernamePasswordChars.size() == 1)
+        if (illegalUsernamePasswordChars.size() == 1)
         {
             std::cout << *i;
             break;
         }
 
-        if (std::next(i) == invalidUsernamePasswordChars.end())
+        if (std::next(i) == illegalUsernamePasswordChars.end())
         {
             std::cout << "and " << *i;
             break;
         }
-        std::cout << *i << ", ";
+        std::cout << *i << " ";
     }
 
-    COORD usernamePos;
-    COORD passwordPos;
-    COORD validMessagePos;
+    COORD usernameInputPos;
+    COORD passwordInputPos;
+    COORD validationMessagePos;
+    
+    validationMessagePos = UIController.CalculateCOORDValueAsIfShifted(UIController.getLastSetPosition(),3, 0);
 
     UIController.shiftCursorFromLastSetPos(2, 0);
     std::cout << "New Username: ";
-    usernamePos = UIController.getCursorPosition();
+    usernameInputPos = UIController.getCursorPosition();
     
-    UIController.shiftCursorFromLastSetPos(2, 0);
+    UIController.shiftCursorFromLastSetPos(1, 0);
     std::cout << "New Password: ";
-    passwordPos = UIController.getCursorPosition();
+    passwordInputPos = UIController.getCursorPosition();
     
-    UIController.placeCursor(usernamePos.Y, usernamePos.X);
-    validMessagePos = UIController.CalculateCOORDValueAsIfShifted(passwordPos,3, 0);
 
-    std::string input;
-
+    unsigned int attempts = 0;
     std::string usernameInput;
-    bool completedUsernameInput = false;
-    while (!completedUsernameInput)
+    while (true)
     {
-        Sleep(10);
-        UIController.placeCursor(usernamePos.Y, usernamePos.X);
-        input = "";
-        std::cin >> input;
+        attempts++;
+        UIController.placeCursor(usernameInputPos.Y, usernameInputPos.X);
+        UIController.clearToRightOnLine();
+        usernameInput = getUserInput();
+    
+        validationResult validation = validateUsername(usernameInput, usernamePasswordMap);
+        UIController.placeCursor(validationMessagePos.Y, validationMessagePos.X);
+        UIController.clearToRightOnLine();
+        std::cout << validation.validationMessage;
 
-        checkGlobalInputCommands(input);
+        Sleep(700);
 
-        if (usernameInput.length() < minUsernameLength)
+        if (validation.isValid)
         {
-            completedUsernameInput = false;
-            UIController.placeCursor(validMessagePos.Y, validMessagePos.X);
-            UIController.clearToRightOnLine();
-            std::cout << "Username is too short.";
-        }
-        else if (usernameInput.length() > maxUsernameLength)
-        {
-            completedUsernameInput = false;
-            UIController.placeCursor(validMessagePos.Y, validMessagePos.X);
-            UIController.clearToRightOnLine();
-            std::cout << "Username is too long.";
+            break;
         }
 
-        if (usernamePasswordMap.count(usernameInput) > 0)
+        if (attempts > 6)
         {
-            completedUsernameInput = false;
-            UIController.placeCursor(validMessagePos.Y, validMessagePos.X);
+            UIController.clearConsole();
+            UIController.placeCursor(validationMessagePos.Y, validationMessagePos.X);
             UIController.clearToRightOnLine();
-            std::cout << "Username already exists.";
+            std::cout << "You have exceeded maximum username input attempts. Please try again later ";
+            for (unsigned int i = 0; i < 1000; i++)
+            {
+                if (i % 200)
+                {
+                    std::cout << ". ";
+                }
+            }
+            UIController.clearConsole();
+            return NULL;
         }
     }
 
+    attempts = 0;
     std::string passwordInput;
-    bool completedPasswordInput = false;
-    while (!completedPasswordInput)
+    while (true)
     {
-        Sleep(10);
-        UIController.placeCursor(passwordPos.X, passwordPos.Y);
-        input = "";
-        std::cin >> input;
+        attempts++;
+        UIController.placeCursor(passwordInputPos.X, passwordInputPos.Y);
+        UIController.clearToRightOnLine();
+        passwordInput = getUserInput();
 
-        checkGlobalInputCommands(input);
+        validationResult validation = validatePassword(passwordInput);
+        UIController.placeCursor(validationMessagePos.Y, validationMessagePos.X);
+        UIController.clearToRightOnLine();
+        std::cout << validation.validationMessage;
 
-        for (unsigned int i = 0; i < input.length() - 1; i++)
+        Sleep(700);
+
+        if (validation.isValid)
         {
-            std::string test = "";
-            test += input[i];
-            if (invalidUsernamePasswordChars.count(test) == 0)
-            {
-                usernameInput += input[i];
-            }
-            if (input[i] == '\r' || input[i] == '\r')
-            {
-                completedUsernameInput = true;
-            }
+            break;
         }
 
-        if (passwordInput.length() < minPasswordLength)
+        if (attempts > 6)
         {
-            completedPasswordInput = false;
-            UIController.placeCursor(validMessagePos.Y, validMessagePos.X);
+            UIController.clearConsole();
+            UIController.placeCursor(validationMessagePos.Y, validationMessagePos.X);
             UIController.clearToRightOnLine();
-            std::cout << "Passord is too short.";
-        }
-        else if (passwordInput.length() > maxPasswordLength)
-        {
-            completedPasswordInput = false;
-            UIController.placeCursor(validMessagePos.Y, validMessagePos.X);
-            UIController.clearToRightOnLine();
-            std::cout << "Password is too long.";
+            std::cout << "You have exceeded maximum password input attempts. Please try again later ";
+            for (unsigned int i = 0; i < 1000; i++)
+            {
+                if (i % 200)
+                {
+                    std::cout << ". ";
+                }
+            }
+            UIController.clearConsole();
+            return NULL;
         }
     }
     
-    // favorite color?
+    std::string color = SelectFavoriteColor();
 
     usernamePasswordMap.insert(std::make_pair(usernameInput, passwordInput));
-    profile = new userProfile(usernameInput, passwordInput, "");
+    profile = new userProfile(usernameInput, passwordInput, color);
     profileMap.insert(std::make_pair(usernameInput + passwordInput, profile));
 
     writeProfileDataToUserProfilesCSV(profile);
@@ -512,9 +528,120 @@ userProfile * createNewUser(std::unordered_map<std::string, std::string>& userna
     return profile;
 }
 
-bool isValidPassword(std::string password)
+validationResult validateUsername(std::string username, std::unordered_map<std::string, std::string>& usernamePasswordMap)
 {
+    bool isValid = true;
+    std::string message;
+    if (usernamePasswordMap.count(username) > 0)
+    {
+        isValid = false;
+        message += "Username already exists. ";
+        return validationResult(isValid, message);
+    }
+
+    for (unsigned int i = 0; i < username.length(); i++)
+    {
+        std::string test = "";
+        test = username[i];
+        if (illegalUsernamePasswordChars.count(test))
+        {
+            isValid = false;
+            message += "Username has invalid characters";
+            break;
+        }
+    }
+
+    if (username.length() < minUsernameLength)
+    { 
+        isValid = false;
+        message += "Username is too short. ";
+    }
+    else if (username.length() > maxUsernameLength)
+    {
+        isValid = false;
+        message += "Username is too long. ";
+    }
+
+    if (isValid)
+    {
+        message += "What a lovely username <3";
+    }
+
+    return validationResult(isValid, message);
+}
+
+validationResult validatePassword(std::string password)
+{
+    bool valid = true;
+    std::string message = "";
+    for (unsigned int i = 0; i < password.length() - 1; i++)
+    {
+        std::string testChar = "";
+        testChar += password[i];
+        if (illegalUsernamePasswordChars.count(testChar) == 1)
+        {
+            valid = false;
+            message += "Password has illegal characters. ";
+        }
+    }
+
+    if (password.length() < minPasswordLength)
+    {
+        valid = false;
+        message += "Password is too short";
+    }
+    else if (password.length() > maxPasswordLength)
+    {
+        valid = false;
+        message += "Password is too long";
+    }
+
+    if (valid)
+    {
+        message += "Password is good!";
+    }
+
+    return validationResult(valid, message);
+}
+
+std::string SelectFavoriteColor()
+{
+    UIController.clearConsole();
+    UIController.placeCursor(topmostRow, leftmostColumn);
+    std::cout << "---------------- Color Select ---------------------";
+    UIController.shiftCursorFromLastSetPos(1, 0);
+    std::cout << "Input your favorite color's corresponding number: ";
+    COORD inputPos = UIController.getCursorPosition();
     
+    for (unsigned int i = 0; i < colors.size(); i++)
+    {
+        UIController.shiftCursorFromLastSetPos(1, 0);
+        std::cout << i << " - " << colors[i];
+    }
+
+    UIController.shiftCursorFromLastSetPos(2, 0);
+    COORD validationMessagePos = UIController.getLastSetPosition();
+    while (true)
+    {
+        UIController.placeCursor(inputPos.Y, inputPos.X);
+        UIController.clearToRightOnLine();
+        std::string selection = getUserInput();
+
+        unsigned int selectionNum = std::stoi(selection);
+        if (selectionNum >= 0 && selectionNum < colors.size())
+        {
+            UIController.placeCursor(validationMessagePos.Y, validationMessagePos.X);
+            UIController.clearToRightOnLine();
+            std::cout << "What a lovely color (:";
+            Sleep(750);
+            UIController.clearConsole();
+            return colors[selectionNum];
+        }
+
+        UIController.placeCursor(validationMessagePos.Y, validationMessagePos.X);
+        UIController.clearToRightOnLine();
+        std::cout << "Not a color number. Please try again";
+    }
 }
 
 bool writeProfileDataToUserProfilesCSV(userProfile* profile)
@@ -533,6 +660,8 @@ bool writeProfileDataToUserProfilesCSV(userProfile* profile)
         profile->getFavoriteColor() << '\n';
 
     outputFile.close();
+
+    return true;
 }
 
 userProfile* modifyProfile( std::unordered_map<std::string, std::string>& usernamePasswordMap, std::unordered_map<std::string, userProfile*>& profileMap)
@@ -563,7 +692,6 @@ int main()
     std::unordered_map<std::string, userProfile*> usernamePasswordToProfileMap;
     loadAllUserData(usernamePasswordMap, usernamePasswordToProfileMap);
 
-
     bool choseToLogin = loginOrCreateAccountPrompt();
     userProfile * profile;
     if (choseToLogin)
@@ -571,15 +699,13 @@ int main()
         profile = login(usernamePasswordMap, usernamePasswordToProfileMap);
         if (profile == NULL)
         {
-            profile = createNewUser(usernamePasswordMap, usernamePasswordToProfileMap);
+            profile = createNewProfile(usernamePasswordMap, usernamePasswordToProfileMap);
         }              
     }
     else
     {
-        profile = createNewUser(usernamePasswordMap, usernamePasswordToProfileMap);
+        profile = createNewProfile(usernamePasswordMap, usernamePasswordToProfileMap);
     }
-
-
 
     // Logged in. Modify profile prompt
 
