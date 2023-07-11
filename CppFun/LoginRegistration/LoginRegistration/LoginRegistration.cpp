@@ -67,9 +67,6 @@ public:
 
 
 bool loadAllUserData(std::unordered_map<std::string, std::string>& usernamePasswordMap, std::unordered_map<std::string, userProfile*>& profileMap);
-std::string getUserInput();
-bool checkGlobalInputCommands(std::string input);
-bool isYes(std::string yesOrNo);
 bool loginOrCreateAccountPrompt();
 userProfile* login(std::unordered_map<std::string, std::string>& usernamePasswordMap, std::unordered_map<std::string, userProfile*>& profileMap);
 userProfile* logout();
@@ -77,6 +74,10 @@ userProfile* createNewUser(std::unordered_map<std::string, std::string>& usernam
 bool writeProfileDataToUserProfilesCSV(userProfile* profile);
 userProfile* modifyProfile(std::unordered_map<std::string, std::string>& usernamePasswordMap, std::unordered_map<std::string, userProfile*>& profileMap);
 void quit();
+
+std::string getUserInput();
+bool checkGlobalInputCommands(std::string input);
+bool isYes(std::string yesOrNo);
 
 static outputController UIController;
 static std::unordered_set<std::string> validLoginOrCreateChars{"L", "l", "C", "c"};
@@ -393,12 +394,18 @@ userProfile * createNewUser(std::unordered_map<std::string, std::string>& userna
     std::cout << "Illegal characters: ";
     for (auto i = invalidUsernamePasswordChars.begin(); i != invalidUsernamePasswordChars.end(); i++)
     {
+        if (invalidUsernamePasswordChars.size() == 1)
+        {
+            std::cout << *i;
+            break;
+        }
+
         if (std::next(i) == invalidUsernamePasswordChars.end())
         {
             std::cout << "and " << *i;
             break;
         }
-        std::cout << *i << " ";
+        std::cout << *i << ", ";
     }
 
     COORD usernamePos;
@@ -426,35 +433,8 @@ userProfile * createNewUser(std::unordered_map<std::string, std::string>& userna
         UIController.placeCursor(usernamePos.Y, usernamePos.X);
         input = "";
         std::cin >> input;
-        
-        size_t found = input.find('\b');
-        int numOfBackspaces = 0;
-        while (found != std::string::npos)
-        {
-            numOfBackspaces++;
-        }
-        if (numOfBackspaces > 0 && UIController.getCursorPosition().X - numOfBackspaces < usernamePos.X)
-        {
-            UIController.placeCursor(usernamePos.Y, usernamePos.X);
-            UIController.clearToRightOnLine();
-            continue;
-        }
 
         checkGlobalInputCommands(input);
-
-        for (unsigned int i = 0; i < input.length() - 1; i++)
-        {
-            std::string test = "";
-            test += input[i];
-            if (invalidUsernamePasswordChars.count(test) == 0)
-            {
-                usernameInput += input[i];
-            }
-            if (input[i] == '\r' || input[i] == '\r')
-            {
-                completedUsernameInput = true;
-            }
-        }
 
         if (usernameInput.length() < minUsernameLength)
         {
