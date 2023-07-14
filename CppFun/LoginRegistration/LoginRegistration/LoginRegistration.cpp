@@ -97,7 +97,7 @@ static outputController UIController;
 static std::unordered_set<std::string> validLoginOrCreateChars{"L", "l", "C", "c"};
 static std::unordered_set<std::string> quitCommandString{ ":q", "Q" };
 static std::unordered_set<std::string> validYesOrNoChars{ "Y", "y", "n", "N"};
-static std::unordered_set<std::string> illegalUsernamePasswordChars{",", "' '", ":"};
+static std::unordered_set<std::string> illegalUsernamePasswordChars{",", "<", "'", "(", ")"," ", ";", ":"};
 static std::vector<std::string> colors{ "Red", "Yellow", "Blue", "Green", "Orange", "Purple" };
 static unsigned int minUsernameLength = 4;
 static unsigned int maxUsernameLength = 13;
