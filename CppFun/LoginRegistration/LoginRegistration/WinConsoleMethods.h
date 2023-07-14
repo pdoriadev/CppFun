@@ -41,9 +41,15 @@ private:
 		}
 		else
 		{
+			assert(("Invalid result from GetConsoleScreenBufferInfo(HANDLE, CONSOLE_SCREEN_BUFFER_INFO)", false));
 			_SMALL_RECT invalid = { 0, 0, 0, 0 };
 			return invalid;
 		}
+	}
+
+	COORD getConsoleSize()
+	{
+
 	}
 
 public: 
@@ -140,7 +146,7 @@ public:
 		_SMALL_RECT consoleRect = getConsoleRect();
 		COORD cursorStartPos = getCoordConsoleCursorPosition();
 		placeCursor(cursorStartPos.Y, consoleRect.Left);
-		std::cout << std::right << std::setfill(' ') << std::setw(consoleRect.Right) << '.' << std::flush;
+		std::cout << std::right << std::setfill(' ') << std::setw(consoleRect.Right) << ' ' << std::flush;
 		placeCursor(cursorStartPos.Y, cursorStartPos.X);
 	}
 
@@ -148,7 +154,7 @@ public:
 	{
 		_SMALL_RECT consoleRect = getConsoleRect();
 		COORD cursorStartPos = getCoordConsoleCursorPosition();
-		std::cout << std::right << std::setfill(' ') << std::setw(consoleRect.Right) << '.' << std::flush;
+		std::cout << std::right << std::setfill(' ') << std::setw(consoleRect.Right - cursorStartPos.X) << ' ' << std::flush;
 		placeCursor(cursorStartPos.Y, cursorStartPos.X);
 	}
 
@@ -158,7 +164,7 @@ public:
 		COORD cursorPosBeforeClear = getCoordConsoleCursorPosition();
 		
 		placeCursor(pos.Y, pos.X);
-		std::cout << std::right << std::setfill(' ') << std::setw(consoleRect.Right) << '.' << std::flush;
+		std::cout << std::right << std::setfill(' ') << std::setw(consoleRect.Right - pos.X) << ' ' << std::flush;
 		placeCursor(cursorPosBeforeClear.Y, cursorPosBeforeClear.X);
 	}
 
@@ -170,7 +176,7 @@ public:
 		placeCursor(rowLine + 1, 0);
 		for (int i = 0; i < consoleRect.Bottom; i++)
 		{
-			std::cout << std::right << std::setfill(' ') << std::setw(consoleRect.Right) << '.' << std::flush;
+			std::cout << std::right << std::setfill(' ') << std::setw(consoleRect.Right) << ' ' << std::flush;
 			placeCursor(getCoordConsoleCursorPosition().Y, getCoordConsoleCursorPosition().X);
 		}
 		placeCursor(cursorBeforeClearing.Y, cursorBeforeClearing.X);
@@ -185,7 +191,7 @@ public:
 		placeCursor(cursorBeforeClearing.Y + 1, 0);
 		for (int i = 0; i < consoleRect.Bottom; i++)
 		{
-			std::cout << std::right << std::setfill(' ') << std::setw(consoleRect.Right) << '.' << std::flush;
+			std::cout << std::right << std::setfill(' ') << std::setw(consoleRect.Right) << ' ' << std::flush;
 			placeCursor(getCoordConsoleCursorPosition().Y, getCoordConsoleCursorPosition().X);
 		}
 		placeCursor(cursorBeforeClearing.Y, cursorBeforeClearing.X);
