@@ -428,7 +428,6 @@ userProfile * createNewProfile(std::unordered_map<std::string, std::string>& use
     COORD passwordInputPos;
     COORD validationMessagePos;
     
-    validationMessagePos = UIController.CalculateCOORDValueAsIfShifted(UIController.getLastSetPosition(),3, 0);
 
     UIController.shiftCursorFromLastSetPos(2, 0);
     std::cout << "New Username: ";
@@ -438,6 +437,7 @@ userProfile * createNewProfile(std::unordered_map<std::string, std::string>& use
     std::cout << "New Password: ";
     passwordInputPos = UIController.getCursorPosition();
     
+    validationMessagePos = UIController.CalculateCOORDValueAsIfShifted(UIController.getLastSetPosition(),1, 0);
 
     unsigned int attempts = 0;
     std::string usernameInput;
@@ -453,8 +453,6 @@ userProfile * createNewProfile(std::unordered_map<std::string, std::string>& use
         UIController.clearToRightOnLine();
         std::cout << validation.validationMessage;
 
-        Sleep(700);
-
         if (validation.isValid)
         {
             break;
@@ -465,7 +463,7 @@ userProfile * createNewProfile(std::unordered_map<std::string, std::string>& use
             UIController.clearConsole();
             UIController.placeCursor(validationMessagePos.Y, validationMessagePos.X);
             UIController.clearToRightOnLine();
-            std::cout << "You have exceeded maximum username input attempts. Please try again later ";
+            std::cout << "You have exceeded maximum username input attempts. Please try creating an account later ";
             for (unsigned int i = 0; i < 1000; i++)
             {
                 if (i % 200)
@@ -483,7 +481,7 @@ userProfile * createNewProfile(std::unordered_map<std::string, std::string>& use
     while (true)
     {
         attempts++;
-        UIController.placeCursor(passwordInputPos.X, passwordInputPos.Y);
+        UIController.placeCursor(passwordInputPos.Y, passwordInputPos.X);
         UIController.clearToRightOnLine();
         passwordInput = getUserInput();
 
@@ -491,8 +489,6 @@ userProfile * createNewProfile(std::unordered_map<std::string, std::string>& use
         UIController.placeCursor(validationMessagePos.Y, validationMessagePos.X);
         UIController.clearToRightOnLine();
         std::cout << validation.validationMessage;
-
-        Sleep(700);
 
         if (validation.isValid)
         {
@@ -504,7 +500,7 @@ userProfile * createNewProfile(std::unordered_map<std::string, std::string>& use
             UIController.clearConsole();
             UIController.placeCursor(validationMessagePos.Y, validationMessagePos.X);
             UIController.clearToRightOnLine();
-            std::cout << "You have exceeded maximum password input attempts. Please try again later ";
+            std::cout << "You have exceeded maximum password input attempts. Please try creating an account later ";
             for (unsigned int i = 0; i < 1000; i++)
             {
                 if (i % 200)
