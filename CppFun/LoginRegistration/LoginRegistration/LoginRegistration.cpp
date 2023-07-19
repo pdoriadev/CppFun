@@ -8,14 +8,14 @@ Peter Doria
 INSTRUCTIONS
 
 1. Stores user credentials (username, password)
-    - all user infos stored in csv. 
+    - all user infos stored in csv. Example:
         "data, data, data, \n"
         "data, data, data, \n"
     - usernames no longer than 10 characters
     - password no longer than 15 characters
 2. Registers new users with new username / password
     - verifies unique username during creation
-    - communicates password strength while password is being typed
+    - communicates password strength while password is being typed *** TODO
 3. Login system for existing users into application
 4. Logout
 5. Modify user profile
@@ -100,13 +100,13 @@ static std::unordered_set<std::string> validYesOrNoChars{ "Y", "y", "n", "N"};
 static std::unordered_set<std::string> illegalUsernamePasswordChars{",", "<", "'", "(", ")"," ", ";", ":"};
 static std::vector<std::string> colors{ "Red", "Yellow", "Blue", "Green", "Orange", "Purple" };
 static unsigned int minUsernameLength = 4;
-static unsigned int maxUsernameLength = 13;
+static unsigned int maxUsernameLength = 10;
 static unsigned int minPasswordLength = 8;
-static unsigned int maxPasswordLength = 23;
+static unsigned int maxPasswordLength = 15;
 
 static unsigned int leftmostColumn = 30;
 static unsigned int topmostRow = 5;
-
+static COORD menuTop;
 
 bool loadAllUserData(std::unordered_map<std::string, std::string>& usernamePasswordMap, std::unordered_map<std::string, userProfile*>& profileMap)
 {
@@ -682,26 +682,65 @@ void quit()
     exit(0);
 }
 
+void MainMenu(userProfile p)
+{
+    UIController.clearConsole();
+    UIController.placeCursor(topmostRow, leftmostColumn);
+    std::cout << "================= MAIN MENU ====================";
+    UIController.shiftCursorFromLastSetPos(1, 0);
+    std::cout << "Edit Profile - 0";
+    UIController.shiftCursorFromLastSetPos(1, 0);
+    std::cout << "Logout - 1";
+    UIController.shiftCursorFromLastSetPos(1, 0);
+    std::cout << "Quit - q:";
+
+    UIController.shiftCursorFromCurrentPos(2, 0);
+    std::cout << "Input the corresponding number for what you would like to do: ";
+    std::string input; 
+    std::cin >> input;
+    checkGlobalInputCommands(input);
+    if (input == "0")
+    {
+        //Open edit profile menu
+    }
+    else if (input == "1")
+    {
+        // Logout 
+    }
+}
+
+void Logout()
+{
+
+}
+
+
 int main()
 {
     std::unordered_map<std::string, std::string> usernamePasswordMap;
     std::unordered_map<std::string, userProfile*> usernamePasswordToProfileMap;
     loadAllUserData(usernamePasswordMap, usernamePasswordToProfileMap);
 
-    bool choseToLogin = loginOrCreateAccountPrompt();
-    userProfile * profile;
-    if (choseToLogin)
+    while (true)
     {
-        profile = login(usernamePasswordMap, usernamePasswordToProfileMap);
-        if (profile == NULL)
+        bool choseToLogin = loginOrCreateAccountPrompt();
+        userProfile* profile;
+        if (choseToLogin)
+        {
+            profile = login(usernamePasswordMap, usernamePasswordToProfileMap);
+            if (profile == NULL)
+            {
+                profile = createNewProfile(usernamePasswordMap, usernamePasswordToProfileMap);
+            }
+        }
+        else
         {
             profile = createNewProfile(usernamePasswordMap, usernamePasswordToProfileMap);
-        }              
+        }
+
+        
     }
-    else
-    {
-        profile = createNewProfile(usernamePasswordMap, usernamePasswordToProfileMap);
-    }
+    
 
     // Logged in. Modify profile prompt
 
