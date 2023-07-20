@@ -86,14 +86,14 @@ validationResult validateUsername(std::string, std::unordered_map<std::string, s
 validationResult validatePassword(std::string);
 std::string SelectFavoriteColor();
 bool writeProfileDataToUserProfilesCSV(userProfile* profile);
-userProfile* modifyProfile(std::unordered_map<std::string, std::string>& usernamePasswordMap, std::unordered_map<std::string, userProfile*>& profileMap);
+void modifyProfile(std::unordered_map<std::string, std::string>& usernamePasswordMap, std::unordered_map<std::string, userProfile*>& profileMap);
 void quit();
 
 std::string getUserInput();
 bool checkGlobalInputCommands(std::string input);
 bool isYes(std::string yesOrNo);
 
-static outputController UIController;
+static outputController UI;
 static std::unordered_set<std::string> validLoginOrCreateChars{"L", "l", "C", "c"};
 static std::unordered_set<std::string> quitCommandString{ ":q", "Q" };
 static std::unordered_set<std::string> validYesOrNoChars{ "Y", "y", "n", "N"};
@@ -222,28 +222,28 @@ bool isYes(std::string yesOrNo)
 
 bool loginOrCreateAccountPrompt()
 {
-    UIController.placeCursor(5, 30);
+    UI.placeCursor(5, 30);
     std::cout << "============== Login / Create Account ==============";
 
-    UIController.shiftCursorFromLastSetPos(2, 0);
+    UI.shiftCursorFromLastSetPos(2, 0);
     std::cout << "Enter ':q' to quit the application at any time.";
     Sleep(5);
 
-    UIController.shiftCursorFromLastSetPos(2, 0);
+    UI.shiftCursorFromLastSetPos(2, 0);
     std::cout << "To Login, press 'L', then press 'Enter'\n";
     Sleep(5);
 
-    UIController.shiftCursorFromLastSetPos(2, 0);
+    UI.shiftCursorFromLastSetPos(2, 0);
     std::cout << "To Create a new account, press 'C', then press 'Enter'";
     Sleep(5);
 
-    UIController.shiftCursorFromLastSetPos(2, 0);
+    UI.shiftCursorFromLastSetPos(2, 0);
     std::string loginOrCreateInput;
     loginOrCreateInput = getUserInput();
     while (validLoginOrCreateChars.count(loginOrCreateInput) == 0)
     {
         checkGlobalInputCommands(loginOrCreateInput);
-        UIController.shiftCursorFromLastSetPos(2, 0);
+        UI.shiftCursorFromLastSetPos(2, 0);
         std::cout << loginOrCreateInput + " is not an option.";
         Sleep(1000);
         std::cout << " Please Try Again .";
@@ -253,9 +253,9 @@ bool loginOrCreateAccountPrompt()
             Sleep(500);
             std::cout << " . ";
         }
-        UIController.clearLine();
-        UIController.shiftCursorFromLastSetPos(-2, 0);
-        UIController.clearLine();
+        UI.clearLine();
+        UI.shiftCursorFromLastSetPos(-2, 0);
+        UI.clearLine();
         loginOrCreateInput = "";
         loginOrCreateInput = getUserInput();
     }
@@ -276,37 +276,37 @@ userProfile * login(std::unordered_map<std::string, std::string>& usernamePasswo
     int maxLoginAttempts = 3;
     int loginAttempts = 0;
 
-    UIController.clearConsole();
+    UI.clearConsole();
     std::cout << std::endl;
-    UIController.placeCursor(5, 30);
-    int LoginMenuTop = UIController.getCursorPosition().Y;
+    UI.placeCursor(5, 30);
+    int LoginMenuTop = UI.getCursorPosition().Y;
     std::cout << "=========== LOGIN MENU ===========";
-    UIController.shiftCursorFromLastSetPos(1, 0);
+    UI.shiftCursorFromLastSetPos(1, 0);
 
     while (loginAttempts < maxLoginAttempts)
     {
         loginAttempts++;
-        UIController.clearBelowGivenLine(LoginMenuTop);
+        UI.clearBelowGivenLine(LoginMenuTop);
         if (loginAttempts == 1)
         {
-            UIController.shiftCursorFromLastSetPos(2, 0);
-            usernamePos = UIController.getCursorPosition();
+            UI.shiftCursorFromLastSetPos(2, 0);
+            usernamePos = UI.getCursorPosition();
         }
         else
         {
-            UIController.placeCursor(usernamePos.Y, usernamePos.X);
+            UI.placeCursor(usernamePos.Y, usernamePos.X);
         }
         std::cout << "Username: ";
         usernameInput = getUserInput();
 
         if (loginAttempts == 1)
         {
-            UIController.shiftCursorFromLastSetPos(2, 0);
-            passwordPos = UIController.getCursorPosition();
+            UI.shiftCursorFromLastSetPos(2, 0);
+            passwordPos = UI.getCursorPosition();
         }
         else
         {
-            UIController.placeCursor(passwordPos.Y, passwordPos.X);
+            UI.placeCursor(passwordPos.Y, passwordPos.X);
         }
         std::cout << "Password: ";
         passwordInput = getUserInput();
@@ -315,8 +315,8 @@ userProfile * login(std::unordered_map<std::string, std::string>& usernamePasswo
         {
             if (profileMap.count(usernameInput + passwordInput) == 1)
             {
-                UIController.shiftCursorFromLastSetPos(2,0);
-                COORD successPos = UIController.getCursorPosition();
+                UI.shiftCursorFromLastSetPos(2,0);
+                COORD successPos = UI.getCursorPosition();
                 bool isBlank = false;
                 for (unsigned int i = 0; i < 200; i++)
                 {
@@ -324,19 +324,19 @@ userProfile * login(std::unordered_map<std::string, std::string>& usernamePasswo
                     {
                         if (isBlank == false)
                         {
-                            UIController.placeCursor(successPos.Y, successPos.X);
+                            UI.placeCursor(successPos.Y, successPos.X);
                             std::cout << "Success! Profile found!";
                             isBlank = true;
                         }
                         else
                         {
-                            UIController.clearLine();
+                            UI.clearLine();
                             isBlank = false;
                         }
                     }
                     Sleep(1);
                 }
-                UIController.clearConsole();
+                UI.clearConsole();
 
                 return profileMap.at(usernameInput + passwordInput);
             }
@@ -344,21 +344,21 @@ userProfile * login(std::unordered_map<std::string, std::string>& usernamePasswo
         }
 
         std::string createAccountOrEnterAgain = "";
-        UIController.shiftCursorFromLastSetPos(1, 0);
+        UI.shiftCursorFromLastSetPos(1, 0);
 
         std::cout << "Username or Password not found. Attempt to login again or create a new account?"; 
         while (validYesOrNoChars.count(createAccountOrEnterAgain) == 0)
         {
-            UIController.shiftCursorFromLastSetPos(2, 0);
-            UIController.clearLine();
+            UI.shiftCursorFromLastSetPos(2, 0);
+            UI.clearLine();
             std::cout << "Enter 'y' to create a new account. Enter 'n' to enter a username/password, again.";
             
-            UIController.shiftCursorFromLastSetPos(1, 0);
-            UIController.clearLine();
+            UI.shiftCursorFromLastSetPos(1, 0);
+            UI.clearLine();
             std::cout << "'y' or 'n': ";
             createAccountOrEnterAgain = getUserInput() ;
             
-            UIController.shiftCursorFromLastSetPos(-3, 0);
+            UI.shiftCursorFromLastSetPos(-3, 0);
         }
 
         if (isYes(createAccountOrEnterAgain))
@@ -367,21 +367,21 @@ userProfile * login(std::unordered_map<std::string, std::string>& usernamePasswo
         }        
         else
         {
-            UIController.clearToRightOnLineFromPos(usernamePos);
-            UIController.clearToRightOnLineFromPos(passwordPos);
-            UIController.clearBelowGivenLine(passwordPos.Y);
+            UI.clearToRightOnLineFromPos(usernamePos);
+            UI.clearToRightOnLineFromPos(passwordPos);
+            UI.clearBelowGivenLine(passwordPos.Y);
         }
     }
 
     if (loginAttempts >= maxLoginAttempts)
     {
-        UIController.clearConsole();
-        UIController.placeCursor(7, 30);
+        UI.clearConsole();
+        UI.placeCursor(7, 30);
         std::cout << "Username and password combination not found.";
-        UIController.shiftCursorFromLastSetPos(2, 0);
+        UI.shiftCursorFromLastSetPos(2, 0);
         std::cout << "You have exceeded your maximum login attempts. Please try again later, or create a new account. ";
         Sleep(10);
-        UIController.clearConsole();
+        UI.clearConsole();
         return NULL;
     }
 
@@ -399,14 +399,14 @@ userProfile * createNewProfile(std::unordered_map<std::string, std::string>& use
 {
     userProfile* profile;
 
-    UIController.clearConsole();
-    UIController.placeCursor(topmostRow, leftmostColumn);
+    UI.clearConsole();
+    UI.placeCursor(topmostRow, leftmostColumn);
     std::cout << "============== Create a Profile ==============";
-    UIController.shiftCursorFromLastSetPos(2, 0);
+    UI.shiftCursorFromLastSetPos(2, 0);
     std::cout << "Username must be between " << minUsernameLength << " and " << maxUsernameLength << " characters.";
-    UIController.shiftCursorFromLastSetPos(1, 0);
+    UI.shiftCursorFromLastSetPos(1, 0);
     std::cout << "Password must be between " << minPasswordLength << " and " << maxPasswordLength << " characters.";
-    UIController.shiftCursorFromLastSetPos(1, 0);
+    UI.shiftCursorFromLastSetPos(1, 0);
     std::cout << "Illegal characters: ";
     for (auto i = illegalUsernamePasswordChars.begin(); i != illegalUsernamePasswordChars.end(); i++)
     {
@@ -429,28 +429,28 @@ userProfile * createNewProfile(std::unordered_map<std::string, std::string>& use
     COORD validationMessagePos;
     
 
-    UIController.shiftCursorFromLastSetPos(2, 0);
+    UI.shiftCursorFromLastSetPos(2, 0);
     std::cout << "New Username: ";
-    usernameInputPos = UIController.getCursorPosition();
+    usernameInputPos = UI.getCursorPosition();
     
-    UIController.shiftCursorFromLastSetPos(1, 0);
+    UI.shiftCursorFromLastSetPos(1, 0);
     std::cout << "New Password: ";
-    passwordInputPos = UIController.getCursorPosition();
+    passwordInputPos = UI.getCursorPosition();
     
-    validationMessagePos = UIController.CalculateCOORDValueAsIfShifted(UIController.getLastSetPosition(),1, 0);
+    validationMessagePos = UI.CalculateCOORDValueAsIfShifted(UI.getLastSetPosition(),1, 0);
 
     unsigned int attempts = 0;
     std::string usernameInput;
     while (true)
     {
         attempts++;
-        UIController.placeCursor(usernameInputPos.Y, usernameInputPos.X);
-        UIController.clearToRightOnLine();
+        UI.placeCursor(usernameInputPos.Y, usernameInputPos.X);
+        UI.clearToRightOnLine();
         usernameInput = getUserInput();
     
         validationResult validation = validateUsername(usernameInput, usernamePasswordMap);
-        UIController.placeCursor(validationMessagePos.Y, validationMessagePos.X);
-        UIController.clearToRightOnLine();
+        UI.placeCursor(validationMessagePos.Y, validationMessagePos.X);
+        UI.clearToRightOnLine();
         std::cout << validation.validationMessage;
 
         if (validation.isValid)
@@ -460,9 +460,9 @@ userProfile * createNewProfile(std::unordered_map<std::string, std::string>& use
 
         if (attempts > 6)
         {
-            UIController.clearConsole();
-            UIController.placeCursor(validationMessagePos.Y, validationMessagePos.X);
-            UIController.clearToRightOnLine();
+            UI.clearConsole();
+            UI.placeCursor(validationMessagePos.Y, validationMessagePos.X);
+            UI.clearToRightOnLine();
             std::cout << "You have exceeded maximum username input attempts. Please try creating an account later ";
             for (unsigned int i = 0; i < 1000; i++)
             {
@@ -471,7 +471,7 @@ userProfile * createNewProfile(std::unordered_map<std::string, std::string>& use
                     std::cout << ". ";
                 }
             }
-            UIController.clearConsole();
+            UI.clearConsole();
             return NULL;
         }
     }
@@ -481,13 +481,13 @@ userProfile * createNewProfile(std::unordered_map<std::string, std::string>& use
     while (true)
     {
         attempts++;
-        UIController.placeCursor(passwordInputPos.Y, passwordInputPos.X);
-        UIController.clearToRightOnLine();
+        UI.placeCursor(passwordInputPos.Y, passwordInputPos.X);
+        UI.clearToRightOnLine();
         passwordInput = getUserInput();
 
         validationResult validation = validatePassword(passwordInput);
-        UIController.placeCursor(validationMessagePos.Y, validationMessagePos.X);
-        UIController.clearToRightOnLine();
+        UI.placeCursor(validationMessagePos.Y, validationMessagePos.X);
+        UI.clearToRightOnLine();
         std::cout << validation.validationMessage;
 
         if (validation.isValid)
@@ -497,9 +497,9 @@ userProfile * createNewProfile(std::unordered_map<std::string, std::string>& use
 
         if (attempts > 6)
         {
-            UIController.clearConsole();
-            UIController.placeCursor(validationMessagePos.Y, validationMessagePos.X);
-            UIController.clearToRightOnLine();
+            UI.clearConsole();
+            UI.placeCursor(validationMessagePos.Y, validationMessagePos.X);
+            UI.clearToRightOnLine();
             std::cout << "You have exceeded maximum password input attempts. Please try creating an account later ";
             for (unsigned int i = 0; i < 1000; i++)
             {
@@ -508,7 +508,7 @@ userProfile * createNewProfile(std::unordered_map<std::string, std::string>& use
                     std::cout << ". ";
                 }
             }
-            UIController.clearConsole();
+            UI.clearConsole();
             return NULL;
         }
     }
@@ -602,40 +602,40 @@ validationResult validatePassword(std::string password)
 
 std::string SelectFavoriteColor()
 {
-    UIController.clearConsole();
-    UIController.placeCursor(topmostRow, leftmostColumn);
+    UI.clearConsole();
+    UI.placeCursor(topmostRow, leftmostColumn);
     std::cout << "---------------- Color Select ---------------------";
-    UIController.shiftCursorFromLastSetPos(1, 0);
+    UI.shiftCursorFromLastSetPos(1, 0);
     std::cout << "Input your favorite color's corresponding number: ";
-    COORD inputPos = UIController.getCursorPosition();
+    COORD inputPos = UI.getCursorPosition();
     
     for (unsigned int i = 0; i < colors.size(); i++)
     {
-        UIController.shiftCursorFromLastSetPos(1, 0);
+        UI.shiftCursorFromLastSetPos(1, 0);
         std::cout << i << " - " << colors[i];
     }
 
-    UIController.shiftCursorFromLastSetPos(2, 0);
-    COORD validationMessagePos = UIController.getLastSetPosition();
+    UI.shiftCursorFromLastSetPos(2, 0);
+    COORD validationMessagePos = UI.getLastSetPosition();
     while (true)
     {
-        UIController.placeCursor(inputPos.Y, inputPos.X);
-        UIController.clearToRightOnLine();
+        UI.placeCursor(inputPos.Y, inputPos.X);
+        UI.clearToRightOnLine();
         std::string selection = getUserInput();
 
         unsigned int selectionNum = std::stoi(selection);
         if (selectionNum >= 0 && selectionNum < colors.size())
         {
-            UIController.placeCursor(validationMessagePos.Y, validationMessagePos.X);
-            UIController.clearToRightOnLine();
+            UI.placeCursor(validationMessagePos.Y, validationMessagePos.X);
+            UI.clearToRightOnLine();
             std::cout << "What a lovely color (:";
             Sleep(750);
-            UIController.clearConsole();
+            UI.clearConsole();
             return colors[selectionNum];
         }
 
-        UIController.placeCursor(validationMessagePos.Y, validationMessagePos.X);
-        UIController.clearToRightOnLine();
+        UI.placeCursor(validationMessagePos.Y, validationMessagePos.X);
+        UI.clearToRightOnLine();
         std::cout << "Not a color number. Please try again";
     }
 }
@@ -660,16 +660,90 @@ bool writeProfileDataToUserProfilesCSV(userProfile* profile)
     return true;
 }
 
-userProfile* modifyProfile( std::unordered_map<std::string, std::string>& usernamePasswordMap, std::unordered_map<std::string, userProfile*>& profileMap)
+void modifyProfile(userProfile *p ,std::unordered_map<std::string, std::string>& usernamePasswordMap, std::unordered_map<std::string, userProfile*>& profileMap)
 {
-    userProfile* profile = new userProfile("user", "password", "blue");
-    return profile;
+    while (true)
+    {
+        UI.clearConsole();
+        UI.placeCursor(topmostRow, leftmostColumn);
+        std::cout << "========== Edit Profile Menu ==========";
+        UI.shiftCursorFromLastSetPos(1, 0);
+        std::cout << "Change username - 0";
+        UI.shiftCursorFromLastSetPos(1, 0);
+        std::cout << "Change password - 1";
+        UI.shiftCursorFromLastSetPos(1, 0);
+        std::cout << "Change favorite color - 2";
+        UI.shiftCursorFromLastSetPos(2, 0);
+    
+        std::cout << "Input the corresponding number to your desired option: ";
+        COORD validationMessagePos = UI.CalculateCOORDValueAsIfShifted(UI.getLastSetPosition(), 1, 0);
+        COORD modifyItemPos = UI.CalculateCOORDValueAsIfShifted(UI.getLastSetPosition(), 3, 0);
+        std::string input;
+        std::cin >> input;
+
+        if (input == "0")
+        {
+            unsigned int attempts = 0;
+            std::string usernameInput; 
+            while (true)
+            {
+                attempts++;
+                UI.placeCursor(modifyItemPos.Y, modifyItemPos.X);
+                std::cout << "Input new username: ";
+                UI.clearToRightOnLine();
+                usernameInput = getUserInput();
+
+                validationResult validation = validateUsername(usernameInput, usernamePasswordMap);
+                UI.placeCursor(validationMessagePos.Y, validationMessagePos.X);
+                UI.clearToRightOnLine();
+                std::cout << validation.validationMessage;
+
+                if (validation.isValid)
+                {
+                    break;
+                }
+
+                if (attempts > 6)
+                {
+                    UI.clearConsole();
+                    UI.placeCursor(validationMessagePos.Y, validationMessagePos.X);
+                    UI.clearToRightOnLine();
+                    std::cout << "You have exceeded maximum username edit attempts. Please try again later.";
+                    for (unsigned int i = 0; i < 1000; i++)
+                    {
+                        if (i % 200)
+                        {
+                            std::cout << ". ";
+                        }
+                    }
+                    UI.clearConsole();
+                    break;
+                }
+            }
+        }
+        else if (input == "1")
+        {
+
+        }
+        else if (input == "2")
+        {
+
+        }
+        else 
+        {
+            UI.placeCursor(validationMessagePos.Y, validationMessagePos.X);
+            std::cout << "Invalid input is not an option";
+        }
+
+    }
+   
+    return;
 }
 
 void quit()
 {
-    UIController.clearConsole();
-    UIController.placeCursor(15, 30);
+    UI.clearConsole();
+    UI.placeCursor(15, 30);
     logout();
     std::cout << "Bye ";
     Sleep(200);
@@ -682,36 +756,29 @@ void quit()
     exit(0);
 }
 
-void MainMenu(userProfile p)
+void MainMenu(userProfile * p, std::unordered_map<std::string, std::string> usernamePasswordMap, std::unordered_map<std::string, userProfile*> usernamePasswordToProfileMap)
 {
-    UIController.clearConsole();
-    UIController.placeCursor(topmostRow, leftmostColumn);
+    UI.clearConsole();
+    UI.placeCursor(topmostRow, leftmostColumn);
     std::cout << "================= MAIN MENU ====================";
-    UIController.shiftCursorFromLastSetPos(1, 0);
+    UI.shiftCursorFromLastSetPos(1, 0);
     std::cout << "Edit Profile - 0";
-    UIController.shiftCursorFromLastSetPos(1, 0);
+    UI.shiftCursorFromLastSetPos(1, 0);
     std::cout << "Logout - 1";
-    UIController.shiftCursorFromLastSetPos(1, 0);
+    UI.shiftCursorFromLastSetPos(1, 0);
     std::cout << "Quit - q:";
 
-    UIController.shiftCursorFromCurrentPos(2, 0);
+    UI.shiftCursorFromCurrentPos(2, 0);
     std::cout << "Input the corresponding number for what you would like to do: ";
-    std::string input; 
-    std::cin >> input;
-    checkGlobalInputCommands(input);
+    std::string input = getUserInput();
     if (input == "0")
     {
-        //Open edit profile menu
+        modifyProfile(p, usernamePasswordMap, usernamePasswordToProfileMap);
     }
     else if (input == "1")
     {
-        // Logout 
+        return;
     }
-}
-
-void Logout()
-{
-
 }
 
 
@@ -738,6 +805,7 @@ int main()
             profile = createNewProfile(usernamePasswordMap, usernamePasswordToProfileMap);
         }
 
+        MainMenu(profile, usernamePasswordMap, usernamePasswordToProfileMap);
         
     }
     
