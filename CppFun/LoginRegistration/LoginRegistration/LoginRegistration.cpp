@@ -11,8 +11,8 @@ INSTRUCTIONS
     - all user infos stored in csv. Example:
         "data, data, data, \n"
         "data, data, data, \n"
-    - usernames no longer than 10 characters
-    - password no longer than 15 characters
+    - usernames min 4 characters, max 16 characters
+    - password min 8 characters, max 32 characters
 2. Registers new users with new username / password
     - verifies unique username during creation
     - communicates password strength while password is being typed *** TODO
@@ -85,8 +85,9 @@ userProfile* createNewProfile(std::unordered_map<std::string, std::string>& user
 validationResult validateUsername(std::string, std::unordered_map<std::string, std::string>& usernamePasswordMap);
 validationResult validatePassword(std::string);
 std::string SelectFavoriteColor();
-bool writeProfileDataToUserProfilesCSV(userProfile* profile);
+bool writeNewProfileDataToUserProfilesCSV(userProfile* profile);
 void modifyProfile(std::unordered_map<std::string, std::string>& usernamePasswordMap, std::unordered_map<std::string, userProfile*>& profileMap);
+void loggedInMenu(userProfile* p, std::unordered_map<std::string, std::string> usernamePasswordMap, std::unordered_map<std::string, userProfile*> usernamePasswordToProfileMap);
 void quit();
 
 std::string getUserInput();
@@ -100,9 +101,9 @@ static std::unordered_set<std::string> validYesOrNoChars{ "Y", "y", "n", "N"};
 static std::unordered_set<std::string> illegalUsernamePasswordChars{",", "<", "'", "(", ")"," ", ";", ":"};
 static std::vector<std::string> colors{ "Red", "Yellow", "Blue", "Green", "Orange", "Purple" };
 static unsigned int minUsernameLength = 4;
-static unsigned int maxUsernameLength = 10;
+static unsigned int maxUsernameLength = 16;
 static unsigned int minPasswordLength = 8;
-static unsigned int maxPasswordLength = 15;
+static unsigned int maxPasswordLength = 32;
 
 static unsigned int leftmostColumn = 30;
 static unsigned int topmostRow = 5;
@@ -114,7 +115,13 @@ bool loadAllUserData(std::unordered_map<std::string, std::string>& usernamePassw
     userProfileCSV.open("userProfiles.csv");
     if (!userProfileCSV.is_open())
     {
-        assert(("userProfile.csv failed to open", false));
+        std::ofstream csv("userProfiles.csv");
+        csv.close();
+    }
+    userProfileCSV.open("userProfiles.csv");
+    if (!userProfileCSV.is_open())
+    {
+        assert(("Failed to open user profile CSV", false));
         return false;
     }
 
@@ -387,7 +394,6 @@ userProfile * login(std::unordered_map<std::string, std::string>& usernamePasswo
 
     assert(("Missed case. Did not think this would get called.", false));
     return NULL;
-
 }
 
 userProfile* logout()
@@ -519,7 +525,7 @@ userProfile * createNewProfile(std::unordered_map<std::string, std::string>& use
     profile = new userProfile(usernameInput, passwordInput, color);
     profileMap.insert(std::make_pair(usernameInput + passwordInput, profile));
 
-    writeProfileDataToUserProfilesCSV(profile);
+    writeNewProfileDataToUserProfilesCSV(profile);
 
     return profile;
 }
@@ -640,7 +646,28 @@ std::string SelectFavoriteColor()
     }
 }
 
-bool writeProfileDataToUserProfilesCSV(userProfile* profile)
+bool writeModifiedProfileDataToUserProfileCSV(userProfile* p, int )
+{
+    std::ofstream output("userProfiles.csv");
+
+    if (!output.is_open())
+    {
+        assert(("Output file failed to open", false));
+        return false;
+    }
+
+    std::string s = "";
+    while (output >> s)
+    {
+        size_t found = s.find(p->getUsername());
+        if (found == std::string::npos)
+        {
+            continue;
+        }
+
+}
+
+bool writeNewProfileDataToUserProfilesCSV(userProfile* profile)
 {
     std::ofstream outputFile("userProfiles.csv", std::ios::app);
     
@@ -658,6 +685,48 @@ bool writeProfileDataToUserProfilesCSV(userProfile* profile)
     outputFile.close();
 
     return true;
+}
+
+void quit()
+{
+    UI.clearConsole();
+    UI.placeCursor(15, 30);
+    logout();
+    std::cout << "Bye ";
+    Sleep(200);
+    std::cout << "bye ";
+    for (int i = 0; i < 5; i++)
+    {
+        Sleep(200);
+        std::cout << ". ";
+    }
+    exit(0);
+}
+
+void loggedInMenu(userProfile * p, std::unordered_map<std::string, std::string> usernamePasswordMap, std::unordered_map<std::string, userProfile*> usernamePasswordToProfileMap)
+{
+    UI.clearConsole();
+    UI.placeCursor(topmostRow, leftmostColumn);
+    std::cout << "================= MAIN MENU ====================";
+    UI.shiftCursorFromLastSetPos(1, 0);
+    std::cout << "Edit Profile - 0";
+    UI.shiftCursorFromLastSetPos(1, 0);
+    std::cout << "Logout - 1";
+    UI.shiftCursorFromLastSetPos(1, 0);
+    std::cout << "Quit - :q";
+
+    UI.shiftCursorFromCurrentPos(2, 0);
+    std::cout << "Input the corresponding number for what you would like to do: ";
+    std::string input = getUserInput();
+    if (input == "0")
+    {
+        modifyProfile(p, usernamePasswordMap, usernamePasswordToProfileMap);
+    }
+    else if (input == "1")
+    {
+        UI.clearConsole();
+        return;
+    }
 }
 
 void modifyProfile(userProfile *p ,std::unordered_map<std::string, std::string>& usernamePasswordMap, std::unordered_map<std::string, userProfile*>& profileMap)
@@ -678,10 +747,10 @@ void modifyProfile(userProfile *p ,std::unordered_map<std::string, std::string>&
         std::cout << "Input the corresponding number to your desired option: ";
         COORD validationMessagePos = UI.CalculateCOORDValueAsIfShifted(UI.getLastSetPosition(), 1, 0);
         COORD modifyItemPos = UI.CalculateCOORDValueAsIfShifted(UI.getLastSetPosition(), 3, 0);
-        std::string input;
-        std::cin >> input;
+        std::string choice;
+        std::cin >> choice;
 
-        if (input == "0")
+        if (choice == "0")
         {
             unsigned int attempts = 0;
             std::string usernameInput; 
@@ -700,6 +769,8 @@ void modifyProfile(userProfile *p ,std::unordered_map<std::string, std::string>&
 
                 if (validation.isValid)
                 {
+                    // find profile in csv
+                    // overwrite current username to be new username
                     break;
                 }
 
@@ -721,11 +792,47 @@ void modifyProfile(userProfile *p ,std::unordered_map<std::string, std::string>&
                 }
             }
         }
-        else if (input == "1")
+        else if (choice == "1")
         {
+            int attempts = 0;
+            std::string passwordInput;
+            while (true)
+            {
+                attempts++;
+                UI.placeCursor(modifyItemPos.Y, modifyItemPos.X);
+                UI.clearToRightOnLine();
+                std::cout << "New Password: ";
+                passwordInput = getUserInput();
 
+                validationResult validation = validatePassword(passwordInput);
+                UI.placeCursor(validationMessagePos.Y, validationMessagePos.X);
+                UI.clearToRightOnLine();
+                std::cout << validation.validationMessage;
+
+                if (validation.isValid)
+                {
+                    break;
+                }
+
+                if (attempts > 6)
+                {
+                    UI.clearConsole();
+                    UI.placeCursor(validationMessagePos.Y, validationMessagePos.X);
+                    UI.clearToRightOnLine();
+                    std::cout << "You have exceeded maximum password input attempts. Please try creating an account later ";
+                    for (unsigned int i = 0; i < 1000; i++)
+                    {
+                        if (i % 200)
+                        {
+                            std::cout << ". ";
+                        }
+                    }
+                    UI.clearConsole();
+                    break;
+                }
+            }
         }
-        else if (input == "2")
+        else if (choice == "2")
         {
 
         }
@@ -740,47 +847,6 @@ void modifyProfile(userProfile *p ,std::unordered_map<std::string, std::string>&
     return;
 }
 
-void quit()
-{
-    UI.clearConsole();
-    UI.placeCursor(15, 30);
-    logout();
-    std::cout << "Bye ";
-    Sleep(200);
-    std::cout << "bye ";
-    for (int i = 0; i < 5; i++)
-    {
-        Sleep(200);
-        std::cout << ". ";
-    }
-    exit(0);
-}
-
-void MainMenu(userProfile * p, std::unordered_map<std::string, std::string> usernamePasswordMap, std::unordered_map<std::string, userProfile*> usernamePasswordToProfileMap)
-{
-    UI.clearConsole();
-    UI.placeCursor(topmostRow, leftmostColumn);
-    std::cout << "================= MAIN MENU ====================";
-    UI.shiftCursorFromLastSetPos(1, 0);
-    std::cout << "Edit Profile - 0";
-    UI.shiftCursorFromLastSetPos(1, 0);
-    std::cout << "Logout - 1";
-    UI.shiftCursorFromLastSetPos(1, 0);
-    std::cout << "Quit - q:";
-
-    UI.shiftCursorFromCurrentPos(2, 0);
-    std::cout << "Input the corresponding number for what you would like to do: ";
-    std::string input = getUserInput();
-    if (input == "0")
-    {
-        modifyProfile(p, usernamePasswordMap, usernamePasswordToProfileMap);
-    }
-    else if (input == "1")
-    {
-        return;
-    }
-}
-
 
 int main()
 {
@@ -791,21 +857,21 @@ int main()
     while (true)
     {
         bool choseToLogin = loginOrCreateAccountPrompt();
-        userProfile* profile;
+        userProfile* p;
         if (choseToLogin)
         {
-            profile = login(usernamePasswordMap, usernamePasswordToProfileMap);
-            if (profile == NULL)
+            p = login(usernamePasswordMap, usernamePasswordToProfileMap);
+            if (p == NULL)
             {
-                profile = createNewProfile(usernamePasswordMap, usernamePasswordToProfileMap);
+                p = createNewProfile(usernamePasswordMap, usernamePasswordToProfileMap);
             }
         }
         else
         {
-            profile = createNewProfile(usernamePasswordMap, usernamePasswordToProfileMap);
+            p = createNewProfile(usernamePasswordMap, usernamePasswordToProfileMap);
         }
 
-        MainMenu(profile, usernamePasswordMap, usernamePasswordToProfileMap);
+        loggedInMenu(p, usernamePasswordMap, usernamePasswordToProfileMap);
         
     }
     
