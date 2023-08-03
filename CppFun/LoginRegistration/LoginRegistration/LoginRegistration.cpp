@@ -318,15 +318,14 @@ userProfile * login(std::unordered_map<std::string, std::string>& usernamePasswo
     UI.shiftCursorFromLastSetPos(1, 0);
     std::cout << "Password: ";
     passwordPos = UI.getCursorPosition();
-    messagePos = UI.CalculateCOORDValueAsIfShifted(UI.getCursorPosition() , 1, UI.getCursorPosition().X - (UI.getCursorPosition().X - leftmostColumn));
-    
-
+    messagePos = UI.shiftCursorFromLastSetPos(2,0);
 
     while (loginAttempts < maxLoginAttempts)
     {
         loginAttempts++;
         UI.placeCursor(usernamePos.Y, usernamePos.X);
         usernameInput = getUserInput();
+        UI.placeCursor(passwordPos.Y, passwordPos.X);
         passwordInput = getUserInput();
 
         if (usernamePasswordMap.count(usernameInput) == 1 && usernamePasswordMap.at(usernameInput) == passwordInput)
@@ -761,8 +760,8 @@ void loggedInMenu(userProfile * p, std::unordered_map<std::string, std::string> 
     UI.shiftCursorFromLastSetPos(1, 0);
     std::cout << "Quit - :q";
 
-    UI.shiftCursorFromCurrentPos(2, 0);
-    std::cout << "Input the corresponding number for what you would like to do: ";
+    UI.shiftCursorFromLastSetPos(2, 0);
+    std::cout << "Input your desired option's corresponding number-: ";
     std::string input = getUserInput();
     if (input == "0")
     {
@@ -800,12 +799,14 @@ void modifyProfile(userProfile *p, std::unordered_map<std::string, std::string>&
     }
     UI.shiftCursorFromLastSetPos(2, 0);
     std::cout << "Input the corresponding number or character for your desired option: ";
-    UI.shiftCursorFromLastSetPos(2, 0); 
-    std::cout << "-----------------------------------------------------------------------";
     
     COORD editChoicePos = UI.getCursorPosition();
     COORD modifyItemPos = UI.CalculateCOORDValueAsIfShifted(UI.getLastSetPosition(), 3, 0);
     COORD validationMessagePos = UI.CalculateCOORDValueAsIfShifted(UI.getLastSetPosition(), 1, 0);
+    
+    UI.shiftCursorFromLastSetPos(8, 0); 
+    std::cout << "-----------------------------------------------------------------------";
+
     
     while (true)
     {
@@ -832,8 +833,13 @@ void modifyProfile(userProfile *p, std::unordered_map<std::string, std::string>&
 
                 if (validation.isValid)
                 {
-                    result v = newP->setUsername(newP->getPassword(), usernameInput);
-                    std::cout << ". " << v.validationMessage;
+                    result result = newP->setUsername(newP->getPassword(), usernameInput);
+                    std::cout << ". " << result.validationMessage;
+                    if (result.isValid == false)
+                    {
+                        assert((result.validationMessage, false));
+                    }
+                    break;
                 }
 
                 if (attempts > 6)
@@ -873,10 +879,11 @@ void modifyProfile(userProfile *p, std::unordered_map<std::string, std::string>&
 
                 if (validation.isValid)
                 {
-                    result v = newP->setPassword(newP->getUsername(), passwordInput);
-                    if (v.isValid == false)
+                    result result = newP->setPassword(newP->getUsername(), passwordInput);
+                    std::cout << ". " << result.validationMessage;
+                    if (result.isValid == false)
                     {
-                        std::cout << ". " << v.validationMessage;
+                        assert((result.validationMessage, false));
                     }
                     break;
                 }
@@ -903,12 +910,14 @@ void modifyProfile(userProfile *p, std::unordered_map<std::string, std::string>&
         {
             std::string c = SelectFavoriteColor();
             result v = newP->setFavoriteColor(newP->getPassword(), c);
+            UI.placeCursor(validationMessagePos.Y, validationMessagePos.X);
+            UI.clearToRightOnLine();
+            std::cout << v.validationMessage;
             if (v.isValid == false)
             {
-                UI.placeCursor(validationMessagePos.Y, validationMessagePos.X);
-                UI.clearToRightOnLine();
-                std::cout << v.validationMessage;
+                assert((v.validationMessage, false));
             }
+            break;
         }
         else if (validReturnToPreviousMenuStrings.count(choice) > 0)
         {
@@ -920,12 +929,13 @@ void modifyProfile(userProfile *p, std::unordered_map<std::string, std::string>&
             std::cout << "Invalid input is not an option";
         }
 
+        UI.clearToRightOnLineFromPos(editChoicePos);
         UI.clearToRightOnLineFromPos(modifyItemPos);
     }
 
+    writeModifiedProfileToCSV(p, newP);
     p = newP;
     
-
     return;
 }
 
@@ -956,9 +966,6 @@ int main()
         loggedInMenu(p, usernamePasswordMap, usernamePasswordToProfileMap);
         
     }
-    
-
-    // Logged in. Modify profile prompt
 
     // Log out option
            
