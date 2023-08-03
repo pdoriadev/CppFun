@@ -71,6 +71,7 @@ public:
     std::string getUsername() { return userData[0]; }
     std::string getPassword() { return userData[1]; }
     std::string getFavoriteColor() { return userData[2]; }
+    std::string getLastProfileItem() { return userData[userData.size() - 1]; }
 
     result setUsername(std::string pWord, std::string newName)
     {
@@ -144,14 +145,7 @@ bool loadAllUserData(std::unordered_map<std::string, std::string>& usernamePassw
     userProfileCSV.open("userProfiles.csv");
     if (!userProfileCSV.is_open())
     {
-        std::ofstream csv("userProfiles.csv");
-        csv.close();
-    }
-    userProfileCSV.open("userProfiles.csv");
-    if (!userProfileCSV.is_open())
-    {
-        assert(("Failed to open user profile CSV", false));
-        return false;
+        assert(("Failed to open CSV", false));
     }
 
     std::string username;
@@ -309,42 +303,30 @@ userProfile * login(std::unordered_map<std::string, std::string>& usernamePasswo
     std::string passwordInput = "";
     COORD usernamePos;
     COORD passwordPos;
+    COORD messagePos;
     int maxLoginAttempts = 3;
     int loginAttempts = 0;
 
     UI.clearConsole();
     std::cout << std::endl;
-    UI.placeCursor(5, 30);
+    UI.placeCursor(topmostRow, leftmostColumn);
     int LoginMenuTop = UI.getCursorPosition().Y;
     std::cout << "=========== LOGIN MENU ===========";
+    UI.shiftCursorFromLastSetPos(2, 0);
+    std::cout << "Username: ";
+    usernamePos = UI.getCursorPosition();
     UI.shiftCursorFromLastSetPos(1, 0);
+    std::cout << "Password: ";
+    passwordPos = UI.getCursorPosition();
+    messagePos = UI.CalculateCOORDValueAsIfShifted(UI.getCursorPosition() , 1, UI.getCursorPosition().X - (UI.getCursorPosition().X - leftmostColumn));
+    
+
 
     while (loginAttempts < maxLoginAttempts)
     {
         loginAttempts++;
-        UI.clearBelowGivenLine(LoginMenuTop);
-        if (loginAttempts == 1)
-        {
-            UI.shiftCursorFromLastSetPos(2, 0);
-            usernamePos = UI.getCursorPosition();
-        }
-        else
-        {
-            UI.placeCursor(usernamePos.Y, usernamePos.X);
-        }
-        std::cout << "Username: ";
+        UI.placeCursor(usernamePos.Y, usernamePos.X);
         usernameInput = getUserInput();
-
-        if (loginAttempts == 1)
-        {
-            UI.shiftCursorFromLastSetPos(2, 0);
-            passwordPos = UI.getCursorPosition();
-        }
-        else
-        {
-            UI.placeCursor(passwordPos.Y, passwordPos.X);
-        }
-        std::cout << "Password: ";
         passwordInput = getUserInput();
 
         if (usernamePasswordMap.count(usernameInput) == 1 && usernamePasswordMap.at(usernameInput) == passwordInput)
@@ -380,7 +362,7 @@ userProfile * login(std::unordered_map<std::string, std::string>& usernamePasswo
         }
 
         std::string createAccountOrEnterAgain = "";
-        UI.shiftCursorFromLastSetPos(1, 0);
+        UI.placeCursor(messagePos.Y, messagePos.X);
 
         std::cout << "Username or Password not found. Attempt to login again or create a new account?"; 
         while (validYesOrNoStrings.count(createAccountOrEnterAgain) == 0)
@@ -405,7 +387,6 @@ userProfile * login(std::unordered_map<std::string, std::string>& usernamePasswo
         {
             UI.clearToRightOnLineFromPos(usernamePos);
             UI.clearToRightOnLineFromPos(passwordPos);
-            UI.clearBelowGivenLine(passwordPos.Y);
         }
     }
 
@@ -675,7 +656,7 @@ std::string SelectFavoriteColor()
     }
 }
 
-result writeModifiedProfileToCSV(userProfile* p, userProfile* newP)
+result writeModifiedProfileToCSV(userProfile* p, userProfile* modP)
 {
     std::ifstream in("userProfiles.csv");
     if (!in.is_open())
@@ -684,29 +665,52 @@ result writeModifiedProfileToCSV(userProfile* p, userProfile* newP)
         return result(false, "CSV failed to open");
     }
     std::string s = "";
-    std::streampos pos;
+    std::string firstPartition = "";
+    std::string secondPartition = "";
+    std::streampos startPos;
     while (in >> s)
     {
         if (s != p->getUsername())
         {
+            firstPartition += s;
             continue;
         }
-
-        for (char c : s)
-        {
-            in.unget();
-        }
-        pos = in.tellg();
         break;
     }
+    for (char c : s)
+    {
+        in.unget();
+    }
+    startPos = in.tellg();
     
-    std::ofstream output("userProfiles.csv");
-    if (!output.is_open())
+    while (in >> s)
+    {
+        if (s == p->getLastProfileItem())
+        {
+            break;
+        }
+    }
+    while (in >> s)
+    {
+        secondPartition += s;
+    }
+    in.close();
+    
+    std::ofstream out("userProfiles.csv");
+    if (!out.is_open())
     {
         assert(("CSV failed to open", false));
         return result(false, "CSV");
     }
-    output.close();
+    out.seekp(startPos);
+    out << firstPartition;
+    out << modP->getUsername() << ", "
+        << modP->getPassword() << ", "
+        << modP->getFavoriteColor() << '\n';
+    out << secondPartition;
+
+    out.close();
+    return result(true, "Success editing profile");
 }
 
 result writeNewProfileToCSV(userProfile* profile)
