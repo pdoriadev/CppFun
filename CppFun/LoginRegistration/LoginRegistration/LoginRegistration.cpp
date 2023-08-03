@@ -39,11 +39,11 @@ Attempt to write all in one file. See how it works. Consider separating into hea
 #include <vector>
 #include <iterator>
 
-struct validationResult
+struct result
 {
     bool isValid = false;
     std::string validationMessage;
-    validationResult(bool _isValid, std::string _validationMessage)
+    result(bool _isValid, std::string _validationMessage)
     {
         validationMessage = _validationMessage;
         isValid = _isValid;
@@ -72,35 +72,35 @@ public:
     std::string getPassword() { return userData[1]; }
     std::string getFavoriteColor() { return userData[2]; }
 
-    validationResult setUsername(std::string pWord, std::string newName)
+    result setUsername(std::string pWord, std::string newName)
     {
         if (pWord != getPassword())
         {
-            return validationResult(false, "Failed to reset username. Incorrect Password.");
+            return result(false, "Failed to reset username. Incorrect Password.");
         }
 
         userData[0] = newName;
-        return validationResult(true, "Username reset successful.");
+        return result(true, "Username reset successful.");
     }
-    validationResult setPassword(std::string uName, std::string newPword)
+    result setPassword(std::string uName, std::string newPword)
     {
         if (uName != getUsername())
         {
-            return validationResult(false, "Failed to reset password. Incorrect Username key.");
+            return result(false, "Failed to reset password. Incorrect Username key.");
         }
 
         userData[1] = newPword;
-        return validationResult(true, "Password reset successful");
+        return result(true, "Password reset successful");
     }
-    validationResult setFavoriteColor(std::string pWord, std::string newColor)
+    result setFavoriteColor(std::string pWord, std::string newColor)
     {
         if (pWord != getPassword())
         {
-            return validationResult(false, "Failed to set new color. Incorrect password key");
+            return result(false, "Failed to set new color. Incorrect password key");
         }
 
         userData[2] = newColor;
-        return validationResult(true, "Set new favorite color successfully.");
+        return result(true, "Set new favorite color successfully.");
     }
 };
 
@@ -109,11 +109,11 @@ bool loginOrCreateAccountPrompt();
 userProfile* login(std::unordered_map<std::string, std::string>& usernamePasswordMap, std::unordered_map<std::string, userProfile*>& profileMap);
 userProfile* logout();
 userProfile* createNewProfile(std::unordered_map<std::string, std::string>& usernamePasswordMap, std::unordered_map<std::string, userProfile*>& profileMap);
-validationResult validateUsername(std::string, std::unordered_map<std::string, std::string>& usernamePasswordMap);
-validationResult validatePassword(std::string);
+result validateUsername(std::string, std::unordered_map<std::string, std::string>& usernamePasswordMap);
+result validatePassword(std::string);
 std::string SelectFavoriteColor();
-bool writeNewProfileToCSV(userProfile* profile);
-validationResult writeModifiedProfileToCSV(userProfile* p);
+result writeNewProfileToCSV(userProfile* profile);
+result writeModifiedProfileToCSV(userProfile* p, userProfile* newP);
 void modifyProfile(userProfile* p, std::unordered_map<std::string, std::string>& usernamePasswordMap, std::unordered_map<std::string, userProfile*>& profileMap);
 void loggedInMenu(userProfile* p, std::unordered_map<std::string, std::string> usernamePasswordMap, std::unordered_map<std::string, userProfile*> usernamePasswordToProfileMap);
 void quit();
@@ -483,7 +483,7 @@ userProfile * createNewProfile(std::unordered_map<std::string, std::string>& use
         UI.clearToRightOnLine();
         usernameInput = getUserInput();
     
-        validationResult validation = validateUsername(usernameInput, usernamePasswordMap);
+        result validation = validateUsername(usernameInput, usernamePasswordMap);
         UI.placeCursor(validationMessagePos.Y, validationMessagePos.X);
         UI.clearToRightOnLine();
         std::cout << validation.validationMessage;
@@ -520,7 +520,7 @@ userProfile * createNewProfile(std::unordered_map<std::string, std::string>& use
         UI.clearToRightOnLine();
         passwordInput = getUserInput();
 
-        validationResult validation = validatePassword(passwordInput);
+        result validation = validatePassword(passwordInput);
         UI.placeCursor(validationMessagePos.Y, validationMessagePos.X);
         UI.clearToRightOnLine();
         std::cout << validation.validationMessage;
@@ -559,7 +559,7 @@ userProfile * createNewProfile(std::unordered_map<std::string, std::string>& use
     return profile;
 }
 
-validationResult validateUsername(std::string username, std::unordered_map<std::string, std::string>& usernamePasswordMap)
+result validateUsername(std::string username, std::unordered_map<std::string, std::string>& usernamePasswordMap)
 {
     bool isValid = true;
     std::string message;
@@ -567,7 +567,7 @@ validationResult validateUsername(std::string username, std::unordered_map<std::
     {
         isValid = false;
         message += "Username already exists. ";
-        return validationResult(isValid, message);
+        return result(isValid, message);
     }
 
     for (unsigned int i = 0; i < username.length(); i++)
@@ -598,10 +598,10 @@ validationResult validateUsername(std::string username, std::unordered_map<std::
         message += "What a lovely username <3";
     }
 
-    return validationResult(isValid, message);
+    return result(isValid, message);
 }
 
-validationResult validatePassword(std::string password)
+result validatePassword(std::string password)
 {
     bool valid = true;
     std::string message = "";
@@ -632,7 +632,7 @@ validationResult validatePassword(std::string password)
         message += "Password is good!";
     }
 
-    return validationResult(valid, message);
+    return result(valid, message);
 }
 
 std::string SelectFavoriteColor()
@@ -675,38 +675,48 @@ std::string SelectFavoriteColor()
     }
 }
 
-validationResult writeModifiedProfileToCSV(userProfile* p)
+result writeModifiedProfileToCSV(userProfile* p, userProfile* newP)
 {
     std::ifstream in("userProfiles.csv");
     if (!in.is_open())
     {
         assert(("CSV failed to open", false));
-        return validationResult(false, "CSV failed to open");
+        return result(false, "CSV failed to open");
     }
     std::string s = "";
+    std::streampos pos;
     while (in >> s)
     {
-        
+        if (s != p->getUsername())
+        {
+            continue;
+        }
+
+        for (char c : s)
+        {
+            in.unget();
+        }
+        pos = in.tellg();
+        break;
     }
-       
     
     std::ofstream output("userProfiles.csv");
     if (!output.is_open())
     {
         assert(("CSV failed to open", false));
-        return validationResult(false, "CSV");
+        return result(false, "CSV");
     }
     output.close();
 }
 
-bool writeNewProfileToCSV(userProfile* profile)
+result writeNewProfileToCSV(userProfile* profile)
 {
     std::ofstream outputFile("userProfiles.csv", std::ios::app);
     
     if (!outputFile.is_open())
     {
-        assert(("Failed to open output file"));
-        return false;
+        assert(("Failed to open CSV file", false));
+        return result (false, "Failed to open CSV file");
     }
 
     outputFile << 
@@ -716,7 +726,7 @@ bool writeNewProfileToCSV(userProfile* profile)
 
     outputFile.close();
 
-    return true;
+    return result (true, "Success");
 }
 
 void quit()
@@ -811,14 +821,14 @@ void modifyProfile(userProfile *p, std::unordered_map<std::string, std::string>&
                 UI.clearToRightOnLine();
                 usernameInput = getUserInput();
 
-                validationResult validation = validateUsername(usernameInput, usernamePasswordMap);
+                result validation = validateUsername(usernameInput, usernamePasswordMap);
                 UI.placeCursor(validationMessagePos.Y, validationMessagePos.X);
                 UI.clearToRightOnLine();
                 std::cout << validation.validationMessage;
 
                 if (validation.isValid)
                 {
-                    validationResult v = newP->setUsername(newP->getPassword(), usernameInput);
+                    result v = newP->setUsername(newP->getPassword(), usernameInput);
                     std::cout << ". " << v.validationMessage;
                 }
 
@@ -852,14 +862,14 @@ void modifyProfile(userProfile *p, std::unordered_map<std::string, std::string>&
                 std::cout << "New Password: ";
                 passwordInput = getUserInput();
 
-                validationResult validation = validatePassword(passwordInput);
+                result validation = validatePassword(passwordInput);
                 UI.placeCursor(validationMessagePos.Y, validationMessagePos.X);
                 UI.clearToRightOnLine();
                 std::cout << validation.validationMessage;
 
                 if (validation.isValid)
                 {
-                    validationResult v = newP->setPassword(newP->getUsername(), passwordInput);
+                    result v = newP->setPassword(newP->getUsername(), passwordInput);
                     if (v.isValid == false)
                     {
                         std::cout << ". " << v.validationMessage;
@@ -888,7 +898,7 @@ void modifyProfile(userProfile *p, std::unordered_map<std::string, std::string>&
         else if (choice == "2")
         {
             std::string c = SelectFavoriteColor();
-            validationResult v = newP->setFavoriteColor(newP->getPassword(), c);
+            result v = newP->setFavoriteColor(newP->getPassword(), c);
             if (v.isValid == false)
             {
                 UI.placeCursor(validationMessagePos.Y, validationMessagePos.X);
