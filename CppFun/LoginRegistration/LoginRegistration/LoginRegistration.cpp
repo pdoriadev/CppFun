@@ -663,45 +663,62 @@ result writeModifiedProfileToCSV(userProfile* p, userProfile* modP)
         assert(("CSV failed to open", false));
         return result(false, "CSV failed to open");
     }
-    std::string s = "";
     std::string firstPartition = "";
     std::string secondPartition = "";
-    std::streampos startPos;
-    while (in >> s)
+    std::string extractedLine;
+    bool firstIncomplete = true;
+    while (getline(in, extractedLine))
     {
-        if (s != p->getUsername())
+        if (firstIncomplete)
         {
-            firstPartition += s;
-            continue;
+            std::string extractedUsername;
+            size_t foundComma = extractedLine.find(',');
+            if (foundComma != std::string::npos)
+            {
+                if (extractedUsername[0] == ',')
+                {
+                    assert(("Unexpected to see comma at beginning of word."), false);
+                }
+
+                extractedUsername = extractedLine.substr(0, foundComma);
+                if (extractedUsername.find(',') != std::string::npos)
+                {
+                    assert(("Comma found in extracted username"), false);
+                }
+
+                if (extractedUsername == p->getUsername())
+                {
+                    firstIncomplete = false;        
+                }
+                else
+                {
+                    firstPartition += extractedLine + '\n';
+                }
+
+            }
         }
-        break;
+        else
+        {
+            size_t foundComma = extractedLine.find(',');
+            if (foundComma != std::string::npos)
+            {
+                if (extractedLine[0] == ',')
+                {
+                    assert(("Unexpected to see comma at beginning of word."), false);
+                }
+                secondPartition += extractedLine + '\n';
+            }
+        }
     }
-    for (char c : s)
-    {
-        in.unget();
-    }
-    startPos = in.tellg();
     
-    while (in >> s)
-    {
-        if (s == p->getLastProfileItem())
-        {
-            break;
-        }
-    }
-    while (in >> s)
-    {
-        secondPartition += s;
-    }
     in.close();
     
     std::ofstream out("userProfiles.csv");
     if (!out.is_open())
     {
         assert(("CSV failed to open", false));
-        return result(false, "CSV");
+        return result(false, "CSV failed to open");
     }
-    out.seekp(startPos);
     out << firstPartition;
     out << modP->getUsername() << ", "
         << modP->getPassword() << ", "
@@ -933,7 +950,17 @@ void modifyProfile(userProfile *p, std::unordered_map<std::string, std::string>&
         UI.clearToRightOnLineFromPos(modifyItemPos);
     }
 
-    writeModifiedProfileToCSV(p, newP);
+    result r = writeModifiedProfileToCSV(p, newP);
+    if (r.isValid == false)
+    {
+        assert((r.validationMessage, false));
+    }
+    
+    usernamePasswordMap.erase(p->getUsername());
+    usernamePasswordMap.insert(std::make_pair(newP->getUsername(), newP->getPassword()));
+    profileMap.erase(newP->getUsername() + newP->getPassword());
+    profileMap.insert(std::make_pair(newP->getUsername() + newP->getPassword(), new userProfile(newP->getUsername(), newP->getPassword(), newP->getFavoriteColor())));
+    
     p = newP;
     
     return;
