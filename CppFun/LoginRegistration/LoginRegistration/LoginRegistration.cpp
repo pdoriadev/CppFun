@@ -671,16 +671,16 @@ result writeModifiedProfileToCSV(userProfile* p, userProfile* modP)
     {
         if (firstIncomplete)
         {
-            std::string extractedUsername;
             size_t foundComma = extractedLine.find(',');
             if (foundComma != std::string::npos)
             {
+                std::string extractedUsername = extractedLine.substr(0, foundComma);
+                
                 if (extractedUsername[0] == ',')
                 {
                     assert(("Unexpected to see comma at beginning of word."), false);
                 }
 
-                extractedUsername = extractedLine.substr(0, foundComma);
                 if (extractedUsername.find(',') != std::string::npos)
                 {
                     assert(("Comma found in extracted username"), false);
@@ -958,7 +958,7 @@ void modifyProfile(userProfile *p, std::unordered_map<std::string, std::string>&
     
     usernamePasswordMap.erase(p->getUsername());
     usernamePasswordMap.insert(std::make_pair(newP->getUsername(), newP->getPassword()));
-    profileMap.erase(newP->getUsername() + newP->getPassword());
+    profileMap.erase(p->getUsername() + p->getPassword());
     profileMap.insert(std::make_pair(newP->getUsername() + newP->getPassword(), new userProfile(newP->getUsername(), newP->getPassword(), newP->getFavoriteColor())));
     
     p = newP;
