@@ -220,35 +220,99 @@ bool loadAllUserData(std::unordered_map<std::string, std::string>& usernamePassw
     return true;
 }
 
-std::string getUserInput()
+result writeModifiedProfileToCSV(userProfile* p, userProfile* modP)
 {
-    std::string input; 
-    std::cin >> input;
-    checkGlobalInputCommands(input);
-    return input;
-}
-
-bool checkGlobalInputCommands(std::string userInput)
-{
-    if (quitCommandString.count(userInput) > 0)
+    std::ifstream in("userProfiles.csv");
+    if (!in.is_open())
     {
-        quit();
-        assert(("If this assert executes, then we didn't quit?!", false));
+        assert(("CSV failed to open", false));
+        return result(false, "CSV failed to open");
+    }
+    std::string firstPartition = "";
+    std::string secondPartition = "";
+    std::string extractedLine;
+    bool firstIncomplete = true;
+    while (getline(in, extractedLine))
+    {
+        if (firstIncomplete)
+        {
+            size_t foundComma = extractedLine.find(',');
+            if (foundComma != std::string::npos)
+            {
+                std::string extractedUsername = extractedLine.substr(0, foundComma);
+
+                if (extractedUsername[0] == ',')
+                {
+                    assert(("Unexpected to see comma at beginning of word."), false);
+                }
+
+                if (extractedUsername.find(',') != std::string::npos)
+                {
+                    assert(("Comma found in extracted username"), false);
+                }
+
+                if (extractedUsername == p->getUsername())
+                {
+                    firstIncomplete = false;
+                }
+                else
+                {
+                    firstPartition += extractedLine + '\n';
+                }
+
+            }
+        }
+        else
+        {
+            size_t foundComma = extractedLine.find(',');
+            if (foundComma != std::string::npos)
+            {
+                if (extractedLine[0] == ',')
+                {
+                    assert(("Unexpected to see comma at beginning of word."), false);
+                }
+                secondPartition += extractedLine + '\n';
+            }
+        }
     }
 
-    return false;
+    in.close();
+
+    std::ofstream out("userProfiles.csv");
+    if (!out.is_open())
+    {
+        assert(("CSV failed to open", false));
+        return result(false, "CSV failed to open");
+    }
+    out << firstPartition;
+    out << modP->getUsername() << ", "
+        << modP->getPassword() << ", "
+        << modP->getFavoriteColor() << '\n';
+    out << secondPartition;
+
+    out.close();
+    return result(true, "Success editing profile");
 }
 
-bool isYes(std::string yesOrNo)
+result writeNewProfileToCSV(userProfile* profile)
 {
-    if (yesOrNo == "y" || yesOrNo == "Y")
+    std::ofstream outputFile("userProfiles.csv", std::ios::app);
+
+    if (!outputFile.is_open())
     {
-        return true;
+        assert(("Failed to open CSV file", false));
+        return result(false, "Failed to open CSV file");
     }
 
-    return false;
-}
+    outputFile <<
+        profile->getUsername() << "," <<
+        profile->getPassword() << "," <<
+        profile->getFavoriteColor() << '\n';
 
+    outputFile.close();
+
+    return result(true, "Success");
+}
 
 bool loginOrCreateAccountPrompt()
 {
@@ -404,6 +468,208 @@ userProfile * login(std::unordered_map<std::string, std::string>& usernamePasswo
     assert(("Missed case. Did not think this would get called.", false));
     return NULL;
 }
+
+void loggedInMenu(userProfile* p, std::unordered_map<std::string, std::string> usernamePasswordMap, std::unordered_map<std::string, userProfile*> usernamePasswordToProfileMap)
+{
+    UI.clearConsole();
+    UI.placeCursor(topmostRow, leftmostColumn);
+    std::cout << "================= MAIN MENU ====================";
+    UI.shiftCursorFromLastSetPos(1, 0);
+    std::cout << "Edit Profile - 0";
+    UI.shiftCursorFromLastSetPos(1, 0);
+    std::cout << "Logout - 1";
+    UI.shiftCursorFromLastSetPos(1, 0);
+    std::cout << "Quit - :q";
+
+    UI.shiftCursorFromLastSetPos(2, 0);
+    std::cout << "Input your desired option's corresponding number-: ";
+    std::string input = getUserInput();
+    if (input == "0")
+    {
+        modifyProfile(p, usernamePasswordMap, usernamePasswordToProfileMap);
+    }
+    else if (input == "1")
+    {
+        UI.clearConsole();
+        return;
+    }
+}
+
+void modifyProfile(userProfile* p, std::unordered_map<std::string, std::string>& usernamePasswordMap, std::unordered_map<std::string, userProfile*>& profileMap)
+{
+    userProfile* newP = new userProfile(p->getUsername(), p->getPassword(), p->getFavoriteColor());
+    UI.clearConsole();
+
+    UI.placeCursor(topmostRow, leftmostColumn);
+    std::cout << "========== Edit Profile Menu ==========";
+    UI.shiftCursorFromLastSetPos(1, 0);
+    std::cout << "Change username - 0";
+    UI.shiftCursorFromLastSetPos(1, 0);
+    std::cout << "Change password - 1";
+    UI.shiftCursorFromLastSetPos(1, 0);
+    std::cout << "Change favorite color - 2";
+    UI.shiftCursorFromLastSetPos(1, 0);
+    std::cout << "Return to Logged-In Menu - ";
+    for (auto i = validReturnToPreviousMenuStrings.begin(); i != validReturnToPreviousMenuStrings.end(); i++)
+    {
+        std::cout << *i;
+        if (std::next(i) != validReturnToPreviousMenuStrings.end())
+        {
+            std::cout << " or ";
+        }
+    }
+    UI.shiftCursorFromLastSetPos(2, 0);
+    std::cout << "Input the corresponding number or character for your desired option: ";
+
+    COORD editChoicePos = UI.getCursorPosition();
+    COORD modifyItemPos = UI.CalculateCOORDValueAsIfShifted(UI.getLastSetPosition(), 3, 0);
+    COORD validationMessagePos = UI.CalculateCOORDValueAsIfShifted(UI.getLastSetPosition(), 1, 0);
+
+    UI.shiftCursorFromLastSetPos(8, 0);
+    std::cout << "-----------------------------------------------------------------------";
+
+
+    while (true)
+    {
+        UI.placeCursor(editChoicePos.Y, editChoicePos.X);
+        std::string choice;
+        std::cin >> choice;
+
+        if (choice == "0")
+        {
+            unsigned int attempts = 0;
+            std::string usernameInput;
+            while (true)
+            {
+                attempts++;
+                UI.placeCursor(modifyItemPos.Y, modifyItemPos.X);
+                std::cout << "Input new username: ";
+                UI.clearToRightOnLine();
+                usernameInput = getUserInput();
+
+                result validation = validateUsername(usernameInput, usernamePasswordMap);
+                UI.placeCursor(validationMessagePos.Y, validationMessagePos.X);
+                UI.clearToRightOnLine();
+                std::cout << validation.validationMessage;
+
+                if (validation.isValid)
+                {
+                    result result = newP->setUsername(newP->getPassword(), usernameInput);
+                    std::cout << ". " << result.validationMessage;
+                    if (result.isValid == false)
+                    {
+                        assert((result.validationMessage, false));
+                    }
+                    break;
+                }
+
+                if (attempts > 6)
+                {
+                    UI.clearConsole();
+                    UI.placeCursor(validationMessagePos.Y, validationMessagePos.X);
+                    UI.clearToRightOnLine();
+                    std::cout << "You have exceeded maximum username edit attempts. Please try again later.";
+                    for (unsigned int i = 0; i < 1000; i++)
+                    {
+                        if (i % 200)
+                        {
+                            std::cout << ". ";
+                        }
+                    }
+                    UI.clearConsole();
+                    break;
+                }
+            }
+        }
+        else if (choice == "1")
+        {
+            int attempts = 0;
+            std::string passwordInput;
+            while (true)
+            {
+                attempts++;
+                UI.placeCursor(modifyItemPos.Y, modifyItemPos.X);
+                UI.clearToRightOnLine();
+                std::cout << "New Password: ";
+                passwordInput = getUserInput();
+
+                result validation = validatePassword(passwordInput);
+                UI.placeCursor(validationMessagePos.Y, validationMessagePos.X);
+                UI.clearToRightOnLine();
+                std::cout << validation.validationMessage;
+
+                if (validation.isValid)
+                {
+                    result result = newP->setPassword(newP->getUsername(), passwordInput);
+                    std::cout << ". " << result.validationMessage;
+                    if (result.isValid == false)
+                    {
+                        assert((result.validationMessage, false));
+                    }
+                    break;
+                }
+
+                if (attempts > 6)
+                {
+                    UI.clearConsole();
+                    UI.placeCursor(validationMessagePos.Y, validationMessagePos.X);
+                    UI.clearToRightOnLine();
+                    std::cout << "You have exceeded maximum password input attempts. Please try creating an account later ";
+                    for (unsigned int i = 0; i < 1000; i++)
+                    {
+                        if (i % 200)
+                        {
+                            std::cout << ". ";
+                        }
+                    }
+                    UI.clearConsole();
+                    break;
+                }
+            }
+        }
+        else if (choice == "2")
+        {
+            std::string c = SelectFavoriteColor();
+            result v = newP->setFavoriteColor(newP->getPassword(), c);
+            UI.placeCursor(validationMessagePos.Y, validationMessagePos.X);
+            UI.clearToRightOnLine();
+            std::cout << v.validationMessage;
+            if (v.isValid == false)
+            {
+                assert((v.validationMessage, false));
+            }
+            break;
+        }
+        else if (validReturnToPreviousMenuStrings.count(choice) > 0)
+        {
+            break;
+        }
+        else
+        {
+            UI.placeCursor(validationMessagePos.Y, validationMessagePos.X);
+            std::cout << "Invalid input is not an option";
+        }
+
+        UI.clearToRightOnLineFromPos(editChoicePos);
+        UI.clearToRightOnLineFromPos(modifyItemPos);
+    }
+
+    result r = writeModifiedProfileToCSV(p, newP);
+    if (r.isValid == false)
+    {
+        assert((r.validationMessage, false));
+    }
+
+    usernamePasswordMap.erase(p->getUsername());
+    usernamePasswordMap.insert(std::make_pair(newP->getUsername(), newP->getPassword()));
+    profileMap.erase(p->getUsername() + p->getPassword());
+    profileMap.insert(std::make_pair(newP->getUsername() + newP->getPassword(), new userProfile(newP->getUsername(), newP->getPassword(), newP->getFavoriteColor())));
+
+    p = newP;
+
+    return;
+}
+
 
 userProfile* logout()
 {
@@ -655,100 +921,6 @@ std::string SelectFavoriteColor()
     }
 }
 
-result writeModifiedProfileToCSV(userProfile* p, userProfile* modP)
-{
-    std::ifstream in("userProfiles.csv");
-    if (!in.is_open())
-    {
-        assert(("CSV failed to open", false));
-        return result(false, "CSV failed to open");
-    }
-    std::string firstPartition = "";
-    std::string secondPartition = "";
-    std::string extractedLine;
-    bool firstIncomplete = true;
-    while (getline(in, extractedLine))
-    {
-        if (firstIncomplete)
-        {
-            size_t foundComma = extractedLine.find(',');
-            if (foundComma != std::string::npos)
-            {
-                std::string extractedUsername = extractedLine.substr(0, foundComma);
-                
-                if (extractedUsername[0] == ',')
-                {
-                    assert(("Unexpected to see comma at beginning of word."), false);
-                }
-
-                if (extractedUsername.find(',') != std::string::npos)
-                {
-                    assert(("Comma found in extracted username"), false);
-                }
-
-                if (extractedUsername == p->getUsername())
-                {
-                    firstIncomplete = false;        
-                }
-                else
-                {
-                    firstPartition += extractedLine + '\n';
-                }
-
-            }
-        }
-        else
-        {
-            size_t foundComma = extractedLine.find(',');
-            if (foundComma != std::string::npos)
-            {
-                if (extractedLine[0] == ',')
-                {
-                    assert(("Unexpected to see comma at beginning of word."), false);
-                }
-                secondPartition += extractedLine + '\n';
-            }
-        }
-    }
-    
-    in.close();
-    
-    std::ofstream out("userProfiles.csv");
-    if (!out.is_open())
-    {
-        assert(("CSV failed to open", false));
-        return result(false, "CSV failed to open");
-    }
-    out << firstPartition;
-    out << modP->getUsername() << ", "
-        << modP->getPassword() << ", "
-        << modP->getFavoriteColor() << '\n';
-    out << secondPartition;
-
-    out.close();
-    return result(true, "Success editing profile");
-}
-
-result writeNewProfileToCSV(userProfile* profile)
-{
-    std::ofstream outputFile("userProfiles.csv", std::ios::app);
-    
-    if (!outputFile.is_open())
-    {
-        assert(("Failed to open CSV file", false));
-        return result (false, "Failed to open CSV file");
-    }
-
-    outputFile << 
-        profile->getUsername() << "," << 
-        profile->getPassword() << "," << 
-        profile->getFavoriteColor() << '\n';
-
-    outputFile.close();
-
-    return result (true, "Success");
-}
-
 void quit()
 {
     UI.clearConsole();
@@ -765,207 +937,34 @@ void quit()
     exit(0);
 }
 
-void loggedInMenu(userProfile * p, std::unordered_map<std::string, std::string> usernamePasswordMap, std::unordered_map<std::string, userProfile*> usernamePasswordToProfileMap)
+std::string getUserInput()
 {
-    UI.clearConsole();
-    UI.placeCursor(topmostRow, leftmostColumn);
-    std::cout << "================= MAIN MENU ====================";
-    UI.shiftCursorFromLastSetPos(1, 0);
-    std::cout << "Edit Profile - 0";
-    UI.shiftCursorFromLastSetPos(1, 0);
-    std::cout << "Logout - 1";
-    UI.shiftCursorFromLastSetPos(1, 0);
-    std::cout << "Quit - :q";
-
-    UI.shiftCursorFromLastSetPos(2, 0);
-    std::cout << "Input your desired option's corresponding number-: ";
-    std::string input = getUserInput();
-    if (input == "0")
-    {
-        modifyProfile(p, usernamePasswordMap, usernamePasswordToProfileMap);
-    }
-    else if (input == "1")
-    {
-        UI.clearConsole();
-        return;
-    }
+    std::string input;
+    std::cin >> input;
+    checkGlobalInputCommands(input);
+    return input;
 }
 
-void modifyProfile(userProfile *p, std::unordered_map<std::string, std::string>& usernamePasswordMap, std::unordered_map<std::string, userProfile*>& profileMap)
+bool checkGlobalInputCommands(std::string userInput)
 {
-    userProfile* newP = new userProfile(p->getUsername(), p->getPassword(), p->getFavoriteColor());
-    UI.clearConsole();
-
-    UI.placeCursor(topmostRow, leftmostColumn);
-    std::cout << "========== Edit Profile Menu ==========";
-    UI.shiftCursorFromLastSetPos(1, 0);
-    std::cout << "Change username - 0";
-    UI.shiftCursorFromLastSetPos(1, 0);
-    std::cout << "Change password - 1";
-    UI.shiftCursorFromLastSetPos(1, 0);
-    std::cout << "Change favorite color - 2";
-    UI.shiftCursorFromLastSetPos(1, 0);
-    std::cout << "Return to Logged-In Menu - ";
-    for (auto i = validReturnToPreviousMenuStrings.begin(); i != validReturnToPreviousMenuStrings.end(); i++)
+    if (quitCommandString.count(userInput) > 0)
     {
-        std::cout << *i;
-        if (std::next(i) != validReturnToPreviousMenuStrings.end())
-        {
-            std::cout << " or ";
-        }
-    }
-    UI.shiftCursorFromLastSetPos(2, 0);
-    std::cout << "Input the corresponding number or character for your desired option: ";
-    
-    COORD editChoicePos = UI.getCursorPosition();
-    COORD modifyItemPos = UI.CalculateCOORDValueAsIfShifted(UI.getLastSetPosition(), 3, 0);
-    COORD validationMessagePos = UI.CalculateCOORDValueAsIfShifted(UI.getLastSetPosition(), 1, 0);
-    
-    UI.shiftCursorFromLastSetPos(8, 0); 
-    std::cout << "-----------------------------------------------------------------------";
-
-    
-    while (true)
-    {
-        UI.placeCursor(editChoicePos.Y, editChoicePos.X);
-        std::string choice;
-        std::cin >> choice;
-
-        if (choice == "0")
-        {
-            unsigned int attempts = 0;
-            std::string usernameInput; 
-            while (true)
-            {
-                attempts++;
-                UI.placeCursor(modifyItemPos.Y, modifyItemPos.X);
-                std::cout << "Input new username: ";
-                UI.clearToRightOnLine();
-                usernameInput = getUserInput();
-
-                result validation = validateUsername(usernameInput, usernamePasswordMap);
-                UI.placeCursor(validationMessagePos.Y, validationMessagePos.X);
-                UI.clearToRightOnLine();
-                std::cout << validation.validationMessage;
-
-                if (validation.isValid)
-                {
-                    result result = newP->setUsername(newP->getPassword(), usernameInput);
-                    std::cout << ". " << result.validationMessage;
-                    if (result.isValid == false)
-                    {
-                        assert((result.validationMessage, false));
-                    }
-                    break;
-                }
-
-                if (attempts > 6)
-                {
-                    UI.clearConsole();
-                    UI.placeCursor(validationMessagePos.Y, validationMessagePos.X);
-                    UI.clearToRightOnLine();
-                    std::cout << "You have exceeded maximum username edit attempts. Please try again later.";
-                    for (unsigned int i = 0; i < 1000; i++)
-                    {
-                        if (i % 200)
-                        {
-                            std::cout << ". ";
-                        }
-                    }
-                    UI.clearConsole();
-                    break;
-                }
-            }
-        }
-        else if (choice == "1")
-        {
-            int attempts = 0;
-            std::string passwordInput;
-            while (true)
-            {
-                attempts++;
-                UI.placeCursor(modifyItemPos.Y, modifyItemPos.X);
-                UI.clearToRightOnLine();
-                std::cout << "New Password: ";
-                passwordInput = getUserInput();
-
-                result validation = validatePassword(passwordInput);
-                UI.placeCursor(validationMessagePos.Y, validationMessagePos.X);
-                UI.clearToRightOnLine();
-                std::cout << validation.validationMessage;
-
-                if (validation.isValid)
-                {
-                    result result = newP->setPassword(newP->getUsername(), passwordInput);
-                    std::cout << ". " << result.validationMessage;
-                    if (result.isValid == false)
-                    {
-                        assert((result.validationMessage, false));
-                    }
-                    break;
-                }
-
-                if (attempts > 6)
-                {
-                    UI.clearConsole();
-                    UI.placeCursor(validationMessagePos.Y, validationMessagePos.X);
-                    UI.clearToRightOnLine();
-                    std::cout << "You have exceeded maximum password input attempts. Please try creating an account later ";
-                    for (unsigned int i = 0; i < 1000; i++)
-                    {
-                        if (i % 200)
-                        {
-                            std::cout << ". ";
-                        }
-                    }
-                    UI.clearConsole();
-                    break;
-                }
-            }
-        }
-        else if (choice == "2")
-        {
-            std::string c = SelectFavoriteColor();
-            result v = newP->setFavoriteColor(newP->getPassword(), c);
-            UI.placeCursor(validationMessagePos.Y, validationMessagePos.X);
-            UI.clearToRightOnLine();
-            std::cout << v.validationMessage;
-            if (v.isValid == false)
-            {
-                assert((v.validationMessage, false));
-            }
-            break;
-        }
-        else if (validReturnToPreviousMenuStrings.count(choice) > 0)
-        {
-            break;
-        }
-        else 
-        {
-            UI.placeCursor(validationMessagePos.Y, validationMessagePos.X);
-            std::cout << "Invalid input is not an option";
-        }
-
-        UI.clearToRightOnLineFromPos(editChoicePos);
-        UI.clearToRightOnLineFromPos(modifyItemPos);
+        quit();
+        assert(("If this assert executes, then we didn't quit?!", false));
     }
 
-    result r = writeModifiedProfileToCSV(p, newP);
-    if (r.isValid == false)
-    {
-        assert((r.validationMessage, false));
-    }
-    
-    usernamePasswordMap.erase(p->getUsername());
-    usernamePasswordMap.insert(std::make_pair(newP->getUsername(), newP->getPassword()));
-    profileMap.erase(p->getUsername() + p->getPassword());
-    profileMap.insert(std::make_pair(newP->getUsername() + newP->getPassword(), new userProfile(newP->getUsername(), newP->getPassword(), newP->getFavoriteColor())));
-    
-    p = newP;
-    
-    return;
+    return false;
 }
 
+bool isYes(std::string yesOrNo)
+{
+    if (yesOrNo == "y" || yesOrNo == "Y")
+    {
+        return true;
+    }
+
+    return false;
+}
 
 int main()
 {
