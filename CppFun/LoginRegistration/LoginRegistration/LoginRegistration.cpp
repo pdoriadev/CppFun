@@ -105,7 +105,7 @@ public:
     }
 };
 
-bool loadAllUserData(std::unordered_map<std::string, std::string>& usernamePasswordMap, std::unordered_map<std::string, userProfile*>& profileMap);
+result loadAllUserData(std::unordered_map<std::string, std::string>& usernamePasswordMap, std::unordered_map<std::string, userProfile*>& profileMap);
 bool loginOrCreateAccountPrompt();
 userProfile* login(std::unordered_map<std::string, std::string>& usernamePasswordMap, std::unordered_map<std::string, userProfile*>& profileMap);
 userProfile* logout();
@@ -125,10 +125,10 @@ bool isYes(std::string yesOrNo);
 
 static outputController UI;
 static std::unordered_set<std::string> validLoginOrCreateStrings{"L", "l", "C", "c"};
-static std::unordered_set<std::string> quitCommandString{ ":q", "Q" };
+static std::unordered_set<std::string> quitCommandString{ ":q", ":+Q" };
 static std::unordered_set<std::string> validYesOrNoStrings{ "Y", "y", "n", "N"};
 static std::unordered_set<std::string> validReturnToPreviousMenuStrings{"B", "b"};
-static std::unordered_set<std::string> illegalUsernamePasswordChars{",", "<", "'", "(", ")"," ", ";", ":"};
+static std::unordered_set<std::string> illegalUsernamePasswordChars{",", "<", "'", "(", ")", " ", ";", ":"};
 static std::vector<std::string> colors{ "Red", "Yellow", "Blue", "Green", "Orange", "Purple" };
 static unsigned int minUsernameLength = 4;
 static unsigned int maxUsernameLength = 16;
@@ -139,13 +139,14 @@ static unsigned int leftmostColumn = 30;
 static unsigned int topmostRow = 5;
 static COORD menuTop;
 
-bool loadAllUserData(std::unordered_map<std::string, std::string>& usernamePasswordMap, std::unordered_map<std::string, userProfile*>& profileMap)
+result loadAllUserData(std::unordered_map<std::string, std::string>& usernamePasswordMap, std::unordered_map<std::string, userProfile*>& profileMap)
 {
     std::ifstream userProfileCSV;
     userProfileCSV.open("userProfiles.csv");
     if (!userProfileCSV.is_open())
     {
         assert(("Failed to open CSV", false));
+        return result(false, "Failed to open CSV file");
     }
 
     std::string username;
@@ -217,7 +218,7 @@ bool loadAllUserData(std::unordered_map<std::string, std::string>& usernamePassw
     }
     
     userProfileCSV.close();
-    return true;
+    return result(true, "Completed loading data");
 }
 
 result writeModifiedProfileToCSV(userProfile* p, userProfile* modP)
@@ -471,27 +472,31 @@ userProfile * login(std::unordered_map<std::string, std::string>& usernamePasswo
 
 void loggedInMenu(userProfile* p, std::unordered_map<std::string, std::string> usernamePasswordMap, std::unordered_map<std::string, userProfile*> usernamePasswordToProfileMap)
 {
-    UI.clearConsole();
-    UI.placeCursor(topmostRow, leftmostColumn);
-    std::cout << "================= MAIN MENU ====================";
-    UI.shiftCursorFromLastSetPos(1, 0);
-    std::cout << "Edit Profile - 0";
-    UI.shiftCursorFromLastSetPos(1, 0);
-    std::cout << "Logout - 1";
-    UI.shiftCursorFromLastSetPos(1, 0);
-    std::cout << "Quit - :q";
-
-    UI.shiftCursorFromLastSetPos(2, 0);
-    std::cout << "Input your desired option's corresponding number-: ";
-    std::string input = getUserInput();
-    if (input == "0")
-    {
-        modifyProfile(p, usernamePasswordMap, usernamePasswordToProfileMap);
-    }
-    else if (input == "1")
+    while (true)
     {
         UI.clearConsole();
-        return;
+        UI.placeCursor(topmostRow, leftmostColumn);
+        std::cout << "================= MAIN MENU ====================";
+        UI.shiftCursorFromLastSetPos(1, 0);
+        std::cout << "Edit Profile - 0";
+        UI.shiftCursorFromLastSetPos(1, 0);
+        std::cout << "Logout - 1";
+        UI.shiftCursorFromLastSetPos(1, 0);
+        std::cout << "Quit - :q";
+
+        UI.shiftCursorFromLastSetPos(2, 0);
+
+        std::cout << "Input your desired option's corresponding number: ";
+        std::string input = getUserInput();
+        if (input == "0")
+        {
+            modifyProfile(p, usernamePasswordMap, usernamePasswordToProfileMap);
+        }
+        else if (input == "1")
+        {
+            UI.clearConsole();
+            return;
+        }
     }
 }
 
@@ -534,6 +539,7 @@ void modifyProfile(userProfile* p, std::unordered_map<std::string, std::string>&
         UI.placeCursor(editChoicePos.Y, editChoicePos.X);
         std::string choice;
         std::cin >> choice;
+        UI.clearToRightOnLineFromPos(validationMessagePos);
 
         if (choice == "0")
         {
