@@ -8,7 +8,9 @@ Peter Doria
 INSTRUCTIONS
 
 1. Stores user credentials (username, password)
-    - all user infos stored in csv.
+    - all user infos stored in csv. Example:
+        "data, data, data, \n"
+        "data, data, data, \n"
     - usernames min 4 characters, max 16 characters
     - password min 8 characters, max 32 characters
 2. Registers new users with new username / password
@@ -104,7 +106,7 @@ public:
 };
 
 result loadAllUserData(std::unordered_map<std::string, std::string>& usernamePasswordMap, std::unordered_map<std::string, userProfile*>& profileMap);
-result loginOrCreateAccountPrompt();
+bool loginOrCreateAccountPrompt();
 userProfile* login(std::unordered_map<std::string, std::string>& usernamePasswordMap, std::unordered_map<std::string, userProfile*>& profileMap);
 userProfile* logout();
 userProfile* createNewProfile(std::unordered_map<std::string, std::string>& usernamePasswordMap, std::unordered_map<std::string, userProfile*>& profileMap);
@@ -123,11 +125,11 @@ bool isYes(std::string yesOrNo);
 
 static outputController UI;
 static std::unordered_set<std::string> validLoginOrCreateStrings{"L", "l", "C", "c"};
-static std::unordered_set<std::string> quitCommandString{ ":q", ":Q" };
+static std::unordered_set<std::string> quitCommandString{ ":q", ":+Q" };
 static std::unordered_set<std::string> validYesOrNoStrings{ "Y", "y", "n", "N"};
 static std::unordered_set<std::string> validReturnToPreviousMenuStrings{"B", "b"};
 static std::unordered_set<std::string> illegalUsernamePasswordChars{",", "<", "'", "(", ")", " ", ";", ":"};
-static std::vector<std::string> favoriteColors{ "Red", "Yellow", "Blue", "Green", "Orange", "Purple" };
+static std::vector<std::string> colors{ "Red", "Yellow", "Blue", "Green", "Orange", "Purple" };
 static unsigned int minUsernameLength = 4;
 static unsigned int maxUsernameLength = 16;
 static unsigned int minPasswordLength = 8;
@@ -313,7 +315,7 @@ result writeNewProfileToCSV(userProfile* profile)
     return result(true, "Success");
 }
 
-result loginOrCreateAccountPrompt()
+bool loginOrCreateAccountPrompt()
 {
     UI.placeCursor(5, 30);
     std::cout << "============== Login / Create Account ==============";
@@ -335,6 +337,7 @@ result loginOrCreateAccountPrompt()
     loginOrCreateInput = getUserInput();
     while (validLoginOrCreateStrings.count(loginOrCreateInput) == 0)
     {
+        checkGlobalInputCommands(loginOrCreateInput);
         UI.shiftCursorFromLastSetPos(2, 0);
         std::cout << loginOrCreateInput + " is not an option.";
         Sleep(1000);
@@ -348,14 +351,15 @@ result loginOrCreateAccountPrompt()
         UI.clearLine();
         UI.shiftCursorFromLastSetPos(-2, 0);
         UI.clearLine();
+        loginOrCreateInput = "";
         loginOrCreateInput = getUserInput();
     }
 
     if (loginOrCreateInput == "L" || loginOrCreateInput == "l")
     {
-        return result(true, "Request to login");
+        return true;
     }
-    return result(false, "Request to create new account");
+    return false;
 }
 
 userProfile * login(std::unordered_map<std::string, std::string>& usernamePasswordMap, std::unordered_map<std::string, userProfile*>& profileMap)
@@ -892,10 +896,10 @@ std::string SelectFavoriteColor()
     std::cout << "Input your favorite color's corresponding number: ";
     COORD inputPos = UI.getCursorPosition();
     
-    for (unsigned int i = 0; i < favoriteColors.size(); i++)
+    for (unsigned int i = 0; i < colors.size(); i++)
     {
         UI.shiftCursorFromLastSetPos(1, 0);
-        std::cout << i << " - " << favoriteColors[i];
+        std::cout << i << " - " << colors[i];
     }
 
     UI.shiftCursorFromLastSetPos(2, 0);
@@ -907,14 +911,14 @@ std::string SelectFavoriteColor()
         std::string selection = getUserInput();
 
         unsigned int selectionNum = std::stoi(selection);
-        if (selectionNum >= 0 && selectionNum < favoriteColors.size())
+        if (selectionNum >= 0 && selectionNum < colors.size())
         {
             UI.placeCursor(validationMessagePos.Y, validationMessagePos.X);
             UI.clearToRightOnLine();
             std::cout << "What a lovely color (:";
             Sleep(750);
             UI.clearConsole();
-            return favoriteColors[selectionNum];
+            return colors[selectionNum];
         }
 
         UI.placeCursor(validationMessagePos.Y, validationMessagePos.X);
@@ -976,9 +980,9 @@ int main()
 
     while (true)
     {
-        result choice = loginOrCreateAccountPrompt();
+        bool choseToLogin = loginOrCreateAccountPrompt();
         userProfile* p;
-        if (choice.isValid)
+        if (choseToLogin)
         {
             p = login(usernamePasswordMap, usernamePasswordToProfileMap);
             if (p == NULL)
