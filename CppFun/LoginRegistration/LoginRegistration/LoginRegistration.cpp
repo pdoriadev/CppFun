@@ -997,11 +997,8 @@ int main()
 
         loggedInMenu(p, usernamePasswordMap, usernamePasswordToProfileMap);
         
-    }
-
-    // Log out option
-           
-
+    }          
+    return 0;
 }
 
    
