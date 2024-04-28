@@ -14,8 +14,11 @@ Receive percentage breakdown and use cases for each spell
 	// alphabetical
 	// by schools
 	// by relationship to a school (the school, aligned, neutral, opposed)
+	// 
 // print spells to console for selection
+// 
 // output selected spells 
+// 
 // output spells + spell descriptions to file
 
 // spell selection + confirmation

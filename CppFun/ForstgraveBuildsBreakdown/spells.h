@@ -3,6 +3,14 @@
 #include <vector>
 #include <assert.h>
 
+/*
+TO-DO:
+	function that gets school info.
+	function thtat gets category info. 
+
+*/
+
+
 namespace Schools
 {
 	enum type
