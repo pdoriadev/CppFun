@@ -8,6 +8,18 @@ Receive percentage breakdown and use cases for each spell
 #include <fstream>
 #include "spells.h"
 
+// Should include:
+	// list of spells
+	// starting stats (going to assume all levels created here are level 0 )
+	// school
+// Later:
+	// apprentice
+	// warband
+class wizard
+{
+
+
+};
 
 
 // print spells to console (organized in different ways)
