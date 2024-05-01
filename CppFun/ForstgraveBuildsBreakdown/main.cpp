@@ -6,7 +6,8 @@ Receive percentage breakdown and use cases for each spell
 
 #include <iostream>
 #include <fstream>
-#include "spells.h"
+#include "Spells.h"
+#include "Attributes.h"
 
 // Should include:
 	// list of spells
@@ -17,7 +18,19 @@ Receive percentage breakdown and use cases for each spell
 	// warband
 class wizard
 {
+private:
+	std::vector<spell> spells;
+	Schools::type school = Schools::type::UNASSIGNED;
+	AttributesInstance attributes;
 
+public:
+	wizard(Schools::type school)
+	{
+		assert(school != Schools::type::UNASSIGNED && "Must provide valid school");
+		school = school;
+	}
+
+	
 
 };
 
