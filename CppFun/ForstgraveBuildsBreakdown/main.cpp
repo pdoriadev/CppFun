@@ -1,38 +1,26 @@
 /*
-Be able to select spells via number input.
-Receive percentage breakdown and use cases for each spell
+Program Flow (console version OR make this in QT as learning exercise for views??):
+1) Create a party (wizard + warband)
+2) Create a wizard
 
+	Wizard Creation
+		- School selection
+			- ability to browse schools and spells
+				- how are they shown
+			- after selecting a school, spells are listed in terms of alignment 
+				(i.e. school's spells first, then aligned, then neutral, then opposed.)
+			- ability to go back and "undo any selection"
+		- Be able to select spells via number input.
+	Receive percentage breakdown and use cases for each spell.
+
+
+	Warband creation
 */
 
 #include <iostream>
 #include <fstream>
-#include "Spells.h"
-#include "Attributes.h"
 
-// Should include:
-	// list of spells
-	// starting stats (going to assume all levels created here are level 0 )
-	// school
-// Later:
-	// apprentice
-	// warband
-class wizard
-{
-private:
-	std::vector<spell> spells;
-	Schools::type school = Schools::type::UNASSIGNED;
-	AttributesInstance attributes;
 
-public:
-	wizard(Schools::type school)
-	{
-		assert(school != Schools::type::UNASSIGNED && "Must provide valid school");
-		school = school;
-	}
-
-	
-
-};
 
 
 // print spells to console (organized in different ways)

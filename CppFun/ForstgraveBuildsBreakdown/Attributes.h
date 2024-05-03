@@ -23,19 +23,3 @@ public:
 };
 
 
-
-class AttributesInstance
-{
-private:
-	Attributes baseAttributes;
-	Attributes currentAttributes;
-
-public: 
-	AttributesInstance(Attributes _baseAttributes)
-	{
-		baseAttributes = _baseAttributes;
-		currentAttributes = _baseAttributes;
-	}
-
-	// put in functions to change current attributes.
-};
