@@ -79,3 +79,5 @@ ipch/
 *.VC.VC.opendb
 
 
+#Qt ignores
+**/[Bb]uild*/
