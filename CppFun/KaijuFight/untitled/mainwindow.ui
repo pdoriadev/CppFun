@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>KaijuFight</class>
+ <widget class="QMainWindow" name="KaijuFight">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>946</width>
+    <height>740</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,12 +19,33 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>946</width>
      <height>23</height>
     </rect>
    </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="defaultUp">
+    <bool>false</bool>
+   </property>
+   <property name="nativeMenuBar">
+    <bool>true</bool>
+   </property>
+   <widget class="QMenu" name="menuYadeleee">
+    <property name="title">
+     <string>Yadeleee</string>
+    </property>
+    <addaction name="actionadsfad"/>
+   </widget>
+   <addaction name="menuYadeleee"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionadsfad">
+   <property name="text">
+    <string>adsfad</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
