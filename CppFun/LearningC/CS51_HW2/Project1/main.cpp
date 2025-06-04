@@ -261,37 +261,52 @@ int main()
 
 */
 
-#include <stdlib.h>
+//#include <stdlib.h>
+//
+//struct Node {
+//	char *value;
+//	struct Node* next;
+//};
+//
+//int main()
+//{
+//	Node a;
+//	a.value = (char*)malloc(sizeof(char));
+//	a.next = (Node*)malloc(sizeof(Node));
+//	*a.value = 'a';
+//	printf("Value of a is: %c", *a.value);
+//
+//	Node b; 
+//	b.value = (char*)malloc(sizeof(char));
+//	b.next = (Node*)malloc(sizeof(Node));
+//	*a.next = b;
+//
+//	*b.value = 'b';
+//	printf("\nValue of b is: %c", *b.value);
+//
+//	printf("\nNode a's next pointer is located at: %x", a.next);
+//	printf("\nNode a's next pointer points to Node b located at: %x", *a.next);
+//	printf("\nNode a's next pointer's value is %c", *a.next->value);
+//
+//	free(a.value);
+//	free(a.next);
+//	free(b.value);
+//	free(b.next);
+//
+//	return 0;
+//}
 
-struct Node {
-	char *value;
-	struct Node* next;
-};
-
-int main()
-{
-	Node a;
-	a.value = (char*)malloc(sizeof(char));
-	a.next = (Node*)malloc(sizeof(Node));
-	*a.value = 'a';
-	printf("Value of a is: %c", *a.value);
-
-	Node b; 
-	b.value = (char*)malloc(sizeof(char));
-	b.next = (Node*)malloc(sizeof(Node));
-	*a.next = b;
-
-	*b.value = 'b';
-	printf("\nValue of b is: %c", *b.value);
-
-	printf("\nNode a's next pointer is located at: %x", a.next);
-	printf("\nNode a's next pointer points to Node b located at: %x", *a.next);
-	printf("\nNode a's next pointer's value is %c", *a.next->value);
-
-	free(a.value);
-	free(a.next);
-	free(b.value);
-	free(b.next);
-
-	return 0;
-}
+//#include <iostream>
+//#include <string>
+//int main()
+//{
+//	int n = 16;
+//	std::cout << std::to_string(n) << '\n';
+//	n = n << 2;
+//	std::cout << std::to_string(n) << '\n';
+//	n = n << 2;
+//	std::cout << std::to_string(n) << '\n';
+//	
+//
+//
+//}

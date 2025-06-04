@@ -19,7 +19,7 @@ Program Flow (console version OR make this in QT as learning exercise for views?
 
 #include <iostream>
 #include <fstream>
-
+#include "json.h"
 
 
 
@@ -39,6 +39,19 @@ Program Flow (console version OR make this in QT as learning exercise for views?
 
 int main()
 {
+	std::ifstream file("Spells.json");
+	nlohmann::json jsonData;
+	file >> jsonData;  // Read JSON file
+
+	// Iterate over JSON array
+	for (const auto& entry : jsonData) {
+		std::cout << "Name: " << entry["name"] << "\n";
+		std::cout << "Age: " << entry["age"] << "\n";
+		std::cout << "Student: " << (entry["is_student"] ? "Yes" : "No") << "\n";
+		std::cout << "-----------------\n";
+	}
+
+	return 0;
 
 };
 
