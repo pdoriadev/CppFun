@@ -12,7 +12,7 @@ TO-DO:
 
 namespace Schools
 {
-	enum type
+	enum type : uint32_t
 	{
 		UNASSIGNED,		// 0
 		CHRONOMANCER,	// 1
@@ -68,7 +68,7 @@ namespace Schools
 
 namespace SpellCategories
 {
-	enum type
+	enum type : uint32_t
 	{
 		UNASSIGNED,		// 0
 		AREA_EFFECT,	// 1

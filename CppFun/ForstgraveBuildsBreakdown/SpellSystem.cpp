@@ -64,7 +64,7 @@ namespace Schools
 	}
 
 
-	static const Schools::SchoolAlignment getAlignment(const Schools::type _chosenSchool) 
+	const SchoolAlignment getAlignment(const Schools::type _chosenSchool) 
 	{	
 		SchoolAlignment alignments[10]
 		{
