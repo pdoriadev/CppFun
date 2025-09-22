@@ -46,8 +46,7 @@ void decodeLetters(const string& cipher, vector<string>& plainTextOut)
 			char plainTextLetter;
 			if (cipher[j] + letterOffset > valueA + 25)
 			{
-				// wrap around to earlier letters
-				plainTextLetter = cipher[j] + letterOffset - valueA + 25 - 1;
+				plainTextLetter = cipher[j] + letterOffset - 26;
 			}
 			else
 			{
@@ -63,7 +62,15 @@ void decodeLetters(const string& cipher, vector<string>& plainTextOut)
 void waitForInput(string messageIn = "\nWaiting For Input. . .", string* messageOut = NULL)
 {
 	cout << messageIn;
-	cin >> *messageOut;
+	if (messageOut == NULL)
+	{
+		cin.ignore();
+	}
+	else
+	{
+		cin >> *messageOut;
+	}
+	
 }
 
 /// <summary>
@@ -95,13 +102,17 @@ void findValidMessages(const vector<string>& plainTextIn, vector<int>& validIndi
 	}
 }
 
-void printValidMessages(const vector<string>& plainTextIn, const vector<int> validIndicesIn)
+bool anyValidCheck(const vector<string>& plainTextIn, const vector<int> validIndicesIn)
 {
 	string messageIn = "";
 	for (int i = 0; i < validIndicesIn.size(); i++)
 	{
 		cout << "\nVariation " << validIndicesIn[i];
+		cout << "\n\"" << plainTextIn[validIndicesIn[i]] << "\"";
 		waitForInput("\nInput anything to output next message. \nInput 'y' if you want to conclude this decoding session.", &messageIn);
+
+		if (messageIn == "y")
+			return true;
 	}
 
 	waitForInput("\nEnd of Valid Messages");
@@ -123,18 +134,20 @@ int main()
 	cout << '\n' << setfill('*') << setw(30) << endl;
 	decodeLetters(message1, plainTextVariants);
 	findValidMessages(plainTextVariants, validMessages);
-	printValidMessages(plainTextVariants, validMessages);
+	anyValidCheck(plainTextVariants, validMessages);
 	
-	// reset plainTextValues
+	// reset arrays
 	for (int i = 0; i < plainTextVariants.size(); i++)
 	{
 		plainTextVariants[i] = "";
 	}
+	validMessages.resize(0);
 
 	cout << '\n' << setfill('*') << setw(30) << endl;
 	decodeLetters(message2, plainTextVariants);
 	findValidMessages(plainTextVariants, validMessages);
-	printValidMessages(plainTextVariants, validMessages);
+	anyValidCheck(plainTextVariants, validMessages);
+	
 
 	return 0;
 }
