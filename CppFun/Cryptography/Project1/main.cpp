@@ -1,26 +1,22 @@
 ///////////////////////////////////////////////////
 // By pdoria
+// 
+// ASCII reference: https://en.cppreference.com/w/cpp/language/ascii.html
+// 
 ///////////////////////////////////////////////////
 
 #include <iostream>
 #include <iomanip>
 #include <vector>
 #include <set>
-#include <cctype>
+#include <fstream>
 
 using namespace std;
-
-enum WaitType 
-{
-	INPUT_ANY,		// = 0
-	INPUT_CONFIRM,	// = 1
-	NO_INPUT_TIMED	// = 2
-};
 
 set<string> validWords = {"a", "and", "at", "as", "be", "but", "do", "for", "have", "he", "i", "in", "is", "it", 
 						"not", "of", "on", "she", "that", "the", "to", "with", "you"};
 
-void decodeLetters(const string& cipher, vector<string>& plainTextOut)
+void decrypt_shiftLettersByConstant(const string& cipher, vector<string>& plainTextOut)
 {
 	for (int i = 0; i < plainTextOut.size(); i++)
 	{
@@ -59,6 +55,34 @@ void decodeLetters(const string& cipher, vector<string>& plainTextOut)
 	
 }
 
+void decrypt_shiftLettersByMinDelta(const string& cipher, string &plainTextOut)
+{
+	plainTextOut.resize(cipher.size(), '*');
+	for (int j = 0; j < cipher.size(); j++)
+	{
+			
+		// Is this a letter?
+		std::pair<int, int> minMax = cipher[j] >= 65 && cipher[j] <= 97 ? std::make_pair(65, 97) : std::make_pair(0, 0);
+		if (minMax.first == 0)
+		{
+			minMax = cipher[j] >= 97 && cipher[j] <= 122 ? std::make_pair(97, 122) : std::make_pair(0, 0);
+		}
+
+		if (minMax.first == 0)
+		{
+			plainTextOut[j] = cipher[j];
+			continue;
+		}
+			
+		// Transform cipher to plainText value
+		int delta = cipher[j] - minMax.first;
+		char plainTextLetter = minMax.second - delta;
+
+		plainTextOut[j] = plainTextLetter;
+	}
+
+}
+
 void waitForInput(string messageIn = "\nWaiting For Input. . .", string* messageOut = NULL)
 {
 	cout << messageIn;
@@ -78,6 +102,7 @@ void waitForInput(string messageIn = "\nWaiting For Input. . .", string* message
 /// </summary>
 void findValidMessages(const vector<string>& plainTextIn, vector<int>& validIndicesOut)
 {
+	validIndicesOut.resize(0);
 	for (int i = 0; i < plainTextIn.size(); i++)
 	{
 		string word = "";
@@ -102,20 +127,30 @@ void findValidMessages(const vector<string>& plainTextIn, vector<int>& validIndi
 	}
 }
 
-bool anyValidCheck(const vector<string>& plainTextIn, const vector<int> validIndicesIn)
+int anyValidCheck(const vector<string>& plainTextIn, const vector<int> validIndicesIn)
 {
 	string messageIn = "";
+	int returnIndex = -1;
+	waitForInput("\nTo print all potential valids without pause in-between, input 'skip'. For pauses, input anything else:", &messageIn);
 	for (int i = 0; i < validIndicesIn.size(); i++)
 	{
 		cout << "\nVariation " << validIndicesIn[i];
 		cout << "\n\"" << plainTextIn[validIndicesIn[i]] << "\"";
-		waitForInput("\nInput anything to output next message. \nInput 'y' if you want to conclude this decoding session.", &messageIn);
+		if ((messageIn == "skip") == false)
+		{
+			waitForInput("\nInput anything to output next message. \nIf the correct message has been found, enter 'y': ", &messageIn);
+		}
 
 		if (messageIn == "y")
-			return true;
+		{
+			returnIndex = i;
+			break;
+		}
 	}
+	
+	waitForInput("\nEnd of Valid Messages\n");
 
-	waitForInput("\nEnd of Valid Messages");
+	return returnIndex;
 }
 
 
@@ -132,22 +167,22 @@ int main()
 	vector<int> validMessages = {};
 	
 	cout << '\n' << setfill('*') << setw(30) << endl;
-	decodeLetters(message1, plainTextVariants);
+	decrypt_shiftLettersByConstant(message1, plainTextVariants);
 	findValidMessages(plainTextVariants, validMessages);
-	anyValidCheck(plainTextVariants, validMessages);
-	
-	// reset arrays
-	for (int i = 0; i < plainTextVariants.size(); i++)
-	{
-		plainTextVariants[i] = "";
-	}
-	validMessages.resize(0);
+	int decryptedIndex = anyValidCheck(plainTextVariants, validMessages);
+	string outputMessage = "Message 1: " + plainTextVariants[decryptedIndex];
 
 	cout << '\n' << setfill('*') << setw(30) << endl;
-	decodeLetters(message2, plainTextVariants);
+	plainTextVariants.resize(1,"");
+	decrypt_shiftLettersByMinDelta(message2, plainTextVariants[0]);
 	findValidMessages(plainTextVariants, validMessages);
-	anyValidCheck(plainTextVariants, validMessages);
+	decryptedIndex = anyValidCheck(plainTextVariants, validMessages);
+	outputMessage += "\nMessage 2: " + plainTextVariants[decryptedIndex];
 	
+	outputMessage += "\n******************** End of Decryption **************************";
+	ofstream outputFile("DecryptedMessages.txt");
+	outputFile << outputMessage;
+	outputFile.close();
 
 	return 0;
 }
