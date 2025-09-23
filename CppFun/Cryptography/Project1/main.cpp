@@ -13,7 +13,7 @@
 
 using namespace std;
 
-set<string> validWords = {"a", "and", "at", "as", "be", "but", "do", "for", "have", "he", "i", "in", "is", "it", 
+set<string> commonEnglishWords = {"a", "and", "at", "as", "be", "but", "do", "for", "have", "he", "i", "in", "is", "it", 
 						"not", "of", "on", "she", "that", "the", "to", "with", "you"};
 
 void decrypt_shiftLettersByConstant(const string& cipher, vector<string>& plainTextOut)
@@ -112,7 +112,7 @@ void findValidMessages(const vector<string>& plainTextIn, vector<int>& validIndi
 								(plainTextIn[i][j] >= 97 && plainTextIn[i][j] <= 122);
 			if (isLetter == false)
 			{
-				if (validWords.count(word) > 0)
+				if (commonEnglishWords.count(word) > 0)
 				{
 					validIndicesOut.push_back(i);
 					break;
@@ -131,7 +131,6 @@ int anyValidCheck(const vector<string>& plainTextIn, const vector<int> validIndi
 {
 	string messageIn = "";
 	int returnIndex = -1;
-	waitForInput("\nTo print all potential valids without pause in-between, input 'skip'. For pauses, input anything else:", &messageIn);
 	for (int i = 0; i < validIndicesIn.size(); i++)
 	{
 		cout << "\nVariation " << validIndicesIn[i];
@@ -143,7 +142,7 @@ int anyValidCheck(const vector<string>& plainTextIn, const vector<int> validIndi
 
 		if (messageIn == "y")
 		{
-			returnIndex = i;
+			returnIndex = validIndicesIn[i];
 			break;
 		}
 	}
@@ -170,18 +169,26 @@ int main()
 	decrypt_shiftLettersByConstant(message1, plainTextVariants);
 	findValidMessages(plainTextVariants, validMessages);
 	int decryptedIndex = anyValidCheck(plainTextVariants, validMessages);
-	string outputMessage = "Message 1: " + plainTextVariants[decryptedIndex];
+	string outputMessage = "";
+	if (decryptedIndex >= 0 && decryptedIndex < plainTextVariants.size())
+	{
+		outputMessage = "\nMessage 1: " + plainTextVariants[decryptedIndex];
+	}
 
 	cout << '\n' << setfill('*') << setw(30) << endl;
 	plainTextVariants.resize(1,"");
 	decrypt_shiftLettersByMinDelta(message2, plainTextVariants[0]);
 	findValidMessages(plainTextVariants, validMessages);
 	decryptedIndex = anyValidCheck(plainTextVariants, validMessages);
-	outputMessage += "\nMessage 2: " + plainTextVariants[decryptedIndex];
+	if (decryptedIndex >= 0 && decryptedIndex < plainTextVariants.size())
+	{
+		outputMessage += "\n\nMessage 2: " + plainTextVariants[decryptedIndex];
+	}
 	
 	outputMessage += "\n******************** End of Decryption **************************";
-	ofstream outputFile("DecryptedMessages.txt");
-	outputFile << outputMessage;
+	ofstream outputFile;
+	outputFile.open("DecryptedMessages.txt");
+	outputFile << outputMessage << endl;
 	outputFile.close();
 
 	return 0;
