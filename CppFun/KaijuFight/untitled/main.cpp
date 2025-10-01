@@ -12,19 +12,22 @@ int main(int argc, char *argv[])
     //////////////////////////////////////////////
     /// APP FLOW
     /// //////////////////////////////////////////
-    /// setup
-    ///     window
-    ///     Load data (kaiju data, saves)
+    /// setup MVP
+    ///     window MVP
+    ///     Load data (kaiju data) MVP
+    ///     Load
     ///     Intro sequence (You are logging into an old console) *P3*
     ///          Booting Kaiju Fight DOS style load screen. '*' filling across screen as it loads
     ///
 
     ///
     /// Main Menu loop
-        /// Fight
-        /// Kaiju creation??
+        /// Fight MVP
         /// View Kaiju Data
-    /// Data Update
+    /// Fight
+    ///     Fight UI
+    ///     Pre-battle
+    ///     Fight
 
     w.show();
     return a.exec();
@@ -87,6 +90,9 @@ int main(int argc, char *argv[])
 ///         Distance system
 ///         No statuses.
 ///
+/// Technical MVP
+///     Executable I can send to someone and they can play.
+///
 ///
 /// Fight UI MVP
 ///     Kaiju 1 Info
@@ -117,6 +123,8 @@ int main(int argc, char *argv[])
 ///
 ///     More Kaijus. How many though?
 ///
+///     Environmental effects/statuses/impact (i.e. burrowed, underwater)
+///
 ///     Unlock kaijus as you beat them?
 ///
 ///     Conversation mini-game outside fight. Reveals lore of world, who you are. Similar to Hotline Miami.
@@ -127,6 +135,8 @@ int main(int argc, char *argv[])
 ///     2 player version?
 ///         Players press keys on opposite sides of the keyboard. Minimize sabotaging.
 ///             i.e. '`' and '\'
+///
+///     Kaiju creature generator
 ///
 /// KAIJU IDEAS
 ///     Kaiju King - Godzilla stand-in. Atomic breath. Regeneration.
