@@ -131,7 +131,8 @@ int main(int argc, char *argv[])
 ///         This used to be a defense simulation for kaiju combat and control. That was long ago. Kaiju are dead? Kaiju destroyed everything?
 ///         The ghost of the man who made kaiju fight. Nobel peace prize.
 ///         You are in the future, where things are good. You are assigned to go through archived programs to see if they are still useful.
-///             Each time you defeat a kaiju, a ghost from the past appears, says who they were, what happened.
+///             Each time you defeat a kaiju, a ghost from the past appears, says who they were, what happened. A cautionary tale
+///             Lines that make a face. Like Starfox Andross but just outlines. static.
 ///
 ///
 /// Beyond v1.0
