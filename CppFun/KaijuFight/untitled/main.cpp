@@ -129,6 +129,9 @@ int main(int argc, char *argv[])
 ///
 ///     Conversation mini-game outside fight. Reveals lore of world, who you are. Similar to Hotline Miami.
 ///         This used to be a defense simulation for kaiju combat and control. That was long ago. Kaiju are dead? Kaiju destroyed everything?
+///         The ghost of the man who made kaiju fight. Nobel peace prize.
+///         You are in the future, where things are good. You are assigned to go through archived programs to see if they are still useful.
+///             Each time you defeat a kaiju, a ghost from the past appears, says who they were, what happened.
 ///
 ///
 /// Beyond v1.0
@@ -137,6 +140,8 @@ int main(int argc, char *argv[])
 ///             i.e. '`' and '\'
 ///
 ///     Kaiju creature generator
+///
+///
 ///
 /// KAIJU IDEAS
 ///     Kaiju King - Godzilla stand-in. Atomic breath. Regeneration.
