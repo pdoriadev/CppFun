@@ -1,0 +1,243 @@
+
+## Combat Design
+real-time combat puzzle
+- DO'S / DON'TS
+    * NO COMPLEX COMBOS TO DO A MOVE. EMPHASIS ON PUZZLE STRATEGY THAN INPUT CHALLENGE
+    * All monsters have the same max energy. Easier to balance. Easier for players to understand (may break this for fun monster)
+    * SCREW BALANCE
+    * No Turn-based - nah. dunno how to make that in a way that isn't pokemon, and I don't want to make pokemon. Kinda sucks.
+         puzzle with chance element (elements + dice) tech help
+- Design ?'s
+    * Game Speed is directly related to kaiju speed. How slow? How fast?
+    * Key placement affects feeling for each kaiju
+    * Playing a kaiju with all inputs in one place vs. across the keyboard - Feel like a spider/master controller vs. a league character)
+    * Fight Length 2-5 minutes? Lumbering kaiju. Should feel like controlling massive beasts where the fight sways back and forth.
+    * But will that be too slow? Will that be fun? The fight needs to be able to turn quickly to have uncertainty to be fun.
+    * Range is fixed for each ability, VISUAL? Or just let the player miss? An indicator when distance is good next to the ability input UI?)
+- General
+    * do I like these games? What other games are like this? --> fighting games. Smash?
+    * dynamic game needs dynamic changes
+        + distance - NUMBER TICKING GOING UP AND DOWN WITH COLOR.
+        + stamina/energy/resource - NUMBER. TICKS UP/DOWN DEPENDING ON KAIJU
+- Input
+    * Number + Letter --> Attack
+    * Complex input loop - Type in move code. Type number corresponding to resource you want to gain/use. Press enter to confirm
+- Status Effects
+    * Stunned - Can't input next move. CAN TYPE TO QUEUE NEXT MOVE WHEN STUN FADES.
+---
+---
+---
+# MVP Scope
+
+## Intro MVP
+Booting Kaiju Fight
+
+## Menu MVP
+Start fight
+
+Quit
+
+## FIGHT MVP
+### One 'map' (just a name. don't worry about having it affect the battle).
+
+### One kaiju. It can fight itself. KAIJU KING
+- Atomic Breath - range of 50. 70 energy cost
+- Simple Input loop - Type in move code. Press enter to confirm
+    * i.e. Pressed 'K'. Pressed enter. Kaiju kicks.
+
+### Kaiju Systems
+- HP (visual)
+- Energy (visual)
+- MVP Ability System Requirements 
+    * Energy Cost (fixed for each ability, visual)
+    * Effect (damage, movement, regeneration, etc., visual)
+    * Range (just let the player miss for now. No visual)
+    * Start-up time (all abilities have a fixed start-up time, VISUAL)
+    * Active time (all abilities have a fixed, active time of 0 (instant), NO VISUAL)
+    * Cooldown time (all abilities have a fixed cooldown time, VISUAL)
+    * All Abilities are non-cancelable.
+    * No "holding abilities. All abilities have instant active time.
+         + (i.e. block continues by holding down confirmation key. For MVP, block has fixed active time.)
+- Distance system
+- No statuses.
+
+## FIGHT UI MVP
+Info for each Kaiju
+    - HP
+    - Energy
+    - Ability state (what ability, what stage of ability)
+- Kaiju 1 Info
+- Kaiju 2 Info
+- Distance
+
+## Technical MVP
+Executable I can send to someone and they can play.
+
+CMAKE
+
+
+
+---
+---
+---
+# Beyond MVP
+- Statuses
+    * Stunned?
+    * Burning
+    * Behind Wall
+    * Environmental (i.e. burrowed, underwater)
+- Complex input loop
+    * Active time - different abilities have different active time.
+    * Holding abilities. i.e. hold enter to hold block.
+    * Takes up UI area where attacks would be?
+    * Ability Holding System Options
+        1.  Holding a key down affects ability state
+            - i.e. charge-up, charge-up visual similar to loading bar.
+            - i.e. extends ability's active time to a point (i.e. til runs out of energy)
+        2. Command line inputs "lock-in" hold amount 
+            - Energy decisions "A30" puts 30 energy into atomic blast. Corresponds to
+            - More jank (more dark souls-y). More commitment. Less twitchy. 
+            - Maybe different for different kaiju. range.
+- Narrative Delivery
+    * Message Logs - Reveals lore of world, who you are. Hotline Miami, Bioshock (but more intimate), etc.
+        + Player presses enter to read next line? Or just next message?
+    * Cyber-Ghost - Each time you defeat a kaiju, a ghost from the past appears, says who they were, what happened. A cautionary tale
+        1. Could: The ghost of the man who made kaiju fight. Nobel peace prize.
+        2. Or: Satirical. Starship troopers, Mickey 17, etc?
+        - Visual: Lines that make a face. Like Starfox Andross but just outlines. static.
+- More Kaijus 
+    * Kaiju King - Godzilla stand-in. Atomic breath. Regeneration.
+    * Dragon King
+    * Jumbo Samurai - small kaiju. Physical attacks. spirit.
+    * Shinobi Turtle -
+    * Max Energy / No-regen - Kaiju that starts with way more energy than anyone else. No regen. Once it runs out of energy, has to run away and find a safe place to recharge/reincarnate in an egg. Extremely vulnerable in egg form. Can break out of egg form early, but then can't get back in until run out of energy.
+    * Kaiju that slows down/speeds up time
+        + affects warm-up/active/cooldown time for attacks
+        + affects anything with a rate based on time (i.e. regeneration)
+
+    
+- More Kaijus. How many though?
+- Unlock kaijus as you beat them?
+
+
+## Narrative
+Lore Ideas
+- Kaiju Fight 1994 (or 2004?)
+- This used to be a defense simulation for kaiju combat and control. That was long ago. Kaiju are dead? Kaiju destroyed everything?
+- You are in the future, where things are good. You are assigned to go through archived programs to see if they are still useful.
+- This is a dummy training module that was considered defunct. Let coworkers pass notes / leave logs
+
+Character Ideas
+- Character A - radicalized. Charlie Kirk-like martyr incident. Fully radicalized. Impacts what they want to do with the program.
+    
+### Sample Message Log - Girlfriend + GUI
+    Message Archive - 10/23/2004
+    ----------------------------
+    G-man (Gary): Hey Trevor, how's it coming.
+    T-bone (Trevor): Shits bad, Gary. She was all cool about the flat-earth shit, then I though we were cool, ya know. If flat earth is no problem then normal stuff is normal... so I mentioned I don't like how her Mom talks to her.
+    G-man (Gary): I mean the GUI
+    T-bone (Trevor): She says, "That's my Mom. That's my problem."
+    G-man (Gary): Yup.
+    T-bone (Trevor): She goes and blabs. to. her. MOM.
+    G-man (Gary): Yikes.
+    T-bone (Trevor): !!!! I gotta come on my hands and knees on glass or some shit...
+    G-man (Gary): That's rough buddy.
+    T-bone (Trevor): Whatever, Gary.
+    G-man (Gary): Did you build an encrypted team chat sub-program to talk about your drama?
+                I need the GUI mode.
+    T-bone (Trevor): The GUI mode is work in progress.
+    G-man (Gary): TREVOR
+                    I love you.
+                    I need a GUI.
+                    What's the command?
+    T-bone (Trevor): LadyGodiva
+    G-man (Gary): Thank you.
+    G-man (Gary): Trevor...
+    T-bone (Trevor): I'm an artist in pain, Gary.
+    G-man (Gary): Trevor. I'm coming to your desk. We are going to make a GUI.
+    T-bone (Trevor): Ok.
+    
+(The GUI Mode is an option for the player. When you put in the GUI command, it reveals a drawing of his soon-to-be Ex-girlfriend).
+ (I don't want them to say what it is because I want the player to want to go put the command in later)
+
+CRIT: This is funny. Man relationships. Ignore problems.
+- This reads like it's supposed to be shot. I think the nuance in my head is not coming across in the log...
+    * **LATER_ME** 
+- uncomfortable with the white/black coding tropes.
+    * white person is dependable. Isn't personal. Seems like the boss.
+    * black person is lost in their personal issues. Likeable, but not dependable.
+        + Helped subvert by having Trev be the one who made the encrypted team chat.
+    * **ACTION**: Flesh out Gary and Trevor to subvert the stereotypes into real people.
+        + Maybe the game is about their relationship? About making something together, under pressure, and building connection.
+
+---
+# Beyond v1.0
+
+## 2 player version?
+Players press keys on opposite sides of the keyboard. Minimize sabotaging.
+- i.e. '`' and '\'
+- "hidden" command to do 2 player version. Players who know can jump right in. 
+
+## Kaiju creature generator
+
+---
+# QT Doc Help
+Inputs key press state - https://somcosoftware.com/en/blog/how-to-track-keyboard-usage-on-windows-with-qt
+    
+
+
+---
+Markdown Ref
+---
+# First Level Heading
+
+Paragraph.
+
+## Second Level Heading
+
+Paragraph.
+
+- bullet
++ other bullet
+* another bullet
+    * child bullet
+
+1. ordered
+2. next ordered
+    + Bullet under ordered
+
+### Third Level Heading
+
+Some *italic* and **bold** text and `inline code`.
+
+An empty line starts a new paragraph.
+
+Use two spaces at the end  
+to force a line break.
+
+A horizontal ruler follows:
+
+---
+
+Add links inline like [this link to the Qt homepage](https://www.qt.io),
+or with a reference like [this other link to the Qt homepage][1].
+
+    Add code blocks with
+    four spaces at the front.
+
+> A blockquote
+> starts with >
+>
+> and has the same paragraph rules as normal text.
+
+First Level Heading in Alternate Style
+======================================
+
+Paragraph.
+
+Second Level Heading in Alternate Style
+---------------------------------------
+
+Paragraph.
+
+[1]: https://www.qt.io
