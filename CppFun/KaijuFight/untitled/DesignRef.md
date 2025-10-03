@@ -114,6 +114,7 @@ CMAKE
     * Kaiju that slows down/speeds up time
         + affects warm-up/active/cooldown time for attacks
         + affects anything with a rate based on time (i.e. regeneration)
+    * Can't Move Kaiju (like Biollante)
 
     
 - More Kaijus. How many though?
