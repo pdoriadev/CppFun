@@ -133,12 +133,35 @@ int main(int argc, char *argv[])
 ///         You are in the future, where things are good. You are assigned to go through archived programs to see if they are still useful.
 ///             Each time you defeat a kaiju, a ghost from the past appears, says who they were, what happened. A cautionary tale
 ///             Lines that make a face. Like Starfox Andross but just outlines. static.
+///         Character A - radicalized. Charlie Kirk-like martyr incident. Fully radicalized. Impacts what they want to do with the program.
+///         Player presses enter to read next line? Or just next message?
+///     Kaiju Fight 2084
+///     This is a dummy training module that was considered defunct. Let coworkers pass notes / leave logs
+///         dude (Trevor, username is T-bone) talking about broke up with girlfriend.
+///         T-bone (Trevor): She was all cool about the flat-earth shit, then I though we were cool, ya know... so I mentioned
+///             how I think her Mom is using her, and I don't like how she talks to my girl. *That* was over the line. At first I was like, shit,
+///             I'm sleeping on the couch. Nope, it's worse. She goes and blabs. to. her. MOM.
+///             She says I'm done. I gotta come on my hands and knees on glass or some shit...
+///         G-man (Gary): "Trevor baby. I need the GUI mode.
+///         T-bone (Trevor): It's work in progress.
+///         G-man (Gary): TREVOR
+///                         I love you.
+///                         I need a GUI.
+///                         What's the command?
+///         T-bone (Trevor): LadyGodiva
+///         G-man (Gary): Trevor...
+///         T-bone (Trevor): I'm an artist, Gary.
+///                         (I don't want them to say what it is because I want the player to want to go put the command in later)
+///         G-man (Gary): Trevor. I'm coming to your desk. We are going to make a GUI.
+///         T-bone (Trevor): Ok.
+///         (The GUI Mode is an option for the player. It doesn't work... until you learn the passcode which reveals it's just a drawing of his now Ex-girlfriend).
 ///
 ///
 /// Beyond v1.0
 ///     2 player version?
 ///         Players press keys on opposite sides of the keyboard. Minimize sabotaging.
 ///             i.e. '`' and '\'
+///         "hidden" file or command to do 2 player version
 ///
 ///     Kaiju creature generator
 ///
