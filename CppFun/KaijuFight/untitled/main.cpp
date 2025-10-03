@@ -137,12 +137,27 @@ int main(int argc, char *argv[])
 ///         Player presses enter to read next line? Or just next message?
 ///     Kaiju Fight 2084
 ///     This is a dummy training module that was considered defunct. Let coworkers pass notes / leave logs
-///         dude (Trevor, username is T-bone) talking about broke up with girlfriend.
-///         T-bone (Trevor): She was all cool about the flat-earth shit, then I though we were cool, ya know... so I mentioned
-///             how I think her Mom is using her, and I don't like how she talks to my girl. *That* was over the line. At first I was like, shit,
-///             I'm sleeping on the couch. Nope, it's worse. She goes and blabs. to. her. MOM.
-///             She says I'm done. I gotta come on my hands and knees on glass or some shit...
-///         G-man (Gary): "Trevor baby. I need the GUI mode.
+///         dude (Trevor, username is T-bone) talking about relationship drama.
+///         CRIT: This is funny. Man relationships. Ignore problems.
+///             uncomfortable with the white/black coding tropes.
+///                 - white person is dependable. Isn't personal. Seems like the boss.
+///                 - black person is lost in their personal issues. Likeable, but not dependable.
+///             Does this work if I swap ethnicity, genders, sexual orientations?
+///                 - Gary is a lesbian. Doesn't chang the race dynamic.
+///                 - Trevor is
+///
+///         G-man (Gary): Hey Trevor, how's it coming.
+///         T-bone (Trevor): Shits bad, Gary. She was all cool about the flat-earth shit, then I though we were cool, ya know. If flat earth is
+///             no problem then normal stuff is normal... so I mentioned I don't like how her Mom talks to my girl.
+///         G-man (Gary): I mean the GUI
+///         T-bone (Trevor): She says, "That's my Mom. That's my problem."
+///         G-man (Gary): Yup.
+///         T-bone (Trevor): She goes and blabs. to. her. MOM.
+///         G-man (Gary): Yikes.
+///         T-bone (Trevor): !!!! I gotta come on my hands and knees on glass or some shit...
+///         G-man (Gary): That's rough buddy.
+///         T-bone (Trevor): Whatever, Gary.
+///         G-man (Gary): I didn't make an encrypted chatroom to talk about relationship issues. I need the GUI mode.
 ///         T-bone (Trevor): It's work in progress.
 ///         G-man (Gary): TREVOR
 ///                         I love you.
@@ -150,11 +165,13 @@ int main(int argc, char *argv[])
 ///                         What's the command?
 ///         T-bone (Trevor): LadyGodiva
 ///         G-man (Gary): Trevor...
-///         T-bone (Trevor): I'm an artist, Gary.
+///         T-bone (Trevor): I'm an artist in pain, Gary.
 ///                         (I don't want them to say what it is because I want the player to want to go put the command in later)
 ///         G-man (Gary): Trevor. I'm coming to your desk. We are going to make a GUI.
 ///         T-bone (Trevor): Ok.
-///         (The GUI Mode is an option for the player. It doesn't work... until you learn the passcode which reveals it's just a drawing of his now Ex-girlfriend).
+///         (The GUI Mode is an option for the player. When you put in the GUI command, it reveals a drawing of his soon-to-be Ex-girlfriend).
+///
+///
 ///
 ///
 /// Beyond v1.0
