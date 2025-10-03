@@ -142,6 +142,7 @@ int main(int argc, char *argv[])
 ///             uncomfortable with the white/black coding tropes.
 ///                 - white person is dependable. Isn't personal. Seems like the boss.
 ///                 - black person is lost in their personal issues. Likeable, but not dependable.
+///                     - Helped subvert by having Trev be the one who made the encrypted team chat.
 ///             Does this work if I swap ethnicity, genders, sexual orientations?
 ///                 - Gary is a lesbian. Doesn't chang the race dynamic.
 ///                 - Trevor is
@@ -157,8 +158,9 @@ int main(int argc, char *argv[])
 ///         T-bone (Trevor): !!!! I gotta come on my hands and knees on glass or some shit...
 ///         G-man (Gary): That's rough buddy.
 ///         T-bone (Trevor): Whatever, Gary.
-///         G-man (Gary): I didn't make an encrypted chatroom to talk about relationship issues. I need the GUI mode.
-///         T-bone (Trevor): It's work in progress.
+///         G-man (Gary): Did you build an encrypted team chat sub-program to talk about your drama?
+///                     I need the GUI mode.
+///         T-bone (Trevor): The GUI mode is work in progress.
 ///         G-man (Gary): TREVOR
 ///                         I love you.
 ///                         I need a GUI.
