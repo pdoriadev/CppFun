@@ -1,29 +1,48 @@
+---
+---
+---
+# KAIJU FIGHT GDD
+---
+# BY PETER DORIA
+---
+---
+---
 
-## Combat Design
-real-time combat puzzle
-- DO'S / DON'TS
-    * NO COMPLEX COMBOS TO DO A MOVE. EMPHASIS ON PUZZLE STRATEGY THAN INPUT CHALLENGE
-    * All monsters have the same max energy. Easier to balance. Easier for players to understand (may break this for fun monster)
-    * SCREW BALANCE
-    * No Turn-based - nah. dunno how to make that in a way that isn't pokemon, and I don't want to make pokemon. Kinda sucks.
-         puzzle with chance element (elements + dice) tech help
-- Design ?'s
-    * Game Speed is directly related to kaiju speed. How slow? How fast?
-    * Key placement affects feeling for each kaiju
-    * Playing a kaiju with all inputs in one place vs. across the keyboard - Feel like a spider/master controller vs. a league character)
-    * Fight Length 2-5 minutes? Lumbering kaiju. Should feel like controlling massive beasts where the fight sways back and forth.
-    * But will that be too slow? Will that be fun? The fight needs to be able to turn quickly to have uncertainty to be fun.
-    * Range is fixed for each ability, VISUAL? Or just let the player miss? An indicator when distance is good next to the ability input UI?)
-- General
-    * do I like these games? What other games are like this? --> fighting games. Smash?
-    * dynamic game needs dynamic changes
-        + distance - NUMBER TICKING GOING UP AND DOWN WITH COLOR.
-        + stamina/energy/resource - NUMBER. TICKS UP/DOWN DEPENDING ON KAIJU
-- Input
-    * Number + Letter --> Attack
-    * Complex input loop - Type in move code. Type number corresponding to resource you want to gain/use. Press enter to confirm
-- Status Effects
-    * Stunned - Can't input next move. CAN TYPE TO QUEUE NEXT MOVE WHEN STUN FADES.
+# Pitch
+
+You find an early 90's military console that has not been turned on in many years. 
+
+---
+# Combat Design - Real-time Combat Puzzle
+---
+
+**DO'S / DON'TS**
+- NO COMPLEX COMBOS TO DO A MOVE. EMPHASIS ON PUZZLE STRATEGY OVER INPUT CHALLENGE
+- All monsters have the same max energy. Easier to balance. Easier for players to understand (may break this for fun monster)
+- SCREW BALANCE
+- No Turn-based - nah. dunno how to make that in a way that isn't pokemon, and I don't want to make pokemon. Kinda sucks.
+   * Puzzle with chance element (elements + dice) tech help
+
+**Design ?'s**
+- Game Speed is directly related to kaiju speed. How slow? How fast?
+- Key placement affects feeling for each kaiju
+- Playing a kaiju with all inputs in one place vs. across the keyboard - Feel like a spider/master controller vs. a league character)
+- Fight Length 2-5 minutes? Lumbering kaiju. Should feel like controlling massive beasts where the fight sways back and forth.
+- But will that be too slow? Will that be fun? The fight needs to be able to turn quickly to have uncertainty to be fun.
+- Range is fixed for each ability, VISUAL? Or just let the player miss? An indicator when distance is good next to the ability input UI?)
+
+**General**
+- do I like these games? What other games are like this? --> fighting games. Smash?
+- dynamic game needs dynamic changes
+    * distance - NUMBER TICKING GOING UP AND DOWN WITH COLOR.
+    * stamina/energy/resource - NUMBER. TICKS UP/DOWN DEPENDING ON KAIJU
+    
+**Input**
+- Number + Letter --> Attack
+- Complex input loop - Type in move code. Type number corresponding to resource you want to gain/use. Press enter to confirm
+
+**Status Effects**
+- Stunned - Can't input next move. CAN TYPE TO QUEUE NEXT MOVE WHEN STUN FADES.
 ---
 ---
 ---
@@ -185,60 +204,3 @@ Players press keys on opposite sides of the keyboard. Minimize sabotaging.
 # QT Doc Help
 Inputs key press state - https://somcosoftware.com/en/blog/how-to-track-keyboard-usage-on-windows-with-qt
     
-
-
----
-Markdown Ref
----
-# First Level Heading
-
-Paragraph.
-
-## Second Level Heading
-
-Paragraph.
-
-- bullet
-+ other bullet
-* another bullet
-    * child bullet
-
-1. ordered
-2. next ordered
-    + Bullet under ordered
-
-### Third Level Heading
-
-Some *italic* and **bold** text and `inline code`.
-
-An empty line starts a new paragraph.
-
-Use two spaces at the end  
-to force a line break.
-
-A horizontal ruler follows:
-
----
-
-Add links inline like [this link to the Qt homepage](https://www.qt.io),
-or with a reference like [this other link to the Qt homepage][1].
-
-    Add code blocks with
-    four spaces at the front.
-
-> A blockquote
-> starts with >
->
-> and has the same paragraph rules as normal text.
-
-First Level Heading in Alternate Style
-======================================
-
-Paragraph.
-
-Second Level Heading in Alternate Style
----------------------------------------
-
-Paragraph.
-
-[1]: https://www.qt.io
