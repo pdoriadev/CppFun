@@ -38,11 +38,15 @@ You find an early 90's military console that has not been turned on in many year
     * stamina/energy/resource - NUMBER. TICKS UP/DOWN DEPENDING ON KAIJU
     
 **Input**
-- Number + Letter --> Attack
+- Command Input --> Attack
+- Backspace input --> delete previous character from cursor position
+- **Design Choice** - No "erase-all" input. Consequence to each thing you type 
+    * **TRADE-OFF** - reflex challenge barrier. Said didn't want to do that. Whoever types faster dould have the upper hand?
 - Complex input loop - Type in move code. Type number corresponding to resource you want to gain/use. Press enter to confirm
 
 **Status Effects**
 - Stunned - Can't input next move. CAN TYPE TO QUEUE NEXT MOVE WHEN STUN FADES.
+
 ---
 ---
 ---
@@ -52,9 +56,8 @@ You find an early 90's military console that has not been turned on in many year
 Booting Kaiju Fight
 
 ## Menu MVP
-Start fight
-
-Quit
+SF - Start fight
+Q - Quit
 
 ## FIGHT MVP
 ### One 'map' (just a name. don't worry about having it affect the battle).
@@ -75,8 +78,10 @@ Quit
     * Active time (all abilities have a fixed, active time of 0 (instant), NO VISUAL)
     * Cooldown time (all abilities have a fixed cooldown time, VISUAL)
     * All Abilities are non-cancelable.
+    * Ability commands are cached. Makes users take care when they are inputting commands
+        + Could lead to some funny cheese strategies.
     * No "holding abilities. All abilities have instant active time.
-         + (i.e. block continues by holding down confirmation key. For MVP, block has fixed active time.)
+        + (i.e. block continues by holding down confirmation key. For MVP, block has fixed active time.)
 - Distance system
 - No statuses.
 
