@@ -2,6 +2,13 @@
 
 #include <QApplication>
 
+#include<iostream>
+
+int funcTest(int test)
+{
+    return test;
+}
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -27,6 +34,9 @@ int main(int argc, char *argv[])
     ///     Fight UI
     ///     Pre-battle
     ///     Fight
+    int (*ptr) (int);
+    ptr = funcTest;
+    std::cout << ptr(0) << std::endl;
 
     w.show();
     return a.exec();
