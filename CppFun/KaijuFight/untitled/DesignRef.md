@@ -158,7 +158,13 @@ CMAKE
         + How to solve this monster??
             - Mother Dragon uses too many multi-head attacks in a row (gets too low on energy) --> bites a head off --> restores energy.
             - Repeat ^ until the last head heats itself like an oroboros
-        + "I fed you my heads, and now you've come for the rest."
+        + LINES
+            - "I fed you my heads, and now you've come for the rest."
+            - "Would you like another head, dear?"
+        + THEMES
+            - Manipulation and guilt, lost agency due to well-meaning maternal figure 
+            - This feels true but limited. Adolescent. There is more to say here. How do we go on with these relationships?
+                - I dont' think I can expand on these themes without increasing the player's moveset?? hmmm
     * **Father Phallis** - a normal-sized guy who looks like a penis
         + Maybe use distance mechanic. Theme - can't get too close to him. 
         + Turtles
