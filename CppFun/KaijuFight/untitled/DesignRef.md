@@ -104,7 +104,13 @@ CMAKE
 ---
 ---
 ---
-# Beyond MVP
+
+# SHOULD I SPLIT THIS GAME INTO THREE? 
+- Kaiju Fight - single-player 
+- Kaiju Fight Online! (DLC for single-player)
+- Kaiju Fight - Story
+
+# Beyond MVP -- 
 - Statuses
     * Stunned?
     * Burning
@@ -139,7 +145,24 @@ CMAKE
         + affects warm-up/active/cooldown time for attacks
         + affects anything with a rate based on time (i.e. regeneration)
     * Can't Move Kaiju (like Biollante)
-
+    * **MOTHER DRAGON**
+        + Alt name - **MOTHER'S 7 HEADS**
+        + A dragon like king ghidorah. There used to be 7 heads. Now, there are 4 heads and 3 stumps. The 3 look like they were bitten off.
+        + Ability - Compel {Ability}
+            - If the player uses any ability other than the one Mother Dragon says to use,... 
+                - the player will lose substantial energy.
+                - Mother Dragon will fly into a rage, using multi-head attacks against the player
+            - If Mother Dragon is at one head left, they can compel the player to use abilities the player does not have access to. (abilities the player has seen in previous monsters)
+        + Ability - lies 
+            - Insert letters while you type your command OR insert command text into the queue **TAKING AWAY PLAYER'S AGENCY. THAT'S THE FEELING.**
+        + How to solve this monster??
+            - Mother Dragon uses too many multi-head attacks in a row (gets too low on energy) --> bites a head off --> restores energy.
+            - Repeat ^ until the last head heats itself like an oroboros
+        + "I fed you my heads, and now you've come for the rest."
+    * **Father Phallis** - a normal-sized guy who looks like a penis
+        + Maybe use distance mechanic. Theme - can't get too close to him. 
+        + Turtles
+        + 
     
 - More Kaijus. How many though?
 - Unlock kaijus as you beat them?
@@ -182,6 +205,14 @@ Character Ideas
     G-man (Gary): Trevor. I'm coming to your desk. We are going to make a GUI.
     T-bone (Trevor): Ok.
     
+
+Character Ideas
+- T-bone
+    + Gets super depressed because of relationship - not because of breakup! But the dynamic.
+    + Doesn't have approval of Mom. 
+
+
+
 (The GUI Mode is an option for the player. When you put in the GUI command, it reveals a drawing of his soon-to-be Ex-girlfriend).
  (I don't want them to say what it is because I want the player to want to go put the command in later)
 
