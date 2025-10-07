@@ -169,7 +169,7 @@ CMAKE
         + Maybe use distance mechanic. Theme - can't get too close to him. 
         + Turtles
         + 
-    
+    * A Kaiju about AI - inspired by Zelda Williams take: https://www.ign.com/articles/robin-williams-daughter-takes-stand-against-ai-slop-exploiting-her-fathers-image 
 - More Kaijus. How many though?
 - Unlock kaijus as you beat them?
 
