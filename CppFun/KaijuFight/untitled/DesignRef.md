@@ -110,7 +110,7 @@ CMAKE
 - Kaiju Fight Online! (DLC for single-player)
 - Kaiju Fight - Story
 
-# Beyond MVP -- 
+# Beyond MVP
 - Statuses
     * Stunned?
     * Burning
@@ -167,7 +167,7 @@ CMAKE
                 - I dont' think I can expand on these themes without increasing the player's moveset?? hmmm
     * **Father Phallis** - a normal-sized guy who looks like a penis
         + Maybe use distance mechanic. Theme - can't get too close to him. 
-        + Turtles
+        + Turtling strategy
         + 
     * A Kaiju about AI - inspired by Zelda Williams take: https://www.ign.com/articles/robin-williams-daughter-takes-stand-against-ai-slop-exploiting-her-fathers-image 
 - More Kaijus. How many though?
@@ -180,6 +180,13 @@ Lore Ideas
 - This used to be a defense simulation for kaiju combat and control. That was long ago. Kaiju are dead? Kaiju destroyed everything?
 - You are in the future, where things are good. You are assigned to go through archived programs to see if they are still useful.
 - This is a dummy training module that was considered defunct. Let coworkers pass notes / leave logs
+- Developers are given requirements for a kaiju control training program. As the project develops, the 
+requirements become darker, stranger, and more personal.
+    * Since the requirements are from on high, the characters know about them only a little bit before
+        the player?
+    * Themes
+        + personal insecurities manifest in our creative work 
+        + 
 
 Character Ideas
 - Character A - radicalized. Charlie Kirk-like martyr incident. Fully radicalized. Impacts what they want to do with the program.
