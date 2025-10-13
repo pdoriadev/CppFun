@@ -148,6 +148,9 @@ CMAKE
     * **MOTHER DRAGON**
         + Alt name - **MOTHER'S 7 HEADS**
         + A dragon like king ghidorah. There used to be 7 heads. Now, there are 4 heads and 3 stumps. The 3 look like they were bitten off.
+            - Maybe one of the seven heads, is robotic. It is the one that bites off the other heads? This, however, changes the metaphor to be
+                more about AI, automation, etc. than the original maternal themes. Does it layer the metaphor or muddy the metaphor? Maybe have
+                Mother Dragon come back like mecha-king ghidorah. It has new tricks, but, ultimately, it succumbs to the same faults? hmm. 
         + Ability - Compel {Ability}
             - If the player uses any ability other than the one Mother Dragon says to use,... 
                 - the player will lose substantial energy.
