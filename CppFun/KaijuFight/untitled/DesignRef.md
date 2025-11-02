@@ -136,6 +136,7 @@ CMAKE
         2. Or: Satirical. Starship troopers, Mickey 17, etc?
         - Visual: Lines that make a face. Like Starfox Andross but just outlines. static.
 - More Kaijus 
+    * Combo Kaiju - Allows for inputting multiple commands at the same time. Putting them all in one line speeds up the abilities, however, you are still committing to all those actions, like a Mars Rover.
     * Kaiju King - Godzilla stand-in. Atomic breath. Regeneration.
     * Dragon King
     * Jumbo Samurai - small kaiju. Physical attacks. spirit.
