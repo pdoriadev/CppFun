@@ -83,3 +83,8 @@ ipch/
 ##################
 ### Qt ignores ###
 **/[Bb]uild*/
+
+######################
+### LibreOfficeDraw ##
+# Exclude lock files.
+**~lock*
