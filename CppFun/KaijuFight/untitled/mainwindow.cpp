@@ -6,7 +6,11 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::KaijuFight)
 {
     ui->setupUi(this);
-    char what = *ui->centralwidget->whatsThis().toStdString().c_str();
+}
+
+void MainWindow::setCommandBoxText(std::string s)
+{
+    ui->CommandBox->setText(s.c_str());
 }
 
 MainWindow::~MainWindow()

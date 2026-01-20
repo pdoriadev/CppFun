@@ -13,6 +13,7 @@ SOURCES += \
     mainwindow.cpp
 
 HEADERS += \
+    GameTime.h \
     mainwindow.h
 
 FORMS += \

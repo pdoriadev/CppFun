@@ -2,17 +2,88 @@
 
 #include <QApplication>
 
-#include<iostream>
+#include <iostream>
+#include "GameTime.h"
+
+
+static int processInput()
+{
+    // adds inputs onto a stack.
+
+
+    return 0;
+}
+
+
+static int fixedUpdate(const timeData &tData)
+{
+    return 0;
+}
+namespace Ui
+{
+class KaijuFight;
+}
+static int renderUpdate(MainWindow &window, const timeData &tData)
+{
+    window.setCommandBoxText(std::to_string(tData.lastSimulationUpdate));
+}
+
+
+static int gameLoop(MainWindow &window)
+{
+    //////////////////////
+    /// \brief
+    /// Setup time data.
+    ///
+
+
+    static timeData tData;
+    getTime(timeResolution::MICRO, tData.lastTime);
+    tData.uSecPerStep = 16666;
+    uint64_t lag = 0;
+
+    bool done = false;
+    while (!done)
+    {
+        getTime(timeResolution::MICRO, tData.currentTime);
+        tData.elapsed = tData.currentTime - tData.lastTime;
+        tData.lastTime = tData.currentTime;
+        lag += tData.elapsed;
+        // edge case for first frame?? --> elapses = 0.
+
+        // process input
+            // for simplicity, processess at every opportunity
+        int code = processInput();
+
+        // update simulation based on how much time has passed.
+            // adds sounds that need to be called to a stack.
+        while (lag >= tData.uSecPerStep)
+        {
+            code = fixedUpdate(tData);
+            getTime(timeResolution::MICRO, tData.lastSimulationUpdate);
+            lag -= tData.uSecPerStep;
+        }
+
+        // always update graphics
+            // do i even need to worry about this if QT is handling all the text and images?
+        // update audio
+            // audio bank. Go through stack to
+        //
+        renderUpdate(window, tData);
+    }
+}
+
 
 int funcTest(int test)
 {
     return test;
 }
-
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
+
+    gameLoop(w);
 
     //////////////////////////////////////////////
     /// APP FLOW

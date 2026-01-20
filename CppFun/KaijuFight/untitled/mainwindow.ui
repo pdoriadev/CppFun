@@ -538,7 +538,7 @@
    <widget class="QTextEdit" name="CommandBox">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>30</x>
       <y>850</y>
       <width>301</width>
       <height>70</height>
