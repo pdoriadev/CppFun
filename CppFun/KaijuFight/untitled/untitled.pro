@@ -37,5 +37,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 DISTFILES += \
     DesignRef.md \
+    ExternalsRef.md \
     MarkdownRef.md \
+    QTDesignerRef.md \
     TechnicalRef.md
