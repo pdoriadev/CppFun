@@ -3,7 +3,10 @@
 
 #include <stdint.h> // uint64
 #include <time.h> // clock_gettime, CLOCK_MONOTONIC_RAW
+#include <ctime>
+#include <sys/time.h>
 #include <assert.h>
+#include <chrono>
 
 typedef struct
 {

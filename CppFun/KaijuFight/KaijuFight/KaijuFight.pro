@@ -9,12 +9,12 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    main.cpp \
-    mainwindow.cpp
+    cpp\main.cpp \
+    cpp\mainwindow.cpp
 
 HEADERS += \
-    GameTime.h \
-    mainwindow.h
+    headers\GameTime.h \
+    headers\mainwindow.h
 
 FORMS += \
     mainwindow.ui
@@ -37,8 +37,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
-    DesignRef.md \
-    ExternalsRef.md \
-    MarkdownRef.md \
-    QTDesignerRef.md \
-    TechnicalRef.md
+    markdown\DesignRef.md \
+    markdown\ExternalsRef.md \
+    markdown\MarkdownRef.md \
+    markdown\QTDesignerRef.md \
+    markdown\TechnicalRef.md

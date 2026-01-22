@@ -18,13 +18,11 @@ static int fixedUpdate(const timeData &tData)
     // update simulation at fixed time step.
     return 0;
 }
-namespace Ui
-{
-class KaijuFight;
-}
+
 static int renderUpdate(MainWindow &window, const timeData &tData)
 {
     window.setCommandBoxText(std::to_string(tData.lastSimulationUpdate));
+    return 0;
 }
 
 
@@ -53,12 +51,15 @@ static int gameLoop(MainWindow &window)
         // process input
             // for simplicity, processess at every opportunity
         int code = processInput();
+        assert(code == 0 && "Process input issue.");
 
         // update simulation based on how much time has passed.
             // adds sounds that need to be called to a stack.
         while (lag >= tData.uSecPerStep)
         {
             code = fixedUpdate(tData);
+            assert(code == 0 && "Process input issue.");
+
             getTime(timeResolution::MICRO, tData.lastSimulationUpdate);
             lag -= tData.uSecPerStep;
         }
@@ -70,6 +71,8 @@ static int gameLoop(MainWindow &window)
         //
         renderUpdate(window, tData);
     }
+
+    return 0;
 }
 
 
