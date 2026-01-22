@@ -3,16 +3,13 @@
 
 #include <stdint.h> // uint64
 #include <time.h> // clock_gettime, CLOCK_MONOTONIC_RAW
-#include <ctime>
-#include <sys/time.h>
 #include <assert.h>
-#include <chrono>
 
 typedef struct
 {
-    uint64_t lastTime;
+    uint64_t prevGameLoop;
     uint64_t lastSimulationUpdate;
-    uint64_t currentTime;
+    uint64_t currentGameLoop;
     uint64_t elapsed;
     uint64_t uSecPerStep;
 } timeData ;
@@ -27,24 +24,34 @@ enum timeResolution
 };
 
 ////////
-/// Based on: https://stackoverflow.com/questions/5833094/get-a-timestamp-in-c-in-microseconds
+/// Linux Man: https://www.man7.org/linux/man-pages/man3/clock_gettime.3.html
+///
+/// CLOCK_MONOTONIC_RAW vs CLOCK_MONOTONIC vs CLOCK_BOOTTIME: https://tigerbeetle.com/blog/2021-08-30-three-clocks-are-better-than-one/
+/// CLOCK_MONOTONIC_RAW is missing on windows QT, but not Linux. Need to learn CMAKE to pull in the proper libraries to run it.
+///     CLOCK_MONOTONIC changes based on NTP. It hangs when the system suspends <--- maybe I want this though? I don't want enemies running
+///         around when the player can't play. That'd be silly. It would make sense for a networked game - but I'm not making a networked game.
+///
+/// Additional links
+///     https://stackoverflow.com/questions/5833094/get-a-timestamp-in-c-in-microseconds
 static void getTime(timeResolution res, uint64_t &time)
 {
     static timespec ts;
-    clock_gettime(CLOCK_MONOTONIC_RAW, &ts);
+    clock_gettime(CLOCK_MONOTONIC, &ts);
+    uint64_t seconds = (uint64_t)ts.tv_sec;
+    uint64_t nano = (uint64_t)ts.tv_nsec;
     switch(res)
     {
     case NANO:
-        time = (uint64_t)(ts.tv_sec * 1000000000 + ts.tv_nsec);
+        time = seconds * 1000000000 + nano;
         break;
     case MICRO:
-        time = (uint64_t)(ts.tv_sec * 1000000 + ts.tv_nsec * 1000);
+        time = seconds * 1000000 + nano * 0.001;
         break;
     case MILLI:
-        time = (uint64_t)(ts.tv_sec * 1000 + ts.tv_nsec / 1000000);
+        time = seconds * 1000 + nano * 0.000001;
         break;
     case SEC:
-        time = (uint64_t)ts.tv_sec + ts.tv_nsec / 1000000000;
+        time = seconds + nano * 0.000000001;
         break;
     default:
         assert(false && "Not a valid time resolution.");

@@ -1,9 +1,9 @@
-#include "mainwindow.h"
+#include "headers/mainwindow.h"
 
 #include <QApplication>
 
-#include <iostream>
-#include "GameTime.h"
+#include <cstdio>
+#include "headers/GameTime.h"
 
 
 static int processInput()
@@ -16,12 +16,13 @@ static int processInput()
 static int fixedUpdate(const timeData &tData)
 {
     // update simulation at fixed time step.
+    printf("Current Loop Time: %d", tData.currentGameLoop);
     return 0;
 }
 
 static int renderUpdate(MainWindow &window, const timeData &tData)
 {
-    window.setCommandBoxText(std::to_string(tData.lastSimulationUpdate));
+    window.setCommandBoxText(std::to_string(tData.currentGameLoop));
     return 0;
 }
 
@@ -35,16 +36,16 @@ static int gameLoop(MainWindow &window)
 
 
     static timeData tData;
-    getTime(timeResolution::MICRO, tData.lastTime);
+    getTime(timeResolution::MICRO, tData.prevGameLoop);
     tData.uSecPerStep = 16666;
     uint64_t lag = 0;
 
     bool done = false;
     while (!done)
     {
-        getTime(timeResolution::MICRO, tData.currentTime);
-        tData.elapsed = tData.currentTime - tData.lastTime;
-        tData.lastTime = tData.currentTime;
+        getTime(timeResolution::MICRO, tData.currentGameLoop);
+        tData.elapsed = tData.currentGameLoop - tData.prevGameLoop;
+        tData.prevGameLoop = tData.currentGameLoop;
         lag += tData.elapsed;
         // edge case for first frame?? --> elapses = 0.
 
@@ -74,7 +75,6 @@ static int gameLoop(MainWindow &window)
 
     return 0;
 }
-
 
 int funcTest(int test)
 {
@@ -109,7 +109,7 @@ int main(int argc, char *argv[])
     ///     Fight
     int (*ptr) (int);
     ptr = funcTest;
-    std::cout << ptr(0) << std::endl;
+    printf("%d", ptr(0));
 
     w.show();
     return a.exec();
