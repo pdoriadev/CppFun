@@ -9,14 +9,13 @@
 static int processInput()
 {
     // adds inputs onto a stack.
-
-
     return 0;
 }
 
 
 static int fixedUpdate(const timeData &tData)
 {
+    // update simulation at fixed time step.
     return 0;
 }
 namespace Ui
