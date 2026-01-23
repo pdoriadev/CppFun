@@ -6,63 +6,97 @@
 #include "headers/GameTime.h"
 
 
+/////////////////////////////////////////////
+/// \brief processInput
+/// for simplicity, processess at every opportunity
+/// \return
+///
 static int processInput()
 {
     // adds inputs onto a stack.
     return 0;
 }
 
-
 static int fixedUpdate(const timeData &tData)
 {
     // update simulation at fixed time step.
-    printf("Current Loop Time: %d", tData.currentGameLoop);
+    //printf("Last Simulation Update: %u\n", tData.lastSimulationUpdate);
     return 0;
 }
 
 static int renderUpdate(MainWindow &window, const timeData &tData)
 {
-    window.setCommandBoxText(std::to_string(tData.currentGameLoop));
+    window.setCommandBoxText(std::to_string(tData.startOfGameLoop));
     return 0;
 }
 
-
-static int gameLoop(MainWindow &window)
+///
+/// \brief gameLoop
+/// \param window
+/// \param application
+/// \return
+/// It looks like Qt has it's own loop, which makes sense. To make the gameLoop work, I would need it to be running at the same time
+///     as Qt's loop. Otherwise, one of these loops is going to be stuck. Or I have one loop go after the other.
+/// Dunno if I want to do that. I want everything to be happening in the gameLoop. Having another concurrent mainLoop
+///     is disgusting, harder to debug, etc. Might be able to have Qt's main loop call into a gameUpdate call that is basically everything
+///     the game loop would do that frame. Feels bad.
+/// I don't like this. Maybe it's easier/not as bad as I think. I'm considering just making this project in C. Before I commit to that,
+///     I want to learn more about linux. I'm going to focus on that.
+///
+static int gameLoop(MainWindow &window, QApplication &application)
 {
     //////////////////////
-    /// \brief
     /// Setup time data.
-    ///
-
-
     static timeData tData;
-    getTime(timeResolution::MICRO, tData.prevGameLoop);
-    tData.uSecPerStep = 16666;
+    tData.uSecPerSimStep = 16666;
     uint64_t lag = 0;
+    //////////////////////
 
     bool done = false;
     while (!done)
     {
-        getTime(timeResolution::MICRO, tData.currentGameLoop);
-        tData.elapsed = tData.currentGameLoop - tData.prevGameLoop;
-        tData.prevGameLoop = tData.currentGameLoop;
-        lag += tData.elapsed;
-        // edge case for first frame?? --> elapses = 0.
+        {
+            //////////////////
+            /// Update Time Data
+            static uint64_t now;
+            getTime(timeResolution::MICRO, now);
+            tData.elapsedSinceLastGameLoop = now - tData.startOfGameLoop;
+            tData.startOfGameLoop = now;
+            lag += tData.elapsedSinceLastGameLoop;
+            //////////////////
+        }
 
-        // process input
-            // for simplicity, processess at every opportunity
         int code = processInput();
         assert(code == 0 && "Process input issue.");
 
         // update simulation based on how much time has passed.
             // adds sounds that need to be called to a stack.
-        while (lag >= tData.uSecPerStep)
+        while (lag >= tData.uSecPerSimStep)
         {
             code = fixedUpdate(tData);
-            assert(code == 0 && "Process input issue.");
+            assert(code == 0 && "Fixed Update issue.");
 
-            getTime(timeResolution::MICRO, tData.lastSimulationUpdate);
-            lag -= tData.uSecPerStep;
+            // Update Timing Test Part A
+            /*
+            uint64_t testVal;
+            getTime(timeResolution::MICRO, testVal);
+            uint64_t elapsedSinceLastSim = tData.lastSimUpdate - testVal;
+            printf("Time since last sim update: %u\n", elapsedSinceLastSim);
+            */
+
+            getTime(timeResolution::MICRO, tData.lastSimUpdate);
+            lag -= tData.uSecPerSimStep;
+
+            // Update Timing Test Part B
+            /*
+            static int test = 0;
+            test += 1;
+            if (test >= 10)
+            {
+                fflush(stdout);
+                done = true;
+            }
+            */
         }
 
         // always update graphics
@@ -84,8 +118,10 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
+    w.show();
+    a.exec();
 
-    gameLoop(w);
+    gameLoop(w, a);
 
     //////////////////////////////////////////////
     /// APP FLOW
@@ -107,11 +143,14 @@ int main(int argc, char *argv[])
     ///     Fight UI
     ///     Pre-battle
     ///     Fight
+
+    /*
     int (*ptr) (int);
     ptr = funcTest;
     printf("%d", ptr(0));
+    */
 
-    w.show();
+
     return a.exec();
 }
 

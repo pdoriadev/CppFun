@@ -7,11 +7,10 @@
 
 typedef struct
 {
-    uint64_t prevGameLoop;
-    uint64_t lastSimulationUpdate;
-    uint64_t currentGameLoop;
-    uint64_t elapsed;
-    uint64_t uSecPerStep;
+    uint64_t startOfGameLoop;
+    uint64_t elapsedSinceLastGameLoop;
+    uint64_t lastSimUpdate;
+    uint64_t uSecPerSimStep;
 } timeData ;
 
 enum timeResolution
@@ -39,19 +38,21 @@ static void getTime(timeResolution res, uint64_t &time)
     clock_gettime(CLOCK_MONOTONIC, &ts);
     uint64_t seconds = (uint64_t)ts.tv_sec;
     uint64_t nano = (uint64_t)ts.tv_nsec;
+
+    // BUG - least significant digit of nanosecond is getting chopped off during unit conversion \:
     switch(res)
     {
     case NANO:
         time = seconds * 1000000000 + nano;
         break;
     case MICRO:
-        time = seconds * 1000000 + nano * 0.001;
+        time = seconds * 1000000    + nano / 1000;
         break;
     case MILLI:
-        time = seconds * 1000 + nano * 0.000001;
+        time = seconds * 1000       + nano / 1000000;
         break;
     case SEC:
-        time = seconds + nano * 0.000000001;
+        time = seconds              + nano / 1000000000;
         break;
     default:
         assert(false && "Not a valid time resolution.");
