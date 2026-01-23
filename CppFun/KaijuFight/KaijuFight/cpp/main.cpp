@@ -37,12 +37,16 @@ static int renderUpdate(MainWindow &window, const timeData &tData)
 /// \return
 /// It looks like Qt has it's own loop, which makes sense. To make the gameLoop work, I would need it to be running at the same time
 ///     as Qt's loop. Otherwise, one of these loops is going to be stuck. Or I have one loop go after the other.
+///     See QApplication.exec(): https://doc.qt.io/qt-6/qapplication.html#exec
 /// Dunno if I want to do that. I want everything to be happening in the gameLoop. Having another concurrent mainLoop
 ///     is disgusting, harder to debug, etc. Might be able to have Qt's main loop call into a gameUpdate call that is basically everything
 ///     the game loop would do that frame. Feels bad.
 /// I don't like this. Maybe it's easier/not as bad as I think. I'm considering just making this project in C. Before I commit to that,
 ///     I want to learn more about linux. I'm going to focus on that.
 ///
+///
+
+class QApplication;
 static int gameLoop(MainWindow &window, QApplication &application)
 {
     //////////////////////
