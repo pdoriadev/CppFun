@@ -25,23 +25,11 @@
 // exit() and exit macros
 #include <stdlib.h>
 
-// The best fun guide to fork(): https://beej.us/guide/bgipc/html/split/fork.html
-// https://www.man7.org/linux/man-pages/man2/fork.2.html
-	// the child pid returned by the child is the pid that the child knows about.
-	// The first child's pid will be 0. The second's will be 1, and so on.
-	// pid_t is a signed integer type: https://man.archlinux.org/man/pid_t.3type.en
-int main(int argc, char* argv[])
+//////////////////////////////////////////////////////////
+// SETUP TABLE IF FILE IS EMPTY.
+/////////////////////////////////////////////////////////
+void setupTable(FILE * tableFile, const char * tableFilePath)
 {
-	//////////////////////////////////////////////////////////
-	// Table File manipulation
-	const char * tableFilePath = "PID_Table.txt";
-	FILE * tableFile = NULL;
-	const uint16_t width = 15;
-	//////////////////////////////////////////////////////////
-
-	//////////////////////////////////////////////////////////
-	// SETUP TABLE IF FILE IS EMPTY.
-	/////////////////////////////////////////////////////////
 	struct stat statBuffer;
 	stat(tableFilePath, &statBuffer);
 	if ((uint64_t)statBuffer.st_size == 0)
@@ -49,21 +37,39 @@ int main(int argc, char* argv[])
 		// opening file in append mode
 		tableFile = fopen(tableFilePath, "a");
 
-		fprintf(tableFile, "%*s", width, "Child ID");
-		fprintf(tableFile, "%*s", width, "Real Child ID");
-		fprintf(tableFile, "%*s", width, "Parent ID");
+		fprintf(tableFile, "%*s", width / 2, "Run #");
+		fprintf(tableFile, "%*s", width, "Child ID, Parent ID");
+		fprintf(tableFile, "%*s", width, "Order");
+		fprintf(tableFile, "%*s", width, "Notes");
 		fprintf(tableFile, "\n"); // new line for first entry
 		fflush(tableFile);
 
 		fclose(tableFile);
 	}
-	//////////////////////////////////////////////////////////
-	// FINISHED TABLE SETUP
-	/////////////////////////////////////////////////////////
+}
 
+
+// The best fun guide to fork(): https://beej.us/guide/bgipc/html/split/fork.html
+// fork() linux manual reference: https://www.man7.org/linux/man-pages/man2/fork.2.html
+// Additional Notes:
+	// The child pid returned by the child is the pid that the child knows about.
+	// The first child's pid will be 0. The second's will be 1, and so on.
+	// pid_t is a signed integer type: https://man.archlinux.org/man/pid_t.3type.en
+
+//////////////////////////////////////////////////////////
+// MAIN PROGRAM - Process Lifetime, Appending to Table
+/////////////////////////////////////////////////////////
+int main(int argc, char* argv[])
+{
 	//////////////////////////////////////////////////////////
-	// MAIN PROGRAM - Process Lifetime, Appending to Table
+	// Table File manipulation
+	FILE * tableFile = NULL;
+	const char * tableFilePath = "PID_Table.txt";
+	const uint16_t width = 15;
+	//////////////////////////////////////////////////////////
+
 	/////////////////////////////////////////////////////////
+	// Child creation and process code
 	pid_t childID = fork();
 	// Error in child creation
 	if (childID < 0)
@@ -75,46 +81,56 @@ int main(int argc, char* argv[])
 	else if (childID == 0)
 	{
 		fprintf(stdout, "\n\nChild process running. \nChild ID: %llu\nParent's ID: %llu", (uint64_t)childID, (uint64_t)getppid());
-
-		// Append to table
-		tableFile = fopen(tableFilePath, "a");
-		// width -1 for the comma
-		fprintf(tableFile, "%*llu,", width-1, (uint64_t)childID);
-		fflush(tableFile);
-		fclose(tableFile);
-
-		fprintf(stdout, "\nChild process exiting.");
+		// avoids flushing before/after other parent print statements. 
 		fflush(stdout);
 		exit(EXIT_SUCCESS);
 	}
-	// Parent process coe
-	else
+
+	////////////////////////////////////////////////////////
+	// Parent Process Code Starts
+	fprintf(stdout, "\nParent process waiting.");
+	fflush(stdout);
+	////////////////////////////////////////////////////////
+	// Parent waits for Child
+	int childExitStatus;
+	waitpid(childID, &childExitStatus, 0);
+	if (childExitStatus == EXIT_FAILURE)
 	{
-		fprintf(stdout, "\nParent process waiting.");
-		fflush(stdout);
-
-		// Wait for Child
-		int childExitStatus;
-		waitpid(childID, &childExitStatus, 0);
-		if (childExitStatus == EXIT_FAILURE)
-		{
-			fprintf(stderr, "\nError waiting for child process. Exit Status Code: %llu", (uint64_t)childExitStatus);
-			exit(EXIT_FAILURE);
-		}
-
-		fprintf(stdout, "\n\nParent process resumes. \nID: %llu\nChild's Real ID: %llu", (uint64_t)childID, (uint64_t)getpid());
-
-		// Append to table
-		tableFile = fopen(tableFilePath, "a"); \
-		// width -1 for the comma
-		fprintf(tableFile, "%*llu,", width-1, (uint64_t)childID);
-		fprintf(tableFile, "%*llu", width, (uint64_t)getpid());
-		fprintf(tableFile, "\n"); // new line for next entry
-		fflush(tableFile);
-		fclose(tableFile);
+		fprintf(stderr, "\nError waiting for child process. Exit Status Code: %llu", (uint64_t)childExitStatus);
+		exit(EXIT_FAILURE);
 	}
 
-	fprintf(stdout, "\nParent Process exiting.\n");
+	///////////////////////////////////////////////////////
+	// Append PID data to table
+	fprintf(stdout, "\n\nParent process resumes. \nID: %llu\nChild's Real ID: %llu", (uint64_t)childID, (uint64_t)getpid());
+
+	tableFile = fopen(tableFilePath, "a"); \
+	if (tableFile == NULL)
+	{
+		fprintf(stderr, "Failed to open table file.");
+	}
+
+
+	uint16_t runCount = 0;
+	{
+		char stringBuffer[1024];
+		// for every time we have not reached the end of the file, up the run counter.
+		for(; feof(tableFile) != EOF; runCount++)
+		{
+			//reads line from file
+			fgets(stringBuffer, sizeof stringBuffer, tableFile);
+		}
+	}
+
+	fprintf(tableFile, "\n%d", runCount);
+	fprintf(tableFile, "%*llu,", width/2 - 1, (uint64_t)childID);
+	fprintf(tableFile, "%*llu", width/2, (uint64_t)getpid());
+	fprintf(tableFile, "\n"); // new line for next entry
+	fflush(tableFile);
+	fclose(tableFile);
+
+
+ 	fprintf(stdout, "\nParent Process exiting.\n");
 	fflush(stdout);
 
 	return 0;
