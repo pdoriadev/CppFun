@@ -12,9 +12,7 @@
 
  	//  Note any differences between runs and save your screenshots
 
-// fork - creates a new process by duplicating the current process.
-#include <sys/types.h> 
-//  wait 
+//  fork(), pid, wait
 #include <sys/wait.h>
 // stat(), for getting a file size.
 #include <sys/stat.h>
@@ -30,6 +28,7 @@
 /////////////////////////////////////////////////////////
 void setupTable(FILE * tableFile, const char * tableFilePath)
 {
+	const uint16_t  width = 15;
 	struct stat statBuffer;
 	stat(tableFilePath, &statBuffer);
 	if ((uint64_t)statBuffer.st_size == 0)
