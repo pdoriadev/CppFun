@@ -15,7 +15,7 @@ int main(int argc, char* argv[])
 {
 	uint64_t timeInMicroseconds;
 	nowInMicroseconds(timeInMicroseconds);
-	printf("Program Start: %lu\n\n", timeInMicroseconds);
+	printf("Program Start: %llu\n\n", timeInMicroseconds);
 
 	uint64_t loops = 1000;
 	/*

@@ -1,0 +1,3 @@
+It seems that file extensions are kinda arbitrary?
+I renamed .doc to .zip and nothing happened?
+

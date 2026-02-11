@@ -1,0 +1,38 @@
+[
+{
+  "directory": "/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/source/.build/clang",
+  "command": "/usr/bin/clang++ -I/lib/x86_64-linux-gnu/../share/libc++/v1 -pthread -stdlib=libc++ -g1 -O3 -DNDEBUG -flto=auto -fvisibility=hidden -std=c++23 -Wno-reserved-module-identifier @CMakeFiles/__cmake_cxx23.dir/lib/share/libc++/v1/std.cppm.o.modmap -o CMakeFiles/__cmake_cxx23.dir/lib/share/libc++/v1/std.cppm.o -c /lib/share/libc++/v1/std.cppm",
+  "file": "/lib/share/libc++/v1/std.cppm",
+  "output": "/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/source/.build/clang/CMakeFiles/__cmake_cxx23.dir/lib/share/libc++/v1/std.cppm.o"
+},
+{
+  "directory": "/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/source/.build/clang",
+  "command": "/usr/bin/clang++ -I/lib/x86_64-linux-gnu/../share/libc++/v1 -pthread -stdlib=libc++ -g1 -O3 -DNDEBUG -flto=auto -fvisibility=hidden -std=c++23 -Wno-reserved-module-identifier @CMakeFiles/__cmake_cxx23.dir/lib/share/libc++/v1/std.compat.cppm.o.modmap -o CMakeFiles/__cmake_cxx23.dir/lib/share/libc++/v1/std.compat.cppm.o -c /lib/share/libc++/v1/std.compat.cppm",
+  "file": "/lib/share/libc++/v1/std.compat.cppm",
+  "output": "/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/source/.build/clang/CMakeFiles/__cmake_cxx23.dir/lib/share/libc++/v1/std.compat.cppm.o"
+},
+{
+  "directory": "/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/source/.build/clang",
+  "command": "/usr/bin/clang++ -I/lib/x86_64-linux-gnu/../share/libc++/v1 -pthread -stdlib=libc++ -g1 -O3 -DNDEBUG -flto=auto -fvisibility=hidden -std=c++26 -Wno-reserved-module-identifier @CMakeFiles/__cmake_cxx26.dir/lib/share/libc++/v1/std.cppm.o.modmap -o CMakeFiles/__cmake_cxx26.dir/lib/share/libc++/v1/std.cppm.o -c /lib/share/libc++/v1/std.cppm",
+  "file": "/lib/share/libc++/v1/std.cppm",
+  "output": "/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/source/.build/clang/CMakeFiles/__cmake_cxx26.dir/lib/share/libc++/v1/std.cppm.o"
+},
+{
+  "directory": "/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/source/.build/clang",
+  "command": "/usr/bin/clang++ -I/lib/x86_64-linux-gnu/../share/libc++/v1 -pthread -stdlib=libc++ -g1 -O3 -DNDEBUG -flto=auto -fvisibility=hidden -std=c++26 -Wno-reserved-module-identifier @CMakeFiles/__cmake_cxx26.dir/lib/share/libc++/v1/std.compat.cppm.o.modmap -o CMakeFiles/__cmake_cxx26.dir/lib/share/libc++/v1/std.compat.cppm.o -c /lib/share/libc++/v1/std.compat.cppm",
+  "file": "/lib/share/libc++/v1/std.compat.cppm",
+  "output": "/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/source/.build/clang/CMakeFiles/__cmake_cxx26.dir/lib/share/libc++/v1/std.compat.cppm.o"
+},
+{
+  "directory": "/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/source/.build/clang",
+  "command": "/usr/bin/clang++ -I/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/source -pthread -stdlib=libc++ -g1 -O3 -DNDEBUG -flto=auto -fvisibility=hidden -std=c++23 -g1 -O3 -DNDEBUG -flto=auto -fvisibility=hidden -DUSING_TOMS_SUGGESTIONS=1 -D__func__=__PRETTY_FUNCTION__ -Weverything -Wno-comma -Wno-unused-template -Wno-sign-conversion -Wno-exit-time-destructors -Wno-global-constructors -Wno-missing-prototypes -Wno-weak-vtables -Wno-padded -Wno-double-promotion -Wno-c++98-compat-pedantic -Wno-c++11-compat-pedantic -Wno-c++14-compat-pedantic -Wno-c++17-compat-pedantic -Wno-c++20-compat-pedantic -Wno-unsafe-buffer-usage -Wno-ctad-maybe-unsupported -Werror @CMakeFiles/build_clang_exe.dir/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/source/Student.cpp.o.modmap -o CMakeFiles/build_clang_exe.dir/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/source/Student.cpp.o -c /mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/source/Student.cpp",
+  "file": "/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/source/Student.cpp",
+  "output": "/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/source/.build/clang/CMakeFiles/build_clang_exe.dir/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/source/Student.cpp.o"
+},
+{
+  "directory": "/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/source/.build/clang",
+  "command": "/usr/bin/clang++ -I/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/source -pthread -stdlib=libc++ -g1 -O3 -DNDEBUG -flto=auto -fvisibility=hidden -std=c++23 -g1 -O3 -DNDEBUG -flto=auto -fvisibility=hidden -DUSING_TOMS_SUGGESTIONS=1 -D__func__=__PRETTY_FUNCTION__ -Weverything -Wno-comma -Wno-unused-template -Wno-sign-conversion -Wno-exit-time-destructors -Wno-global-constructors -Wno-missing-prototypes -Wno-weak-vtables -Wno-padded -Wno-double-promotion -Wno-c++98-compat-pedantic -Wno-c++11-compat-pedantic -Wno-c++14-compat-pedantic -Wno-c++17-compat-pedantic -Wno-c++20-compat-pedantic -Wno-unsafe-buffer-usage -Wno-ctad-maybe-unsupported -Werror @CMakeFiles/build_clang_exe.dir/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/source/sample_usage-main.cpp.o.modmap -o CMakeFiles/build_clang_exe.dir/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/source/sample_usage-main.cpp.o -c /mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/source/sample_usage-main.cpp",
+  "file": "/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/source/sample_usage-main.cpp",
+  "output": "/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/source/.build/clang/CMakeFiles/build_clang_exe.dir/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/source/sample_usage-main.cpp.o"
+}
+]

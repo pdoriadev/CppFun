@@ -1,0 +1,95 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {   "name": "Compile (g++) and Debug",
+            "type": "cppdbg",
+            "request": "launch",
+            "preLaunchTask": "Build All with g++ (Debug)",
+            "program": "${workspaceFolder}/bin/project_gxx_Debug",
+            "args": [],                                         // Redirect Example:  "<", "Athletes.dat"
+            "stopAtEntry": true,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "internalConsoleOptions": "neverOpen"
+        },
+
+
+
+        {   "name": "Compile (clang) and Debug",
+            "type": "lldb",
+            "request": "launch",
+            "preLaunchTask": "Build All with Clang (Debug)",
+            "program": "${workspaceFolder}/bin/project_clangxx_Debug",
+            "args": [],                                         // argv parameters passed to program
+            "stdio": [],                                        // Redirect:  "stdin, stdout, stderr" Example: "stdio": ["${workspaceFolder}/input.txt", null, null].
+//          "stopOnEntry": true,
+            "cwd": "${workspaceFolder}",
+            "env": {},                                          // ex: {"MY_VAR": "value", "DEBUG_MODE": "1"}
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "initCommands": [
+              "breakpoint set --name main"
+            ]
+        },
+
+
+
+        {   "name": "(gdb) Launch GCC",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/project_gxx_Debug",
+            "args": [],                                         // Redirect Example:  "<", "Athletes.dat"
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": true,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "internalConsoleOptions": "neverOpen"
+        },
+
+
+
+        {
+            "name": "(lldb) Launch Clang",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/project_clangxx_Debug",
+            "args": [],                                         // argv parameters passed to program
+            "stdio": [],                                        // Redirect:  "stdin, stdout, stderr" Example: "stdio": ["${workspaceFolder}/input.txt", null, null].
+            "stopOnEntry": false,
+            "cwd": "${workspaceFolder}",
+            "env": {},                                          // ex: {"MY_VAR": "value", "DEBUG_MODE": "1"}
+            "console": "externalTerminal",
+            "internalConsoleOptions": "neverOpen"
+      }
+  ],
+
+  "compounds": [
+      {
+          "name": "Debug Both",
+          "configurations": [
+              "Compile (g++) and Debug",
+              "Compile (clang) and Debug"
+        ]
+      }
+  ]
+}

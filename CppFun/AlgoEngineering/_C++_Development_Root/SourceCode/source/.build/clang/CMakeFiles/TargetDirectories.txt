@@ -1,0 +1,5 @@
+/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/source/.build/clang/CMakeFiles/__cmake_cxx23.dir
+/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/source/.build/clang/CMakeFiles/__cmake_cxx26.dir
+/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/source/.build/clang/CMakeFiles/build_clang_exe.dir
+/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/source/.build/clang/CMakeFiles/edit_cache.dir
+/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/source/.build/clang/CMakeFiles/rebuild_cache.dir

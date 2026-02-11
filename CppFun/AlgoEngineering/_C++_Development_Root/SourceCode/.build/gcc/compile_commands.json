@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/.build/gcc",
+  "command": "/usr/bin/g++ -I/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode -pthread -g1 -O3 -DNDEBUG -flto=auto -fuse-linker-plugin -fvisibility=hidden -fwhole-program -std=c++23 -g1 -O3 -DNDEBUG -flto=auto -fuse-linker-plugin -fvisibility=hidden -fwhole-program -DUSING_TOMS_SUGGESTIONS=1 -D__func__=__PRETTY_FUNCTION__ -Wall -Wextra -pedantic -Wconversion -Wdelete-non-virtual-dtor -Wduplicated-branches -Wduplicated-cond -Wextra-semi -Wfloat-equal -Wformat=2 -Winit-self -Wleading-whitespace=spaces -Wlogical-op -Wnoexcept -Wshadow -Wnull-dereference -Wnon-virtual-dtor -Wold-style-cast -Wstrict-null-sentinel -Wsuggest-override -Wswitch-default -Wswitch-enum -Woverloaded-virtual -Wuseless-cast -Werror -fmodules-ts -fmodule-mapper=CMakeFiles/build_gcc_exe.dir/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/main.cpp.o.modmap -MD -fdeps-format=p1689r5 -x c++ -o CMakeFiles/build_gcc_exe.dir/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/main.cpp.o -c /mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/main.cpp",
+  "file": "/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/main.cpp",
+  "output": "/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/.build/gcc/CMakeFiles/build_gcc_exe.dir/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/main.cpp.o"
+}
+]

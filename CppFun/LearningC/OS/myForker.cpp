@@ -37,9 +37,8 @@ void setupTable(FILE * tableFile, const char * tableFilePath)
 		tableFile = fopen(tableFilePath, "a");
 
 		fprintf(tableFile, "%*s", width / 2, "Run #");
-		fprintf(tableFile, "%*s", width, "Child ID, Parent ID");
-		fprintf(tableFile, "%*s", width, "Order");
-		fprintf(tableFile, "%*s", width, "Notes");
+		fprintf(tableFile, "%*s", width, "Child ID");
+		fprintf(tableFile, "%*s", width, "Parent ID");
 		fprintf(tableFile, "\n"); // new line for first entry
 		fflush(tableFile);
 
@@ -60,12 +59,6 @@ void setupTable(FILE * tableFile, const char * tableFilePath)
 /////////////////////////////////////////////////////////
 int main(int argc, char* argv[])
 {
-	//////////////////////////////////////////////////////////
-	// Table File manipulation
-	FILE * tableFile = NULL;
-	const char * tableFilePath = "PID_Table.txt";
-	const uint16_t width = 15;
-	//////////////////////////////////////////////////////////
 
 	/////////////////////////////////////////////////////////
 	// Child creation and process code
@@ -79,8 +72,8 @@ int main(int argc, char* argv[])
 	// Child process code
 	else if (childID == 0)
 	{
-		fprintf(stdout, "\n\nChild process running. \nChild ID: %llu\nParent's ID: %llu", (uint64_t)childID, (uint64_t)getppid());
-		// avoids flushing before/after other parent print statements. 
+		fprintf(stdout, "\n\nChild process running. \nChild ID: %llu\nParent's ID: %llu", (uint64_t)getpid(), (uint64_t)getppid());
+		// avoids flushing before/after other parent print statements.
 		fflush(stdout);
 		exit(EXIT_SUCCESS);
 	}
@@ -100,35 +93,66 @@ int main(int argc, char* argv[])
 	}
 
 	///////////////////////////////////////////////////////
-	// Append PID data to table
+	// Output PID data to console
 	fprintf(stdout, "\n\nParent process resumes. \nID: %llu\nChild's Real ID: %llu", (uint64_t)childID, (uint64_t)getpid());
 
-	tableFile = fopen(tableFilePath, "a"); \
+	//////////////////////////////////////////////////////////
+	// Table File Data, Setup
+	FILE * tableFile = NULL;
+	const char * tableFilePath = "PID_Table.txt";
+	const uint16_t width = 15;
+	//////////////////////////////////////////////////////////
+	// Setup, Write to table
+	setupTable(tableFile, tableFilePath);
+
+	// open the file for reading to check how many runs we've done
+	tableFile = fopen(tableFilePath, "r");
 	if (tableFile == NULL)
 	{
 		fprintf(stderr, "Failed to open table file.");
 	}
 
-
 	uint16_t runCount = 0;
 	{
 		char stringBuffer[1024];
-		// for every time we have not reached the end of the file, up the run counter.
-		for(; feof(tableFile) != EOF; runCount++)
+		// Find the end of file.
+			// End of File check is taken directly from Beej's guide: https://beej.us/guide/bgc/html/split/file-inputoutput.html#end-of-file-eof
+		char c;
+		while ((c = fgetc(tableFile)) != EOF)
 		{
-			//reads line from file
-			fgets(stringBuffer, sizeof stringBuffer, tableFile);
+			fprintf(stdout, "Not end of file.\n");
+			// for every time we have not reached the end of the file, up the run counter.
+			if (c == '\n')
+			{
+				runCount++;
+			}
 		}
+		fflush(stdout);
+		// for(; feof(tableFile) != EOF; runCount++)
+		// {
+			//reads line from file
+		//	fgets(stringBuffer, sizeof stringBuffer, tableFile);
+		//}
 	}
-
-	fprintf(tableFile, "\n%d", runCount);
-	fprintf(tableFile, "%*llu,", width/2 - 1, (uint64_t)childID);
-	fprintf(tableFile, "%*llu", width/2, (uint64_t)getpid());
-	fprintf(tableFile, "\n"); // new line for next entry
-	fflush(tableFile);
 	fclose(tableFile);
 
+	// open the file for appending
+	tableFile = fopen(tableFilePath, "a");
+	if (tableFile == NULL)
+	{
+		fprintf(stderr, "Failed to open table file.");
+	}
 
+	fprintf(tableFile, "\n%*d,", width/2 - 1, runCount);
+	fprintf(tableFile, "%*llu,", width - 1, (uint64_t)childID);
+	fprintf(tableFile, "%*llu", width, (uint64_t)getpid());
+
+	//////////////////////////////////////////////////////////
+	// Close out file.
+	fflush(tableFile);
+	fclose(tableFile);
+	//////////////////////////////////////////////////////////
+	// Finish terminal output
  	fprintf(stdout, "\nParent Process exiting.\n");
 	fflush(stdout);
 

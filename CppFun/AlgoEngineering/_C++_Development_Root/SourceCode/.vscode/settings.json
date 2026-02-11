@@ -1,0 +1,6 @@
+{
+  //"editor.formatOnPaste": false,
+  //"C_Cpp.intelliSenseEngine": "disabled",
+  //"editor.hover.enabled": false
+  /* See User Settings in Linux: ~/.config/Code/User/settings.json, Windows: %APPDATA%\Code\User\settings.json, WSL: ~/.vscode-server/data/Machine/settings.json */
+}

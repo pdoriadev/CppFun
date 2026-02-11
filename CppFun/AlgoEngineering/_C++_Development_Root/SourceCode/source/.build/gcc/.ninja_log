@@ -1,0 +1,25 @@
+# ninja log v7
+335	406	1769796618254297000	CMakeFiles/__CMAKE__CXX23@synth_691cf5f9afd0.dir/b493f36079d1.bmi.ddi	a3d97785d683393c
+314	8772	1769796618234200800	CMakeFiles/__CMAKE__CXX23@synth_691cf5f9afd0.dir/6c7e1919e325.bmi.ddi	2fa1a6d17b7fb076
+384	575	1769797719302464500	CMakeFiles/__CMAKE__CXX23@synth_691cf5f9afd0.dir/CXX.dd	bf05b809b7b6be92
+384	575	1769797719302464500	CMakeFiles/__CMAKE__CXX23@synth_691cf5f9afd0.dir/CXXModules.json	bf05b809b7b6be92
+384	575	1769797719302464500	CMakeFiles/__CMAKE__CXX23@synth_691cf5f9afd0.dir/6c7e1919e325.bmi.modmap	bf05b809b7b6be92
+384	575	1769797719302464500	CMakeFiles/__CMAKE__CXX23@synth_691cf5f9afd0.dir/b493f36079d1.bmi.modmap	bf05b809b7b6be92
+8998	11649	1769796627132565100	CMakeFiles/build_gcc_exe.dir/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/source/Student.cpp.o.ddi	34b612b3651db000
+9059	13253	1769796627184982400	CMakeFiles/build_gcc_exe.dir/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/source/sample_usage-main.cpp.o.ddi	75eaefe503f75a9a
+620	1237	1769797719547082300	CMakeFiles/build_gcc_exe.dir/CXX.dd	b3eb0545c0dce890
+620	1237	1769797719547082300	CMakeFiles/build_gcc_exe.dir/CXXModules.json	b3eb0545c0dce890
+620	1237	1769797719547082300	CMakeFiles/build_gcc_exe.dir/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/source/Student.cpp.o.modmap	b3eb0545c0dce890
+620	1237	1769797719547082300	CMakeFiles/build_gcc_exe.dir/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/source/sample_usage-main.cpp.o.modmap	b3eb0545c0dce890
+13896	15717	1769796632135863500	CMakeFiles/build_gcc_exe.dir/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/source/Student.cpp.o	c260b536cd4a5f38
+13953	16762	1769796632181148800	CMakeFiles/build_gcc_exe.dir/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/source/sample_usage-main.cpp.o	593fa30f85cffb7e
+16831	20291	1769796635106716200	/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/source/bin/project_gxx_Release	47f0e60f13ff3c2e
+1333	5133	1769797720277475500	/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/source/bin/build_gxx_Release	a9060a80e4e4190b
+395	565	1769798107995004200	CMakeFiles/__CMAKE__CXX23@synth_691cf5f9afd0.dir/CXX.dd	bf05b809b7b6be92
+395	565	1769798107995004200	CMakeFiles/__CMAKE__CXX23@synth_691cf5f9afd0.dir/CXXModules.json	bf05b809b7b6be92
+395	565	1769798107995004200	CMakeFiles/__CMAKE__CXX23@synth_691cf5f9afd0.dir/6c7e1919e325.bmi.modmap	bf05b809b7b6be92
+395	565	1769798107995004200	CMakeFiles/__CMAKE__CXX23@synth_691cf5f9afd0.dir/b493f36079d1.bmi.modmap	bf05b809b7b6be92
+602	1182	1769798108208545000	CMakeFiles/build_gcc_exe.dir/CXX.dd	b3eb0545c0dce890
+602	1182	1769798108208545000	CMakeFiles/build_gcc_exe.dir/CXXModules.json	b3eb0545c0dce890
+602	1182	1769798108208545000	CMakeFiles/build_gcc_exe.dir/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/source/Student.cpp.o.modmap	b3eb0545c0dce890
+602	1182	1769798108208545000	CMakeFiles/build_gcc_exe.dir/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/source/sample_usage-main.cpp.o.modmap	b3eb0545c0dce890

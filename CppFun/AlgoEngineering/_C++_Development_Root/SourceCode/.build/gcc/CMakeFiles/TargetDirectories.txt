@@ -1,0 +1,4 @@
+/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/.build/gcc/CMakeFiles/build_gcc_exe.dir
+/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/.build/gcc/CMakeFiles/edit_cache.dir
+/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/.build/gcc/CMakeFiles/rebuild_cache.dir
+/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/.build/gcc/CMakeFiles/__CMAKE__CXX23@synth_db1739c6d613.dir

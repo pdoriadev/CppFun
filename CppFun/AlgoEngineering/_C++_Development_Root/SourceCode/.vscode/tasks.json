@@ -1,0 +1,114 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks":
+    [
+      { "label": "Build All with g++ (Debug)",
+        "type": "shell",
+        "options": {
+          "env": {
+            "VAR_NAME": "VAR_VALUE"  // not used, but I wanted to keep a placeholder
+          }
+        },
+        "command": ".vscode/Build_vsc.sh",
+        "args": [
+          "--gcc",
+          "-debug",
+          "-warn"
+        ],
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        "presentation": {
+          "clear": true,
+          "echo": false,
+          "reveal": "always",
+          "focus": false,
+          "panel": "shared",
+          "showReuseMessage": false
+        },
+        "problemMatcher": "$gcc"
+      },
+
+
+
+      { "label": "Build All with g++ (Release)",
+        "type": "shell",
+        "options": {
+          "env": {
+            "VAR_NAME": "VAR_VALUE" // not used, but I wanted to keep a placeholder
+          }
+        },
+        "command": ".vscode/Build_vsc.sh",
+        "args": [
+          "--gcc",
+          "-release"
+        ],
+        "group": "build",
+        "presentation": {
+          "clear": true,
+          "echo": false,
+          "reveal": "always",
+          "focus": false,
+          "panel": "shared",
+          "showReuseMessage": false
+        },
+        "problemMatcher": "$gcc"
+      },
+
+
+
+      { "label": "Build All with Clang (Debug)",
+        "type": "shell",
+        "options": {
+          "env": {
+            "VAR_NAME": "VAR_VALUE" // not used, but I wanted to keep a placeholder
+          }
+        },
+        "command": ".vscode/Build_vsc.sh",
+        "args": [
+          "--clang",
+          "-debug",
+          "-warn"
+        ],
+        "group": "build",
+        "presentation": {
+          "clear": true,
+          "echo": false,
+          "reveal": "always",
+          "focus": false,
+          "panel": "shared",
+          "showReuseMessage": false
+        },
+        "problemMatcher": "$gcc"
+      },
+
+
+
+      { "label": "Build All with Clang (Release)",
+        "type": "shell",
+        "options": {
+          "env": {
+            "VAR_NAME": "VAR_VALUE" // not used, but I wanted to keep a placeholder
+          }
+        },
+        "command": ".vscode/Build_vsc.sh",
+        "args": [
+          "--clang",
+          "-release"
+        ],
+        "group": "build",
+        "presentation": {
+          "clear": true,
+          "echo": false,
+          "reveal": "always",
+          "focus": false,
+          "panel": "shared",
+          "showReuseMessage": false
+        },
+        "problemMatcher": "$gcc"
+      }
+     ]
+}
