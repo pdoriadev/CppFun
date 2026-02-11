@@ -62,9 +62,13 @@ def lawnMowerSort(diskList:[int], n:int) :
 	print(f"Mows: {mows}\nswaps: {swaps}")
 
 	return swaps
-
+# Starts with leftmost disk. Goes to the right every 2 indexes.
+# When it reaches the end starts at the first or second-most left index.
+# Checks adjacent disks for swaps (i.e. k, k+1) 
+# Total of n runs
 def alternateSort(diskList:[int], n:int):
 	print(f"List before sort: {diskList[0:len(diskList)]}")
+	print(f"n = {n}")
 	if len(diskList) <= 2 :
 		print("List is already sorted.")
 		return
@@ -73,7 +77,7 @@ def alternateSort(diskList:[int], n:int):
 	index:int = 0
 	runs:int = 0
 	swaps:int = 0
-	while runs <= n/2 :
+	while runs < n:
 		# compare values. If left is greater, then swap.
 		if diskList[index] > diskList[index+1]:
 			temp:int = diskList[index]
