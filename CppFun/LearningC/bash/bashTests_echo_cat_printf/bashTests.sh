@@ -1,8 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
 printf "\n"
 echo "'#!/bin/bash' is the shebang line. 'bash' says we're using bash scripting commands here."
 
-printf "\n\n================ echo  ================"
+printf "\n\n================ echo  ================\n"
 # echo shebang
 echo "'echo' command lets us output strings to console."
 # echo description
