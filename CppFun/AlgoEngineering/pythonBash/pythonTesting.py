@@ -1,4 +1,4 @@
-#!/peter/bin/env python3
+#!/usr/bin/env python3
 
 def castingTest():
 	n = 3
@@ -9,5 +9,9 @@ def castingTest():
 
 def stringEquality():
 	color = "Red"
-	if color == "Blue":
+	if color != "Blue":
 		return 1
+
+if __name__ == "__main__":
+	castingTest()
+	stringEquality()
