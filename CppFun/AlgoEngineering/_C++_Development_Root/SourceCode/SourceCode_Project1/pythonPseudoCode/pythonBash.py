@@ -49,7 +49,8 @@ def colorToNumber(disk):
 	return 1
 
 
-# Summation: 3 || 1 + 4 + (n)((2*cToN + 5) + 1 + 4(n/2)) + 1 =  6 + (2n*cToN + 5n + n + 4(n^2/2)) = 6 + 2n*cToN + 6n + (4n^2)/2 = (4n^2)/2 + n(6 + 2*cToN) + 6
+# Summation: 4 ||  2 + 4 + (n) * ( (n/2)((2*cToN + 1) + (2cToN + 5) +  1 + 3n) + 1
+#		   6 + (2n*cToN + 5n + n + 4(n^2/2)) = 6 + 2n*cToN + 6n + (4n^2)/2 = (4n^2)/2 + n(6 + 2*cToN) + 6
 # If length = 8, n = 4, therefore: 4(16)/2 + 24 + 8*cToN + 6 = 62 + 8*cToN
 def lawnMowerSort(diskList:[int], n:int) :
 	print(f"List before sort: [", end='')
@@ -59,8 +60,8 @@ def lawnMowerSort(diskList:[int], n:int) :
 			print(", ", end='')
 	print("]")
 
-	# 1 || 3
-	if len(diskList) <= 2 : # 1 || 1 + 2
+	# 2 || 4
+	if len(diskList) <= 2 : # 2 || 2 + 2
 		print("List is already sorted.")
 		return
 
@@ -77,7 +78,7 @@ def lawnMowerSort(diskList:[int], n:int) :
 			# swappability depends on value. We want 0's on the left and 1's on the right.
 			# 1's get moved right when mowing right. 0's get moved left when mowing left.
 			# mowDirection switches between 1 and -1.
-		if colorToNumber(diskList[index])*mowDirection > colorToNumber(diskList[index+mowDirection])*mowDirection : # n(cToN + cToN + 1) || n(cToN + cToN + 1 + 4)
+		if colorToNumber(diskList[index])*mowDirection > colorToNumber(diskList[index+mowDirection])*mowDirection : # (n/2)*(2cToN + 1) + (n/2)(2cToN + 1 + 4)
 			swap:int = diskList[index+mowDirection] # 1
 			diskList[index+mowDirection] = diskList[index] # 1
 			diskList[index] = swap # 1
@@ -87,7 +88,7 @@ def lawnMowerSort(diskList:[int], n:int) :
 		# Increment index in current direction we are "mowing".
 		index += mowDirection # n*1
 		# Bounds check to change direction
-		if index+mowDirection <= 0 or index+mowDirection >= len(diskList)-1 : # n*2 || (n/2)(2+1+1) - (n/2) = times mow direction changes - includes len() func call
+		if index+mowDirection <= 0 or index+mowDirection >= len(diskList)-1 : # (n/2)2 + (n/2)(2+1+1) - (n/2) = times mow direction changes - includes len() func call
 			mowDirection *= -1 # 1
 			mows += 0.5 # 1
 
@@ -102,7 +103,7 @@ def lawnMowerSort(diskList:[int], n:int) :
 
 # Starts with leftmost disk. Goes to the right every 2 indexes.
 # When it reaches the end starts at the first or second-most left index.
-# Checks adjacent disks for swaps (i.e. k, k+1) 
+# Checks adjacent disks for swaps (i.e. k, k+1)
 # Total of n runs
 def alternateSort(diskList:[int], n:int):
 	print(f"List before sort: [", end='')
@@ -112,30 +113,49 @@ def alternateSort(diskList:[int], n:int):
 			print(", ", end='')
 	else: print("]")
 	print(f"n = {n}")
+
+	# 4 || 2
 	if len(diskList) <= 2 :
 		print("List is already sorted.")
 		return
 
+	# 4
 	startingIndex:int = 0
 	index:int = 0
 	runs:int = 0
 	swaps:int = 0
+	steps:int = 6
+	# n
 	while runs < n:
+		# (n/2)[(2cToN + 1) + (2cToN + 5)]
 		# compare values. If left is greater, then swap.
 		if colorToNumber(diskList[index]) > colorToNumber(diskList[index+1]):
 			temp:int = diskList[index]
 			diskList[index] = diskList[index+1]
 			diskList[index+1] = temp
 			swaps +=1
+			steps +=8
+			print(f"Swapped. steps={steps}")
+		else:
+			steps +=4
+			print(f"NO swap. steps={steps}")
 
+		# 1
 		# print(f"Index {index}: {diskList[0:len(diskList)]}")
 		index += 2
+		steps+=1
 
-		# Bounds check. Never going to swap when index is equal to the second to last index. 
+		# (n/2)2 + (n/2)(5)
+		# Bounds check. Never going to swap when index is equal to the second to last index.
 		if index >= len(diskList)-2 :
 			startingIndex = 1 - startingIndex
 			index = startingIndex
 			runs += 1
+			steps+=5
+			print(f"Looped. steps={steps}")
+		else:
+			steps+=2
+			print(f"NOloop. steps={steps}")
 
 	print(f"List before sort: [", end='')
 	for i in diskList:
@@ -144,7 +164,11 @@ def alternateSort(diskList:[int], n:int):
 			print(", ", end='')
 	else: print("]")
 	print(f"Swaps={swaps}\nRuns={runs}")
+	steps+=1
+	print(f"Steps={steps}")
+	# 1
 	return swaps
+
 
 
 if __name__ == "__main__":
