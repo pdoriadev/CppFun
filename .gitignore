@@ -88,3 +88,7 @@ ipch/
 ### LibreOfficeDraw ##
 # Exclude lock files.
 **~lock*
+
+######################
+### Temp Nano File ###
+*.swp
