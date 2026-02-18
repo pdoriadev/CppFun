@@ -99,6 +99,7 @@ struct Algorithm_2 : Algorithm
     ///               where j is the number of traversals completed (e.g., starts with 1), for example
     ///                    1: [⚪, ⚫, ⚪, ⚫]
     ///                    2: [⚪, ⚪, ⚫, ⚫]
+		uint64_t n = disks.size() / 2;
 		if (n <= 1)
 		{
 			// Disks is already sorted
@@ -108,7 +109,7 @@ struct Algorithm_2 : Algorithm
 		uint64_t swaps = 0;
 		uint64_t j = 0;
 		uint64_t startingIndex = 0;
-		for (int i = 0; j < n; )
+		for (uint64_t i = 0; j < n; )
 		{
 			// Swap Check.
 			if (static_cast<uint8_t>(disks[i].color()) > static_cast<uint8_t>(disks[i+1].color()))
@@ -119,7 +120,7 @@ struct Algorithm_2 : Algorithm
 				swaps++;
 			}
 
-			i+=2
+			i+=2;
 
 			// Bounds Check. If bounds is exceeded, switch the starting index between
 				// 0 and 1, and start the loop again.
