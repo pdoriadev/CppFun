@@ -21,7 +21,7 @@ void printFileSizeToFile()
 }
 
 
-// For waiting for processess. 
+// For waiting for processess.
 #include <sys/wait.h>
 // exit() and exit() macros.
 #include <stdlib.h>
