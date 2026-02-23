@@ -85,7 +85,7 @@ function(apply_compiler_flags target)
     -Wno-c++20-compat-pedantic
     -Wno-unsafe-buffer-usage
     -Wno-ctad-maybe-unsupported
-#   -Wno-unique-object-duplication   # introduced in clang-21
+    -Wno-unique-object-duplication   # introduced in clang-21
 #   -Wno-zero-as-null-pointer-constant
   )
 
