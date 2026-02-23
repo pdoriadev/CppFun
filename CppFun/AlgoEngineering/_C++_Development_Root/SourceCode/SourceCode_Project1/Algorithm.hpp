@@ -6,7 +6,9 @@
   ///
   /// Do not put anything else in this section, i.e. comments, classes, functions, etc.  Only #include directives
 #include <iostream>
-#include <stdint.h>
+#include <cstdint>
+#include <print>
+#include "Disk.hpp"
 #include "Disks.hpp"
 /////////////////////// END-TO-DO (1) ////////////////////////////
 
@@ -40,35 +42,37 @@ struct Algorithm_1 : Algorithm
     ///               where j is the number of traversals completed (e.g., starts with 1), for example
     ///                    1: [⚪, ⚫, ⚪, ⚫]
     ///                    2: [⚪, ⚪, ⚫, ⚫]
-    uint64_t n = disks.size() / 2;
+    const uint64_t n = disks.size() / 2;
 
     if (n <= 1)
     {
       // Disks is already sorted
+      std::print( std::cout, "{:>3}: {::s}\n", 1, disks);
+      std::print( std::cout, "{:>3}: {::s}\n", 2, disks);
       return 0;
     }
 
     uint64_t swaps = 0;
-    uint64_t j = 0; // j/2 = completedMows
+    uint64_t halfMows = 0; // halfMows/2 = completedMows
     short mowDirection = 1;
-    for (uint64_t i = 0; j < n; )
+    for (uint64_t i = 0; halfMows < n; )
     {
       // Swap Check.
-      if (static_cast<uint8_t>(disks[i].color()) * mowDirection > static_cast<uint8_t>(disks[i+mowDirection].color()) * mowDirection)
+      if (disks[i].color() * mowDirection > disks[i+mowDirection].color() * mowDirection)
       {
         swap(disks[i], disks[i+mowDirection]);
-        swaps+=1;
+        swaps += 1;
       }
 
       i+=mowDirection;
 
       // Bounds Check. If bounds is exceeded, switch mow direction.
-      if (i+mowDirection <= 0 || i+mowDirection >= 2*n-1)
+      if (i+mowDirection <= 0 || i+mowDirection >= (2*n)-1)
       {
         mowDirection *= (-1);
-        j++;
+        halfMows += 1;
         // :>3 means 3 columns, right justified.
-        std::print( std::cout, "{:>3}: {::s}\n", j, disks );
+        std::print( std::cout, "{:>3}: {::s}\n", halfMows, disks);
       }
     }
 
@@ -97,23 +101,24 @@ struct Algorithm_2 : Algorithm
     ///               where j is the number of traversals completed (e.g., starts with 1), for example
     ///                    1: [⚪, ⚫, ⚪, ⚫]
     ///                    2: [⚪, ⚪, ⚫, ⚫]
-    uint64_t n = disks.size() / 2;
+    const uint64_t n = disks.size() / 2;
     if (n <= 1)
     {
       // Disks is already sorted
+      std::print( std::cout, "{:>3}: {::s}\n", 1, disks);
       return 0;
     }
 
     uint64_t swaps = 0;
-    uint64_t j = 0;
+    uint64_t runs = 0;
     uint64_t startingIndex = 0;
-    for (uint64_t i = 0; j < n; )
+    for (uint64_t i = 0; runs < n; )
     {
       // Swap Check.
-      if (static_cast<uint8_t>(disks[i].color()) > static_cast<uint8_t>(disks[i+1].color()))
+      if (disks[i].color() > disks[i+1].color())
       {
         swap(disks[i], disks[i+1]);
-        swaps++;
+        swaps += 1;
       }
 
       i+=2;
@@ -124,8 +129,8 @@ struct Algorithm_2 : Algorithm
       {
         startingIndex = 1 - startingIndex;
         i = startingIndex;
-        j++;
-        std::print( std::cout, "{:>3}: {::s}\n", j, disks );
+        runs += 1;
+        std::print( std::cout, "{:>3}: {::s}\n", runs, disks );
       }
     }
 
