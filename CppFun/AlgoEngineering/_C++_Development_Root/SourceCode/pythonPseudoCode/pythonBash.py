@@ -6,6 +6,7 @@
 generalCase1 = [0, 1, 0, 1, 0, 1, 0, 1]
 generalCase2 = [0, 1, 0, 1]
 generalCase3 = [0, 1, 0, 1 , 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+generalCase4 = [0, 1, 0, 1 , 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
 edgeCase1 = []
 edgeCase2 = [0, 1]
 
@@ -40,6 +41,7 @@ class Disk(object):
 
 diskCase1 = [Disk(0), Disk(1), Disk(0), Disk(1), Disk(0), Disk(1), Disk(0), Disk(1)]
 diskCase2 = [Disk(0), Disk(1), Disk(0), Disk(1)]
+diskCase3 = [Disk(0), Disk(1), Disk(0), Disk(1), Disk(0), Disk(1), Disk(0), Disk(1), Disk(0), Disk(1), Disk(0), Disk(1), Disk(0), Disk(1) ]
 diskEdgeCase1 = []
 diskEdgeCase2 = [Disk(0), Disk(1)]
 
@@ -186,11 +188,13 @@ if __name__ == "__main__":
 
 	lawnMowerSort(diskCase1.copy(), len(diskCase1) / 2)
 	lawnMowerSort(diskCase2.copy(), len(diskCase2) / 2)
+	lawnMowerSort(diskCase3.copy(), len(diskCase3) / 2)
 	lawnMowerSort(diskEdgeCase1.copy(), len(diskEdgeCase1) / 2)
 	lawnMowerSort(diskEdgeCase2.copy(), len(diskEdgeCase2) / 2)
 
 	alternateSort(diskCase1.copy(), len(diskCase1) / 2)
 	alternateSort(diskCase2.copy(), len(diskCase2) / 2)
+	alternateSort(diskCase3.copy(), len(diskCase3) / 2)
 	alternateSort(diskEdgeCase1.copy(), len(diskEdgeCase1) / 2)
 	alternateSort(diskEdgeCase2.copy(), len(diskEdgeCase2) / 2)
 
