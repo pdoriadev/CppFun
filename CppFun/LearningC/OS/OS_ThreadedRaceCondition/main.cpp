@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdint.h>
+#include <stdlib.h>
 #include <threads.h>
 #include "BankAccount.hpp"
 
@@ -33,7 +34,10 @@ bool printAndDoBankingAction(BankAccount *account, Action *action)
 	for (uint64_t i = 0; i < action->iterations; i++)
 	{
 		printBalance(account);
-		(*action->actionFunction)(account, action->amount);
+		if ((*action->actionFunction)(account, action->amount) == false)
+		{
+			return false;
+		}
 		printBalance(account);
 	}
 
@@ -45,15 +49,26 @@ int main (int argv, char* argc[])
 	BankAccount account;
 
 	Action depositAction = {.iterations=4, .amount=1000, .actionFunction=deposit};
-	Action withdrawAction = {.iterations=1, .amount=-1000, .actionFunction=withdraw}
+	Action withdrawAction = {.iterations=1, .amount=-1000, .actionFunction=withdraw};
 
-	printAndDoBankingAction(&account, &depositAction);
-	printAndDoBankingAction(&account, &withdrawAction);
+	if (printAndDoBankingAction(&account, &depositAction) == false)
+	{
+		fprintf(stdout, "\nExited with error. Failed to deposit.\n");
+		exit(1);
+	}
+
+	if (printAndDoBankingAction(&account, &withdrawAction) == false)
+	{
+		fprintf(stdout, "\nExited with error. Failed to withdraw.\n");
+		exit(1);
+	}
 
 	fprintf(stdout, "\nFinal Amount: %d\n", account.balance);
 	fflush(stdout);
 
   // spin up n threads
+
+
   // wait for n threads
 
   // print final account balance
@@ -63,7 +78,7 @@ int main (int argv, char* argc[])
 }
 
 // write this up later.
-bool executeThread(BankAccount *account) 
+bool executeThread(BankAccount *account)
 {
 	return true;
 }
