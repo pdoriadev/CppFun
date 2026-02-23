@@ -1,28 +1,64 @@
-#include <stdint.h>
-#include <limits.h>
+#include <cstdint>
+#include <climits>
+#include <cstddef>
 
 typedef struct BankAccount
 {
-	uint64_t balance = 0;
+	int64_t balance = 0;
 } BankAccount;
 
-bool deposit(BankAccount *account, uint64_t amount)
+bool createAccount(BankAccount *account, const int64_t initialValue)
 {
-	if (account.balance + amount > ULLONG_MAX)
+	if (account == NULL)
 	{
 		return false;
 	}
-	&account.balance += amount;
+	account->balance = initialValue;
 	return true;
 }
 
-bool withdraw(BankAccount *account, uint64_t amount)
+bool deposit(BankAccount *account, int64_t amount)
 {
-	if (account.balance - amount < 0)
+	if (account == NULL)
 	{
 		return false;
 	}
-	&account.balance -= amount;
+
+  if (amount < 0)
+	{
+		// deposit cannot be a negative amount
+		return false;
+	}
+
+	if (account->balance + amount > LLONG_MAX)
+	{
+		// cannot exceed more money than is possible
+		amount = LLONG_MAX - amount;
+	}
+
+	account->balance += amount;
+	return true;
+}
+
+bool withdraw(BankAccount *account, int64_t amount)
+{
+	if (account == NULL)
+	{
+		return false;
+	}
+
+	if (amount > 0)
+	{
+		// withdrawl cannot be a positive amount
+		return false;
+	}
+
+	if (account->balance - amount < LLONG_MIN)
+	{
+		amount = LLONG_MIN - amount;
+	}
+
+	account->balance += amount;
 	return true;
 }
 
