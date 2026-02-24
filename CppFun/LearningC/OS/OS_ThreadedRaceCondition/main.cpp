@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
+#include <string.h>
 #include <pthread.h>
 #include "BankAccount.hpp"
 
@@ -49,36 +50,39 @@ bool outputAndDoBankingAction(BankAccount *account, Action *action, FILE *output
 	return true;
 }
 
-// write this up later.
-bool testDepositsWithdrawls(BankAccount *account, Action deposit, Action withdraw, thrd_t threadID)
+
+bool testDepositsWithdrawls(BankAccount *account, uint32_t* threadID)
 {
  	Action depositAction = {.iterations=1, .amount=1000, .actionFunction=deposit};
 	Action withdrawAction = {.iterations=1, .amount=-1000, .actionFunction=withdraw};
 
   // seeding the rand_r() to get consistent random behavior between threads.
-  deposit.iterations = (rand_r(threadID) % 4) + 1;
-  withdraw.iterations = (rand_r(threadID) % 3) + 1;
+    // rand_r required an unsigned_int* seed.
+  depositAction.iterations = ( rand_r((unsigned int*)threadID) % 4 ) + 1;
+  withdrawAction.iterations = (  rand_r((unsigned int*)threadID) % 3 ) + 1;
 
   // Create Log File name for thread
   // append thread ID to end of log file name.
-  char logFileString[20] = "Log_";
+    // NOTE: Later found out I can call pthread_self to get the calling thread's ID.
+  char logFileStr[20] = "Log_";
   char threadIDString[10];
-  snprintf(threadIDString, 10, %d, threadID);
-  strncat(logFileString, threadIDString, 10);
-  strncat(logFileString, ".txt", 4);
+  snprintf(threadIDString, 10, "%d", threadID);
+  strncat(logFileStr, threadIDString, 11);
+  strncat(logFileStr, ".txt", 5);
 
   // create/open file in write mode.
-  FILE *logFile = fopen(outputNameString, w+);
-  // pass file pointer to printAndDo functions.
+  FILE *logFile = fopen(logFileStr, "w+");
 
-  for (uint64_t i = 0; i < deposit.iterations; i++)
+  // Deposits
+  for (uint64_t i = 0; i < depositAction.iterations; i++)
   {
-    outputAndDoBankingAction(account, deposit, logFile);
+    outputAndDoBankingAction(account, &depositAction, logFile);
   }
 
-  for (uint64_t i = 0; i < withdraw.iterations; i++)
+  // Withdrawls
+  for (uint64_t i = 0; i < withdrawAction.iterations; i++)
   {
-    outputAndDoBankingAction(account, withdraw, logFile);
+    outputAndDoBankingAction(account, &withdrawAction, logFile);
   }
 
   fclose(logFile);
@@ -88,39 +92,44 @@ bool testDepositsWithdrawls(BankAccount *account, Action deposit, Action withdra
 typedef struct ThreadArg
 {
   BankAccount *account;
-  thrd_t threadID
+  uint32_t* threadID;
 } ThreadArg;
-
 
 // Thread function (takes in BankAccount object, threadID number)
 // - threads operate on the same BankAccount object.
 // - threads write to their own log file for each interaction
-int executeThread(void *args)
+void* executeThread(void *args)
 {
-  // Cast args back to a usable type
-  ThreadArg threadArg = *(ThreadArg*)arg;
-  testDepositsWithdrawls(threadArg.account, depositAction, threadArg.threadID);
+  // Cast void* to a ThreadArg*. Then dereference the pointer.
+  ThreadArg threadArg = *(ThreadArg*)args;
+  free(args);
+  testDepositsWithdrawls(threadArg.account, threadArg.threadID);
 
-  // thread exit
+  pthread_exit(0); // https://www.man7.org/linux/man-pages/man3/pthread_exit.3.html
 }
 
 int main (int argv, char* argc[])
 {
   // Command Line Args
 	BankAccount account;
+  createAccount(&account, 0);
 
   const uint32_t THREAD_COUNT = 4;
-  thrd_t threads[THREAD_COUNT];
+  pthread_t threads[THREAD_COUNT];
 
   // spin up n threads
-  for (uint8_t i = 0; i < THREAD_COUNT; i++)
+  for (uint32_t i = 0; i < THREAD_COUNT; i++)
   {
+
+		// allocates memory the size of a ThreadArg struct.
+			// casts the void* returned by malloc to a ThreadArg*.
+    ThreadArg *argCopy = (ThreadArg*) malloc(sizeof(ThreadArg));
     // copy the thread arg to avoid any multi-threading race condition.
       // The thread will make its own copy and free the malloc: https://beej.us/guide/bgc/html/split/multithreading.html
-    ThreadArg *threadSpecificArg = malloc(sizeof *threadSpecificArg);
-    threadSpecificArg = {.account=account, .threadID = threads[i]};
+    argCopy->account  = &account;
+		argCopy->threadID = (uint32_t*)&threads[i];
 
-    if (pthread_create(threads[i], NULL, executeThread, threadSpecificArg) != 0)
+    if (pthread_create(&threads[i], NULL, executeThread, &argCopy) != 0)
     {
       fprintf(stdout, "FAILED TO CREATE P_THREAD. ThreadID: %d", threads[i]);
       return 1;
@@ -128,18 +137,16 @@ int main (int argv, char* argc[])
   }
 
   // wait for n threads
-  for (uint8_t i = 0; i < THREAD_COUNT; i++)
+  for (uint32_t i = 0; i < THREAD_COUNT; i++)
   {
     // wait for i'th thread in threads list
     pthread_join(threads[i], NULL);
   }
 
   // print final account balance
-  outputBalance(stdout, "\nFinal Balance: %d\n", account->balance);
+  fprintf(stdout, "\nFinal Balance: %d\n", account.balance);
 
   // print merged transaction logs for analysis
 
   return 0;
 }
-
-
