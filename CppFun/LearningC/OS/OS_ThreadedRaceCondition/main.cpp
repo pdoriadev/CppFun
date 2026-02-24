@@ -59,20 +59,29 @@ bool testDepositsWithdrawls(BankAccount *account, uint32_t* threadID)
 
   // seeding the rand_r() to get consistent random behavior between threads.
     // rand_r required an unsigned_int* seed.
-  depositAction.iterations = ( rand_r((unsigned int*)threadID) % 4 ) + 1;
-  withdrawAction.iterations = (  rand_r((unsigned int*)threadID) % 3 ) + 1;
+	srand(*threadID);
+  depositAction.iterations = ( rand() % 4 ) + 1;
+	srand (*threadID + 1);
+  withdrawAction.iterations = ( rand() % 3 ) + 1;
 
   // Create Log File name for thread
   // append thread ID to end of log file name.
     // NOTE: Later found out I can call pthread_self to get the calling thread's ID.
-  char logFileStr[20] = "Log_";
-  char threadIDString[10];
-  snprintf(threadIDString, 10, "%d", threadID);
-  strncat(logFileStr, threadIDString, 11);
-  strncat(logFileStr, ".txt", 5);
+  char logFileStr[30] = "Log_";
+  char threadIDString[30];
+  snprintf(threadIDString, 15, "%lu", *threadID);
+  // const char LENGTH_CHECK[30] = { *threadIDString };
+	// size_t length = strlen(LENGTH_CHECK);
+	strcat(logFileStr, threadIDString);
+  strcat(logFileStr, ".txt");
 
   // create/open file in write mode.
   FILE *logFile = fopen(logFileStr, "w+");
+	fprintf(logFile, "\nFile name: %s", logFileStr);
+	fprintf(logFile, "\nThreadID string: %s", threadIDString);
+	fprintf(logFile, "\nThreadID number: %lu", *threadID);
+	fprintf(logFile, "\nDeposit Iterations: %llu", depositAction.iterations);
+	fprintf(logFile, "\nWithdraw Iterations: %llu", withdrawAction.iterations);
 
   // Deposits
   for (uint64_t i = 0; i < depositAction.iterations; i++)
@@ -121,7 +130,6 @@ int main (int argv, char* argc[])
   // spin up n threads
   for (uint32_t i = 0; i < THREAD_COUNT; i++)
   {
-
 		// allocates memory the size of a ThreadArg struct.
 			// casts the void* returned by malloc to a ThreadArg*.
     ThreadArg *argCopy = (ThreadArg*) malloc(sizeof(ThreadArg));
@@ -132,11 +140,11 @@ int main (int argv, char* argc[])
 
     if (pthread_create(&threads[i], NULL, executeThread, &argCopy) != 0)
     {
-      fprintf(stdout, "FAILED TO CREATE P_THREAD. ThreadID: %d", threads[i]);
+      fprintf(stdout, "FAILED TO CREATE PTHREAD. ThreadID: %lu", threads[i]);
       return 1;
     }
-		fprintf(stdout, "\n Started thread :%d", (uint32_t)threads[i]);
-		sleep(1);
+		fprintf(stdout, "\n Started thread: %lu", (uint32_t)threads[i]);
+		// sleep(1);
   }
 
   // wait for n threads
@@ -144,11 +152,11 @@ int main (int argv, char* argc[])
   {
     // wait for i'th thread in threads list
     pthread_join(threads[i], NULL);
-		fprintf(stdout, "\nThread complete: %d", (uint32_t)threads[i]);
+		fprintf(stdout, "\nThread complete: %lu", (uint32_t)threads[i]);
   }
 
   // print final account balance
-  fprintf(stdout, "\nFinal Balance: %d\n", account.balance);
+  fprintf(stdout, "\nFinal Balance: %llu\n", account.balance);
 
   // print merged transaction logs for analysis
 
