@@ -1,0 +1,11 @@
+
+File name: Log_12569658208838.txt
+ThreadID string: 12569658208838
+pthread_self() id: 69203648
+Deposit Iterations: 4
+Withdraw Iterations: 1
+Balance: $-255786336
+Balance: $-255785336
+Balance: $-255784336
+Balance: $-255783336
+Balance: $-255784336
