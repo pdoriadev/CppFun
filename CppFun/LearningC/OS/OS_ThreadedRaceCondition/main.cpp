@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include <pthread.h>
 #include "BankAccount.hpp"
 
@@ -102,7 +103,7 @@ void* executeThread(void *args)
 {
   // Cast void* to a ThreadArg*. Then dereference the pointer.
   ThreadArg threadArg = *(ThreadArg*)args;
-  free(args);
+  //free(args);
   testDepositsWithdrawls(threadArg.account, threadArg.threadID);
 
   pthread_exit(0); // https://www.man7.org/linux/man-pages/man3/pthread_exit.3.html
@@ -134,6 +135,8 @@ int main (int argv, char* argc[])
       fprintf(stdout, "FAILED TO CREATE P_THREAD. ThreadID: %d", threads[i]);
       return 1;
     }
+		fprintf(stdout, "\n Started thread :%d", (uint32_t)threads[i]);
+		sleep(1);
   }
 
   // wait for n threads
@@ -141,6 +144,7 @@ int main (int argv, char* argc[])
   {
     // wait for i'th thread in threads list
     pthread_join(threads[i], NULL);
+		fprintf(stdout, "\nThread complete: %d", (uint32_t)threads[i]);
   }
 
   // print final account balance
