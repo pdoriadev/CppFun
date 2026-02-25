@@ -1,0 +1,14 @@
+
+Log File is unique. Passed.
+ThreadArg Values
+Balance=0
+  Index=3
+          File name: Log_3.txt
+           ThreadID: 3
+ Deposit Iterations: 3
+Withdraw Iterations: 2
+Balance: $5000
+Balance: $6000
+Balance: $7000
+Balance: $6000
+Balance: $5000

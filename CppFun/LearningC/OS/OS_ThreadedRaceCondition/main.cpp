@@ -84,22 +84,36 @@ void* executeThread(void *args)
   ThreadArg threadArg = *(ThreadArg*)args;
 
 	char logFileStr[30];
+	// Trusting that we are being given a unique index.
 	getThreadLogFileName(threadArg.threadIndex, logFileStr, 30);
-	FILE *logFP = fopen(logFileStr, "a");
+
+	// Opening with read permissions to see if file exists.
+		// Shouldn't open new file if it doesn't exist.
+	/*FILE *logFP = fopen(logFileStr, "r"); <--- THIS LINE CAUSES A SEGMENTATION FAULT
 	if (logFP != NULL)
 	{
-		const char errorStr[] = "Log File already exists!";
+		char errorStr[300] = "\nLog File already exists: ";
+		strcat(errorStr, logFileStr);
+		char threadValues[200];
+		snprintf(threadValues, 199, "\nThreadArg Values\nBalance=%lli\n  Index=%lu", threadArg.account->balance, threadArg.threadIndex);
+		strcat(errorStr, threadValues);
 		printErrorToErrorFileThenExit(errorStr);
 	}
+	*/
+	// fclose(logFP);
+
+	// Opening new log file
 
   // Debug Log Statements
-  fprintf(logFP, "\nThreadArg Values");
+  /*
+	logFP = fopen(logFileStr, "w");
+	fprintf(logFP, "\nLog File is unique. Passed.");
+	fprintf(logFP, "\nThreadArg Values");
   fprintf(logFP, "\nBalance=%lli", threadArg.account->balance);
   fprintf(logFP, "\n  Index=%lu", threadArg.threadIndex);
   fflush(logFP);
-
   fclose(logFP);
-
+	*/
   testDepositsWithdrawls(&threadArg);
 
   //  https://www.man7.org/linux/man-pages/man3/pthread_exit.3.html
@@ -108,6 +122,12 @@ void* executeThread(void *args)
 
 int main (int argv, char* argc[])
 {
+	// Reset error log file
+	if (resetErrorLogFile() == false)
+	{
+		printErrorToErrorFileThenExit("Failed to reset error log file.");
+	}
+
   // Command Line Args
 	BankAccount account;
   createAccount(&account, 0);
@@ -135,7 +155,7 @@ int main (int argv, char* argc[])
 		fprintf(stdout, "\n  Index: %lu", argCopy->threadIndex);
 		fflush(stdout);
 
-		if (pthread_create(&threads[i], NULL, executeThread, &argCopy) != 0)
+		if (pthread_create(&threads[i], NULL, executeThread, (void*)argCopy) != 0)
     {
       fprintf(stdout, "FAILED TO CREATE PTHREAD. ThreadID: %lu", threads[i]);
       return 1;
