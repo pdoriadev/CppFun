@@ -85,12 +85,20 @@ void* executeThread(void *args)
 
 	char logFileStr[30];
 	getThreadLogFileName(threadArg.threadIndex, logFileStr, 30);
-	FILE *checkFP = fopen(logFileStr, "r");
-	if (checkFP != NULL)
+	FILE *logFP = fopen(logFileStr, "a");
+	if (logFP != NULL)
 	{
-		char errorStr[] = "Log File already exists!";
+		const char errorStr[] = "Log File already exists!";
 		printErrorToErrorFileThenExit(errorStr);
 	}
+
+  // Debug Log Statements
+  fprintf(logFP, "\nThreadArg Values");
+  fprintf(logFP, "\nBalance=%lli", threadArg.account->balance);
+  fprintf(logFP, "\n  Index=%lu", threadArg.threadIndex);
+  fflush(logFP);
+
+  fclose(logFP);
 
   testDepositsWithdrawls(&threadArg);
 
@@ -121,13 +129,19 @@ int main (int argv, char* argc[])
     (*argCopy).account = &account;
 		(*argCopy).threadIndex = i;
 
+		// Debugging out statements
+		fprintf(stdout, "\nPrethread Creation");
+		fprintf(stdout, "\nAccount: %lli", argCopy->account->balance);
+		fprintf(stdout, "\n  Index: %lu", argCopy->threadIndex);
+		fflush(stdout);
+
 		if (pthread_create(&threads[i], NULL, executeThread, &argCopy) != 0)
     {
       fprintf(stdout, "FAILED TO CREATE PTHREAD. ThreadID: %lu", threads[i]);
       return 1;
     }
 
-		fprintf(stdout, "\n Started thread: %lu", i);
+		fprintf(stdout, "\n Created thread: %lu", i);
   }
 
   // wait for n threads
@@ -135,7 +149,7 @@ int main (int argv, char* argc[])
   {
     // wait for i'th thread in threads list
     pthread_join(threads[i], NULL);
-		fprintf(stdout, "\nThread complete: %lu", i);
+		fprintf(stdout, "\nThread Exited: %lu", i);
   }
 
   // print final account balance

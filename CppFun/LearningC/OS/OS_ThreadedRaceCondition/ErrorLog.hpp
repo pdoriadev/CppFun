@@ -2,10 +2,11 @@
 #include <stdio.h>
 #include <string.h>
 
-void printErrorToErrorFileThenExit(char errorStr[])
+
+void printErrorToErrorFileThenExit(const char errorStr[])
 {
 	FILE *fp = fopen("error.txt", "w+");
-	fprintf(fp, errorStr);
+	fprintf(fp, "%s", errorStr);
 
 	fflush(fp);
 	fclose(fp);
