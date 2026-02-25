@@ -1,0 +1,9 @@
+
+          File name: Log_1178597056.txt
+           ThreadID: 1178597056
+ Deposit Iterations: 3
+Withdraw Iterations: 1
+Balance: $952868704
+Balance: $952869704
+Balance: $952870704
+Balance: $952869704
