@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-void printErrorToErrorFileThenExit(const char errorStr[])
+void printErrorToErrorFile(const char errorStr[])
 {
 	FILE *fp = fopen("error.txt", "w");
 	fprintf(fp, "%s", errorStr);
