@@ -1,5 +1,0 @@
-
-         ID: 4181698240
-          i: 5
-SumPtrValue: 8
-  CachedSum: 4

@@ -1,5 +1,0 @@
-
-         ID: 4190090944
-          i: 4
-SumPtrValue: 8
-  CachedSum: 7
