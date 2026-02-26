@@ -72,12 +72,12 @@ int main (int argv, char* argc[])
 
   // Command Line Args
 	BankAccount account;
-  createAccount(&account, 0);
+  createAccount(&account, 1000);
 
-  const uint32_t THREAD_COUNT = 4;
+  const uint32_t THREAD_COUNT = 100;
   pthread_t threads[THREAD_COUNT];
 
-  fprintf(stdout, "\nSpinning up %lu threads", THREAD_COUNT);
+  fprintf(stdout, "\nSpinning up %lu threads.", THREAD_COUNT);
 	fflush(stdout);
   // spin up n threads
   for (uint32_t i = 0; i < THREAD_COUNT; i++)
@@ -90,14 +90,6 @@ int main (int argv, char* argc[])
       // The thread will make its own copy and free the malloc: https://beej.us/guide/bgc/html/split/multithreading.html
     (*argCopy).account = &account;
 		(*argCopy).threadIndex = i;
-
-		// Debugging out statements
-		/*
-		fprintf(stdout, "\nPrethread Creation");
-		fprintf(stdout, "\nAccount: %lli", argCopy->account->balance);
-		fprintf(stdout, "\n  Index: %lu", argCopy->threadIndex);
-		fflush(stdout);
-		*/
 
 		if (pthread_create(&threads[i], NULL, runThreadedLoggingRaceCondition, (void*)argCopy) != 0)
     {

@@ -1,9 +1,0 @@
-
-          File name: Log_2.txt
-           ThreadID: 2
- Deposit Iterations: 3
-Withdraw Iterations: 1
-Balance: $6000
-Balance: $7000
-Balance: $8000
-Balance: $7000
