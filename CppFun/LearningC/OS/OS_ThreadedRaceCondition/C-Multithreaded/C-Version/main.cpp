@@ -17,20 +17,9 @@
 
 bool testDepositsWithdrawls(ThreadArg *tArgs)
 {
- 	Action depositAction = {.iterations=1, .amount=1000, .actionFunction=deposit};
-	Action withdrawAction = {.iterations=1, .amount=-1000, .actionFunction=withdraw};
-
-  // seeding the rand_r() to get consistent random behavior between threads.
-    // rand_r required an unsigned_int* seed.
-	srand(tArgs->threadIndex);
-  depositAction.iterations = ( rand() % 4 ) + 1;
-	srand (tArgs->threadIndex + 1);
-  withdrawAction.iterations = ( rand() % 3 ) + 1;
-
+  // Open file. Create the file if it is the first run.
 	char logFileStrOut[30];
 	getThreadLogFileName(tArgs->threadIndex, logFileStrOut, 30);
-
-  // Open file. Create the file if it is the first run.
   FILE *logFile;
   if (tArgs->runCount == 0)
 	{
@@ -45,16 +34,26 @@ bool testDepositsWithdrawls(ThreadArg *tArgs)
 	{
 		printErrorToErrorFile("Failed to open thread log file");
 	}
+
+  /////////////////////////////////////////////////////////
+  // Write to file. Perform withdrawls/deposits.
+  uint64_t expectedFinalBalance = tArgs->account->balance + (tArgs->deposits - tArgs->withdrawls)*1000;
 	fprintf(logFile, "\n==========================================================");
 	fprintf(logFile, "\n          File name: %s", logFileStrOut);
 	fprintf(logFile, "\n                Run: %lu", tArgs->runCount);
   fprintf(logFile, "\n           ThreadID: %lu", tArgs->threadIndex);
-	fprintf(logFile, "\n Deposit Iterations: %llu", depositAction.iterations);
-	fprintf(logFile, "\nWithdraw Iterations: %llu", withdrawAction.iterations);
+	fprintf(logFile, "\n Deposit Iterations: %llu", tArgs->deposits);
+	fprintf(logFile, "\nWithdraw Iterations: %llu", tArgs->withdrawls);
 
+ 	Action depositAction = {.iterations=tArgs->deposits, .amount=1000, .actionFunction=deposit};
+	Action withdrawAction = {.iterations=tArgs->withdrawls, .amount=-1000, .actionFunction=withdraw};
   outputAndDoBankingAction(tArgs->account, &depositAction, logFile);
   outputAndDoBankingAction(tArgs->account, &withdrawAction, logFile);
 
+  fprintf(logFile, "\n      Final Balance: %llu", tArgs->account->balance);
+  fprintf(logFile, "\n   Expected Balance: %llu", expectedFinalBalance);
+
+  fflush(logFile);
   fclose(logFile);
 	return true;
 }
@@ -85,15 +84,18 @@ int main (int argv, char* argc[])
 		printErrorToErrorFile("Failed to reset error log file.");
 	}
 
-	BankAccount account;
-  createAccount(&account, 1000);
-
-	const uint32_t RUNS_TARGET = 3;
+	const uint32_t RUNS_TARGET = 100;
   const uint32_t THREAD_COUNT = 100;
   pthread_t threads[THREAD_COUNT];
-
+  char finalExpectedBalancesAllRuns[1000] = "";
 	for (uint32_t runCount = 0; runCount < RUNS_TARGET; runCount++)
 	{
+    uint32_t totalDeposits = 0;
+    uint32_t totalWithdrawls = 0;
+		// malloc BankAccount
+		BankAccount *accountPtr = (BankAccount*)(malloc(sizeof(BankAccount)));
+    createAccount(accountPtr, 0);
+
 		fprintf(stdout, "\nSpinning up %lu threads for run %lu.", THREAD_COUNT, runCount);
 		fflush(stdout);
 
@@ -106,9 +108,17 @@ int main (int argv, char* argc[])
 
       // copy the thread arg to avoid any multi-threading race condition.
         // The thread will make its own copy and free the malloc: https://beej.us/guide/bgc/html/split/multithreading.html
-      (*argCopy).account = &account;
-		  (*argCopy).threadIndex = i;
-		  (*argCopy).runCount = runCount;
+      argCopy->account = accountPtr;
+		  argCopy->threadIndex = i;
+		  argCopy->runCount = runCount;
+
+  	  // seeding the rand_r() to get consistent random behavior between threads.
+        // rand_r required an unsigned_int* seed.
+    	srand(i);
+      argCopy->deposits = ( rand() % 512 ) + 1;
+      argCopy->withdrawls = ( rand() % 256 ) + 1;
+      totalDeposits += argCopy->deposits;
+      totalWithdrawls += argCopy->withdrawls;
 
 		  if (pthread_create(&threads[i], NULL, runThreadedLoggingRaceCondition, (void*)argCopy) != 0)
       {
@@ -127,20 +137,47 @@ int main (int argv, char* argc[])
 		  // fprintf(stdout, "\nThread Exited: %lu", i);
     }
 
-    // print merged transaction logs for analysis
-    const char BUFFER = 100;
-    char mergeLogsStrOut [BUFFER];
-	  if (mergeThreadLogFiles(THREAD_COUNT, mergeLogsStrOut, BUFFER) == false)
-	  {
-		  printErrorToErrorFile("Failed to merge thread log files.");
-	  }
 
-		
-    // print final account balance
-    // fprintf(stdout, "\nFinal Balance: %lld\n", account.balance);
+    // Final vs. Expected Balance Strings and Output
+    uint64_t expectedBalance = totalDeposits*1000 - totalWithdrawls*1000;
+    char finalExpectedBalanceStr[200] = "\n   Final Balance: ";
+    char intStr[30];
+    snprintf(intStr, 29, "%llu", accountPtr->balance);
+    strcat(finalExpectedBalanceStr, intStr);
+    strcat(finalExpectedBalanceStr, "\nExpected Balance: ");
+    snprintf(intStr, 29, "%llu", expectedBalance);
+    strcat(finalExpectedBalanceStr, intStr);
 
+    fprintf(stdout, finalExpectedBalanceStr);
+    strcat(finalExpectedBalancesAllRuns, finalExpectedBalanceStr);
+
+		// Clean-up malloc
+		memset(accountPtr, 0, sizeof(BankAccount));
+		free(accountPtr);
+		accountPtr = NULL;
 	}
 
+	/////////////////////////////////////////////////////////
+  // CREATE MERGED LOG FILE. PRINT TO CONSOLE.
+  const char BUFFER = 100;
+  char mergeLogsStrOut [BUFFER];
+	if (mergeThreadLogFiles(THREAD_COUNT, mergeLogsStrOut, BUFFER) == false)
+	{
+	  printErrorToErrorFile("Failed to merge thread log files.");
+	}
 
+	if (copyFileToDestinationFile(mergeLogsStrOut, stdout) == false)
+  {
+    printErrorToErrorFile("Failed to copy merged log file contents to console");
+  }
+
+  fprintf(stdout, finalExpectedBalancesAllRuns);
+
+	///////////////////////////////////////////////////////
+	// OUTPUT ANY ERRORS TO CONSOLE
+  if (copyFileToDestinationFile("error.txt", stdout) == false)
+  {
+    printErrorToErrorFile("Failed to ouput error file contents to stdout");
+  }
   return 0;
 }

@@ -3,8 +3,12 @@
 #include <string.h>
 #include <stdlib.h>
 
+uint32_t errorCount = 0;
+
 void printErrorToErrorFile(const char errorStr[])
 {
+	errorCount += 1;
+
 	FILE *fp = fopen("error.txt", "w");
 	fprintf(fp, "%s", errorStr);
 

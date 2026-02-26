@@ -68,4 +68,6 @@ typedef struct ThreadArg
   BankAccount *account = NULL;
   uint32_t threadIndex = 0;
 	uint32_t runCount = 0;
+	uint32_t deposits = 0;
+	uint32_t withdrawls = 0;
 } ThreadArg;

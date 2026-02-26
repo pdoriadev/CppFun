@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <string.h>
 
-bool outputLogFileToConsole(const char logFileNameStr[])
+bool copyFileToDestinationFile(const char logFileNameStr[], FILE *destinationFP)
 {
 	FILE *sourceLogFP = fopen(logFileNameStr, "r");
 	if (sourceLogFP == NULL)
@@ -19,7 +19,7 @@ bool outputLogFileToConsole(const char logFileNameStr[])
 	size_t bytesWritten;
 	while ((bytesRead = fread(buffer, sizeof(char), BUFFER_SIZE, sourceLogFP)) > 0)
 	{
-		if ((bytesWritten = fwrite(buffer, sizeof(char), bytesRead, stdout)) != bytesRead)
+		if ((bytesWritten = fwrite(buffer, sizeof(char), bytesRead, destinationFP)) != bytesRead)
 		{
 			fflush(sourceLogFP);
 			fclose(sourceLogFP);
