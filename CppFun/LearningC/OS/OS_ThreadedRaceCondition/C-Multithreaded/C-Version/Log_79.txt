@@ -4,31 +4,2298 @@
                 Run: 0
            ThreadID: 79
  Deposit Iterations: 4
-Withdraw Iterations: 1
-Balance: $39000
-Balance: $40000
-Balance: $41000
-Balance: $42000
-Balance: $41000
+Withdraw Iterations: 11
+Balance: $9375000
+Balance: $9376000
+Balance: $9377000
+Balance: $9378000
+Balance: $9377000
+Balance: $9376000
+Balance: $9375000
+Balance: $9374000
+Balance: $9373000
+Balance: $9372000
+Balance: $9371000
+Balance: $9370000
+Balance: $9369000
+Balance: $9368000
+Balance: $9367000
+      Final Balance: 9367000
+   Expected Balance: 4304334296
 ==========================================================
           File name: Log_79.txt
                 Run: 1
            ThreadID: 79
  Deposit Iterations: 4
-Withdraw Iterations: 1
-Balance: $92000
-Balance: $93000
-Balance: $94000
-Balance: $95000
-Balance: $94000
+Withdraw Iterations: 11
+Balance: $9233000
+Balance: $9234000
+Balance: $9235000
+Balance: $9236000
+Balance: $9235000
+Balance: $9234000
+Balance: $9233000
+Balance: $9232000
+Balance: $9231000
+Balance: $9230000
+Balance: $9229000
+Balance: $9228000
+Balance: $9227000
+Balance: $9226000
+Balance: $9225000
+      Final Balance: 9225000
+   Expected Balance: 4304124296
 ==========================================================
           File name: Log_79.txt
                 Run: 2
            ThreadID: 79
  Deposit Iterations: 4
-Withdraw Iterations: 1
-Balance: $149000
-Balance: $150000
-Balance: $151000
-Balance: $152000
-Balance: $151000
+Withdraw Iterations: 11
+Balance: $8892000
+Balance: $8893000
+Balance: $8894000
+Balance: $8895000
+Balance: $8894000
+Balance: $8893000
+Balance: $8892000
+Balance: $8891000
+Balance: $8890000
+Balance: $8889000
+Balance: $8888000
+Balance: $8887000
+Balance: $8886000
+Balance: $8885000
+Balance: $8884000
+      Final Balance: 8884000
+   Expected Balance: 4303710296
+==========================================================
+          File name: Log_79.txt
+                Run: 3
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9199000
+Balance: $9200000
+Balance: $9201000
+Balance: $9202000
+Balance: $9201000
+Balance: $9200000
+Balance: $9199000
+Balance: $9198000
+Balance: $9197000
+Balance: $9196000
+Balance: $9195000
+Balance: $9194000
+Balance: $9193000
+Balance: $9192000
+Balance: $9191000
+      Final Balance: 9191000
+   Expected Balance: 4304161296
+==========================================================
+          File name: Log_79.txt
+                Run: 4
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9097000
+Balance: $9098000
+Balance: $9099000
+Balance: $9100000
+Balance: $9099000
+Balance: $9098000
+Balance: $9097000
+Balance: $9096000
+Balance: $9095000
+Balance: $9094000
+Balance: $9093000
+Balance: $9092000
+Balance: $9091000
+Balance: $9090000
+Balance: $9089000
+      Final Balance: 9089000
+   Expected Balance: 4303985296
+==========================================================
+          File name: Log_79.txt
+                Run: 5
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $8869000
+Balance: $8870000
+Balance: $8871000
+Balance: $8872000
+Balance: $8871000
+Balance: $8870000
+Balance: $8869000
+Balance: $8868000
+Balance: $8867000
+Balance: $8866000
+Balance: $8865000
+Balance: $8864000
+Balance: $8863000
+Balance: $8862000
+Balance: $8861000
+      Final Balance: 8861000
+   Expected Balance: 4303742296
+==========================================================
+          File name: Log_79.txt
+                Run: 6
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9312000
+Balance: $9313000
+Balance: $9314000
+Balance: $9315000
+Balance: $9314000
+Balance: $9313000
+Balance: $9312000
+Balance: $9311000
+Balance: $9310000
+Balance: $9309000
+Balance: $9308000
+Balance: $9307000
+Balance: $9306000
+Balance: $9305000
+Balance: $9304000
+      Final Balance: 9304000
+   Expected Balance: 4304190296
+==========================================================
+          File name: Log_79.txt
+                Run: 7
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $8896000
+Balance: $8897000
+Balance: $8898000
+Balance: $8899000
+Balance: $8898000
+Balance: $8897000
+Balance: $8896000
+Balance: $8895000
+Balance: $8894000
+Balance: $8893000
+Balance: $8892000
+Balance: $8891000
+Balance: $8890000
+Balance: $8889000
+Balance: $8888000
+      Final Balance: 8888000
+   Expected Balance: 4303800296
+==========================================================
+          File name: Log_79.txt
+                Run: 8
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9032000
+Balance: $9033000
+Balance: $9034000
+Balance: $9035000
+Balance: $9034000
+Balance: $9033000
+Balance: $9032000
+Balance: $9031000
+Balance: $9030000
+Balance: $9029000
+Balance: $9028000
+Balance: $9027000
+Balance: $9026000
+Balance: $9025000
+Balance: $9024000
+      Final Balance: 9024000
+   Expected Balance: 4303877296
+==========================================================
+          File name: Log_79.txt
+                Run: 9
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $8983000
+Balance: $8984000
+Balance: $8985000
+Balance: $8986000
+Balance: $8985000
+Balance: $8984000
+Balance: $8983000
+Balance: $8982000
+Balance: $8981000
+Balance: $8980000
+Balance: $8979000
+Balance: $8978000
+Balance: $8977000
+Balance: $8976000
+Balance: $8975000
+      Final Balance: 8975000
+   Expected Balance: 4303801296
+==========================================================
+          File name: Log_79.txt
+                Run: 10
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $958000
+Balance: $959000
+Balance: $960000
+Balance: $961000
+Balance: $960000
+Balance: $959000
+Balance: $958000
+Balance: $957000
+Balance: $956000
+Balance: $955000
+Balance: $954000
+Balance: $953000
+Balance: $952000
+Balance: $951000
+Balance: $950000
+      Final Balance: 950000
+   Expected Balance: 4295820296
+==========================================================
+          File name: Log_79.txt
+                Run: 11
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9355000
+Balance: $9356000
+Balance: $9357000
+Balance: $9358000
+Balance: $9357000
+Balance: $9356000
+Balance: $9355000
+Balance: $9354000
+Balance: $9353000
+Balance: $9352000
+Balance: $9351000
+Balance: $9350000
+Balance: $9349000
+Balance: $9348000
+Balance: $9347000
+      Final Balance: 9347000
+   Expected Balance: 4304344296
+==========================================================
+          File name: Log_79.txt
+                Run: 12
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9508000
+Balance: $9509000
+Balance: $9510000
+Balance: $9511000
+Balance: $9510000
+Balance: $9509000
+Balance: $9508000
+Balance: $9507000
+Balance: $9506000
+Balance: $9505000
+Balance: $9504000
+Balance: $9503000
+Balance: $9502000
+Balance: $9501000
+Balance: $9500000
+      Final Balance: 9500000
+   Expected Balance: 4304404296
+==========================================================
+          File name: Log_79.txt
+                Run: 13
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9085000
+Balance: $9086000
+Balance: $9087000
+Balance: $9088000
+Balance: $9087000
+Balance: $9086000
+Balance: $9085000
+Balance: $9084000
+Balance: $9083000
+Balance: $9082000
+Balance: $9081000
+Balance: $9080000
+Balance: $9079000
+Balance: $9078000
+Balance: $9077000
+      Final Balance: 9077000
+   Expected Balance: 4303994296
+==========================================================
+          File name: Log_79.txt
+                Run: 14
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9148000
+Balance: $9149000
+Balance: $9150000
+Balance: $9151000
+Balance: $9150000
+Balance: $9149000
+Balance: $9148000
+Balance: $9147000
+Balance: $9146000
+Balance: $9145000
+Balance: $9144000
+Balance: $9143000
+Balance: $9142000
+Balance: $9141000
+Balance: $9140000
+      Final Balance: 9140000
+   Expected Balance: 4303995296
+==========================================================
+          File name: Log_79.txt
+                Run: 15
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9009000
+Balance: $9013000
+Balance: $9016000
+Balance: $9019000
+Balance: $9020000
+Balance: $9021000
+Balance: $9022000
+Balance: $9021000
+Balance: $9020000
+Balance: $9019000
+Balance: $9018000
+Balance: $9017000
+Balance: $9016000
+Balance: $9015000
+Balance: $9014000
+      Final Balance: 9014000
+   Expected Balance: 4303924296
+==========================================================
+          File name: Log_79.txt
+                Run: 16
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9200000
+Balance: $9201000
+Balance: $9202000
+Balance: $9203000
+Balance: $9202000
+Balance: $9201000
+Balance: $9200000
+Balance: $9199000
+Balance: $9198000
+Balance: $9197000
+Balance: $9196000
+Balance: $9195000
+Balance: $9194000
+Balance: $9193000
+Balance: $9192000
+      Final Balance: 9192000
+   Expected Balance: 4304102296
+==========================================================
+          File name: Log_79.txt
+                Run: 17
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $8755000
+Balance: $8756000
+Balance: $8757000
+Balance: $8758000
+Balance: $8757000
+Balance: $8756000
+Balance: $8755000
+Balance: $8754000
+Balance: $8753000
+Balance: $8752000
+Balance: $8751000
+Balance: $8750000
+Balance: $8749000
+Balance: $8748000
+Balance: $8747000
+      Final Balance: 8747000
+   Expected Balance: 4303599296
+==========================================================
+          File name: Log_79.txt
+                Run: 18
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9237000
+Balance: $9238000
+Balance: $9239000
+Balance: $9240000
+Balance: $9239000
+Balance: $9238000
+Balance: $9237000
+Balance: $9236000
+Balance: $9235000
+Balance: $9234000
+Balance: $9233000
+Balance: $9232000
+Balance: $9231000
+Balance: $9230000
+Balance: $9229000
+      Final Balance: 9229000
+   Expected Balance: 4304084296
+==========================================================
+          File name: Log_79.txt
+                Run: 19
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $8766000
+Balance: $8767000
+Balance: $8768000
+Balance: $8769000
+Balance: $8768000
+Balance: $8767000
+Balance: $8766000
+Balance: $8765000
+Balance: $8764000
+Balance: $8763000
+Balance: $8762000
+Balance: $8761000
+Balance: $8760000
+Balance: $8759000
+Balance: $8758000
+      Final Balance: 8758000
+   Expected Balance: 4303723296
+==========================================================
+          File name: Log_79.txt
+                Run: 20
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $8823000
+Balance: $8824000
+Balance: $8825000
+Balance: $8826000
+Balance: $8825000
+Balance: $8824000
+Balance: $8823000
+Balance: $8822000
+Balance: $8821000
+Balance: $8820000
+Balance: $8819000
+Balance: $8818000
+Balance: $8817000
+Balance: $8816000
+Balance: $8815000
+      Final Balance: 8815000
+   Expected Balance: 4303724296
+==========================================================
+          File name: Log_79.txt
+                Run: 21
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9305000
+Balance: $9306000
+Balance: $9307000
+Balance: $9308000
+Balance: $9307000
+Balance: $9306000
+Balance: $9305000
+Balance: $9304000
+Balance: $9303000
+Balance: $9302000
+Balance: $9301000
+Balance: $9300000
+Balance: $9299000
+Balance: $9298000
+Balance: $9297000
+      Final Balance: 9297000
+   Expected Balance: 4304170296
+==========================================================
+          File name: Log_79.txt
+                Run: 22
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9590000
+Balance: $9590000
+Balance: $9592000
+Balance: $9592000
+Balance: $9591000
+Balance: $9591000
+Balance: $9588000
+Balance: $9587000
+Balance: $9586000
+Balance: $9585000
+Balance: $9584000
+Balance: $9583000
+Balance: $9582000
+Balance: $9581000
+Balance: $9580000
+      Final Balance: 9580000
+   Expected Balance: 4304482296
+==========================================================
+          File name: Log_79.txt
+                Run: 23
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9140000
+Balance: $9141000
+Balance: $9142000
+Balance: $9143000
+Balance: $9142000
+Balance: $9141000
+Balance: $9140000
+Balance: $9139000
+Balance: $9138000
+Balance: $9137000
+Balance: $9136000
+Balance: $9135000
+Balance: $9134000
+Balance: $9133000
+Balance: $9132000
+      Final Balance: 9132000
+   Expected Balance: 4303984296
+==========================================================
+          File name: Log_79.txt
+                Run: 24
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9248000
+Balance: $9249000
+Balance: $9250000
+Balance: $9251000
+Balance: $9250000
+Balance: $9249000
+Balance: $9248000
+Balance: $9247000
+Balance: $9246000
+Balance: $9245000
+Balance: $9244000
+Balance: $9243000
+Balance: $9242000
+Balance: $9241000
+Balance: $9240000
+      Final Balance: 9240000
+   Expected Balance: 4304252296
+==========================================================
+          File name: Log_79.txt
+                Run: 25
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9638000
+Balance: $9639000
+Balance: $9640000
+Balance: $9641000
+Balance: $9640000
+Balance: $9639000
+Balance: $9638000
+Balance: $9637000
+Balance: $9636000
+Balance: $9635000
+Balance: $9634000
+Balance: $9633000
+Balance: $9632000
+Balance: $9631000
+Balance: $9630000
+      Final Balance: 9630000
+   Expected Balance: 4304509296
+==========================================================
+          File name: Log_79.txt
+                Run: 26
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $8900000
+Balance: $8901000
+Balance: $8902000
+Balance: $8903000
+Balance: $8902000
+Balance: $8901000
+Balance: $8900000
+Balance: $8899000
+Balance: $8898000
+Balance: $8897000
+Balance: $8896000
+Balance: $8895000
+Balance: $8894000
+Balance: $8893000
+Balance: $8892000
+      Final Balance: 8892000
+   Expected Balance: 4303744296
+==========================================================
+          File name: Log_79.txt
+                Run: 27
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $8832000
+Balance: $8833000
+Balance: $8834000
+Balance: $8835000
+Balance: $8834000
+Balance: $8833000
+Balance: $8832000
+Balance: $8831000
+Balance: $8830000
+Balance: $8829000
+Balance: $8828000
+Balance: $8827000
+Balance: $8826000
+Balance: $8825000
+Balance: $8824000
+      Final Balance: 8824000
+   Expected Balance: 4303777296
+==========================================================
+          File name: Log_79.txt
+                Run: 28
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9191000
+Balance: $9192000
+Balance: $9193000
+Balance: $9194000
+Balance: $9193000
+Balance: $9192000
+Balance: $9191000
+Balance: $9190000
+Balance: $9189000
+Balance: $9188000
+Balance: $9187000
+Balance: $9186000
+Balance: $9185000
+Balance: $9184000
+Balance: $9183000
+      Final Balance: 9183000
+   Expected Balance: 4304034296
+==========================================================
+          File name: Log_79.txt
+                Run: 29
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9192000
+Balance: $9195000
+Balance: $9197000
+Balance: $9200000
+Balance: $9202000
+Balance: $9203000
+Balance: $9204000
+Balance: $9204000
+Balance: $9204000
+Balance: $9204000
+Balance: $9204000
+Balance: $9204000
+Balance: $9204000
+Balance: $9204000
+Balance: $9204000
+      Final Balance: 9204000
+   Expected Balance: 4304101296
+==========================================================
+          File name: Log_79.txt
+                Run: 30
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9183000
+Balance: $9187000
+Balance: $9190000
+Balance: $9192000
+Balance: $9194000
+Balance: $9195000
+Balance: $9194000
+Balance: $9193000
+Balance: $9192000
+Balance: $9191000
+Balance: $9190000
+Balance: $9189000
+Balance: $9188000
+Balance: $9187000
+Balance: $9186000
+      Final Balance: 9186000
+   Expected Balance: 4304153296
+==========================================================
+          File name: Log_79.txt
+                Run: 31
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $8904000
+Balance: $8905000
+Balance: $8906000
+Balance: $8907000
+Balance: $8906000
+Balance: $8905000
+Balance: $8904000
+Balance: $8903000
+Balance: $8902000
+Balance: $8901000
+Balance: $8900000
+Balance: $8899000
+Balance: $8898000
+Balance: $8897000
+Balance: $8896000
+      Final Balance: 8896000
+   Expected Balance: 4303748296
+==========================================================
+          File name: Log_79.txt
+                Run: 32
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9087000
+Balance: $9088000
+Balance: $9089000
+Balance: $9090000
+Balance: $9089000
+Balance: $9088000
+Balance: $9087000
+Balance: $9086000
+Balance: $9085000
+Balance: $9084000
+Balance: $9083000
+Balance: $9082000
+Balance: $9081000
+Balance: $9080000
+Balance: $9079000
+      Final Balance: 9079000
+   Expected Balance: 4303954296
+==========================================================
+          File name: Log_79.txt
+                Run: 33
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9005000
+Balance: $9006000
+Balance: $9007000
+Balance: $9008000
+Balance: $9007000
+Balance: $9006000
+Balance: $9005000
+Balance: $9004000
+Balance: $9003000
+Balance: $9002000
+Balance: $9001000
+Balance: $9000000
+Balance: $8999000
+Balance: $8998000
+Balance: $8997000
+      Final Balance: 8997000
+   Expected Balance: 4303956296
+==========================================================
+          File name: Log_79.txt
+                Run: 34
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $8928000
+Balance: $8929000
+Balance: $8931000
+Balance: $8933000
+Balance: $8933000
+Balance: $8934000
+Balance: $8934000
+Balance: $8935000
+Balance: $8936000
+Balance: $8936000
+Balance: $8936000
+Balance: $8936000
+Balance: $8936000
+Balance: $8936000
+Balance: $8936000
+      Final Balance: 8937000
+   Expected Balance: 4303772296
+==========================================================
+          File name: Log_79.txt
+                Run: 35
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $8891000
+Balance: $8892000
+Balance: $8893000
+Balance: $8894000
+Balance: $8893000
+Balance: $8892000
+Balance: $8891000
+Balance: $8890000
+Balance: $8889000
+Balance: $8888000
+Balance: $8887000
+Balance: $8886000
+Balance: $8885000
+Balance: $8884000
+Balance: $8883000
+      Final Balance: 8883000
+   Expected Balance: 4303759296
+==========================================================
+          File name: Log_79.txt
+                Run: 36
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9015000
+Balance: $9016000
+Balance: $9017000
+Balance: $9018000
+Balance: $9017000
+Balance: $9016000
+Balance: $9015000
+Balance: $9014000
+Balance: $9013000
+Balance: $9012000
+Balance: $9011000
+Balance: $9010000
+Balance: $9009000
+Balance: $9008000
+Balance: $9007000
+      Final Balance: 9007000
+   Expected Balance: 4303973296
+==========================================================
+          File name: Log_79.txt
+                Run: 37
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9471000
+Balance: $9472000
+Balance: $9473000
+Balance: $9474000
+Balance: $9473000
+Balance: $9472000
+Balance: $9471000
+Balance: $9470000
+Balance: $9469000
+Balance: $9468000
+Balance: $9467000
+Balance: $9466000
+Balance: $9465000
+Balance: $9464000
+Balance: $9463000
+      Final Balance: 9463000
+   Expected Balance: 4304301296
+==========================================================
+          File name: Log_79.txt
+                Run: 38
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9028000
+Balance: $9029000
+Balance: $9030000
+Balance: $9031000
+Balance: $9030000
+Balance: $9029000
+Balance: $9028000
+Balance: $9027000
+Balance: $9026000
+Balance: $9025000
+Balance: $9024000
+Balance: $9023000
+Balance: $9022000
+Balance: $9021000
+Balance: $9020000
+      Final Balance: 9020000
+   Expected Balance: 4303894296
+==========================================================
+          File name: Log_79.txt
+                Run: 39
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9089000
+Balance: $9092000
+Balance: $9095000
+Balance: $9098000
+Balance: $9100000
+Balance: $9101000
+Balance: $9102000
+Balance: $9103000
+Balance: $9104000
+Balance: $9105000
+Balance: $9106000
+Balance: $9107000
+Balance: $9108000
+Balance: $9109000
+Balance: $9110000
+      Final Balance: 9112000
+   Expected Balance: 4304056296
+==========================================================
+          File name: Log_79.txt
+                Run: 40
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9239000
+Balance: $9240000
+Balance: $9241000
+Balance: $9242000
+Balance: $9241000
+Balance: $9240000
+Balance: $9239000
+Balance: $9238000
+Balance: $9237000
+Balance: $9236000
+Balance: $9235000
+Balance: $9234000
+Balance: $9233000
+Balance: $9232000
+Balance: $9231000
+      Final Balance: 9231000
+   Expected Balance: 4304139296
+==========================================================
+          File name: Log_79.txt
+                Run: 41
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9192000
+Balance: $9193000
+Balance: $9194000
+Balance: $9195000
+Balance: $9194000
+Balance: $9193000
+Balance: $9192000
+Balance: $9191000
+Balance: $9190000
+Balance: $9189000
+Balance: $9188000
+Balance: $9187000
+Balance: $9186000
+Balance: $9185000
+Balance: $9184000
+      Final Balance: 9184000
+   Expected Balance: 4304037296
+==========================================================
+          File name: Log_79.txt
+                Run: 42
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9340000
+Balance: $9341000
+Balance: $9342000
+Balance: $9343000
+Balance: $9342000
+Balance: $9341000
+Balance: $9340000
+Balance: $9339000
+Balance: $9338000
+Balance: $9337000
+Balance: $9336000
+Balance: $9335000
+Balance: $9334000
+Balance: $9333000
+Balance: $9332000
+      Final Balance: 9332000
+   Expected Balance: 4304214296
+==========================================================
+          File name: Log_79.txt
+                Run: 43
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9010000
+Balance: $9011000
+Balance: $9012000
+Balance: $9013000
+Balance: $9012000
+Balance: $9011000
+Balance: $9010000
+Balance: $9009000
+Balance: $9008000
+Balance: $9007000
+Balance: $9006000
+Balance: $9005000
+Balance: $9004000
+Balance: $9003000
+Balance: $9002000
+      Final Balance: 9002000
+   Expected Balance: 4303910296
+==========================================================
+          File name: Log_79.txt
+                Run: 44
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9119000
+Balance: $9120000
+Balance: $9121000
+Balance: $9122000
+Balance: $9121000
+Balance: $9120000
+Balance: $9119000
+Balance: $9118000
+Balance: $9117000
+Balance: $9116000
+Balance: $9115000
+Balance: $9114000
+Balance: $9113000
+Balance: $9112000
+Balance: $9111000
+      Final Balance: 9111000
+   Expected Balance: 4303951296
+==========================================================
+          File name: Log_79.txt
+                Run: 45
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9332000
+Balance: $9333000
+Balance: $9334000
+Balance: $9335000
+Balance: $9334000
+Balance: $9333000
+Balance: $9332000
+Balance: $9331000
+Balance: $9330000
+Balance: $9329000
+Balance: $9328000
+Balance: $9327000
+Balance: $9326000
+Balance: $9325000
+Balance: $9324000
+      Final Balance: 9324000
+   Expected Balance: 4304276296
+==========================================================
+          File name: Log_79.txt
+                Run: 46
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9275000
+Balance: $9276000
+Balance: $9277000
+Balance: $9278000
+Balance: $9277000
+Balance: $9276000
+Balance: $9275000
+Balance: $9274000
+Balance: $9273000
+Balance: $9272000
+Balance: $9271000
+Balance: $9270000
+Balance: $9269000
+Balance: $9268000
+Balance: $9267000
+      Final Balance: 9267000
+   Expected Balance: 4304197296
+==========================================================
+          File name: Log_79.txt
+                Run: 47
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9270000
+Balance: $9271000
+Balance: $9272000
+Balance: $9273000
+Balance: $9272000
+Balance: $9271000
+Balance: $9270000
+Balance: $9269000
+Balance: $9268000
+Balance: $9267000
+Balance: $9266000
+Balance: $9265000
+Balance: $9264000
+Balance: $9263000
+Balance: $9262000
+      Final Balance: 9262000
+   Expected Balance: 4304174296
+==========================================================
+          File name: Log_79.txt
+                Run: 48
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9566000
+Balance: $9569000
+Balance: $9570000
+Balance: $9571000
+Balance: $9570000
+Balance: $9569000
+Balance: $9568000
+Balance: $9567000
+Balance: $9566000
+Balance: $9565000
+Balance: $9564000
+Balance: $9563000
+Balance: $9562000
+Balance: $9561000
+Balance: $9560000
+      Final Balance: 9560000
+   Expected Balance: 4304498296
+==========================================================
+          File name: Log_79.txt
+                Run: 49
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9343000
+Balance: $9344000
+Balance: $9345000
+Balance: $9346000
+Balance: $9345000
+Balance: $9344000
+Balance: $9343000
+Balance: $9342000
+Balance: $9341000
+Balance: $9340000
+Balance: $9339000
+Balance: $9338000
+Balance: $9337000
+Balance: $9336000
+Balance: $9335000
+      Final Balance: 9335000
+   Expected Balance: 4304212296
+==========================================================
+          File name: Log_79.txt
+                Run: 50
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9434000
+Balance: $9435000
+Balance: $9436000
+Balance: $9437000
+Balance: $9436000
+Balance: $9435000
+Balance: $9434000
+Balance: $9433000
+Balance: $9432000
+Balance: $9431000
+Balance: $9430000
+Balance: $9429000
+Balance: $9428000
+Balance: $9427000
+Balance: $9426000
+      Final Balance: 9426000
+   Expected Balance: 4304279296
+==========================================================
+          File name: Log_79.txt
+                Run: 51
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $8703000
+Balance: $8704000
+Balance: $8705000
+Balance: $8706000
+Balance: $8705000
+Balance: $8704000
+Balance: $8703000
+Balance: $8702000
+Balance: $8701000
+Balance: $8700000
+Balance: $8699000
+Balance: $8698000
+Balance: $8697000
+Balance: $8696000
+Balance: $8695000
+      Final Balance: 8695000
+   Expected Balance: 4303662296
+==========================================================
+          File name: Log_79.txt
+                Run: 52
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $8960000
+Balance: $8961000
+Balance: $8962000
+Balance: $8963000
+Balance: $8962000
+Balance: $8961000
+Balance: $8960000
+Balance: $8959000
+Balance: $8958000
+Balance: $8957000
+Balance: $8956000
+Balance: $8955000
+Balance: $8954000
+Balance: $8953000
+Balance: $8952000
+      Final Balance: 8952000
+   Expected Balance: 4303862296
+==========================================================
+          File name: Log_79.txt
+                Run: 53
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9069000
+Balance: $9070000
+Balance: $9071000
+Balance: $9072000
+Balance: $9071000
+Balance: $9070000
+Balance: $9069000
+Balance: $9068000
+Balance: $9067000
+Balance: $9066000
+Balance: $9065000
+Balance: $9064000
+Balance: $9063000
+Balance: $9062000
+Balance: $9061000
+      Final Balance: 9061000
+   Expected Balance: 4304057296
+==========================================================
+          File name: Log_79.txt
+                Run: 54
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9356000
+Balance: $9357000
+Balance: $9358000
+Balance: $9359000
+Balance: $9358000
+Balance: $9357000
+Balance: $9356000
+Balance: $9355000
+Balance: $9354000
+Balance: $9353000
+Balance: $9352000
+Balance: $9351000
+Balance: $9350000
+Balance: $9349000
+Balance: $9348000
+      Final Balance: 9348000
+   Expected Balance: 4304231296
+==========================================================
+          File name: Log_79.txt
+                Run: 55
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9373000
+Balance: $9374000
+Balance: $9375000
+Balance: $9376000
+Balance: $9375000
+Balance: $9374000
+Balance: $9373000
+Balance: $9372000
+Balance: $9371000
+Balance: $9370000
+Balance: $9369000
+Balance: $9368000
+Balance: $9367000
+Balance: $9366000
+Balance: $9365000
+      Final Balance: 9365000
+   Expected Balance: 4304267296
+==========================================================
+          File name: Log_79.txt
+                Run: 56
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $8980000
+Balance: $8981000
+Balance: $8982000
+Balance: $8983000
+Balance: $8982000
+Balance: $8981000
+Balance: $8980000
+Balance: $8979000
+Balance: $8978000
+Balance: $8977000
+Balance: $8976000
+Balance: $8975000
+Balance: $8975000
+Balance: $8974000
+Balance: $8973000
+      Final Balance: 8973000
+   Expected Balance: 4303884296
+==========================================================
+          File name: Log_79.txt
+                Run: 57
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9039000
+Balance: $9040000
+Balance: $9041000
+Balance: $9042000
+Balance: $9041000
+Balance: $9040000
+Balance: $9039000
+Balance: $9038000
+Balance: $9037000
+Balance: $9036000
+Balance: $9035000
+Balance: $9034000
+Balance: $9033000
+Balance: $9032000
+Balance: $9031000
+      Final Balance: 9031000
+   Expected Balance: 4303998296
+==========================================================
+          File name: Log_79.txt
+                Run: 58
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9351000
+Balance: $9352000
+Balance: $9353000
+Balance: $9354000
+Balance: $9353000
+Balance: $9352000
+Balance: $9351000
+Balance: $9350000
+Balance: $9349000
+Balance: $9348000
+Balance: $9347000
+Balance: $9346000
+Balance: $9345000
+Balance: $9344000
+Balance: $9343000
+      Final Balance: 9343000
+   Expected Balance: 4304235296
+==========================================================
+          File name: Log_79.txt
+                Run: 59
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $8969000
+Balance: $8970000
+Balance: $8971000
+Balance: $8972000
+Balance: $8971000
+Balance: $8970000
+Balance: $8969000
+Balance: $8968000
+Balance: $8967000
+Balance: $8966000
+Balance: $8965000
+Balance: $8964000
+Balance: $8963000
+Balance: $8962000
+Balance: $8961000
+      Final Balance: 8961000
+   Expected Balance: 4303841296
+==========================================================
+          File name: Log_79.txt
+                Run: 60
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9093000
+Balance: $9094000
+Balance: $9095000
+Balance: $9096000
+Balance: $9095000
+Balance: $9094000
+Balance: $9093000
+Balance: $9092000
+Balance: $9091000
+Balance: $9090000
+Balance: $9089000
+Balance: $9088000
+Balance: $9087000
+Balance: $9086000
+Balance: $9085000
+      Final Balance: 9085000
+   Expected Balance: 4303937296
+==========================================================
+          File name: Log_79.txt
+                Run: 61
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $267000
+Balance: $268000
+Balance: $269000
+Balance: $270000
+Balance: $269000
+Balance: $268000
+Balance: $267000
+Balance: $266000
+Balance: $265000
+Balance: $264000
+Balance: $263000
+Balance: $262000
+Balance: $261000
+Balance: $260000
+Balance: $259000
+      Final Balance: 259000
+   Expected Balance: 4295261296
+==========================================================
+          File name: Log_79.txt
+                Run: 62
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9189000
+Balance: $9190000
+Balance: $9191000
+Balance: $9192000
+Balance: $9191000
+Balance: $9190000
+Balance: $9189000
+Balance: $9188000
+Balance: $9187000
+Balance: $9186000
+Balance: $9185000
+Balance: $9184000
+Balance: $9183000
+Balance: $9182000
+Balance: $9181000
+      Final Balance: 9181000
+   Expected Balance: 4304120296
+==========================================================
+          File name: Log_79.txt
+                Run: 63
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $8971000
+Balance: $8972000
+Balance: $8973000
+Balance: $8974000
+Balance: $8973000
+Balance: $8972000
+Balance: $8971000
+Balance: $8970000
+Balance: $8969000
+Balance: $8968000
+Balance: $8967000
+Balance: $8966000
+Balance: $8965000
+Balance: $8964000
+Balance: $8963000
+      Final Balance: 8963000
+   Expected Balance: 4303859296
+==========================================================
+          File name: Log_79.txt
+                Run: 64
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9270000
+Balance: $9271000
+Balance: $9272000
+Balance: $9273000
+Balance: $9272000
+Balance: $9271000
+Balance: $9270000
+Balance: $9269000
+Balance: $9268000
+Balance: $9267000
+Balance: $9266000
+Balance: $9265000
+Balance: $9264000
+Balance: $9263000
+Balance: $9262000
+      Final Balance: 9262000
+   Expected Balance: 4304145296
+==========================================================
+          File name: Log_79.txt
+                Run: 65
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9307000
+Balance: $9308000
+Balance: $9309000
+Balance: $9310000
+Balance: $9309000
+Balance: $9308000
+Balance: $9307000
+Balance: $9306000
+Balance: $9305000
+Balance: $9304000
+Balance: $9303000
+Balance: $9302000
+Balance: $9301000
+Balance: $9300000
+Balance: $9299000
+      Final Balance: 9299000
+   Expected Balance: 4304182296
+==========================================================
+          File name: Log_79.txt
+                Run: 66
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $8883000
+Balance: $8884000
+Balance: $8885000
+Balance: $8886000
+Balance: $8885000
+Balance: $8884000
+Balance: $8883000
+Balance: $8882000
+Balance: $8881000
+Balance: $8880000
+Balance: $8879000
+Balance: $8878000
+Balance: $8877000
+Balance: $8876000
+Balance: $8875000
+      Final Balance: 8875000
+   Expected Balance: 4303757296
+==========================================================
+          File name: Log_79.txt
+                Run: 67
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9014000
+Balance: $9015000
+Balance: $9016000
+Balance: $9017000
+Balance: $9016000
+Balance: $9015000
+Balance: $9014000
+Balance: $9013000
+Balance: $9012000
+Balance: $9011000
+Balance: $9010000
+Balance: $9009000
+Balance: $9008000
+Balance: $9007000
+Balance: $9006000
+      Final Balance: 9006000
+   Expected Balance: 4303916296
+==========================================================
+          File name: Log_79.txt
+                Run: 68
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9146000
+Balance: $9147000
+Balance: $9148000
+Balance: $9149000
+Balance: $9148000
+Balance: $9147000
+Balance: $9146000
+Balance: $9145000
+Balance: $9144000
+Balance: $9143000
+Balance: $9142000
+Balance: $9141000
+Balance: $9140000
+Balance: $9139000
+Balance: $9138000
+      Final Balance: 9138000
+   Expected Balance: 4304080296
+==========================================================
+          File name: Log_79.txt
+                Run: 69
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $8994000
+Balance: $8995000
+Balance: $8996000
+Balance: $8997000
+Balance: $8996000
+Balance: $8995000
+Balance: $8994000
+Balance: $8993000
+Balance: $8992000
+Balance: $8991000
+Balance: $8990000
+Balance: $8989000
+Balance: $8988000
+Balance: $8987000
+Balance: $8986000
+      Final Balance: 8986000
+   Expected Balance: 4303896296
+==========================================================
+          File name: Log_79.txt
+                Run: 70
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $8932000
+Balance: $8933000
+Balance: $8934000
+Balance: $8935000
+Balance: $8934000
+Balance: $8933000
+Balance: $8932000
+Balance: $8931000
+Balance: $8930000
+Balance: $8929000
+Balance: $8928000
+Balance: $8927000
+Balance: $8926000
+Balance: $8925000
+Balance: $8924000
+      Final Balance: 8924000
+   Expected Balance: 4303808296
+==========================================================
+          File name: Log_79.txt
+                Run: 71
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $8981000
+Balance: $8982000
+Balance: $8983000
+Balance: $8984000
+Balance: $8983000
+Balance: $8982000
+Balance: $8981000
+Balance: $8980000
+Balance: $8979000
+Balance: $8978000
+Balance: $8977000
+Balance: $8976000
+Balance: $8975000
+Balance: $8974000
+Balance: $8973000
+      Final Balance: 8973000
+   Expected Balance: 4303878296
+==========================================================
+          File name: Log_79.txt
+                Run: 72
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $8996000
+Balance: $9000000
+Balance: $9002000
+Balance: $9004000
+Balance: $9004000
+Balance: $9004000
+Balance: $9004000
+Balance: $9004000
+Balance: $9004000
+Balance: $9004000
+Balance: $9004000
+Balance: $9003000
+Balance: $9002000
+Balance: $9001000
+Balance: $9000000
+      Final Balance: 9000000
+   Expected Balance: 4303903296
+==========================================================
+          File name: Log_79.txt
+                Run: 73
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9205000
+Balance: $9203000
+Balance: $9202000
+Balance: $9203000
+Balance: $9202000
+Balance: $9201000
+Balance: $9200000
+Balance: $9199000
+Balance: $9198000
+Balance: $9197000
+Balance: $9196000
+Balance: $9195000
+Balance: $9194000
+Balance: $9193000
+Balance: $9192000
+      Final Balance: 9192000
+   Expected Balance: 4304073296
+==========================================================
+          File name: Log_79.txt
+                Run: 74
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $8961000
+Balance: $8962000
+Balance: $8963000
+Balance: $8964000
+Balance: $8963000
+Balance: $8962000
+Balance: $8961000
+Balance: $8960000
+Balance: $8959000
+Balance: $8958000
+Balance: $8957000
+Balance: $8956000
+Balance: $8955000
+Balance: $8954000
+Balance: $8953000
+      Final Balance: 8953000
+   Expected Balance: 4303856296
+==========================================================
+          File name: Log_79.txt
+                Run: 75
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9260000
+Balance: $9261000
+Balance: $9262000
+Balance: $9263000
+Balance: $9262000
+Balance: $9261000
+Balance: $9260000
+Balance: $9259000
+Balance: $9258000
+Balance: $9257000
+Balance: $9256000
+Balance: $9255000
+Balance: $9254000
+Balance: $9253000
+Balance: $9252000
+      Final Balance: 9252000
+   Expected Balance: 4304186296
+==========================================================
+          File name: Log_79.txt
+                Run: 76
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9238000
+Balance: $9238000
+Balance: $9237000
+Balance: $9236000
+Balance: $9232000
+Balance: $9230000
+Balance: $9229000
+Balance: $9228000
+Balance: $9227000
+Balance: $9226000
+Balance: $9225000
+Balance: $9224000
+Balance: $9223000
+Balance: $9222000
+Balance: $9221000
+      Final Balance: 9221000
+   Expected Balance: 4304117296
+==========================================================
+          File name: Log_79.txt
+                Run: 77
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $8880000
+Balance: $8881000
+Balance: $8882000
+Balance: $8883000
+Balance: $8882000
+Balance: $8881000
+Balance: $8880000
+Balance: $8879000
+Balance: $8878000
+Balance: $8877000
+Balance: $8876000
+Balance: $8875000
+Balance: $8874000
+Balance: $8873000
+Balance: $8872000
+      Final Balance: 8872000
+   Expected Balance: 4303749296
+==========================================================
+          File name: Log_79.txt
+                Run: 78
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9166000
+Balance: $9167000
+Balance: $9168000
+Balance: $9169000
+Balance: $9168000
+Balance: $9167000
+Balance: $9166000
+Balance: $9165000
+Balance: $9164000
+Balance: $9163000
+Balance: $9162000
+Balance: $9161000
+Balance: $9160000
+Balance: $9159000
+Balance: $9158000
+      Final Balance: 9158000
+   Expected Balance: 4304045296
+==========================================================
+          File name: Log_79.txt
+                Run: 79
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $8970000
+Balance: $8971000
+Balance: $8972000
+Balance: $8973000
+Balance: $8972000
+Balance: $8971000
+Balance: $8970000
+Balance: $8969000
+Balance: $8968000
+Balance: $8967000
+Balance: $8966000
+Balance: $8965000
+Balance: $8964000
+Balance: $8963000
+Balance: $8962000
+      Final Balance: 8962000
+   Expected Balance: 4303900296
+==========================================================
+          File name: Log_79.txt
+                Run: 80
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9156000
+Balance: $9157000
+Balance: $9158000
+Balance: $9159000
+Balance: $9158000
+Balance: $9157000
+Balance: $9156000
+Balance: $9155000
+Balance: $9154000
+Balance: $9153000
+Balance: $9152000
+Balance: $9151000
+Balance: $9150000
+Balance: $9149000
+Balance: $9148000
+      Final Balance: 9148000
+   Expected Balance: 4304115296
+==========================================================
+          File name: Log_79.txt
+                Run: 81
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9213000
+Balance: $9214000
+Balance: $9215000
+Balance: $9216000
+Balance: $9215000
+Balance: $9214000
+Balance: $9213000
+Balance: $9212000
+Balance: $9211000
+Balance: $9210000
+Balance: $9209000
+Balance: $9208000
+Balance: $9207000
+Balance: $9206000
+Balance: $9205000
+      Final Balance: 9205000
+   Expected Balance: 4304116296
+==========================================================
+          File name: Log_79.txt
+                Run: 82
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9159000
+Balance: $9160000
+Balance: $9161000
+Balance: $9162000
+Balance: $9161000
+Balance: $9160000
+Balance: $9159000
+Balance: $9158000
+Balance: $9157000
+Balance: $9156000
+Balance: $9155000
+Balance: $9154000
+Balance: $9153000
+Balance: $9152000
+Balance: $9151000
+      Final Balance: 9151000
+   Expected Balance: 4304042296
+==========================================================
+          File name: Log_79.txt
+                Run: 83
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $8939000
+Balance: $8940000
+Balance: $8941000
+Balance: $8942000
+Balance: $8941000
+Balance: $8940000
+Balance: $8939000
+Balance: $8938000
+Balance: $8937000
+Balance: $8936000
+Balance: $8935000
+Balance: $8934000
+Balance: $8933000
+Balance: $8932000
+Balance: $8931000
+      Final Balance: 8931000
+   Expected Balance: 4303841296
+==========================================================
+          File name: Log_79.txt
+                Run: 84
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9124000
+Balance: $9125000
+Balance: $9126000
+Balance: $9127000
+Balance: $9126000
+Balance: $9125000
+Balance: $9124000
+Balance: $9123000
+Balance: $9122000
+Balance: $9121000
+Balance: $9120000
+Balance: $9119000
+Balance: $9118000
+Balance: $9117000
+Balance: $9116000
+      Final Balance: 9116000
+   Expected Balance: 4304026296
+==========================================================
+          File name: Log_79.txt
+                Run: 85
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9317000
+Balance: $9318000
+Balance: $9319000
+Balance: $9320000
+Balance: $9319000
+Balance: $9318000
+Balance: $9317000
+Balance: $9316000
+Balance: $9315000
+Balance: $9314000
+Balance: $9313000
+Balance: $9312000
+Balance: $9311000
+Balance: $9310000
+Balance: $9309000
+      Final Balance: 9309000
+   Expected Balance: 4304156296
+==========================================================
+          File name: Log_79.txt
+                Run: 86
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $8874000
+Balance: $8875000
+Balance: $8876000
+Balance: $8877000
+Balance: $8876000
+Balance: $8875000
+Balance: $8874000
+Balance: $8873000
+Balance: $8872000
+Balance: $8871000
+Balance: $8870000
+Balance: $8869000
+Balance: $8868000
+Balance: $8867000
+Balance: $8866000
+      Final Balance: 8866000
+   Expected Balance: 4303804296
+==========================================================
+          File name: Log_79.txt
+                Run: 87
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9351000
+Balance: $9352000
+Balance: $9353000
+Balance: $9354000
+Balance: $9353000
+Balance: $9352000
+Balance: $9351000
+Balance: $9350000
+Balance: $9349000
+Balance: $9348000
+Balance: $9347000
+Balance: $9346000
+Balance: $9345000
+Balance: $9344000
+Balance: $9343000
+      Final Balance: 9343000
+   Expected Balance: 4304196296
+==========================================================
+          File name: Log_79.txt
+                Run: 88
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9013000
+Balance: $9014000
+Balance: $9015000
+Balance: $9016000
+Balance: $9015000
+Balance: $9014000
+Balance: $9013000
+Balance: $9012000
+Balance: $9011000
+Balance: $9010000
+Balance: $9009000
+Balance: $9008000
+Balance: $9007000
+Balance: $9006000
+Balance: $9005000
+      Final Balance: 9005000
+   Expected Balance: 4303942296
+==========================================================
+          File name: Log_79.txt
+                Run: 89
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9249000
+Balance: $9250000
+Balance: $9251000
+Balance: $9252000
+Balance: $9251000
+Balance: $9250000
+Balance: $9249000
+Balance: $9248000
+Balance: $9247000
+Balance: $9246000
+Balance: $9245000
+Balance: $9244000
+Balance: $9243000
+Balance: $9242000
+Balance: $9241000
+      Final Balance: 9241000
+   Expected Balance: 4304093296
+==========================================================
+          File name: Log_79.txt
+                Run: 90
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9359000
+Balance: $9360000
+Balance: $9361000
+Balance: $9362000
+Balance: $9361000
+Balance: $9360000
+Balance: $9359000
+Balance: $9358000
+Balance: $9357000
+Balance: $9356000
+Balance: $9355000
+Balance: $9354000
+Balance: $9353000
+Balance: $9352000
+Balance: $9351000
+      Final Balance: 9351000
+   Expected Balance: 4304289296
+==========================================================
+          File name: Log_79.txt
+                Run: 91
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9038000
+Balance: $9039000
+Balance: $9040000
+Balance: $9041000
+Balance: $9040000
+Balance: $9039000
+Balance: $9038000
+Balance: $9037000
+Balance: $9036000
+Balance: $9035000
+Balance: $9034000
+Balance: $9033000
+Balance: $9032000
+Balance: $9031000
+Balance: $9030000
+      Final Balance: 9030000
+   Expected Balance: 4303940296
+==========================================================
+          File name: Log_79.txt
+                Run: 92
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9127000
+Balance: $9128000
+Balance: $9129000
+Balance: $9130000
+Balance: $9129000
+Balance: $9128000
+Balance: $9127000
+Balance: $9126000
+Balance: $9125000
+Balance: $9124000
+Balance: $9123000
+Balance: $9122000
+Balance: $9121000
+Balance: $9120000
+Balance: $9119000
+      Final Balance: 9119000
+   Expected Balance: 4304057296
+==========================================================
+          File name: Log_79.txt
+                Run: 93
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $8828000
+Balance: $8832000
+Balance: $8835000
+Balance: $8838000
+Balance: $8839000
+Balance: $8839000
+Balance: $8839000
+Balance: $8839000
+Balance: $8839000
+Balance: $8839000
+Balance: $8839000
+Balance: $8840000
+Balance: $8840000
+Balance: $8840000
+Balance: $8840000
+      Final Balance: 8841000
+   Expected Balance: 4303696296
+==========================================================
+          File name: Log_79.txt
+                Run: 94
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $8776000
+Balance: $8777000
+Balance: $8778000
+Balance: $8779000
+Balance: $8778000
+Balance: $8777000
+Balance: $8776000
+Balance: $8775000
+Balance: $8774000
+Balance: $8773000
+Balance: $8772000
+Balance: $8771000
+Balance: $8770000
+Balance: $8769000
+Balance: $8768000
+      Final Balance: 8768000
+   Expected Balance: 4303671296
+==========================================================
+          File name: Log_79.txt
+                Run: 95
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $8892000
+Balance: $8893000
+Balance: $8894000
+Balance: $8895000
+Balance: $8894000
+Balance: $8893000
+Balance: $8892000
+Balance: $8891000
+Balance: $8890000
+Balance: $8889000
+Balance: $8888000
+Balance: $8887000
+Balance: $8886000
+Balance: $8885000
+Balance: $8884000
+      Final Balance: 8884000
+   Expected Balance: 4303789296
+==========================================================
+          File name: Log_79.txt
+                Run: 96
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9025000
+Balance: $9026000
+Balance: $9027000
+Balance: $9028000
+Balance: $9027000
+Balance: $9026000
+Balance: $9025000
+Balance: $9024000
+Balance: $9023000
+Balance: $9022000
+Balance: $9021000
+Balance: $9020000
+Balance: $9019000
+Balance: $9018000
+Balance: $9017000
+      Final Balance: 9017000
+   Expected Balance: 4303920296
+==========================================================
+          File name: Log_79.txt
+                Run: 97
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $9085000
+Balance: $9086000
+Balance: $9087000
+Balance: $9088000
+Balance: $9087000
+Balance: $9086000
+Balance: $9085000
+Balance: $9084000
+Balance: $9083000
+Balance: $9082000
+Balance: $9081000
+Balance: $9080000
+Balance: $9079000
+Balance: $9078000
+Balance: $9077000
+      Final Balance: 9077000
+   Expected Balance: 4304033296
+==========================================================
+          File name: Log_79.txt
+                Run: 98
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $8845000
+Balance: $8846000
+Balance: $8847000
+Balance: $8848000
+Balance: $8847000
+Balance: $8846000
+Balance: $8845000
+Balance: $8844000
+Balance: $8843000
+Balance: $8842000
+Balance: $8841000
+Balance: $8840000
+Balance: $8839000
+Balance: $8838000
+Balance: $8837000
+      Final Balance: 8837000
+   Expected Balance: 4303746296
+==========================================================
+          File name: Log_79.txt
+                Run: 99
+           ThreadID: 79
+ Deposit Iterations: 4
+Withdraw Iterations: 11
+Balance: $8719000
+Balance: $8720000
+Balance: $8721000
+Balance: $8722000
+Balance: $8721000
+Balance: $8720000
+Balance: $8719000
+Balance: $8718000
+Balance: $8717000
+Balance: $8716000
+Balance: $8715000
+Balance: $8714000
+Balance: $8713000
+Balance: $8712000
+Balance: $8711000
+      Final Balance: 8711000
+   Expected Balance: 4303614296
