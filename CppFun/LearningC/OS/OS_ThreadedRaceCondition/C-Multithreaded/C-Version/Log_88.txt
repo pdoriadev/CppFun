@@ -1,0 +1,28 @@
+
+==========================================================
+          File name: Log_88.txt
+                Run: 0
+           ThreadID: 88
+ Deposit Iterations: 2
+Withdraw Iterations: 1
+Balance: $53000
+Balance: $54000
+Balance: $53000
+==========================================================
+          File name: Log_88.txt
+                Run: 1
+           ThreadID: 88
+ Deposit Iterations: 2
+Withdraw Iterations: 1
+Balance: $107000
+Balance: $108000
+Balance: $107000
+==========================================================
+          File name: Log_88.txt
+                Run: 2
+           ThreadID: 88
+ Deposit Iterations: 2
+Withdraw Iterations: 1
+Balance: $162000
+Balance: $163000
+Balance: $162000

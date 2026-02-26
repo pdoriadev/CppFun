@@ -1,0 +1,34 @@
+
+==========================================================
+          File name: Log_85.txt
+                Run: 0
+           ThreadID: 85
+ Deposit Iterations: 4
+Withdraw Iterations: 1
+Balance: $45000
+Balance: $46000
+Balance: $47000
+Balance: $48000
+Balance: $47000
+==========================================================
+          File name: Log_85.txt
+                Run: 1
+           ThreadID: 85
+ Deposit Iterations: 4
+Withdraw Iterations: 1
+Balance: $100000
+Balance: $101000
+Balance: $102000
+Balance: $103000
+Balance: $102000
+==========================================================
+          File name: Log_85.txt
+                Run: 2
+           ThreadID: 85
+ Deposit Iterations: 4
+Withdraw Iterations: 1
+Balance: $155000
+Balance: $156000
+Balance: $157000
+Balance: $158000
+Balance: $157000

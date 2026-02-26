@@ -1,0 +1,28 @@
+
+==========================================================
+          File name: Log_49.txt
+                Run: 0
+           ThreadID: 49
+ Deposit Iterations: 1
+Withdraw Iterations: 2
+Balance: $31000
+Balance: $30000
+Balance: $29000
+==========================================================
+          File name: Log_49.txt
+                Run: 1
+           ThreadID: 49
+ Deposit Iterations: 1
+Withdraw Iterations: 2
+Balance: $84000
+Balance: $83000
+Balance: $82000
+==========================================================
+          File name: Log_49.txt
+                Run: 2
+           ThreadID: 49
+ Deposit Iterations: 1
+Withdraw Iterations: 2
+Balance: $138000
+Balance: $137000
+Balance: $136000

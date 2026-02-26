@@ -1,0 +1,37 @@
+
+==========================================================
+          File name: Log_18.txt
+                Run: 0
+           ThreadID: 18
+ Deposit Iterations: 3
+Withdraw Iterations: 3
+Balance: $25000
+Balance: $26000
+Balance: $27000
+Balance: $26000
+Balance: $25000
+Balance: $24000
+==========================================================
+          File name: Log_18.txt
+                Run: 1
+           ThreadID: 18
+ Deposit Iterations: 3
+Withdraw Iterations: 3
+Balance: $60000
+Balance: $61000
+Balance: $62000
+Balance: $61000
+Balance: $60000
+Balance: $59000
+==========================================================
+          File name: Log_18.txt
+                Run: 2
+           ThreadID: 18
+ Deposit Iterations: 3
+Withdraw Iterations: 3
+Balance: $115000
+Balance: $116000
+Balance: $117000
+Balance: $116000
+Balance: $115000
+Balance: $114000

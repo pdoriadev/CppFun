@@ -1,0 +1,25 @@
+
+==========================================================
+          File name: Log_70.txt
+                Run: 0
+           ThreadID: 70
+ Deposit Iterations: 1
+Withdraw Iterations: 1
+Balance: $39000
+Balance: $38000
+==========================================================
+          File name: Log_70.txt
+                Run: 1
+           ThreadID: 70
+ Deposit Iterations: 1
+Withdraw Iterations: 1
+Balance: $94000
+Balance: $93000
+==========================================================
+          File name: Log_70.txt
+                Run: 2
+           ThreadID: 70
+ Deposit Iterations: 1
+Withdraw Iterations: 1
+Balance: $148000
+Balance: $147000
