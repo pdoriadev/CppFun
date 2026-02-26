@@ -5,7 +5,7 @@
 #include <stdint.h>
 // exit()
 #include <unistd.h>
-//
+
 
 bool outputBalance(BankAccount *account, FILE* outputFile)
 {

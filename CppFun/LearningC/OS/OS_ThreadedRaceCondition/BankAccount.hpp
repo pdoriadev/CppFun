@@ -63,3 +63,8 @@ bool withdraw(BankAccount *account, int64_t amount)
 }
 
 
+typedef struct ThreadArg
+{
+  BankAccount *account = NULL;
+  uint32_t threadIndex = 0;
+} ThreadArg;
