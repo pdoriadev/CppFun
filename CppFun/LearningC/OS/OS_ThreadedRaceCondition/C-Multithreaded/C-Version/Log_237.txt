@@ -1,0 +1,801 @@
+
+==========================================================
+          File name: Log_237.txt
+                Run: 0
+           ThreadID: 237
+ Deposit Iterations: 4295
+Withdraw Iterations: 3237
+      Final Balance: 205478000
+   Expected Balance: 205478000
+==========================================================
+          File name: Log_237.txt
+                Run: 1
+           ThreadID: 237
+ Deposit Iterations: 4566
+Withdraw Iterations: 1966
+      Final Balance: 540888000
+   Expected Balance: 280422000
+==========================================================
+          File name: Log_237.txt
+                Run: 2
+           ThreadID: 237
+ Deposit Iterations: 341
+Withdraw Iterations: 1690
+      Final Balance: 201165000
+   Expected Balance: 4496132296
+==========================================================
+          File name: Log_237.txt
+                Run: 3
+           ThreadID: 237
+ Deposit Iterations: 7690
+Withdraw Iterations: 1789
+      Final Balance: 228125000
+   Expected Balance: 228125000
+==========================================================
+          File name: Log_237.txt
+                Run: 4
+           ThreadID: 237
+ Deposit Iterations: 6747
+Withdraw Iterations: 2254
+      Final Balance: 301530000
+   Expected Balance: 301530000
+==========================================================
+          File name: Log_237.txt
+                Run: 5
+           ThreadID: 237
+ Deposit Iterations: 6165
+Withdraw Iterations: 2357
+      Final Balance: 504359000
+   Expected Balance: 267760000
+==========================================================
+          File name: Log_237.txt
+                Run: 6
+           ThreadID: 237
+ Deposit Iterations: 1924
+Withdraw Iterations: 3783
+      Final Balance: 565011000
+   Expected Balance: 4546495296
+==========================================================
+          File name: Log_237.txt
+                Run: 7
+           ThreadID: 237
+ Deposit Iterations: 3076
+Withdraw Iterations: 2106
+      Final Balance: 518069000
+   Expected Balance: 245461000
+==========================================================
+          File name: Log_237.txt
+                Run: 8
+           ThreadID: 237
+ Deposit Iterations: 4172
+Withdraw Iterations: 788
+      Final Balance: 511893000
+   Expected Balance: 230271000
+==========================================================
+          File name: Log_237.txt
+                Run: 9
+           ThreadID: 237
+ Deposit Iterations: 7264
+Withdraw Iterations: 3267
+      Final Balance: 223612000
+   Expected Balance: 223612000
+==========================================================
+          File name: Log_237.txt
+                Run: 10
+           ThreadID: 237
+ Deposit Iterations: 6701
+Withdraw Iterations: 1342
+      Final Balance: 247145000
+   Expected Balance: 247145000
+==========================================================
+          File name: Log_237.txt
+                Run: 11
+           ThreadID: 237
+ Deposit Iterations: 1258
+Withdraw Iterations: 2937
+      Final Balance: 196451000
+   Expected Balance: 4491418296
+==========================================================
+          File name: Log_237.txt
+                Run: 12
+           ThreadID: 237
+ Deposit Iterations: 892
+Withdraw Iterations: 3279
+      Final Balance: 290935000
+   Expected Balance: 4585902296
+==========================================================
+          File name: Log_237.txt
+                Run: 13
+           ThreadID: 237
+ Deposit Iterations: 6468
+Withdraw Iterations: 3609
+      Final Balance: 267941000
+   Expected Balance: 267941000
+==========================================================
+          File name: Log_237.txt
+                Run: 14
+           ThreadID: 237
+ Deposit Iterations: 5275
+Withdraw Iterations: 2480
+      Final Balance: 235806000
+   Expected Balance: 235806000
+==========================================================
+          File name: Log_237.txt
+                Run: 15
+           ThreadID: 237
+ Deposit Iterations: 6061
+Withdraw Iterations: 2768
+      Final Balance: 522685000
+   Expected Balance: 275613000
+==========================================================
+          File name: Log_237.txt
+                Run: 16
+           ThreadID: 237
+ Deposit Iterations: 4577
+Withdraw Iterations: 3145
+      Final Balance: 491564000
+   Expected Balance: 226163000
+==========================================================
+          File name: Log_237.txt
+                Run: 17
+           ThreadID: 237
+ Deposit Iterations: 5946
+Withdraw Iterations: 1967
+      Final Balance: 500403000
+   Expected Balance: 217578000
+==========================================================
+          File name: Log_237.txt
+                Run: 18
+           ThreadID: 237
+ Deposit Iterations: 1444
+Withdraw Iterations: 2949
+      Final Balance: 243592000
+   Expected Balance: 4538559296
+==========================================================
+          File name: Log_237.txt
+                Run: 19
+           ThreadID: 237
+ Deposit Iterations: 1496
+Withdraw Iterations: 2773
+      Final Balance: 247070000
+   Expected Balance: 4542037296
+==========================================================
+          File name: Log_237.txt
+                Run: 20
+           ThreadID: 237
+ Deposit Iterations: 5381
+Withdraw Iterations: 794
+      Final Balance: 160770000
+   Expected Balance: 160770000
+==========================================================
+          File name: Log_237.txt
+                Run: 21
+           ThreadID: 237
+ Deposit Iterations: 4339
+Withdraw Iterations: 1033
+      Final Balance: 221546000
+   Expected Balance: 221546000
+==========================================================
+          File name: Log_237.txt
+                Run: 22
+           ThreadID: 237
+ Deposit Iterations: 3353
+Withdraw Iterations: 2412
+      Final Balance: 255029000
+   Expected Balance: 255029000
+==========================================================
+          File name: Log_237.txt
+                Run: 23
+           ThreadID: 237
+ Deposit Iterations: 2870
+Withdraw Iterations: 3899
+      Final Balance: 287881000
+   Expected Balance: 4582848296
+==========================================================
+          File name: Log_237.txt
+                Run: 24
+           ThreadID: 237
+ Deposit Iterations: 692
+Withdraw Iterations: 3307
+      Final Balance: 296341000
+   Expected Balance: 4591308296
+==========================================================
+          File name: Log_237.txt
+                Run: 25
+           ThreadID: 237
+ Deposit Iterations: 7619
+Withdraw Iterations: 2394
+      Final Balance: 285315000
+   Expected Balance: 285315000
+==========================================================
+          File name: Log_237.txt
+                Run: 26
+           ThreadID: 237
+ Deposit Iterations: 5318
+Withdraw Iterations: 2899
+      Final Balance: 297158000
+   Expected Balance: 297158000
+==========================================================
+          File name: Log_237.txt
+                Run: 27
+           ThreadID: 237
+ Deposit Iterations: 7454
+Withdraw Iterations: 3907
+      Final Balance: 200780000
+   Expected Balance: 200780000
+==========================================================
+          File name: Log_237.txt
+                Run: 28
+           ThreadID: 237
+ Deposit Iterations: 1005
+Withdraw Iterations: 2106
+      Final Balance: 532761000
+   Expected Balance: 4541039296
+==========================================================
+          File name: Log_237.txt
+                Run: 29
+           ThreadID: 237
+ Deposit Iterations: 2414
+Withdraw Iterations: 1530
+      Final Balance: 256517000
+   Expected Balance: 256517000
+==========================================================
+          File name: Log_237.txt
+                Run: 30
+           ThreadID: 237
+ Deposit Iterations: 4830
+Withdraw Iterations: 2415
+      Final Balance: 243345000
+   Expected Balance: 243345000
+==========================================================
+          File name: Log_237.txt
+                Run: 31
+           ThreadID: 237
+ Deposit Iterations: 1528
+Withdraw Iterations: 3675
+      Final Balance: 232956000
+   Expected Balance: 4527923296
+==========================================================
+          File name: Log_237.txt
+                Run: 32
+           ThreadID: 237
+ Deposit Iterations: 3957
+Withdraw Iterations: 1928
+      Final Balance: 395912000
+   Expected Balance: 158233000
+==========================================================
+          File name: Log_237.txt
+                Run: 33
+           ThreadID: 237
+ Deposit Iterations: 3454
+Withdraw Iterations: 1281
+      Final Balance: 502378000
+   Expected Balance: 297042000
+==========================================================
+          File name: Log_237.txt
+                Run: 34
+           ThreadID: 237
+ Deposit Iterations: 2505
+Withdraw Iterations: 1021
+      Final Balance: 272868000
+   Expected Balance: 272868000
+==========================================================
+          File name: Log_237.txt
+                Run: 35
+           ThreadID: 237
+ Deposit Iterations: 4267
+Withdraw Iterations: 2925
+      Final Balance: 185643000
+   Expected Balance: 185643000
+==========================================================
+          File name: Log_237.txt
+                Run: 36
+           ThreadID: 237
+ Deposit Iterations: 6021
+Withdraw Iterations: 3585
+      Final Balance: 269541000
+   Expected Balance: 269541000
+==========================================================
+          File name: Log_237.txt
+                Run: 37
+           ThreadID: 237
+ Deposit Iterations: 1302
+Withdraw Iterations: 3057
+      Final Balance: 435699000
+   Expected Balance: 4496306296
+==========================================================
+          File name: Log_237.txt
+                Run: 38
+           ThreadID: 237
+ Deposit Iterations: 5072
+Withdraw Iterations: 836
+      Final Balance: 533304000
+   Expected Balance: 201203000
+==========================================================
+          File name: Log_237.txt
+                Run: 39
+           ThreadID: 237
+ Deposit Iterations: 5921
+Withdraw Iterations: 1416
+      Final Balance: 518261000
+   Expected Balance: 224000000
+==========================================================
+          File name: Log_237.txt
+                Run: 40
+           ThreadID: 237
+ Deposit Iterations: 858
+Withdraw Iterations: 1848
+      Final Balance: 436104000
+   Expected Balance: 4480372296
+==========================================================
+          File name: Log_237.txt
+                Run: 41
+           ThreadID: 237
+ Deposit Iterations: 2301
+Withdraw Iterations: 162
+      Final Balance: 561021000
+   Expected Balance: 277691000
+==========================================================
+          File name: Log_237.txt
+                Run: 42
+           ThreadID: 237
+ Deposit Iterations: 8104
+Withdraw Iterations: 598
+      Final Balance: 286930000
+   Expected Balance: 286930000
+==========================================================
+          File name: Log_237.txt
+                Run: 43
+           ThreadID: 237
+ Deposit Iterations: 4794
+Withdraw Iterations: 2989
+      Final Balance: 530475000
+   Expected Balance: 310796000
+==========================================================
+          File name: Log_237.txt
+                Run: 44
+           ThreadID: 237
+ Deposit Iterations: 1513
+Withdraw Iterations: 728
+      Final Balance: 447062000
+   Expected Balance: 200329000
+==========================================================
+          File name: Log_237.txt
+                Run: 45
+           ThreadID: 237
+ Deposit Iterations: 1634
+Withdraw Iterations: 2235
+      Final Balance: 485883000
+   Expected Balance: 4540899296
+==========================================================
+          File name: Log_237.txt
+                Run: 46
+           ThreadID: 237
+ Deposit Iterations: 5303
+Withdraw Iterations: 283
+      Final Balance: 508995000
+   Expected Balance: 263428000
+==========================================================
+          File name: Log_237.txt
+                Run: 47
+           ThreadID: 237
+ Deposit Iterations: 701
+Withdraw Iterations: 1669
+      Final Balance: 572421000
+   Expected Balance: 4545965296
+==========================================================
+          File name: Log_237.txt
+                Run: 48
+           ThreadID: 237
+ Deposit Iterations: 4108
+Withdraw Iterations: 1413
+      Final Balance: 530379000
+   Expected Balance: 221733000
+==========================================================
+          File name: Log_237.txt
+                Run: 49
+           ThreadID: 237
+ Deposit Iterations: 165
+Withdraw Iterations: 1970
+      Final Balance: 434541000
+   Expected Balance: 4496169296
+==========================================================
+          File name: Log_237.txt
+                Run: 50
+           ThreadID: 237
+ Deposit Iterations: 7453
+Withdraw Iterations: 228
+      Final Balance: 250729000
+   Expected Balance: 250729000
+==========================================================
+          File name: Log_237.txt
+                Run: 51
+           ThreadID: 237
+ Deposit Iterations: 2618
+Withdraw Iterations: 647
+      Final Balance: 267230000
+   Expected Balance: 267230000
+==========================================================
+          File name: Log_237.txt
+                Run: 52
+           ThreadID: 237
+ Deposit Iterations: 1300
+Withdraw Iterations: 1369
+      Final Balance: 464827000
+   Expected Balance: 4516749296
+==========================================================
+          File name: Log_237.txt
+                Run: 53
+           ThreadID: 237
+ Deposit Iterations: 5331
+Withdraw Iterations: 3936
+      Final Balance: 232426000
+   Expected Balance: 232426000
+==========================================================
+          File name: Log_237.txt
+                Run: 54
+           ThreadID: 237
+ Deposit Iterations: 5402
+Withdraw Iterations: 3507
+      Final Balance: 503155000
+   Expected Balance: 221628000
+==========================================================
+          File name: Log_237.txt
+                Run: 55
+           ThreadID: 237
+ Deposit Iterations: 6074
+Withdraw Iterations: 536
+      Final Balance: 213936000
+   Expected Balance: 213936000
+==========================================================
+          File name: Log_237.txt
+                Run: 56
+           ThreadID: 237
+ Deposit Iterations: 4458
+Withdraw Iterations: 370
+      Final Balance: 218161000
+   Expected Balance: 218161000
+==========================================================
+          File name: Log_237.txt
+                Run: 57
+           ThreadID: 237
+ Deposit Iterations: 1950
+Withdraw Iterations: 1535
+      Final Balance: 286327000
+   Expected Balance: 286327000
+==========================================================
+          File name: Log_237.txt
+                Run: 58
+           ThreadID: 237
+ Deposit Iterations: 208
+Withdraw Iterations: 2779
+      Final Balance: 255250000
+   Expected Balance: 4550217296
+==========================================================
+          File name: Log_237.txt
+                Run: 59
+           ThreadID: 237
+ Deposit Iterations: 5915
+Withdraw Iterations: 308
+      Final Balance: 267644000
+   Expected Balance: 267644000
+==========================================================
+          File name: Log_237.txt
+                Run: 60
+           ThreadID: 237
+ Deposit Iterations: 877
+Withdraw Iterations: 53
+      Final Balance: 10015000
+   Expected Balance: 10015000
+==========================================================
+          File name: Log_237.txt
+                Run: 61
+           ThreadID: 237
+ Deposit Iterations: 5271
+Withdraw Iterations: 3482
+      Final Balance: 186015000
+   Expected Balance: 186015000
+==========================================================
+          File name: Log_237.txt
+                Run: 62
+           ThreadID: 237
+ Deposit Iterations: 1640
+Withdraw Iterations: 967
+      Final Balance: 535310000
+   Expected Balance: 261535000
+==========================================================
+          File name: Log_237.txt
+                Run: 63
+           ThreadID: 237
+ Deposit Iterations: 7319
+Withdraw Iterations: 2243
+      Final Balance: 266675000
+   Expected Balance: 266675000
+==========================================================
+          File name: Log_237.txt
+                Run: 64
+           ThreadID: 237
+ Deposit Iterations: 5675
+Withdraw Iterations: 1254
+      Final Balance: 501229000
+   Expected Balance: 212298000
+==========================================================
+          File name: Log_237.txt
+                Run: 65
+           ThreadID: 237
+ Deposit Iterations: 4460
+Withdraw Iterations: 3137
+      Final Balance: 427118000
+   Expected Balance: 161524000
+==========================================================
+          File name: Log_237.txt
+                Run: 66
+           ThreadID: 237
+ Deposit Iterations: 5784
+Withdraw Iterations: 1172
+      Final Balance: 486030000
+   Expected Balance: 292006000
+==========================================================
+          File name: Log_237.txt
+                Run: 67
+           ThreadID: 237
+ Deposit Iterations: 1656
+Withdraw Iterations: 3408
+      Final Balance: 446986000
+   Expected Balance: 4542979296
+==========================================================
+          File name: Log_237.txt
+                Run: 68
+           ThreadID: 237
+ Deposit Iterations: 3052
+Withdraw Iterations: 1024
+      Final Balance: 182850000
+   Expected Balance: 182850000
+==========================================================
+          File name: Log_237.txt
+                Run: 69
+           ThreadID: 237
+ Deposit Iterations: 6734
+Withdraw Iterations: 287
+      Final Balance: 577067000
+   Expected Balance: 265292000
+==========================================================
+          File name: Log_237.txt
+                Run: 70
+           ThreadID: 237
+ Deposit Iterations: 2150
+Withdraw Iterations: 3559
+      Final Balance: 210394000
+   Expected Balance: 4505361296
+==========================================================
+          File name: Log_237.txt
+                Run: 71
+           ThreadID: 237
+ Deposit Iterations: 4848
+Withdraw Iterations: 2081
+      Final Balance: 552517000
+   Expected Balance: 263177000
+==========================================================
+          File name: Log_237.txt
+                Run: 72
+           ThreadID: 237
+ Deposit Iterations: 2781
+Withdraw Iterations: 2136
+      Final Balance: 249372000
+   Expected Balance: 249372000
+==========================================================
+          File name: Log_237.txt
+                Run: 73
+           ThreadID: 237
+ Deposit Iterations: 7324
+Withdraw Iterations: 2950
+      Final Balance: 459725000
+   Expected Balance: 249516000
+==========================================================
+          File name: Log_237.txt
+                Run: 74
+           ThreadID: 237
+ Deposit Iterations: 1059
+Withdraw Iterations: 2343
+      Final Balance: 523959000
+   Expected Balance: 4572632296
+==========================================================
+          File name: Log_237.txt
+                Run: 75
+           ThreadID: 237
+ Deposit Iterations: 295
+Withdraw Iterations: 1700
+      Final Balance: 202465000
+   Expected Balance: 4497432296
+==========================================================
+          File name: Log_237.txt
+                Run: 76
+           ThreadID: 237
+ Deposit Iterations: 6528
+Withdraw Iterations: 567
+      Final Balance: 265484000
+   Expected Balance: 265484000
+==========================================================
+          File name: Log_237.txt
+                Run: 77
+           ThreadID: 237
+ Deposit Iterations: 6203
+Withdraw Iterations: 1889
+      Final Balance: 310861000
+   Expected Balance: 310861000
+==========================================================
+          File name: Log_237.txt
+                Run: 78
+           ThreadID: 237
+ Deposit Iterations: 694
+Withdraw Iterations: 1972
+      Final Balance: 496731000
+   Expected Balance: 4516901296
+==========================================================
+          File name: Log_237.txt
+                Run: 79
+           ThreadID: 237
+ Deposit Iterations: 6649
+Withdraw Iterations: 3994
+      Final Balance: 449377000
+   Expected Balance: 209373000
+==========================================================
+          File name: Log_237.txt
+                Run: 80
+           ThreadID: 237
+ Deposit Iterations: 492
+Withdraw Iterations: 1324
+      Final Balance: 578749000
+   Expected Balance: 4568111296
+==========================================================
+          File name: Log_237.txt
+                Run: 81
+           ThreadID: 237
+ Deposit Iterations: 4767
+Withdraw Iterations: 2811
+      Final Balance: 493002000
+   Expected Balance: 174530000
+==========================================================
+          File name: Log_237.txt
+                Run: 82
+           ThreadID: 237
+ Deposit Iterations: 1441
+Withdraw Iterations: 2297
+      Final Balance: 571386000
+   Expected Balance: 4571355296
+==========================================================
+          File name: Log_237.txt
+                Run: 83
+           ThreadID: 237
+ Deposit Iterations: 4725
+Withdraw Iterations: 2375
+      Final Balance: 536213000
+   Expected Balance: 253819000
+==========================================================
+          File name: Log_237.txt
+                Run: 84
+           ThreadID: 237
+ Deposit Iterations: 7327
+Withdraw Iterations: 1621
+      Final Balance: 483602000
+   Expected Balance: 255778000
+==========================================================
+          File name: Log_237.txt
+                Run: 85
+           ThreadID: 237
+ Deposit Iterations: 4934
+Withdraw Iterations: 839
+      Final Balance: 494383000
+   Expected Balance: 208690000
+==========================================================
+          File name: Log_237.txt
+                Run: 86
+           ThreadID: 237
+ Deposit Iterations: 5891
+Withdraw Iterations: 3066
+      Final Balance: 452937000
+   Expected Balance: 245025000
+==========================================================
+          File name: Log_237.txt
+                Run: 87
+           ThreadID: 237
+ Deposit Iterations: 7778
+Withdraw Iterations: 675
+      Final Balance: 464220000
+   Expected Balance: 257840000
+==========================================================
+          File name: Log_237.txt
+                Run: 88
+           ThreadID: 237
+ Deposit Iterations: 21
+Withdraw Iterations: 3474
+      Final Balance: 503244000
+   Expected Balance: 4553762296
+==========================================================
+          File name: Log_237.txt
+                Run: 89
+           ThreadID: 237
+ Deposit Iterations: 6267
+Withdraw Iterations: 1788
+      Final Balance: 457406000
+   Expected Balance: 204898000
+==========================================================
+          File name: Log_237.txt
+                Run: 90
+           ThreadID: 237
+ Deposit Iterations: 138
+Withdraw Iterations: 2376
+      Final Balance: 209134000
+   Expected Balance: 4504101296
+==========================================================
+          File name: Log_237.txt
+                Run: 91
+           ThreadID: 237
+ Deposit Iterations: 7778
+Withdraw Iterations: 3008
+      Final Balance: 261823000
+   Expected Balance: 261823000
+==========================================================
+          File name: Log_237.txt
+                Run: 92
+           ThreadID: 237
+ Deposit Iterations: 3706
+Withdraw Iterations: 3972
+      Final Balance: 468413000
+   Expected Balance: 4534812296
+==========================================================
+          File name: Log_237.txt
+                Run: 93
+           ThreadID: 237
+ Deposit Iterations: 1361
+Withdraw Iterations: 3014
+      Final Balance: 232314000
+   Expected Balance: 4527281296
+==========================================================
+          File name: Log_237.txt
+                Run: 94
+           ThreadID: 237
+ Deposit Iterations: 6201
+Withdraw Iterations: 3768
+      Final Balance: 521995000
+   Expected Balance: 277451000
+==========================================================
+          File name: Log_237.txt
+                Run: 95
+           ThreadID: 237
+ Deposit Iterations: 4462
+Withdraw Iterations: 3178
+      Final Balance: 509026000
+   Expected Balance: 251659000
+==========================================================
+          File name: Log_237.txt
+                Run: 96
+           ThreadID: 237
+ Deposit Iterations: 2773
+Withdraw Iterations: 2942
+      Final Balance: 451615000
+   Expected Balance: 4549320296
+==========================================================
+          File name: Log_237.txt
+                Run: 97
+           ThreadID: 237
+ Deposit Iterations: 4599
+Withdraw Iterations: 3370
+      Final Balance: 211759000
+   Expected Balance: 211759000
+==========================================================
+          File name: Log_237.txt
+                Run: 98
+           ThreadID: 237
+ Deposit Iterations: 3229
+Withdraw Iterations: 2682
+      Final Balance: 203200000
+   Expected Balance: 203200000
+==========================================================
+          File name: Log_237.txt
+                Run: 99
+           ThreadID: 237
+ Deposit Iterations: 6274
+Withdraw Iterations: 1778
+      Final Balance: 202917000
+   Expected Balance: 202917000

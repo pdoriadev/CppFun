@@ -1,0 +1,801 @@
+
+==========================================================
+          File name: Log_185.txt
+                Run: 0
+           ThreadID: 185
+ Deposit Iterations: 511
+Withdraw Iterations: 1489
+      Final Balance: 408240000
+   Expected Balance: 4451305296
+==========================================================
+          File name: Log_185.txt
+                Run: 1
+           ThreadID: 185
+ Deposit Iterations: 5043
+Withdraw Iterations: 3400
+      Final Balance: 233103000
+   Expected Balance: 233103000
+==========================================================
+          File name: Log_185.txt
+                Run: 2
+           ThreadID: 185
+ Deposit Iterations: 6233
+Withdraw Iterations: 1388
+      Final Balance: 422888000
+   Expected Balance: 162077000
+==========================================================
+          File name: Log_185.txt
+                Run: 3
+           ThreadID: 185
+ Deposit Iterations: 127
+Withdraw Iterations: 3518
+      Final Balance: 429490000
+   Expected Balance: 4458157296
+==========================================================
+          File name: Log_185.txt
+                Run: 4
+           ThreadID: 185
+ Deposit Iterations: 125
+Withdraw Iterations: 2852
+      Final Balance: 232180000
+   Expected Balance: 4527147296
+==========================================================
+          File name: Log_185.txt
+                Run: 5
+           ThreadID: 185
+ Deposit Iterations: 5911
+Withdraw Iterations: 1899
+      Final Balance: 193143000
+   Expected Balance: 193143000
+==========================================================
+          File name: Log_185.txt
+                Run: 6
+           ThreadID: 185
+ Deposit Iterations: 1706
+Withdraw Iterations: 2791
+      Final Balance: 514009000
+   Expected Balance: 4480238296
+==========================================================
+          File name: Log_185.txt
+                Run: 7
+           ThreadID: 185
+ Deposit Iterations: 6865
+Withdraw Iterations: 660
+      Final Balance: 191953000
+   Expected Balance: 191953000
+==========================================================
+          File name: Log_185.txt
+                Run: 8
+           ThreadID: 185
+ Deposit Iterations: 2200
+Withdraw Iterations: 2531
+      Final Balance: 191357000
+   Expected Balance: 4486324296
+==========================================================
+          File name: Log_185.txt
+                Run: 9
+           ThreadID: 185
+ Deposit Iterations: 1152
+Withdraw Iterations: 826
+      Final Balance: 484883000
+   Expected Balance: 182284000
+==========================================================
+          File name: Log_185.txt
+                Run: 10
+           ThreadID: 185
+ Deposit Iterations: 976
+Withdraw Iterations: 2162
+      Final Balance: 175745000
+   Expected Balance: 4470712296
+==========================================================
+          File name: Log_185.txt
+                Run: 11
+           ThreadID: 185
+ Deposit Iterations: 5279
+Withdraw Iterations: 2829
+      Final Balance: 188198000
+   Expected Balance: 188198000
+==========================================================
+          File name: Log_185.txt
+                Run: 12
+           ThreadID: 185
+ Deposit Iterations: 7435
+Withdraw Iterations: 1300
+      Final Balance: 525053000
+   Expected Balance: 229840000
+==========================================================
+          File name: Log_185.txt
+                Run: 13
+           ThreadID: 185
+ Deposit Iterations: 399
+Withdraw Iterations: 2939
+      Final Balance: 495260000
+   Expected Balance: 4492774296
+==========================================================
+          File name: Log_185.txt
+                Run: 14
+           ThreadID: 185
+ Deposit Iterations: 5603
+Withdraw Iterations: 2888
+      Final Balance: 169154000
+   Expected Balance: 169154000
+==========================================================
+          File name: Log_185.txt
+                Run: 15
+           ThreadID: 185
+ Deposit Iterations: 1248
+Withdraw Iterations: 2337
+      Final Balance: 203151000
+   Expected Balance: 4498118296
+==========================================================
+          File name: Log_185.txt
+                Run: 16
+           ThreadID: 185
+ Deposit Iterations: 1461
+Withdraw Iterations: 2106
+      Final Balance: 447991000
+   Expected Balance: 4489740296
+==========================================================
+          File name: Log_185.txt
+                Run: 17
+           ThreadID: 185
+ Deposit Iterations: 8061
+Withdraw Iterations: 1277
+      Final Balance: 461742000
+   Expected Balance: 163761000
+==========================================================
+          File name: Log_185.txt
+                Run: 18
+           ThreadID: 185
+ Deposit Iterations: 2827
+Withdraw Iterations: 2442
+      Final Balance: 196325000
+   Expected Balance: 196325000
+==========================================================
+          File name: Log_185.txt
+                Run: 19
+           ThreadID: 185
+ Deposit Iterations: 951
+Withdraw Iterations: 386
+      Final Balance: 193738000
+   Expected Balance: 193738000
+==========================================================
+          File name: Log_185.txt
+                Run: 20
+           ThreadID: 185
+ Deposit Iterations: 4277
+Withdraw Iterations: 2368
+      Final Balance: 138281000
+   Expected Balance: 138281000
+==========================================================
+          File name: Log_185.txt
+                Run: 21
+           ThreadID: 185
+ Deposit Iterations: 8
+Withdraw Iterations: 3925
+      Final Balance: 165271000
+   Expected Balance: 4460238296
+==========================================================
+          File name: Log_185.txt
+                Run: 22
+           ThreadID: 185
+ Deposit Iterations: 6879
+Withdraw Iterations: 2573
+      Final Balance: 204275000
+   Expected Balance: 204275000
+==========================================================
+          File name: Log_185.txt
+                Run: 23
+           ThreadID: 185
+ Deposit Iterations: 1703
+Withdraw Iterations: 973
+      Final Balance: 239930000
+   Expected Balance: 239930000
+==========================================================
+          File name: Log_185.txt
+                Run: 24
+           ThreadID: 185
+ Deposit Iterations: 1251
+Withdraw Iterations: 1025
+      Final Balance: 538701000
+   Expected Balance: 234729000
+==========================================================
+          File name: Log_185.txt
+                Run: 25
+           ThreadID: 185
+ Deposit Iterations: 6830
+Withdraw Iterations: 922
+      Final Balance: 438598000
+   Expected Balance: 230449000
+==========================================================
+          File name: Log_185.txt
+                Run: 26
+           ThreadID: 185
+ Deposit Iterations: 1205
+Withdraw Iterations: 2269
+      Final Balance: 490374000
+   Expected Balance: 4533980296
+==========================================================
+          File name: Log_185.txt
+                Run: 27
+           ThreadID: 185
+ Deposit Iterations: 7268
+Withdraw Iterations: 1771
+      Final Balance: 457359000
+   Expected Balance: 162152000
+==========================================================
+          File name: Log_185.txt
+                Run: 28
+           ThreadID: 185
+ Deposit Iterations: 5636
+Withdraw Iterations: 2055
+      Final Balance: 476840000
+   Expected Balance: 195689000
+==========================================================
+          File name: Log_185.txt
+                Run: 29
+           ThreadID: 185
+ Deposit Iterations: 522
+Withdraw Iterations: 2636
+      Final Balance: 213503000
+   Expected Balance: 4508470296
+==========================================================
+          File name: Log_185.txt
+                Run: 30
+           ThreadID: 185
+ Deposit Iterations: 4905
+Withdraw Iterations: 2931
+      Final Balance: 191590000
+   Expected Balance: 191590000
+==========================================================
+          File name: Log_185.txt
+                Run: 31
+           ThreadID: 185
+ Deposit Iterations: 724
+Withdraw Iterations: 822
+      Final Balance: 421785000
+   Expected Balance: 4500574296
+==========================================================
+          File name: Log_185.txt
+                Run: 32
+           ThreadID: 185
+ Deposit Iterations: 2776
+Withdraw Iterations: 1038
+      Final Balance: 138126000
+   Expected Balance: 138126000
+==========================================================
+          File name: Log_185.txt
+                Run: 33
+           ThreadID: 185
+ Deposit Iterations: 7267
+Withdraw Iterations: 3981
+      Final Balance: 445081000
+   Expected Balance: 246429000
+==========================================================
+          File name: Log_185.txt
+                Run: 34
+           ThreadID: 185
+ Deposit Iterations: 7285
+Withdraw Iterations: 2149
+      Final Balance: 478473000
+   Expected Balance: 201759000
+==========================================================
+          File name: Log_185.txt
+                Run: 35
+           ThreadID: 185
+ Deposit Iterations: 5701
+Withdraw Iterations: 1871
+      Final Balance: 432356000
+   Expected Balance: 160155000
+==========================================================
+          File name: Log_185.txt
+                Run: 36
+           ThreadID: 185
+ Deposit Iterations: 2199
+Withdraw Iterations: 493
+      Final Balance: 231828000
+   Expected Balance: 231828000
+==========================================================
+          File name: Log_185.txt
+                Run: 37
+           ThreadID: 185
+ Deposit Iterations: 2937
+Withdraw Iterations: 3493
+      Final Balance: 395397000
+   Expected Balance: 4454643296
+==========================================================
+          File name: Log_185.txt
+                Run: 38
+           ThreadID: 185
+ Deposit Iterations: 5266
+Withdraw Iterations: 3926
+      Final Balance: 164755000
+   Expected Balance: 164755000
+==========================================================
+          File name: Log_185.txt
+                Run: 39
+           ThreadID: 185
+ Deposit Iterations: 4157
+Withdraw Iterations: 1376
+      Final Balance: 150633000
+   Expected Balance: 150633000
+==========================================================
+          File name: Log_185.txt
+                Run: 40
+           ThreadID: 185
+ Deposit Iterations: 6380
+Withdraw Iterations: 2670
+      Final Balance: 373358000
+   Expected Balance: 157073000
+==========================================================
+          File name: Log_185.txt
+                Run: 41
+           ThreadID: 185
+ Deposit Iterations: 279
+Withdraw Iterations: 1793
+      Final Balance: 523019000
+   Expected Balance: 4494331296
+==========================================================
+          File name: Log_185.txt
+                Run: 42
+           ThreadID: 185
+ Deposit Iterations: 4625
+Withdraw Iterations: 2924
+      Final Balance: 210161000
+   Expected Balance: 210161000
+==========================================================
+          File name: Log_185.txt
+                Run: 43
+           ThreadID: 185
+ Deposit Iterations: 3124
+Withdraw Iterations: 624
+      Final Balance: 496605000
+   Expected Balance: 256121000
+==========================================================
+          File name: Log_185.txt
+                Run: 44
+           ThreadID: 185
+ Deposit Iterations: 509
+Withdraw Iterations: 2180
+      Final Balance: 170725000
+   Expected Balance: 4465692296
+==========================================================
+          File name: Log_185.txt
+                Run: 45
+           ThreadID: 185
+ Deposit Iterations: 4079
+Withdraw Iterations: 2687
+      Final Balance: 207844000
+   Expected Balance: 207844000
+==========================================================
+          File name: Log_185.txt
+                Run: 46
+           ThreadID: 185
+ Deposit Iterations: 784
+Withdraw Iterations: 1282
+      Final Balance: 460880000
+   Expected Balance: 4494363296
+==========================================================
+          File name: Log_185.txt
+                Run: 47
+           ThreadID: 185
+ Deposit Iterations: 4814
+Withdraw Iterations: 3431
+      Final Balance: 509278000
+   Expected Balance: 204645000
+==========================================================
+          File name: Log_185.txt
+                Run: 48
+           ThreadID: 185
+ Deposit Iterations: 2213
+Withdraw Iterations: 2646
+      Final Balance: 184039000
+   Expected Balance: 4479006296
+==========================================================
+          File name: Log_185.txt
+                Run: 49
+           ThreadID: 185
+ Deposit Iterations: 683
+Withdraw Iterations: 3135
+      Final Balance: 401844000
+   Expected Balance: 4460123296
+==========================================================
+          File name: Log_185.txt
+                Run: 50
+           ThreadID: 185
+ Deposit Iterations: 5654
+Withdraw Iterations: 1590
+      Final Balance: 439304000
+   Expected Balance: 215026000
+==========================================================
+          File name: Log_185.txt
+                Run: 51
+           ThreadID: 185
+ Deposit Iterations: 3227
+Withdraw Iterations: 1003
+      Final Balance: 187275000
+   Expected Balance: 187275000
+==========================================================
+          File name: Log_185.txt
+                Run: 52
+           ThreadID: 185
+ Deposit Iterations: 6013
+Withdraw Iterations: 2095
+      Final Balance: 161063000
+   Expected Balance: 161063000
+==========================================================
+          File name: Log_185.txt
+                Run: 53
+           ThreadID: 185
+ Deposit Iterations: 1238
+Withdraw Iterations: 3434
+      Final Balance: 389980000
+   Expected Balance: 4442060296
+==========================================================
+          File name: Log_185.txt
+                Run: 54
+           ThreadID: 185
+ Deposit Iterations: 2293
+Withdraw Iterations: 2043
+      Final Balance: 170547000
+   Expected Balance: 170547000
+==========================================================
+          File name: Log_185.txt
+                Run: 55
+           ThreadID: 185
+ Deposit Iterations: 5846
+Withdraw Iterations: 277
+      Final Balance: 179077000
+   Expected Balance: 179077000
+==========================================================
+          File name: Log_185.txt
+                Run: 56
+           ThreadID: 185
+ Deposit Iterations: 2468
+Withdraw Iterations: 2333
+      Final Balance: 179819000
+   Expected Balance: 179819000
+==========================================================
+          File name: Log_185.txt
+                Run: 57
+           ThreadID: 185
+ Deposit Iterations: 1977
+Withdraw Iterations: 3602
+      Final Balance: 448864000
+   Expected Balance: 4530519296
+==========================================================
+          File name: Log_185.txt
+                Run: 58
+           ThreadID: 185
+ Deposit Iterations: 4975
+Withdraw Iterations: 3764
+      Final Balance: 212110000
+   Expected Balance: 212110000
+==========================================================
+          File name: Log_185.txt
+                Run: 59
+           ThreadID: 185
+ Deposit Iterations: 7904
+Withdraw Iterations: 4029
+      Final Balance: 434037000
+   Expected Balance: 217373000
+==========================================================
+          File name: Log_185.txt
+                Run: 60
+           ThreadID: 185
+ Deposit Iterations: 2887
+Withdraw Iterations: 2886
+      Final Balance: 436595000
+   Expected Balance: 222220000
+==========================================================
+          File name: Log_185.txt
+                Run: 61
+           ThreadID: 185
+ Deposit Iterations: 2800
+Withdraw Iterations: 2421
+      Final Balance: 150176000
+   Expected Balance: 150176000
+==========================================================
+          File name: Log_185.txt
+                Run: 62
+           ThreadID: 185
+ Deposit Iterations: 3757
+Withdraw Iterations: 2082
+      Final Balance: 479701000
+   Expected Balance: 200657000
+==========================================================
+          File name: Log_185.txt
+                Run: 63
+           ThreadID: 185
+ Deposit Iterations: 1174
+Withdraw Iterations: 1177
+      Final Balance: 208313000
+   Expected Balance: 4503280296
+==========================================================
+          File name: Log_185.txt
+                Run: 64
+           ThreadID: 185
+ Deposit Iterations: 5449
+Withdraw Iterations: 83
+      Final Balance: 157499000
+   Expected Balance: 157499000
+==========================================================
+          File name: Log_185.txt
+                Run: 65
+           ThreadID: 185
+ Deposit Iterations: 1496
+Withdraw Iterations: 2191
+      Final Balance: 111361000
+   Expected Balance: 4406328296
+==========================================================
+          File name: Log_185.txt
+                Run: 66
+           ThreadID: 185
+ Deposit Iterations: 3424
+Withdraw Iterations: 3320
+      Final Balance: 232408000
+   Expected Balance: 232408000
+==========================================================
+          File name: Log_185.txt
+                Run: 67
+           ThreadID: 185
+ Deposit Iterations: 6734
+Withdraw Iterations: 1491
+      Final Balance: 223779000
+   Expected Balance: 223779000
+==========================================================
+          File name: Log_185.txt
+                Run: 68
+           ThreadID: 185
+ Deposit Iterations: 2709
+Withdraw Iterations: 3420
+      Final Balance: 389324000
+   Expected Balance: 4433832296
+==========================================================
+          File name: Log_185.txt
+                Run: 69
+           ThreadID: 185
+ Deposit Iterations: 300
+Withdraw Iterations: 288
+      Final Balance: 492841000
+   Expected Balance: 217389000
+==========================================================
+          File name: Log_185.txt
+                Run: 70
+           ThreadID: 185
+ Deposit Iterations: 2601
+Withdraw Iterations: 3775
+      Final Balance: 144185000
+   Expected Balance: 4439152296
+==========================================================
+          File name: Log_185.txt
+                Run: 71
+           ThreadID: 185
+ Deposit Iterations: 199
+Withdraw Iterations: 3738
+      Final Balance: 479523000
+   Expected Balance: 4470120296
+==========================================================
+          File name: Log_185.txt
+                Run: 72
+           ThreadID: 185
+ Deposit Iterations: 5429
+Withdraw Iterations: 441
+      Final Balance: 219765000
+   Expected Balance: 219765000
+==========================================================
+          File name: Log_185.txt
+                Run: 73
+           ThreadID: 185
+ Deposit Iterations: 1883
+Withdraw Iterations: 407
+      Final Balance: 442800000
+   Expected Balance: 176458000
+==========================================================
+          File name: Log_185.txt
+                Run: 74
+           ThreadID: 185
+ Deposit Iterations: 7352
+Withdraw Iterations: 1096
+      Final Balance: 464449000
+   Expected Balance: 213404000
+==========================================================
+          File name: Log_185.txt
+                Run: 75
+           ThreadID: 185
+ Deposit Iterations: 6627
+Withdraw Iterations: 2030
+      Final Balance: 134719000
+   Expected Balance: 134719000
+==========================================================
+          File name: Log_185.txt
+                Run: 76
+           ThreadID: 185
+ Deposit Iterations: 7727
+Withdraw Iterations: 2882
+      Final Balance: 208559000
+   Expected Balance: 208559000
+==========================================================
+          File name: Log_185.txt
+                Run: 77
+           ThreadID: 185
+ Deposit Iterations: 7043
+Withdraw Iterations: 4094
+      Final Balance: 254225000
+   Expected Balance: 254225000
+==========================================================
+          File name: Log_185.txt
+                Run: 78
+           ThreadID: 185
+ Deposit Iterations: 577
+Withdraw Iterations: 457
+      Final Balance: 445654000
+   Expected Balance: 166295000
+==========================================================
+          File name: Log_185.txt
+                Run: 79
+           ThreadID: 185
+ Deposit Iterations: 7053
+Withdraw Iterations: 1055
+      Final Balance: 157921000
+   Expected Balance: 157921000
+==========================================================
+          File name: Log_185.txt
+                Run: 80
+           ThreadID: 185
+ Deposit Iterations: 847
+Withdraw Iterations: 1789
+      Final Balance: 537898000
+   Expected Balance: 4512434296
+==========================================================
+          File name: Log_185.txt
+                Run: 81
+           ThreadID: 185
+ Deposit Iterations: 2683
+Withdraw Iterations: 1617
+      Final Balance: 132362000
+   Expected Balance: 132362000
+==========================================================
+          File name: Log_185.txt
+                Run: 82
+           ThreadID: 185
+ Deposit Iterations: 4831
+Withdraw Iterations: 338
+      Final Balance: 536549000
+   Expected Balance: 216393000
+==========================================================
+          File name: Log_185.txt
+                Run: 83
+           ThreadID: 185
+ Deposit Iterations: 1763
+Withdraw Iterations: 1516
+      Final Balance: 481628000
+   Expected Balance: 194714000
+==========================================================
+          File name: Log_185.txt
+                Run: 84
+           ThreadID: 185
+ Deposit Iterations: 5222
+Withdraw Iterations: 3935
+      Final Balance: 457345000
+   Expected Balance: 177830000
+==========================================================
+          File name: Log_185.txt
+                Run: 85
+           ThreadID: 185
+ Deposit Iterations: 1906
+Withdraw Iterations: 478
+      Final Balance: 154876000
+   Expected Balance: 154876000
+==========================================================
+          File name: Log_185.txt
+                Run: 86
+           ThreadID: 185
+ Deposit Iterations: 1048
+Withdraw Iterations: 2083
+      Final Balance: 184440000
+   Expected Balance: 4479407296
+==========================================================
+          File name: Log_185.txt
+                Run: 87
+           ThreadID: 185
+ Deposit Iterations: 2879
+Withdraw Iterations: 2608
+      Final Balance: 423914000
+   Expected Balance: 205047000
+==========================================================
+          File name: Log_185.txt
+                Run: 88
+           ThreadID: 185
+ Deposit Iterations: 476
+Withdraw Iterations: 2991
+      Final Balance: 204712000
+   Expected Balance: 4499679296
+==========================================================
+          File name: Log_185.txt
+                Run: 89
+           ThreadID: 185
+ Deposit Iterations: 5011
+Withdraw Iterations: 1908
+      Final Balance: 156380000
+   Expected Balance: 156380000
+==========================================================
+          File name: Log_185.txt
+                Run: 90
+           ThreadID: 185
+ Deposit Iterations: 154
+Withdraw Iterations: 725
+      Final Balance: 176684000
+   Expected Balance: 4471651296
+==========================================================
+          File name: Log_185.txt
+                Run: 91
+           ThreadID: 185
+ Deposit Iterations: 2831
+Withdraw Iterations: 460
+      Final Balance: 206394000
+   Expected Balance: 206394000
+==========================================================
+          File name: Log_185.txt
+                Run: 92
+           ThreadID: 185
+ Deposit Iterations: 7202
+Withdraw Iterations: 3420
+      Final Balance: 170446000
+   Expected Balance: 170446000
+==========================================================
+          File name: Log_185.txt
+                Run: 93
+           ThreadID: 185
+ Deposit Iterations: 7877
+Withdraw Iterations: 3041
+      Final Balance: 179615000
+   Expected Balance: 179615000
+==========================================================
+          File name: Log_185.txt
+                Run: 94
+           ThreadID: 185
+ Deposit Iterations: 467
+Withdraw Iterations: 3665
+      Final Balance: 211203000
+   Expected Balance: 4506170296
+==========================================================
+          File name: Log_185.txt
+                Run: 95
+           ThreadID: 185
+ Deposit Iterations: 2301
+Withdraw Iterations: 4079
+      Final Balance: 475065000
+   Expected Balance: 4497891296
+==========================================================
+          File name: Log_185.txt
+                Run: 96
+           ThreadID: 185
+ Deposit Iterations: 2006
+Withdraw Iterations: 2576
+      Final Balance: 408429000
+   Expected Balance: 4483110296
+==========================================================
+          File name: Log_185.txt
+                Run: 97
+           ThreadID: 185
+ Deposit Iterations: 4870
+Withdraw Iterations: 2631
+      Final Balance: 172274000
+   Expected Balance: 172274000
+==========================================================
+          File name: Log_185.txt
+                Run: 98
+           ThreadID: 185
+ Deposit Iterations: 3194
+Withdraw Iterations: 3169
+      Final Balance: 353798000
+   Expected Balance: 160500000
+==========================================================
+          File name: Log_185.txt
+                Run: 99
+           ThreadID: 185
+ Deposit Iterations: 6495
+Withdraw Iterations: 2903
+      Final Balance: 167768000
+   Expected Balance: 167768000

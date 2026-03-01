@@ -1,0 +1,801 @@
+
+==========================================================
+          File name: Log_219.txt
+                Run: 0
+           ThreadID: 219
+ Deposit Iterations: 1937
+Withdraw Iterations: 1147
+      Final Balance: 187016000
+   Expected Balance: 187016000
+==========================================================
+          File name: Log_219.txt
+                Run: 1
+           ThreadID: 219
+ Deposit Iterations: 4765
+Withdraw Iterations: 3193
+      Final Balance: 525485000
+   Expected Balance: 277428000
+==========================================================
+          File name: Log_219.txt
+                Run: 2
+           ThreadID: 219
+ Deposit Iterations: 2246
+Withdraw Iterations: 1326
+      Final Balance: 191573000
+   Expected Balance: 191573000
+==========================================================
+          File name: Log_219.txt
+                Run: 3
+           ThreadID: 219
+ Deposit Iterations: 2220
+Withdraw Iterations: 2831
+      Final Balance: 200396000
+   Expected Balance: 4495363296
+==========================================================
+          File name: Log_219.txt
+                Run: 4
+           ThreadID: 219
+ Deposit Iterations: 1090
+Withdraw Iterations: 1088
+      Final Balance: 510723000
+   Expected Balance: 271704000
+==========================================================
+          File name: Log_219.txt
+                Run: 5
+           ThreadID: 219
+ Deposit Iterations: 6283
+Withdraw Iterations: 726
+      Final Balance: 235654000
+   Expected Balance: 235654000
+==========================================================
+          File name: Log_219.txt
+                Run: 6
+           ThreadID: 219
+ Deposit Iterations: 4226
+Withdraw Iterations: 3361
+      Final Balance: 242009000
+   Expected Balance: 242009000
+==========================================================
+          File name: Log_219.txt
+                Run: 7
+           ThreadID: 219
+ Deposit Iterations: 4870
+Withdraw Iterations: 8
+      Final Balance: 230433000
+   Expected Balance: 230433000
+==========================================================
+          File name: Log_219.txt
+                Run: 8
+           ThreadID: 219
+ Deposit Iterations: 1537
+Withdraw Iterations: 2238
+      Final Balance: 213660000
+   Expected Balance: 4508627296
+==========================================================
+          File name: Log_219.txt
+                Run: 9
+           ThreadID: 219
+ Deposit Iterations: 7764
+Withdraw Iterations: 1287
+      Final Balance: 526788000
+   Expected Balance: 205801000
+==========================================================
+          File name: Log_219.txt
+                Run: 10
+           ThreadID: 219
+ Deposit Iterations: 6268
+Withdraw Iterations: 2020
+      Final Balance: 514170000
+   Expected Balance: 234945000
+==========================================================
+          File name: Log_219.txt
+                Run: 11
+           ThreadID: 219
+ Deposit Iterations: 3007
+Withdraw Iterations: 539
+      Final Balance: 406117000
+   Expected Balance: 192796000
+==========================================================
+          File name: Log_219.txt
+                Run: 12
+           ThreadID: 219
+ Deposit Iterations: 6073
+Withdraw Iterations: 3888
+      Final Balance: 543011000
+   Expected Balance: 279102000
+==========================================================
+          File name: Log_219.txt
+                Run: 13
+           ThreadID: 219
+ Deposit Iterations: 7614
+Withdraw Iterations: 1658
+      Final Balance: 241360000
+   Expected Balance: 241360000
+==========================================================
+          File name: Log_219.txt
+                Run: 14
+           ThreadID: 219
+ Deposit Iterations: 4112
+Withdraw Iterations: 1919
+      Final Balance: 492129000
+   Expected Balance: 204265000
+==========================================================
+          File name: Log_219.txt
+                Run: 15
+           ThreadID: 219
+ Deposit Iterations: 3976
+Withdraw Iterations: 123
+      Final Balance: 246384000
+   Expected Balance: 246384000
+==========================================================
+          File name: Log_219.txt
+                Run: 16
+           ThreadID: 219
+ Deposit Iterations: 4971
+Withdraw Iterations: 2257
+      Final Balance: 482948000
+   Expected Balance: 218293000
+==========================================================
+          File name: Log_219.txt
+                Run: 17
+           ThreadID: 219
+ Deposit Iterations: 5514
+Withdraw Iterations: 2752
+      Final Balance: 198830000
+   Expected Balance: 198830000
+==========================================================
+          File name: Log_219.txt
+                Run: 18
+           ThreadID: 219
+ Deposit Iterations: 4430
+Withdraw Iterations: 2508
+      Final Balance: 451841000
+   Expected Balance: 226946000
+==========================================================
+          File name: Log_219.txt
+                Run: 19
+           ThreadID: 219
+ Deposit Iterations: 3010
+Withdraw Iterations: 1700
+      Final Balance: 547626000
+   Expected Balance: 224663000
+==========================================================
+          File name: Log_219.txt
+                Run: 20
+           ThreadID: 219
+ Deposit Iterations: 5972
+Withdraw Iterations: 2044
+      Final Balance: 153562000
+   Expected Balance: 153562000
+==========================================================
+          File name: Log_219.txt
+                Run: 21
+           ThreadID: 219
+ Deposit Iterations: 6861
+Withdraw Iterations: 3484
+      Final Balance: 209198000
+   Expected Balance: 209198000
+==========================================================
+          File name: Log_219.txt
+                Run: 22
+           ThreadID: 219
+ Deposit Iterations: 7786
+Withdraw Iterations: 2657
+      Final Balance: 245029000
+   Expected Balance: 245029000
+==========================================================
+          File name: Log_219.txt
+                Run: 23
+           ThreadID: 219
+ Deposit Iterations: 4670
+Withdraw Iterations: 2465
+      Final Balance: 539331000
+   Expected Balance: 265195000
+==========================================================
+          File name: Log_219.txt
+                Run: 24
+           ThreadID: 219
+ Deposit Iterations: 3117
+Withdraw Iterations: 3453
+      Final Balance: 270897000
+   Expected Balance: 4565864296
+==========================================================
+          File name: Log_219.txt
+                Run: 25
+           ThreadID: 219
+ Deposit Iterations: 937
+Withdraw Iterations: 111
+      Final Balance: 463186000
+   Expected Balance: 259863000
+==========================================================
+          File name: Log_219.txt
+                Run: 26
+           ThreadID: 219
+ Deposit Iterations: 7841
+Withdraw Iterations: 2809
+      Final Balance: 278501000
+   Expected Balance: 278501000
+==========================================================
+          File name: Log_219.txt
+                Run: 27
+           ThreadID: 219
+ Deposit Iterations: 5060
+Withdraw Iterations: 2535
+      Final Balance: 191969000
+   Expected Balance: 191969000
+==========================================================
+          File name: Log_219.txt
+                Run: 28
+           ThreadID: 219
+ Deposit Iterations: 2020
+Withdraw Iterations: 1113
+      Final Balance: 233294000
+   Expected Balance: 233294000
+==========================================================
+          File name: Log_219.txt
+                Run: 29
+           ThreadID: 219
+ Deposit Iterations: 2860
+Withdraw Iterations: 88
+      Final Balance: 249522000
+   Expected Balance: 249522000
+==========================================================
+          File name: Log_219.txt
+                Run: 30
+           ThreadID: 219
+ Deposit Iterations: 1272
+Withdraw Iterations: 1604
+      Final Balance: 510611000
+   Expected Balance: 4520092296
+==========================================================
+          File name: Log_219.txt
+                Run: 31
+           ThreadID: 219
+ Deposit Iterations: 2873
+Withdraw Iterations: 2258
+      Final Balance: 229296000
+   Expected Balance: 229296000
+==========================================================
+          File name: Log_219.txt
+                Run: 32
+           ThreadID: 219
+ Deposit Iterations: 971
+Withdraw Iterations: 3352
+      Final Balance: 373265000
+   Expected Balance: 4435461296
+==========================================================
+          File name: Log_219.txt
+                Run: 33
+           ThreadID: 219
+ Deposit Iterations: 1377
+Withdraw Iterations: 3813
+      Final Balance: 278627000
+   Expected Balance: 4573594296
+==========================================================
+          File name: Log_219.txt
+                Run: 34
+           ThreadID: 219
+ Deposit Iterations: 227
+Withdraw Iterations: 2714
+      Final Balance: 243874000
+   Expected Balance: 4538841296
+==========================================================
+          File name: Log_219.txt
+                Run: 35
+           ThreadID: 219
+ Deposit Iterations: 3099
+Withdraw Iterations: 1215
+      Final Balance: 486687000
+   Expected Balance: 169697000
+==========================================================
+          File name: Log_219.txt
+                Run: 36
+           ThreadID: 219
+ Deposit Iterations: 5485
+Withdraw Iterations: 3314
+      Final Balance: 262135000
+   Expected Balance: 262135000
+==========================================================
+          File name: Log_219.txt
+                Run: 37
+           ThreadID: 219
+ Deposit Iterations: 6090
+Withdraw Iterations: 2838
+      Final Balance: 196130000
+   Expected Balance: 196130000
+==========================================================
+          File name: Log_219.txt
+                Run: 38
+           ThreadID: 219
+ Deposit Iterations: 7901
+Withdraw Iterations: 2728
+      Final Balance: 188074000
+   Expected Balance: 188074000
+==========================================================
+          File name: Log_219.txt
+                Run: 39
+           ThreadID: 219
+ Deposit Iterations: 2485
+Withdraw Iterations: 3800
+      Final Balance: 489464000
+   Expected Balance: 4500198296
+==========================================================
+          File name: Log_219.txt
+                Run: 40
+           ThreadID: 219
+ Deposit Iterations: 4071
+Withdraw Iterations: 2492
+      Final Balance: 181040000
+   Expected Balance: 181040000
+==========================================================
+          File name: Log_219.txt
+                Run: 41
+           ThreadID: 219
+ Deposit Iterations: 2878
+Withdraw Iterations: 277
+      Final Balance: 554289000
+   Expected Balance: 246665000
+==========================================================
+          File name: Log_219.txt
+                Run: 42
+           ThreadID: 219
+ Deposit Iterations: 2728
+Withdraw Iterations: 1963
+      Final Balance: 265631000
+   Expected Balance: 265631000
+==========================================================
+          File name: Log_219.txt
+                Run: 43
+           ThreadID: 219
+ Deposit Iterations: 3302
+Withdraw Iterations: 2293
+      Final Balance: 504970000
+   Expected Balance: 303891000
+==========================================================
+          File name: Log_219.txt
+                Run: 44
+           ThreadID: 219
+ Deposit Iterations: 6713
+Withdraw Iterations: 1450
+      Final Balance: 421433000
+   Expected Balance: 200027000
+==========================================================
+          File name: Log_219.txt
+                Run: 45
+           ThreadID: 219
+ Deposit Iterations: 1553
+Withdraw Iterations: 812
+      Final Balance: 476191000
+   Expected Balance: 227491000
+==========================================================
+          File name: Log_219.txt
+                Run: 46
+           ThreadID: 219
+ Deposit Iterations: 6606
+Withdraw Iterations: 2009
+      Final Balance: 489820000
+   Expected Balance: 242065000
+==========================================================
+          File name: Log_219.txt
+                Run: 47
+           ThreadID: 219
+ Deposit Iterations: 5307
+Withdraw Iterations: 1736
+      Final Balance: 245281000
+   Expected Balance: 245281000
+==========================================================
+          File name: Log_219.txt
+                Run: 48
+           ThreadID: 219
+ Deposit Iterations: 2082
+Withdraw Iterations: 37
+      Final Balance: 507317000
+   Expected Balance: 204805000
+==========================================================
+          File name: Log_219.txt
+                Run: 49
+           ThreadID: 219
+ Deposit Iterations: 4609
+Withdraw Iterations: 3947
+      Final Balance: 197857000
+   Expected Balance: 197857000
+==========================================================
+          File name: Log_219.txt
+                Run: 50
+           ThreadID: 219
+ Deposit Iterations: 607
+Withdraw Iterations: 744
+      Final Balance: 241038000
+   Expected Balance: 4536005296
+==========================================================
+          File name: Log_219.txt
+                Run: 51
+           ThreadID: 219
+ Deposit Iterations: 1291
+Withdraw Iterations: 707
+      Final Balance: 481090000
+   Expected Balance: 234654000
+==========================================================
+          File name: Log_219.txt
+                Run: 52
+           ThreadID: 219
+ Deposit Iterations: 4002
+Withdraw Iterations: 2946
+      Final Balance: 462741000
+   Expected Balance: 197919000
+==========================================================
+          File name: Log_219.txt
+                Run: 53
+           ThreadID: 219
+ Deposit Iterations: 380
+Withdraw Iterations: 22
+      Final Balance: 204615000
+   Expected Balance: 204615000
+==========================================================
+          File name: Log_219.txt
+                Run: 54
+           ThreadID: 219
+ Deposit Iterations: 6483
+Withdraw Iterations: 2565
+      Final Balance: 488637000
+   Expected Balance: 214690000
+==========================================================
+          File name: Log_219.txt
+                Run: 55
+           ThreadID: 219
+ Deposit Iterations: 7027
+Withdraw Iterations: 2266
+      Final Balance: 198894000
+   Expected Balance: 198894000
+==========================================================
+          File name: Log_219.txt
+                Run: 56
+           ThreadID: 219
+ Deposit Iterations: 5983
+Withdraw Iterations: 3015
+      Final Balance: 487939000
+   Expected Balance: 202424000
+==========================================================
+          File name: Log_219.txt
+                Run: 57
+           ThreadID: 219
+ Deposit Iterations: 6946
+Withdraw Iterations: 1439
+      Final Balance: 271236000
+   Expected Balance: 271236000
+==========================================================
+          File name: Log_219.txt
+                Run: 58
+           ThreadID: 219
+ Deposit Iterations: 1044
+Withdraw Iterations: 3936
+      Final Balance: 519416000
+   Expected Balance: 4530558296
+==========================================================
+          File name: Log_219.txt
+                Run: 59
+           ThreadID: 219
+ Deposit Iterations: 2151
+Withdraw Iterations: 613
+      Final Balance: 458070000
+   Expected Balance: 247017000
+==========================================================
+          File name: Log_219.txt
+                Run: 60
+           ThreadID: 219
+ Deposit Iterations: 5882
+Withdraw Iterations: 2477
+      Final Balance: 468493000
+   Expected Balance: 255548000
+==========================================================
+          File name: Log_219.txt
+                Run: 61
+           ThreadID: 219
+ Deposit Iterations: 2772
+Withdraw Iterations: 270
+      Final Balance: 177003000
+   Expected Balance: 177003000
+==========================================================
+          File name: Log_219.txt
+                Run: 62
+           ThreadID: 219
+ Deposit Iterations: 3850
+Withdraw Iterations: 1814
+      Final Balance: 519959000
+   Expected Balance: 235376000
+==========================================================
+          File name: Log_219.txt
+                Run: 63
+           ThreadID: 219
+ Deposit Iterations: 3515
+Withdraw Iterations: 1301
+      Final Balance: 565729000
+   Expected Balance: 241757000
+==========================================================
+          File name: Log_219.txt
+                Run: 64
+           ThreadID: 219
+ Deposit Iterations: 1613
+Withdraw Iterations: 365
+      Final Balance: 479939000
+   Expected Balance: 200710000
+==========================================================
+          File name: Log_219.txt
+                Run: 65
+           ThreadID: 219
+ Deposit Iterations: 5822
+Withdraw Iterations: 2141
+      Final Balance: 146421000
+   Expected Balance: 146421000
+==========================================================
+          File name: Log_219.txt
+                Run: 66
+           ThreadID: 219
+ Deposit Iterations: 7887
+Withdraw Iterations: 2956
+      Final Balance: 280285000
+   Expected Balance: 280285000
+==========================================================
+          File name: Log_219.txt
+                Run: 67
+           ThreadID: 219
+ Deposit Iterations: 511
+Withdraw Iterations: 1492
+      Final Balance: 430296000
+   Expected Balance: 4528625296
+==========================================================
+          File name: Log_219.txt
+                Run: 68
+           ThreadID: 219
+ Deposit Iterations: 3158
+Withdraw Iterations: 1191
+      Final Balance: 431640000
+   Expected Balance: 168001000
+==========================================================
+          File name: Log_219.txt
+                Run: 69
+           ThreadID: 219
+ Deposit Iterations: 3958
+Withdraw Iterations: 2617
+      Final Balance: 549927000
+   Expected Balance: 230455000
+==========================================================
+          File name: Log_219.txt
+                Run: 70
+           ThreadID: 219
+ Deposit Iterations: 6233
+Withdraw Iterations: 1479
+      Final Balance: 441592000
+   Expected Balance: 186911000
+==========================================================
+          File name: Log_219.txt
+                Run: 71
+           ThreadID: 219
+ Deposit Iterations: 4478
+Withdraw Iterations: 2373
+      Final Balance: 237147000
+   Expected Balance: 237147000
+==========================================================
+          File name: Log_219.txt
+                Run: 72
+           ThreadID: 219
+ Deposit Iterations: 3808
+Withdraw Iterations: 2618
+      Final Balance: 245123000
+   Expected Balance: 245123000
+==========================================================
+          File name: Log_219.txt
+                Run: 73
+           ThreadID: 219
+ Deposit Iterations: 131
+Withdraw Iterations: 603
+      Final Balance: 440788000
+   Expected Balance: 4511455296
+==========================================================
+          File name: Log_219.txt
+                Run: 74
+           ThreadID: 219
+ Deposit Iterations: 5359
+Withdraw Iterations: 1947
+      Final Balance: 243050000
+   Expected Balance: 243050000
+==========================================================
+          File name: Log_219.txt
+                Run: 75
+           ThreadID: 219
+ Deposit Iterations: 5723
+Withdraw Iterations: 2535
+      Final Balance: 187413000
+   Expected Balance: 187413000
+==========================================================
+          File name: Log_219.txt
+                Run: 76
+           ThreadID: 219
+ Deposit Iterations: 365
+Withdraw Iterations: 2290
+      Final Balance: 250278000
+   Expected Balance: 4545245296
+==========================================================
+          File name: Log_219.txt
+                Run: 77
+           ThreadID: 219
+ Deposit Iterations: 1233
+Withdraw Iterations: 766
+      Final Balance: 529947000
+   Expected Balance: 305687000
+==========================================================
+          File name: Log_219.txt
+                Run: 78
+           ThreadID: 219
+ Deposit Iterations: 6150
+Withdraw Iterations: 3335
+      Final Balance: 487738000
+   Expected Balance: 208694000
+==========================================================
+          File name: Log_219.txt
+                Run: 79
+           ThreadID: 219
+ Deposit Iterations: 6381
+Withdraw Iterations: 1300
+      Final Balance: 422806000
+   Expected Balance: 189933000
+==========================================================
+          File name: Log_219.txt
+                Run: 80
+           ThreadID: 219
+ Deposit Iterations: 5257
+Withdraw Iterations: 3343
+      Final Balance: 258072000
+   Expected Balance: 258072000
+==========================================================
+          File name: Log_219.txt
+                Run: 81
+           ThreadID: 219
+ Deposit Iterations: 2482
+Withdraw Iterations: 2428
+      Final Balance: 465850000
+   Expected Balance: 164210000
+==========================================================
+          File name: Log_219.txt
+                Run: 82
+           ThreadID: 219
+ Deposit Iterations: 1063
+Withdraw Iterations: 2701
+      Final Balance: 257529000
+   Expected Balance: 4552496296
+==========================================================
+          File name: Log_219.txt
+                Run: 83
+           ThreadID: 219
+ Deposit Iterations: 3631
+Withdraw Iterations: 816
+      Final Balance: 524302000
+   Expected Balance: 243431000
+==========================================================
+          File name: Log_219.txt
+                Run: 84
+           ThreadID: 219
+ Deposit Iterations: 5011
+Withdraw Iterations: 77
+      Final Balance: 215941000
+   Expected Balance: 215941000
+==========================================================
+          File name: Log_219.txt
+                Run: 85
+           ThreadID: 219
+ Deposit Iterations: 5622
+Withdraw Iterations: 804
+      Final Balance: 6033000
+   Expected Balance: 6033000
+==========================================================
+          File name: Log_219.txt
+                Run: 86
+           ThreadID: 219
+ Deposit Iterations: 351
+Withdraw Iterations: 2228
+      Final Balance: 221409000
+   Expected Balance: 4516376296
+==========================================================
+          File name: Log_219.txt
+                Run: 87
+           ThreadID: 219
+ Deposit Iterations: 207
+Withdraw Iterations: 2286
+      Final Balance: 234574000
+   Expected Balance: 4529541296
+==========================================================
+          File name: Log_219.txt
+                Run: 88
+           ThreadID: 219
+ Deposit Iterations: 5764
+Withdraw Iterations: 3346
+      Final Balance: 236080000
+   Expected Balance: 236080000
+==========================================================
+          File name: Log_219.txt
+                Run: 89
+           ThreadID: 219
+ Deposit Iterations: 4400
+Withdraw Iterations: 2748
+      Final Balance: 445254000
+   Expected Balance: 186850000
+==========================================================
+          File name: Log_219.txt
+                Run: 90
+           ThreadID: 219
+ Deposit Iterations: 4549
+Withdraw Iterations: 1436
+      Final Balance: 194564000
+   Expected Balance: 194564000
+==========================================================
+          File name: Log_219.txt
+                Run: 91
+           ThreadID: 219
+ Deposit Iterations: 5189
+Withdraw Iterations: 1085
+      Final Balance: 246467000
+   Expected Balance: 246467000
+==========================================================
+          File name: Log_219.txt
+                Run: 92
+           ThreadID: 219
+ Deposit Iterations: 5254
+Withdraw Iterations: 1949
+      Final Balance: 196100000
+   Expected Balance: 196100000
+==========================================================
+          File name: Log_219.txt
+                Run: 93
+           ThreadID: 219
+ Deposit Iterations: 6449
+Withdraw Iterations: 1532
+      Final Balance: 220768000
+   Expected Balance: 220768000
+==========================================================
+          File name: Log_219.txt
+                Run: 94
+           ThreadID: 219
+ Deposit Iterations: 2224
+Withdraw Iterations: 3295
+      Final Balance: 510385000
+   Expected Balance: 4544141296
+==========================================================
+          File name: Log_219.txt
+                Run: 95
+           ThreadID: 219
+ Deposit Iterations: 1038
+Withdraw Iterations: 895
+      Final Balance: 245600000
+   Expected Balance: 245600000
+==========================================================
+          File name: Log_219.txt
+                Run: 96
+           ThreadID: 219
+ Deposit Iterations: 7161
+Withdraw Iterations: 3963
+      Final Balance: 436705000
+   Expected Balance: 251377000
+==========================================================
+          File name: Log_219.txt
+                Run: 97
+           ThreadID: 219
+ Deposit Iterations: 3219
+Withdraw Iterations: 2499
+      Final Balance: 427627000
+   Expected Balance: 194208000
+==========================================================
+          File name: Log_219.txt
+                Run: 98
+           ThreadID: 219
+ Deposit Iterations: 1761
+Withdraw Iterations: 249
+      Final Balance: 187935000
+   Expected Balance: 187935000
+==========================================================
+          File name: Log_219.txt
+                Run: 99
+           ThreadID: 219
+ Deposit Iterations: 2205
+Withdraw Iterations: 175
+      Final Balance: 405119000
+   Expected Balance: 179233000

@@ -1,0 +1,801 @@
+
+==========================================================
+          File name: Log_137.txt
+                Run: 0
+           ThreadID: 137
+ Deposit Iterations: 114
+Withdraw Iterations: 1343
+      Final Balance: 128942000
+   Expected Balance: 4423909296
+==========================================================
+          File name: Log_137.txt
+                Run: 1
+           ThreadID: 137
+ Deposit Iterations: 4007
+Withdraw Iterations: 1761
+      Final Balance: 437924000
+   Expected Balance: 182798000
+==========================================================
+          File name: Log_137.txt
+                Run: 2
+           ThreadID: 137
+ Deposit Iterations: 2693
+Withdraw Iterations: 3024
+      Final Balance: 95238000
+   Expected Balance: 4390205296
+==========================================================
+          File name: Log_137.txt
+                Run: 3
+           ThreadID: 137
+ Deposit Iterations: 1273
+Withdraw Iterations: 3817
+      Final Balance: 121366000
+   Expected Balance: 4416333296
+==========================================================
+          File name: Log_137.txt
+                Run: 4
+           ThreadID: 137
+ Deposit Iterations: 7768
+Withdraw Iterations: 1646
+      Final Balance: 421975000
+   Expected Balance: 187193000
+==========================================================
+          File name: Log_137.txt
+                Run: 5
+           ThreadID: 137
+ Deposit Iterations: 83
+Withdraw Iterations: 2125
+      Final Balance: 451711000
+   Expected Balance: 4420291296
+==========================================================
+          File name: Log_137.txt
+                Run: 6
+           ThreadID: 137
+ Deposit Iterations: 4570
+Withdraw Iterations: 3719
+      Final Balance: 137010000
+   Expected Balance: 137010000
+==========================================================
+          File name: Log_137.txt
+                Run: 7
+           ThreadID: 137
+ Deposit Iterations: 646
+Withdraw Iterations: 1427
+      Final Balance: 159291000
+   Expected Balance: 4454258296
+==========================================================
+          File name: Log_137.txt
+                Run: 8
+           ThreadID: 137
+ Deposit Iterations: 3741
+Withdraw Iterations: 647
+      Final Balance: 408090000
+   Expected Balance: 137428000
+==========================================================
+          File name: Log_137.txt
+                Run: 9
+           ThreadID: 137
+ Deposit Iterations: 5809
+Withdraw Iterations: 4072
+      Final Balance: 404412000
+   Expected Balance: 141015000
+==========================================================
+          File name: Log_137.txt
+                Run: 10
+           ThreadID: 137
+ Deposit Iterations: 635
+Withdraw Iterations: 2097
+      Final Balance: 420356000
+   Expected Balance: 4438922296
+==========================================================
+          File name: Log_137.txt
+                Run: 11
+           ThreadID: 137
+ Deposit Iterations: 15
+Withdraw Iterations: 3306
+      Final Balance: 341185000
+   Expected Balance: 4440228296
+==========================================================
+          File name: Log_137.txt
+                Run: 12
+           ThreadID: 137
+ Deposit Iterations: 5887
+Withdraw Iterations: 1958
+      Final Balance: 172964000
+   Expected Balance: 172964000
+==========================================================
+          File name: Log_137.txt
+                Run: 13
+           ThreadID: 137
+ Deposit Iterations: 7306
+Withdraw Iterations: 1680
+      Final Balance: 150830000
+   Expected Balance: 150830000
+==========================================================
+          File name: Log_137.txt
+                Run: 14
+           ThreadID: 137
+ Deposit Iterations: 210
+Withdraw Iterations: 3540
+      Final Balance: 424456000
+   Expected Balance: 4421822296
+==========================================================
+          File name: Log_137.txt
+                Run: 15
+           ThreadID: 137
+ Deposit Iterations: 2879
+Withdraw Iterations: 2766
+      Final Balance: 414386000
+   Expected Balance: 153765000
+==========================================================
+          File name: Log_137.txt
+                Run: 16
+           ThreadID: 137
+ Deposit Iterations: 2019
+Withdraw Iterations: 3818
+      Final Balance: 129883000
+   Expected Balance: 4424850296
+==========================================================
+          File name: Log_137.txt
+                Run: 17
+           ThreadID: 137
+ Deposit Iterations: 4071
+Withdraw Iterations: 2864
+      Final Balance: 136271000
+   Expected Balance: 136271000
+==========================================================
+          File name: Log_137.txt
+                Run: 18
+           ThreadID: 137
+ Deposit Iterations: 6839
+Withdraw Iterations: 3312
+      Final Balance: 270743000
+   Expected Balance: 10119000
+==========================================================
+          File name: Log_137.txt
+                Run: 19
+           ThreadID: 137
+ Deposit Iterations: 4306
+Withdraw Iterations: 4050
+      Final Balance: 452521000
+   Expected Balance: 127531000
+==========================================================
+          File name: Log_137.txt
+                Run: 20
+           ThreadID: 137
+ Deposit Iterations: 1737
+Withdraw Iterations: 1166
+      Final Balance: 370118000
+   Expected Balance: 113535000
+==========================================================
+          File name: Log_137.txt
+                Run: 21
+           ThreadID: 137
+ Deposit Iterations: 1504
+Withdraw Iterations: 1838
+      Final Balance: 406526000
+   Expected Balance: 4420864296
+==========================================================
+          File name: Log_137.txt
+                Run: 22
+           ThreadID: 137
+ Deposit Iterations: 2612
+Withdraw Iterations: 2004
+      Final Balance: 150027000
+   Expected Balance: 150027000
+==========================================================
+          File name: Log_137.txt
+                Run: 23
+           ThreadID: 137
+ Deposit Iterations: 3342
+Withdraw Iterations: 1314
+      Final Balance: 186094000
+   Expected Balance: 186094000
+==========================================================
+          File name: Log_137.txt
+                Run: 24
+           ThreadID: 137
+ Deposit Iterations: 4572
+Withdraw Iterations: 3710
+      Final Balance: 188152000
+   Expected Balance: 188152000
+==========================================================
+          File name: Log_137.txt
+                Run: 25
+           ThreadID: 137
+ Deposit Iterations: 910
+Withdraw Iterations: 3824
+      Final Balance: 151988000
+   Expected Balance: 4446955296
+==========================================================
+          File name: Log_137.txt
+                Run: 26
+           ThreadID: 137
+ Deposit Iterations: 5499
+Withdraw Iterations: 3421
+      Final Balance: 190455000
+   Expected Balance: 190455000
+==========================================================
+          File name: Log_137.txt
+                Run: 27
+           ThreadID: 137
+ Deposit Iterations: 7547
+Withdraw Iterations: 3838
+      Final Balance: 393601000
+   Expected Balance: 115682000
+==========================================================
+          File name: Log_137.txt
+                Run: 28
+           ThreadID: 137
+ Deposit Iterations: 7401
+Withdraw Iterations: 1097
+      Final Balance: 144727000
+   Expected Balance: 144727000
+==========================================================
+          File name: Log_137.txt
+                Run: 29
+           ThreadID: 137
+ Deposit Iterations: 1725
+Withdraw Iterations: 1734
+      Final Balance: 383540000
+   Expected Balance: 4460155296
+==========================================================
+          File name: Log_137.txt
+                Run: 30
+           ThreadID: 137
+ Deposit Iterations: 3068
+Withdraw Iterations: 1233
+      Final Balance: 112466000
+   Expected Balance: 112466000
+==========================================================
+          File name: Log_137.txt
+                Run: 31
+           ThreadID: 137
+ Deposit Iterations: 2144
+Withdraw Iterations: 829
+      Final Balance: 160082000
+   Expected Balance: 160082000
+==========================================================
+          File name: Log_137.txt
+                Run: 32
+           ThreadID: 137
+ Deposit Iterations: 1090
+Withdraw Iterations: 1278
+      Final Balance: 110995000
+   Expected Balance: 4405962296
+==========================================================
+          File name: Log_137.txt
+                Run: 33
+           ThreadID: 137
+ Deposit Iterations: 6561
+Withdraw Iterations: 2612
+      Final Balance: 203479000
+   Expected Balance: 203479000
+==========================================================
+          File name: Log_137.txt
+                Run: 34
+           ThreadID: 137
+ Deposit Iterations: 884
+Withdraw Iterations: 3546
+      Final Balance: 403295000
+   Expected Balance: 4442960296
+==========================================================
+          File name: Log_137.txt
+                Run: 35
+           ThreadID: 137
+ Deposit Iterations: 4923
+Withdraw Iterations: 498
+      Final Balance: 404724000
+   Expected Balance: 110357000
+==========================================================
+          File name: Log_137.txt
+                Run: 36
+           ThreadID: 137
+ Deposit Iterations: 4942
+Withdraw Iterations: 2173
+      Final Balance: 380067000
+   Expected Balance: 163967000
+==========================================================
+          File name: Log_137.txt
+                Run: 37
+           ThreadID: 137
+ Deposit Iterations: 745
+Withdraw Iterations: 1912
+      Final Balance: 330683000
+   Expected Balance: 4434696296
+==========================================================
+          File name: Log_137.txt
+                Run: 38
+           ThreadID: 137
+ Deposit Iterations: 1341
+Withdraw Iterations: 1017
+      Final Balance: 123551000
+   Expected Balance: 123551000
+==========================================================
+          File name: Log_137.txt
+                Run: 39
+           ThreadID: 137
+ Deposit Iterations: 5253
+Withdraw Iterations: 2136
+      Final Balance: 109288000
+   Expected Balance: 109288000
+==========================================================
+          File name: Log_137.txt
+                Run: 40
+           ThreadID: 137
+ Deposit Iterations: 6605
+Withdraw Iterations: 2707
+      Final Balance: 349039000
+   Expected Balance: 124319000
+==========================================================
+          File name: Log_137.txt
+                Run: 41
+           ThreadID: 137
+ Deposit Iterations: 3998
+Withdraw Iterations: 2405
+      Final Balance: 148786000
+   Expected Balance: 148786000
+==========================================================
+          File name: Log_137.txt
+                Run: 42
+           ThreadID: 137
+ Deposit Iterations: 4212
+Withdraw Iterations: 3318
+      Final Balance: 137744000
+   Expected Balance: 137744000
+==========================================================
+          File name: Log_137.txt
+                Run: 43
+           ThreadID: 137
+ Deposit Iterations: 5319
+Withdraw Iterations: 3738
+      Final Balance: 186399000
+   Expected Balance: 186399000
+==========================================================
+          File name: Log_137.txt
+                Run: 44
+           ThreadID: 137
+ Deposit Iterations: 575
+Withdraw Iterations: 2188
+      Final Balance: 348714000
+   Expected Balance: 4424955296
+==========================================================
+          File name: Log_137.txt
+                Run: 45
+           ThreadID: 137
+ Deposit Iterations: 4928
+Withdraw Iterations: 1151
+      Final Balance: 437548000
+   Expected Balance: 138411000
+==========================================================
+          File name: Log_137.txt
+                Run: 46
+           ThreadID: 137
+ Deposit Iterations: 4260
+Withdraw Iterations: 896
+      Final Balance: 280953000
+   Expected Balance: 10326000
+==========================================================
+          File name: Log_137.txt
+                Run: 47
+           ThreadID: 137
+ Deposit Iterations: 7754
+Withdraw Iterations: 1491
+      Final Balance: 453180000
+   Expected Balance: 171624000
+==========================================================
+          File name: Log_137.txt
+                Run: 48
+           ThreadID: 137
+ Deposit Iterations: 6157
+Withdraw Iterations: 3637
+      Final Balance: 422872000
+   Expected Balance: 143827000
+==========================================================
+          File name: Log_137.txt
+                Run: 49
+           ThreadID: 137
+ Deposit Iterations: 5741
+Withdraw Iterations: 1190
+      Final Balance: 374970000
+   Expected Balance: 120224000
+==========================================================
+          File name: Log_137.txt
+                Run: 50
+           ThreadID: 137
+ Deposit Iterations: 3898
+Withdraw Iterations: 1316
+      Final Balance: 150010000
+   Expected Balance: 150010000
+==========================================================
+          File name: Log_137.txt
+                Run: 51
+           ThreadID: 137
+ Deposit Iterations: 1891
+Withdraw Iterations: 3486
+      Final Balance: 152634000
+   Expected Balance: 4447601296
+==========================================================
+          File name: Log_137.txt
+                Run: 52
+           ThreadID: 137
+ Deposit Iterations: 4471
+Withdraw Iterations: 66
+      Final Balance: 389991000
+   Expected Balance: 143387000
+==========================================================
+          File name: Log_137.txt
+                Run: 53
+           ThreadID: 137
+ Deposit Iterations: 3592
+Withdraw Iterations: 2631
+      Final Balance: 115056000
+   Expected Balance: 115056000
+==========================================================
+          File name: Log_137.txt
+                Run: 54
+           ThreadID: 137
+ Deposit Iterations: 732
+Withdraw Iterations: 2502
+      Final Balance: 141510000
+   Expected Balance: 4436477296
+==========================================================
+          File name: Log_137.txt
+                Run: 55
+           ThreadID: 137
+ Deposit Iterations: 4381
+Withdraw Iterations: 3974
+      Final Balance: 395296000
+   Expected Balance: 130711000
+==========================================================
+          File name: Log_137.txt
+                Run: 56
+           ThreadID: 137
+ Deposit Iterations: 5768
+Withdraw Iterations: 1414
+      Final Balance: 141316000
+   Expected Balance: 141316000
+==========================================================
+          File name: Log_137.txt
+                Run: 57
+           ThreadID: 137
+ Deposit Iterations: 1939
+Withdraw Iterations: 3601
+      Final Balance: 408166000
+   Expected Balance: 4463472296
+==========================================================
+          File name: Log_137.txt
+                Run: 58
+           ThreadID: 137
+ Deposit Iterations: 4666
+Withdraw Iterations: 1409
+      Final Balance: 143188000
+   Expected Balance: 143188000
+==========================================================
+          File name: Log_137.txt
+                Run: 59
+           ThreadID: 137
+ Deposit Iterations: 2282
+Withdraw Iterations: 98
+      Final Balance: 419564000
+   Expected Balance: 151199000
+==========================================================
+          File name: Log_137.txt
+                Run: 60
+           ThreadID: 137
+ Deposit Iterations: 51
+Withdraw Iterations: 1168
+      Final Balance: 177324000
+   Expected Balance: 4472291296
+==========================================================
+          File name: Log_137.txt
+                Run: 61
+           ThreadID: 137
+ Deposit Iterations: 3932
+Withdraw Iterations: 3855
+      Final Balance: 360882000
+   Expected Balance: 87293000
+==========================================================
+          File name: Log_137.txt
+                Run: 62
+           ThreadID: 137
+ Deposit Iterations: 8046
+Withdraw Iterations: 1934
+      Final Balance: 154080000
+   Expected Balance: 154080000
+==========================================================
+          File name: Log_137.txt
+                Run: 63
+           ThreadID: 137
+ Deposit Iterations: 588
+Withdraw Iterations: 1439
+      Final Balance: 464430000
+   Expected Balance: 4459140296
+==========================================================
+          File name: Log_137.txt
+                Run: 64
+           ThreadID: 137
+ Deposit Iterations: 3513
+Withdraw Iterations: 813
+      Final Balance: 117540000
+   Expected Balance: 117540000
+==========================================================
+          File name: Log_137.txt
+                Run: 65
+           ThreadID: 137
+ Deposit Iterations: 2840
+Withdraw Iterations: 3426
+      Final Balance: 2121000
+   Expected Balance: 4297088296
+==========================================================
+          File name: Log_137.txt
+                Run: 66
+           ThreadID: 137
+ Deposit Iterations: 6407
+Withdraw Iterations: 485
+      Final Balance: 172051000
+   Expected Balance: 172051000
+==========================================================
+          File name: Log_137.txt
+                Run: 67
+           ThreadID: 137
+ Deposit Iterations: 2074
+Withdraw Iterations: 3655
+      Final Balance: 368834000
+   Expected Balance: 4438909296
+==========================================================
+          File name: Log_137.txt
+                Run: 68
+           ThreadID: 137
+ Deposit Iterations: 363
+Withdraw Iterations: 1929
+      Final Balance: 347492000
+   Expected Balance: 4411803296
+==========================================================
+          File name: Log_137.txt
+                Run: 69
+           ThreadID: 137
+ Deposit Iterations: 5097
+Withdraw Iterations: 208
+      Final Balance: 442269000
+   Expected Balance: 167629000
+==========================================================
+          File name: Log_137.txt
+                Run: 70
+           ThreadID: 137
+ Deposit Iterations: 1589
+Withdraw Iterations: 422
+      Final Balance: 354307000
+   Expected Balance: 121003000
+==========================================================
+          File name: Log_137.txt
+                Run: 71
+           ThreadID: 137
+ Deposit Iterations: 1588
+Withdraw Iterations: 288
+      Final Balance: 145750000
+   Expected Balance: 145750000
+==========================================================
+          File name: Log_137.txt
+                Run: 72
+           ThreadID: 137
+ Deposit Iterations: 5510
+Withdraw Iterations: 2719
+      Final Balance: 395977000
+   Expected Balance: 151198000
+==========================================================
+          File name: Log_137.txt
+                Run: 73
+           ThreadID: 137
+ Deposit Iterations: 2679
+Withdraw Iterations: 159
+      Final Balance: 393674000
+   Expected Balance: 122904000
+==========================================================
+          File name: Log_137.txt
+                Run: 74
+           ThreadID: 137
+ Deposit Iterations: 7052
+Withdraw Iterations: 2208
+      Final Balance: 154784000
+   Expected Balance: 154784000
+==========================================================
+          File name: Log_137.txt
+                Run: 75
+           ThreadID: 137
+ Deposit Iterations: 6684
+Withdraw Iterations: 434
+      Final Balance: 239739000
+   Expected Balance: 12011000
+==========================================================
+          File name: Log_137.txt
+                Run: 76
+           ThreadID: 137
+ Deposit Iterations: 1835
+Withdraw Iterations: 1435
+      Final Balance: 432017000
+   Expected Balance: 141641000
+==========================================================
+          File name: Log_137.txt
+                Run: 77
+           ThreadID: 137
+ Deposit Iterations: 5283
+Withdraw Iterations: 3411
+      Final Balance: 190912000
+   Expected Balance: 190912000
+==========================================================
+          File name: Log_137.txt
+                Run: 78
+           ThreadID: 137
+ Deposit Iterations: 4701
+Withdraw Iterations: 1091
+      Final Balance: 402510000
+   Expected Balance: 132837000
+==========================================================
+          File name: Log_137.txt
+                Run: 79
+           ThreadID: 137
+ Deposit Iterations: 7080
+Withdraw Iterations: 4039
+      Final Balance: 337032000
+   Expected Balance: 117009000
+==========================================================
+          File name: Log_137.txt
+                Run: 80
+           ThreadID: 137
+ Deposit Iterations: 1578
+Withdraw Iterations: 2035
+      Final Balance: 168823000
+   Expected Balance: 4463790296
+==========================================================
+          File name: Log_137.txt
+                Run: 81
+           ThreadID: 137
+ Deposit Iterations: 2393
+Withdraw Iterations: 3709
+      Final Balance: 94730000
+   Expected Balance: 4389697296
+==========================================================
+          File name: Log_137.txt
+                Run: 82
+           ThreadID: 137
+ Deposit Iterations: 3387
+Withdraw Iterations: 2654
+      Final Balance: 471047000
+   Expected Balance: 168032000
+==========================================================
+          File name: Log_137.txt
+                Run: 83
+           ThreadID: 137
+ Deposit Iterations: 4561
+Withdraw Iterations: 285
+      Final Balance: 423245000
+   Expected Balance: 152721000
+==========================================================
+          File name: Log_137.txt
+                Run: 84
+           ThreadID: 137
+ Deposit Iterations: 3745
+Withdraw Iterations: 1738
+      Final Balance: 133510000
+   Expected Balance: 133510000
+==========================================================
+          File name: Log_137.txt
+                Run: 85
+           ThreadID: 137
+ Deposit Iterations: 4408
+Withdraw Iterations: 2225
+      Final Balance: 121886000
+   Expected Balance: 121886000
+==========================================================
+          File name: Log_137.txt
+                Run: 86
+           ThreadID: 137
+ Deposit Iterations: 3378
+Withdraw Iterations: 272
+      Final Balance: 355478000
+   Expected Balance: 143701000
+==========================================================
+          File name: Log_137.txt
+                Run: 87
+           ThreadID: 137
+ Deposit Iterations: 3601
+Withdraw Iterations: 809
+      Final Balance: 381136000
+   Expected Balance: 148114000
+==========================================================
+          File name: Log_137.txt
+                Run: 88
+           ThreadID: 137
+ Deposit Iterations: 2974
+Withdraw Iterations: 2749
+      Final Balance: 439608000
+   Expected Balance: 155126000
+==========================================================
+          File name: Log_137.txt
+                Run: 89
+           ThreadID: 137
+ Deposit Iterations: 538
+Withdraw Iterations: 1134
+      Final Balance: 395932000
+   Expected Balance: 4403859296
+==========================================================
+          File name: Log_137.txt
+                Run: 90
+           ThreadID: 137
+ Deposit Iterations: 2418
+Withdraw Iterations: 2008
+      Final Balance: 380945000
+   Expected Balance: 146842000
+==========================================================
+          File name: Log_137.txt
+                Run: 91
+           ThreadID: 137
+ Deposit Iterations: 6327
+Withdraw Iterations: 418
+      Final Balance: 143736000
+   Expected Balance: 143736000
+==========================================================
+          File name: Log_137.txt
+                Run: 92
+           ThreadID: 137
+ Deposit Iterations: 7712
+Withdraw Iterations: 799
+      Final Balance: 405012000
+   Expected Balance: 140055000
+==========================================================
+          File name: Log_137.txt
+                Run: 93
+           ThreadID: 137
+ Deposit Iterations: 148
+Withdraw Iterations: 2023
+      Final Balance: 361001000
+   Expected Balance: 4428899296
+==========================================================
+          File name: Log_137.txt
+                Run: 94
+           ThreadID: 137
+ Deposit Iterations: 5073
+Withdraw Iterations: 1945
+      Final Balance: 161635000
+   Expected Balance: 161635000
+==========================================================
+          File name: Log_137.txt
+                Run: 95
+           ThreadID: 137
+ Deposit Iterations: 1164
+Withdraw Iterations: 2615
+      Final Balance: 160346000
+   Expected Balance: 4455313296
+==========================================================
+          File name: Log_137.txt
+                Run: 96
+           ThreadID: 137
+ Deposit Iterations: 4556
+Withdraw Iterations: 580
+      Final Balance: 374305000
+   Expected Balance: 146360000
+==========================================================
+          File name: Log_137.txt
+                Run: 97
+           ThreadID: 137
+ Deposit Iterations: 1799
+Withdraw Iterations: 3154
+      Final Balance: 360404000
+   Expected Balance: 4411523296
+==========================================================
+          File name: Log_137.txt
+                Run: 98
+           ThreadID: 137
+ Deposit Iterations: 129
+Withdraw Iterations: 1494
+      Final Balance: 323004000
+   Expected Balance: 4407483296
+==========================================================
+          File name: Log_137.txt
+                Run: 99
+           ThreadID: 137
+ Deposit Iterations: 3038
+Withdraw Iterations: 3185
+      Final Balance: 334573000
+   Expected Balance: 4404272296

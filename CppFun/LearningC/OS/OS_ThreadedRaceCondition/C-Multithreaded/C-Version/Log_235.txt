@@ -1,0 +1,801 @@
+
+==========================================================
+          File name: Log_235.txt
+                Run: 0
+           ThreadID: 235
+ Deposit Iterations: 531
+Withdraw Iterations: 3411
+      Final Balance: 429134000
+   Expected Balance: 4496507296
+==========================================================
+          File name: Log_235.txt
+                Run: 1
+           ThreadID: 235
+ Deposit Iterations: 2614
+Withdraw Iterations: 2379
+      Final Balance: 274115000
+   Expected Balance: 274115000
+==========================================================
+          File name: Log_235.txt
+                Run: 2
+           ThreadID: 235
+ Deposit Iterations: 3419
+Withdraw Iterations: 277
+      Final Balance: 484582000
+   Expected Balance: 205656000
+==========================================================
+          File name: Log_235.txt
+                Run: 3
+           ThreadID: 235
+ Deposit Iterations: 4517
+Withdraw Iterations: 950
+      Final Balance: 222224000
+   Expected Balance: 222224000
+==========================================================
+          File name: Log_235.txt
+                Run: 4
+           ThreadID: 235
+ Deposit Iterations: 841
+Withdraw Iterations: 1802
+      Final Balance: 291332000
+   Expected Balance: 4586299296
+==========================================================
+          File name: Log_235.txt
+                Run: 5
+           ThreadID: 235
+ Deposit Iterations: 3766
+Withdraw Iterations: 4026
+      Final Balance: 259406000
+   Expected Balance: 4554373296
+==========================================================
+          File name: Log_235.txt
+                Run: 6
+           ThreadID: 235
+ Deposit Iterations: 534
+Withdraw Iterations: 3827
+      Final Balance: 569712000
+   Expected Balance: 4545061296
+==========================================================
+          File name: Log_235.txt
+                Run: 7
+           ThreadID: 235
+ Deposit Iterations: 1777
+Withdraw Iterations: 1706
+      Final Balance: 517099000
+   Expected Balance: 244763000
+==========================================================
+          File name: Log_235.txt
+                Run: 8
+           ThreadID: 235
+ Deposit Iterations: 4008
+Withdraw Iterations: 2609
+      Final Balance: 6839000
+   Expected Balance: 6839000
+==========================================================
+          File name: Log_235.txt
+                Run: 9
+           ThreadID: 235
+ Deposit Iterations: 5208
+Withdraw Iterations: 416
+      Final Balance: 249278000
+   Expected Balance: 249278000
+==========================================================
+          File name: Log_235.txt
+                Run: 10
+           ThreadID: 235
+ Deposit Iterations: 7341
+Withdraw Iterations: 2907
+      Final Balance: 241554000
+   Expected Balance: 241554000
+==========================================================
+          File name: Log_235.txt
+                Run: 11
+           ThreadID: 235
+ Deposit Iterations: 1986
+Withdraw Iterations: 3712
+      Final Balance: 422925000
+   Expected Balance: 4490445296
+==========================================================
+          File name: Log_235.txt
+                Run: 12
+           ThreadID: 235
+ Deposit Iterations: 2018
+Withdraw Iterations: 1611
+      Final Balance: 288511000
+   Expected Balance: 288511000
+==========================================================
+          File name: Log_235.txt
+                Run: 13
+           ThreadID: 235
+ Deposit Iterations: 1931
+Withdraw Iterations: 1956
+      Final Balance: 257574000
+   Expected Balance: 4552541296
+==========================================================
+          File name: Log_235.txt
+                Run: 14
+           ThreadID: 235
+ Deposit Iterations: 7803
+Withdraw Iterations: 515
+      Final Balance: 513773000
+   Expected Balance: 240299000
+==========================================================
+          File name: Log_235.txt
+                Run: 15
+           ThreadID: 235
+ Deposit Iterations: 4684
+Withdraw Iterations: 1430
+      Final Balance: 519392000
+   Expected Balance: 275574000
+==========================================================
+          File name: Log_235.txt
+                Run: 16
+           ThreadID: 235
+ Deposit Iterations: 5211
+Withdraw Iterations: 2959
+      Final Balance: 486927000
+   Expected Balance: 226983000
+==========================================================
+          File name: Log_235.txt
+                Run: 17
+           ThreadID: 235
+ Deposit Iterations: 7127
+Withdraw Iterations: 2362
+      Final Balance: 212287000
+   Expected Balance: 212287000
+==========================================================
+          File name: Log_235.txt
+                Run: 18
+           ThreadID: 235
+ Deposit Iterations: 5318
+Withdraw Iterations: 2088
+      Final Balance: 463757000
+   Expected Balance: 246103000
+==========================================================
+          File name: Log_235.txt
+                Run: 19
+           ThreadID: 235
+ Deposit Iterations: 1044
+Withdraw Iterations: 2683
+      Final Balance: 248347000
+   Expected Balance: 4543314296
+==========================================================
+          File name: Log_235.txt
+                Run: 20
+           ThreadID: 235
+ Deposit Iterations: 1443
+Withdraw Iterations: 331
+      Final Balance: 503213000
+   Expected Balance: 159085000
+==========================================================
+          File name: Log_235.txt
+                Run: 21
+           ThreadID: 235
+ Deposit Iterations: 1986
+Withdraw Iterations: 1398
+      Final Balance: 488034000
+   Expected Balance: 229536000
+==========================================================
+          File name: Log_235.txt
+                Run: 22
+           ThreadID: 235
+ Deposit Iterations: 4051
+Withdraw Iterations: 1107
+      Final Balance: 468776000
+   Expected Balance: 257032000
+==========================================================
+          File name: Log_235.txt
+                Run: 23
+           ThreadID: 235
+ Deposit Iterations: 5469
+Withdraw Iterations: 1248
+      Final Balance: 285803000
+   Expected Balance: 285803000
+==========================================================
+          File name: Log_235.txt
+                Run: 24
+           ThreadID: 235
+ Deposit Iterations: 8008
+Withdraw Iterations: 1583
+      Final Balance: 603385000
+   Expected Balance: 303177000
+==========================================================
+          File name: Log_235.txt
+                Run: 25
+           ThreadID: 235
+ Deposit Iterations: 4697
+Withdraw Iterations: 1040
+      Final Balance: 274902000
+   Expected Balance: 274902000
+==========================================================
+          File name: Log_235.txt
+                Run: 26
+           ThreadID: 235
+ Deposit Iterations: 3412
+Withdraw Iterations: 1465
+      Final Balance: 292041000
+   Expected Balance: 292041000
+==========================================================
+          File name: Log_235.txt
+                Run: 27
+           ThreadID: 235
+ Deposit Iterations: 786
+Withdraw Iterations: 2386
+      Final Balance: 197233000
+   Expected Balance: 4492200296
+==========================================================
+          File name: Log_235.txt
+                Run: 28
+           ThreadID: 235
+ Deposit Iterations: 1094
+Withdraw Iterations: 1385
+      Final Balance: 248849000
+   Expected Balance: 4543816296
+==========================================================
+          File name: Log_235.txt
+                Run: 29
+           ThreadID: 235
+ Deposit Iterations: 3693
+Withdraw Iterations: 3750
+      Final Balance: 482296000
+   Expected Balance: 4551926296
+==========================================================
+          File name: Log_235.txt
+                Run: 30
+           ThreadID: 235
+ Deposit Iterations: 3128
+Withdraw Iterations: 3699
+      Final Balance: 240930000
+   Expected Balance: 4535897296
+==========================================================
+          File name: Log_235.txt
+                Run: 31
+           ThreadID: 235
+ Deposit Iterations: 1815
+Withdraw Iterations: 1181
+      Final Balance: 232092000
+   Expected Balance: 232092000
+==========================================================
+          File name: Log_235.txt
+                Run: 32
+           ThreadID: 235
+ Deposit Iterations: 4155
+Withdraw Iterations: 1338
+      Final Balance: 395578000
+   Expected Balance: 159021000
+==========================================================
+          File name: Log_235.txt
+                Run: 33
+           ThreadID: 235
+ Deposit Iterations: 1528
+Withdraw Iterations: 2513
+      Final Balance: 502103000
+   Expected Balance: 4588851296
+==========================================================
+          File name: Log_235.txt
+                Run: 34
+           ThreadID: 235
+ Deposit Iterations: 3527
+Withdraw Iterations: 1415
+      Final Balance: 541307000
+   Expected Balance: 267317000
+==========================================================
+          File name: Log_235.txt
+                Run: 35
+           ThreadID: 235
+ Deposit Iterations: 2187
+Withdraw Iterations: 2252
+      Final Balance: 515468000
+   Expected Balance: 4479203296
+==========================================================
+          File name: Log_235.txt
+                Run: 36
+           ThreadID: 235
+ Deposit Iterations: 1677
+Withdraw Iterations: 811
+      Final Balance: 466260000
+   Expected Balance: 271559000
+==========================================================
+          File name: Log_235.txt
+                Run: 37
+           ThreadID: 235
+ Deposit Iterations: 5089
+Withdraw Iterations: 1190
+      Final Balance: 434336000
+   Expected Balance: 208605000
+==========================================================
+          File name: Log_235.txt
+                Run: 38
+           ThreadID: 235
+ Deposit Iterations: 5528
+Withdraw Iterations: 364
+      Final Balance: 198437000
+   Expected Balance: 198437000
+==========================================================
+          File name: Log_235.txt
+                Run: 39
+           ThreadID: 235
+ Deposit Iterations: 7207
+Withdraw Iterations: 1913
+      Final Balance: 513756000
+   Expected Balance: 223009000
+==========================================================
+          File name: Log_235.txt
+                Run: 40
+           ThreadID: 235
+ Deposit Iterations: 5705
+Withdraw Iterations: 1881
+      Final Balance: 432021000
+   Expected Balance: 190219000
+==========================================================
+          File name: Log_235.txt
+                Run: 41
+           ThreadID: 235
+ Deposit Iterations: 5692
+Withdraw Iterations: 347
+      Final Balance: 275552000
+   Expected Balance: 275552000
+==========================================================
+          File name: Log_235.txt
+                Run: 42
+           ThreadID: 235
+ Deposit Iterations: 3633
+Withdraw Iterations: 1886
+      Final Balance: 274430000
+   Expected Balance: 274430000
+==========================================================
+          File name: Log_235.txt
+                Run: 43
+           ThreadID: 235
+ Deposit Iterations: 4257
+Withdraw Iterations: 1482
+      Final Balance: 521900000
+   Expected Balance: 311766000
+==========================================================
+          File name: Log_235.txt
+                Run: 44
+           ThreadID: 235
+ Deposit Iterations: 5661
+Withdraw Iterations: 3546
+      Final Balance: 446277000
+   Expected Balance: 203033000
+==========================================================
+          File name: Log_235.txt
+                Run: 45
+           ThreadID: 235
+ Deposit Iterations: 93
+Withdraw Iterations: 617
+      Final Balance: 246533000
+   Expected Balance: 4541500296
+==========================================================
+          File name: Log_235.txt
+                Run: 46
+           ThreadID: 235
+ Deposit Iterations: 1580
+Withdraw Iterations: 1334
+      Final Balance: 7208000
+   Expected Balance: 7208000
+==========================================================
+          File name: Log_235.txt
+                Run: 47
+           ThreadID: 235
+ Deposit Iterations: 7070
+Withdraw Iterations: 1650
+      Final Balance: 567066000
+   Expected Balance: 258665000
+==========================================================
+          File name: Log_235.txt
+                Run: 48
+           ThreadID: 235
+ Deposit Iterations: 4931
+Withdraw Iterations: 215
+      Final Balance: 219038000
+   Expected Balance: 219038000
+==========================================================
+          File name: Log_235.txt
+                Run: 49
+           ThreadID: 235
+ Deposit Iterations: 6502
+Withdraw Iterations: 2057
+      Final Balance: 205102000
+   Expected Balance: 205102000
+==========================================================
+          File name: Log_235.txt
+                Run: 50
+           ThreadID: 235
+ Deposit Iterations: 1605
+Withdraw Iterations: 3405
+      Final Balance: 489518000
+   Expected Balance: 4536099296
+==========================================================
+          File name: Log_235.txt
+                Run: 51
+           ThreadID: 235
+ Deposit Iterations: 5769
+Withdraw Iterations: 2545
+      Final Balance: 496588000
+   Expected Balance: 264156000
+==========================================================
+          File name: Log_235.txt
+                Run: 52
+           ThreadID: 235
+ Deposit Iterations: 514
+Withdraw Iterations: 998
+      Final Balance: 214757000
+   Expected Balance: 4509724296
+==========================================================
+          File name: Log_235.txt
+                Run: 53
+           ThreadID: 235
+ Deposit Iterations: 3562
+Withdraw Iterations: 2119
+      Final Balance: 466861000
+   Expected Balance: 232474000
+==========================================================
+          File name: Log_235.txt
+                Run: 54
+           ThreadID: 235
+ Deposit Iterations: 2247
+Withdraw Iterations: 4007
+      Final Balance: 217848000
+   Expected Balance: 4512815296
+==========================================================
+          File name: Log_235.txt
+                Run: 55
+           ThreadID: 235
+ Deposit Iterations: 6448
+Withdraw Iterations: 3669
+      Final Balance: 462956000
+   Expected Balance: 211177000
+==========================================================
+          File name: Log_235.txt
+                Run: 56
+           ThreadID: 235
+ Deposit Iterations: 5003
+Withdraw Iterations: 2737
+      Final Balance: 504302000
+   Expected Balance: 211187000
+==========================================================
+          File name: Log_235.txt
+                Run: 57
+           ThreadID: 235
+ Deposit Iterations: 4953
+Withdraw Iterations: 1908
+      Final Balance: 490663000
+   Expected Balance: 288957000
+==========================================================
+          File name: Log_235.txt
+                Run: 58
+           ThreadID: 235
+ Deposit Iterations: 2222
+Withdraw Iterations: 804
+      Final Balance: 259292000
+   Expected Balance: 259292000
+==========================================================
+          File name: Log_235.txt
+                Run: 59
+           ThreadID: 235
+ Deposit Iterations: 864
+Withdraw Iterations: 1816
+      Final Balance: 478021000
+   Expected Balance: 4556052296
+==========================================================
+          File name: Log_235.txt
+                Run: 60
+           ThreadID: 235
+ Deposit Iterations: 2947
+Withdraw Iterations: 2453
+      Final Balance: 265303000
+   Expected Balance: 265303000
+==========================================================
+          File name: Log_235.txt
+                Run: 61
+           ThreadID: 235
+ Deposit Iterations: 1294
+Withdraw Iterations: 4020
+      Final Balance: 184226000
+   Expected Balance: 4479193296
+==========================================================
+          File name: Log_235.txt
+                Run: 62
+           ThreadID: 235
+ Deposit Iterations: 7374
+Withdraw Iterations: 130
+      Final Balance: 254015000
+   Expected Balance: 254015000
+==========================================================
+          File name: Log_235.txt
+                Run: 63
+           ThreadID: 235
+ Deposit Iterations: 5227
+Withdraw Iterations: 1767
+      Final Balance: 594882000
+   Expected Balance: 265059000
+==========================================================
+          File name: Log_235.txt
+                Run: 64
+           ThreadID: 235
+ Deposit Iterations: 657
+Withdraw Iterations: 925
+      Final Balance: 207877000
+   Expected Balance: 4502844296
+==========================================================
+          File name: Log_235.txt
+                Run: 65
+           ThreadID: 235
+ Deposit Iterations: 5006
+Withdraw Iterations: 1527
+      Final Balance: 160201000
+   Expected Balance: 160201000
+==========================================================
+          File name: Log_235.txt
+                Run: 66
+           ThreadID: 235
+ Deposit Iterations: 5294
+Withdraw Iterations: 1967
+      Final Balance: 481708000
+   Expected Balance: 290721000
+==========================================================
+          File name: Log_235.txt
+                Run: 67
+           ThreadID: 235
+ Deposit Iterations: 3322
+Withdraw Iterations: 2560
+      Final Balance: 242851000
+   Expected Balance: 242851000
+==========================================================
+          File name: Log_235.txt
+                Run: 68
+           ThreadID: 235
+ Deposit Iterations: 3700
+Withdraw Iterations: 1137
+      Final Balance: 439911000
+   Expected Balance: 178346000
+==========================================================
+          File name: Log_235.txt
+                Run: 69
+           ThreadID: 235
+ Deposit Iterations: 4551
+Withdraw Iterations: 2171
+      Final Balance: 256214000
+   Expected Balance: 256214000
+==========================================================
+          File name: Log_235.txt
+                Run: 70
+           ThreadID: 235
+ Deposit Iterations: 2501
+Withdraw Iterations: 415
+      Final Balance: 211803000
+   Expected Balance: 211803000
+==========================================================
+          File name: Log_235.txt
+                Run: 71
+           ThreadID: 235
+ Deposit Iterations: 648
+Withdraw Iterations: 907
+      Final Balance: 549750000
+   Expected Balance: 4552775296
+==========================================================
+          File name: Log_235.txt
+                Run: 72
+           ThreadID: 235
+ Deposit Iterations: 2640
+Withdraw Iterations: 629
+      Final Balance: 250088000
+   Expected Balance: 250088000
+==========================================================
+          File name: Log_235.txt
+                Run: 73
+           ThreadID: 235
+ Deposit Iterations: 7749
+Withdraw Iterations: 73
+      Final Balance: 241597000
+   Expected Balance: 241597000
+==========================================================
+          File name: Log_235.txt
+                Run: 74
+           ThreadID: 235
+ Deposit Iterations: 3254
+Withdraw Iterations: 2879
+      Final Balance: 525243000
+   Expected Balance: 275676000
+==========================================================
+          File name: Log_235.txt
+                Run: 75
+           ThreadID: 235
+ Deposit Iterations: 1407
+Withdraw Iterations: 301
+      Final Balance: 203870000
+   Expected Balance: 203870000
+==========================================================
+          File name: Log_235.txt
+                Run: 76
+           ThreadID: 235
+ Deposit Iterations: 2540
+Withdraw Iterations: 56
+      Final Balance: 259523000
+   Expected Balance: 260711000
+==========================================================
+          File name: Log_235.txt
+                Run: 77
+           ThreadID: 235
+ Deposit Iterations: 3040
+Withdraw Iterations: 3282
+      Final Balance: 301042000
+   Expected Balance: 4596009296
+==========================================================
+          File name: Log_235.txt
+                Run: 78
+           ThreadID: 235
+ Deposit Iterations: 3105
+Withdraw Iterations: 2388
+      Final Balance: 498009000
+   Expected Balance: 221544000
+==========================================================
+          File name: Log_235.txt
+                Run: 79
+           ThreadID: 235
+ Deposit Iterations: 4017
+Withdraw Iterations: 689
+      Final Balance: 207954000
+   Expected Balance: 207954000
+==========================================================
+          File name: Log_235.txt
+                Run: 80
+           ThreadID: 235
+ Deposit Iterations: 7755
+Withdraw Iterations: 3317
+      Final Balance: 274465000
+   Expected Balance: 274465000
+==========================================================
+          File name: Log_235.txt
+                Run: 81
+           ThreadID: 235
+ Deposit Iterations: 4590
+Withdraw Iterations: 3264
+      Final Balance: 491834000
+   Expected Balance: 173900000
+==========================================================
+          File name: Log_235.txt
+                Run: 82
+           ThreadID: 235
+ Deposit Iterations: 4157
+Withdraw Iterations: 128
+      Final Balance: 572242000
+   Expected Balance: 280931000
+==========================================================
+          File name: Log_235.txt
+                Run: 83
+           ThreadID: 235
+ Deposit Iterations: 7509
+Withdraw Iterations: 3606
+      Final Balance: 533725000
+   Expected Balance: 255372000
+==========================================================
+          File name: Log_235.txt
+                Run: 84
+           ThreadID: 235
+ Deposit Iterations: 6133
+Withdraw Iterations: 2272
+      Final Balance: 249004000
+   Expected Balance: 249004000
+==========================================================
+          File name: Log_235.txt
+                Run: 85
+           ThreadID: 235
+ Deposit Iterations: 6169
+Withdraw Iterations: 2888
+      Final Balance: 203048000
+   Expected Balance: 203048000
+==========================================================
+          File name: Log_235.txt
+                Run: 86
+           ThreadID: 235
+ Deposit Iterations: 933
+Withdraw Iterations: 4048
+      Final Balance: 450112000
+   Expected Balance: 4534052296
+==========================================================
+          File name: Log_235.txt
+                Run: 87
+           ThreadID: 235
+ Deposit Iterations: 2084
+Withdraw Iterations: 3773
+      Final Balance: 250737000
+   Expected Balance: 4545704296
+==========================================================
+          File name: Log_235.txt
+                Run: 88
+           ThreadID: 235
+ Deposit Iterations: 461
+Withdraw Iterations: 256
+      Final Balance: 506697000
+   Expected Balance: 256093000
+==========================================================
+          File name: Log_235.txt
+                Run: 89
+           ThreadID: 235
+ Deposit Iterations: 3671
+Withdraw Iterations: 1491
+      Final Balance: 195077000
+   Expected Balance: 195077000
+==========================================================
+          File name: Log_235.txt
+                Run: 90
+           ThreadID: 235
+ Deposit Iterations: 7529
+Withdraw Iterations: 1485
+      Final Balance: 450815000
+   Expected Balance: 217416000
+==========================================================
+          File name: Log_235.txt
+                Run: 91
+           ThreadID: 235
+ Deposit Iterations: 1932
+Withdraw Iterations: 1861
+      Final Balance: 260244000
+   Expected Balance: 260244000
+==========================================================
+          File name: Log_235.txt
+                Run: 92
+           ThreadID: 235
+ Deposit Iterations: 1271
+Withdraw Iterations: 2060
+      Final Balance: 239373000
+   Expected Balance: 4534340296
+==========================================================
+          File name: Log_235.txt
+                Run: 93
+           ThreadID: 235
+ Deposit Iterations: 6682
+Withdraw Iterations: 3772
+      Final Balance: 464432000
+   Expected Balance: 234375000
+==========================================================
+          File name: Log_235.txt
+                Run: 94
+           ThreadID: 235
+ Deposit Iterations: 1002
+Withdraw Iterations: 2741
+      Final Balance: 268440000
+   Expected Balance: 4563407296
+==========================================================
+          File name: Log_235.txt
+                Run: 95
+           ThreadID: 235
+ Deposit Iterations: 3477
+Withdraw Iterations: 2741
+      Final Balance: 507742000
+   Expected Balance: 252837000
+==========================================================
+          File name: Log_235.txt
+                Run: 96
+           ThreadID: 235
+ Deposit Iterations: 4319
+Withdraw Iterations: 4053
+      Final Balance: 451419000
+   Expected Balance: 254788000
+==========================================================
+          File name: Log_235.txt
+                Run: 97
+           ThreadID: 235
+ Deposit Iterations: 1291
+Withdraw Iterations: 2119
+      Final Balance: 447045000
+   Expected Balance: 4504669296
+==========================================================
+          File name: Log_235.txt
+                Run: 98
+           ThreadID: 235
+ Deposit Iterations: 5379
+Withdraw Iterations: 1405
+      Final Balance: 391053000
+   Expected Balance: 206588000
+==========================================================
+          File name: Log_235.txt
+                Run: 99
+           ThreadID: 235
+ Deposit Iterations: 289
+Withdraw Iterations: 2293
+      Final Balance: 421924000
+   Expected Balance: 4491384296

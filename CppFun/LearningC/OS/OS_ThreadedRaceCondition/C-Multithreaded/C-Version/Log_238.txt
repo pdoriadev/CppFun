@@ -1,0 +1,801 @@
+
+==========================================================
+          File name: Log_238.txt
+                Run: 0
+           ThreadID: 238
+ Deposit Iterations: 6365
+Withdraw Iterations: 2216
+      Final Balance: 209627000
+   Expected Balance: 209627000
+==========================================================
+          File name: Log_238.txt
+                Run: 1
+           ThreadID: 238
+ Deposit Iterations: 6017
+Withdraw Iterations: 1143
+      Final Balance: 545762000
+   Expected Balance: 282696000
+==========================================================
+          File name: Log_238.txt
+                Run: 2
+           ThreadID: 238
+ Deposit Iterations: 7856
+Withdraw Iterations: 3559
+      Final Balance: 205462000
+   Expected Balance: 205462000
+==========================================================
+          File name: Log_238.txt
+                Run: 3
+           ThreadID: 238
+ Deposit Iterations: 1524
+Withdraw Iterations: 2722
+      Final Balance: 476612000
+   Expected Balance: 4521894296
+==========================================================
+          File name: Log_238.txt
+                Run: 4
+           ThreadID: 238
+ Deposit Iterations: 925
+Withdraw Iterations: 2783
+      Final Balance: 525225000
+   Expected Balance: 4594639296
+==========================================================
+          File name: Log_238.txt
+                Run: 5
+           ThreadID: 238
+ Deposit Iterations: 7527
+Withdraw Iterations: 2563
+      Final Balance: 509323000
+   Expected Balance: 268916000
+==========================================================
+          File name: Log_238.txt
+                Run: 6
+           ThreadID: 238
+ Deposit Iterations: 3928
+Withdraw Iterations: 3379
+      Final Balance: 565560000
+   Expected Balance: 253936000
+==========================================================
+          File name: Log_238.txt
+                Run: 7
+           ThreadID: 238
+ Deposit Iterations: 2956
+Withdraw Iterations: 1261
+      Final Balance: 246186000
+   Expected Balance: 246186000
+==========================================================
+          File name: Log_238.txt
+                Run: 8
+           ThreadID: 238
+ Deposit Iterations: 2459
+Withdraw Iterations: 3336
+      Final Balance: 511016000
+   Expected Balance: 4520977296
+==========================================================
+          File name: Log_238.txt
+                Run: 9
+           ThreadID: 238
+ Deposit Iterations: 6275
+Withdraw Iterations: 3565
+      Final Balance: 226322000
+   Expected Balance: 226322000
+==========================================================
+          File name: Log_238.txt
+                Run: 10
+           ThreadID: 238
+ Deposit Iterations: 2363
+Withdraw Iterations: 257
+      Final Balance: 249251000
+   Expected Balance: 249251000
+==========================================================
+          File name: Log_238.txt
+                Run: 11
+           ThreadID: 238
+ Deposit Iterations: 3918
+Withdraw Iterations: 2594
+      Final Balance: 424249000
+   Expected Balance: 197775000
+==========================================================
+          File name: Log_238.txt
+                Run: 12
+           ThreadID: 238
+ Deposit Iterations: 5090
+Withdraw Iterations: 940
+      Final Balance: 567721000
+   Expected Balance: 295085000
+==========================================================
+          File name: Log_238.txt
+                Run: 13
+           ThreadID: 238
+ Deposit Iterations: 7766
+Withdraw Iterations: 3585
+      Final Balance: 272122000
+   Expected Balance: 272122000
+==========================================================
+          File name: Log_238.txt
+                Run: 14
+           ThreadID: 238
+ Deposit Iterations: 4757
+Withdraw Iterations: 2418
+      Final Balance: 240307000
+   Expected Balance: 240307000
+==========================================================
+          File name: Log_238.txt
+                Run: 15
+           ThreadID: 238
+ Deposit Iterations: 3663
+Withdraw Iterations: 3993
+      Final Balance: 522355000
+   Expected Balance: 4566957296
+==========================================================
+          File name: Log_238.txt
+                Run: 16
+           ThreadID: 238
+ Deposit Iterations: 2257
+Withdraw Iterations: 3152
+      Final Balance: 490669000
+   Expected Balance: 4518803296
+==========================================================
+          File name: Log_238.txt
+                Run: 17
+           ThreadID: 238
+ Deposit Iterations: 4032
+Withdraw Iterations: 2111
+      Final Balance: 502324000
+   Expected Balance: 215520000
+==========================================================
+          File name: Log_238.txt
+                Run: 18
+           ThreadID: 238
+ Deposit Iterations: 7736
+Withdraw Iterations: 2842
+      Final Balance: 248486000
+   Expected Balance: 248486000
+==========================================================
+          File name: Log_238.txt
+                Run: 19
+           ThreadID: 238
+ Deposit Iterations: 4707
+Withdraw Iterations: 111
+      Final Balance: 588225000
+   Expected Balance: 250394000
+==========================================================
+          File name: Log_238.txt
+                Run: 20
+           ThreadID: 238
+ Deposit Iterations: 1024
+Withdraw Iterations: 2965
+      Final Balance: 501272000
+   Expected Balance: 4453796296
+==========================================================
+          File name: Log_238.txt
+                Run: 21
+           ThreadID: 238
+ Deposit Iterations: 7906
+Withdraw Iterations: 3022
+      Final Balance: 492918000
+   Expected Balance: 235329000
+==========================================================
+          File name: Log_238.txt
+                Run: 22
+           ThreadID: 238
+ Deposit Iterations: 5629
+Withdraw Iterations: 1430
+      Final Balance: 471665000
+   Expected Balance: 259228000
+==========================================================
+          File name: Log_238.txt
+                Run: 23
+           ThreadID: 238
+ Deposit Iterations: 7835
+Withdraw Iterations: 1642
+      Final Balance: 551941000
+   Expected Balance: 294074000
+==========================================================
+          File name: Log_238.txt
+                Run: 24
+           ThreadID: 238
+ Deposit Iterations: 7336
+Withdraw Iterations: 2464
+      Final Balance: 301213000
+   Expected Balance: 301213000
+==========================================================
+          File name: Log_238.txt
+                Run: 25
+           ThreadID: 238
+ Deposit Iterations: 960
+Withdraw Iterations: 143
+      Final Balance: 286132000
+   Expected Balance: 286132000
+==========================================================
+          File name: Log_238.txt
+                Run: 26
+           ThreadID: 238
+ Deposit Iterations: 1989
+Withdraw Iterations: 3529
+      Final Balance: 563994000
+   Expected Balance: 4590585296
+==========================================================
+          File name: Log_238.txt
+                Run: 27
+           ThreadID: 238
+ Deposit Iterations: 7132
+Withdraw Iterations: 2490
+      Final Balance: 205422000
+   Expected Balance: 205422000
+==========================================================
+          File name: Log_238.txt
+                Run: 28
+           ThreadID: 238
+ Deposit Iterations: 306
+Withdraw Iterations: 3594
+      Final Balance: 243885000
+   Expected Balance: 4538852296
+==========================================================
+          File name: Log_238.txt
+                Run: 29
+           ThreadID: 238
+ Deposit Iterations: 3470
+Withdraw Iterations: 2666
+      Final Balance: 257321000
+   Expected Balance: 257321000
+==========================================================
+          File name: Log_238.txt
+                Run: 30
+           ThreadID: 238
+ Deposit Iterations: 7710
+Withdraw Iterations: 2936
+      Final Balance: 248119000
+   Expected Balance: 248119000
+==========================================================
+          File name: Log_238.txt
+                Run: 31
+           ThreadID: 238
+ Deposit Iterations: 6773
+Withdraw Iterations: 595
+      Final Balance: 475478000
+   Expected Balance: 239134000
+==========================================================
+          File name: Log_238.txt
+                Run: 32
+           ThreadID: 238
+ Deposit Iterations: 4051
+Withdraw Iterations: 3662
+      Final Balance: 396301000
+   Expected Balance: 156593000
+==========================================================
+          File name: Log_238.txt
+                Run: 33
+           ThreadID: 238
+ Deposit Iterations: 1506
+Withdraw Iterations: 3301
+      Final Balance: 293074000
+   Expected Balance: 4588041296
+==========================================================
+          File name: Log_238.txt
+                Run: 34
+           ThreadID: 238
+ Deposit Iterations: 3635
+Withdraw Iterations: 1511
+      Final Balance: 274992000
+   Expected Balance: 274992000
+==========================================================
+          File name: Log_238.txt
+                Run: 35
+           ThreadID: 238
+ Deposit Iterations: 7003
+Withdraw Iterations: 1602
+      Final Balance: 191044000
+   Expected Balance: 191044000
+==========================================================
+          File name: Log_238.txt
+                Run: 36
+           ThreadID: 238
+ Deposit Iterations: 4812
+Withdraw Iterations: 2521
+      Final Balance: 271832000
+   Expected Balance: 271832000
+==========================================================
+          File name: Log_238.txt
+                Run: 37
+           ThreadID: 238
+ Deposit Iterations: 538
+Withdraw Iterations: 2540
+      Final Balance: 202130000
+   Expected Balance: 4497097296
+==========================================================
+          File name: Log_238.txt
+                Run: 38
+           ThreadID: 238
+ Deposit Iterations: 322
+Withdraw Iterations: 2500
+      Final Balance: 531126000
+   Expected Balance: 4489756296
+==========================================================
+          File name: Log_238.txt
+                Run: 39
+           ThreadID: 238
+ Deposit Iterations: 4957
+Withdraw Iterations: 187
+      Final Balance: 224265000
+   Expected Balance: 224265000
+==========================================================
+          File name: Log_238.txt
+                Run: 40
+           ThreadID: 238
+ Deposit Iterations: 32
+Withdraw Iterations: 182
+      Final Balance: 435954000
+   Expected Balance: 4481212296
+==========================================================
+          File name: Log_238.txt
+                Run: 41
+           ThreadID: 238
+ Deposit Iterations: 7220
+Withdraw Iterations: 2352
+      Final Balance: 565889000
+   Expected Balance: 280420000
+==========================================================
+          File name: Log_238.txt
+                Run: 42
+           ThreadID: 238
+ Deposit Iterations: 7807
+Withdraw Iterations: 4074
+      Final Balance: 539720000
+   Expected Balance: 290663000
+==========================================================
+          File name: Log_238.txt
+                Run: 43
+           ThreadID: 238
+ Deposit Iterations: 195
+Withdraw Iterations: 3142
+      Final Balance: 527528000
+   Expected Balance: 4601011296
+==========================================================
+          File name: Log_238.txt
+                Run: 44
+           ThreadID: 238
+ Deposit Iterations: 2194
+Withdraw Iterations: 628
+      Final Balance: 448628000
+   Expected Balance: 201110000
+==========================================================
+          File name: Log_238.txt
+                Run: 45
+           ThreadID: 238
+ Deposit Iterations: 5273
+Withdraw Iterations: 2429
+      Final Balance: 499185000
+   Expected Balance: 255331000
+==========================================================
+          File name: Log_238.txt
+                Run: 46
+           ThreadID: 238
+ Deposit Iterations: 4029
+Withdraw Iterations: 454
+      Final Balance: 258408000
+   Expected Balance: 258408000
+==========================================================
+          File name: Log_238.txt
+                Run: 47
+           ThreadID: 238
+ Deposit Iterations: 6380
+Withdraw Iterations: 181
+      Final Balance: 561646000
+   Expected Balance: 259444000
+==========================================================
+          File name: Log_238.txt
+                Run: 48
+           ThreadID: 238
+ Deposit Iterations: 7026
+Withdraw Iterations: 2026
+      Final Balance: 224038000
+   Expected Balance: 224038000
+==========================================================
+          File name: Log_238.txt
+                Run: 49
+           ThreadID: 238
+ Deposit Iterations: 5611
+Withdraw Iterations: 3171
+      Final Balance: 436981000
+   Expected Balance: 205447000
+==========================================================
+          File name: Log_238.txt
+                Run: 50
+           ThreadID: 238
+ Deposit Iterations: 7589
+Withdraw Iterations: 3330
+      Final Balance: 254988000
+   Expected Balance: 254988000
+==========================================================
+          File name: Log_238.txt
+                Run: 51
+           ThreadID: 238
+ Deposit Iterations: 2511
+Withdraw Iterations: 3783
+      Final Balance: 265958000
+   Expected Balance: 4560925296
+==========================================================
+          File name: Log_238.txt
+                Run: 52
+           ThreadID: 238
+ Deposit Iterations: 6710
+Withdraw Iterations: 1616
+      Final Balance: 226945000
+   Expected Balance: 226945000
+==========================================================
+          File name: Log_238.txt
+                Run: 53
+           ThreadID: 238
+ Deposit Iterations: 527
+Withdraw Iterations: 718
+      Final Balance: 232235000
+   Expected Balance: 4527202296
+==========================================================
+          File name: Log_238.txt
+                Run: 54
+           ThreadID: 238
+ Deposit Iterations: 1807
+Withdraw Iterations: 274
+      Final Balance: 219381000
+   Expected Balance: 219381000
+==========================================================
+          File name: Log_238.txt
+                Run: 55
+           ThreadID: 238
+ Deposit Iterations: 6193
+Withdraw Iterations: 2668
+      Final Balance: 217461000
+   Expected Balance: 217461000
+==========================================================
+          File name: Log_238.txt
+                Run: 56
+           ThreadID: 238
+ Deposit Iterations: 4671
+Withdraw Iterations: 4066
+      Final Balance: 218766000
+   Expected Balance: 218766000
+==========================================================
+          File name: Log_238.txt
+                Run: 57
+           ThreadID: 238
+ Deposit Iterations: 758
+Withdraw Iterations: 2124
+      Final Balance: 284961000
+   Expected Balance: 4579928296
+==========================================================
+          File name: Log_238.txt
+                Run: 58
+           ThreadID: 238
+ Deposit Iterations: 4568
+Withdraw Iterations: 146
+      Final Balance: 536200000
+   Expected Balance: 259672000
+==========================================================
+          File name: Log_238.txt
+                Run: 59
+           ThreadID: 238
+ Deposit Iterations: 5059
+Withdraw Iterations: 2487
+      Final Balance: 483993000
+   Expected Balance: 270216000
+==========================================================
+          File name: Log_238.txt
+                Run: 60
+           ThreadID: 238
+ Deposit Iterations: 1313
+Withdraw Iterations: 3840
+      Final Balance: 488089000
+   Expected Balance: 4557743296
+==========================================================
+          File name: Log_238.txt
+                Run: 61
+           ThreadID: 238
+ Deposit Iterations: 2067
+Withdraw Iterations: 2417
+      Final Balance: 450440000
+   Expected Balance: 4480632296
+==========================================================
+          File name: Log_238.txt
+                Run: 62
+           ThreadID: 238
+ Deposit Iterations: 2667
+Withdraw Iterations: 3616
+      Final Balance: 539635000
+   Expected Balance: 4558070296
+==========================================================
+          File name: Log_238.txt
+                Run: 63
+           ThreadID: 238
+ Deposit Iterations: 4409
+Withdraw Iterations: 3591
+      Final Balance: 267493000
+   Expected Balance: 267493000
+==========================================================
+          File name: Log_238.txt
+                Run: 64
+           ThreadID: 238
+ Deposit Iterations: 5515
+Withdraw Iterations: 2212
+      Final Balance: 504532000
+   Expected Balance: 211180000
+==========================================================
+          File name: Log_238.txt
+                Run: 65
+           ThreadID: 238
+ Deposit Iterations: 3882
+Withdraw Iterations: 3085
+      Final Balance: 427915000
+   Expected Balance: 160998000
+==========================================================
+          File name: Log_238.txt
+                Run: 66
+           ThreadID: 238
+ Deposit Iterations: 2763
+Withdraw Iterations: 818
+      Final Balance: 478381000
+   Expected Balance: 289339000
+==========================================================
+          File name: Log_238.txt
+                Run: 67
+           ThreadID: 238
+ Deposit Iterations: 2555
+Withdraw Iterations: 3143
+      Final Balance: 446398000
+   Expected Balance: 4544143296
+==========================================================
+          File name: Log_238.txt
+                Run: 68
+           ThreadID: 238
+ Deposit Iterations: 5428
+Withdraw Iterations: 944
+      Final Balance: 444395000
+   Expected Balance: 187334000
+==========================================================
+          File name: Log_238.txt
+                Run: 69
+           ThreadID: 238
+ Deposit Iterations: 3178
+Withdraw Iterations: 979
+      Final Balance: 579266000
+   Expected Balance: 261044000
+==========================================================
+          File name: Log_238.txt
+                Run: 70
+           ThreadID: 238
+ Deposit Iterations: 521
+Withdraw Iterations: 1734
+      Final Balance: 209181000
+   Expected Balance: 4504148296
+==========================================================
+          File name: Log_238.txt
+                Run: 71
+           ThreadID: 238
+ Deposit Iterations: 4441
+Withdraw Iterations: 2677
+      Final Balance: 276971000
+   Expected Balance: 17158000
+==========================================================
+          File name: Log_238.txt
+                Run: 72
+           ThreadID: 238
+ Deposit Iterations: 389
+Withdraw Iterations: 2071
+      Final Balance: 247690000
+   Expected Balance: 4542657296
+==========================================================
+          File name: Log_238.txt
+                Run: 73
+           ThreadID: 238
+ Deposit Iterations: 4453
+Withdraw Iterations: 3512
+      Final Balance: 460666000
+   Expected Balance: 246083000
+==========================================================
+          File name: Log_238.txt
+                Run: 74
+           ThreadID: 238
+ Deposit Iterations: 4068
+Withdraw Iterations: 1426
+      Final Balance: 281591000
+   Expected Balance: 281591000
+==========================================================
+          File name: Log_238.txt
+                Run: 75
+           ThreadID: 238
+ Deposit Iterations: 7342
+Withdraw Iterations: 2194
+      Final Balance: 207613000
+   Expected Balance: 207613000
+==========================================================
+          File name: Log_238.txt
+                Run: 76
+           ThreadID: 238
+ Deposit Iterations: 610
+Withdraw Iterations: 1577
+      Final Balance: 523719000
+   Expected Balance: 4559484296
+==========================================================
+          File name: Log_238.txt
+                Run: 77
+           ThreadID: 238
+ Deposit Iterations: 6869
+Withdraw Iterations: 2408
+      Final Balance: 315322000
+   Expected Balance: 315322000
+==========================================================
+          File name: Log_238.txt
+                Run: 78
+           ThreadID: 238
+ Deposit Iterations: 7703
+Withdraw Iterations: 3772
+      Final Balance: 500662000
+   Expected Balance: 227143000
+==========================================================
+          File name: Log_238.txt
+                Run: 79
+           ThreadID: 238
+ Deposit Iterations: 7800
+Withdraw Iterations: 3319
+      Final Balance: 453858000
+   Expected Balance: 211199000
+==========================================================
+          File name: Log_238.txt
+                Run: 80
+           ThreadID: 238
+ Deposit Iterations: 3363
+Withdraw Iterations: 2751
+      Final Balance: 274588000
+   Expected Balance: 274588000
+==========================================================
+          File name: Log_238.txt
+                Run: 81
+           ThreadID: 238
+ Deposit Iterations: 2116
+Withdraw Iterations: 1462
+      Final Balance: 173228000
+   Expected Balance: 173228000
+==========================================================
+          File name: Log_238.txt
+                Run: 82
+           ThreadID: 238
+ Deposit Iterations: 2552
+Withdraw Iterations: 1673
+      Final Balance: 278123000
+   Expected Balance: 278123000
+==========================================================
+          File name: Log_238.txt
+                Run: 83
+           ThreadID: 238
+ Deposit Iterations: 8039
+Withdraw Iterations: 2626
+      Final Balance: 256882000
+   Expected Balance: 256882000
+==========================================================
+          File name: Log_238.txt
+                Run: 84
+           ThreadID: 238
+ Deposit Iterations: 3856
+Withdraw Iterations: 3025
+      Final Balance: 250903000
+   Expected Balance: 250903000
+==========================================================
+          File name: Log_238.txt
+                Run: 85
+           ThreadID: 238
+ Deposit Iterations: 3817
+Withdraw Iterations: 49
+      Final Balance: 208363000
+   Expected Balance: 208363000
+==========================================================
+          File name: Log_238.txt
+                Run: 86
+           ThreadID: 238
+ Deposit Iterations: 2190
+Withdraw Iterations: 2032
+      Final Balance: 458703000
+   Expected Balance: 242358000
+==========================================================
+          File name: Log_238.txt
+                Run: 87
+           ThreadID: 238
+ Deposit Iterations: 2960
+Withdraw Iterations: 3223
+      Final Balance: 249874000
+   Expected Balance: 4544841296
+==========================================================
+          File name: Log_238.txt
+                Run: 88
+           ThreadID: 238
+ Deposit Iterations: 6306
+Withdraw Iterations: 2796
+      Final Balance: 506754000
+   Expected Balance: 265758000
+==========================================================
+          File name: Log_238.txt
+                Run: 89
+           ThreadID: 238
+ Deposit Iterations: 1431
+Withdraw Iterations: 516
+      Final Balance: 458321000
+   Expected Balance: 201334000
+==========================================================
+          File name: Log_238.txt
+                Run: 90
+           ThreadID: 238
+ Deposit Iterations: 2439
+Withdraw Iterations: 2977
+      Final Balance: 208596000
+   Expected Balance: 4503563296
+==========================================================
+          File name: Log_238.txt
+                Run: 91
+           ThreadID: 238
+ Deposit Iterations: 1053
+Withdraw Iterations: 1675
+      Final Balance: 261201000
+   Expected Balance: 4556168296
+==========================================================
+          File name: Log_238.txt
+                Run: 92
+           ThreadID: 238
+ Deposit Iterations: 6036
+Withdraw Iterations: 3088
+      Final Balance: 471361000
+   Expected Balance: 243059000
+==========================================================
+          File name: Log_238.txt
+                Run: 93
+           ThreadID: 238
+ Deposit Iterations: 1368
+Withdraw Iterations: 3428
+      Final Balance: 462372000
+   Expected Balance: 4525221296
+==========================================================
+          File name: Log_238.txt
+                Run: 94
+           ThreadID: 238
+ Deposit Iterations: 3671
+Withdraw Iterations: 1822
+      Final Balance: 276867000
+   Expected Balance: 276867000
+==========================================================
+          File name: Log_238.txt
+                Run: 95
+           ThreadID: 238
+ Deposit Iterations: 3417
+Withdraw Iterations: 3898
+      Final Balance: 249894000
+   Expected Balance: 4544861296
+==========================================================
+          File name: Log_238.txt
+                Run: 96
+           ThreadID: 238
+ Deposit Iterations: 110
+Withdraw Iterations: 2865
+      Final Balance: 251767000
+   Expected Balance: 4546734296
+==========================================================
+          File name: Log_238.txt
+                Run: 97
+           ThreadID: 238
+ Deposit Iterations: 524
+Withdraw Iterations: 883
+      Final Balance: 446686000
+   Expected Balance: 4512528296
+==========================================================
+          File name: Log_238.txt
+                Run: 98
+           ThreadID: 238
+ Deposit Iterations: 3748
+Withdraw Iterations: 2401
+      Final Balance: 392400000
+   Expected Balance: 204547000
+==========================================================
+          File name: Log_238.txt
+                Run: 99
+           ThreadID: 238
+ Deposit Iterations: 5318
+Withdraw Iterations: 2610
+      Final Balance: 205625000
+   Expected Balance: 205625000

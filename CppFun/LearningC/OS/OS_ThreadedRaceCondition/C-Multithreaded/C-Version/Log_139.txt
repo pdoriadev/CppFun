@@ -1,0 +1,801 @@
+
+==========================================================
+          File name: Log_139.txt
+                Run: 0
+           ThreadID: 139
+ Deposit Iterations: 4048
+Withdraw Iterations: 3761
+      Final Balance: 348597000
+   Expected Balance: 129229000
+==========================================================
+          File name: Log_139.txt
+                Run: 1
+           ThreadID: 139
+ Deposit Iterations: 5163
+Withdraw Iterations: 2512
+      Final Balance: 439731000
+   Expected Balance: 183203000
+==========================================================
+          File name: Log_139.txt
+                Run: 2
+           ThreadID: 139
+ Deposit Iterations: 7004
+Withdraw Iterations: 2196
+      Final Balance: 384248000
+   Expected Balance: 100046000
+==========================================================
+          File name: Log_139.txt
+                Run: 3
+           ThreadID: 139
+ Deposit Iterations: 667
+Withdraw Iterations: 724
+      Final Balance: 391330000
+   Expected Balance: 4416276296
+==========================================================
+          File name: Log_139.txt
+                Run: 4
+           ThreadID: 139
+ Deposit Iterations: 7852
+Withdraw Iterations: 2307
+      Final Balance: 186616000
+   Expected Balance: 186616000
+==========================================================
+          File name: Log_139.txt
+                Run: 5
+           ThreadID: 139
+ Deposit Iterations: 3753
+Withdraw Iterations: 2811
+      Final Balance: 453753000
+   Expected Balance: 128308000
+==========================================================
+          File name: Log_139.txt
+                Run: 6
+           ThreadID: 139
+ Deposit Iterations: 6686
+Withdraw Iterations: 2243
+      Final Balance: 141453000
+   Expected Balance: 141453000
+==========================================================
+          File name: Log_139.txt
+                Run: 7
+           ThreadID: 139
+ Deposit Iterations: 2338
+Withdraw Iterations: 2419
+      Final Balance: 426659000
+   Expected Balance: 4454177296
+==========================================================
+          File name: Log_139.txt
+                Run: 8
+           ThreadID: 139
+ Deposit Iterations: 6816
+Withdraw Iterations: 2539
+      Final Balance: 412367000
+   Expected Balance: 140705000
+==========================================================
+          File name: Log_139.txt
+                Run: 9
+           ThreadID: 139
+ Deposit Iterations: 6341
+Withdraw Iterations: 3569
+      Final Balance: 142050000
+   Expected Balance: 142050000
+==========================================================
+          File name: Log_139.txt
+                Run: 10
+           ThreadID: 139
+ Deposit Iterations: 1122
+Withdraw Iterations: 387
+      Final Balance: 423972000
+   Expected Balance: 146152000
+==========================================================
+          File name: Log_139.txt
+                Run: 11
+           ThreadID: 139
+ Deposit Iterations: 3917
+Withdraw Iterations: 1404
+      Final Balance: 151065000
+   Expected Balance: 151065000
+==========================================================
+          File name: Log_139.txt
+                Run: 12
+           ThreadID: 139
+ Deposit Iterations: 5957
+Withdraw Iterations: 1994
+      Final Balance: 174659000
+   Expected Balance: 174659000
+==========================================================
+          File name: Log_139.txt
+                Run: 13
+           ThreadID: 139
+ Deposit Iterations: 3465
+Withdraw Iterations: 3244
+      Final Balance: 445578000
+   Expected Balance: 158786000
+==========================================================
+          File name: Log_139.txt
+                Run: 14
+           ThreadID: 139
+ Deposit Iterations: 6118
+Withdraw Iterations: 3560
+      Final Balance: 132743000
+   Expected Balance: 132743000
+==========================================================
+          File name: Log_139.txt
+                Run: 15
+           ThreadID: 139
+ Deposit Iterations: 6915
+Withdraw Iterations: 739
+      Final Balance: 420562000
+   Expected Balance: 166076000
+==========================================================
+          File name: Log_139.txt
+                Run: 16
+           ThreadID: 139
+ Deposit Iterations: 881
+Withdraw Iterations: 2456
+      Final Balance: 127879000
+   Expected Balance: 4422846296
+==========================================================
+          File name: Log_139.txt
+                Run: 17
+           ThreadID: 139
+ Deposit Iterations: 7795
+Withdraw Iterations: 1715
+      Final Balance: 399259000
+   Expected Balance: 142351000
+==========================================================
+          File name: Log_139.txt
+                Run: 18
+           ThreadID: 139
+ Deposit Iterations: 820
+Withdraw Iterations: 3515
+      Final Balance: 397276000
+   Expected Balance: 4447470296
+==========================================================
+          File name: Log_139.txt
+                Run: 19
+           ThreadID: 139
+ Deposit Iterations: 1113
+Withdraw Iterations: 2818
+      Final Balance: 125570000
+   Expected Balance: 4420537296
+==========================================================
+          File name: Log_139.txt
+                Run: 20
+           ThreadID: 139
+ Deposit Iterations: 3177
+Withdraw Iterations: 1041
+      Final Balance: 372216000
+   Expected Balance: 115100000
+==========================================================
+          File name: Log_139.txt
+                Run: 21
+           ThreadID: 139
+ Deposit Iterations: 3816
+Withdraw Iterations: 1124
+      Final Balance: 409218000
+   Expected Balance: 133985000
+==========================================================
+          File name: Log_139.txt
+                Run: 22
+           ThreadID: 139
+ Deposit Iterations: 4985
+Withdraw Iterations: 3983
+      Final Balance: 388405000
+   Expected Balance: 151029000
+==========================================================
+          File name: Log_139.txt
+                Run: 23
+           ThreadID: 139
+ Deposit Iterations: 4946
+Withdraw Iterations: 2523
+      Final Balance: 442468000
+   Expected Balance: 187808000
+==========================================================
+          File name: Log_139.txt
+                Run: 24
+           ThreadID: 139
+ Deposit Iterations: 2543
+Withdraw Iterations: 1391
+      Final Balance: 189304000
+   Expected Balance: 189304000
+==========================================================
+          File name: Log_139.txt
+                Run: 25
+           ThreadID: 139
+ Deposit Iterations: 1434
+Withdraw Iterations: 247
+      Final Balance: 418538000
+   Expected Balance: 153356000
+==========================================================
+          File name: Log_139.txt
+                Run: 26
+           ThreadID: 139
+ Deposit Iterations: 5850
+Withdraw Iterations: 1161
+      Final Balance: 195144000
+   Expected Balance: 195144000
+==========================================================
+          File name: Log_139.txt
+                Run: 27
+           ThreadID: 139
+ Deposit Iterations: 328
+Withdraw Iterations: 3161
+      Final Balance: 109140000
+   Expected Balance: 4404107296
+==========================================================
+          File name: Log_139.txt
+                Run: 28
+           ThreadID: 139
+ Deposit Iterations: 6603
+Withdraw Iterations: 3051
+      Final Balance: 146953000
+   Expected Balance: 146953000
+==========================================================
+          File name: Log_139.txt
+                Run: 29
+           ThreadID: 139
+ Deposit Iterations: 7580
+Withdraw Iterations: 932
+      Final Balance: 185969000
+   Expected Balance: 185969000
+==========================================================
+          File name: Log_139.txt
+                Run: 30
+           ThreadID: 139
+ Deposit Iterations: 4743
+Withdraw Iterations: 2099
+      Final Balance: 392911000
+   Expected Balance: 113769000
+==========================================================
+          File name: Log_139.txt
+                Run: 31
+           ThreadID: 139
+ Deposit Iterations: 1600
+Withdraw Iterations: 2123
+      Final Balance: 165518000
+   Expected Balance: 4460485296
+==========================================================
+          File name: Log_139.txt
+                Run: 32
+           ThreadID: 139
+ Deposit Iterations: 4587
+Withdraw Iterations: 71
+      Final Balance: 287530000
+   Expected Balance: 118647000
+==========================================================
+          File name: Log_139.txt
+                Run: 33
+           ThreadID: 139
+ Deposit Iterations: 907
+Withdraw Iterations: 3353
+      Final Balance: 198612000
+   Expected Balance: 4493579296
+==========================================================
+          File name: Log_139.txt
+                Run: 34
+           ThreadID: 139
+ Deposit Iterations: 6376
+Withdraw Iterations: 2639
+      Final Balance: 407032000
+   Expected Balance: 153864000
+==========================================================
+          File name: Log_139.txt
+                Run: 35
+           ThreadID: 139
+ Deposit Iterations: 5828
+Withdraw Iterations: 599
+      Final Balance: 409953000
+   Expected Balance: 116446000
+==========================================================
+          File name: Log_139.txt
+                Run: 36
+           ThreadID: 139
+ Deposit Iterations: 1289
+Withdraw Iterations: 850
+      Final Balance: 382970000
+   Expected Balance: 159848000
+==========================================================
+          File name: Log_139.txt
+                Run: 37
+           ThreadID: 139
+ Deposit Iterations: 4622
+Withdraw Iterations: 1864
+      Final Balance: 337866000
+   Expected Balance: 141018000
+==========================================================
+          File name: Log_139.txt
+                Run: 38
+           ThreadID: 139
+ Deposit Iterations: 2713
+Withdraw Iterations: 451
+      Final Balance: 417179000
+   Expected Balance: 128911000
+==========================================================
+          File name: Log_139.txt
+                Run: 39
+           ThreadID: 139
+ Deposit Iterations: 2270
+Withdraw Iterations: 2823
+      Final Balance: 390994000
+   Expected Balance: 4403702296
+==========================================================
+          File name: Log_139.txt
+                Run: 40
+           ThreadID: 139
+ Deposit Iterations: 2853
+Withdraw Iterations: 3352
+      Final Balance: 122393000
+   Expected Balance: 4417360296
+==========================================================
+          File name: Log_139.txt
+                Run: 41
+           ThreadID: 139
+ Deposit Iterations: 924
+Withdraw Iterations: 1810
+      Final Balance: 147900000
+   Expected Balance: 4442867296
+==========================================================
+          File name: Log_139.txt
+                Run: 42
+           ThreadID: 139
+ Deposit Iterations: 6905
+Withdraw Iterations: 2171
+      Final Balance: 143175000
+   Expected Balance: 143175000
+==========================================================
+          File name: Log_139.txt
+                Run: 43
+           ThreadID: 139
+ Deposit Iterations: 7501
+Withdraw Iterations: 2043
+      Final Balance: 198911000
+   Expected Balance: 198911000
+==========================================================
+          File name: Log_139.txt
+                Run: 44
+           ThreadID: 139
+ Deposit Iterations: 2624
+Withdraw Iterations: 2893
+      Final Balance: 131332000
+   Expected Balance: 4426299296
+==========================================================
+          File name: Log_139.txt
+                Run: 45
+           ThreadID: 139
+ Deposit Iterations: 3871
+Withdraw Iterations: 1822
+      Final Balance: 145379000
+   Expected Balance: 145379000
+==========================================================
+          File name: Log_139.txt
+                Run: 46
+           ThreadID: 139
+ Deposit Iterations: 4768
+Withdraw Iterations: 1620
+      Final Balance: 417766000
+   Expected Balance: 148121000
+==========================================================
+          File name: Log_139.txt
+                Run: 47
+           ThreadID: 139
+ Deposit Iterations: 963
+Withdraw Iterations: 781
+      Final Balance: 453653000
+   Expected Balance: 165543000
+==========================================================
+          File name: Log_139.txt
+                Run: 48
+           ThreadID: 139
+ Deposit Iterations: 3781
+Withdraw Iterations: 2573
+      Final Balance: 144922000
+   Expected Balance: 144922000
+==========================================================
+          File name: Log_139.txt
+                Run: 49
+           ThreadID: 139
+ Deposit Iterations: 5900
+Withdraw Iterations: 3114
+      Final Balance: 377756000
+   Expected Balance: 121138000
+==========================================================
+          File name: Log_139.txt
+                Run: 50
+           ThreadID: 139
+ Deposit Iterations: 2708
+Withdraw Iterations: 2486
+      Final Balance: 158975000
+   Expected Balance: 158975000
+==========================================================
+          File name: Log_139.txt
+                Run: 51
+           ThreadID: 139
+ Deposit Iterations: 5206
+Withdraw Iterations: 2528
+      Final Balance: 155312000
+   Expected Balance: 155312000
+==========================================================
+          File name: Log_139.txt
+                Run: 52
+           ThreadID: 139
+ Deposit Iterations: 1826
+Withdraw Iterations: 1475
+      Final Balance: 392153000
+   Expected Balance: 139333000
+==========================================================
+          File name: Log_139.txt
+                Run: 53
+           ThreadID: 139
+ Deposit Iterations: 3776
+Withdraw Iterations: 322
+      Final Balance: 116522000
+   Expected Balance: 116522000
+==========================================================
+          File name: Log_139.txt
+                Run: 54
+           ThreadID: 139
+ Deposit Iterations: 4679
+Withdraw Iterations: 2221
+      Final Balance: 370471000
+   Expected Balance: 143968000
+==========================================================
+          File name: Log_139.txt
+                Run: 55
+           ThreadID: 139
+ Deposit Iterations: 5514
+Withdraw Iterations: 2815
+      Final Balance: 132333000
+   Expected Balance: 132333000
+==========================================================
+          File name: Log_139.txt
+                Run: 56
+           ThreadID: 139
+ Deposit Iterations: 304
+Withdraw Iterations: 3299
+      Final Balance: 138321000
+   Expected Balance: 4433288296
+==========================================================
+          File name: Log_139.txt
+                Run: 57
+           ThreadID: 139
+ Deposit Iterations: 7686
+Withdraw Iterations: 2100
+      Final Balance: 175753000
+   Expected Balance: 175753000
+==========================================================
+          File name: Log_139.txt
+                Run: 58
+           ThreadID: 139
+ Deposit Iterations: 3226
+Withdraw Iterations: 3329
+      Final Balance: 444101000
+   Expected Balance: 4437272296
+==========================================================
+          File name: Log_139.txt
+                Run: 59
+           ThreadID: 139
+ Deposit Iterations: 659
+Withdraw Iterations: 2361
+      Final Balance: 417862000
+   Expected Balance: 4449161296
+==========================================================
+          File name: Log_139.txt
+                Run: 60
+           ThreadID: 139
+ Deposit Iterations: 4216
+Withdraw Iterations: 86
+      Final Balance: 400234000
+   Expected Balance: 184035000
+==========================================================
+          File name: Log_139.txt
+                Run: 61
+           ThreadID: 139
+ Deposit Iterations: 6181
+Withdraw Iterations: 4057
+      Final Balance: 363006000
+   Expected Balance: 93353000
+==========================================================
+          File name: Log_139.txt
+                Run: 62
+           ThreadID: 139
+ Deposit Iterations: 1084
+Withdraw Iterations: 3523
+      Final Balance: 423255000
+   Expected Balance: 4450155296
+==========================================================
+          File name: Log_139.txt
+                Run: 63
+           ThreadID: 139
+ Deposit Iterations: 5518
+Withdraw Iterations: 3222
+      Final Balance: 466726000
+   Expected Balance: 165286000
+==========================================================
+          File name: Log_139.txt
+                Run: 64
+           ThreadID: 139
+ Deposit Iterations: 794
+Withdraw Iterations: 1395
+      Final Balance: 403551000
+   Expected Balance: 4411906296
+==========================================================
+          File name: Log_139.txt
+                Run: 65
+           ThreadID: 139
+ Deposit Iterations: 4332
+Withdraw Iterations: 2580
+      Final Balance: 328535000
+   Expected Balance: 89388000
+==========================================================
+          File name: Log_139.txt
+                Run: 66
+           ThreadID: 139
+ Deposit Iterations: 4840
+Withdraw Iterations: 2905
+      Final Balance: 402924000
+   Expected Balance: 163882000
+==========================================================
+          File name: Log_139.txt
+                Run: 67
+           ThreadID: 139
+ Deposit Iterations: 7703
+Withdraw Iterations: 1711
+      Final Balance: 154720000
+   Expected Balance: 154720000
+==========================================================
+          File name: Log_139.txt
+                Run: 68
+           ThreadID: 139
+ Deposit Iterations: 7803
+Withdraw Iterations: 1312
+      Final Balance: 121763000
+   Expected Balance: 121763000
+==========================================================
+          File name: Log_139.txt
+                Run: 69
+           ThreadID: 139
+ Deposit Iterations: 2578
+Withdraw Iterations: 325
+      Final Balance: 168794000
+   Expected Balance: 168794000
+==========================================================
+          File name: Log_139.txt
+                Run: 70
+           ThreadID: 139
+ Deposit Iterations: 1187
+Withdraw Iterations: 904
+      Final Balance: 360770000
+   Expected Balance: 120119000
+==========================================================
+          File name: Log_139.txt
+                Run: 71
+           ThreadID: 139
+ Deposit Iterations: 3281
+Withdraw Iterations: 795
+      Final Balance: 419928000
+   Expected Balance: 148236000
+==========================================================
+          File name: Log_139.txt
+                Run: 72
+           ThreadID: 139
+ Deposit Iterations: 4137
+Withdraw Iterations: 268
+      Final Balance: 403773000
+   Expected Balance: 152276000
+==========================================================
+          File name: Log_139.txt
+                Run: 73
+           ThreadID: 139
+ Deposit Iterations: 420
+Withdraw Iterations: 3744
+      Final Balance: 122133000
+   Expected Balance: 4417100296
+==========================================================
+          File name: Log_139.txt
+                Run: 74
+           ThreadID: 139
+ Deposit Iterations: 337
+Withdraw Iterations: 3140
+      Final Balance: 423483000
+   Expected Balance: 4450548296
+==========================================================
+          File name: Log_139.txt
+                Run: 75
+           ThreadID: 139
+ Deposit Iterations: 6229
+Withdraw Iterations: 3918
+      Final Balance: 415040000
+   Expected Balance: 91753000
+==========================================================
+          File name: Log_139.txt
+                Run: 76
+           ThreadID: 139
+ Deposit Iterations: 5988
+Withdraw Iterations: 539
+      Final Balance: 436552000
+   Expected Balance: 146690000
+==========================================================
+          File name: Log_139.txt
+                Run: 77
+           ThreadID: 139
+ Deposit Iterations: 5385
+Withdraw Iterations: 2351
+      Final Balance: 198811000
+   Expected Balance: 198811000
+==========================================================
+          File name: Log_139.txt
+                Run: 78
+           ThreadID: 139
+ Deposit Iterations: 526
+Withdraw Iterations: 2576
+      Final Balance: 127177000
+   Expected Balance: 4422144296
+==========================================================
+          File name: Log_139.txt
+                Run: 79
+           ThreadID: 139
+ Deposit Iterations: 2582
+Withdraw Iterations: 2080
+      Final Balance: 114470000
+   Expected Balance: 114470000
+==========================================================
+          File name: Log_139.txt
+                Run: 80
+           ThreadID: 139
+ Deposit Iterations: 3782
+Withdraw Iterations: 2172
+      Final Balance: 170433000
+   Expected Balance: 170433000
+==========================================================
+          File name: Log_139.txt
+                Run: 81
+           ThreadID: 139
+ Deposit Iterations: 460
+Withdraw Iterations: 3483
+      Final Balance: 215262000
+   Expected Balance: 4301376296
+==========================================================
+          File name: Log_139.txt
+                Run: 82
+           ThreadID: 139
+ Deposit Iterations: 1204
+Withdraw Iterations: 16
+      Final Balance: 171641000
+   Expected Balance: 171641000
+==========================================================
+          File name: Log_139.txt
+                Run: 83
+           ThreadID: 139
+ Deposit Iterations: 6215
+Withdraw Iterations: 1572
+      Final Balance: 427888000
+   Expected Balance: 158295000
+==========================================================
+          File name: Log_139.txt
+                Run: 84
+           ThreadID: 139
+ Deposit Iterations: 7235
+Withdraw Iterations: 708
+      Final Balance: 431200000
+   Expected Balance: 140943000
+==========================================================
+          File name: Log_139.txt
+                Run: 85
+           ThreadID: 139
+ Deposit Iterations: 6266
+Withdraw Iterations: 2683
+      Final Balance: 397665000
+   Expected Balance: 123947000
+==========================================================
+          File name: Log_139.txt
+                Run: 86
+           ThreadID: 139
+ Deposit Iterations: 352
+Withdraw Iterations: 256
+      Final Balance: 356219000
+   Expected Balance: 140691000
+==========================================================
+          File name: Log_139.txt
+                Run: 87
+           ThreadID: 139
+ Deposit Iterations: 1150
+Withdraw Iterations: 1161
+      Final Balance: 12019000
+   Expected Balance: 4306986296
+==========================================================
+          File name: Log_139.txt
+                Run: 88
+           ThreadID: 139
+ Deposit Iterations: 3418
+Withdraw Iterations: 2694
+      Final Balance: 440554000
+   Expected Balance: 155625000
+==========================================================
+          File name: Log_139.txt
+                Run: 89
+           ThreadID: 139
+ Deposit Iterations: 5373
+Withdraw Iterations: 3620
+      Final Balance: 395992000
+   Expected Balance: 111241000
+==========================================================
+          File name: Log_139.txt
+                Run: 90
+           ThreadID: 139
+ Deposit Iterations: 3354
+Withdraw Iterations: 2354
+      Final Balance: 381945000
+   Expected Balance: 149538000
+==========================================================
+          File name: Log_139.txt
+                Run: 91
+           ThreadID: 139
+ Deposit Iterations: 95
+Withdraw Iterations: 300
+      Final Balance: 464397000
+   Expected Balance: 4434690296
+==========================================================
+          File name: Log_139.txt
+                Run: 92
+           ThreadID: 139
+ Deposit Iterations: 5360
+Withdraw Iterations: 2276
+      Final Balance: 408096000
+   Expected Balance: 138832000
+==========================================================
+          File name: Log_139.txt
+                Run: 93
+           ThreadID: 139
+ Deposit Iterations: 5927
+Withdraw Iterations: 460
+      Final Balance: 140415000
+   Expected Balance: 140415000
+==========================================================
+          File name: Log_139.txt
+                Run: 94
+           ThreadID: 139
+ Deposit Iterations: 7282
+Withdraw Iterations: 914
+      Final Balance: 407285000
+   Expected Balance: 173379000
+==========================================================
+          File name: Log_139.txt
+                Run: 95
+           ThreadID: 139
+ Deposit Iterations: 5686
+Withdraw Iterations: 4085
+      Final Balance: 13494000
+   Expected Balance: 13494000
+==========================================================
+          File name: Log_139.txt
+                Run: 96
+           ThreadID: 139
+ Deposit Iterations: 289
+Withdraw Iterations: 755
+      Final Balance: 373839000
+   Expected Balance: 4438006296
+==========================================================
+          File name: Log_139.txt
+                Run: 97
+           ThreadID: 139
+ Deposit Iterations: 2033
+Withdraw Iterations: 3767
+      Final Balance: 116177000
+   Expected Balance: 4411144296
+==========================================================
+          File name: Log_139.txt
+                Run: 98
+           ThreadID: 139
+ Deposit Iterations: 5842
+Withdraw Iterations: 3768
+      Final Balance: 115955000
+   Expected Balance: 115955000
+==========================================================
+          File name: Log_139.txt
+                Run: 99
+           ThreadID: 139
+ Deposit Iterations: 2563
+Withdraw Iterations: 801
+      Final Balance: 111214000
+   Expected Balance: 111214000

@@ -1,0 +1,801 @@
+
+==========================================================
+          File name: Log_243.txt
+                Run: 0
+           ThreadID: 243
+ Deposit Iterations: 2595
+Withdraw Iterations: 3794
+      Final Balance: 437030000
+   Expected Balance: 4502174296
+==========================================================
+          File name: Log_243.txt
+                Run: 1
+           ThreadID: 243
+ Deposit Iterations: 179
+Withdraw Iterations: 38
+      Final Balance: 553568000
+   Expected Balance: 291019000
+==========================================================
+          File name: Log_243.txt
+                Run: 2
+           ThreadID: 243
+ Deposit Iterations: 28
+Withdraw Iterations: 1529
+      Final Balance: 214325000
+   Expected Balance: 4509292296
+==========================================================
+          File name: Log_243.txt
+                Run: 3
+           ThreadID: 243
+ Deposit Iterations: 5836
+Withdraw Iterations: 805
+      Final Balance: 236856000
+   Expected Balance: 236856000
+==========================================================
+          File name: Log_243.txt
+                Run: 4
+           ThreadID: 243
+ Deposit Iterations: 3695
+Withdraw Iterations: 1821
+      Final Balance: 306565000
+   Expected Balance: 306565000
+==========================================================
+          File name: Log_243.txt
+                Run: 5
+           ThreadID: 243
+ Deposit Iterations: 85
+Withdraw Iterations: 262
+      Final Balance: 274738000
+   Expected Balance: 4569705296
+==========================================================
+          File name: Log_243.txt
+                Run: 6
+           ThreadID: 243
+ Deposit Iterations: 908
+Withdraw Iterations: 61
+      Final Balance: 575119000
+   Expected Balance: 254234000
+==========================================================
+          File name: Log_243.txt
+                Run: 7
+           ThreadID: 243
+ Deposit Iterations: 2963
+Withdraw Iterations: 4064
+      Final Balance: 521963000
+   Expected Balance: 4541203296
+==========================================================
+          File name: Log_243.txt
+                Run: 8
+           ThreadID: 243
+ Deposit Iterations: 6487
+Withdraw Iterations: 3679
+      Final Balance: 520818000
+   Expected Balance: 235454000
+==========================================================
+          File name: Log_243.txt
+                Run: 9
+           ThreadID: 243
+ Deposit Iterations: 2199
+Withdraw Iterations: 2065
+      Final Balance: 542637000
+   Expected Balance: 219749000
+==========================================================
+          File name: Log_243.txt
+                Run: 10
+           ThreadID: 243
+ Deposit Iterations: 7827
+Withdraw Iterations: 2361
+      Final Balance: 260384000
+   Expected Balance: 260384000
+==========================================================
+          File name: Log_243.txt
+                Run: 11
+           ThreadID: 243
+ Deposit Iterations: 664
+Withdraw Iterations: 592
+      Final Balance: 199257000
+   Expected Balance: 199257000
+==========================================================
+          File name: Log_243.txt
+                Run: 12
+           ThreadID: 243
+ Deposit Iterations: 5657
+Withdraw Iterations: 2983
+      Final Balance: 302599000
+   Expected Balance: 302599000
+==========================================================
+          File name: Log_243.txt
+                Run: 13
+           ThreadID: 243
+ Deposit Iterations: 4795
+Withdraw Iterations: 4036
+      Final Balance: 548477000
+   Expected Balance: 272965000
+==========================================================
+          File name: Log_243.txt
+                Run: 14
+           ThreadID: 243
+ Deposit Iterations: 5943
+Withdraw Iterations: 2522
+      Final Balance: 253123000
+   Expected Balance: 253123000
+==========================================================
+          File name: Log_243.txt
+                Run: 15
+           ThreadID: 243
+ Deposit Iterations: 2554
+Withdraw Iterations: 597
+      Final Balance: 526121000
+   Expected Balance: 288564000
+==========================================================
+          File name: Log_243.txt
+                Run: 16
+           ThreadID: 243
+ Deposit Iterations: 3224
+Withdraw Iterations: 3592
+      Final Balance: 1030000
+   Expected Balance: 4295997296
+==========================================================
+          File name: Log_243.txt
+                Run: 17
+           ThreadID: 243
+ Deposit Iterations: 5067
+Withdraw Iterations: 2421
+      Final Balance: 511530000
+   Expected Balance: 215497000
+==========================================================
+          File name: Log_243.txt
+                Run: 18
+           ThreadID: 243
+ Deposit Iterations: 1253
+Withdraw Iterations: 1777
+      Final Balance: 251089000
+   Expected Balance: 4546056296
+==========================================================
+          File name: Log_243.txt
+                Run: 19
+           ThreadID: 243
+ Deposit Iterations: 1887
+Withdraw Iterations: 3797
+      Final Balance: 245160000
+   Expected Balance: 4540127296
+==========================================================
+          File name: Log_243.txt
+                Run: 20
+           ThreadID: 243
+ Deposit Iterations: 2578
+Withdraw Iterations: 2649
+      Final Balance: 172162000
+   Expected Balance: 4467129296
+==========================================================
+          File name: Log_243.txt
+                Run: 21
+           ThreadID: 243
+ Deposit Iterations: 8037
+Withdraw Iterations: 1338
+      Final Balance: 501353000
+   Expected Balance: 237144000
+==========================================================
+          File name: Log_243.txt
+                Run: 22
+           ThreadID: 243
+ Deposit Iterations: 4410
+Withdraw Iterations: 3648
+      Final Balance: 257267000
+   Expected Balance: 257267000
+==========================================================
+          File name: Log_243.txt
+                Run: 23
+           ThreadID: 243
+ Deposit Iterations: 1019
+Withdraw Iterations: 3040
+      Final Balance: 285860000
+   Expected Balance: 4580827296
+==========================================================
+          File name: Log_243.txt
+                Run: 24
+           ThreadID: 243
+ Deposit Iterations: 2145
+Withdraw Iterations: 77
+      Final Balance: 309886000
+   Expected Balance: 309886000
+==========================================================
+          File name: Log_243.txt
+                Run: 25
+           ThreadID: 243
+ Deposit Iterations: 3415
+Withdraw Iterations: 1462
+      Final Balance: 288085000
+   Expected Balance: 288085000
+==========================================================
+          File name: Log_243.txt
+                Run: 26
+           ThreadID: 243
+ Deposit Iterations: 7394
+Withdraw Iterations: 1794
+      Final Balance: 310609000
+   Expected Balance: 310609000
+==========================================================
+          File name: Log_243.txt
+                Run: 27
+           ThreadID: 243
+ Deposit Iterations: 213
+Withdraw Iterations: 2093
+      Final Balance: 520218000
+   Expected Balance: 4506211296
+==========================================================
+          File name: Log_243.txt
+                Run: 28
+           ThreadID: 243
+ Deposit Iterations: 143
+Withdraw Iterations: 3159
+      Final Balance: 246128000
+   Expected Balance: 4541095296
+==========================================================
+          File name: Log_243.txt
+                Run: 29
+           ThreadID: 243
+ Deposit Iterations: 5286
+Withdraw Iterations: 1768
+      Final Balance: 490705000
+   Expected Balance: 267089000
+==========================================================
+          File name: Log_243.txt
+                Run: 30
+           ThreadID: 243
+ Deposit Iterations: 5899
+Withdraw Iterations: 397
+      Final Balance: 251677000
+   Expected Balance: 251677000
+==========================================================
+          File name: Log_243.txt
+                Run: 31
+           ThreadID: 243
+ Deposit Iterations: 249
+Withdraw Iterations: 1738
+      Final Balance: 480372000
+   Expected Balance: 4533097296
+==========================================================
+          File name: Log_243.txt
+                Run: 32
+           ThreadID: 243
+ Deposit Iterations: 5394
+Withdraw Iterations: 1574
+      Final Balance: 400908000
+   Expected Balance: 158438000
+==========================================================
+          File name: Log_243.txt
+                Run: 33
+           ThreadID: 243
+ Deposit Iterations: 5319
+Withdraw Iterations: 315
+      Final Balance: 518471000
+   Expected Balance: 298078000
+==========================================================
+          File name: Log_243.txt
+                Run: 34
+           ThreadID: 243
+ Deposit Iterations: 4915
+Withdraw Iterations: 533
+      Final Balance: 555785000
+   Expected Balance: 286017000
+==========================================================
+          File name: Log_243.txt
+                Run: 35
+           ThreadID: 243
+ Deposit Iterations: 7527
+Withdraw Iterations: 3129
+      Final Balance: 515953000
+   Expected Balance: 200455000
+==========================================================
+          File name: Log_243.txt
+                Run: 36
+           ThreadID: 243
+ Deposit Iterations: 2308
+Withdraw Iterations: 2059
+      Final Balance: 273628000
+   Expected Balance: 273628000
+==========================================================
+          File name: Log_243.txt
+                Run: 37
+           ThreadID: 243
+ Deposit Iterations: 4096
+Withdraw Iterations: 3753
+      Final Balance: 440946000
+   Expected Balance: 204475000
+==========================================================
+          File name: Log_243.txt
+                Run: 38
+           ThreadID: 243
+ Deposit Iterations: 4040
+Withdraw Iterations: 46
+      Final Balance: 207131000
+   Expected Balance: 207131000
+==========================================================
+          File name: Log_243.txt
+                Run: 39
+           ThreadID: 243
+ Deposit Iterations: 1228
+Withdraw Iterations: 2633
+      Final Balance: 225735000
+   Expected Balance: 4520702296
+==========================================================
+          File name: Log_243.txt
+                Run: 40
+           ThreadID: 243
+ Deposit Iterations: 7055
+Withdraw Iterations: 2300
+      Final Balance: 193251000
+   Expected Balance: 193251000
+==========================================================
+          File name: Log_243.txt
+                Run: 41
+           ThreadID: 243
+ Deposit Iterations: 5061
+Withdraw Iterations: 1945
+      Final Balance: 569891000
+   Expected Balance: 283242000
+==========================================================
+          File name: Log_243.txt
+                Run: 42
+           ThreadID: 243
+ Deposit Iterations: 4058
+Withdraw Iterations: 2019
+      Final Balance: 552591000
+   Expected Balance: 288336000
+==========================================================
+          File name: Log_243.txt
+                Run: 43
+           ThreadID: 243
+ Deposit Iterations: 948
+Withdraw Iterations: 2172
+      Final Balance: 307498000
+   Expected Balance: 4602465296
+==========================================================
+          File name: Log_243.txt
+                Run: 44
+           ThreadID: 243
+ Deposit Iterations: 5908
+Withdraw Iterations: 4011
+      Final Balance: 209735000
+   Expected Balance: 209735000
+==========================================================
+          File name: Log_243.txt
+                Run: 45
+           ThreadID: 243
+ Deposit Iterations: 1511
+Withdraw Iterations: 16
+      Final Balance: 252487000
+   Expected Balance: 252487000
+==========================================================
+          File name: Log_243.txt
+                Run: 46
+           ThreadID: 243
+ Deposit Iterations: 2449
+Withdraw Iterations: 2538
+      Final Balance: 260138000
+   Expected Balance: 4555105296
+==========================================================
+          File name: Log_243.txt
+                Run: 47
+           ThreadID: 243
+ Deposit Iterations: 7425
+Withdraw Iterations: 2113
+      Final Balance: 259123000
+   Expected Balance: 259123000
+==========================================================
+          File name: Log_243.txt
+                Run: 48
+           ThreadID: 243
+ Deposit Iterations: 2815
+Withdraw Iterations: 2795
+      Final Balance: 537991000
+   Expected Balance: 225914000
+==========================================================
+          File name: Log_243.txt
+                Run: 49
+           ThreadID: 243
+ Deposit Iterations: 863
+Withdraw Iterations: 2828
+      Final Balance: 204016000
+   Expected Balance: 4498983296
+==========================================================
+          File name: Log_243.txt
+                Run: 50
+           ThreadID: 243
+ Deposit Iterations: 5292
+Withdraw Iterations: 461
+      Final Balance: 261842000
+   Expected Balance: 261842000
+==========================================================
+          File name: Log_243.txt
+                Run: 51
+           ThreadID: 243
+ Deposit Iterations: 674
+Withdraw Iterations: 574
+      Final Balance: 498134000
+   Expected Balance: 282096000
+==========================================================
+          File name: Log_243.txt
+                Run: 52
+           ThreadID: 243
+ Deposit Iterations: 1218
+Withdraw Iterations: 3475
+      Final Balance: 229763000
+   Expected Balance: 4524730296
+==========================================================
+          File name: Log_243.txt
+                Run: 53
+           ThreadID: 243
+ Deposit Iterations: 5725
+Withdraw Iterations: 3613
+      Final Balance: 231231000
+   Expected Balance: 231231000
+==========================================================
+          File name: Log_243.txt
+                Run: 54
+           ThreadID: 243
+ Deposit Iterations: 1431
+Withdraw Iterations: 49
+      Final Balance: 514360000
+   Expected Balance: 222068000
+==========================================================
+          File name: Log_243.txt
+                Run: 55
+           ThreadID: 243
+ Deposit Iterations: 5545
+Withdraw Iterations: 1298
+      Final Balance: 232542000
+   Expected Balance: 232542000
+==========================================================
+          File name: Log_243.txt
+                Run: 56
+           ThreadID: 243
+ Deposit Iterations: 2265
+Withdraw Iterations: 1818
+      Final Balance: 501312000
+   Expected Balance: 223311000
+==========================================================
+          File name: Log_243.txt
+                Run: 57
+           ThreadID: 243
+ Deposit Iterations: 1083
+Withdraw Iterations: 349
+      Final Balance: 494873000
+   Expected Balance: 283912000
+==========================================================
+          File name: Log_243.txt
+                Run: 58
+           ThreadID: 243
+ Deposit Iterations: 1084
+Withdraw Iterations: 2492
+      Final Balance: 534792000
+   Expected Balance: 4555321296
+==========================================================
+          File name: Log_243.txt
+                Run: 59
+           ThreadID: 243
+ Deposit Iterations: 474
+Withdraw Iterations: 1919
+      Final Balance: 482587000
+   Expected Balance: 4568040296
+==========================================================
+          File name: Log_243.txt
+                Run: 60
+           ThreadID: 243
+ Deposit Iterations: 2709
+Withdraw Iterations: 1398
+      Final Balance: 271468000
+   Expected Balance: 271468000
+==========================================================
+          File name: Log_243.txt
+                Run: 61
+           ThreadID: 243
+ Deposit Iterations: 2692
+Withdraw Iterations: 1586
+      Final Balance: 465394000
+   Expected Balance: 185470000
+==========================================================
+          File name: Log_243.txt
+                Run: 62
+           ThreadID: 243
+ Deposit Iterations: 4879
+Withdraw Iterations: 3377
+      Final Balance: 540584000
+   Expected Balance: 265554000
+==========================================================
+          File name: Log_243.txt
+                Run: 63
+           ThreadID: 243
+ Deposit Iterations: 2968
+Withdraw Iterations: 3631
+      Final Balance: 602663000
+   Expected Balance: 4566703296
+==========================================================
+          File name: Log_243.txt
+                Run: 64
+           ThreadID: 243
+ Deposit Iterations: 6176
+Withdraw Iterations: 2812
+      Final Balance: 511368000
+   Expected Balance: 211241000
+==========================================================
+          File name: Log_243.txt
+                Run: 65
+           ThreadID: 243
+ Deposit Iterations: 5717
+Withdraw Iterations: 2732
+      Final Balance: 433048000
+   Expected Balance: 170385000
+==========================================================
+          File name: Log_243.txt
+                Run: 66
+           ThreadID: 243
+ Deposit Iterations: 1099
+Withdraw Iterations: 1664
+      Final Balance: 286829000
+   Expected Balance: 4581796296
+==========================================================
+          File name: Log_243.txt
+                Run: 67
+           ThreadID: 243
+ Deposit Iterations: 7439
+Withdraw Iterations: 3877
+      Final Balance: 255686000
+   Expected Balance: 255686000
+==========================================================
+          File name: Log_243.txt
+                Run: 68
+           ThreadID: 243
+ Deposit Iterations: 2262
+Withdraw Iterations: 2133
+      Final Balance: 183043000
+   Expected Balance: 183043000
+==========================================================
+          File name: Log_243.txt
+                Run: 69
+           ThreadID: 243
+ Deposit Iterations: 6216
+Withdraw Iterations: 525
+      Final Balance: 593612000
+   Expected Balance: 267957000
+==========================================================
+          File name: Log_243.txt
+                Run: 70
+           ThreadID: 243
+ Deposit Iterations: 5615
+Withdraw Iterations: 799
+      Final Balance: 224850000
+   Expected Balance: 224850000
+==========================================================
+          File name: Log_243.txt
+                Run: 71
+           ThreadID: 243
+ Deposit Iterations: 7020
+Withdraw Iterations: 1520
+      Final Balance: 266030000
+   Expected Balance: 266030000
+==========================================================
+          File name: Log_243.txt
+                Run: 72
+           ThreadID: 243
+ Deposit Iterations: 2098
+Withdraw Iterations: 131
+      Final Balance: 513148000
+   Expected Balance: 249818000
+==========================================================
+          File name: Log_243.txt
+                Run: 73
+           ThreadID: 243
+ Deposit Iterations: 3462
+Withdraw Iterations: 3265
+      Final Balance: 467867000
+   Expected Balance: 249248000
+==========================================================
+          File name: Log_243.txt
+                Run: 74
+           ThreadID: 243
+ Deposit Iterations: 4877
+Withdraw Iterations: 2923
+      Final Balance: 532908000
+   Expected Balance: 283545000
+==========================================================
+          File name: Log_243.txt
+                Run: 75
+           ThreadID: 243
+ Deposit Iterations: 6259
+Withdraw Iterations: 2875
+      Final Balance: 503094000
+   Expected Balance: 217635000
+==========================================================
+          File name: Log_243.txt
+                Run: 76
+           ThreadID: 243
+ Deposit Iterations: 4451
+Withdraw Iterations: 2356
+      Final Balance: 527882000
+   Expected Balance: 278461000
+==========================================================
+          File name: Log_243.txt
+                Run: 77
+           ThreadID: 243
+ Deposit Iterations: 1389
+Withdraw Iterations: 3528
+      Final Balance: 548168000
+   Expected Balance: 4610779296
+==========================================================
+          File name: Log_243.txt
+                Run: 78
+           ThreadID: 243
+ Deposit Iterations: 3480
+Withdraw Iterations: 2331
+      Final Balance: 222701000
+   Expected Balance: 222701000
+==========================================================
+          File name: Log_243.txt
+                Run: 79
+           ThreadID: 243
+ Deposit Iterations: 5614
+Withdraw Iterations: 1199
+      Final Balance: 460238000
+   Expected Balance: 216347000
+==========================================================
+          File name: Log_243.txt
+                Run: 80
+           ThreadID: 243
+ Deposit Iterations: 5290
+Withdraw Iterations: 2103
+      Final Balance: 278340000
+   Expected Balance: 278340000
+==========================================================
+          File name: Log_243.txt
+                Run: 81
+           ThreadID: 243
+ Deposit Iterations: 7527
+Withdraw Iterations: 967
+      Final Balance: 187148000
+   Expected Balance: 187148000
+==========================================================
+          File name: Log_243.txt
+                Run: 82
+           ThreadID: 243
+ Deposit Iterations: 5411
+Withdraw Iterations: 1394
+      Final Balance: 282907000
+   Expected Balance: 282907000
+==========================================================
+          File name: Log_243.txt
+                Run: 83
+           ThreadID: 243
+ Deposit Iterations: 6469
+Withdraw Iterations: 2133
+      Final Balance: 265755000
+   Expected Balance: 265755000
+==========================================================
+          File name: Log_243.txt
+                Run: 84
+           ThreadID: 243
+ Deposit Iterations: 7334
+Withdraw Iterations: 447
+      Final Balance: 258201000
+   Expected Balance: 258201000
+==========================================================
+          File name: Log_243.txt
+                Run: 85
+           ThreadID: 243
+ Deposit Iterations: 4049
+Withdraw Iterations: 3904
+      Final Balance: 498724000
+   Expected Balance: 210350000
+==========================================================
+          File name: Log_243.txt
+                Run: 86
+           ThreadID: 243
+ Deposit Iterations: 3693
+Withdraw Iterations: 1091
+      Final Balance: 469253000
+   Expected Balance: 243910000
+==========================================================
+          File name: Log_243.txt
+                Run: 87
+           ThreadID: 243
+ Deposit Iterations: 4383
+Withdraw Iterations: 558
+      Final Balance: 257481000
+   Expected Balance: 257481000
+==========================================================
+          File name: Log_243.txt
+                Run: 88
+           ThreadID: 243
+ Deposit Iterations: 294
+Withdraw Iterations: 3112
+      Final Balance: 512433000
+   Expected Balance: 4553877296
+==========================================================
+          File name: Log_243.txt
+                Run: 89
+           ThreadID: 243
+ Deposit Iterations: 5516
+Withdraw Iterations: 2320
+      Final Balance: 214189000
+   Expected Balance: 214189000
+==========================================================
+          File name: Log_243.txt
+                Run: 90
+           ThreadID: 243
+ Deposit Iterations: 5896
+Withdraw Iterations: 192
+      Final Balance: 459825000
+   Expected Balance: 217582000
+==========================================================
+          File name: Log_243.txt
+                Run: 91
+           ThreadID: 243
+ Deposit Iterations: 1593
+Withdraw Iterations: 1183
+      Final Balance: 540492000
+   Expected Balance: 269385000
+==========================================================
+          File name: Log_243.txt
+                Run: 92
+           ThreadID: 243
+ Deposit Iterations: 1770
+Withdraw Iterations: 757
+      Final Balance: 238683000
+   Expected Balance: 238683000
+==========================================================
+          File name: Log_243.txt
+                Run: 93
+           ThreadID: 243
+ Deposit Iterations: 4433
+Withdraw Iterations: 4090
+      Final Balance: 469513000
+   Expected Balance: 232561000
+==========================================================
+          File name: Log_243.txt
+                Run: 94
+           ThreadID: 243
+ Deposit Iterations: 661
+Withdraw Iterations: 696
+      Final Balance: 525945000
+   Expected Balance: 4574379296
+==========================================================
+          File name: Log_243.txt
+                Run: 95
+           ThreadID: 243
+ Deposit Iterations: 5207
+Withdraw Iterations: 3321
+      Final Balance: 255888000
+   Expected Balance: 255888000
+==========================================================
+          File name: Log_243.txt
+                Run: 96
+           ThreadID: 243
+ Deposit Iterations: 3709
+Withdraw Iterations: 2360
+      Final Balance: 253116000
+   Expected Balance: 253116000
+==========================================================
+          File name: Log_243.txt
+                Run: 97
+           ThreadID: 243
+ Deposit Iterations: 3087
+Withdraw Iterations: 154
+      Final Balance: 226031000
+   Expected Balance: 226031000
+==========================================================
+          File name: Log_243.txt
+                Run: 98
+           ThreadID: 243
+ Deposit Iterations: 4845
+Withdraw Iterations: 1913
+      Final Balance: 206132000
+   Expected Balance: 206132000
+==========================================================
+          File name: Log_243.txt
+                Run: 99
+           ThreadID: 243
+ Deposit Iterations: 4411
+Withdraw Iterations: 2088
+      Final Balance: 432751000
+   Expected Balance: 205581000

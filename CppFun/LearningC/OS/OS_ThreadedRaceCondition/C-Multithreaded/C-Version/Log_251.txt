@@ -1,0 +1,801 @@
+
+==========================================================
+          File name: Log_251.txt
+                Run: 0
+           ThreadID: 251
+ Deposit Iterations: 4760
+Withdraw Iterations: 113
+      Final Balance: 449425000
+   Expected Balance: 218670000
+==========================================================
+          File name: Log_251.txt
+                Run: 1
+           ThreadID: 251
+ Deposit Iterations: 3136
+Withdraw Iterations: 2916
+      Final Balance: 294116000
+   Expected Balance: 294116000
+==========================================================
+          File name: Log_251.txt
+                Run: 2
+           ThreadID: 251
+ Deposit Iterations: 2924
+Withdraw Iterations: 180
+      Final Balance: 223639000
+   Expected Balance: 223639000
+==========================================================
+          File name: Log_251.txt
+                Run: 3
+           ThreadID: 251
+ Deposit Iterations: 100
+Withdraw Iterations: 1458
+      Final Balance: 238706000
+   Expected Balance: 4533673296
+==========================================================
+          File name: Log_251.txt
+                Run: 4
+           ThreadID: 251
+ Deposit Iterations: 2232
+Withdraw Iterations: 2036
+      Final Balance: 310965000
+   Expected Balance: 310965000
+==========================================================
+          File name: Log_251.txt
+                Run: 5
+           ThreadID: 251
+ Deposit Iterations: 5381
+Withdraw Iterations: 1211
+      Final Balance: 527808000
+   Expected Balance: 282072000
+==========================================================
+          File name: Log_251.txt
+                Run: 6
+           ThreadID: 251
+ Deposit Iterations: 5059
+Withdraw Iterations: 1638
+      Final Balance: 580107000
+   Expected Balance: 275464000
+==========================================================
+          File name: Log_251.txt
+                Run: 7
+           ThreadID: 251
+ Deposit Iterations: 4922
+Withdraw Iterations: 632
+      Final Balance: 532202000
+   Expected Balance: 265819000
+==========================================================
+          File name: Log_251.txt
+                Run: 8
+           ThreadID: 251
+ Deposit Iterations: 6021
+Withdraw Iterations: 1620
+      Final Balance: 546984000
+   Expected Balance: 239535000
+==========================================================
+          File name: Log_251.txt
+                Run: 9
+           ThreadID: 251
+ Deposit Iterations: 2837
+Withdraw Iterations: 2734
+      Final Balance: 541711000
+   Expected Balance: 249381000
+==========================================================
+          File name: Log_251.txt
+                Run: 10
+           ThreadID: 251
+ Deposit Iterations: 467
+Withdraw Iterations: 1693
+      Final Balance: 539309000
+   Expected Balance: 4552580296
+==========================================================
+          File name: Log_251.txt
+                Run: 11
+           ThreadID: 251
+ Deposit Iterations: 1976
+Withdraw Iterations: 2883
+      Final Balance: 198706000
+   Expected Balance: 4493673296
+==========================================================
+          File name: Log_251.txt
+                Run: 12
+           ThreadID: 251
+ Deposit Iterations: 1104
+Withdraw Iterations: 2154
+      Final Balance: 307299000
+   Expected Balance: 4602266296
+==========================================================
+          File name: Log_251.txt
+                Run: 13
+           ThreadID: 251
+ Deposit Iterations: 7784
+Withdraw Iterations: 3473
+      Final Balance: 285693000
+   Expected Balance: 285693000
+==========================================================
+          File name: Log_251.txt
+                Run: 14
+           ThreadID: 251
+ Deposit Iterations: 4961
+Withdraw Iterations: 1205
+      Final Balance: 528513000
+   Expected Balance: 271751000
+==========================================================
+          File name: Log_251.txt
+                Run: 15
+           ThreadID: 251
+ Deposit Iterations: 6956
+Withdraw Iterations: 3889
+      Final Balance: 300594000
+   Expected Balance: 300594000
+==========================================================
+          File name: Log_251.txt
+                Run: 16
+           ThreadID: 251
+ Deposit Iterations: 5464
+Withdraw Iterations: 249
+      Final Balance: 504653000
+   Expected Balance: 248195000
+==========================================================
+          File name: Log_251.txt
+                Run: 17
+           ThreadID: 251
+ Deposit Iterations: 1061
+Withdraw Iterations: 2824
+      Final Balance: 527515000
+   Expected Balance: 4511233296
+==========================================================
+          File name: Log_251.txt
+                Run: 18
+           ThreadID: 251
+ Deposit Iterations: 1790
+Withdraw Iterations: 814
+      Final Balance: 488351000
+   Expected Balance: 257944000
+==========================================================
+          File name: Log_251.txt
+                Run: 19
+           ThreadID: 251
+ Deposit Iterations: 634
+Withdraw Iterations: 2526
+      Final Balance: 254075000
+   Expected Balance: 4549042296
+==========================================================
+          File name: Log_251.txt
+                Run: 20
+           ThreadID: 251
+ Deposit Iterations: 3498
+Withdraw Iterations: 243
+      Final Balance: 508779000
+   Expected Balance: 184210000
+==========================================================
+          File name: Log_251.txt
+                Run: 21
+           ThreadID: 251
+ Deposit Iterations: 2020
+Withdraw Iterations: 318
+      Final Balance: 510037000
+   Expected Balance: 243885000
+==========================================================
+          File name: Log_251.txt
+                Run: 22
+           ThreadID: 251
+ Deposit Iterations: 7411
+Withdraw Iterations: 530
+      Final Balance: 478415000
+   Expected Balance: 274660000
+==========================================================
+          File name: Log_251.txt
+                Run: 23
+           ThreadID: 251
+ Deposit Iterations: 5487
+Withdraw Iterations: 372
+      Final Balance: 303896000
+   Expected Balance: 303896000
+==========================================================
+          File name: Log_251.txt
+                Run: 24
+           ThreadID: 251
+ Deposit Iterations: 4320
+Withdraw Iterations: 2709
+      Final Balance: 326915000
+   Expected Balance: 326915000
+==========================================================
+          File name: Log_251.txt
+                Run: 25
+           ThreadID: 251
+ Deposit Iterations: 5442
+Withdraw Iterations: 3185
+      Final Balance: 294649000
+   Expected Balance: 294649000
+==========================================================
+          File name: Log_251.txt
+                Run: 26
+           ThreadID: 251
+ Deposit Iterations: 6405
+Withdraw Iterations: 2369
+      Final Balance: 316222000
+   Expected Balance: 316222000
+==========================================================
+          File name: Log_251.txt
+                Run: 27
+           ThreadID: 251
+ Deposit Iterations: 4694
+Withdraw Iterations: 2696
+      Final Balance: 229954000
+   Expected Balance: 229954000
+==========================================================
+          File name: Log_251.txt
+                Run: 28
+           ThreadID: 251
+ Deposit Iterations: 6099
+Withdraw Iterations: 132
+      Final Balance: 255242000
+   Expected Balance: 255242000
+==========================================================
+          File name: Log_251.txt
+                Run: 29
+           ThreadID: 251
+ Deposit Iterations: 7257
+Withdraw Iterations: 3006
+      Final Balance: 499112000
+   Expected Balance: 274134000
+==========================================================
+          File name: Log_251.txt
+                Run: 30
+           ThreadID: 251
+ Deposit Iterations: 7721
+Withdraw Iterations: 1121
+      Final Balance: 549831000
+   Expected Balance: 258740000
+==========================================================
+          File name: Log_251.txt
+                Run: 31
+           ThreadID: 251
+ Deposit Iterations: 4255
+Withdraw Iterations: 3214
+      Final Balance: 479123000
+   Expected Balance: 250455000
+==========================================================
+          File name: Log_251.txt
+                Run: 32
+           ThreadID: 251
+ Deposit Iterations: 894
+Withdraw Iterations: 1857
+      Final Balance: 165699000
+   Expected Balance: 4460666296
+==========================================================
+          File name: Log_251.txt
+                Run: 33
+           ThreadID: 251
+ Deposit Iterations: 4838
+Withdraw Iterations: 2088
+      Final Balance: 307992000
+   Expected Balance: 307992000
+==========================================================
+          File name: Log_251.txt
+                Run: 34
+           ThreadID: 251
+ Deposit Iterations: 7614
+Withdraw Iterations: 4060
+      Final Balance: 571177000
+   Expected Balance: 288496000
+==========================================================
+          File name: Log_251.txt
+                Run: 35
+           ThreadID: 251
+ Deposit Iterations: 5734
+Withdraw Iterations: 661
+      Final Balance: 233915000
+   Expected Balance: 15617000
+==========================================================
+          File name: Log_251.txt
+                Run: 36
+           ThreadID: 251
+ Deposit Iterations: 488
+Withdraw Iterations: 2393
+      Final Balance: 274383000
+   Expected Balance: 4569350296
+==========================================================
+          File name: Log_251.txt
+                Run: 37
+           ThreadID: 251
+ Deposit Iterations: 1712
+Withdraw Iterations: 1994
+      Final Balance: 440664000
+   Expected Balance: 4502306296
+==========================================================
+          File name: Log_251.txt
+                Run: 38
+           ThreadID: 251
+ Deposit Iterations: 2431
+Withdraw Iterations: 1822
+      Final Balance: 218852000
+   Expected Balance: 218852000
+==========================================================
+          File name: Log_251.txt
+                Run: 39
+           ThreadID: 251
+ Deposit Iterations: 959
+Withdraw Iterations: 2105
+      Final Balance: 518427000
+   Expected Balance: 4527116296
+==========================================================
+          File name: Log_251.txt
+                Run: 40
+           ThreadID: 251
+ Deposit Iterations: 3669
+Withdraw Iterations: 3212
+      Final Balance: 441869000
+   Expected Balance: 203334000
+==========================================================
+          File name: Log_251.txt
+                Run: 41
+           ThreadID: 251
+ Deposit Iterations: 5849
+Withdraw Iterations: 45
+      Final Balance: 578913000
+   Expected Balance: 286193000
+==========================================================
+          File name: Log_251.txt
+                Run: 42
+           ThreadID: 251
+ Deposit Iterations: 223
+Withdraw Iterations: 1068
+      Final Balance: 556091000
+   Expected Balance: 4587215296
+==========================================================
+          File name: Log_251.txt
+                Run: 43
+           ThreadID: 251
+ Deposit Iterations: 6603
+Withdraw Iterations: 1351
+      Final Balance: 555537000
+   Expected Balance: 322124000
+==========================================================
+          File name: Log_251.txt
+                Run: 44
+           ThreadID: 251
+ Deposit Iterations: 1607
+Withdraw Iterations: 3967
+      Final Balance: 452071000
+   Expected Balance: 4510822296
+==========================================================
+          File name: Log_251.txt
+                Run: 45
+           ThreadID: 251
+ Deposit Iterations: 5868
+Withdraw Iterations: 3133
+      Final Balance: 508476000
+   Expected Balance: 255222000
+==========================================================
+          File name: Log_251.txt
+                Run: 46
+           ThreadID: 251
+ Deposit Iterations: 7090
+Withdraw Iterations: 1021
+      Final Balance: 267575000
+   Expected Balance: 267575000
+==========================================================
+          File name: Log_251.txt
+                Run: 47
+           ThreadID: 251
+ Deposit Iterations: 5440
+Withdraw Iterations: 693
+      Final Balance: 583265000
+   Expected Balance: 264566000
+==========================================================
+          File name: Log_251.txt
+                Run: 48
+           ThreadID: 251
+ Deposit Iterations: 6069
+Withdraw Iterations: 3555
+      Final Balance: 548339000
+   Expected Balance: 233592000
+==========================================================
+          File name: Log_251.txt
+                Run: 49
+           ThreadID: 251
+ Deposit Iterations: 1384
+Withdraw Iterations: 1328
+      Final Balance: 459251000
+   Expected Balance: 213457000
+==========================================================
+          File name: Log_251.txt
+                Run: 50
+           ThreadID: 251
+ Deposit Iterations: 4162
+Withdraw Iterations: 2848
+      Final Balance: 267419000
+   Expected Balance: 267419000
+==========================================================
+          File name: Log_251.txt
+                Run: 51
+           ThreadID: 251
+ Deposit Iterations: 5362
+Withdraw Iterations: 736
+      Final Balance: 511310000
+   Expected Balance: 292696000
+==========================================================
+          File name: Log_251.txt
+                Run: 52
+           ThreadID: 251
+ Deposit Iterations: 4688
+Withdraw Iterations: 821
+      Final Balance: 483187000
+   Expected Balance: 240524000
+==========================================================
+          File name: Log_251.txt
+                Run: 53
+           ThreadID: 251
+ Deposit Iterations: 2134
+Withdraw Iterations: 486
+      Final Balance: 480050000
+   Expected Balance: 240840000
+==========================================================
+          File name: Log_251.txt
+                Run: 54
+           ThreadID: 251
+ Deposit Iterations: 7096
+Withdraw Iterations: 3380
+      Final Balance: 522756000
+   Expected Balance: 246251000
+==========================================================
+          File name: Log_251.txt
+                Run: 55
+           ThreadID: 251
+ Deposit Iterations: 7151
+Withdraw Iterations: 1936
+      Final Balance: 485978000
+   Expected Balance: 242713000
+==========================================================
+          File name: Log_251.txt
+                Run: 56
+           ThreadID: 251
+ Deposit Iterations: 5867
+Withdraw Iterations: 2965
+      Final Balance: 243518000
+   Expected Balance: 243518000
+==========================================================
+          File name: Log_251.txt
+                Run: 57
+           ThreadID: 251
+ Deposit Iterations: 6534
+Withdraw Iterations: 3581
+      Final Balance: 500481000
+   Expected Balance: 291709000
+==========================================================
+          File name: Log_251.txt
+                Run: 58
+           ThreadID: 251
+ Deposit Iterations: 5348
+Withdraw Iterations: 976
+      Final Balance: 537086000
+   Expected Balance: 276644000
+==========================================================
+          File name: Log_251.txt
+                Run: 59
+           ThreadID: 251
+ Deposit Iterations: 5422
+Withdraw Iterations: 3024
+      Final Balance: 486956000
+   Expected Balance: 276027000
+==========================================================
+          File name: Log_251.txt
+                Run: 60
+           ThreadID: 251
+ Deposit Iterations: 2140
+Withdraw Iterations: 3614
+      Final Balance: 496643000
+   Expected Balance: 4575881296
+==========================================================
+          File name: Log_251.txt
+                Run: 61
+           ThreadID: 251
+ Deposit Iterations: 129
+Withdraw Iterations: 3956
+      Final Balance: 470326000
+   Expected Balance: 4483411296
+==========================================================
+          File name: Log_251.txt
+                Run: 62
+           ThreadID: 251
+ Deposit Iterations: 2327
+Withdraw Iterations: 3906
+      Final Balance: 272220000
+   Expected Balance: 4567187296
+==========================================================
+          File name: Log_251.txt
+                Run: 63
+           ThreadID: 251
+ Deposit Iterations: 4149
+Withdraw Iterations: 3059
+      Final Balance: 276892000
+   Expected Balance: 276892000
+==========================================================
+          File name: Log_251.txt
+                Run: 64
+           ThreadID: 251
+ Deposit Iterations: 387
+Withdraw Iterations: 3324
+      Final Balance: 505806000
+   Expected Balance: 4509682296
+==========================================================
+          File name: Log_251.txt
+                Run: 65
+           ThreadID: 251
+ Deposit Iterations: 1475
+Withdraw Iterations: 1082
+      Final Balance: 190626000
+   Expected Balance: 190626000
+==========================================================
+          File name: Log_251.txt
+                Run: 66
+           ThreadID: 251
+ Deposit Iterations: 4406
+Withdraw Iterations: 2956
+      Final Balance: 489189000
+   Expected Balance: 310550000
+==========================================================
+          File name: Log_251.txt
+                Run: 67
+           ThreadID: 251
+ Deposit Iterations: 2310
+Withdraw Iterations: 1650
+      Final Balance: 257609000
+   Expected Balance: 257609000
+==========================================================
+          File name: Log_251.txt
+                Run: 68
+           ThreadID: 251
+ Deposit Iterations: 6216
+Withdraw Iterations: 1475
+      Final Balance: 460694000
+   Expected Balance: 196345000
+==========================================================
+          File name: Log_251.txt
+                Run: 69
+           ThreadID: 251
+ Deposit Iterations: 6537
+Withdraw Iterations: 1950
+      Final Balance: 266649000
+   Expected Balance: 266649000
+==========================================================
+          File name: Log_251.txt
+                Run: 70
+           ThreadID: 251
+ Deposit Iterations: 1568
+Withdraw Iterations: 3828
+      Final Balance: 467438000
+   Expected Balance: 4522839296
+==========================================================
+          File name: Log_251.txt
+                Run: 71
+           ThreadID: 251
+ Deposit Iterations: 2356
+Withdraw Iterations: 2403
+      Final Balance: 267885000
+   Expected Balance: 4562852296
+==========================================================
+          File name: Log_251.txt
+                Run: 72
+           ThreadID: 251
+ Deposit Iterations: 5215
+Withdraw Iterations: 955
+      Final Balance: 253895000
+   Expected Balance: 253895000
+==========================================================
+          File name: Log_251.txt
+                Run: 73
+           ThreadID: 251
+ Deposit Iterations: 7737
+Withdraw Iterations: 1738
+      Final Balance: 469455000
+   Expected Balance: 247291000
+==========================================================
+          File name: Log_251.txt
+                Run: 74
+           ThreadID: 251
+ Deposit Iterations: 6376
+Withdraw Iterations: 2096
+      Final Balance: 284748000
+   Expected Balance: 284748000
+==========================================================
+          File name: Log_251.txt
+                Run: 75
+           ThreadID: 251
+ Deposit Iterations: 2222
+Withdraw Iterations: 1111
+      Final Balance: 505317000
+   Expected Balance: 222224000
+==========================================================
+          File name: Log_251.txt
+                Run: 76
+           ThreadID: 251
+ Deposit Iterations: 5975
+Withdraw Iterations: 3591
+      Final Balance: 285394000
+   Expected Balance: 285394000
+==========================================================
+          File name: Log_251.txt
+                Run: 77
+           ThreadID: 251
+ Deposit Iterations: 1003
+Withdraw Iterations: 1758
+      Final Balance: 552324000
+   Expected Balance: 4613666296
+==========================================================
+          File name: Log_251.txt
+                Run: 78
+           ThreadID: 251
+ Deposit Iterations: 4106
+Withdraw Iterations: 2403
+      Final Balance: 503591000
+   Expected Balance: 229955000
+==========================================================
+          File name: Log_251.txt
+                Run: 79
+           ThreadID: 251
+ Deposit Iterations: 314
+Withdraw Iterations: 1086
+      Final Balance: 468115000
+   Expected Balance: 4506127296
+==========================================================
+          File name: Log_251.txt
+                Run: 80
+           ThreadID: 251
+ Deposit Iterations: 6376
+Withdraw Iterations: 2144
+      Final Balance: 301163000
+   Expected Balance: 301163000
+==========================================================
+          File name: Log_251.txt
+                Run: 81
+           ThreadID: 251
+ Deposit Iterations: 5059
+Withdraw Iterations: 2550
+      Final Balance: 192255000
+   Expected Balance: 192255000
+==========================================================
+          File name: Log_251.txt
+                Run: 82
+           ThreadID: 251
+ Deposit Iterations: 3780
+Withdraw Iterations: 3289
+      Final Balance: 581476000
+   Expected Balance: 285893000
+==========================================================
+          File name: Log_251.txt
+                Run: 83
+           ThreadID: 251
+ Deposit Iterations: 8106
+Withdraw Iterations: 2404
+      Final Balance: 283802000
+   Expected Balance: 283802000
+==========================================================
+          File name: Log_251.txt
+                Run: 84
+           ThreadID: 251
+ Deposit Iterations: 5285
+Withdraw Iterations: 1149
+      Final Balance: 502917000
+   Expected Balance: 261955000
+==========================================================
+          File name: Log_251.txt
+                Run: 85
+           ThreadID: 251
+ Deposit Iterations: 5575
+Withdraw Iterations: 2131
+      Final Balance: 508116000
+   Expected Balance: 217127000
+==========================================================
+          File name: Log_251.txt
+                Run: 86
+           ThreadID: 251
+ Deposit Iterations: 5160
+Withdraw Iterations: 681
+      Final Balance: 479919000
+   Expected Balance: 258945000
+==========================================================
+          File name: Log_251.txt
+                Run: 87
+           ThreadID: 251
+ Deposit Iterations: 2169
+Withdraw Iterations: 901
+      Final Balance: 254026000
+   Expected Balance: 254026000
+==========================================================
+          File name: Log_251.txt
+                Run: 88
+           ThreadID: 251
+ Deposit Iterations: 6943
+Withdraw Iterations: 140
+      Final Balance: 275865000
+   Expected Balance: 275865000
+==========================================================
+          File name: Log_251.txt
+                Run: 89
+           ThreadID: 251
+ Deposit Iterations: 6795
+Withdraw Iterations: 825
+      Final Balance: 226369000
+   Expected Balance: 226369000
+==========================================================
+          File name: Log_251.txt
+                Run: 90
+           ThreadID: 251
+ Deposit Iterations: 5384
+Withdraw Iterations: 1637
+      Final Balance: 221308000
+   Expected Balance: 221308000
+==========================================================
+          File name: Log_251.txt
+                Run: 91
+           ThreadID: 251
+ Deposit Iterations: 5862
+Withdraw Iterations: 2339
+      Final Balance: 283103000
+   Expected Balance: 283103000
+==========================================================
+          File name: Log_251.txt
+                Run: 92
+           ThreadID: 251
+ Deposit Iterations: 3251
+Withdraw Iterations: 3619
+      Final Balance: 474380000
+   Expected Balance: 4548012296
+==========================================================
+          File name: Log_251.txt
+                Run: 93
+           ThreadID: 251
+ Deposit Iterations: 138
+Withdraw Iterations: 2150
+      Final Balance: 228718000
+   Expected Balance: 4523685296
+==========================================================
+          File name: Log_251.txt
+                Run: 94
+           ThreadID: 251
+ Deposit Iterations: 6298
+Withdraw Iterations: 3855
+      Final Balance: 536803000
+   Expected Balance: 285416000
+==========================================================
+          File name: Log_251.txt
+                Run: 95
+           ThreadID: 251
+ Deposit Iterations: 2495
+Withdraw Iterations: 2936
+      Final Balance: 263807000
+   Expected Balance: 4558774296
+==========================================================
+          File name: Log_251.txt
+                Run: 96
+           ThreadID: 251
+ Deposit Iterations: 852
+Withdraw Iterations: 3700
+      Final Balance: 249347000
+   Expected Balance: 4544314296
+==========================================================
+          File name: Log_251.txt
+                Run: 97
+           ThreadID: 251
+ Deposit Iterations: 6595
+Withdraw Iterations: 938
+      Final Balance: 241323000
+   Expected Balance: 241323000
+==========================================================
+          File name: Log_251.txt
+                Run: 98
+           ThreadID: 251
+ Deposit Iterations: 325
+Withdraw Iterations: 2907
+      Final Balance: 414649000
+   Expected Balance: 4505515296
+==========================================================
+          File name: Log_251.txt
+                Run: 99
+           ThreadID: 251
+ Deposit Iterations: 656
+Withdraw Iterations: 1226
+      Final Balance: 198855000
+   Expected Balance: 4493822296

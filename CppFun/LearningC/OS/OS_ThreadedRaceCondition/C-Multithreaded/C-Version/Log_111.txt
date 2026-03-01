@@ -1,0 +1,801 @@
+
+==========================================================
+          File name: Log_111.txt
+                Run: 0
+           ThreadID: 111
+ Deposit Iterations: 3500
+Withdraw Iterations: 1667
+      Final Balance: 336868000
+   Expected Balance: 122915000
+==========================================================
+          File name: Log_111.txt
+                Run: 1
+           ThreadID: 111
+ Deposit Iterations: 3920
+Withdraw Iterations: 1370
+      Final Balance: 143918000
+   Expected Balance: 143918000
+==========================================================
+          File name: Log_111.txt
+                Run: 2
+           ThreadID: 111
+ Deposit Iterations: 4564
+Withdraw Iterations: 4068
+      Final Balance: 79272000
+   Expected Balance: 79272000
+==========================================================
+          File name: Log_111.txt
+                Run: 3
+           ThreadID: 111
+ Deposit Iterations: 5289
+Withdraw Iterations: 3211
+      Final Balance: 101162000
+   Expected Balance: 101162000
+==========================================================
+          File name: Log_111.txt
+                Run: 4
+           ThreadID: 111
+ Deposit Iterations: 1992
+Withdraw Iterations: 2319
+      Final Balance: 392487000
+   Expected Balance: 4439278296
+==========================================================
+          File name: Log_111.txt
+                Run: 5
+           ThreadID: 111
+ Deposit Iterations: 1012
+Withdraw Iterations: 3455
+      Final Balance: 96127000
+   Expected Balance: 4391094296
+==========================================================
+          File name: Log_111.txt
+                Run: 6
+           ThreadID: 111
+ Deposit Iterations: 2082
+Withdraw Iterations: 1103
+      Final Balance: 407446000
+   Expected Balance: 116026000
+==========================================================
+          File name: Log_111.txt
+                Run: 7
+           ThreadID: 111
+ Deposit Iterations: 3125
+Withdraw Iterations: 4007
+      Final Balance: 381894000
+   Expected Balance: 4436896296
+==========================================================
+          File name: Log_111.txt
+                Run: 8
+           ThreadID: 111
+ Deposit Iterations: 7241
+Withdraw Iterations: 1193
+      Final Balance: 377864000
+   Expected Balance: 132804000
+==========================================================
+          File name: Log_111.txt
+                Run: 9
+           ThreadID: 111
+ Deposit Iterations: 3160
+Withdraw Iterations: 2135
+      Final Balance: 128037000
+   Expected Balance: 128037000
+==========================================================
+          File name: Log_111.txt
+                Run: 10
+           ThreadID: 111
+ Deposit Iterations: 7143
+Withdraw Iterations: 2603
+      Final Balance: 383802000
+   Expected Balance: 124055000
+==========================================================
+          File name: Log_111.txt
+                Run: 11
+           ThreadID: 111
+ Deposit Iterations: 7902
+Withdraw Iterations: 1635
+      Final Balance: 323015000
+   Expected Balance: 128844000
+==========================================================
+          File name: Log_111.txt
+                Run: 12
+           ThreadID: 111
+ Deposit Iterations: 5922
+Withdraw Iterations: 1638
+      Final Balance: 139769000
+   Expected Balance: 139769000
+==========================================================
+          File name: Log_111.txt
+                Run: 13
+           ThreadID: 111
+ Deposit Iterations: 4624
+Withdraw Iterations: 3956
+      Final Balance: 132632000
+   Expected Balance: 132632000
+==========================================================
+          File name: Log_111.txt
+                Run: 14
+           ThreadID: 111
+ Deposit Iterations: 3074
+Withdraw Iterations: 732
+      Final Balance: 395352000
+   Expected Balance: 109214000
+==========================================================
+          File name: Log_111.txt
+                Run: 15
+           ThreadID: 111
+ Deposit Iterations: 240
+Withdraw Iterations: 1680
+      Final Balance: 140002000
+   Expected Balance: 4434969296
+==========================================================
+          File name: Log_111.txt
+                Run: 16
+           ThreadID: 111
+ Deposit Iterations: 4720
+Withdraw Iterations: 3051
+      Final Balance: 362536000
+   Expected Balance: 109893000
+==========================================================
+          File name: Log_111.txt
+                Run: 17
+           ThreadID: 111
+ Deposit Iterations: 7935
+Withdraw Iterations: 3795
+      Final Balance: 111850000
+   Expected Balance: 111850000
+==========================================================
+          File name: Log_111.txt
+                Run: 18
+           ThreadID: 111
+ Deposit Iterations: 4205
+Withdraw Iterations: 667
+      Final Balance: 378795000
+   Expected Balance: 121035000
+==========================================================
+          File name: Log_111.txt
+                Run: 19
+           ThreadID: 111
+ Deposit Iterations: 2342
+Withdraw Iterations: 435
+      Final Balance: 409376000
+   Expected Balance: 110338000
+==========================================================
+          File name: Log_111.txt
+                Run: 20
+           ThreadID: 111
+ Deposit Iterations: 7666
+Withdraw Iterations: 3233
+      Final Balance: 327626000
+   Expected Balance: 85070000
+==========================================================
+          File name: Log_111.txt
+                Run: 21
+           ThreadID: 111
+ Deposit Iterations: 4691
+Withdraw Iterations: 197
+      Final Balance: 377957000
+   Expected Balance: 111153000
+==========================================================
+          File name: Log_111.txt
+                Run: 22
+           ThreadID: 111
+ Deposit Iterations: 2908
+Withdraw Iterations: 3197
+      Final Balance: 112948000
+   Expected Balance: 4407915296
+==========================================================
+          File name: Log_111.txt
+                Run: 23
+           ThreadID: 111
+ Deposit Iterations: 693
+Withdraw Iterations: 1256
+      Final Balance: 158651000
+   Expected Balance: 4453618296
+==========================================================
+          File name: Log_111.txt
+                Run: 24
+           ThreadID: 111
+ Deposit Iterations: 7426
+Withdraw Iterations: 3311
+      Final Balance: 172297000
+   Expected Balance: 172297000
+==========================================================
+          File name: Log_111.txt
+                Run: 25
+           ThreadID: 111
+ Deposit Iterations: 7374
+Withdraw Iterations: 248
+      Final Balance: 413131000
+   Expected Balance: 135287000
+==========================================================
+          File name: Log_111.txt
+                Run: 26
+           ThreadID: 111
+ Deposit Iterations: 838
+Withdraw Iterations: 1599
+      Final Balance: 155422000
+   Expected Balance: 4450389296
+==========================================================
+          File name: Log_111.txt
+                Run: 27
+           ThreadID: 111
+ Deposit Iterations: 1107
+Withdraw Iterations: 2005
+      Final Balance: 357714000
+   Expected Balance: 4382860296
+==========================================================
+          File name: Log_111.txt
+                Run: 28
+           ThreadID: 111
+ Deposit Iterations: 6191
+Withdraw Iterations: 1786
+      Final Balance: 374191000
+   Expected Balance: 119996000
+==========================================================
+          File name: Log_111.txt
+                Run: 29
+           ThreadID: 111
+ Deposit Iterations: 4835
+Withdraw Iterations: 992
+      Final Balance: 132709000
+   Expected Balance: 132709000
+==========================================================
+          File name: Log_111.txt
+                Run: 30
+           ThreadID: 111
+ Deposit Iterations: 6999
+Withdraw Iterations: 1054
+      Final Balance: 78104000
+   Expected Balance: 78104000
+==========================================================
+          File name: Log_111.txt
+                Run: 31
+           ThreadID: 111
+ Deposit Iterations: 4146
+Withdraw Iterations: 3831
+      Final Balance: 347762000
+   Expected Balance: 121203000
+==========================================================
+          File name: Log_111.txt
+                Run: 32
+           ThreadID: 111
+ Deposit Iterations: 7039
+Withdraw Iterations: 2623
+      Final Balance: 94399000
+   Expected Balance: 94399000
+==========================================================
+          File name: Log_111.txt
+                Run: 33
+           ThreadID: 111
+ Deposit Iterations: 2108
+Withdraw Iterations: 1965
+      Final Balance: 377036000
+   Expected Balance: 174218000
+==========================================================
+          File name: Log_111.txt
+                Run: 34
+           ThreadID: 111
+ Deposit Iterations: 8001
+Withdraw Iterations: 4094
+      Final Balance: 122368000
+   Expected Balance: 122368000
+==========================================================
+          File name: Log_111.txt
+                Run: 35
+           ThreadID: 111
+ Deposit Iterations: 7118
+Withdraw Iterations: 3221
+      Final Balance: 369261000
+   Expected Balance: 103089000
+==========================================================
+          File name: Log_111.txt
+                Run: 36
+           ThreadID: 111
+ Deposit Iterations: 6704
+Withdraw Iterations: 3120
+      Final Balance: 384950000
+   Expected Balance: 138494000
+==========================================================
+          File name: Log_111.txt
+                Run: 37
+           ThreadID: 111
+ Deposit Iterations: 3681
+Withdraw Iterations: 334
+      Final Balance: 302650000
+   Expected Balance: 137477000
+==========================================================
+          File name: Log_111.txt
+                Run: 38
+           ThreadID: 111
+ Deposit Iterations: 2286
+Withdraw Iterations: 2252
+      Final Balance: 122409000
+   Expected Balance: 122409000
+==========================================================
+          File name: Log_111.txt
+                Run: 39
+           ThreadID: 111
+ Deposit Iterations: 4629
+Withdraw Iterations: 2932
+      Final Balance: 369655000
+   Expected Balance: 90331000
+==========================================================
+          File name: Log_111.txt
+                Run: 40
+           ThreadID: 111
+ Deposit Iterations: 3393
+Withdraw Iterations: 500
+      Final Balance: 318945000
+   Expected Balance: 99654000
+==========================================================
+          File name: Log_111.txt
+                Run: 41
+           ThreadID: 111
+ Deposit Iterations: 3238
+Withdraw Iterations: 4045
+      Final Balance: 108539000
+   Expected Balance: 4403506296
+==========================================================
+          File name: Log_111.txt
+                Run: 42
+           ThreadID: 111
+ Deposit Iterations: 7810
+Withdraw Iterations: 3039
+      Final Balance: 420545000
+   Expected Balance: 99097000
+==========================================================
+          File name: Log_111.txt
+                Run: 43
+           ThreadID: 111
+ Deposit Iterations: 4927
+Withdraw Iterations: 3704
+      Final Balance: 442016000
+   Expected Balance: 162568000
+==========================================================
+          File name: Log_111.txt
+                Run: 44
+           ThreadID: 111
+ Deposit Iterations: 5646
+Withdraw Iterations: 3147
+      Final Balance: 310036000
+   Expected Balance: 125334000
+==========================================================
+          File name: Log_111.txt
+                Run: 45
+           ThreadID: 111
+ Deposit Iterations: 7278
+Withdraw Iterations: 1614
+      Final Balance: 416108000
+   Expected Balance: 118364000
+==========================================================
+          File name: Log_111.txt
+                Run: 46
+           ThreadID: 111
+ Deposit Iterations: 1581
+Withdraw Iterations: 2570
+      Final Balance: 115101000
+   Expected Balance: 4410068296
+==========================================================
+          File name: Log_111.txt
+                Run: 47
+           ThreadID: 111
+ Deposit Iterations: 5873
+Withdraw Iterations: 3035
+      Final Balance: 128575000
+   Expected Balance: 128575000
+==========================================================
+          File name: Log_111.txt
+                Run: 48
+           ThreadID: 111
+ Deposit Iterations: 385
+Withdraw Iterations: 3673
+      Final Balance: 401172000
+   Expected Balance: 4401485296
+==========================================================
+          File name: Log_111.txt
+                Run: 49
+           ThreadID: 111
+ Deposit Iterations: 7069
+Withdraw Iterations: 1193
+      Final Balance: 326157000
+   Expected Balance: 109911000
+==========================================================
+          File name: Log_111.txt
+                Run: 50
+           ThreadID: 111
+ Deposit Iterations: 2470
+Withdraw Iterations: 2108
+      Final Balance: 114448000
+   Expected Balance: 114448000
+==========================================================
+          File name: Log_111.txt
+                Run: 51
+           ThreadID: 111
+ Deposit Iterations: 2748
+Withdraw Iterations: 2736
+      Final Balance: 378018000
+   Expected Balance: 119291000
+==========================================================
+          File name: Log_111.txt
+                Run: 52
+           ThreadID: 111
+ Deposit Iterations: 769
+Withdraw Iterations: 782
+      Final Balance: 360166000
+   Expected Balance: 4417107296
+==========================================================
+          File name: Log_111.txt
+                Run: 53
+           ThreadID: 111
+ Deposit Iterations: 1179
+Withdraw Iterations: 3590
+      Final Balance: 83669000
+   Expected Balance: 4378636296
+==========================================================
+          File name: Log_111.txt
+                Run: 54
+           ThreadID: 111
+ Deposit Iterations: 5270
+Withdraw Iterations: 2951
+      Final Balance: 113254000
+   Expected Balance: 113254000
+==========================================================
+          File name: Log_111.txt
+                Run: 55
+           ThreadID: 111
+ Deposit Iterations: 298
+Withdraw Iterations: 1835
+      Final Balance: 362224000
+   Expected Balance: 4408531296
+==========================================================
+          File name: Log_111.txt
+                Run: 56
+           ThreadID: 111
+ Deposit Iterations: 2777
+Withdraw Iterations: 3664
+      Final Balance: 117421000
+   Expected Balance: 4412388296
+==========================================================
+          File name: Log_111.txt
+                Run: 57
+           ThreadID: 111
+ Deposit Iterations: 240
+Withdraw Iterations: 1412
+      Final Balance: 386926000
+   Expected Balance: 4429881296
+==========================================================
+          File name: Log_111.txt
+                Run: 58
+           ThreadID: 111
+ Deposit Iterations: 1197
+Withdraw Iterations: 329
+      Final Balance: 417095000
+   Expected Balance: 111096000
+==========================================================
+          File name: Log_111.txt
+                Run: 59
+           ThreadID: 111
+ Deposit Iterations: 6861
+Withdraw Iterations: 2915
+      Final Balance: 393946000
+   Expected Balance: 114855000
+==========================================================
+          File name: Log_111.txt
+                Run: 60
+           ThreadID: 111
+ Deposit Iterations: 5660
+Withdraw Iterations: 208
+      Final Balance: 155963000
+   Expected Balance: 155963000
+==========================================================
+          File name: Log_111.txt
+                Run: 61
+           ThreadID: 111
+ Deposit Iterations: 5570
+Withdraw Iterations: 1549
+      Final Balance: 322473000
+   Expected Balance: 73399000
+==========================================================
+          File name: Log_111.txt
+                Run: 62
+           ThreadID: 111
+ Deposit Iterations: 5329
+Withdraw Iterations: 156
+      Final Balance: 406948000
+   Expected Balance: 131849000
+==========================================================
+          File name: Log_111.txt
+                Run: 63
+           ThreadID: 111
+ Deposit Iterations: 1194
+Withdraw Iterations: 3477
+      Final Balance: 116665000
+   Expected Balance: 4411632296
+==========================================================
+          File name: Log_111.txt
+                Run: 64
+           ThreadID: 111
+ Deposit Iterations: 1909
+Withdraw Iterations: 737
+      Final Balance: 97613000
+   Expected Balance: 97613000
+==========================================================
+          File name: Log_111.txt
+                Run: 65
+           ThreadID: 111
+ Deposit Iterations: 2877
+Withdraw Iterations: 2813
+      Final Balance: 293554000
+   Expected Balance: 76032000
+==========================================================
+          File name: Log_111.txt
+                Run: 66
+           ThreadID: 111
+ Deposit Iterations: 2713
+Withdraw Iterations: 783
+      Final Balance: 134501000
+   Expected Balance: 134501000
+==========================================================
+          File name: Log_111.txt
+                Run: 67
+           ThreadID: 111
+ Deposit Iterations: 1332
+Withdraw Iterations: 4033
+      Final Balance: 358144000
+   Expected Balance: 4411726296
+==========================================================
+          File name: Log_111.txt
+                Run: 68
+           ThreadID: 111
+ Deposit Iterations: 1548
+Withdraw Iterations: 2069
+      Final Balance: 332960000
+   Expected Balance: 4391878296
+==========================================================
+          File name: Log_111.txt
+                Run: 69
+           ThreadID: 111
+ Deposit Iterations: 6199
+Withdraw Iterations: 2384
+      Final Balance: 397639000
+   Expected Balance: 137431000
+==========================================================
+          File name: Log_111.txt
+                Run: 70
+           ThreadID: 111
+ Deposit Iterations: 2374
+Withdraw Iterations: 2587
+      Final Balance: 80089000
+   Expected Balance: 4375056296
+==========================================================
+          File name: Log_111.txt
+                Run: 71
+           ThreadID: 111
+ Deposit Iterations: 2104
+Withdraw Iterations: 3302
+      Final Balance: 113857000
+   Expected Balance: 4408824296
+==========================================================
+          File name: Log_111.txt
+                Run: 72
+           ThreadID: 111
+ Deposit Iterations: 6035
+Withdraw Iterations: 2986
+      Final Balance: 112552000
+   Expected Balance: 112552000
+==========================================================
+          File name: Log_111.txt
+                Run: 73
+           ThreadID: 111
+ Deposit Iterations: 686
+Withdraw Iterations: 4010
+      Final Balance: 375415000
+   Expected Balance: 4397908296
+==========================================================
+          File name: Log_111.txt
+                Run: 74
+           ThreadID: 111
+ Deposit Iterations: 1944
+Withdraw Iterations: 627
+      Final Balance: 389666000
+   Expected Balance: 119200000
+==========================================================
+          File name: Log_111.txt
+                Run: 75
+           ThreadID: 111
+ Deposit Iterations: 3272
+Withdraw Iterations: 2977
+      Final Balance: 74995000
+   Expected Balance: 74995000
+==========================================================
+          File name: Log_111.txt
+                Run: 76
+           ThreadID: 111
+ Deposit Iterations: 100
+Withdraw Iterations: 1146
+      Final Balance: 413012000
+   Expected Balance: 4406309296
+==========================================================
+          File name: Log_111.txt
+                Run: 77
+           ThreadID: 111
+ Deposit Iterations: 137
+Withdraw Iterations: 297
+      Final Balance: 155266000
+   Expected Balance: 4450233296
+==========================================================
+          File name: Log_111.txt
+                Run: 78
+           ThreadID: 111
+ Deposit Iterations: 6708
+Withdraw Iterations: 3130
+      Final Balance: 361020000
+   Expected Balance: 101662000
+==========================================================
+          File name: Log_111.txt
+                Run: 79
+           ThreadID: 111
+ Deposit Iterations: 3466
+Withdraw Iterations: 796
+      Final Balance: 91349000
+   Expected Balance: 91349000
+==========================================================
+          File name: Log_111.txt
+                Run: 80
+           ThreadID: 111
+ Deposit Iterations: 2194
+Withdraw Iterations: 661
+      Final Balance: 154045000
+   Expected Balance: 154045000
+==========================================================
+          File name: Log_111.txt
+                Run: 81
+           ThreadID: 111
+ Deposit Iterations: 4980
+Withdraw Iterations: 3757
+      Final Balance: 71547000
+   Expected Balance: 71547000
+==========================================================
+          File name: Log_111.txt
+                Run: 82
+           ThreadID: 111
+ Deposit Iterations: 399
+Withdraw Iterations: 2132
+      Final Balance: 436915000
+   Expected Balance: 4422706296
+==========================================================
+          File name: Log_111.txt
+                Run: 83
+           ThreadID: 111
+ Deposit Iterations: 7449
+Withdraw Iterations: 27
+      Final Balance: 100697000
+   Expected Balance: 100697000
+==========================================================
+          File name: Log_111.txt
+                Run: 84
+           ThreadID: 111
+ Deposit Iterations: 872
+Withdraw Iterations: 183
+      Final Balance: 108988000
+   Expected Balance: 108988000
+==========================================================
+          File name: Log_111.txt
+                Run: 85
+           ThreadID: 111
+ Deposit Iterations: 2285
+Withdraw Iterations: 2284
+      Final Balance: 366491000
+   Expected Balance: 100372000
+==========================================================
+          File name: Log_111.txt
+                Run: 86
+           ThreadID: 111
+ Deposit Iterations: 2107
+Withdraw Iterations: 375
+      Final Balance: 346102000
+   Expected Balance: 126342000
+==========================================================
+          File name: Log_111.txt
+                Run: 87
+           ThreadID: 111
+ Deposit Iterations: 5576
+Withdraw Iterations: 2925
+      Final Balance: 127512000
+   Expected Balance: 127512000
+==========================================================
+          File name: Log_111.txt
+                Run: 88
+           ThreadID: 111
+ Deposit Iterations: 763
+Withdraw Iterations: 671
+      Final Balance: 128447000
+   Expected Balance: 128447000
+==========================================================
+          File name: Log_111.txt
+                Run: 89
+           ThreadID: 111
+ Deposit Iterations: 4503
+Withdraw Iterations: 3421
+      Final Balance: 92733000
+   Expected Balance: 92733000
+==========================================================
+          File name: Log_111.txt
+                Run: 90
+           ThreadID: 111
+ Deposit Iterations: 936
+Withdraw Iterations: 934
+      Final Balance: 336665000
+   Expected Balance: 142041000
+==========================================================
+          File name: Log_111.txt
+                Run: 91
+           ThreadID: 111
+ Deposit Iterations: 7828
+Withdraw Iterations: 2461
+      Final Balance: 442123000
+   Expected Balance: 122212000
+==========================================================
+          File name: Log_111.txt
+                Run: 92
+           ThreadID: 111
+ Deposit Iterations: 512
+Withdraw Iterations: 3848
+      Final Balance: 376591000
+   Expected Balance: 4411206296
+==========================================================
+          File name: Log_111.txt
+                Run: 93
+           ThreadID: 111
+ Deposit Iterations: 898
+Withdraw Iterations: 516
+      Final Balance: 332650000
+   Expected Balance: 118776000
+==========================================================
+          File name: Log_111.txt
+                Run: 94
+           ThreadID: 111
+ Deposit Iterations: 2084
+Withdraw Iterations: 594
+      Final Balance: 117967000
+   Expected Balance: 117967000
+==========================================================
+          File name: Log_111.txt
+                Run: 95
+           ThreadID: 111
+ Deposit Iterations: 5975
+Withdraw Iterations: 2903
+      Final Balance: 135359000
+   Expected Balance: 135359000
+==========================================================
+          File name: Log_111.txt
+                Run: 96
+           ThreadID: 111
+ Deposit Iterations: 1319
+Withdraw Iterations: 2169
+      Final Balance: 339003000
+   Expected Balance: 4421785296
+==========================================================
+          File name: Log_111.txt
+                Run: 97
+           ThreadID: 111
+ Deposit Iterations: 7024
+Withdraw Iterations: 1731
+      Final Balance: 107653000
+   Expected Balance: 107653000
+==========================================================
+          File name: Log_111.txt
+                Run: 98
+           ThreadID: 111
+ Deposit Iterations: 1730
+Withdraw Iterations: 1656
+      Final Balance: 101857000
+   Expected Balance: 101857000
+==========================================================
+          File name: Log_111.txt
+                Run: 99
+           ThreadID: 111
+ Deposit Iterations: 5009
+Withdraw Iterations: 1461
+      Final Balance: 300632000
+   Expected Balance: 106458000

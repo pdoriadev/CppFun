@@ -1,0 +1,801 @@
+
+==========================================================
+          File name: Log_213.txt
+                Run: 0
+           ThreadID: 213
+ Deposit Iterations: 784
+Withdraw Iterations: 28
+      Final Balance: 429737000
+   Expected Balance: 178198000
+==========================================================
+          File name: Log_213.txt
+                Run: 1
+           ThreadID: 213
+ Deposit Iterations: 1912
+Withdraw Iterations: 2619
+      Final Balance: 266372000
+   Expected Balance: 4561339296
+==========================================================
+          File name: Log_213.txt
+                Run: 2
+           ThreadID: 213
+ Deposit Iterations: 3024
+Withdraw Iterations: 3353
+      Final Balance: 451889000
+   Expected Balance: 4487065296
+==========================================================
+          File name: Log_213.txt
+                Run: 3
+           ThreadID: 213
+ Deposit Iterations: 4250
+Withdraw Iterations: 4070
+      Final Balance: 193106000
+   Expected Balance: 193106000
+==========================================================
+          File name: Log_213.txt
+                Run: 4
+           ThreadID: 213
+ Deposit Iterations: 5442
+Withdraw Iterations: 3928
+      Final Balance: 514304000
+   Expected Balance: 267391000
+==========================================================
+          File name: Log_213.txt
+                Run: 5
+           ThreadID: 213
+ Deposit Iterations: 489
+Withdraw Iterations: 2289
+      Final Balance: 493047000
+   Expected Balance: 4526626296
+==========================================================
+          File name: Log_213.txt
+                Run: 6
+           ThreadID: 213
+ Deposit Iterations: 7137
+Withdraw Iterations: 672
+      Final Balance: 552954000
+   Expected Balance: 242443000
+==========================================================
+          File name: Log_213.txt
+                Run: 7
+           ThreadID: 213
+ Deposit Iterations: 3659
+Withdraw Iterations: 3096
+      Final Balance: 495338000
+   Expected Balance: 223276000
+==========================================================
+          File name: Log_213.txt
+                Run: 8
+           ThreadID: 213
+ Deposit Iterations: 5333
+Withdraw Iterations: 890
+      Final Balance: 491352000
+   Expected Balance: 218804000
+==========================================================
+          File name: Log_213.txt
+                Run: 9
+           ThreadID: 213
+ Deposit Iterations: 3675
+Withdraw Iterations: 4000
+      Final Balance: 519053000
+   Expected Balance: 4493320296
+==========================================================
+          File name: Log_213.txt
+                Run: 10
+           ThreadID: 213
+ Deposit Iterations: 6556
+Withdraw Iterations: 1844
+      Final Balance: 213546000
+   Expected Balance: 213546000
+==========================================================
+          File name: Log_213.txt
+                Run: 11
+           ThreadID: 213
+ Deposit Iterations: 5659
+Withdraw Iterations: 2025
+      Final Balance: 403929000
+   Expected Balance: 190898000
+==========================================================
+          File name: Log_213.txt
+                Run: 12
+           ThreadID: 213
+ Deposit Iterations: 4334
+Withdraw Iterations: 2418
+      Final Balance: 544177000
+   Expected Balance: 267829000
+==========================================================
+          File name: Log_213.txt
+                Run: 13
+           ThreadID: 213
+ Deposit Iterations: 4657
+Withdraw Iterations: 2276
+      Final Balance: 226328000
+   Expected Balance: 226328000
+==========================================================
+          File name: Log_213.txt
+                Run: 14
+           ThreadID: 213
+ Deposit Iterations: 1437
+Withdraw Iterations: 1241
+      Final Balance: 489556000
+   Expected Balance: 197143000
+==========================================================
+          File name: Log_213.txt
+                Run: 15
+           ThreadID: 213
+ Deposit Iterations: 4322
+Withdraw Iterations: 1330
+      Final Balance: 240404000
+   Expected Balance: 240404000
+==========================================================
+          File name: Log_213.txt
+                Run: 16
+           ThreadID: 213
+ Deposit Iterations: 3784
+Withdraw Iterations: 2388
+      Final Balance: 209732000
+   Expected Balance: 209732000
+==========================================================
+          File name: Log_213.txt
+                Run: 17
+           ThreadID: 213
+ Deposit Iterations: 3216
+Withdraw Iterations: 855
+      Final Balance: 196068000
+   Expected Balance: 196068000
+==========================================================
+          File name: Log_213.txt
+                Run: 18
+           ThreadID: 213
+ Deposit Iterations: 4052
+Withdraw Iterations: 3353
+      Final Balance: 449919000
+   Expected Balance: 216642000
+==========================================================
+          File name: Log_213.txt
+                Run: 19
+           ThreadID: 213
+ Deposit Iterations: 5241
+Withdraw Iterations: 174
+      Final Balance: 537214000
+   Expected Balance: 231437000
+==========================================================
+          File name: Log_213.txt
+                Run: 20
+           ThreadID: 213
+ Deposit Iterations: 1352
+Withdraw Iterations: 198
+      Final Balance: 152893000
+   Expected Balance: 152893000
+==========================================================
+          File name: Log_213.txt
+                Run: 21
+           ThreadID: 213
+ Deposit Iterations: 330
+Withdraw Iterations: 236
+      Final Balance: 461147000
+   Expected Balance: 202420000
+==========================================================
+          File name: Log_213.txt
+                Run: 22
+           ThreadID: 213
+ Deposit Iterations: 1240
+Withdraw Iterations: 1493
+      Final Balance: 237555000
+   Expected Balance: 4532522296
+==========================================================
+          File name: Log_213.txt
+                Run: 23
+           ThreadID: 213
+ Deposit Iterations: 7456
+Withdraw Iterations: 3007
+      Final Balance: 527991000
+   Expected Balance: 267622000
+==========================================================
+          File name: Log_213.txt
+                Run: 24
+           ThreadID: 213
+ Deposit Iterations: 5586
+Withdraw Iterations: 2548
+      Final Balance: 13593000
+   Expected Balance: 13593000
+==========================================================
+          File name: Log_213.txt
+                Run: 25
+           ThreadID: 213
+ Deposit Iterations: 209
+Withdraw Iterations: 1533
+      Final Balance: 302333000
+   Expected Balance: 4295209296
+==========================================================
+          File name: Log_213.txt
+                Run: 26
+           ThreadID: 213
+ Deposit Iterations: 4165
+Withdraw Iterations: 1017
+      Final Balance: 533458000
+   Expected Balance: 262884000
+==========================================================
+          File name: Log_213.txt
+                Run: 27
+           ThreadID: 213
+ Deposit Iterations: 2650
+Withdraw Iterations: 3794
+      Final Balance: 178641000
+   Expected Balance: 4473608296
+==========================================================
+          File name: Log_213.txt
+                Run: 28
+           ThreadID: 213
+ Deposit Iterations: 5125
+Withdraw Iterations: 624
+      Final Balance: 228154000
+   Expected Balance: 228154000
+==========================================================
+          File name: Log_213.txt
+                Run: 29
+           ThreadID: 213
+ Deposit Iterations: 1388
+Withdraw Iterations: 1242
+      Final Balance: 466938000
+   Expected Balance: 249316000
+==========================================================
+          File name: Log_213.txt
+                Run: 30
+           ThreadID: 213
+ Deposit Iterations: 1841
+Withdraw Iterations: 1153
+      Final Balance: 219508000
+   Expected Balance: 219508000
+==========================================================
+          File name: Log_213.txt
+                Run: 31
+           ThreadID: 213
+ Deposit Iterations: 663
+Withdraw Iterations: 3584
+      Final Balance: 220154000
+   Expected Balance: 4515121296
+==========================================================
+          File name: Log_213.txt
+                Run: 32
+           ThreadID: 213
+ Deposit Iterations: 2655
+Withdraw Iterations: 2800
+      Final Balance: 368319000
+   Expected Balance: 4434862296
+==========================================================
+          File name: Log_213.txt
+                Run: 33
+           ThreadID: 213
+ Deposit Iterations: 4833
+Withdraw Iterations: 3248
+      Final Balance: 482025000
+   Expected Balance: 282003000
+==========================================================
+          File name: Log_213.txt
+                Run: 34
+           ThreadID: 213
+ Deposit Iterations: 6590
+Withdraw Iterations: 780
+      Final Balance: 512938000
+   Expected Balance: 243948000
+==========================================================
+          File name: Log_213.txt
+                Run: 35
+           ThreadID: 213
+ Deposit Iterations: 2468
+Withdraw Iterations: 3455
+      Final Balance: 480316000
+   Expected Balance: 4457108296
+==========================================================
+          File name: Log_213.txt
+                Run: 36
+           ThreadID: 213
+ Deposit Iterations: 7029
+Withdraw Iterations: 391
+      Final Balance: 460951000
+   Expected Balance: 262932000
+==========================================================
+          File name: Log_213.txt
+                Run: 37
+           ThreadID: 213
+ Deposit Iterations: 1380
+Withdraw Iterations: 3407
+      Final Balance: 183687000
+   Expected Balance: 4478654296
+==========================================================
+          File name: Log_213.txt
+                Run: 38
+           ThreadID: 213
+ Deposit Iterations: 732
+Withdraw Iterations: 2331
+      Final Balance: 494158000
+   Expected Balance: 4475176296
+==========================================================
+          File name: Log_213.txt
+                Run: 39
+           ThreadID: 213
+ Deposit Iterations: 2569
+Withdraw Iterations: 951
+      Final Balance: 194072000
+   Expected Balance: 194072000
+==========================================================
+          File name: Log_213.txt
+                Run: 40
+           ThreadID: 213
+ Deposit Iterations: 284
+Withdraw Iterations: 1797
+      Final Balance: 409403000
+   Expected Balance: 4472282296
+==========================================================
+          File name: Log_213.txt
+                Run: 41
+           ThreadID: 213
+ Deposit Iterations: 6214
+Withdraw Iterations: 1339
+      Final Balance: 542221000
+   Expected Balance: 246098000
+==========================================================
+          File name: Log_213.txt
+                Run: 42
+           ThreadID: 213
+ Deposit Iterations: 4935
+Withdraw Iterations: 866
+      Final Balance: 512147000
+   Expected Balance: 262661000
+==========================================================
+          File name: Log_213.txt
+                Run: 43
+           ThreadID: 213
+ Deposit Iterations: 2735
+Withdraw Iterations: 4001
+      Final Balance: 507658000
+   Expected Balance: 4589732296
+==========================================================
+          File name: Log_213.txt
+                Run: 44
+           ThreadID: 213
+ Deposit Iterations: 2407
+Withdraw Iterations: 2675
+      Final Balance: 192532000
+   Expected Balance: 4487499296
+==========================================================
+          File name: Log_213.txt
+                Run: 45
+           ThreadID: 213
+ Deposit Iterations: 3828
+Withdraw Iterations: 2701
+      Final Balance: 472231000
+   Expected Balance: 229207000
+==========================================================
+          File name: Log_213.txt
+                Run: 46
+           ThreadID: 213
+ Deposit Iterations: 7451
+Withdraw Iterations: 943
+      Final Balance: 478781000
+   Expected Balance: 236905000
+==========================================================
+          File name: Log_213.txt
+                Run: 47
+           ThreadID: 213
+ Deposit Iterations: 4749
+Withdraw Iterations: 253
+      Final Balance: 539245000
+   Expected Balance: 245697000
+==========================================================
+          File name: Log_213.txt
+                Run: 48
+           ThreadID: 213
+ Deposit Iterations: 6007
+Withdraw Iterations: 2045
+      Final Balance: 489174000
+   Expected Balance: 206658000
+==========================================================
+          File name: Log_213.txt
+                Run: 49
+           ThreadID: 213
+ Deposit Iterations: 1514
+Withdraw Iterations: 2264
+      Final Balance: 412185000
+   Expected Balance: 4486035296
+==========================================================
+          File name: Log_213.txt
+                Run: 50
+           ThreadID: 213
+ Deposit Iterations: 1696
+Withdraw Iterations: 608
+      Final Balance: 232975000
+   Expected Balance: 232975000
+==========================================================
+          File name: Log_213.txt
+                Run: 51
+           ThreadID: 213
+ Deposit Iterations: 7595
+Withdraw Iterations: 3941
+      Final Balance: 484750000
+   Expected Balance: 226699000
+==========================================================
+          File name: Log_213.txt
+                Run: 52
+           ThreadID: 213
+ Deposit Iterations: 6573
+Withdraw Iterations: 3020
+      Final Balance: 190550000
+   Expected Balance: 190550000
+==========================================================
+          File name: Log_213.txt
+                Run: 53
+           ThreadID: 213
+ Deposit Iterations: 1102
+Withdraw Iterations: 2870
+      Final Balance: 201553000
+   Expected Balance: 4496520296
+==========================================================
+          File name: Log_213.txt
+                Run: 54
+           ThreadID: 213
+ Deposit Iterations: 3181
+Withdraw Iterations: 3813
+      Final Balance: 197360000
+   Expected Balance: 4492327296
+==========================================================
+          File name: Log_213.txt
+                Run: 55
+           ThreadID: 213
+ Deposit Iterations: 6372
+Withdraw Iterations: 2811
+      Final Balance: 453762000
+   Expected Balance: 192842000
+==========================================================
+          File name: Log_213.txt
+                Run: 56
+           ThreadID: 213
+ Deposit Iterations: 4570
+Withdraw Iterations: 2540
+      Final Balance: 199805000
+   Expected Balance: 199805000
+==========================================================
+          File name: Log_213.txt
+                Run: 57
+           ThreadID: 213
+ Deposit Iterations: 6628
+Withdraw Iterations: 3561
+      Final Balance: 261341000
+   Expected Balance: 261341000
+==========================================================
+          File name: Log_213.txt
+                Run: 58
+           ThreadID: 213
+ Deposit Iterations: 7527
+Withdraw Iterations: 3023
+      Final Balance: 241652000
+   Expected Balance: 241652000
+==========================================================
+          File name: Log_213.txt
+                Run: 59
+           ThreadID: 213
+ Deposit Iterations: 4338
+Withdraw Iterations: 1392
+      Final Balance: 239557000
+   Expected Balance: 239557000
+==========================================================
+          File name: Log_213.txt
+                Run: 60
+           ThreadID: 213
+ Deposit Iterations: 2700
+Withdraw Iterations: 3576
+      Final Balance: 460017000
+   Expected Balance: 4544826296
+==========================================================
+          File name: Log_213.txt
+                Run: 61
+           ThreadID: 213
+ Deposit Iterations: 2873
+Withdraw Iterations: 337
+      Final Balance: 434746000
+   Expected Balance: 166564000
+==========================================================
+          File name: Log_213.txt
+                Run: 62
+           ThreadID: 213
+ Deposit Iterations: 3196
+Withdraw Iterations: 956
+      Final Balance: 509845000
+   Expected Balance: 235580000
+==========================================================
+          File name: Log_213.txt
+                Run: 63
+           ThreadID: 213
+ Deposit Iterations: 7384
+Withdraw Iterations: 3895
+      Final Balance: 240050000
+   Expected Balance: 240050000
+==========================================================
+          File name: Log_213.txt
+                Run: 64
+           ThreadID: 213
+ Deposit Iterations: 3962
+Withdraw Iterations: 844
+      Final Balance: 198311000
+   Expected Balance: 198311000
+==========================================================
+          File name: Log_213.txt
+                Run: 65
+           ThreadID: 213
+ Deposit Iterations: 4232
+Withdraw Iterations: 1934
+      Final Balance: 389644000
+   Expected Balance: 147015000
+==========================================================
+          File name: Log_213.txt
+                Run: 66
+           ThreadID: 213
+ Deposit Iterations: 7926
+Withdraw Iterations: 569
+      Final Balance: 267113000
+   Expected Balance: 267113000
+==========================================================
+          File name: Log_213.txt
+                Run: 67
+           ThreadID: 213
+ Deposit Iterations: 6110
+Withdraw Iterations: 1107
+      Final Balance: 233186000
+   Expected Balance: 233186000
+==========================================================
+          File name: Log_213.txt
+                Run: 68
+           ThreadID: 213
+ Deposit Iterations: 3711
+Withdraw Iterations: 662
+      Final Balance: 166254000
+   Expected Balance: 166254000
+==========================================================
+          File name: Log_213.txt
+                Run: 69
+           ThreadID: 213
+ Deposit Iterations: 165
+Withdraw Iterations: 222
+      Final Balance: 230677000
+   Expected Balance: 4525644296
+==========================================================
+          File name: Log_213.txt
+                Run: 70
+           ThreadID: 213
+ Deposit Iterations: 755
+Withdraw Iterations: 699
+      Final Balance: 430475000
+   Expected Balance: 174734000
+==========================================================
+          File name: Log_213.txt
+                Run: 71
+           ThreadID: 213
+ Deposit Iterations: 5336
+Withdraw Iterations: 1939
+      Final Balance: 228888000
+   Expected Balance: 228888000
+==========================================================
+          File name: Log_213.txt
+                Run: 72
+           ThreadID: 213
+ Deposit Iterations: 1148
+Withdraw Iterations: 3827
+      Final Balance: 454837000
+   Expected Balance: 4531364296
+==========================================================
+          File name: Log_213.txt
+                Run: 73
+           ThreadID: 213
+ Deposit Iterations: 2644
+Withdraw Iterations: 2197
+      Final Balance: 206254000
+   Expected Balance: 206254000
+==========================================================
+          File name: Log_213.txt
+                Run: 74
+           ThreadID: 213
+ Deposit Iterations: 7015
+Withdraw Iterations: 2378
+      Final Balance: 232491000
+   Expected Balance: 232491000
+==========================================================
+          File name: Log_213.txt
+                Run: 75
+           ThreadID: 213
+ Deposit Iterations: 212
+Withdraw Iterations: 501
+      Final Balance: 489557000
+   Expected Balance: 4470379296
+==========================================================
+          File name: Log_213.txt
+                Run: 76
+           ThreadID: 213
+ Deposit Iterations: 3657
+Withdraw Iterations: 2572
+      Final Balance: 247389000
+   Expected Balance: 247389000
+==========================================================
+          File name: Log_213.txt
+                Run: 77
+           ThreadID: 213
+ Deposit Iterations: 3117
+Withdraw Iterations: 1732
+      Final Balance: 524780000
+   Expected Balance: 299599000
+==========================================================
+          File name: Log_213.txt
+                Run: 78
+           ThreadID: 213
+ Deposit Iterations: 3158
+Withdraw Iterations: 1625
+      Final Balance: 208558000
+   Expected Balance: 208558000
+==========================================================
+          File name: Log_213.txt
+                Run: 79
+           ThreadID: 213
+ Deposit Iterations: 4441
+Withdraw Iterations: 579
+      Final Balance: 404188000
+   Expected Balance: 188955000
+==========================================================
+          File name: Log_213.txt
+                Run: 80
+           ThreadID: 213
+ Deposit Iterations: 2179
+Withdraw Iterations: 1785
+      Final Balance: 253986000
+   Expected Balance: 253986000
+==========================================================
+          File name: Log_213.txt
+                Run: 81
+           ThreadID: 213
+ Deposit Iterations: 3605
+Withdraw Iterations: 160
+      Final Balance: 457294000
+   Expected Balance: 162950000
+==========================================================
+          File name: Log_213.txt
+                Run: 82
+           ThreadID: 213
+ Deposit Iterations: 1846
+Withdraw Iterations: 3810
+      Final Balance: 252531000
+   Expected Balance: 4547498296
+==========================================================
+          File name: Log_213.txt
+                Run: 83
+           ThreadID: 213
+ Deposit Iterations: 5783
+Withdraw Iterations: 3586
+      Final Balance: 240935000
+   Expected Balance: 240935000
+==========================================================
+          File name: Log_213.txt
+                Run: 84
+           ThreadID: 213
+ Deposit Iterations: 4220
+Withdraw Iterations: 1482
+      Final Balance: 206829000
+   Expected Balance: 206829000
+==========================================================
+          File name: Log_213.txt
+                Run: 85
+           ThreadID: 213
+ Deposit Iterations: 3266
+Withdraw Iterations: 1288
+      Final Balance: 171400000
+   Expected Balance: 171400000
+==========================================================
+          File name: Log_213.txt
+                Run: 86
+           ThreadID: 213
+ Deposit Iterations: 6919
+Withdraw Iterations: 3545
+      Final Balance: 432815000
+   Expected Balance: 217367000
+==========================================================
+          File name: Log_213.txt
+                Run: 87
+           ThreadID: 213
+ Deposit Iterations: 224
+Withdraw Iterations: 2126
+      Final Balance: 445815000
+   Expected Balance: 4523346296
+==========================================================
+          File name: Log_213.txt
+                Run: 88
+           ThreadID: 213
+ Deposit Iterations: 144
+Withdraw Iterations: 1247
+      Final Balance: 228906000
+   Expected Balance: 4523873296
+==========================================================
+          File name: Log_213.txt
+                Run: 89
+           ThreadID: 213
+ Deposit Iterations: 1539
+Withdraw Iterations: 2314
+      Final Balance: 185198000
+   Expected Balance: 4480165296
+==========================================================
+          File name: Log_213.txt
+                Run: 90
+           ThreadID: 213
+ Deposit Iterations: 3062
+Withdraw Iterations: 1957
+      Final Balance: 191663000
+   Expected Balance: 191663000
+==========================================================
+          File name: Log_213.txt
+                Run: 91
+           ThreadID: 213
+ Deposit Iterations: 3646
+Withdraw Iterations: 1340
+      Final Balance: 240722000
+   Expected Balance: 240722000
+==========================================================
+          File name: Log_213.txt
+                Run: 92
+           ThreadID: 213
+ Deposit Iterations: 3940
+Withdraw Iterations: 3308
+      Final Balance: 183366000
+   Expected Balance: 183366000
+==========================================================
+          File name: Log_213.txt
+                Run: 93
+           ThreadID: 213
+ Deposit Iterations: 455
+Withdraw Iterations: 588
+      Final Balance: 215408000
+   Expected Balance: 4510375296
+==========================================================
+          File name: Log_213.txt
+                Run: 94
+           ThreadID: 213
+ Deposit Iterations: 547
+Withdraw Iterations: 174
+      Final Balance: 500577000
+   Expected Balance: 247196000
+==========================================================
+          File name: Log_213.txt
+                Run: 95
+           ThreadID: 213
+ Deposit Iterations: 4216
+Withdraw Iterations: 1409
+      Final Balance: 236593000
+   Expected Balance: 236593000
+==========================================================
+          File name: Log_213.txt
+                Run: 96
+           ThreadID: 213
+ Deposit Iterations: 4131
+Withdraw Iterations: 5
+      Final Balance: 240622000
+   Expected Balance: 240622000
+==========================================================
+          File name: Log_213.txt
+                Run: 97
+           ThreadID: 213
+ Deposit Iterations: 4017
+Withdraw Iterations: 3332
+      Final Balance: 193371000
+   Expected Balance: 193371000
+==========================================================
+          File name: Log_213.txt
+                Run: 98
+           ThreadID: 213
+ Deposit Iterations: 1391
+Withdraw Iterations: 800
+      Final Balance: 181122000
+   Expected Balance: 181122000
+==========================================================
+          File name: Log_213.txt
+                Run: 99
+           ThreadID: 213
+ Deposit Iterations: 4093
+Withdraw Iterations: 1689
+      Final Balance: 212964000
+   Expected Balance: 2404000

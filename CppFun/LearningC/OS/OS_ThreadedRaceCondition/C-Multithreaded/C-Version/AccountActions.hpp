@@ -22,6 +22,7 @@ typedef struct Action
 
 
 // Assumes the outputFP is open and writable!
+// Does not close the outputFP!
 bool outputAndDoBankingAction(BankAccount *account, Action *action, FILE *outputFP)
 {
   if (action->actionFunction == NULL)
@@ -36,6 +37,7 @@ bool outputAndDoBankingAction(BankAccount *account, Action *action, FILE *output
     return false;
   }
 
+/* Assume don't output
   if (outputFP == NULL)
   {
     FILE *errorFP = fopen("errorLog.txt", "w+");
@@ -44,6 +46,7 @@ bool outputAndDoBankingAction(BankAccount *account, Action *action, FILE *output
     fclose(errorFP);
     exit(EXIT_FAILURE);
   }
+*/
 
   for (uint64_t i = 0; i < action->iterations; i++)
   {
@@ -51,7 +54,11 @@ bool outputAndDoBankingAction(BankAccount *account, Action *action, FILE *output
     {
       return false;
     }
-    outputBalance(account, outputFP);
+
+		if (outputFP != NULL)
+		{
+			outputBalance(account, outputFP);
+		}
   }
 
   return true;

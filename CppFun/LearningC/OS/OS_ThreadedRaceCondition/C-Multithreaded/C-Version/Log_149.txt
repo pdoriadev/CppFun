@@ -1,0 +1,801 @@
+
+==========================================================
+          File name: Log_149.txt
+                Run: 0
+           ThreadID: 149
+ Deposit Iterations: 3046
+Withdraw Iterations: 3955
+      Final Balance: 359637000
+   Expected Balance: 4423361296
+==========================================================
+          File name: Log_149.txt
+                Run: 1
+           ThreadID: 149
+ Deposit Iterations: 1513
+Withdraw Iterations: 1744
+      Final Balance: 444570000
+   Expected Balance: 4476960296
+==========================================================
+          File name: Log_149.txt
+                Run: 2
+           ThreadID: 149
+ Deposit Iterations: 951
+Withdraw Iterations: 2486
+      Final Balance: 101597000
+   Expected Balance: 4396564296
+==========================================================
+          File name: Log_149.txt
+                Run: 3
+           ThreadID: 149
+ Deposit Iterations: 1413
+Withdraw Iterations: 2187
+      Final Balance: 119405000
+   Expected Balance: 4414372296
+==========================================================
+          File name: Log_149.txt
+                Run: 4
+           ThreadID: 149
+ Deposit Iterations: 4325
+Withdraw Iterations: 1454
+      Final Balance: 195921000
+   Expected Balance: 195921000
+==========================================================
+          File name: Log_149.txt
+                Run: 5
+           ThreadID: 149
+ Deposit Iterations: 3663
+Withdraw Iterations: 1447
+      Final Balance: 148727000
+   Expected Balance: 148727000
+==========================================================
+          File name: Log_149.txt
+                Run: 6
+           ThreadID: 149
+ Deposit Iterations: 7909
+Withdraw Iterations: 1369
+      Final Balance: 479291000
+   Expected Balance: 150913000
+==========================================================
+          File name: Log_149.txt
+                Run: 7
+           ThreadID: 149
+ Deposit Iterations: 1231
+Withdraw Iterations: 1952
+      Final Balance: 435173000
+   Expected Balance: 4458598296
+==========================================================
+          File name: Log_149.txt
+                Run: 8
+           ThreadID: 149
+ Deposit Iterations: 3074
+Withdraw Iterations: 1075
+      Final Balance: 428722000
+   Expected Balance: 151718000
+==========================================================
+          File name: Log_149.txt
+                Run: 9
+           ThreadID: 149
+ Deposit Iterations: 3557
+Withdraw Iterations: 3099
+      Final Balance: 423367000
+   Expected Balance: 149548000
+==========================================================
+          File name: Log_149.txt
+                Run: 10
+           ThreadID: 149
+ Deposit Iterations: 1294
+Withdraw Iterations: 2809
+      Final Balance: 167939000
+   Expected Balance: 4462906296
+==========================================================
+          File name: Log_149.txt
+                Run: 11
+           ThreadID: 149
+ Deposit Iterations: 5095
+Withdraw Iterations: 2779
+      Final Balance: 146385000
+   Expected Balance: 146385000
+==========================================================
+          File name: Log_149.txt
+                Run: 12
+           ThreadID: 149
+ Deposit Iterations: 4902
+Withdraw Iterations: 1650
+      Final Balance: 463048000
+   Expected Balance: 190980000
+==========================================================
+          File name: Log_149.txt
+                Run: 13
+           ThreadID: 149
+ Deposit Iterations: 828
+Withdraw Iterations: 1616
+      Final Balance: 452802000
+   Expected Balance: 4468102296
+==========================================================
+          File name: Log_149.txt
+                Run: 14
+           ThreadID: 149
+ Deposit Iterations: 551
+Withdraw Iterations: 1617
+      Final Balance: 139397000
+   Expected Balance: 4434364296
+==========================================================
+          File name: Log_149.txt
+                Run: 15
+           ThreadID: 149
+ Deposit Iterations: 3554
+Withdraw Iterations: 1030
+      Final Balance: 429751000
+   Expected Balance: 171661000
+==========================================================
+          File name: Log_149.txt
+                Run: 16
+           ThreadID: 149
+ Deposit Iterations: 4345
+Withdraw Iterations: 3294
+      Final Balance: 138604000
+   Expected Balance: 138604000
+==========================================================
+          File name: Log_149.txt
+                Run: 17
+           ThreadID: 149
+ Deposit Iterations: 3569
+Withdraw Iterations: 3755
+      Final Balance: 142923000
+   Expected Balance: 4437890296
+==========================================================
+          File name: Log_149.txt
+                Run: 18
+           ThreadID: 149
+ Deposit Iterations: 3408
+Withdraw Iterations: 3577
+      Final Balance: 163116000
+   Expected Balance: 4458083296
+==========================================================
+          File name: Log_149.txt
+                Run: 19
+           ThreadID: 149
+ Deposit Iterations: 5237
+Withdraw Iterations: 1330
+      Final Balance: 143399000
+   Expected Balance: 143399000
+==========================================================
+          File name: Log_149.txt
+                Run: 20
+           ThreadID: 149
+ Deposit Iterations: 399
+Withdraw Iterations: 3137
+      Final Balance: 374984000
+   Expected Balance: 4411035296
+==========================================================
+          File name: Log_149.txt
+                Run: 21
+           ThreadID: 149
+ Deposit Iterations: 8003
+Withdraw Iterations: 766
+      Final Balance: 155664000
+   Expected Balance: 155664000
+==========================================================
+          File name: Log_149.txt
+                Run: 22
+           ThreadID: 149
+ Deposit Iterations: 2359
+Withdraw Iterations: 3651
+      Final Balance: 164816000
+   Expected Balance: 4459783296
+==========================================================
+          File name: Log_149.txt
+                Run: 23
+           ThreadID: 149
+ Deposit Iterations: 8063
+Withdraw Iterations: 2746
+      Final Balance: 192003000
+   Expected Balance: 192003000
+==========================================================
+          File name: Log_149.txt
+                Run: 24
+           ThreadID: 149
+ Deposit Iterations: 3415
+Withdraw Iterations: 2592
+      Final Balance: 499670000
+   Expected Balance: 206367000
+==========================================================
+          File name: Log_149.txt
+                Run: 25
+           ThreadID: 149
+ Deposit Iterations: 4890
+Withdraw Iterations: 2303
+      Final Balance: 171832000
+   Expected Balance: 171832000
+==========================================================
+          File name: Log_149.txt
+                Run: 26
+           ThreadID: 149
+ Deposit Iterations: 6715
+Withdraw Iterations: 2407
+      Final Balance: 209737000
+   Expected Balance: 209737000
+==========================================================
+          File name: Log_149.txt
+                Run: 27
+           ThreadID: 149
+ Deposit Iterations: 5204
+Withdraw Iterations: 3221
+      Final Balance: 113340000
+   Expected Balance: 113340000
+==========================================================
+          File name: Log_149.txt
+                Run: 28
+           ThreadID: 149
+ Deposit Iterations: 4190
+Withdraw Iterations: 2659
+      Final Balance: 149417000
+   Expected Balance: 149417000
+==========================================================
+          File name: Log_149.txt
+                Run: 29
+           ThreadID: 149
+ Deposit Iterations: 5577
+Withdraw Iterations: 2300
+      Final Balance: 192693000
+   Expected Balance: 192693000
+==========================================================
+          File name: Log_149.txt
+                Run: 30
+           ThreadID: 149
+ Deposit Iterations: 6399
+Withdraw Iterations: 3237
+      Final Balance: 397869000
+   Expected Balance: 141020000
+==========================================================
+          File name: Log_149.txt
+                Run: 31
+           ThreadID: 149
+ Deposit Iterations: 257
+Withdraw Iterations: 4079
+      Final Balance: 391904000
+   Expected Balance: 4461616296
+==========================================================
+          File name: Log_149.txt
+                Run: 32
+           ThreadID: 149
+ Deposit Iterations: 6958
+Withdraw Iterations: 167
+      Final Balance: 313088000
+   Expected Balance: 120809000
+==========================================================
+          File name: Log_149.txt
+                Run: 33
+           ThreadID: 149
+ Deposit Iterations: 5442
+Withdraw Iterations: 3257
+      Final Balance: 401660000
+   Expected Balance: 214240000
+==========================================================
+          File name: Log_149.txt
+                Run: 34
+           ThreadID: 149
+ Deposit Iterations: 7093
+Withdraw Iterations: 3567
+      Final Balance: 423671000
+   Expected Balance: 154101000
+==========================================================
+          File name: Log_149.txt
+                Run: 35
+           ThreadID: 149
+ Deposit Iterations: 7136
+Withdraw Iterations: 1521
+      Final Balance: 134296000
+   Expected Balance: 134296000
+==========================================================
+          File name: Log_149.txt
+                Run: 36
+           ThreadID: 149
+ Deposit Iterations: 6132
+Withdraw Iterations: 958
+      Final Balance: 395229000
+   Expected Balance: 173337000
+==========================================================
+          File name: Log_149.txt
+                Run: 37
+           ThreadID: 149
+ Deposit Iterations: 3001
+Withdraw Iterations: 3704
+      Final Balance: 350836000
+   Expected Balance: 4435808296
+==========================================================
+          File name: Log_149.txt
+                Run: 38
+           ThreadID: 149
+ Deposit Iterations: 8045
+Withdraw Iterations: 1640
+      Final Balance: 427783000
+   Expected Balance: 147349000
+==========================================================
+          File name: Log_149.txt
+                Run: 39
+           ThreadID: 149
+ Deposit Iterations: 5184
+Withdraw Iterations: 911
+      Final Balance: 406297000
+   Expected Balance: 113380000
+==========================================================
+          File name: Log_149.txt
+                Run: 40
+           ThreadID: 149
+ Deposit Iterations: 2360
+Withdraw Iterations: 2695
+      Final Balance: 134740000
+   Expected Balance: 4429707296
+==========================================================
+          File name: Log_149.txt
+                Run: 41
+           ThreadID: 149
+ Deposit Iterations: 5596
+Withdraw Iterations: 2309
+      Final Balance: 154306000
+   Expected Balance: 154306000
+==========================================================
+          File name: Log_149.txt
+                Run: 42
+           ThreadID: 149
+ Deposit Iterations: 4654
+Withdraw Iterations: 1781
+      Final Balance: 469403000
+   Expected Balance: 146735000
+==========================================================
+          File name: Log_149.txt
+                Run: 43
+           ThreadID: 149
+ Deposit Iterations: 5540
+Withdraw Iterations: 2908
+      Final Balance: 458757000
+   Expected Balance: 201300000
+==========================================================
+          File name: Log_149.txt
+                Run: 44
+           ThreadID: 149
+ Deposit Iterations: 7222
+Withdraw Iterations: 2139
+      Final Balance: 366393000
+   Expected Balance: 149395000
+==========================================================
+          File name: Log_149.txt
+                Run: 45
+           ThreadID: 149
+ Deposit Iterations: 3515
+Withdraw Iterations: 1524
+      Final Balance: 148362000
+   Expected Balance: 148362000
+==========================================================
+          File name: Log_149.txt
+                Run: 46
+           ThreadID: 149
+ Deposit Iterations: 3899
+Withdraw Iterations: 131
+      Final Balance: 167625000
+   Expected Balance: 167625000
+==========================================================
+          File name: Log_149.txt
+                Run: 47
+           ThreadID: 149
+ Deposit Iterations: 2644
+Withdraw Iterations: 3632
+      Final Balance: 461795000
+   Expected Balance: 4459289296
+==========================================================
+          File name: Log_149.txt
+                Run: 48
+           ThreadID: 149
+ Deposit Iterations: 5081
+Withdraw Iterations: 3757
+      Final Balance: 240654000
+   Expected Balance: 6399000
+==========================================================
+          File name: Log_149.txt
+                Run: 49
+           ThreadID: 149
+ Deposit Iterations: 1580
+Withdraw Iterations: 3325
+      Final Balance: 128058000
+   Expected Balance: 4423025296
+==========================================================
+          File name: Log_149.txt
+                Run: 50
+           ThreadID: 149
+ Deposit Iterations: 8039
+Withdraw Iterations: 4070
+      Final Balance: 402770000
+   Expected Balance: 176644000
+==========================================================
+          File name: Log_149.txt
+                Run: 51
+           ThreadID: 149
+ Deposit Iterations: 4260
+Withdraw Iterations: 3765
+      Final Balance: 173148000
+   Expected Balance: 173148000
+==========================================================
+          File name: Log_149.txt
+                Run: 52
+           ThreadID: 149
+ Deposit Iterations: 5525
+Withdraw Iterations: 2315
+      Final Balance: 403480000
+   Expected Balance: 151625000
+==========================================================
+          File name: Log_149.txt
+                Run: 53
+           ThreadID: 149
+ Deposit Iterations: 6485
+Withdraw Iterations: 3078
+      Final Balance: 134090000
+   Expected Balance: 134090000
+==========================================================
+          File name: Log_149.txt
+                Run: 54
+           ThreadID: 149
+ Deposit Iterations: 5063
+Withdraw Iterations: 3212
+      Final Balance: 396403000
+   Expected Balance: 151293000
+==========================================================
+          File name: Log_149.txt
+                Run: 55
+           ThreadID: 149
+ Deposit Iterations: 2864
+Withdraw Iterations: 3636
+      Final Balance: 404984000
+   Expected Balance: 4434720296
+==========================================================
+          File name: Log_149.txt
+                Run: 56
+           ThreadID: 149
+ Deposit Iterations: 6597
+Withdraw Iterations: 3100
+      Final Balance: 151246000
+   Expected Balance: 151246000
+==========================================================
+          File name: Log_149.txt
+                Run: 57
+           ThreadID: 149
+ Deposit Iterations: 2769
+Withdraw Iterations: 2124
+      Final Balance: 2718000
+   Expected Balance: 2718000
+==========================================================
+          File name: Log_149.txt
+                Run: 58
+           ThreadID: 149
+ Deposit Iterations: 7872
+Withdraw Iterations: 641
+      Final Balance: 463122000
+   Expected Balance: 162307000
+==========================================================
+          File name: Log_149.txt
+                Run: 59
+           ThreadID: 149
+ Deposit Iterations: 1584
+Withdraw Iterations: 192
+      Final Balance: 418898000
+   Expected Balance: 162931000
+==========================================================
+          File name: Log_149.txt
+                Run: 60
+           ThreadID: 149
+ Deposit Iterations: 1556
+Withdraw Iterations: 1684
+      Final Balance: 411446000
+   Expected Balance: 4477024296
+==========================================================
+          File name: Log_149.txt
+                Run: 61
+           ThreadID: 149
+ Deposit Iterations: 2072
+Withdraw Iterations: 3997
+      Final Balance: 94576000
+   Expected Balance: 4389543296
+==========================================================
+          File name: Log_149.txt
+                Run: 62
+           ThreadID: 149
+ Deposit Iterations: 6481
+Withdraw Iterations: 1975
+      Final Balance: 451619000
+   Expected Balance: 167417000
+==========================================================
+          File name: Log_149.txt
+                Run: 63
+           ThreadID: 149
+ Deposit Iterations: 3526
+Withdraw Iterations: 716
+      Final Balance: 171993000
+   Expected Balance: 171993000
+==========================================================
+          File name: Log_149.txt
+                Run: 64
+           ThreadID: 149
+ Deposit Iterations: 836
+Withdraw Iterations: 3695
+      Final Balance: 124134000
+   Expected Balance: 4419101296
+==========================================================
+          File name: Log_149.txt
+                Run: 65
+           ThreadID: 149
+ Deposit Iterations: 4336
+Withdraw Iterations: 2723
+      Final Balance: 333567000
+   Expected Balance: 96161000
+==========================================================
+          File name: Log_149.txt
+                Run: 66
+           ThreadID: 149
+ Deposit Iterations: 6466
+Withdraw Iterations: 3447
+      Final Balance: 177783000
+   Expected Balance: 177783000
+==========================================================
+          File name: Log_149.txt
+                Run: 67
+           ThreadID: 149
+ Deposit Iterations: 473
+Withdraw Iterations: 1335
+      Final Balance: 376139000
+   Expected Balance: 4465178296
+==========================================================
+          File name: Log_149.txt
+                Run: 68
+           ThreadID: 149
+ Deposit Iterations: 5022
+Withdraw Iterations: 1255
+      Final Balance: 136953000
+   Expected Balance: 136953000
+==========================================================
+          File name: Log_149.txt
+                Run: 69
+           ThreadID: 149
+ Deposit Iterations: 5447
+Withdraw Iterations: 1933
+      Final Balance: 463242000
+   Expected Balance: 178905000
+==========================================================
+          File name: Log_149.txt
+                Run: 70
+           ThreadID: 149
+ Deposit Iterations: 2315
+Withdraw Iterations: 61
+      Final Balance: 135159000
+   Expected Balance: 135159000
+==========================================================
+          File name: Log_149.txt
+                Run: 71
+           ThreadID: 149
+ Deposit Iterations: 3642
+Withdraw Iterations: 1011
+      Final Balance: 424824000
+   Expected Balance: 159736000
+==========================================================
+          File name: Log_149.txt
+                Run: 72
+           ThreadID: 149
+ Deposit Iterations: 2056
+Withdraw Iterations: 1934
+      Final Balance: 172737000
+   Expected Balance: 172737000
+==========================================================
+          File name: Log_149.txt
+                Run: 73
+           ThreadID: 149
+ Deposit Iterations: 2070
+Withdraw Iterations: 1042
+      Final Balance: 408538000
+   Expected Balance: 124313000
+==========================================================
+          File name: Log_149.txt
+                Run: 74
+           ThreadID: 149
+ Deposit Iterations: 4101
+Withdraw Iterations: 433
+      Final Balance: 169073000
+   Expected Balance: 169073000
+==========================================================
+          File name: Log_149.txt
+                Run: 75
+           ThreadID: 149
+ Deposit Iterations: 2574
+Withdraw Iterations: 2047
+      Final Balance: 91974000
+   Expected Balance: 91974000
+==========================================================
+          File name: Log_149.txt
+                Run: 76
+           ThreadID: 149
+ Deposit Iterations: 906
+Withdraw Iterations: 2071
+      Final Balance: 448493000
+   Expected Balance: 4440912296
+==========================================================
+          File name: Log_149.txt
+                Run: 77
+           ThreadID: 149
+ Deposit Iterations: 2062
+Withdraw Iterations: 155
+      Final Balance: 435940000
+   Expected Balance: 209977000
+==========================================================
+          File name: Log_149.txt
+                Run: 78
+           ThreadID: 149
+ Deposit Iterations: 131
+Withdraw Iterations: 1651
+      Final Balance: 131684000
+   Expected Balance: 4426651296
+==========================================================
+          File name: Log_149.txt
+                Run: 79
+           ThreadID: 149
+ Deposit Iterations: 690
+Withdraw Iterations: 1325
+      Final Balance: 118495000
+   Expected Balance: 4413462296
+==========================================================
+          File name: Log_149.txt
+                Run: 80
+           ThreadID: 149
+ Deposit Iterations: 5100
+Withdraw Iterations: 628
+      Final Balance: 486990000
+   Expected Balance: 190404000
+==========================================================
+          File name: Log_149.txt
+                Run: 81
+           ThreadID: 149
+ Deposit Iterations: 3213
+Withdraw Iterations: 2207
+      Final Balance: 390179000
+   Expected Balance: 106125000
+==========================================================
+          File name: Log_149.txt
+                Run: 82
+           ThreadID: 149
+ Deposit Iterations: 2631
+Withdraw Iterations: 2046
+      Final Balance: 179861000
+   Expected Balance: 179861000
+==========================================================
+          File name: Log_149.txt
+                Run: 83
+           ThreadID: 149
+ Deposit Iterations: 4640
+Withdraw Iterations: 625
+      Final Balance: 433116000
+   Expected Balance: 167980000
+==========================================================
+          File name: Log_149.txt
+                Run: 84
+           ThreadID: 149
+ Deposit Iterations: 4764
+Withdraw Iterations: 696
+      Final Balance: 157709000
+   Expected Balance: 157709000
+==========================================================
+          File name: Log_149.txt
+                Run: 85
+           ThreadID: 149
+ Deposit Iterations: 8109
+Withdraw Iterations: 938
+      Final Balance: 424541000
+   Expected Balance: 136757000
+==========================================================
+          File name: Log_149.txt
+                Run: 86
+           ThreadID: 149
+ Deposit Iterations: 639
+Withdraw Iterations: 2415
+      Final Balance: 366112000
+   Expected Balance: 4443660296
+==========================================================
+          File name: Log_149.txt
+                Run: 87
+           ThreadID: 149
+ Deposit Iterations: 3711
+Withdraw Iterations: 3906
+      Final Balance: 167438000
+   Expected Balance: 4462405296
+==========================================================
+          File name: Log_149.txt
+                Run: 88
+           ThreadID: 149
+ Deposit Iterations: 4885
+Withdraw Iterations: 877
+      Final Balance: 452144000
+   Expected Balance: 170671000
+==========================================================
+          File name: Log_149.txt
+                Run: 89
+           ThreadID: 149
+ Deposit Iterations: 4132
+Withdraw Iterations: 3848
+      Final Balance: 119417000
+   Expected Balance: 119417000
+==========================================================
+          File name: Log_149.txt
+                Run: 90
+           ThreadID: 149
+ Deposit Iterations: 4253
+Withdraw Iterations: 888
+      Final Balance: 153624000
+   Expected Balance: 153624000
+==========================================================
+          File name: Log_149.txt
+                Run: 91
+           ThreadID: 149
+ Deposit Iterations: 5983
+Withdraw Iterations: 3027
+      Final Balance: 469074000
+   Expected Balance: 161616000
+==========================================================
+          File name: Log_149.txt
+                Run: 92
+           ThreadID: 149
+ Deposit Iterations: 2671
+Withdraw Iterations: 2261
+      Final Balance: 139221000
+   Expected Balance: 139221000
+==========================================================
+          File name: Log_149.txt
+                Run: 93
+           ThreadID: 149
+ Deposit Iterations: 353
+Withdraw Iterations: 496
+      Final Balance: 144453000
+   Expected Balance: 4439420296
+==========================================================
+          File name: Log_149.txt
+                Run: 94
+           ThreadID: 149
+ Deposit Iterations: 7360
+Withdraw Iterations: 3340
+      Final Balance: 419069000
+   Expected Balance: 182721000
+==========================================================
+          File name: Log_149.txt
+                Run: 95
+           ThreadID: 149
+ Deposit Iterations: 3829
+Withdraw Iterations: 1724
+      Final Balance: 164608000
+   Expected Balance: 164608000
+==========================================================
+          File name: Log_149.txt
+                Run: 96
+           ThreadID: 149
+ Deposit Iterations: 820
+Withdraw Iterations: 2296
+      Final Balance: 148863000
+   Expected Balance: 4443830296
+==========================================================
+          File name: Log_149.txt
+                Run: 97
+           ThreadID: 149
+ Deposit Iterations: 2428
+Withdraw Iterations: 3641
+      Final Balance: 123868000
+   Expected Balance: 4418835296
+==========================================================
+          File name: Log_149.txt
+                Run: 98
+           ThreadID: 149
+ Deposit Iterations: 3712
+Withdraw Iterations: 1259
+      Final Balance: 135290000
+   Expected Balance: 135290000
+==========================================================
+          File name: Log_149.txt
+                Run: 99
+           ThreadID: 149
+ Deposit Iterations: 3993
+Withdraw Iterations: 590
+      Final Balance: 351220000
+   Expected Balance: 132895000

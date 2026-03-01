@@ -1,0 +1,801 @@
+
+==========================================================
+          File name: Log_196.txt
+                Run: 0
+           ThreadID: 196
+ Deposit Iterations: 6312
+Withdraw Iterations: 2304
+      Final Balance: 172230000
+   Expected Balance: 172230000
+==========================================================
+          File name: Log_196.txt
+                Run: 1
+           ThreadID: 196
+ Deposit Iterations: 5287
+Withdraw Iterations: 3565
+      Final Balance: 251163000
+   Expected Balance: 251163000
+==========================================================
+          File name: Log_196.txt
+                Run: 2
+           ThreadID: 196
+ Deposit Iterations: 3641
+Withdraw Iterations: 2510
+      Final Balance: 437664000
+   Expected Balance: 176184000
+==========================================================
+          File name: Log_196.txt
+                Run: 3
+           ThreadID: 196
+ Deposit Iterations: 6828
+Withdraw Iterations: 2251
+      Final Balance: 434442000
+   Expected Balance: 185220000
+==========================================================
+          File name: Log_196.txt
+                Run: 4
+           ThreadID: 196
+ Deposit Iterations: 5154
+Withdraw Iterations: 69
+      Final Balance: 246207000
+   Expected Balance: 246207000
+==========================================================
+          File name: Log_196.txt
+                Run: 5
+           ThreadID: 196
+ Deposit Iterations: 1636
+Withdraw Iterations: 1135
+      Final Balance: 203899000
+   Expected Balance: 203899000
+==========================================================
+          File name: Log_196.txt
+                Run: 6
+           ThreadID: 196
+ Deposit Iterations: 7664
+Withdraw Iterations: 997
+      Final Balance: 219601000
+   Expected Balance: 219601000
+==========================================================
+          File name: Log_196.txt
+                Run: 7
+           ThreadID: 196
+ Deposit Iterations: 3882
+Withdraw Iterations: 2726
+      Final Balance: 211006000
+   Expected Balance: 211006000
+==========================================================
+          File name: Log_196.txt
+                Run: 8
+           ThreadID: 196
+ Deposit Iterations: 6399
+Withdraw Iterations: 50
+      Final Balance: 5440000
+   Expected Balance: 5440000
+==========================================================
+          File name: Log_196.txt
+                Run: 9
+           ThreadID: 196
+ Deposit Iterations: 3268
+Withdraw Iterations: 3601
+      Final Balance: 486561000
+   Expected Balance: 4491032296
+==========================================================
+          File name: Log_196.txt
+                Run: 10
+           ThreadID: 196
+ Deposit Iterations: 5776
+Withdraw Iterations: 2543
+      Final Balance: 184758000
+   Expected Balance: 184758000
+==========================================================
+          File name: Log_196.txt
+                Run: 11
+           ThreadID: 196
+ Deposit Iterations: 287
+Withdraw Iterations: 2899
+      Final Balance: 380528000
+   Expected Balance: 4477673296
+==========================================================
+          File name: Log_196.txt
+                Run: 12
+           ThreadID: 196
+ Deposit Iterations: 666
+Withdraw Iterations: 745
+      Final Balance: 527664000
+   Expected Balance: 4530076296
+==========================================================
+          File name: Log_196.txt
+                Run: 13
+           ThreadID: 196
+ Deposit Iterations: 4613
+Withdraw Iterations: 1594
+      Final Balance: 515676000
+   Expected Balance: 213715000
+==========================================================
+          File name: Log_196.txt
+                Run: 14
+           ThreadID: 196
+ Deposit Iterations: 7991
+Withdraw Iterations: 3603
+      Final Balance: 177956000
+   Expected Balance: 177956000
+==========================================================
+          File name: Log_196.txt
+                Run: 15
+           ThreadID: 196
+ Deposit Iterations: 3629
+Withdraw Iterations: 745
+      Final Balance: 466164000
+   Expected Balance: 212570000
+==========================================================
+          File name: Log_196.txt
+                Run: 16
+           ThreadID: 196
+ Deposit Iterations: 1485
+Withdraw Iterations: 252
+      Final Balance: 452359000
+   Expected Balance: 209497000
+==========================================================
+          File name: Log_196.txt
+                Run: 17
+           ThreadID: 196
+ Deposit Iterations: 2718
+Withdraw Iterations: 3255
+      Final Balance: 477513000
+   Expected Balance: 4457090296
+==========================================================
+          File name: Log_196.txt
+                Run: 18
+           ThreadID: 196
+ Deposit Iterations: 2554
+Withdraw Iterations: 697
+      Final Balance: 434246000
+   Expected Balance: 203635000
+==========================================================
+          File name: Log_196.txt
+                Run: 19
+           ThreadID: 196
+ Deposit Iterations: 6472
+Withdraw Iterations: 164
+      Final Balance: 206407000
+   Expected Balance: 206407000
+==========================================================
+          File name: Log_196.txt
+                Run: 20
+           ThreadID: 196
+ Deposit Iterations: 2567
+Withdraw Iterations: 124
+      Final Balance: 426795000
+   Expected Balance: 145220000
+==========================================================
+          File name: Log_196.txt
+                Run: 21
+           ThreadID: 196
+ Deposit Iterations: 5994
+Withdraw Iterations: 1040
+      Final Balance: 179946000
+   Expected Balance: 179946000
+==========================================================
+          File name: Log_196.txt
+                Run: 22
+           ThreadID: 196
+ Deposit Iterations: 1636
+Withdraw Iterations: 1177
+      Final Balance: 419708000
+   Expected Balance: 224139000
+==========================================================
+          File name: Log_196.txt
+                Run: 23
+           ThreadID: 196
+ Deposit Iterations: 3673
+Withdraw Iterations: 942
+      Final Balance: 7916000
+   Expected Balance: 7916000
+==========================================================
+          File name: Log_196.txt
+                Run: 24
+           ThreadID: 196
+ Deposit Iterations: 3034
+Withdraw Iterations: 3570
+      Final Balance: 542640000
+   Expected Balance: 4540373296
+==========================================================
+          File name: Log_196.txt
+                Run: 25
+           ThreadID: 196
+ Deposit Iterations: 3782
+Withdraw Iterations: 2969
+      Final Balance: 229812000
+   Expected Balance: 229812000
+==========================================================
+          File name: Log_196.txt
+                Run: 26
+           ThreadID: 196
+ Deposit Iterations: 6538
+Withdraw Iterations: 1134
+      Final Balance: 508204000
+   Expected Balance: 258453000
+==========================================================
+          File name: Log_196.txt
+                Run: 27
+           ThreadID: 196
+ Deposit Iterations: 4542
+Withdraw Iterations: 2584
+      Final Balance: 170826000
+   Expected Balance: 170826000
+==========================================================
+          File name: Log_196.txt
+                Run: 28
+           ThreadID: 196
+ Deposit Iterations: 7352
+Withdraw Iterations: 3378
+      Final Balance: 497017000
+   Expected Balance: 203425000
+==========================================================
+          File name: Log_196.txt
+                Run: 29
+           ThreadID: 196
+ Deposit Iterations: 4146
+Withdraw Iterations: 1676
+      Final Balance: 225487000
+   Expected Balance: 225487000
+==========================================================
+          File name: Log_196.txt
+                Run: 30
+           ThreadID: 196
+ Deposit Iterations: 5940
+Withdraw Iterations: 2739
+      Final Balance: 211647000
+   Expected Balance: 211647000
+==========================================================
+          File name: Log_196.txt
+                Run: 31
+           ThreadID: 196
+ Deposit Iterations: 7163
+Withdraw Iterations: 337
+      Final Balance: 434553000
+   Expected Balance: 218645000
+==========================================================
+          File name: Log_196.txt
+                Run: 32
+           ThreadID: 196
+ Deposit Iterations: 2484
+Withdraw Iterations: 1454
+      Final Balance: 137264000
+   Expected Balance: 137264000
+==========================================================
+          File name: Log_196.txt
+                Run: 33
+           ThreadID: 196
+ Deposit Iterations: 4767
+Withdraw Iterations: 1080
+      Final Balance: 259884000
+   Expected Balance: 259884000
+==========================================================
+          File name: Log_196.txt
+                Run: 34
+           ThreadID: 196
+ Deposit Iterations: 7257
+Withdraw Iterations: 200
+      Final Balance: 495455000
+   Expected Balance: 229169000
+==========================================================
+          File name: Log_196.txt
+                Run: 35
+           ThreadID: 196
+ Deposit Iterations: 4329
+Withdraw Iterations: 2844
+      Final Balance: 165334000
+   Expected Balance: 165334000
+==========================================================
+          File name: Log_196.txt
+                Run: 36
+           ThreadID: 196
+ Deposit Iterations: 923
+Withdraw Iterations: 1910
+      Final Balance: 412162000
+   Expected Balance: 4532929296
+==========================================================
+          File name: Log_196.txt
+                Run: 37
+           ThreadID: 196
+ Deposit Iterations: 204
+Withdraw Iterations: 1573
+      Final Balance: 395761000
+   Expected Balance: 4472694296
+==========================================================
+          File name: Log_196.txt
+                Run: 38
+           ThreadID: 196
+ Deposit Iterations: 3695
+Withdraw Iterations: 3082
+      Final Balance: 466587000
+   Expected Balance: 173404000
+==========================================================
+          File name: Log_196.txt
+                Run: 39
+           ThreadID: 196
+ Deposit Iterations: 4951
+Withdraw Iterations: 3749
+      Final Balance: 475151000
+   Expected Balance: 150265000
+==========================================================
+          File name: Log_196.txt
+                Run: 40
+           ThreadID: 196
+ Deposit Iterations: 1311
+Withdraw Iterations: 3110
+      Final Balance: 384055000
+   Expected Balance: 4453793296
+==========================================================
+          File name: Log_196.txt
+                Run: 41
+           ThreadID: 196
+ Deposit Iterations: 6744
+Withdraw Iterations: 2847
+      Final Balance: 534168000
+   Expected Balance: 219068000
+==========================================================
+          File name: Log_196.txt
+                Run: 42
+           ThreadID: 196
+ Deposit Iterations: 1459
+Withdraw Iterations: 1407
+      Final Balance: 224298000
+   Expected Balance: 224298000
+==========================================================
+          File name: Log_196.txt
+                Run: 43
+           ThreadID: 196
+ Deposit Iterations: 6452
+Withdraw Iterations: 1315
+      Final Balance: 504084000
+   Expected Balance: 273499000
+==========================================================
+          File name: Log_196.txt
+                Run: 44
+           ThreadID: 196
+ Deposit Iterations: 2882
+Withdraw Iterations: 1111
+      Final Balance: 409932000
+   Expected Balance: 187156000
+==========================================================
+          File name: Log_196.txt
+                Run: 45
+           ThreadID: 196
+ Deposit Iterations: 1816
+Withdraw Iterations: 3202
+      Final Balance: 456066000
+   Expected Balance: 4507118296
+==========================================================
+          File name: Log_196.txt
+                Run: 46
+           ThreadID: 196
+ Deposit Iterations: 7486
+Withdraw Iterations: 1086
+      Final Balance: 207583000
+   Expected Balance: 207583000
+==========================================================
+          File name: Log_196.txt
+                Run: 47
+           ThreadID: 196
+ Deposit Iterations: 5065
+Withdraw Iterations: 2874
+      Final Balance: 521731000
+   Expected Balance: 221255000
+==========================================================
+          File name: Log_196.txt
+                Run: 48
+           ThreadID: 196
+ Deposit Iterations: 1594
+Withdraw Iterations: 3446
+      Final Balance: 189404000
+   Expected Balance: 4484371296
+==========================================================
+          File name: Log_196.txt
+                Run: 49
+           ThreadID: 196
+ Deposit Iterations: 2902
+Withdraw Iterations: 2601
+      Final Balance: 399934000
+   Expected Balance: 190098000
+==========================================================
+          File name: Log_196.txt
+                Run: 50
+           ThreadID: 196
+ Deposit Iterations: 3067
+Withdraw Iterations: 2932
+      Final Balance: 224285000
+   Expected Balance: 224285000
+==========================================================
+          File name: Log_196.txt
+                Run: 51
+           ThreadID: 196
+ Deposit Iterations: 2905
+Withdraw Iterations: 2632
+      Final Balance: 196031000
+   Expected Balance: 196031000
+==========================================================
+          File name: Log_196.txt
+                Run: 52
+           ThreadID: 196
+ Deposit Iterations: 6092
+Withdraw Iterations: 2031
+      Final Balance: 449967000
+   Expected Balance: 179994000
+==========================================================
+          File name: Log_196.txt
+                Run: 53
+           ThreadID: 196
+ Deposit Iterations: 6235
+Withdraw Iterations: 926
+      Final Balance: 176289000
+   Expected Balance: 176289000
+==========================================================
+          File name: Log_196.txt
+                Run: 54
+           ThreadID: 196
+ Deposit Iterations: 798
+Withdraw Iterations: 903
+      Final Balance: 184850000
+   Expected Balance: 4479817296
+==========================================================
+          File name: Log_196.txt
+                Run: 55
+           ThreadID: 196
+ Deposit Iterations: 2209
+Withdraw Iterations: 1221
+      Final Balance: 184438000
+   Expected Balance: 184438000
+==========================================================
+          File name: Log_196.txt
+                Run: 56
+           ThreadID: 196
+ Deposit Iterations: 8104
+Withdraw Iterations: 459
+      Final Balance: 189567000
+   Expected Balance: 189567000
+==========================================================
+          File name: Log_196.txt
+                Run: 57
+           ThreadID: 196
+ Deposit Iterations: 2082
+Withdraw Iterations: 3317
+      Final Balance: 245153000
+   Expected Balance: 4540120296
+==========================================================
+          File name: Log_196.txt
+                Run: 58
+           ThreadID: 196
+ Deposit Iterations: 7174
+Withdraw Iterations: 3939
+      Final Balance: 228153000
+   Expected Balance: 228153000
+==========================================================
+          File name: Log_196.txt
+                Run: 59
+           ThreadID: 196
+ Deposit Iterations: 373
+Withdraw Iterations: 3891
+      Final Balance: 225982000
+   Expected Balance: 4520949296
+==========================================================
+          File name: Log_196.txt
+                Run: 60
+           ThreadID: 196
+ Deposit Iterations: 4258
+Withdraw Iterations: 903
+      Final Balance: 453027000
+   Expected Balance: 243667000
+==========================================================
+          File name: Log_196.txt
+                Run: 61
+           ThreadID: 196
+ Deposit Iterations: 639
+Withdraw Iterations: 3187
+      Final Balance: 160741000
+   Expected Balance: 4455708296
+==========================================================
+          File name: Log_196.txt
+                Run: 62
+           ThreadID: 196
+ Deposit Iterations: 1993
+Withdraw Iterations: 1564
+      Final Balance: 495500000
+   Expected Balance: 203621000
+==========================================================
+          File name: Log_196.txt
+                Run: 63
+           ThreadID: 196
+ Deposit Iterations: 4516
+Withdraw Iterations: 2771
+      Final Balance: 538355000
+   Expected Balance: 221779000
+==========================================================
+          File name: Log_196.txt
+                Run: 64
+           ThreadID: 196
+ Deposit Iterations: 2678
+Withdraw Iterations: 1845
+      Final Balance: 450733000
+   Expected Balance: 177502000
+==========================================================
+          File name: Log_196.txt
+                Run: 65
+           ThreadID: 196
+ Deposit Iterations: 5384
+Withdraw Iterations: 1062
+      Final Balance: 375330000
+   Expected Balance: 131541000
+==========================================================
+          File name: Log_196.txt
+                Run: 66
+           ThreadID: 196
+ Deposit Iterations: 6779
+Withdraw Iterations: 2567
+      Final Balance: 241496000
+   Expected Balance: 241496000
+==========================================================
+          File name: Log_196.txt
+                Run: 67
+           ThreadID: 196
+ Deposit Iterations: 1885
+Withdraw Iterations: 385
+      Final Balance: 414062000
+   Expected Balance: 226411000
+==========================================================
+          File name: Log_196.txt
+                Run: 68
+           ThreadID: 196
+ Deposit Iterations: 721
+Withdraw Iterations: 1340
+      Final Balance: 392914000
+   Expected Balance: 4448187296
+==========================================================
+          File name: Log_196.txt
+                Run: 69
+           ThreadID: 196
+ Deposit Iterations: 6467
+Withdraw Iterations: 3222
+      Final Balance: 505420000
+   Expected Balance: 226262000
+==========================================================
+          File name: Log_196.txt
+                Run: 70
+           ThreadID: 196
+ Deposit Iterations: 2529
+Withdraw Iterations: 2552
+      Final Balance: 410578000
+   Expected Balance: 4456194296
+==========================================================
+          File name: Log_196.txt
+                Run: 71
+           ThreadID: 196
+ Deposit Iterations: 6274
+Withdraw Iterations: 915
+      Final Balance: 209116000
+   Expected Balance: 209116000
+==========================================================
+          File name: Log_196.txt
+                Run: 72
+           ThreadID: 196
+ Deposit Iterations: 5872
+Withdraw Iterations: 1862
+      Final Balance: 228195000
+   Expected Balance: 228195000
+==========================================================
+          File name: Log_196.txt
+                Run: 73
+           ThreadID: 196
+ Deposit Iterations: 4571
+Withdraw Iterations: 3919
+      Final Balance: 192511000
+   Expected Balance: 192511000
+==========================================================
+          File name: Log_196.txt
+                Run: 74
+           ThreadID: 196
+ Deposit Iterations: 5929
+Withdraw Iterations: 323
+      Final Balance: 492991000
+   Expected Balance: 222197000
+==========================================================
+          File name: Log_196.txt
+                Run: 75
+           ThreadID: 196
+ Deposit Iterations: 4019
+Withdraw Iterations: 2684
+      Final Balance: 152688000
+   Expected Balance: 152688000
+==========================================================
+          File name: Log_196.txt
+                Run: 76
+           ThreadID: 196
+ Deposit Iterations: 1216
+Withdraw Iterations: 3142
+      Final Balance: 227624000
+   Expected Balance: 4522591296
+==========================================================
+          File name: Log_196.txt
+                Run: 77
+           ThreadID: 196
+ Deposit Iterations: 741
+Withdraw Iterations: 2656
+      Final Balance: 504404000
+   Expected Balance: 4564539296
+==========================================================
+          File name: Log_196.txt
+                Run: 78
+           ThreadID: 196
+ Deposit Iterations: 1417
+Withdraw Iterations: 3099
+      Final Balance: 451447000
+   Expected Balance: 4475073296
+==========================================================
+          File name: Log_196.txt
+                Run: 79
+           ThreadID: 196
+ Deposit Iterations: 4455
+Withdraw Iterations: 2784
+      Final Balance: 161064000
+   Expected Balance: 161064000
+==========================================================
+          File name: Log_196.txt
+                Run: 80
+           ThreadID: 196
+ Deposit Iterations: 1660
+Withdraw Iterations: 3774
+      Final Balance: 237562000
+   Expected Balance: 4532529296
+==========================================================
+          File name: Log_196.txt
+                Run: 81
+           ThreadID: 196
+ Deposit Iterations: 3471
+Withdraw Iterations: 1718
+      Final Balance: 147541000
+   Expected Balance: 147541000
+==========================================================
+          File name: Log_196.txt
+                Run: 82
+           ThreadID: 196
+ Deposit Iterations: 1132
+Withdraw Iterations: 3966
+      Final Balance: 221963000
+   Expected Balance: 4516930296
+==========================================================
+          File name: Log_196.txt
+                Run: 83
+           ThreadID: 196
+ Deposit Iterations: 6267
+Withdraw Iterations: 346
+      Final Balance: 213616000
+   Expected Balance: 213616000
+==========================================================
+          File name: Log_196.txt
+                Run: 84
+           ThreadID: 196
+ Deposit Iterations: 1279
+Withdraw Iterations: 543
+      Final Balance: 467293000
+   Expected Balance: 179384000
+==========================================================
+          File name: Log_196.txt
+                Run: 85
+           ThreadID: 196
+ Deposit Iterations: 3873
+Withdraw Iterations: 3162
+      Final Balance: 446055000
+   Expected Balance: 167681000
+==========================================================
+          File name: Log_196.txt
+                Run: 86
+           ThreadID: 196
+ Deposit Iterations: 818
+Withdraw Iterations: 3554
+      Final Balance: 192408000
+   Expected Balance: 4487375296
+==========================================================
+          File name: Log_196.txt
+                Run: 87
+           ThreadID: 196
+ Deposit Iterations: 7647
+Withdraw Iterations: 3457
+      Final Balance: 220759000
+   Expected Balance: 220759000
+==========================================================
+          File name: Log_196.txt
+                Run: 88
+           ThreadID: 196
+ Deposit Iterations: 3850
+Withdraw Iterations: 2647
+      Final Balance: 467574000
+   Expected Balance: 225227000
+==========================================================
+          File name: Log_196.txt
+                Run: 89
+           ThreadID: 196
+ Deposit Iterations: 1682
+Withdraw Iterations: 1479
+      Final Balance: 434467000
+   Expected Balance: 176453000
+==========================================================
+          File name: Log_196.txt
+                Run: 90
+           ThreadID: 196
+ Deposit Iterations: 5753
+Withdraw Iterations: 1516
+      Final Balance: 182401000
+   Expected Balance: 182401000
+==========================================================
+          File name: Log_196.txt
+                Run: 91
+           ThreadID: 196
+ Deposit Iterations: 7269
+Withdraw Iterations: 3769
+      Final Balance: 226083000
+   Expected Balance: 226083000
+==========================================================
+          File name: Log_196.txt
+                Run: 92
+           ThreadID: 196
+ Deposit Iterations: 7233
+Withdraw Iterations: 879
+      Final Balance: 454728000
+   Expected Balance: 185136000
+==========================================================
+          File name: Log_196.txt
+                Run: 93
+           ThreadID: 196
+ Deposit Iterations: 447
+Withdraw Iterations: 3234
+      Final Balance: 411120000
+   Expected Balance: 4492794296
+==========================================================
+          File name: Log_196.txt
+                Run: 94
+           ThreadID: 196
+ Deposit Iterations: 3464
+Withdraw Iterations: 4037
+      Final Balance: 479063000
+   Expected Balance: 4526526296
+==========================================================
+          File name: Log_196.txt
+                Run: 95
+           ThreadID: 196
+ Deposit Iterations: 728
+Withdraw Iterations: 2317
+      Final Balance: 478310000
+   Expected Balance: 4505358296
+==========================================================
+          File name: Log_196.txt
+                Run: 96
+           ThreadID: 196
+ Deposit Iterations: 7661
+Withdraw Iterations: 3216
+      Final Balance: 414012000
+   Expected Balance: 211348000
+==========================================================
+          File name: Log_196.txt
+                Run: 97
+           ThreadID: 196
+ Deposit Iterations: 3267
+Withdraw Iterations: 934
+      Final Balance: 189793000
+   Expected Balance: 189793000
+==========================================================
+          File name: Log_196.txt
+                Run: 98
+           ThreadID: 196
+ Deposit Iterations: 4947
+Withdraw Iterations: 519
+      Final Balance: 174188000
+   Expected Balance: 174188000
+==========================================================
+          File name: Log_196.txt
+                Run: 99
+           ThreadID: 196
+ Deposit Iterations: 835
+Withdraw Iterations: 1672
+      Final Balance: 177483000
+   Expected Balance: 4472450296

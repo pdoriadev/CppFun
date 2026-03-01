@@ -3,3499 +3,799 @@
           File name: Log_84.txt
                 Run: 0
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10122000
-Balance: $10123000
-Balance: $10124000
-Balance: $10125000
-Balance: $10126000
-Balance: $10127000
-Balance: $10126000
-Balance: $10125000
-Balance: $10124000
-Balance: $10123000
-Balance: $10122000
-Balance: $10121000
-Balance: $10120000
-Balance: $10119000
-Balance: $10118000
-Balance: $10117000
-Balance: $10116000
-Balance: $10115000
-Balance: $10114000
-Balance: $10113000
-Balance: $10112000
-Balance: $10111000
-Balance: $10110000
-Balance: $10109000
-Balance: $10108000
-Balance: $10107000
-Balance: $10106000
-      Final Balance: 10106000
-   Expected Balance: 4305126296
+ Deposit Iterations: 4834
+Withdraw Iterations: 115
+      Final Balance: 304207000
+   Expected Balance: 96028000
 ==========================================================
           File name: Log_84.txt
                 Run: 1
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10036000
-Balance: $10037000
-Balance: $10038000
-Balance: $10039000
-Balance: $10040000
-Balance: $10041000
-Balance: $10040000
-Balance: $10039000
-Balance: $10038000
-Balance: $10037000
-Balance: $10036000
-Balance: $10035000
-Balance: $10034000
-Balance: $10033000
-Balance: $10032000
-Balance: $10031000
-Balance: $10030000
-Balance: $10029000
-Balance: $10171000
-Balance: $10170000
-Balance: $10169000
-Balance: $10168000
-Balance: $10167000
-Balance: $10166000
-Balance: $10165000
-Balance: $10164000
-Balance: $10163000
-      Final Balance: 10163000
-   Expected Balance: 4304847296
+ Deposit Iterations: 4607
+Withdraw Iterations: 329
+      Final Balance: 110352000
+   Expected Balance: 110352000
 ==========================================================
           File name: Log_84.txt
                 Run: 2
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10240000
-Balance: $10241000
-Balance: $10242000
-Balance: $10243000
-Balance: $10244000
-Balance: $10245000
-Balance: $10244000
-Balance: $10243000
-Balance: $10242000
-Balance: $10241000
-Balance: $10240000
-Balance: $10239000
-Balance: $10238000
-Balance: $10237000
-Balance: $10236000
-Balance: $10235000
-Balance: $10234000
-Balance: $10233000
-Balance: $10339000
-Balance: $10338000
-Balance: $10337000
-Balance: $10336000
-Balance: $10335000
-Balance: $10334000
-Balance: $10333000
-Balance: $10332000
-Balance: $10331000
-      Final Balance: 10331000
-   Expected Balance: 4305029296
+ Deposit Iterations: 5790
+Withdraw Iterations: 2952
+      Final Balance: 324453000
+   Expected Balance: 41649000
 ==========================================================
           File name: Log_84.txt
                 Run: 3
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10084000
-Balance: $10085000
-Balance: $10086000
-Balance: $10087000
-Balance: $10088000
-Balance: $10089000
-Balance: $10088000
-Balance: $10087000
-Balance: $10086000
-Balance: $10085000
-Balance: $10084000
-Balance: $10083000
-Balance: $10082000
-Balance: $10081000
-Balance: $10080000
-Balance: $10079000
-Balance: $10078000
-Balance: $10077000
-Balance: $10210000
-Balance: $10209000
-Balance: $10208000
-Balance: $10207000
-Balance: $10206000
-Balance: $10205000
-Balance: $10204000
-Balance: $10203000
-Balance: $10202000
-      Final Balance: 10202000
-   Expected Balance: 4304897296
+ Deposit Iterations: 5478
+Withdraw Iterations: 3807
+      Final Balance: 99711000
+   Expected Balance: 99711000
 ==========================================================
           File name: Log_84.txt
                 Run: 4
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10220000
-Balance: $10221000
-Balance: $10222000
-Balance: $10223000
-Balance: $10224000
-Balance: $10225000
-Balance: $10224000
-Balance: $10223000
-Balance: $10222000
-Balance: $10221000
-Balance: $10220000
-Balance: $10219000
-Balance: $10218000
-Balance: $10217000
-Balance: $10216000
-Balance: $10215000
-Balance: $10214000
-Balance: $10213000
-Balance: $10316000
-Balance: $10315000
-Balance: $10314000
-Balance: $10313000
-Balance: $10312000
-Balance: $10311000
-Balance: $10310000
-Balance: $10309000
-Balance: $10308000
-      Final Balance: 10308000
-   Expected Balance: 4305084296
+ Deposit Iterations: 873
+Withdraw Iterations: 1922
+      Final Balance: 107765000
+   Expected Balance: 4402732296
 ==========================================================
           File name: Log_84.txt
                 Run: 5
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9991000
-Balance: $9992000
-Balance: $9993000
-Balance: $9994000
-Balance: $9995000
-Balance: $9997000
-Balance: $9996000
-Balance: $9996000
-Balance: $9995000
-Balance: $9995000
-Balance: $9995000
-Balance: $9994000
-Balance: $9995000
-Balance: $9994000
-Balance: $9994000
-Balance: $9993000
-Balance: $9993000
-Balance: $9992000
-Balance: $9992000
-Balance: $10081000
-Balance: $10080000
-Balance: $10079000
-Balance: $10078000
-Balance: $10077000
-Balance: $10076000
-Balance: $10075000
-Balance: $10074000
-      Final Balance: 10074000
-   Expected Balance: 4304764296
+ Deposit Iterations: 1886
+Withdraw Iterations: 3074
+      Final Balance: 381681000
+   Expected Balance: 4376591296
 ==========================================================
           File name: Log_84.txt
                 Run: 6
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10229000
-Balance: $10230000
-Balance: $10231000
-Balance: $10232000
-Balance: $10233000
-Balance: $10234000
-Balance: $10233000
-Balance: $10232000
-Balance: $10231000
-Balance: $10230000
-Balance: $10229000
-Balance: $10228000
-Balance: $10227000
-Balance: $10226000
-Balance: $10225000
-Balance: $10224000
-Balance: $10223000
-Balance: $10222000
-Balance: $10273000
-Balance: $10272000
-Balance: $10270000
-Balance: $10268000
-Balance: $10266000
-Balance: $10264000
-Balance: $10262000
-Balance: $10260000
-Balance: $10258000
-      Final Balance: 10257000
-   Expected Balance: 4305016296
+ Deposit Iterations: 4828
+Withdraw Iterations: 1371
+      Final Balance: 106657000
+   Expected Balance: 106657000
 ==========================================================
           File name: Log_84.txt
                 Run: 7
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10258000
-Balance: $10259000
-Balance: $10260000
-Balance: $10261000
-Balance: $10262000
-Balance: $10263000
-Balance: $10262000
-Balance: $10261000
-Balance: $10260000
-Balance: $10259000
-Balance: $10258000
-Balance: $10257000
-Balance: $10256000
-Balance: $10255000
-Balance: $10254000
-Balance: $10253000
-Balance: $10252000
-Balance: $10251000
-Balance: $10492000
-Balance: $10491000
-Balance: $10490000
-Balance: $10489000
-Balance: $10488000
-Balance: $10487000
-Balance: $10486000
-Balance: $10485000
-Balance: $10484000
-      Final Balance: 10484000
-   Expected Balance: 4305102296
+ Deposit Iterations: 1699
+Withdraw Iterations: 365
+      Final Balance: 341217000
+   Expected Balance: 120244000
 ==========================================================
           File name: Log_84.txt
                 Run: 8
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10017000
-Balance: $10018000
-Balance: $10019000
-Balance: $10020000
-Balance: $10021000
-Balance: $10022000
-Balance: $10021000
-Balance: $10020000
-Balance: $10019000
-Balance: $10018000
-Balance: $10017000
-Balance: $10016000
-Balance: $10015000
-Balance: $10014000
-Balance: $10013000
-Balance: $10012000
-Balance: $10011000
-Balance: $10010000
-Balance: $10171000
-Balance: $10170000
-Balance: $10169000
-Balance: $10168000
-Balance: $10167000
-Balance: $10166000
-Balance: $10165000
-Balance: $10164000
-Balance: $10163000
-      Final Balance: 10163000
-   Expected Balance: 4304903296
+ Deposit Iterations: 267
+Withdraw Iterations: 939
+      Final Balance: 367120000
+   Expected Balance: 4376604296
 ==========================================================
           File name: Log_84.txt
                 Run: 9
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10132000
-Balance: $10133000
-Balance: $10134000
-Balance: $10135000
-Balance: $10136000
-Balance: $10137000
-Balance: $10136000
-Balance: $10135000
-Balance: $10134000
-Balance: $10133000
-Balance: $10132000
-Balance: $10131000
-Balance: $10130000
-Balance: $10129000
-Balance: $10128000
-Balance: $10127000
-Balance: $10126000
-Balance: $10125000
-Balance: $10286000
-Balance: $10285000
-Balance: $10284000
-Balance: $10283000
-Balance: $10282000
-Balance: $10281000
-Balance: $10280000
-Balance: $10279000
-Balance: $10278000
-      Final Balance: 10278000
-   Expected Balance: 4305083296
+ Deposit Iterations: 4184
+Withdraw Iterations: 1709
+      Final Balance: 98925000
+   Expected Balance: 98925000
 ==========================================================
           File name: Log_84.txt
                 Run: 10
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9820000
-Balance: $9821000
-Balance: $9822000
-Balance: $9823000
-Balance: $9824000
-Balance: $9825000
-Balance: $9824000
-Balance: $9823000
-Balance: $9822000
-Balance: $9821000
-Balance: $9820000
-Balance: $9819000
-Balance: $9818000
-Balance: $9817000
-Balance: $9816000
-Balance: $9815000
-Balance: $9814000
-Balance: $9813000
-Balance: $9812000
-Balance: $9867000
-Balance: $9866000
-Balance: $9865000
-Balance: $9864000
-Balance: $9863000
-Balance: $9862000
-Balance: $9861000
-Balance: $9860000
-      Final Balance: 9860000
-   Expected Balance: 4304627296
+ Deposit Iterations: 4770
+Withdraw Iterations: 671
+      Final Balance: 364469000
+   Expected Balance: 97606000
 ==========================================================
           File name: Log_84.txt
                 Run: 11
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10396000
-Balance: $10397000
-Balance: $10398000
-Balance: $10399000
-Balance: $10400000
-Balance: $10401000
-Balance: $10400000
-Balance: $10399000
-Balance: $10398000
-Balance: $10397000
-Balance: $10396000
-Balance: $10395000
-Balance: $10394000
-Balance: $10393000
-Balance: $10392000
-Balance: $10391000
-Balance: $10390000
-Balance: $10389000
-Balance: $10388000
-Balance: $10387000
-Balance: $10386000
-Balance: $10385000
-Balance: $10384000
-Balance: $10383000
-Balance: $10382000
-Balance: $10381000
-Balance: $10380000
-      Final Balance: 10380000
-   Expected Balance: 4305187296
+ Deposit Iterations: 4155
+Withdraw Iterations: 516
+      Final Balance: 97861000
+   Expected Balance: 97861000
 ==========================================================
           File name: Log_84.txt
                 Run: 12
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10323000
-Balance: $10324000
-Balance: $10325000
-Balance: $10326000
-Balance: $10327000
-Balance: $10328000
-Balance: $10327000
-Balance: $10326000
-Balance: $10325000
-Balance: $10324000
-Balance: $10323000
-Balance: $10322000
-Balance: $10321000
-Balance: $10320000
-Balance: $10319000
-Balance: $10318000
-Balance: $10317000
-Balance: $10316000
-Balance: $10477000
-Balance: $10476000
-Balance: $10475000
-Balance: $10474000
-Balance: $10473000
-Balance: $10472000
-Balance: $10471000
-Balance: $10470000
-Balance: $10469000
-      Final Balance: 10469000
-   Expected Balance: 4305220296
+ Deposit Iterations: 2213
+Withdraw Iterations: 2522
+      Final Balance: 419289000
+   Expected Balance: 4401799296
 ==========================================================
           File name: Log_84.txt
                 Run: 13
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9944000
-Balance: $9945000
-Balance: $9946000
-Balance: $9947000
-Balance: $9949000
-Balance: $9950000
-Balance: $9950000
-Balance: $9949000
-Balance: $9948000
-Balance: $9948000
-Balance: $9947000
-Balance: $9948000
-Balance: $9947000
-Balance: $9947000
-Balance: $9948000
-Balance: $9949000
-Balance: $9950000
-Balance: $9951000
-Balance: $9952000
-Balance: $10044000
-Balance: $10043000
-Balance: $10042000
-Balance: $10041000
-Balance: $10040000
-Balance: $10039000
-Balance: $10038000
-Balance: $10037000
-      Final Balance: 10037000
-   Expected Balance: 4304793296
+ Deposit Iterations: 7788
+Withdraw Iterations: 2177
+      Final Balance: 388419000
+   Expected Balance: 112839000
 ==========================================================
           File name: Log_84.txt
                 Run: 14
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $480000
-Balance: $481000
-Balance: $482000
-Balance: $483000
-Balance: $484000
-Balance: $485000
-Balance: $484000
-Balance: $483000
-Balance: $482000
-Balance: $481000
-Balance: $480000
-Balance: $479000
-Balance: $478000
-Balance: $477000
-Balance: $476000
-Balance: $475000
-Balance: $474000
-Balance: $473000
-Balance: $472000
-Balance: $471000
-Balance: $500000
-Balance: $499000
-Balance: $498000
-Balance: $497000
-Balance: $496000
-Balance: $495000
-Balance: $494000
-      Final Balance: 494000
-   Expected Balance: 4295443296
+ Deposit Iterations: 410
+Withdraw Iterations: 722
+      Final Balance: 69766000
+   Expected Balance: 4364733296
 ==========================================================
           File name: Log_84.txt
                 Run: 15
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9950000
-Balance: $9951000
-Balance: $9952000
-Balance: $9953000
-Balance: $9954000
-Balance: $9955000
-Balance: $9954000
-Balance: $9953000
-Balance: $9952000
-Balance: $9951000
-Balance: $9950000
-Balance: $9949000
-Balance: $9948000
-Balance: $9947000
-Balance: $9946000
-Balance: $9945000
-Balance: $9944000
-Balance: $9943000
-Balance: $9942000
-Balance: $10150000
-Balance: $10145000
-Balance: $10143000
-Balance: $10141000
-Balance: $10139000
-Balance: $10138000
-Balance: $10136000
-Balance: $10134000
-      Final Balance: 10133000
-   Expected Balance: 4304732296
+ Deposit Iterations: 2495
+Withdraw Iterations: 3475
+      Final Balance: 117293000
+   Expected Balance: 4412260296
 ==========================================================
           File name: Log_84.txt
                 Run: 16
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10254000
-Balance: $10255000
-Balance: $10256000
-Balance: $10257000
-Balance: $10258000
-Balance: $10259000
-Balance: $10258000
-Balance: $10257000
-Balance: $10256000
-Balance: $10255000
-Balance: $10254000
-Balance: $10253000
-Balance: $10252000
-Balance: $10251000
-Balance: $10250000
-Balance: $10249000
-Balance: $10248000
-Balance: $10247000
-Balance: $10407000
-Balance: $10406000
-Balance: $10405000
-Balance: $10404000
-Balance: $10403000
-Balance: $10402000
-Balance: $10401000
-Balance: $10400000
-Balance: $10399000
-      Final Balance: 10399000
-   Expected Balance: 4305075296
+ Deposit Iterations: 6677
+Withdraw Iterations: 3364
+      Final Balance: 338972000
+   Expected Balance: 83188000
 ==========================================================
           File name: Log_84.txt
                 Run: 17
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9593000
-Balance: $9594000
-Balance: $9595000
-Balance: $9596000
-Balance: $9597000
-Balance: $9598000
-Balance: $9597000
-Balance: $9596000
-Balance: $9595000
-Balance: $9594000
-Balance: $9593000
-Balance: $9592000
-Balance: $9591000
-Balance: $9590000
-Balance: $9589000
-Balance: $9588000
-Balance: $9587000
-Balance: $9586000
-Balance: $9585000
-Balance: $9584000
-Balance: $9583000
-Balance: $9582000
-Balance: $9581000
-Balance: $9580000
-Balance: $9579000
-Balance: $9578000
-Balance: $9577000
-      Final Balance: 9577000
-   Expected Balance: 4304401296
+ Deposit Iterations: 2597
+Withdraw Iterations: 1607
+      Final Balance: 326582000
+   Expected Balance: 95047000
 ==========================================================
           File name: Log_84.txt
                 Run: 18
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10102000
-Balance: $10103000
-Balance: $10104000
-Balance: $10105000
-Balance: $10106000
-Balance: $10107000
-Balance: $10106000
-Balance: $10105000
-Balance: $10104000
-Balance: $10103000
-Balance: $10102000
-Balance: $10101000
-Balance: $10100000
-Balance: $10099000
-Balance: $10098000
-Balance: $10097000
-Balance: $10096000
-Balance: $10095000
-Balance: $10228000
-Balance: $10227000
-Balance: $10226000
-Balance: $10225000
-Balance: $10224000
-Balance: $10223000
-Balance: $10222000
-Balance: $10221000
-Balance: $10220000
-      Final Balance: 10220000
-   Expected Balance: 4305053296
+ Deposit Iterations: 3962
+Withdraw Iterations: 2884
+      Final Balance: 351683000
+   Expected Balance: 79112000
 ==========================================================
           File name: Log_84.txt
                 Run: 19
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9700000
-Balance: $9701000
-Balance: $9702000
-Balance: $9703000
-Balance: $9704000
-Balance: $9705000
-Balance: $9704000
-Balance: $9703000
-Balance: $9702000
-Balance: $9701000
-Balance: $9700000
-Balance: $9699000
-Balance: $9698000
-Balance: $9697000
-Balance: $9696000
-Balance: $9695000
-Balance: $9694000
-Balance: $9693000
-Balance: $9692000
-Balance: $9862000
-Balance: $9861000
-Balance: $9860000
-Balance: $9859000
-Balance: $9858000
-Balance: $9857000
-Balance: $9856000
-Balance: $9855000
-      Final Balance: 9855000
-   Expected Balance: 4304510296
+ Deposit Iterations: 4379
+Withdraw Iterations: 3023
+      Final Balance: 386401000
+   Expected Balance: 81091000
 ==========================================================
           File name: Log_84.txt
                 Run: 20
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9901000
-Balance: $9903000
-Balance: $9905000
-Balance: $9908000
-Balance: $9910000
-Balance: $9913000
-Balance: $9915000
-Balance: $9915000
-Balance: $9916000
-Balance: $9917000
-Balance: $9918000
-Balance: $9917000
-Balance: $9917000
-Balance: $9917000
-Balance: $9917000
-Balance: $9917000
-Balance: $9917000
-Balance: $9917000
-Balance: $9917000
-Balance: $10027000
-Balance: $10026000
-Balance: $10025000
-Balance: $10024000
-Balance: $10023000
-Balance: $10022000
-Balance: $10021000
-Balance: $10020000
-      Final Balance: 10020000
-   Expected Balance: 4304763296
+ Deposit Iterations: 3536
+Withdraw Iterations: 3600
+      Final Balance: 306574000
+   Expected Balance: 4360856296
 ==========================================================
           File name: Log_84.txt
                 Run: 21
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10300000
-Balance: $10301000
-Balance: $10302000
-Balance: $10303000
-Balance: $10304000
-Balance: $10305000
-Balance: $10304000
-Balance: $10303000
-Balance: $10302000
-Balance: $10301000
-Balance: $10300000
-Balance: $10299000
-Balance: $10298000
-Balance: $10297000
-Balance: $10296000
-Balance: $10295000
-Balance: $10294000
-Balance: $10293000
-Balance: $10426000
-Balance: $10425000
-Balance: $10424000
-Balance: $10423000
-Balance: $10422000
-Balance: $10421000
-Balance: $10420000
-Balance: $10419000
-Balance: $10418000
-      Final Balance: 10418000
-   Expected Balance: 4305210296
+ Deposit Iterations: 7368
+Withdraw Iterations: 1091
+      Final Balance: 338506000
+   Expected Balance: 92794000
 ==========================================================
           File name: Log_84.txt
                 Run: 22
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10486000
-Balance: $10487000
-Balance: $10488000
-Balance: $10489000
-Balance: $10490000
-Balance: $10491000
-Balance: $10490000
-Balance: $10489000
-Balance: $10488000
-Balance: $10487000
-Balance: $10486000
-Balance: $10485000
-Balance: $10484000
-Balance: $10483000
-Balance: $10482000
-Balance: $10481000
-Balance: $10480000
-Balance: $10479000
-Balance: $10639000
-Balance: $10638000
-Balance: $10637000
-Balance: $10636000
-Balance: $10635000
-Balance: $10634000
-Balance: $10633000
-Balance: $10632000
-Balance: $10631000
-      Final Balance: 10631000
-   Expected Balance: 4305302296
+ Deposit Iterations: 133
+Withdraw Iterations: 1378
+      Final Balance: 353642000
+   Expected Balance: 4374120296
 ==========================================================
           File name: Log_84.txt
                 Run: 23
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10343000
-Balance: $10344000
-Balance: $10345000
-Balance: $10346000
-Balance: $10347000
-Balance: $10348000
-Balance: $10347000
-Balance: $10346000
-Balance: $10345000
-Balance: $10344000
-Balance: $10343000
-Balance: $10342000
-Balance: $10341000
-Balance: $10340000
-Balance: $10339000
-Balance: $10338000
-Balance: $10337000
-Balance: $10336000
-Balance: $10496000
-Balance: $10495000
-Balance: $10494000
-Balance: $10493000
-Balance: $10492000
-Balance: $10491000
-Balance: $10490000
-Balance: $10489000
-Balance: $10488000
-      Final Balance: 10488000
-   Expected Balance: 4305132296
+ Deposit Iterations: 1718
+Withdraw Iterations: 1573
+      Final Balance: 122094000
+   Expected Balance: 122094000
 ==========================================================
           File name: Log_84.txt
                 Run: 24
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10003000
-Balance: $10004000
-Balance: $10005000
-Balance: $10006000
-Balance: $10007000
-Balance: $10008000
-Balance: $10007000
-Balance: $10006000
-Balance: $10005000
-Balance: $10004000
-Balance: $10003000
-Balance: $10002000
-Balance: $10001000
-Balance: $10000000
-Balance: $9999000
-Balance: $9998000
-Balance: $9997000
-Balance: $9996000
-Balance: $10130000
-Balance: $10129000
-Balance: $10128000
-Balance: $10127000
-Balance: $10126000
-Balance: $10125000
-Balance: $10124000
-Balance: $10123000
-Balance: $10122000
-      Final Balance: 10122000
-   Expected Balance: 4304865296
+ Deposit Iterations: 6391
+Withdraw Iterations: 3829
+      Final Balance: 145163000
+   Expected Balance: 145163000
 ==========================================================
           File name: Log_84.txt
                 Run: 25
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10399000
-Balance: $10400000
-Balance: $10401000
-Balance: $10402000
-Balance: $10403000
-Balance: $10404000
-Balance: $10403000
-Balance: $10402000
-Balance: $10401000
-Balance: $10400000
-Balance: $10399000
-Balance: $10398000
-Balance: $10397000
-Balance: $10396000
-Balance: $10395000
-Balance: $10394000
-Balance: $10393000
-Balance: $10392000
-Balance: $10580000
-Balance: $10579000
-Balance: $10578000
-Balance: $10577000
-Balance: $10576000
-Balance: $10575000
-Balance: $10574000
-Balance: $10573000
-Balance: $10572000
-      Final Balance: 10572000
-   Expected Balance: 4305338296
+ Deposit Iterations: 6275
+Withdraw Iterations: 3636
+      Final Balance: 392474000
+   Expected Balance: 101820000
 ==========================================================
           File name: Log_84.txt
                 Run: 26
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10121000
-Balance: $10122000
-Balance: $10123000
-Balance: $10124000
-Balance: $10125000
-Balance: $10126000
-Balance: $10125000
-Balance: $10124000
-Balance: $10123000
-Balance: $10122000
-Balance: $10121000
-Balance: $10120000
-Balance: $10119000
-Balance: $10118000
-Balance: $10117000
-Balance: $10116000
-Balance: $10115000
-Balance: $10114000
-Balance: $10261000
-Balance: $10260000
-Balance: $10259000
-Balance: $10258000
-Balance: $10257000
-Balance: $10256000
-Balance: $10255000
-Balance: $10254000
-Balance: $10253000
-      Final Balance: 10253000
-   Expected Balance: 4304835296
+ Deposit Iterations: 4265
+Withdraw Iterations: 1570
+      Final Balance: 391908000
+   Expected Balance: 125381000
 ==========================================================
           File name: Log_84.txt
                 Run: 27
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9931000
-Balance: $9932000
-Balance: $9933000
-Balance: $9934000
-Balance: $9935000
-Balance: $9936000
-Balance: $9935000
-Balance: $9934000
-Balance: $9933000
-Balance: $9932000
-Balance: $9931000
-Balance: $9930000
-Balance: $9929000
-Balance: $9928000
-Balance: $9927000
-Balance: $9926000
-Balance: $9925000
-Balance: $9924000
-Balance: $9923000
-Balance: $10070000
-Balance: $10071000
-Balance: $10070000
-Balance: $10070000
-Balance: $10070000
-Balance: $10070000
-Balance: $10070000
-Balance: $10070000
-      Final Balance: 10071000
-   Expected Balance: 4304796296
+ Deposit Iterations: 8051
+Withdraw Iterations: 976
+      Final Balance: 348907000
+   Expected Balance: 72559000
 ==========================================================
           File name: Log_84.txt
                 Run: 28
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9908000
-Balance: $9909000
-Balance: $9911000
-Balance: $9912000
-Balance: $9914000
-Balance: $9915000
-Balance: $9915000
-Balance: $9915000
-Balance: $9915000
-Balance: $9914000
-Balance: $9913000
-Balance: $9913000
-Balance: $9913000
-Balance: $9913000
-Balance: $9913000
-Balance: $9913000
-Balance: $9913000
-Balance: $9913000
-Balance: $9913000
-Balance: $10010000
-Balance: $10010000
-Balance: $10009000
-Balance: $10009000
-Balance: $10009000
-Balance: $10009000
-Balance: $10009000
-Balance: $10009000
-      Final Balance: 10010000
-   Expected Balance: 4304858296
+ Deposit Iterations: 5048
+Withdraw Iterations: 2283
+      Final Balance: 343972000
+   Expected Balance: 83136000
 ==========================================================
           File name: Log_84.txt
                 Run: 29
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $752000
-Balance: $753000
-Balance: $754000
-Balance: $755000
-Balance: $756000
-Balance: $757000
-Balance: $756000
-Balance: $755000
-Balance: $754000
-Balance: $753000
-Balance: $752000
-Balance: $751000
-Balance: $750000
-Balance: $749000
-Balance: $748000
-Balance: $747000
-Balance: $746000
-Balance: $745000
-Balance: $744000
-Balance: $743000
-Balance: $660000
-Balance: $659000
-Balance: $658000
-Balance: $657000
-Balance: $656000
-Balance: $655000
-Balance: $654000
-      Final Balance: 654000
-   Expected Balance: 4295683296
+ Deposit Iterations: 3060
+Withdraw Iterations: 1054
+      Final Balance: 89237000
+   Expected Balance: 89237000
 ==========================================================
           File name: Log_84.txt
                 Run: 30
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9715000
-Balance: $9716000
-Balance: $9717000
-Balance: $9718000
-Balance: $9719000
-Balance: $9720000
-Balance: $9719000
-Balance: $9718000
-Balance: $9717000
-Balance: $9716000
-Balance: $9715000
-Balance: $9714000
-Balance: $9713000
-Balance: $9712000
-Balance: $9711000
-Balance: $9710000
-Balance: $9709000
-Balance: $9708000
-Balance: $9707000
-Balance: $9840000
-Balance: $9839000
-Balance: $9838000
-Balance: $9837000
-Balance: $9836000
-Balance: $9835000
-Balance: $9834000
-Balance: $9833000
-      Final Balance: 9833000
-   Expected Balance: 4304528296
+ Deposit Iterations: 6219
+Withdraw Iterations: 328
+      Final Balance: 43017000
+   Expected Balance: 43017000
 ==========================================================
           File name: Log_84.txt
                 Run: 31
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9903000
-Balance: $9904000
-Balance: $9905000
-Balance: $9906000
-Balance: $9907000
-Balance: $9908000
-Balance: $9907000
-Balance: $9905000
-Balance: $9904000
-Balance: $9903000
-Balance: $9901000
-Balance: $9899000
-Balance: $9898000
-Balance: $9896000
-Balance: $9894000
-Balance: $9893000
-Balance: $9892000
-Balance: $9890000
-Balance: $9888000
-Balance: $10160000
-Balance: $10159000
-Balance: $10158000
-Balance: $10157000
-Balance: $10156000
-Balance: $10155000
-Balance: $10154000
-Balance: $10153000
-      Final Balance: 10153000
-   Expected Balance: 4304825296
+ Deposit Iterations: 4139
+Withdraw Iterations: 69
+      Final Balance: 336873000
+   Expected Balance: 91283000
 ==========================================================
           File name: Log_84.txt
                 Run: 32
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9982000
-Balance: $9983000
-Balance: $9984000
-Balance: $9985000
-Balance: $9986000
-Balance: $9987000
-Balance: $9986000
-Balance: $9985000
-Balance: $9984000
-Balance: $9983000
-Balance: $9982000
-Balance: $9981000
-Balance: $9980000
-Balance: $9979000
-Balance: $9978000
-Balance: $9977000
-Balance: $9976000
-Balance: $9975000
-Balance: $9974000
-Balance: $10137000
-Balance: $10136000
-Balance: $10135000
-Balance: $10134000
-Balance: $10133000
-Balance: $10132000
-Balance: $10131000
-Balance: $10130000
-      Final Balance: 10130000
-   Expected Balance: 4304819296
+ Deposit Iterations: 4552
+Withdraw Iterations: 2150
+      Final Balance: 233317000
+   Expected Balance: 62448000
 ==========================================================
           File name: Log_84.txt
                 Run: 33
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9737000
-Balance: $9738000
-Balance: $9739000
-Balance: $9740000
-Balance: $9741000
-Balance: $9742000
-Balance: $9741000
-Balance: $9740000
-Balance: $9739000
-Balance: $9738000
-Balance: $9737000
-Balance: $9736000
-Balance: $9735000
-Balance: $9734000
-Balance: $9733000
-Balance: $9732000
-Balance: $9731000
-Balance: $9730000
-Balance: $9729000
-Balance: $9855000
-Balance: $9854000
-Balance: $9853000
-Balance: $9852000
-Balance: $9851000
-Balance: $9850000
-Balance: $9849000
-Balance: $9848000
-      Final Balance: 9848000
-   Expected Balance: 4304545296
+ Deposit Iterations: 4055
+Withdraw Iterations: 245
+      Final Balance: 130058000
+   Expected Balance: 130058000
 ==========================================================
           File name: Log_84.txt
                 Run: 34
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9751000
-Balance: $9752000
-Balance: $9753000
-Balance: $9754000
-Balance: $9755000
-Balance: $9756000
-Balance: $9755000
-Balance: $9754000
-Balance: $9753000
-Balance: $9752000
-Balance: $9751000
-Balance: $9750000
-Balance: $9749000
-Balance: $9748000
-Balance: $9747000
-Balance: $9746000
-Balance: $9745000
-Balance: $9744000
-Balance: $9743000
-Balance: $9932000
-Balance: $9931000
-Balance: $9930000
-Balance: $9929000
-Balance: $9928000
-Balance: $9927000
-Balance: $9926000
-Balance: $9925000
-      Final Balance: 9925000
-   Expected Balance: 4304646296
+ Deposit Iterations: 7633
+Withdraw Iterations: 2987
+      Final Balance: 381708000
+   Expected Balance: 72419000
 ==========================================================
           File name: Log_84.txt
                 Run: 35
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10425000
-Balance: $10426000
-Balance: $10427000
-Balance: $10428000
-Balance: $10429000
-Balance: $10430000
-Balance: $10429000
-Balance: $10428000
-Balance: $10427000
-Balance: $10426000
-Balance: $10425000
-Balance: $10424000
-Balance: $10423000
-Balance: $10422000
-Balance: $10421000
-Balance: $10420000
-Balance: $10419000
-Balance: $10418000
-Balance: $10450000
-Balance: $10449000
-Balance: $10448000
-Balance: $10447000
-Balance: $10446000
-Balance: $10445000
-Balance: $10444000
-Balance: $10443000
-Balance: $10442000
-      Final Balance: 10442000
-   Expected Balance: 4304842296
+ Deposit Iterations: 4621
+Withdraw Iterations: 3275
+      Final Balance: 341489000
+   Expected Balance: 62977000
 ==========================================================
           File name: Log_84.txt
                 Run: 36
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9821000
-Balance: $9822000
-Balance: $9823000
-Balance: $9824000
-Balance: $9825000
-Balance: $9826000
-Balance: $9825000
-Balance: $9824000
-Balance: $9823000
-Balance: $9822000
-Balance: $9821000
-Balance: $9820000
-Balance: $9819000
-Balance: $9818000
-Balance: $9817000
-Balance: $9816000
-Balance: $9815000
-Balance: $9814000
-Balance: $9813000
-Balance: $10092000
-Balance: $10091000
-Balance: $10090000
-Balance: $10089000
-Balance: $10088000
-Balance: $10087000
-Balance: $10086000
-Balance: $10085000
-      Final Balance: 10085000
-   Expected Balance: 4304604296
+ Deposit Iterations: 182
+Withdraw Iterations: 2811
+      Final Balance: 347774000
+   Expected Balance: 4400510296
 ==========================================================
           File name: Log_84.txt
                 Run: 37
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10335000
-Balance: $10336000
-Balance: $10337000
-Balance: $10338000
-Balance: $10339000
-Balance: $10340000
-Balance: $10339000
-Balance: $10338000
-Balance: $10337000
-Balance: $10336000
-Balance: $10335000
-Balance: $10334000
-Balance: $10333000
-Balance: $10332000
-Balance: $10331000
-Balance: $10330000
-Balance: $10329000
-Balance: $10328000
-Balance: $10459000
-Balance: $10458000
-Balance: $10457000
-Balance: $10456000
-Balance: $10455000
-Balance: $10454000
-Balance: $10453000
-Balance: $10452000
-Balance: $10451000
-      Final Balance: 10451000
-   Expected Balance: 4305259296
+ Deposit Iterations: 2470
+Withdraw Iterations: 2694
+      Final Balance: 117356000
+   Expected Balance: 4412323296
 ==========================================================
           File name: Log_84.txt
                 Run: 38
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10075000
-Balance: $10076000
-Balance: $10077000
-Balance: $10078000
-Balance: $10079000
-Balance: $10080000
-Balance: $10079000
-Balance: $10078000
-Balance: $10077000
-Balance: $10076000
-Balance: $10075000
-Balance: $10074000
-Balance: $10073000
-Balance: $10072000
-Balance: $10071000
-Balance: $10070000
-Balance: $10069000
-Balance: $10068000
-Balance: $10228000
-Balance: $10227000
-Balance: $10226000
-Balance: $10225000
-Balance: $10224000
-Balance: $10223000
-Balance: $10222000
-Balance: $10221000
-Balance: $10220000
-      Final Balance: 10220000
-   Expected Balance: 4304889296
+ Deposit Iterations: 6724
+Withdraw Iterations: 1361
+      Final Balance: 355021000
+   Expected Balance: 116871000
 ==========================================================
           File name: Log_84.txt
                 Run: 39
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10158000
-Balance: $10159000
-Balance: $10160000
-Balance: $10161000
-Balance: $10162000
-Balance: $10163000
-Balance: $10162000
-Balance: $10161000
-Balance: $10160000
-Balance: $10159000
-Balance: $10158000
-Balance: $10157000
-Balance: $10156000
-Balance: $10155000
-Balance: $10154000
-Balance: $10153000
-Balance: $10152000
-Balance: $10151000
-Balance: $10312000
-Balance: $10311000
-Balance: $10310000
-Balance: $10309000
-Balance: $10308000
-Balance: $10307000
-Balance: $10306000
-Balance: $10305000
-Balance: $10304000
-      Final Balance: 10304000
-   Expected Balance: 4304911296
+ Deposit Iterations: 5856
+Withdraw Iterations: 302
+      Final Balance: 336401000
+   Expected Balance: 78238000
 ==========================================================
           File name: Log_84.txt
                 Run: 40
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10052000
-Balance: $10053000
-Balance: $10054000
-Balance: $10055000
-Balance: $10056000
-Balance: $10057000
-Balance: $10056000
-Balance: $10055000
-Balance: $10054000
-Balance: $10053000
-Balance: $10052000
-Balance: $10051000
-Balance: $10050000
-Balance: $10049000
-Balance: $10048000
-Balance: $10047000
-Balance: $10046000
-Balance: $10045000
-Balance: $10151000
-Balance: $10150000
-Balance: $10149000
-Balance: $10148000
-Balance: $10147000
-Balance: $10146000
-Balance: $10145000
-Balance: $10144000
-Balance: $10143000
-      Final Balance: 10143000
-   Expected Balance: 4304871296
+ Deposit Iterations: 7620
+Withdraw Iterations: 1176
+      Final Balance: 295367000
+   Expected Balance: 86956000
 ==========================================================
           File name: Log_84.txt
                 Run: 41
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9784000
-Balance: $9785000
-Balance: $9786000
-Balance: $9787000
-Balance: $9788000
-Balance: $9789000
-Balance: $9788000
-Balance: $9787000
-Balance: $9786000
-Balance: $9785000
-Balance: $9784000
-Balance: $9783000
-Balance: $9782000
-Balance: $9781000
-Balance: $9780000
-Balance: $9779000
-Balance: $9778000
-Balance: $9777000
-Balance: $9776000
-Balance: $9923000
-Balance: $9917000
-Balance: $9916000
-Balance: $9915000
-Balance: $9914000
-Balance: $9913000
-Balance: $9912000
-Balance: $9911000
-      Final Balance: 9911000
-   Expected Balance: 4304719296
+ Deposit Iterations: 6938
+Withdraw Iterations: 2598
+      Final Balance: 386573000
+   Expected Balance: 100944000
 ==========================================================
           File name: Log_84.txt
                 Run: 42
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10192000
-Balance: $10193000
-Balance: $10194000
-Balance: $10195000
-Balance: $10196000
-Balance: $10197000
-Balance: $10196000
-Balance: $10195000
-Balance: $10194000
-Balance: $10193000
-Balance: $10192000
-Balance: $10191000
-Balance: $10190000
-Balance: $10189000
-Balance: $10188000
-Balance: $10187000
-Balance: $10186000
-Balance: $10185000
-Balance: $10298000
-Balance: $10297000
-Balance: $10296000
-Balance: $10295000
-Balance: $10294000
-Balance: $10293000
-Balance: $10292000
-Balance: $10291000
-Balance: $10290000
-      Final Balance: 10290000
-   Expected Balance: 4304985296
+ Deposit Iterations: 4080
+Withdraw Iterations: 3502
+      Final Balance: 68324000
+   Expected Balance: 68324000
 ==========================================================
           File name: Log_84.txt
                 Run: 43
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9719000
-Balance: $9720000
-Balance: $9721000
-Balance: $9722000
-Balance: $9723000
-Balance: $9724000
-Balance: $9723000
-Balance: $9722000
-Balance: $9721000
-Balance: $9720000
-Balance: $9719000
-Balance: $9718000
-Balance: $9717000
-Balance: $9716000
-Balance: $9715000
-Balance: $9714000
-Balance: $9713000
-Balance: $9712000
-Balance: $9711000
-Balance: $9882000
-Balance: $9881000
-Balance: $9880000
-Balance: $9879000
-Balance: $9878000
-Balance: $9877000
-Balance: $9876000
-Balance: $9875000
-      Final Balance: 9875000
-   Expected Balance: 4304586296
+ Deposit Iterations: 7282
+Withdraw Iterations: 1079
+      Final Balance: 409639000
+   Expected Balance: 142078000
 ==========================================================
           File name: Log_84.txt
                 Run: 44
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9780000
-Balance: $9781000
-Balance: $9782000
-Balance: $9783000
-Balance: $9784000
-Balance: $9785000
-Balance: $9784000
-Balance: $9783000
-Balance: $9782000
-Balance: $9781000
-Balance: $9780000
-Balance: $9779000
-Balance: $9778000
-Balance: $9777000
-Balance: $9776000
-Balance: $9775000
-Balance: $9774000
-Balance: $9773000
-Balance: $9772000
-Balance: $9886000
-Balance: $9885000
-Balance: $9884000
-Balance: $9883000
-Balance: $9882000
-Balance: $9881000
-Balance: $9880000
-Balance: $9879000
-      Final Balance: 9879000
-   Expected Balance: 4304605296
+ Deposit Iterations: 7313
+Withdraw Iterations: 1380
+      Final Balance: 97211000
+   Expected Balance: 97211000
 ==========================================================
           File name: Log_84.txt
                 Run: 45
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10082000
-Balance: $10083000
-Balance: $10084000
-Balance: $10085000
-Balance: $10086000
-Balance: $10087000
-Balance: $10086000
-Balance: $10085000
-Balance: $10084000
-Balance: $10083000
-Balance: $10082000
-Balance: $10081000
-Balance: $10080000
-Balance: $10079000
-Balance: $10078000
-Balance: $10077000
-Balance: $10076000
-Balance: $10075000
-Balance: $10236000
-Balance: $10235000
-Balance: $10234000
-Balance: $10233000
-Balance: $10232000
-Balance: $10231000
-Balance: $10230000
-Balance: $10229000
-Balance: $10228000
-      Final Balance: 10228000
-   Expected Balance: 4304926296
+ Deposit Iterations: 1390
+Withdraw Iterations: 3885
+      Final Balance: 75789000
+   Expected Balance: 4370756296
 ==========================================================
           File name: Log_84.txt
                 Run: 46
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10292000
-Balance: $10293000
-Balance: $10294000
-Balance: $10295000
-Balance: $10296000
-Balance: $10297000
-Balance: $10296000
-Balance: $10295000
-Balance: $10294000
-Balance: $10293000
-Balance: $10292000
-Balance: $10291000
-Balance: $10290000
-Balance: $10289000
-Balance: $10288000
-Balance: $10287000
-Balance: $10286000
-Balance: $10285000
-Balance: $10497000
-Balance: $10499000
-Balance: $10498000
-Balance: $10497000
-Balance: $10496000
-Balance: $10495000
-Balance: $10494000
-Balance: $10493000
-Balance: $10492000
-      Final Balance: 10492000
-   Expected Balance: 4305189296
+ Deposit Iterations: 4198
+Withdraw Iterations: 1996
+      Final Balance: 84778000
+   Expected Balance: 84778000
 ==========================================================
           File name: Log_84.txt
                 Run: 47
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9909000
-Balance: $9910000
-Balance: $9911000
-Balance: $9912000
-Balance: $9913000
-Balance: $9914000
-Balance: $9913000
-Balance: $9912000
-Balance: $9911000
-Balance: $9910000
-Balance: $9909000
-Balance: $9908000
-Balance: $9907000
-Balance: $9906000
-Balance: $9905000
-Balance: $9904000
-Balance: $9903000
-Balance: $9902000
-Balance: $9901000
-Balance: $10082000
-Balance: $10081000
-Balance: $10080000
-Balance: $10079000
-Balance: $10078000
-Balance: $10077000
-Balance: $10076000
-Balance: $10075000
-      Final Balance: 10075000
-   Expected Balance: 4304690296
+ Deposit Iterations: 3457
+Withdraw Iterations: 3144
+      Final Balance: 385873000
+   Expected Balance: 85753000
 ==========================================================
           File name: Log_84.txt
                 Run: 48
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10209000
-Balance: $10210000
-Balance: $10211000
-Balance: $10212000
-Balance: $10213000
-Balance: $10214000
-Balance: $10213000
-Balance: $10212000
-Balance: $10211000
-Balance: $10210000
-Balance: $10209000
-Balance: $10208000
-Balance: $10207000
-Balance: $10206000
-Balance: $10205000
-Balance: $10204000
-Balance: $10203000
-Balance: $10202000
-Balance: $10305000
-Balance: $10304000
-Balance: $10303000
-Balance: $10302000
-Balance: $10301000
-Balance: $10300000
-Balance: $10299000
-Balance: $10298000
-Balance: $10297000
-      Final Balance: 10297000
-   Expected Balance: 4305079296
+ Deposit Iterations: 1249
+Withdraw Iterations: 624
+      Final Balance: 377930000
+   Expected Balance: 85404000
 ==========================================================
           File name: Log_84.txt
                 Run: 49
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10101000
-Balance: $10102000
-Balance: $10103000
-Balance: $10104000
-Balance: $10105000
-Balance: $10106000
-Balance: $10105000
-Balance: $10104000
-Balance: $10103000
-Balance: $10102000
-Balance: $10101000
-Balance: $10100000
-Balance: $10099000
-Balance: $10098000
-Balance: $10097000
-Balance: $10096000
-Balance: $10095000
-Balance: $10094000
-Balance: $10374000
-Balance: $10373000
-Balance: $10372000
-Balance: $10371000
-Balance: $10370000
-Balance: $10369000
-Balance: $10368000
-Balance: $10367000
-Balance: $10366000
-      Final Balance: 10366000
-   Expected Balance: 4304887296
+ Deposit Iterations: 3286
+Withdraw Iterations: 2064
+      Final Balance: 71716000
+   Expected Balance: 71716000
 ==========================================================
           File name: Log_84.txt
                 Run: 50
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10193000
-Balance: $10194000
-Balance: $10195000
-Balance: $10196000
-Balance: $10197000
-Balance: $10198000
-Balance: $10197000
-Balance: $10196000
-Balance: $10195000
-Balance: $10194000
-Balance: $10193000
-Balance: $10192000
-Balance: $10191000
-Balance: $10190000
-Balance: $10189000
-Balance: $10188000
-Balance: $10187000
-Balance: $10186000
-Balance: $10345000
-Balance: $10344000
-Balance: $10342000
-Balance: $10341000
-Balance: $10340000
-Balance: $10338000
-Balance: $10337000
-Balance: $10335000
-Balance: $10333000
-      Final Balance: 10332000
-   Expected Balance: 4304983296
+ Deposit Iterations: 4476
+Withdraw Iterations: 2537
+      Final Balance: 94051000
+   Expected Balance: 94051000
 ==========================================================
           File name: Log_84.txt
                 Run: 51
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9671000
-Balance: $9672000
-Balance: $9673000
-Balance: $9674000
-Balance: $9675000
-Balance: $9676000
-Balance: $9675000
-Balance: $9674000
-Balance: $9673000
-Balance: $9672000
-Balance: $9671000
-Balance: $9670000
-Balance: $9669000
-Balance: $9668000
-Balance: $9667000
-Balance: $9666000
-Balance: $9665000
-Balance: $9664000
-Balance: $9663000
-Balance: $9833000
-Balance: $9833000
-Balance: $9832000
-Balance: $9831000
-Balance: $9830000
-Balance: $9829000
-Balance: $9828000
-Balance: $9828000
-      Final Balance: 9828000
-   Expected Balance: 4304622296
+ Deposit Iterations: 238
+Withdraw Iterations: 3491
+      Final Balance: 90120000
+   Expected Balance: 4385087296
 ==========================================================
           File name: Log_84.txt
                 Run: 52
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9559000
-Balance: $9560000
-Balance: $9561000
-Balance: $9562000
-Balance: $9563000
-Balance: $9564000
-Balance: $9563000
-Balance: $9562000
-Balance: $9561000
-Balance: $9560000
-Balance: $9559000
-Balance: $9558000
-Balance: $9557000
-Balance: $9556000
-Balance: $9555000
-Balance: $9554000
-Balance: $9553000
-Balance: $9552000
-Balance: $9551000
-Balance: $9607000
-Balance: $9606000
-Balance: $9605000
-Balance: $9604000
-Balance: $9603000
-Balance: $9602000
-Balance: $9601000
-Balance: $9600000
-      Final Balance: 9600000
-   Expected Balance: 4304498296
+ Deposit Iterations: 5801
+Withdraw Iterations: 2654
+      Final Balance: 95628000
+   Expected Balance: 95628000
 ==========================================================
           File name: Log_84.txt
                 Run: 53
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9949000
-Balance: $9950000
-Balance: $9951000
-Balance: $9952000
-Balance: $9953000
-Balance: $9954000
-Balance: $9953000
-Balance: $9952000
-Balance: $9951000
-Balance: $9950000
-Balance: $9949000
-Balance: $9948000
-Balance: $9947000
-Balance: $9946000
-Balance: $9945000
-Balance: $9944000
-Balance: $9943000
-Balance: $9942000
-Balance: $9941000
-Balance: $10077000
-Balance: $10076000
-Balance: $10075000
-Balance: $10074000
-Balance: $10073000
-Balance: $10072000
-Balance: $10071000
-Balance: $10070000
-      Final Balance: 10070000
-   Expected Balance: 4304770296
+ Deposit Iterations: 6448
+Withdraw Iterations: 2799
+      Final Balance: 68869000
+   Expected Balance: 68869000
 ==========================================================
           File name: Log_84.txt
                 Run: 54
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10388000
-Balance: $10389000
-Balance: $10390000
-Balance: $10391000
-Balance: $10392000
-Balance: $10393000
-Balance: $10392000
-Balance: $10391000
-Balance: $10390000
-Balance: $10389000
-Balance: $10388000
-Balance: $10387000
-Balance: $10386000
-Balance: $10385000
-Balance: $10384000
-Balance: $10383000
-Balance: $10382000
-Balance: $10381000
-Balance: $10487000
-Balance: $10486000
-Balance: $10485000
-Balance: $10484000
-Balance: $10483000
-Balance: $10482000
-Balance: $10481000
-Balance: $10480000
-Balance: $10479000
-      Final Balance: 10479000
-   Expected Balance: 4305185296
+ Deposit Iterations: 107
+Withdraw Iterations: 472
+      Final Balance: 333637000
+   Expected Balance: 4371307296
 ==========================================================
           File name: Log_84.txt
                 Run: 55
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10366000
-Balance: $10367000
-Balance: $10368000
-Balance: $10369000
-Balance: $10370000
-Balance: $10371000
-Balance: $10370000
-Balance: $10369000
-Balance: $10368000
-Balance: $10367000
-Balance: $10366000
-Balance: $10365000
-Balance: $10364000
-Balance: $10363000
-Balance: $10362000
-Balance: $10361000
-Balance: $10360000
-Balance: $10359000
-Balance: $10465000
-Balance: $10464000
-Balance: $10463000
-Balance: $10462000
-Balance: $10461000
-Balance: $10460000
-Balance: $10459000
-Balance: $10458000
-Balance: $10457000
-      Final Balance: 10457000
-   Expected Balance: 4305210296
+ Deposit Iterations: 4361
+Withdraw Iterations: 178
+      Final Balance: 94093000
+   Expected Balance: 94093000
 ==========================================================
           File name: Log_84.txt
                 Run: 56
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9873000
-Balance: $9874000
-Balance: $9875000
-Balance: $9876000
-Balance: $9877000
-Balance: $9878000
-Balance: $9877000
-Balance: $9876000
-Balance: $9875000
-Balance: $9874000
-Balance: $9873000
-Balance: $9872000
-Balance: $9871000
-Balance: $9870000
-Balance: $9869000
-Balance: $9868000
-Balance: $9867000
-Balance: $9866000
-Balance: $9865000
-Balance: $9893000
-Balance: $9892000
-Balance: $9892000
-Balance: $9892000
-Balance: $9892000
-Balance: $9892000
-Balance: $9892000
-Balance: $9892000
-      Final Balance: 9894000
-   Expected Balance: 4304683296
+ Deposit Iterations: 6862
+Withdraw Iterations: 3790
+      Final Balance: 334736000
+   Expected Balance: 80168000
 ==========================================================
           File name: Log_84.txt
                 Run: 57
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10430000
-Balance: $10431000
-Balance: $10432000
-Balance: $10433000
-Balance: $10434000
-Balance: $10435000
-Balance: $10434000
-Balance: $10433000
-Balance: $10432000
-Balance: $10431000
-Balance: $10430000
-Balance: $10429000
-Balance: $10428000
-Balance: $10427000
-Balance: $10426000
-Balance: $10425000
-Balance: $10424000
-Balance: $10423000
-Balance: $10611000
-Balance: $10610000
-Balance: $10609000
-Balance: $10608000
-Balance: $10607000
-Balance: $10606000
-Balance: $10605000
-Balance: $10604000
-Balance: $10603000
-      Final Balance: 10603000
-   Expected Balance: 4305193296
+ Deposit Iterations: 166
+Withdraw Iterations: 791
+      Final Balance: 104320000
+   Expected Balance: 4399287296
 ==========================================================
           File name: Log_84.txt
                 Run: 58
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10472000
-Balance: $10473000
-Balance: $10474000
-Balance: $10475000
-Balance: $10476000
-Balance: $10477000
-Balance: $10476000
-Balance: $10475000
-Balance: $10474000
-Balance: $10473000
-Balance: $10472000
-Balance: $10471000
-Balance: $10470000
-Balance: $10469000
-Balance: $10468000
-Balance: $10467000
-Balance: $10466000
-Balance: $10465000
-Balance: $10571000
-Balance: $10570000
-Balance: $10569000
-Balance: $10568000
-Balance: $10567000
-Balance: $10566000
-Balance: $10565000
-Balance: $10564000
-Balance: $10563000
-      Final Balance: 10563000
-   Expected Balance: 4305288296
+ Deposit Iterations: 1946
+Withdraw Iterations: 341
+      Final Balance: 90040000
+   Expected Balance: 90040000
 ==========================================================
           File name: Log_84.txt
                 Run: 59
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10110000
-Balance: $10112000
-Balance: $10113000
-Balance: $10114000
-Balance: $10115000
-Balance: $10116000
-Balance: $10115000
-Balance: $10114000
-Balance: $10113000
-Balance: $10112000
-Balance: $10111000
-Balance: $10110000
-Balance: $10109000
-Balance: $10108000
-Balance: $10107000
-Balance: $10106000
-Balance: $10105000
-Balance: $10104000
-Balance: $10265000
-Balance: $10264000
-Balance: $10263000
-Balance: $10262000
-Balance: $10261000
-Balance: $10260000
-Balance: $10259000
-Balance: $10258000
-Balance: $10257000
-      Final Balance: 10257000
-   Expected Balance: 4304982296
+ Deposit Iterations: 2313
+Withdraw Iterations: 283
+      Final Balance: 89622000
+   Expected Balance: 89622000
 ==========================================================
           File name: Log_84.txt
                 Run: 60
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10362000
-Balance: $10363000
-Balance: $10364000
-Balance: $10365000
-Balance: $10366000
-Balance: $10367000
-Balance: $10366000
-Balance: $10365000
-Balance: $10364000
-Balance: $10363000
-Balance: $10362000
-Balance: $10361000
-Balance: $10360000
-Balance: $10359000
-Balance: $10358000
-Balance: $10357000
-Balance: $10356000
-Balance: $10355000
-Balance: $10447000
-Balance: $10446000
-Balance: $10445000
-Balance: $10444000
-Balance: $10443000
-Balance: $10442000
-Balance: $10441000
-Balance: $10440000
-Balance: $10439000
-      Final Balance: 10439000
-   Expected Balance: 4305186296
+ Deposit Iterations: 1578
+Withdraw Iterations: 3218
+      Final Balance: 121568000
+   Expected Balance: 4416535296
 ==========================================================
           File name: Log_84.txt
                 Run: 61
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10046000
-Balance: $10047000
-Balance: $10048000
-Balance: $10049000
-Balance: $10050000
-Balance: $10051000
-Balance: $10050000
-Balance: $10049000
-Balance: $10048000
-Balance: $10047000
-Balance: $10046000
-Balance: $10045000
-Balance: $10044000
-Balance: $10043000
-Balance: $10042000
-Balance: $10041000
-Balance: $10040000
-Balance: $10039000
-Balance: $10055000
-Balance: $10060000
-Balance: $10061000
-Balance: $10062000
-Balance: $10061000
-Balance: $10060000
-Balance: $10059000
-Balance: $10058000
-Balance: $10057000
-      Final Balance: 10057000
-   Expected Balance: 4304865296
+ Deposit Iterations: 1224
+Withdraw Iterations: 1310
+      Final Balance: 43151000
+   Expected Balance: 4338118296
 ==========================================================
           File name: Log_84.txt
                 Run: 62
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10139000
-Balance: $10143000
-Balance: $10146000
-Balance: $10148000
-Balance: $10150000
-Balance: $10152000
-Balance: $10153000
-Balance: $10154000
-Balance: $10155000
-Balance: $10155000
-Balance: $10154000
-Balance: $10153000
-Balance: $10152000
-Balance: $10151000
-Balance: $10150000
-Balance: $10149000
-Balance: $10148000
-Balance: $10147000
-Balance: $10288000
-Balance: $10292000
-Balance: $10293000
-Balance: $10293000
-Balance: $10293000
-Balance: $10293000
-Balance: $10293000
-Balance: $10293000
-Balance: $10294000
-      Final Balance: 10295000
-   Expected Balance: 4305025296
+ Deposit Iterations: 6281
+Withdraw Iterations: 1607
+      Final Balance: 97799000
+   Expected Balance: 97799000
 ==========================================================
           File name: Log_84.txt
                 Run: 63
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9510000
-Balance: $9511000
-Balance: $9512000
-Balance: $9513000
-Balance: $9514000
-Balance: $9515000
-Balance: $9514000
-Balance: $9513000
-Balance: $9512000
-Balance: $9511000
-Balance: $9510000
-Balance: $9509000
-Balance: $9508000
-Balance: $9507000
-Balance: $9506000
-Balance: $9505000
-Balance: $9504000
-Balance: $9503000
-Balance: $9502000
-Balance: $9671000
-Balance: $9670000
-Balance: $9669000
-Balance: $9668000
-Balance: $9667000
-Balance: $9666000
-Balance: $9665000
-Balance: $9664000
-      Final Balance: 9664000
-   Expected Balance: 4304331296
+ Deposit Iterations: 3530
+Withdraw Iterations: 3494
+      Final Balance: 417182000
+   Expected Balance: 77478000
 ==========================================================
           File name: Log_84.txt
                 Run: 64
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9899000
-Balance: $9900000
-Balance: $9901000
-Balance: $9902000
-Balance: $9903000
-Balance: $9904000
-Balance: $9903000
-Balance: $9902000
-Balance: $9901000
-Balance: $9900000
-Balance: $9899000
-Balance: $9898000
-Balance: $9897000
-Balance: $9896000
-Balance: $9895000
-Balance: $9894000
-Balance: $9893000
-Balance: $9892000
-Balance: $9891000
-Balance: $9919000
-Balance: $9918000
-Balance: $9917000
-Balance: $9916000
-Balance: $9915000
-Balance: $9914000
-Balance: $9913000
-Balance: $9912000
-      Final Balance: 9912000
-   Expected Balance: 4304709296
+ Deposit Iterations: 7027
+Withdraw Iterations: 1995
+      Final Balance: 67651000
+   Expected Balance: 67651000
 ==========================================================
           File name: Log_84.txt
                 Run: 65
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10078000
-Balance: $10079000
-Balance: $10080000
-Balance: $10081000
-Balance: $10082000
-Balance: $10083000
-Balance: $10082000
-Balance: $10081000
-Balance: $10080000
-Balance: $10079000
-Balance: $10078000
-Balance: $10077000
-Balance: $10076000
-Balance: $10075000
-Balance: $10074000
-Balance: $10073000
-Balance: $10072000
-Balance: $10071000
-Balance: $10203000
-Balance: $10206000
-Balance: $10206000
-Balance: $10206000
-Balance: $10206000
-Balance: $10206000
-Balance: $10206000
-Balance: $10205000
-Balance: $10206000
-      Final Balance: 10207000
-   Expected Balance: 4304897296
+ Deposit Iterations: 3752
+Withdraw Iterations: 595
+      Final Balance: 272394000
+   Expected Balance: 71981000
 ==========================================================
           File name: Log_84.txt
                 Run: 66
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9950000
-Balance: $9951000
-Balance: $9952000
-Balance: $9953000
-Balance: $9954000
-Balance: $9955000
-Balance: $9954000
-Balance: $9953000
-Balance: $9952000
-Balance: $9951000
-Balance: $9950000
-Balance: $9949000
-Balance: $9948000
-Balance: $9947000
-Balance: $9946000
-Balance: $9945000
-Balance: $9944000
-Balance: $9943000
-Balance: $9942000
-Balance: $10131000
-Balance: $10130000
-Balance: $10129000
-Balance: $10128000
-Balance: $10127000
-Balance: $10126000
-Balance: $10125000
-Balance: $10124000
-      Final Balance: 10124000
-   Expected Balance: 4304707296
+ Deposit Iterations: 3706
+Withdraw Iterations: 3026
+      Final Balance: 94548000
+   Expected Balance: 94548000
 ==========================================================
           File name: Log_84.txt
                 Run: 67
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9777000
-Balance: $9778000
-Balance: $9779000
-Balance: $9780000
-Balance: $9781000
-Balance: $9782000
-Balance: $9781000
-Balance: $9780000
-Balance: $9779000
-Balance: $9778000
-Balance: $9777000
-Balance: $9776000
-Balance: $9775000
-Balance: $9774000
-Balance: $9773000
-Balance: $9772000
-Balance: $9771000
-Balance: $9770000
-Balance: $9769000
-Balance: $9798000
-Balance: $9797000
-Balance: $9796000
-Balance: $9795000
-Balance: $9794000
-Balance: $9793000
-Balance: $9792000
-Balance: $9791000
-      Final Balance: 9791000
-   Expected Balance: 4304757296
+ Deposit Iterations: 478
+Withdraw Iterations: 664
+      Final Balance: 91516000
+   Expected Balance: 4386483296
 ==========================================================
           File name: Log_84.txt
                 Run: 68
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $361000
-Balance: $362000
-Balance: $363000
-Balance: $364000
-Balance: $365000
-Balance: $366000
-Balance: $365000
-Balance: $364000
-Balance: $363000
-Balance: $362000
-Balance: $361000
-Balance: $360000
-Balance: $359000
-Balance: $358000
-Balance: $357000
-Balance: $356000
-Balance: $355000
-Balance: $355000
-Balance: $354000
-Balance: $353000
-Balance: $356000
-Balance: $355000
-Balance: $354000
-Balance: $353000
-Balance: $352000
-Balance: $351000
-Balance: $350000
-      Final Balance: 350000
-   Expected Balance: 4295252296
+ Deposit Iterations: 6126
+Withdraw Iterations: 1567
+      Final Balance: 68715000
+   Expected Balance: 68715000
 ==========================================================
           File name: Log_84.txt
                 Run: 69
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9656000
-Balance: $9657000
-Balance: $9658000
-Balance: $9659000
-Balance: $9660000
-Balance: $9661000
-Balance: $9660000
-Balance: $9659000
-Balance: $9658000
-Balance: $9657000
-Balance: $9656000
-Balance: $9655000
-Balance: $9654000
-Balance: $9653000
-Balance: $9652000
-Balance: $9651000
-Balance: $9650000
-Balance: $9649000
-Balance: $9648000
-Balance: $9732000
-Balance: $9731000
-Balance: $9730000
-Balance: $9729000
-Balance: $9728000
-Balance: $9727000
-Balance: $9726000
-Balance: $9725000
-      Final Balance: 9725000
-   Expected Balance: 4304465296
+ Deposit Iterations: 4106
+Withdraw Iterations: 1559
+      Final Balance: 107620000
+   Expected Balance: 107620000
 ==========================================================
           File name: Log_84.txt
                 Run: 70
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9991000
-Balance: $9992000
-Balance: $9993000
-Balance: $9994000
-Balance: $9995000
-Balance: $9996000
-Balance: $9995000
-Balance: $9994000
-Balance: $9993000
-Balance: $9992000
-Balance: $9991000
-Balance: $9990000
-Balance: $9989000
-Balance: $9988000
-Balance: $9987000
-Balance: $9986000
-Balance: $9985000
-Balance: $9984000
-Balance: $9983000
-Balance: $9969000
-Balance: $9968000
-Balance: $9967000
-Balance: $9966000
-Balance: $9965000
-Balance: $9964000
-Balance: $9963000
-Balance: $9962000
-      Final Balance: 9962000
-   Expected Balance: 4304714296
+ Deposit Iterations: 354
+Withdraw Iterations: 2495
+      Final Balance: 55342000
+   Expected Balance: 4350309296
 ==========================================================
           File name: Log_84.txt
                 Run: 71
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9850000
-Balance: $9851000
-Balance: $9852000
-Balance: $9853000
-Balance: $9854000
-Balance: $9855000
-Balance: $9854000
-Balance: $9853000
-Balance: $9852000
-Balance: $9851000
-Balance: $9850000
-Balance: $9849000
-Balance: $9848000
-Balance: $9847000
-Balance: $9846000
-Balance: $9845000
-Balance: $9844000
-Balance: $9843000
-Balance: $9842000
-Balance: $9841000
-Balance: $9840000
-Balance: $9839000
-Balance: $9838000
-Balance: $9837000
-Balance: $9836000
-Balance: $9835000
-Balance: $9834000
-      Final Balance: 9834000
-   Expected Balance: 4304643296
+ Deposit Iterations: 5271
+Withdraw Iterations: 1230
+      Final Balance: 101190000
+   Expected Balance: 101190000
 ==========================================================
           File name: Log_84.txt
                 Run: 72
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10006000
-Balance: $10007000
-Balance: $10008000
-Balance: $10009000
-Balance: $10010000
-Balance: $10011000
-Balance: $10010000
-Balance: $10009000
-Balance: $10008000
-Balance: $10007000
-Balance: $10006000
-Balance: $10005000
-Balance: $10004000
-Balance: $10003000
-Balance: $10002000
-Balance: $10001000
-Balance: $10000000
-Balance: $9999000
-Balance: $10133000
-Balance: $10133000
-Balance: $10132000
-Balance: $10132000
-Balance: $10132000
-Balance: $10132000
-Balance: $10132000
-Balance: $10133000
-Balance: $10133000
-      Final Balance: 10135000
-   Expected Balance: 4304786296
+ Deposit Iterations: 7687
+Withdraw Iterations: 2792
+      Final Balance: 351832000
+   Expected Balance: 95676000
 ==========================================================
           File name: Log_84.txt
                 Run: 73
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10087000
-Balance: $10088000
-Balance: $10089000
-Balance: $10090000
-Balance: $10091000
-Balance: $10092000
-Balance: $10091000
-Balance: $10090000
-Balance: $10089000
-Balance: $10088000
-Balance: $10087000
-Balance: $10086000
-Balance: $10085000
-Balance: $10084000
-Balance: $10083000
-Balance: $10082000
-Balance: $10081000
-Balance: $10080000
-Balance: $10133000
-Balance: $10132000
-Balance: $10131000
-Balance: $10130000
-Balance: $10129000
-Balance: $10128000
-Balance: $10127000
-Balance: $10126000
-Balance: $10125000
-      Final Balance: 10125000
-   Expected Balance: 4304873296
+ Deposit Iterations: 8050
+Withdraw Iterations: 1207
+      Final Balance: 347616000
+   Expected Balance: 82821000
 ==========================================================
           File name: Log_84.txt
                 Run: 74
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9691000
-Balance: $9692000
-Balance: $9693000
-Balance: $9694000
-Balance: $9695000
-Balance: $9696000
-Balance: $9695000
-Balance: $9694000
-Balance: $9693000
-Balance: $9692000
-Balance: $9691000
-Balance: $9690000
-Balance: $9689000
-Balance: $9688000
-Balance: $9687000
-Balance: $9686000
-Balance: $9685000
-Balance: $9684000
-Balance: $9683000
-Balance: $9822000
-Balance: $9821000
-Balance: $9820000
-Balance: $9819000
-Balance: $9818000
-Balance: $9817000
-Balance: $9816000
-Balance: $9815000
-      Final Balance: 9815000
-   Expected Balance: 4304512296
+ Deposit Iterations: 1465
+Withdraw Iterations: 1191
+      Final Balance: 88466000
+   Expected Balance: 88466000
 ==========================================================
           File name: Log_84.txt
                 Run: 75
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10250000
-Balance: $10251000
-Balance: $10252000
-Balance: $10253000
-Balance: $10254000
-Balance: $10255000
-Balance: $10254000
-Balance: $10253000
-Balance: $10252000
-Balance: $10251000
-Balance: $10250000
-Balance: $10249000
-Balance: $10248000
-Balance: $10247000
-Balance: $10246000
-Balance: $10245000
-Balance: $10244000
-Balance: $10243000
-Balance: $10263000
-Balance: $10267000
-Balance: $10267000
-Balance: $10266000
-Balance: $10265000
-Balance: $10264000
-Balance: $10263000
-Balance: $10262000
-Balance: $10261000
-      Final Balance: 10261000
-   Expected Balance: 4305039296
+ Deposit Iterations: 7198
+Withdraw Iterations: 195
+      Final Balance: 47702000
+   Expected Balance: 47702000
 ==========================================================
           File name: Log_84.txt
                 Run: 76
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9910000
-Balance: $9911000
-Balance: $9912000
-Balance: $9913000
-Balance: $9914000
-Balance: $9915000
-Balance: $9914000
-Balance: $9913000
-Balance: $9912000
-Balance: $9911000
-Balance: $9910000
-Balance: $9909000
-Balance: $9908000
-Balance: $9907000
-Balance: $9906000
-Balance: $9905000
-Balance: $9904000
-Balance: $9903000
-Balance: $9902000
-Balance: $10085000
-Balance: $10084000
-Balance: $10083000
-Balance: $10082000
-Balance: $10081000
-Balance: $10080000
-Balance: $10079000
-Balance: $10078000
-      Final Balance: 10078000
-   Expected Balance: 4304692296
+ Deposit Iterations: 5811
+Withdraw Iterations: 435
+      Final Balance: 376472000
+   Expected Balance: 84120000
 ==========================================================
           File name: Log_84.txt
                 Run: 77
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9968000
-Balance: $9969000
-Balance: $9970000
-Balance: $9971000
-Balance: $9972000
-Balance: $9973000
-Balance: $9972000
-Balance: $9971000
-Balance: $9970000
-Balance: $9969000
-Balance: $9968000
-Balance: $9967000
-Balance: $9966000
-Balance: $9965000
-Balance: $9964000
-Balance: $9963000
-Balance: $9962000
-Balance: $9961000
-Balance: $9960000
-Balance: $10123000
-Balance: $10122000
-Balance: $10121000
-Balance: $10120000
-Balance: $10119000
-Balance: $10118000
-Balance: $10117000
-Balance: $10116000
-      Final Balance: 10116000
-   Expected Balance: 4304809296
+ Deposit Iterations: 4067
+Withdraw Iterations: 1172
+      Final Balance: 141914000
+   Expected Balance: 141914000
 ==========================================================
           File name: Log_84.txt
                 Run: 78
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9807000
-Balance: $9808000
-Balance: $9809000
-Balance: $9810000
-Balance: $9811000
-Balance: $9812000
-Balance: $9811000
-Balance: $9810000
-Balance: $9809000
-Balance: $9808000
-Balance: $9807000
-Balance: $9806000
-Balance: $9805000
-Balance: $9804000
-Balance: $9803000
-Balance: $9802000
-Balance: $9801000
-Balance: $9800000
-Balance: $9799000
-Balance: $9940000
-Balance: $9939000
-Balance: $9938000
-Balance: $9937000
-Balance: $9936000
-Balance: $9935000
-Balance: $9934000
-Balance: $9933000
-      Final Balance: 9933000
-   Expected Balance: 4304617296
+ Deposit Iterations: 6355
+Withdraw Iterations: 2976
+      Final Balance: 61999000
+   Expected Balance: 61999000
 ==========================================================
           File name: Log_84.txt
                 Run: 79
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9909000
-Balance: $9910000
-Balance: $9911000
-Balance: $9912000
-Balance: $9913000
-Balance: $9914000
-Balance: $9913000
-Balance: $9912000
-Balance: $9911000
-Balance: $9910000
-Balance: $9909000
-Balance: $9908000
-Balance: $9907000
-Balance: $9906000
-Balance: $9905000
-Balance: $9904000
-Balance: $9903000
-Balance: $9902000
-Balance: $9901000
-Balance: $10040000
-Balance: $10039000
-Balance: $10038000
-Balance: $10037000
-Balance: $10036000
-Balance: $10035000
-Balance: $10034000
-Balance: $10033000
-      Final Balance: 10033000
-   Expected Balance: 4304690296
+ Deposit Iterations: 776
+Withdraw Iterations: 730
+      Final Balance: 73763000
+   Expected Balance: 73763000
 ==========================================================
           File name: Log_84.txt
                 Run: 80
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9967000
-Balance: $9968000
-Balance: $9969000
-Balance: $9970000
-Balance: $9971000
-Balance: $9972000
-Balance: $9971000
-Balance: $9970000
-Balance: $9969000
-Balance: $9968000
-Balance: $9967000
-Balance: $9966000
-Balance: $9965000
-Balance: $9964000
-Balance: $9963000
-Balance: $9962000
-Balance: $9961000
-Balance: $9960000
-Balance: $9959000
-Balance: $10096000
-Balance: $10095000
-Balance: $10094000
-Balance: $10093000
-Balance: $10092000
-Balance: $10091000
-Balance: $10090000
-Balance: $10089000
-      Final Balance: 10089000
-   Expected Balance: 4304776296
+ Deposit Iterations: 7670
+Withdraw Iterations: 1409
+      Final Balance: 406170000
+   Expected Balance: 126034000
 ==========================================================
           File name: Log_84.txt
                 Run: 81
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10399000
-Balance: $10400000
-Balance: $10401000
-Balance: $10402000
-Balance: $10403000
-Balance: $10404000
-Balance: $10403000
-Balance: $10402000
-Balance: $10401000
-Balance: $10400000
-Balance: $10399000
-Balance: $10398000
-Balance: $10397000
-Balance: $10396000
-Balance: $10395000
-Balance: $10394000
-Balance: $10393000
-Balance: $10392000
-Balance: $10550000
-Balance: $10549000
-Balance: $10548000
-Balance: $10547000
-Balance: $10546000
-Balance: $10545000
-Balance: $10544000
-Balance: $10543000
-Balance: $10542000
-      Final Balance: 10542000
-   Expected Balance: 4305134296
+ Deposit Iterations: 2937
+Withdraw Iterations: 3582
+      Final Balance: 340187000
+   Expected Balance: 4342170296
 ==========================================================
           File name: Log_84.txt
                 Run: 82
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $875000
-Balance: $876000
-Balance: $877000
-Balance: $878000
-Balance: $879000
-Balance: $880000
-Balance: $879000
-Balance: $878000
-Balance: $877000
-Balance: $876000
-Balance: $875000
-Balance: $874000
-Balance: $873000
-Balance: $872000
-Balance: $871000
-Balance: $870000
-Balance: $869000
-Balance: $868000
-Balance: $867000
-Balance: $866000
-Balance: $992000
-Balance: $991000
-Balance: $990000
-Balance: $989000
-Balance: $988000
-Balance: $987000
-Balance: $986000
-      Final Balance: 986000
-   Expected Balance: 4295706296
+ Deposit Iterations: 4010
+Withdraw Iterations: 678
+      Final Balance: 417997000
+   Expected Balance: 98125000
 ==========================================================
           File name: Log_84.txt
                 Run: 83
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9937000
-Balance: $9938000
-Balance: $9939000
-Balance: $9940000
-Balance: $9941000
-Balance: $9942000
-Balance: $9941000
-Balance: $9940000
-Balance: $9939000
-Balance: $9938000
-Balance: $9937000
-Balance: $9936000
-Balance: $9935000
-Balance: $9934000
-Balance: $9933000
-Balance: $9932000
-Balance: $9931000
-Balance: $9930000
-Balance: $9929000
-Balance: $10039000
-Balance: $10038000
-Balance: $10037000
-Balance: $10036000
-Balance: $10036000
-Balance: $10035000
-Balance: $10034000
-Balance: $10034000
-      Final Balance: 10035000
-   Expected Balance: 4304718296
+ Deposit Iterations: 391
+Withdraw Iterations: 537
+      Final Balance: 358104000
+   Expected Balance: 4364361296
 ==========================================================
           File name: Log_84.txt
                 Run: 84
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9824000
-Balance: $9825000
-Balance: $9826000
-Balance: $9827000
-Balance: $9828000
-Balance: $9829000
-Balance: $9828000
-Balance: $9827000
-Balance: $9826000
-Balance: $9825000
-Balance: $9824000
-Balance: $9823000
-Balance: $9822000
-Balance: $9821000
-Balance: $9820000
-Balance: $9819000
-Balance: $9818000
-Balance: $9817000
-Balance: $9816000
-Balance: $9957000
-Balance: $9956000
-Balance: $9955000
-Balance: $9954000
-Balance: $9953000
-Balance: $9952000
-Balance: $9951000
-Balance: $9950000
-      Final Balance: 9950000
-   Expected Balance: 4304617296
+ Deposit Iterations: 1030
+Withdraw Iterations: 1305
+      Final Balance: 101419000
+   Expected Balance: 4396386296
 ==========================================================
           File name: Log_84.txt
                 Run: 85
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10018000
-Balance: $10019000
-Balance: $10020000
-Balance: $10021000
-Balance: $10022000
-Balance: $10023000
-Balance: $10022000
-Balance: $10021000
-Balance: $10020000
-Balance: $10019000
-Balance: $10018000
-Balance: $10017000
-Balance: $10016000
-Balance: $10015000
-Balance: $10014000
-Balance: $10013000
-Balance: $10012000
-Balance: $10011000
-Balance: $10010000
-Balance: $10009000
-Balance: $10008000
-Balance: $10007000
-Balance: $10006000
-Balance: $10005000
-Balance: $10004000
-Balance: $10003000
-Balance: $10002000
-      Final Balance: 10002000
-   Expected Balance: 4304769296
+ Deposit Iterations: 6558
+Withdraw Iterations: 2165
+      Final Balance: 342541000
+   Expected Balance: 78131000
 ==========================================================
           File name: Log_84.txt
                 Run: 86
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9705000
-Balance: $9706000
-Balance: $9707000
-Balance: $9708000
-Balance: $9709000
-Balance: $9710000
-Balance: $9709000
-Balance: $9708000
-Balance: $9707000
-Balance: $9706000
-Balance: $9705000
-Balance: $9704000
-Balance: $9703000
-Balance: $9702000
-Balance: $9701000
-Balance: $9700000
-Balance: $9699000
-Balance: $9698000
-Balance: $9697000
-Balance: $9831000
-Balance: $9834000
-Balance: $9834000
-Balance: $9833000
-Balance: $9832000
-Balance: $9831000
-Balance: $9830000
-Balance: $9829000
-      Final Balance: 9829000
-   Expected Balance: 4304485296
+ Deposit Iterations: 6394
+Withdraw Iterations: 1024
+      Final Balance: 95228000
+   Expected Balance: 95228000
 ==========================================================
           File name: Log_84.txt
                 Run: 87
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10450000
-Balance: $10451000
-Balance: $10452000
-Balance: $10453000
-Balance: $10454000
-Balance: $10455000
-Balance: $10454000
-Balance: $10453000
-Balance: $10452000
-Balance: $10451000
-Balance: $10450000
-Balance: $10449000
-Balance: $10448000
-Balance: $10447000
-Balance: $10446000
-Balance: $10445000
-Balance: $10444000
-Balance: $10443000
-Balance: $10576000
-Balance: $10575000
-Balance: $10574000
-Balance: $10573000
-Balance: $10572000
-Balance: $10571000
-Balance: $10570000
-Balance: $10569000
-Balance: $10568000
-      Final Balance: 10568000
-   Expected Balance: 4305264296
+ Deposit Iterations: 2601
+Withdraw Iterations: 3553
+      Final Balance: 320004000
+   Expected Balance: 4404755296
 ==========================================================
           File name: Log_84.txt
                 Run: 88
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10022000
-Balance: $10023000
-Balance: $10024000
-Balance: $10025000
-Balance: $10026000
-Balance: $10027000
-Balance: $10026000
-Balance: $10025000
-Balance: $10024000
-Balance: $10023000
-Balance: $10022000
-Balance: $10021000
-Balance: $10020000
-Balance: $10019000
-Balance: $10018000
-Balance: $10017000
-Balance: $10016000
-Balance: $10015000
-Balance: $10085000
-Balance: $10084000
-Balance: $10083000
-Balance: $10082000
-Balance: $10082000
-Balance: $10082000
-Balance: $10082000
-Balance: $10082000
-Balance: $10082000
-      Final Balance: 10083000
-   Expected Balance: 4304890296
+ Deposit Iterations: 4419
+Withdraw Iterations: 126
+      Final Balance: 379249000
+   Expected Balance: 97722000
 ==========================================================
           File name: Log_84.txt
                 Run: 89
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10381000
-Balance: $10382000
-Balance: $10383000
-Balance: $10384000
-Balance: $10385000
-Balance: $10386000
-Balance: $10385000
-Balance: $10384000
-Balance: $10383000
-Balance: $10382000
-Balance: $10381000
-Balance: $10380000
-Balance: $10379000
-Balance: $10378000
-Balance: $10377000
-Balance: $10376000
-Balance: $10375000
-Balance: $10374000
-Balance: $10502000
-Balance: $10501000
-Balance: $10500000
-Balance: $10499000
-Balance: $10498000
-Balance: $10497000
-Balance: $10496000
-Balance: $10495000
-Balance: $10494000
-      Final Balance: 10494000
-   Expected Balance: 4305189296
+ Deposit Iterations: 7864
+Withdraw Iterations: 2157
+      Final Balance: 337227000
+   Expected Balance: 75710000
 ==========================================================
           File name: Log_84.txt
                 Run: 90
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10530000
-Balance: $10531000
-Balance: $10532000
-Balance: $10533000
-Balance: $10534000
-Balance: $10535000
-Balance: $10534000
-Balance: $10533000
-Balance: $10532000
-Balance: $10531000
-Balance: $10530000
-Balance: $10529000
-Balance: $10528000
-Balance: $10527000
-Balance: $10526000
-Balance: $10525000
-Balance: $10524000
-Balance: $10523000
-Balance: $10650000
-Balance: $10649000
-Balance: $10648000
-Balance: $10647000
-Balance: $10646000
-Balance: $10645000
-Balance: $10644000
-Balance: $10643000
-Balance: $10642000
-      Final Balance: 10642000
-   Expected Balance: 4305311296
+ Deposit Iterations: 1623
+Withdraw Iterations: 1133
+      Final Balance: 124455000
+   Expected Balance: 124455000
 ==========================================================
           File name: Log_84.txt
                 Run: 91
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $1096000
-Balance: $1097000
-Balance: $1098000
-Balance: $1099000
-Balance: $1100000
-Balance: $1101000
-Balance: $1100000
-Balance: $1099000
-Balance: $1098000
-Balance: $1097000
-Balance: $1096000
-Balance: $1095000
-Balance: $1094000
-Balance: $1093000
-Balance: $1092000
-Balance: $1091000
-Balance: $1090000
-Balance: $1089000
-Balance: $1088000
-Balance: $1068000
-Balance: $1062000
-Balance: $1059000
-Balance: $1057000
-Balance: $1056000
-Balance: $1055000
-Balance: $1055000
-Balance: $1055000
-      Final Balance: 1056000
-   Expected Balance: 4295958296
+ Deposit Iterations: 6786
+Withdraw Iterations: 319
+      Final Balance: 86167000
+   Expected Balance: 86167000
 ==========================================================
           File name: Log_84.txt
                 Run: 92
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10303000
-Balance: $10304000
-Balance: $10305000
-Balance: $10306000
-Balance: $10307000
-Balance: $10308000
-Balance: $10307000
-Balance: $10306000
-Balance: $10305000
-Balance: $10304000
-Balance: $10303000
-Balance: $10302000
-Balance: $10301000
-Balance: $10300000
-Balance: $10299000
-Balance: $10299000
-Balance: $10298000
-Balance: $10297000
-Balance: $10456000
-Balance: $10455000
-Balance: $10454000
-Balance: $10453000
-Balance: $10452000
-Balance: $10451000
-Balance: $10450000
-Balance: $10449000
-Balance: $10448000
-      Final Balance: 10448000
-   Expected Balance: 4305146296
+ Deposit Iterations: 2878
+Withdraw Iterations: 630
+      Final Balance: 372643000
+   Expected Balance: 77179000
 ==========================================================
           File name: Log_84.txt
                 Run: 93
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9982000
-Balance: $9983000
-Balance: $9984000
-Balance: $9985000
-Balance: $9986000
-Balance: $9987000
-Balance: $9986000
-Balance: $9985000
-Balance: $9984000
-Balance: $9983000
-Balance: $9982000
-Balance: $9981000
-Balance: $9980000
-Balance: $9979000
-Balance: $9978000
-Balance: $9977000
-Balance: $9976000
-Balance: $9975000
-Balance: $9974000
-Balance: $10242000
-Balance: $10241000
-Balance: $10240000
-Balance: $10239000
-Balance: $10238000
-Balance: $10237000
-Balance: $10236000
-Balance: $10235000
-      Final Balance: 10235000
-   Expected Balance: 4304775296
+ Deposit Iterations: 6605
+Withdraw Iterations: 1993
+      Final Balance: 91318000
+   Expected Balance: 91318000
 ==========================================================
           File name: Log_84.txt
                 Run: 94
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10161000
-Balance: $10162000
-Balance: $10163000
-Balance: $10164000
-Balance: $10165000
-Balance: $10166000
-Balance: $10165000
-Balance: $10164000
-Balance: $10163000
-Balance: $10162000
-Balance: $10161000
-Balance: $10160000
-Balance: $10159000
-Balance: $10158000
-Balance: $10157000
-Balance: $10156000
-Balance: $10155000
-Balance: $10154000
-Balance: $10261000
-Balance: $10260000
-Balance: $10259000
-Balance: $10258000
-Balance: $10257000
-Balance: $10256000
-Balance: $10255000
-Balance: $10254000
-Balance: $10253000
-      Final Balance: 10253000
-   Expected Balance: 4304994296
+ Deposit Iterations: 2875
+Withdraw Iterations: 2922
+      Final Balance: 358903000
+   Expected Balance: 4382735296
 ==========================================================
           File name: Log_84.txt
                 Run: 95
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9817000
-Balance: $9818000
-Balance: $9819000
-Balance: $9820000
-Balance: $9821000
-Balance: $9822000
-Balance: $9821000
-Balance: $9820000
-Balance: $9819000
-Balance: $9818000
-Balance: $9817000
-Balance: $9816000
-Balance: $9815000
-Balance: $9814000
-Balance: $9813000
-Balance: $9812000
-Balance: $9811000
-Balance: $9810000
-Balance: $9809000
-Balance: $9978000
-Balance: $9977000
-Balance: $9976000
-Balance: $9975000
-Balance: $9974000
-Balance: $9973000
-Balance: $9972000
-Balance: $9971000
-      Final Balance: 9971000
-   Expected Balance: 4304597296
+ Deposit Iterations: 205
+Withdraw Iterations: 995
+      Final Balance: 105568000
+   Expected Balance: 4400535296
 ==========================================================
           File name: Log_84.txt
                 Run: 96
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10048000
-Balance: $10049000
-Balance: $10050000
-Balance: $10051000
-Balance: $10052000
-Balance: $10053000
-Balance: $10052000
-Balance: $10051000
-Balance: $10050000
-Balance: $10049000
-Balance: $10048000
-Balance: $10047000
-Balance: $10046000
-Balance: $10045000
-Balance: $10044000
-Balance: $10043000
-Balance: $10042000
-Balance: $10041000
-Balance: $10094000
-Balance: $10093000
-Balance: $10092000
-Balance: $10091000
-Balance: $10090000
-Balance: $10089000
-Balance: $10088000
-Balance: $10087000
-Balance: $10086000
-      Final Balance: 10086000
-   Expected Balance: 4304861296
+ Deposit Iterations: 424
+Withdraw Iterations: 2267
+      Final Balance: 100851000
+   Expected Balance: 4395818296
 ==========================================================
           File name: Log_84.txt
                 Run: 97
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9882000
-Balance: $9883000
-Balance: $9884000
-Balance: $9885000
-Balance: $9886000
-Balance: $9887000
-Balance: $9886000
-Balance: $9885000
-Balance: $9884000
-Balance: $9883000
-Balance: $9882000
-Balance: $9881000
-Balance: $9880000
-Balance: $9879000
-Balance: $9878000
-Balance: $9877000
-Balance: $9876000
-Balance: $9875000
-Balance: $9874000
-Balance: $9976000
-Balance: $9975000
-Balance: $9974000
-Balance: $9973000
-Balance: $9972000
-Balance: $9971000
-Balance: $9970000
-Balance: $9969000
-      Final Balance: 9969000
-   Expected Balance: 4304663296
+ Deposit Iterations: 67
+Withdraw Iterations: 2009
+      Final Balance: 79117000
+   Expected Balance: 4374084296
 ==========================================================
           File name: Log_84.txt
                 Run: 98
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $10136000
-Balance: $10137000
-Balance: $10138000
-Balance: $10139000
-Balance: $10140000
-Balance: $10141000
-Balance: $10140000
-Balance: $10139000
-Balance: $10138000
-Balance: $10137000
-Balance: $10136000
-Balance: $10135000
-Balance: $10134000
-Balance: $10133000
-Balance: $10132000
-Balance: $10131000
-Balance: $10130000
-Balance: $10129000
-Balance: $10181000
-Balance: $10180000
-Balance: $10179000
-Balance: $10178000
-Balance: $10177000
-Balance: $10176000
-Balance: $10175000
-Balance: $10174000
-Balance: $10173000
-      Final Balance: 10173000
-   Expected Balance: 4305021296
+ Deposit Iterations: 5408
+Withdraw Iterations: 1532
+      Final Balance: 72602000
+   Expected Balance: 72602000
 ==========================================================
           File name: Log_84.txt
                 Run: 99
            ThreadID: 84
- Deposit Iterations: 6
-Withdraw Iterations: 21
-Balance: $9695000
-Balance: $9696000
-Balance: $9697000
-Balance: $9698000
-Balance: $9699000
-Balance: $9700000
-Balance: $9699000
-Balance: $9698000
-Balance: $9697000
-Balance: $9696000
-Balance: $9695000
-Balance: $9694000
-Balance: $9693000
-Balance: $9692000
-Balance: $9691000
-Balance: $9690000
-Balance: $9689000
-Balance: $9688000
-Balance: $9687000
-Balance: $9907000
-Balance: $9912000
-Balance: $9914000
-Balance: $9916000
-Balance: $9919000
-Balance: $9920000
-Balance: $9920000
-Balance: $9921000
-      Final Balance: 9924000
-   Expected Balance: 4304448296
+ Deposit Iterations: 1609
+Withdraw Iterations: 2233
+      Final Balance: 79131000
+   Expected Balance: 4374098296

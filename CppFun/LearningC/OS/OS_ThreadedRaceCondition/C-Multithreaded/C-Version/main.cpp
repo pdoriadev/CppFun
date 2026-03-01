@@ -8,12 +8,21 @@
 #include <unistd.h>
 // threads
 #include <pthread.h>
+// clock_gettime
+#include <time.h>
 ////////////////////////
 // User-defined headers
 #include "BankAccount.hpp"
 #include "AccountActions.hpp"
 #include "Errorlog.hpp"
 #include "ThreadLog.hpp"
+
+void nowInMicroseconds(uint64_t &useconds)
+{
+  timespec ts;
+  clock_gettime(CLOCK_MONOTONIC, &ts);
+  useconds = (uint64_t)ts.tv_sec * 1000000 + (uint64_t)ts.tv_nsec / 1000;
+}
 
 bool testDepositsWithdrawls(ThreadArg *tArgs)
 {
@@ -45,10 +54,15 @@ bool testDepositsWithdrawls(ThreadArg *tArgs)
 	fprintf(logFile, "\n Deposit Iterations: %llu", tArgs->deposits);
 	fprintf(logFile, "\nWithdraw Iterations: %llu", tArgs->withdrawls);
 
+	if (rand() % 2 == 0)
+	{
+		sleep(1);
+	}
+
  	Action depositAction = {.iterations=tArgs->deposits, .amount=1000, .actionFunction=deposit};
 	Action withdrawAction = {.iterations=tArgs->withdrawls, .amount=-1000, .actionFunction=withdraw};
-  outputAndDoBankingAction(tArgs->account, &depositAction, logFile);
-  outputAndDoBankingAction(tArgs->account, &withdrawAction, logFile);
+  outputAndDoBankingAction(tArgs->account, &depositAction, NULL);
+  outputAndDoBankingAction(tArgs->account, &withdrawAction, NULL);
 
   fprintf(logFile, "\n      Final Balance: %llu", tArgs->account->balance);
   fprintf(logFile, "\n   Expected Balance: %llu", expectedFinalBalance);
@@ -85,9 +99,9 @@ int main (int argv, char* argc[])
 	}
 
 	const uint32_t RUNS_TARGET = 100;
-  const uint32_t THREAD_COUNT = 100;
+  const uint32_t THREAD_COUNT = 256;
   pthread_t threads[THREAD_COUNT];
-  char finalExpectedBalancesAllRuns[1000] = "";
+  char finalExpectedBalancesAllRuns[10000] = "";
 	for (uint32_t runCount = 0; runCount < RUNS_TARGET; runCount++)
 	{
     uint32_t totalDeposits = 0;
@@ -114,9 +128,12 @@ int main (int argv, char* argc[])
 
   	  // seeding the rand_r() to get consistent random behavior between threads.
         // rand_r required an unsigned_int* seed.
-    	srand(i);
-      argCopy->deposits = ( rand() % 512 ) + 1;
-      argCopy->withdrawls = ( rand() % 256 ) + 1;
+			uint64_t nowOut;
+			nowInMicroseconds(nowOut);
+    	srand((uint64_t)i + nowOut);
+      argCopy->deposits = ( rand() % 8112 ) + 1;
+      argCopy->withdrawls = ( rand() % 4096 ) + 1;
+
       totalDeposits += argCopy->deposits;
       totalWithdrawls += argCopy->withdrawls;
 
@@ -140,8 +157,11 @@ int main (int argv, char* argc[])
 
     // Final vs. Expected Balance Strings and Output
     uint64_t expectedBalance = totalDeposits*1000 - totalWithdrawls*1000;
-    char finalExpectedBalanceStr[200] = "\n   Final Balance: ";
+    char finalExpectedBalanceStr[200] = "\n\n             Run: ";
     char intStr[30];
+		snprintf(intStr, 29, "%lu", runCount);
+		strcat(finalExpectedBalanceStr, intStr);
+		strcat(finalExpectedBalanceStr, "\n   Final Balance: ");
     snprintf(intStr, 29, "%llu", accountPtr->balance);
     strcat(finalExpectedBalanceStr, intStr);
     strcat(finalExpectedBalanceStr, "\nExpected Balance: ");

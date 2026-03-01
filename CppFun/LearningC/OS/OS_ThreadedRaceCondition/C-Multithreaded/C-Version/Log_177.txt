@@ -1,0 +1,801 @@
+
+==========================================================
+          File name: Log_177.txt
+                Run: 0
+           ThreadID: 177
+ Deposit Iterations: 58
+Withdraw Iterations: 333
+      Final Balance: 398837000
+   Expected Balance: 4443698296
+==========================================================
+          File name: Log_177.txt
+                Run: 1
+           ThreadID: 177
+ Deposit Iterations: 2259
+Withdraw Iterations: 1765
+      Final Balance: 476451000
+   Expected Balance: 221777000
+==========================================================
+          File name: Log_177.txt
+                Run: 2
+           ThreadID: 177
+ Deposit Iterations: 3273
+Withdraw Iterations: 983
+      Final Balance: 144220000
+   Expected Balance: 144220000
+==========================================================
+          File name: Log_177.txt
+                Run: 3
+           ThreadID: 177
+ Deposit Iterations: 7724
+Withdraw Iterations: 445
+      Final Balance: 432273000
+   Expected Balance: 160435000
+==========================================================
+          File name: Log_177.txt
+                Run: 4
+           ThreadID: 177
+ Deposit Iterations: 3855
+Withdraw Iterations: 846
+      Final Balance: 224585000
+   Expected Balance: 224585000
+==========================================================
+          File name: Log_177.txt
+                Run: 5
+           ThreadID: 177
+ Deposit Iterations: 63
+Withdraw Iterations: 20
+      Final Balance: 473948000
+   Expected Balance: 189564000
+==========================================================
+          File name: Log_177.txt
+                Run: 6
+           ThreadID: 177
+ Deposit Iterations: 4581
+Withdraw Iterations: 1980
+      Final Balance: 170468000
+   Expected Balance: 170468000
+==========================================================
+          File name: Log_177.txt
+                Run: 7
+           ThreadID: 177
+ Deposit Iterations: 4422
+Withdraw Iterations: 1235
+      Final Balance: 468445000
+   Expected Balance: 187223000
+==========================================================
+          File name: Log_177.txt
+                Run: 8
+           ThreadID: 177
+ Deposit Iterations: 3719
+Withdraw Iterations: 3751
+      Final Balance: 180603000
+   Expected Balance: 4475570296
+==========================================================
+          File name: Log_177.txt
+                Run: 9
+           ThreadID: 177
+ Deposit Iterations: 1072
+Withdraw Iterations: 3344
+      Final Balance: 173313000
+   Expected Balance: 4468280296
+==========================================================
+          File name: Log_177.txt
+                Run: 10
+           ThreadID: 177
+ Deposit Iterations: 91
+Withdraw Iterations: 3258
+      Final Balance: 171573000
+   Expected Balance: 4466540296
+==========================================================
+          File name: Log_177.txt
+                Run: 11
+           ThreadID: 177
+ Deposit Iterations: 7413
+Withdraw Iterations: 1647
+      Final Balance: 373159000
+   Expected Balance: 171474000
+==========================================================
+          File name: Log_177.txt
+                Run: 12
+           ThreadID: 177
+ Deposit Iterations: 605
+Withdraw Iterations: 3650
+      Final Balance: 220930000
+   Expected Balance: 4515897296
+==========================================================
+          File name: Log_177.txt
+                Run: 13
+           ThreadID: 177
+ Deposit Iterations: 1180
+Withdraw Iterations: 724
+      Final Balance: 487859000
+   Expected Balance: 194803000
+==========================================================
+          File name: Log_177.txt
+                Run: 14
+           ThreadID: 177
+ Deposit Iterations: 2549
+Withdraw Iterations: 1141
+      Final Balance: 160238000
+   Expected Balance: 160238000
+==========================================================
+          File name: Log_177.txt
+                Run: 15
+           ThreadID: 177
+ Deposit Iterations: 3588
+Withdraw Iterations: 2954
+      Final Balance: 452325000
+   Expected Balance: 198237000
+==========================================================
+          File name: Log_177.txt
+                Run: 16
+           ThreadID: 177
+ Deposit Iterations: 2435
+Withdraw Iterations: 3028
+      Final Balance: 432577000
+   Expected Balance: 4481213296
+==========================================================
+          File name: Log_177.txt
+                Run: 17
+           ThreadID: 177
+ Deposit Iterations: 2602
+Withdraw Iterations: 1875
+      Final Balance: 445523000
+   Expected Balance: 162847000
+==========================================================
+          File name: Log_177.txt
+                Run: 18
+           ThreadID: 177
+ Deposit Iterations: 1098
+Withdraw Iterations: 1255
+      Final Balance: 171036000
+   Expected Balance: 4466003296
+==========================================================
+          File name: Log_177.txt
+                Run: 19
+           ThreadID: 177
+ Deposit Iterations: 1542
+Withdraw Iterations: 3017
+      Final Balance: 178163000
+   Expected Balance: 4473130296
+==========================================================
+          File name: Log_177.txt
+                Run: 20
+           ThreadID: 177
+ Deposit Iterations: 2281
+Withdraw Iterations: 3230
+      Final Balance: 134630000
+   Expected Balance: 4429597296
+==========================================================
+          File name: Log_177.txt
+                Run: 21
+           ThreadID: 177
+ Deposit Iterations: 1617
+Withdraw Iterations: 1614
+      Final Balance: 437116000
+   Expected Balance: 166478000
+==========================================================
+          File name: Log_177.txt
+                Run: 22
+           ThreadID: 177
+ Deposit Iterations: 5725
+Withdraw Iterations: 1952
+      Final Balance: 408473000
+   Expected Balance: 198720000
+==========================================================
+          File name: Log_177.txt
+                Run: 23
+           ThreadID: 177
+ Deposit Iterations: 7579
+Withdraw Iterations: 2706
+      Final Balance: 239366000
+   Expected Balance: 239366000
+==========================================================
+          File name: Log_177.txt
+                Run: 24
+           ThreadID: 177
+ Deposit Iterations: 4913
+Withdraw Iterations: 3813
+      Final Balance: 231921000
+   Expected Balance: 231921000
+==========================================================
+          File name: Log_177.txt
+                Run: 25
+           ThreadID: 177
+ Deposit Iterations: 3500
+Withdraw Iterations: 2217
+      Final Balance: 428015000
+   Expected Balance: 217109000
+==========================================================
+          File name: Log_177.txt
+                Run: 26
+           ThreadID: 177
+ Deposit Iterations: 2832
+Withdraw Iterations: 1743
+      Final Balance: 231950000
+   Expected Balance: 231950000
+==========================================================
+          File name: Log_177.txt
+                Run: 27
+           ThreadID: 177
+ Deposit Iterations: 7405
+Withdraw Iterations: 2579
+      Final Balance: 434159000
+   Expected Balance: 152391000
+==========================================================
+          File name: Log_177.txt
+                Run: 28
+           ThreadID: 177
+ Deposit Iterations: 4415
+Withdraw Iterations: 2705
+      Final Balance: 464048000
+   Expected Balance: 183551000
+==========================================================
+          File name: Log_177.txt
+                Run: 29
+           ThreadID: 177
+ Deposit Iterations: 3221
+Withdraw Iterations: 3865
+      Final Balance: 214537000
+   Expected Balance: 4509504296
+==========================================================
+          File name: Log_177.txt
+                Run: 30
+           ThreadID: 177
+ Deposit Iterations: 1609
+Withdraw Iterations: 1255
+      Final Balance: 186025000
+   Expected Balance: 186025000
+==========================================================
+          File name: Log_177.txt
+                Run: 31
+           ThreadID: 177
+ Deposit Iterations: 6
+Withdraw Iterations: 1780
+      Final Balance: 413211000
+   Expected Balance: 4490641296
+==========================================================
+          File name: Log_177.txt
+                Run: 32
+           ThreadID: 177
+ Deposit Iterations: 4766
+Withdraw Iterations: 889
+      Final Balance: 138202000
+   Expected Balance: 138202000
+==========================================================
+          File name: Log_177.txt
+                Run: 33
+           ThreadID: 177
+ Deposit Iterations: 4222
+Withdraw Iterations: 1526
+      Final Balance: 439092000
+   Expected Balance: 243868000
+==========================================================
+          File name: Log_177.txt
+                Run: 34
+           ThreadID: 177
+ Deposit Iterations: 3940
+Withdraw Iterations: 1476
+      Final Balance: 455202000
+   Expected Balance: 190241000
+==========================================================
+          File name: Log_177.txt
+                Run: 35
+           ThreadID: 177
+ Deposit Iterations: 1474
+Withdraw Iterations: 3341
+      Final Balance: 150011000
+   Expected Balance: 4444978296
+==========================================================
+          File name: Log_177.txt
+                Run: 36
+           ThreadID: 177
+ Deposit Iterations: 1939
+Withdraw Iterations: 1083
+      Final Balance: 286463000
+   Expected Balance: 6223000
+==========================================================
+          File name: Log_177.txt
+                Run: 37
+           ThreadID: 177
+ Deposit Iterations: 482
+Withdraw Iterations: 3192
+      Final Balance: 158935000
+   Expected Balance: 4453902296
+==========================================================
+          File name: Log_177.txt
+                Run: 38
+           ThreadID: 177
+ Deposit Iterations: 6181
+Withdraw Iterations: 4047
+      Final Balance: 459341000
+   Expected Balance: 165736000
+==========================================================
+          File name: Log_177.txt
+                Run: 39
+           ThreadID: 177
+ Deposit Iterations: 3503
+Withdraw Iterations: 3251
+      Final Balance: 441043000
+   Expected Balance: 144107000
+==========================================================
+          File name: Log_177.txt
+                Run: 40
+           ThreadID: 177
+ Deposit Iterations: 6807
+Withdraw Iterations: 915
+      Final Balance: 155872000
+   Expected Balance: 155872000
+==========================================================
+          File name: Log_177.txt
+                Run: 41
+           ThreadID: 177
+ Deposit Iterations: 4576
+Withdraw Iterations: 3748
+      Final Balance: 189382000
+   Expected Balance: 189382000
+==========================================================
+          File name: Log_177.txt
+                Run: 42
+           ThreadID: 177
+ Deposit Iterations: 493
+Withdraw Iterations: 787
+      Final Balance: 184752000
+   Expected Balance: 4479719296
+==========================================================
+          File name: Log_177.txt
+                Run: 43
+           ThreadID: 177
+ Deposit Iterations: 4904
+Withdraw Iterations: 1519
+      Final Balance: 483067000
+   Expected Balance: 248893000
+==========================================================
+          File name: Log_177.txt
+                Run: 44
+           ThreadID: 177
+ Deposit Iterations: 966
+Withdraw Iterations: 3747
+      Final Balance: 399897000
+   Expected Balance: 4448179296
+==========================================================
+          File name: Log_177.txt
+                Run: 45
+           ThreadID: 177
+ Deposit Iterations: 4260
+Withdraw Iterations: 3370
+      Final Balance: 196917000
+   Expected Balance: 196917000
+==========================================================
+          File name: Log_177.txt
+                Run: 46
+           ThreadID: 177
+ Deposit Iterations: 2664
+Withdraw Iterations: 2977
+      Final Balance: 192277000
+   Expected Balance: 4487244296
+==========================================================
+          File name: Log_177.txt
+                Run: 47
+           ThreadID: 177
+ Deposit Iterations: 6162
+Withdraw Iterations: 1466
+      Final Balance: 496665000
+   Expected Balance: 201068000
+==========================================================
+          File name: Log_177.txt
+                Run: 48
+           ThreadID: 177
+ Deposit Iterations: 6189
+Withdraw Iterations: 2990
+      Final Balance: 243853000
+   Expected Balance: 8274000
+==========================================================
+          File name: Log_177.txt
+                Run: 49
+           ThreadID: 177
+ Deposit Iterations: 3629
+Withdraw Iterations: 868
+      Final Balance: 402641000
+   Expected Balance: 161420000
+==========================================================
+          File name: Log_177.txt
+                Run: 50
+           ThreadID: 177
+ Deposit Iterations: 6704
+Withdraw Iterations: 3345
+      Final Balance: 429109000
+   Expected Balance: 208743000
+==========================================================
+          File name: Log_177.txt
+                Run: 51
+           ThreadID: 177
+ Deposit Iterations: 3459
+Withdraw Iterations: 234
+      Final Balance: 429738000
+   Expected Balance: 181802000
+==========================================================
+          File name: Log_177.txt
+                Run: 52
+           ThreadID: 177
+ Deposit Iterations: 4838
+Withdraw Iterations: 1064
+      Final Balance: 434460000
+   Expected Balance: 160133000
+==========================================================
+          File name: Log_177.txt
+                Run: 53
+           ThreadID: 177
+ Deposit Iterations: 379
+Withdraw Iterations: 1460
+      Final Balance: 147881000
+   Expected Balance: 4442848296
+==========================================================
+          File name: Log_177.txt
+                Run: 54
+           ThreadID: 177
+ Deposit Iterations: 5145
+Withdraw Iterations: 91
+      Final Balance: 431616000
+   Expected Balance: 169575000
+==========================================================
+          File name: Log_177.txt
+                Run: 55
+           ThreadID: 177
+ Deposit Iterations: 3349
+Withdraw Iterations: 3442
+      Final Balance: 168619000
+   Expected Balance: 4463586296
+==========================================================
+          File name: Log_177.txt
+                Run: 56
+           ThreadID: 177
+ Deposit Iterations: 319
+Withdraw Iterations: 3943
+      Final Balance: 166989000
+   Expected Balance: 4461956296
+==========================================================
+          File name: Log_177.txt
+                Run: 57
+           ThreadID: 177
+ Deposit Iterations: 5495
+Withdraw Iterations: 3099
+      Final Balance: 5114000
+   Expected Balance: 5114000
+==========================================================
+          File name: Log_177.txt
+                Run: 58
+           ThreadID: 177
+ Deposit Iterations: 3591
+Withdraw Iterations: 55
+      Final Balance: 199038000
+   Expected Balance: 199038000
+==========================================================
+          File name: Log_177.txt
+                Run: 59
+           ThreadID: 177
+ Deposit Iterations: 6432
+Withdraw Iterations: 1637
+      Final Balance: 209324000
+   Expected Balance: 209324000
+==========================================================
+          File name: Log_177.txt
+                Run: 60
+           ThreadID: 177
+ Deposit Iterations: 5167
+Withdraw Iterations: 763
+      Final Balance: 206395000
+   Expected Balance: 206395000
+==========================================================
+          File name: Log_177.txt
+                Run: 61
+           ThreadID: 177
+ Deposit Iterations: 4796
+Withdraw Iterations: 1552
+      Final Balance: 140444000
+   Expected Balance: 140444000
+==========================================================
+          File name: Log_177.txt
+                Run: 62
+           ThreadID: 177
+ Deposit Iterations: 120
+Withdraw Iterations: 3143
+      Final Balance: 200092000
+   Expected Balance: 4495059296
+==========================================================
+          File name: Log_177.txt
+                Run: 63
+           ThreadID: 177
+ Deposit Iterations: 2378
+Withdraw Iterations: 3930
+      Final Balance: 512672000
+   Expected Balance: 4498756296
+==========================================================
+          File name: Log_177.txt
+                Run: 64
+           ThreadID: 177
+ Deposit Iterations: 5491
+Withdraw Iterations: 864
+      Final Balance: 151603000
+   Expected Balance: 151603000
+==========================================================
+          File name: Log_177.txt
+                Run: 65
+           ThreadID: 177
+ Deposit Iterations: 2516
+Withdraw Iterations: 64
+      Final Balance: 110583000
+   Expected Balance: 110583000
+==========================================================
+          File name: Log_177.txt
+                Run: 66
+           ThreadID: 177
+ Deposit Iterations: 4510
+Withdraw Iterations: 3471
+      Final Balance: 213078000
+   Expected Balance: 213078000
+==========================================================
+          File name: Log_177.txt
+                Run: 67
+           ThreadID: 177
+ Deposit Iterations: 3829
+Withdraw Iterations: 1859
+      Final Balance: 217618000
+   Expected Balance: 217618000
+==========================================================
+          File name: Log_177.txt
+                Run: 68
+           ThreadID: 177
+ Deposit Iterations: 1117
+Withdraw Iterations: 2339
+      Final Balance: 377793000
+   Expected Balance: 4434327296
+==========================================================
+          File name: Log_177.txt
+                Run: 69
+           ThreadID: 177
+ Deposit Iterations: 2093
+Withdraw Iterations: 1490
+      Final Balance: 202633000
+   Expected Balance: 202633000
+==========================================================
+          File name: Log_177.txt
+                Run: 70
+           ThreadID: 177
+ Deposit Iterations: 6841
+Withdraw Iterations: 3725
+      Final Balance: 148681000
+   Expected Balance: 148681000
+==========================================================
+          File name: Log_177.txt
+                Run: 71
+           ThreadID: 177
+ Deposit Iterations: 5519
+Withdraw Iterations: 3615
+      Final Balance: 178692000
+   Expected Balance: 178692000
+==========================================================
+          File name: Log_177.txt
+                Run: 72
+           ThreadID: 177
+ Deposit Iterations: 610
+Withdraw Iterations: 2994
+      Final Balance: 203810000
+   Expected Balance: 4498777296
+==========================================================
+          File name: Log_177.txt
+                Run: 73
+           ThreadID: 177
+ Deposit Iterations: 3783
+Withdraw Iterations: 289
+      Final Balance: 431616000
+   Expected Balance: 166332000
+==========================================================
+          File name: Log_177.txt
+                Run: 74
+           ThreadID: 177
+ Deposit Iterations: 5469
+Withdraw Iterations: 2591
+      Final Balance: 200132000
+   Expected Balance: 200132000
+==========================================================
+          File name: Log_177.txt
+                Run: 75
+           ThreadID: 177
+ Deposit Iterations: 6012
+Withdraw Iterations: 2423
+      Final Balance: 451593000
+   Expected Balance: 129571000
+==========================================================
+          File name: Log_177.txt
+                Run: 76
+           ThreadID: 177
+ Deposit Iterations: 1529
+Withdraw Iterations: 1133
+      Final Balance: 474785000
+   Expected Balance: 198445000
+==========================================================
+          File name: Log_177.txt
+                Run: 77
+           ThreadID: 177
+ Deposit Iterations: 5764
+Withdraw Iterations: 1674
+      Final Balance: 235860000
+   Expected Balance: 235860000
+==========================================================
+          File name: Log_177.txt
+                Run: 78
+           ThreadID: 177
+ Deposit Iterations: 7097
+Withdraw Iterations: 3918
+      Final Balance: 158261000
+   Expected Balance: 158261000
+==========================================================
+          File name: Log_177.txt
+                Run: 79
+           ThreadID: 177
+ Deposit Iterations: 4800
+Withdraw Iterations: 253
+      Final Balance: 378690000
+   Expected Balance: 153801000
+==========================================================
+          File name: Log_177.txt
+                Run: 80
+           ThreadID: 177
+ Deposit Iterations: 6181
+Withdraw Iterations: 3091
+      Final Balance: 210584000
+   Expected Balance: 210584000
+==========================================================
+          File name: Log_177.txt
+                Run: 81
+           ThreadID: 177
+ Deposit Iterations: 7398
+Withdraw Iterations: 576
+      Final Balance: 131425000
+   Expected Balance: 131425000
+==========================================================
+          File name: Log_177.txt
+                Run: 82
+           ThreadID: 177
+ Deposit Iterations: 1984
+Withdraw Iterations: 3103
+      Final Balance: 521145000
+   Expected Balance: 4502719296
+==========================================================
+          File name: Log_177.txt
+                Run: 83
+           ThreadID: 177
+ Deposit Iterations: 7434
+Withdraw Iterations: 882
+      Final Balance: 194687000
+   Expected Balance: 194687000
+==========================================================
+          File name: Log_177.txt
+                Run: 84
+           ThreadID: 177
+ Deposit Iterations: 8067
+Withdraw Iterations: 1519
+      Final Balance: 455029000
+   Expected Balance: 183827000
+==========================================================
+          File name: Log_177.txt
+                Run: 85
+           ThreadID: 177
+ Deposit Iterations: 5136
+Withdraw Iterations: 2557
+      Final Balance: 442039000
+   Expected Balance: 151202000
+==========================================================
+          File name: Log_177.txt
+                Run: 86
+           ThreadID: 177
+ Deposit Iterations: 2444
+Withdraw Iterations: 895
+      Final Balance: 168183000
+   Expected Balance: 168183000
+==========================================================
+          File name: Log_177.txt
+                Run: 87
+           ThreadID: 177
+ Deposit Iterations: 7751
+Withdraw Iterations: 682
+      Final Balance: 419568000
+   Expected Balance: 203460000
+==========================================================
+          File name: Log_177.txt
+                Run: 88
+           ThreadID: 177
+ Deposit Iterations: 614
+Withdraw Iterations: 455
+      Final Balance: 465393000
+   Expected Balance: 198904000
+==========================================================
+          File name: Log_177.txt
+                Run: 89
+           ThreadID: 177
+ Deposit Iterations: 7583
+Withdraw Iterations: 257
+      Final Balance: 142767000
+   Expected Balance: 142767000
+==========================================================
+          File name: Log_177.txt
+                Run: 90
+           ThreadID: 177
+ Deposit Iterations: 2694
+Withdraw Iterations: 1608
+      Final Balance: 175436000
+   Expected Balance: 175436000
+==========================================================
+          File name: Log_177.txt
+                Run: 91
+           ThreadID: 177
+ Deposit Iterations: 486
+Withdraw Iterations: 2430
+      Final Balance: 194680000
+   Expected Balance: 4489647296
+==========================================================
+          File name: Log_177.txt
+                Run: 92
+           ThreadID: 177
+ Deposit Iterations: 6489
+Withdraw Iterations: 3827
+      Final Balance: 158668000
+   Expected Balance: 158668000
+==========================================================
+          File name: Log_177.txt
+                Run: 93
+           ThreadID: 177
+ Deposit Iterations: 2140
+Withdraw Iterations: 1070
+      Final Balance: 389667000
+   Expected Balance: 170873000
+==========================================================
+          File name: Log_177.txt
+                Run: 94
+           ThreadID: 177
+ Deposit Iterations: 5766
+Withdraw Iterations: 2901
+      Final Balance: 215159000
+   Expected Balance: 215159000
+==========================================================
+          File name: Log_177.txt
+                Run: 95
+           ThreadID: 177
+ Deposit Iterations: 2137
+Withdraw Iterations: 405
+      Final Balance: 202020000
+   Expected Balance: 202020000
+==========================================================
+          File name: Log_177.txt
+                Run: 96
+           ThreadID: 177
+ Deposit Iterations: 1075
+Withdraw Iterations: 2282
+      Final Balance: 396760000
+   Expected Balance: 4482491296
+==========================================================
+          File name: Log_177.txt
+                Run: 97
+           ThreadID: 177
+ Deposit Iterations: 1512
+Withdraw Iterations: 1249
+      Final Balance: 379235000
+   Expected Balance: 167636000
+==========================================================
+          File name: Log_177.txt
+                Run: 98
+           ThreadID: 177
+ Deposit Iterations: 4985
+Withdraw Iterations: 1000
+      Final Balance: 350280000
+   Expected Balance: 164431000
+==========================================================
+          File name: Log_177.txt
+                Run: 99
+           ThreadID: 177
+ Deposit Iterations: 2671
+Withdraw Iterations: 2812
+      Final Balance: 375028000
+   Expected Balance: 4462047296

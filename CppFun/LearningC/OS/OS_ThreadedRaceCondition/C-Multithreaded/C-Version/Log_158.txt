@@ -1,0 +1,801 @@
+
+==========================================================
+          File name: Log_158.txt
+                Run: 0
+           ThreadID: 158
+ Deposit Iterations: 2401
+Withdraw Iterations: 3246
+      Final Balance: 370121000
+   Expected Balance: 4439153296
+==========================================================
+          File name: Log_158.txt
+                Run: 1
+           ThreadID: 158
+ Deposit Iterations: 2509
+Withdraw Iterations: 1490
+      Final Balance: 187908000
+   Expected Balance: 187908000
+==========================================================
+          File name: Log_158.txt
+                Run: 2
+           ThreadID: 158
+ Deposit Iterations: 2093
+Withdraw Iterations: 1164
+      Final Balance: 121135000
+   Expected Balance: 121135000
+==========================================================
+          File name: Log_158.txt
+                Run: 3
+           ThreadID: 158
+ Deposit Iterations: 3823
+Withdraw Iterations: 2491
+      Final Balance: 129356000
+   Expected Balance: 129356000
+==========================================================
+          File name: Log_158.txt
+                Run: 4
+           ThreadID: 158
+ Deposit Iterations: 2900
+Withdraw Iterations: 2345
+      Final Balance: 208752000
+   Expected Balance: 208752000
+==========================================================
+          File name: Log_158.txt
+                Run: 5
+           ThreadID: 158
+ Deposit Iterations: 2301
+Withdraw Iterations: 700
+      Final Balance: 164748000
+   Expected Balance: 164748000
+==========================================================
+          File name: Log_158.txt
+                Run: 6
+           ThreadID: 158
+ Deposit Iterations: 1359
+Withdraw Iterations: 2663
+      Final Balance: 488899000
+   Expected Balance: 4439406296
+==========================================================
+          File name: Log_158.txt
+                Run: 7
+           ThreadID: 158
+ Deposit Iterations: 2587
+Withdraw Iterations: 2333
+      Final Balance: 451259000
+   Expected Balance: 167755000
+==========================================================
+          File name: Log_158.txt
+                Run: 8
+           ThreadID: 158
+ Deposit Iterations: 3789
+Withdraw Iterations: 3150
+      Final Balance: 151292000
+   Expected Balance: 151292000
+==========================================================
+          File name: Log_158.txt
+                Run: 9
+           ThreadID: 158
+ Deposit Iterations: 3744
+Withdraw Iterations: 1261
+      Final Balance: 444212000
+   Expected Balance: 155965000
+==========================================================
+          File name: Log_158.txt
+                Run: 10
+           ThreadID: 158
+ Deposit Iterations: 2242
+Withdraw Iterations: 3003
+      Final Balance: 440746000
+   Expected Balance: 4461809296
+==========================================================
+          File name: Log_158.txt
+                Run: 11
+           ThreadID: 158
+ Deposit Iterations: 1202
+Withdraw Iterations: 255
+      Final Balance: 156309000
+   Expected Balance: 156309000
+==========================================================
+          File name: Log_158.txt
+                Run: 12
+           ThreadID: 158
+ Deposit Iterations: 4061
+Withdraw Iterations: 766
+      Final Balance: 197661000
+   Expected Balance: 197661000
+==========================================================
+          File name: Log_158.txt
+                Run: 13
+           ThreadID: 158
+ Deposit Iterations: 2721
+Withdraw Iterations: 324
+      Final Balance: 463362000
+   Expected Balance: 181326000
+==========================================================
+          File name: Log_158.txt
+                Run: 14
+           ThreadID: 158
+ Deposit Iterations: 1979
+Withdraw Iterations: 3523
+      Final Balance: 449852000
+   Expected Balance: 4450751296
+==========================================================
+          File name: Log_158.txt
+                Run: 15
+           ThreadID: 158
+ Deposit Iterations: 1806
+Withdraw Iterations: 2891
+      Final Balance: 429622000
+   Expected Balance: 4463491296
+==========================================================
+          File name: Log_158.txt
+                Run: 16
+           ThreadID: 158
+ Deposit Iterations: 4526
+Withdraw Iterations: 3631
+      Final Balance: 152325000
+   Expected Balance: 152325000
+==========================================================
+          File name: Log_158.txt
+                Run: 17
+           ThreadID: 158
+ Deposit Iterations: 5959
+Withdraw Iterations: 2669
+      Final Balance: 429218000
+   Expected Balance: 159475000
+==========================================================
+          File name: Log_158.txt
+                Run: 18
+           ThreadID: 158
+ Deposit Iterations: 1411
+Withdraw Iterations: 2823
+      Final Balance: 166709000
+   Expected Balance: 4461676296
+==========================================================
+          File name: Log_158.txt
+                Run: 19
+           ThreadID: 158
+ Deposit Iterations: 4684
+Withdraw Iterations: 1428
+      Final Balance: 149584000
+   Expected Balance: 149584000
+==========================================================
+          File name: Log_158.txt
+                Run: 20
+           ThreadID: 158
+ Deposit Iterations: 4149
+Withdraw Iterations: 1105
+      Final Balance: 130428000
+   Expected Balance: 130428000
+==========================================================
+          File name: Log_158.txt
+                Run: 21
+           ThreadID: 158
+ Deposit Iterations: 3881
+Withdraw Iterations: 3887
+      Final Balance: 159585000
+   Expected Balance: 4454552296
+==========================================================
+          File name: Log_158.txt
+                Run: 22
+           ThreadID: 158
+ Deposit Iterations: 7592
+Withdraw Iterations: 253
+      Final Balance: 189279000
+   Expected Balance: 189279000
+==========================================================
+          File name: Log_158.txt
+                Run: 23
+           ThreadID: 158
+ Deposit Iterations: 1439
+Withdraw Iterations: 1685
+      Final Balance: 200018000
+   Expected Balance: 4494985296
+==========================================================
+          File name: Log_158.txt
+                Run: 24
+           ThreadID: 158
+ Deposit Iterations: 7778
+Withdraw Iterations: 2341
+      Final Balance: 213142000
+   Expected Balance: 213142000
+==========================================================
+          File name: Log_158.txt
+                Run: 25
+           ThreadID: 158
+ Deposit Iterations: 5651
+Withdraw Iterations: 690
+      Final Balance: 420312000
+   Expected Balance: 198959000
+==========================================================
+          File name: Log_158.txt
+                Run: 26
+           ThreadID: 158
+ Deposit Iterations: 5394
+Withdraw Iterations: 2899
+      Final Balance: 216595000
+   Expected Balance: 216595000
+==========================================================
+          File name: Log_158.txt
+                Run: 27
+           ThreadID: 158
+ Deposit Iterations: 6707
+Withdraw Iterations: 2370
+      Final Balance: 419889000
+   Expected Balance: 125969000
+==========================================================
+          File name: Log_158.txt
+                Run: 28
+           ThreadID: 158
+ Deposit Iterations: 632
+Withdraw Iterations: 2896
+      Final Balance: 154760000
+   Expected Balance: 4449727296
+==========================================================
+          File name: Log_158.txt
+                Run: 29
+           ThreadID: 158
+ Deposit Iterations: 1674
+Withdraw Iterations: 3467
+      Final Balance: 419566000
+   Expected Balance: 4496189296
+==========================================================
+          File name: Log_158.txt
+                Run: 30
+           ThreadID: 158
+ Deposit Iterations: 5552
+Withdraw Iterations: 1910
+      Final Balance: 158038000
+   Expected Balance: 158038000
+==========================================================
+          File name: Log_158.txt
+                Run: 31
+           ThreadID: 158
+ Deposit Iterations: 2890
+Withdraw Iterations: 504
+      Final Balance: 177323000
+   Expected Balance: 177323000
+==========================================================
+          File name: Log_158.txt
+                Run: 32
+           ThreadID: 158
+ Deposit Iterations: 1781
+Withdraw Iterations: 1856
+      Final Balance: 125845000
+   Expected Balance: 4420812296
+==========================================================
+          File name: Log_158.txt
+                Run: 33
+           ThreadID: 158
+ Deposit Iterations: 4314
+Withdraw Iterations: 241
+      Final Balance: 214785000
+   Expected Balance: 214785000
+==========================================================
+          File name: Log_158.txt
+                Run: 34
+           ThreadID: 158
+ Deposit Iterations: 7991
+Withdraw Iterations: 3996
+      Final Balance: 428927000
+   Expected Balance: 169876000
+==========================================================
+          File name: Log_158.txt
+                Run: 35
+           ThreadID: 158
+ Deposit Iterations: 4703
+Withdraw Iterations: 518
+      Final Balance: 145501000
+   Expected Balance: 145501000
+==========================================================
+          File name: Log_158.txt
+                Run: 36
+           ThreadID: 158
+ Deposit Iterations: 4731
+Withdraw Iterations: 67
+      Final Balance: 181444000
+   Expected Balance: 181444000
+==========================================================
+          File name: Log_158.txt
+                Run: 37
+           ThreadID: 158
+ Deposit Iterations: 2908
+Withdraw Iterations: 2179
+      Final Balance: 148600000
+   Expected Balance: 148600000
+==========================================================
+          File name: Log_158.txt
+                Run: 38
+           ThreadID: 158
+ Deposit Iterations: 3809
+Withdraw Iterations: 2633
+      Final Balance: 440277000
+   Expected Balance: 144916000
+==========================================================
+          File name: Log_158.txt
+                Run: 39
+           ThreadID: 158
+ Deposit Iterations: 1731
+Withdraw Iterations: 2067
+      Final Balance: 418274000
+   Expected Balance: 4415668296
+==========================================================
+          File name: Log_158.txt
+                Run: 40
+           ThreadID: 158
+ Deposit Iterations: 3836
+Withdraw Iterations: 3267
+      Final Balance: 360890000
+   Expected Balance: 144668000
+==========================================================
+          File name: Log_158.txt
+                Run: 41
+           ThreadID: 158
+ Deposit Iterations: 123
+Withdraw Iterations: 3488
+      Final Balance: 482940000
+   Expected Balance: 4457811296
+==========================================================
+          File name: Log_158.txt
+                Run: 42
+           ThreadID: 158
+ Deposit Iterations: 3546
+Withdraw Iterations: 1357
+      Final Balance: 467322000
+   Expected Balance: 159329000
+==========================================================
+          File name: Log_158.txt
+                Run: 43
+           ThreadID: 158
+ Deposit Iterations: 655
+Withdraw Iterations: 2996
+      Final Balance: 461255000
+   Expected Balance: 4501168296
+==========================================================
+          File name: Log_158.txt
+                Run: 44
+           ThreadID: 158
+ Deposit Iterations: 6464
+Withdraw Iterations: 579
+      Final Balance: 380587000
+   Expected Balance: 150380000
+==========================================================
+          File name: Log_158.txt
+                Run: 45
+           ThreadID: 158
+ Deposit Iterations: 44
+Withdraw Iterations: 2934
+      Final Balance: 443962000
+   Expected Balance: 4464241296
+==========================================================
+          File name: Log_158.txt
+                Run: 46
+           ThreadID: 158
+ Deposit Iterations: 5715
+Withdraw Iterations: 2484
+      Final Balance: 441967000
+   Expected Balance: 173003000
+==========================================================
+          File name: Log_158.txt
+                Run: 47
+           ThreadID: 158
+ Deposit Iterations: 6780
+Withdraw Iterations: 3737
+      Final Balance: 167965000
+   Expected Balance: 167965000
+==========================================================
+          File name: Log_158.txt
+                Run: 48
+           ThreadID: 158
+ Deposit Iterations: 2944
+Withdraw Iterations: 3271
+      Final Balance: 169079000
+   Expected Balance: 4464046296
+==========================================================
+          File name: Log_158.txt
+                Run: 49
+           ThreadID: 158
+ Deposit Iterations: 7820
+Withdraw Iterations: 1
+      Final Balance: 143587000
+   Expected Balance: 143587000
+==========================================================
+          File name: Log_158.txt
+                Run: 50
+           ThreadID: 158
+ Deposit Iterations: 7172
+Withdraw Iterations: 1080
+      Final Balance: 416166000
+   Expected Balance: 194384000
+==========================================================
+          File name: Log_158.txt
+                Run: 51
+           ThreadID: 158
+ Deposit Iterations: 4424
+Withdraw Iterations: 209
+      Final Balance: 425820000
+   Expected Balance: 170740000
+==========================================================
+          File name: Log_158.txt
+                Run: 52
+           ThreadID: 158
+ Deposit Iterations: 2061
+Withdraw Iterations: 2012
+      Final Balance: 412105000
+   Expected Balance: 148726000
+==========================================================
+          File name: Log_158.txt
+                Run: 53
+           ThreadID: 158
+ Deposit Iterations: 3733
+Withdraw Iterations: 1210
+      Final Balance: 373423000
+   Expected Balance: 140142000
+==========================================================
+          File name: Log_158.txt
+                Run: 54
+           ThreadID: 158
+ Deposit Iterations: 4362
+Withdraw Iterations: 3187
+      Final Balance: 157317000
+   Expected Balance: 157317000
+==========================================================
+          File name: Log_158.txt
+                Run: 55
+           ThreadID: 158
+ Deposit Iterations: 7075
+Withdraw Iterations: 1298
+      Final Balance: 155231000
+   Expected Balance: 155231000
+==========================================================
+          File name: Log_158.txt
+                Run: 56
+           ThreadID: 158
+ Deposit Iterations: 544
+Withdraw Iterations: 2042
+      Final Balance: 406611000
+   Expected Balance: 4451740296
+==========================================================
+          File name: Log_158.txt
+                Run: 57
+           ThreadID: 158
+ Deposit Iterations: 5745
+Withdraw Iterations: 4057
+      Final Balance: 197664000
+   Expected Balance: 197664000
+==========================================================
+          File name: Log_158.txt
+                Run: 58
+           ThreadID: 158
+ Deposit Iterations: 7161
+Withdraw Iterations: 1805
+      Final Balance: 176189000
+   Expected Balance: 176189000
+==========================================================
+          File name: Log_158.txt
+                Run: 59
+           ThreadID: 158
+ Deposit Iterations: 1516
+Withdraw Iterations: 809
+      Final Balance: 159918000
+   Expected Balance: 159918000
+==========================================================
+          File name: Log_158.txt
+                Run: 60
+           ThreadID: 158
+ Deposit Iterations: 6038
+Withdraw Iterations: 2070
+      Final Balance: 417050000
+   Expected Balance: 199073000
+==========================================================
+          File name: Log_158.txt
+                Run: 61
+           ThreadID: 158
+ Deposit Iterations: 3811
+Withdraw Iterations: 1119
+      Final Balance: 104893000
+   Expected Balance: 104893000
+==========================================================
+          File name: Log_158.txt
+                Run: 62
+           ThreadID: 158
+ Deposit Iterations: 7817
+Withdraw Iterations: 1639
+      Final Balance: 172172000
+   Expected Balance: 172172000
+==========================================================
+          File name: Log_158.txt
+                Run: 63
+           ThreadID: 158
+ Deposit Iterations: 3791
+Withdraw Iterations: 354
+      Final Balance: 186711000
+   Expected Balance: 186711000
+==========================================================
+          File name: Log_158.txt
+                Run: 64
+           ThreadID: 158
+ Deposit Iterations: 7705
+Withdraw Iterations: 966
+      Final Balance: 430042000
+   Expected Balance: 145420000
+==========================================================
+          File name: Log_158.txt
+                Run: 65
+           ThreadID: 158
+ Deposit Iterations: 1865
+Withdraw Iterations: 723
+      Final Balance: 97090000
+   Expected Balance: 97090000
+==========================================================
+          File name: Log_158.txt
+                Run: 66
+           ThreadID: 158
+ Deposit Iterations: 2738
+Withdraw Iterations: 3878
+      Final Balance: 432103000
+   Expected Balance: 4486872296
+==========================================================
+          File name: Log_158.txt
+                Run: 67
+           ThreadID: 158
+ Deposit Iterations: 539
+Withdraw Iterations: 2015
+      Final Balance: 381221000
+   Expected Balance: 4485582296
+==========================================================
+          File name: Log_158.txt
+                Run: 68
+           ThreadID: 158
+ Deposit Iterations: 2317
+Withdraw Iterations: 1008
+      Final Balance: 377950000
+   Expected Balance: 138466000
+==========================================================
+          File name: Log_158.txt
+                Run: 69
+           ThreadID: 158
+ Deposit Iterations: 7664
+Withdraw Iterations: 2203
+      Final Balance: 182977000
+   Expected Balance: 182977000
+==========================================================
+          File name: Log_158.txt
+                Run: 70
+           ThreadID: 158
+ Deposit Iterations: 1948
+Withdraw Iterations: 215
+      Final Balance: 371441000
+   Expected Balance: 142037000
+==========================================================
+          File name: Log_158.txt
+                Run: 71
+           ThreadID: 158
+ Deposit Iterations: 530
+Withdraw Iterations: 543
+      Final Balance: 443558000
+   Expected Balance: 4457289296
+==========================================================
+          File name: Log_158.txt
+                Run: 72
+           ThreadID: 158
+ Deposit Iterations: 6468
+Withdraw Iterations: 136
+      Final Balance: 420643000
+   Expected Balance: 191401000
+==========================================================
+          File name: Log_158.txt
+                Run: 73
+           ThreadID: 158
+ Deposit Iterations: 2990
+Withdraw Iterations: 2378
+      Final Balance: 415132000
+   Expected Balance: 146585000
+==========================================================
+          File name: Log_158.txt
+                Run: 74
+           ThreadID: 158
+ Deposit Iterations: 4151
+Withdraw Iterations: 3107
+      Final Balance: 446827000
+   Expected Balance: 175138000
+==========================================================
+          File name: Log_158.txt
+                Run: 75
+           ThreadID: 158
+ Deposit Iterations: 243
+Withdraw Iterations: 1039
+      Final Balance: 108133000
+   Expected Balance: 4403100296
+==========================================================
+          File name: Log_158.txt
+                Run: 76
+           ThreadID: 158
+ Deposit Iterations: 328
+Withdraw Iterations: 836
+      Final Balance: 454912000
+   Expected Balance: 4451374296
+==========================================================
+          File name: Log_158.txt
+                Run: 77
+           ThreadID: 158
+ Deposit Iterations: 3965
+Withdraw Iterations: 711
+      Final Balance: 457524000
+   Expected Balance: 220194000
+==========================================================
+          File name: Log_158.txt
+                Run: 78
+           ThreadID: 158
+ Deposit Iterations: 4552
+Withdraw Iterations: 2263
+      Final Balance: 435645000
+   Expected Balance: 141025000
+==========================================================
+          File name: Log_158.txt
+                Run: 79
+           ThreadID: 158
+ Deposit Iterations: 1986
+Withdraw Iterations: 575
+      Final Balance: 127770000
+   Expected Balance: 123228000
+==========================================================
+          File name: Log_158.txt
+                Run: 80
+           ThreadID: 158
+ Deposit Iterations: 8093
+Withdraw Iterations: 1313
+      Final Balance: 514124000
+   Expected Balance: 195454000
+==========================================================
+          File name: Log_158.txt
+                Run: 81
+           ThreadID: 158
+ Deposit Iterations: 1887
+Withdraw Iterations: 2219
+      Final Balance: 400914000
+   Expected Balance: 4404173296
+==========================================================
+          File name: Log_158.txt
+                Run: 82
+           ThreadID: 158
+ Deposit Iterations: 6185
+Withdraw Iterations: 1774
+      Final Balance: 185661000
+   Expected Balance: 185661000
+==========================================================
+          File name: Log_158.txt
+                Run: 83
+           ThreadID: 158
+ Deposit Iterations: 6440
+Withdraw Iterations: 3024
+      Final Balance: 168779000
+   Expected Balance: 168779000
+==========================================================
+          File name: Log_158.txt
+                Run: 84
+           ThreadID: 158
+ Deposit Iterations: 6476
+Withdraw Iterations: 1235
+      Final Balance: 161125000
+   Expected Balance: 161125000
+==========================================================
+          File name: Log_158.txt
+                Run: 85
+           ThreadID: 158
+ Deposit Iterations: 3728
+Withdraw Iterations: 1165
+      Final Balance: 439846000
+   Expected Balance: 138858000
+==========================================================
+          File name: Log_158.txt
+                Run: 86
+           ThreadID: 158
+ Deposit Iterations: 5289
+Withdraw Iterations: 853
+      Final Balance: 155856000
+   Expected Balance: 155856000
+==========================================================
+          File name: Log_158.txt
+                Run: 87
+           ThreadID: 158
+ Deposit Iterations: 673
+Withdraw Iterations: 3517
+      Final Balance: 400704000
+   Expected Balance: 4465261296
+==========================================================
+          File name: Log_158.txt
+                Run: 88
+           ThreadID: 158
+ Deposit Iterations: 2278
+Withdraw Iterations: 2302
+      Final Balance: 461088000
+   Expected Balance: 4473562296
+==========================================================
+          File name: Log_158.txt
+                Run: 89
+           ThreadID: 158
+ Deposit Iterations: 6082
+Withdraw Iterations: 3341
+      Final Balance: 126466000
+   Expected Balance: 126466000
+==========================================================
+          File name: Log_158.txt
+                Run: 90
+           ThreadID: 158
+ Deposit Iterations: 7348
+Withdraw Iterations: 3671
+      Final Balance: 401771000
+   Expected Balance: 170499000
+==========================================================
+          File name: Log_158.txt
+                Run: 91
+           ThreadID: 158
+ Deposit Iterations: 7824
+Withdraw Iterations: 2264
+      Final Balance: 478391000
+   Expected Balance: 177502000
+==========================================================
+          File name: Log_158.txt
+                Run: 92
+           ThreadID: 158
+ Deposit Iterations: 2138
+Withdraw Iterations: 2263
+      Final Balance: 420937000
+   Expected Balance: 4440342296
+==========================================================
+          File name: Log_158.txt
+                Run: 93
+           ThreadID: 158
+ Deposit Iterations: 5068
+Withdraw Iterations: 2401
+      Final Balance: 371133000
+   Expected Balance: 152016000
+==========================================================
+          File name: Log_158.txt
+                Run: 94
+           ThreadID: 158
+ Deposit Iterations: 6001
+Withdraw Iterations: 2860
+      Final Balance: 440681000
+   Expected Balance: 190741000
+==========================================================
+          File name: Log_158.txt
+                Run: 95
+           ThreadID: 158
+ Deposit Iterations: 428
+Withdraw Iterations: 3217
+      Final Balance: 177791000
+   Expected Balance: 4472758296
+==========================================================
+          File name: Log_158.txt
+                Run: 96
+           ThreadID: 158
+ Deposit Iterations: 7557
+Withdraw Iterations: 39
+      Final Balance: 160196000
+   Expected Balance: 160196000
+==========================================================
+          File name: Log_158.txt
+                Run: 97
+           ThreadID: 158
+ Deposit Iterations: 5572
+Withdraw Iterations: 2557
+      Final Balance: 141740000
+   Expected Balance: 141740000
+==========================================================
+          File name: Log_158.txt
+                Run: 98
+           ThreadID: 158
+ Deposit Iterations: 5540
+Withdraw Iterations: 2324
+      Final Balance: 222766000
+   Expected Balance: 5996000
+==========================================================
+          File name: Log_158.txt
+                Run: 99
+           ThreadID: 158
+ Deposit Iterations: 8063
+Withdraw Iterations: 2052
+      Final Balance: 139706000
+   Expected Balance: 139706000

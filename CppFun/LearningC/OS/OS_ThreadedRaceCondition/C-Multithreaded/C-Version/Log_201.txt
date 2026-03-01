@@ -1,0 +1,801 @@
+
+==========================================================
+          File name: Log_201.txt
+                Run: 0
+           ThreadID: 201
+ Deposit Iterations: 5248
+Withdraw Iterations: 1979
+      Final Balance: 172804000
+   Expected Balance: 172804000
+==========================================================
+          File name: Log_201.txt
+                Run: 1
+           ThreadID: 201
+ Deposit Iterations: 7399
+Withdraw Iterations: 556
+      Final Balance: 506601000
+   Expected Balance: 264991000
+==========================================================
+          File name: Log_201.txt
+                Run: 2
+           ThreadID: 201
+ Deposit Iterations: 5326
+Withdraw Iterations: 2523
+      Final Balance: 180348000
+   Expected Balance: 180348000
+==========================================================
+          File name: Log_201.txt
+                Run: 3
+           ThreadID: 201
+ Deposit Iterations: 4881
+Withdraw Iterations: 538
+      Final Balance: 192624000
+   Expected Balance: 192624000
+==========================================================
+          File name: Log_201.txt
+                Run: 4
+           ThreadID: 201
+ Deposit Iterations: 2773
+Withdraw Iterations: 3090
+      Final Balance: 251222000
+   Expected Balance: 4546189296
+==========================================================
+          File name: Log_201.txt
+                Run: 5
+           ThreadID: 201
+ Deposit Iterations: 5159
+Withdraw Iterations: 3020
+      Final Balance: 212149000
+   Expected Balance: 212149000
+==========================================================
+          File name: Log_201.txt
+                Run: 6
+           ThreadID: 201
+ Deposit Iterations: 4860
+Withdraw Iterations: 628
+      Final Balance: 541974000
+   Expected Balance: 223735000
+==========================================================
+          File name: Log_201.txt
+                Run: 7
+           ThreadID: 201
+ Deposit Iterations: 2345
+Withdraw Iterations: 3990
+      Final Balance: 489942000
+   Expected Balance: 4512270296
+==========================================================
+          File name: Log_201.txt
+                Run: 8
+           ThreadID: 201
+ Deposit Iterations: 1239
+Withdraw Iterations: 3724
+      Final Balance: 196173000
+   Expected Balance: 4491140296
+==========================================================
+          File name: Log_201.txt
+                Run: 9
+           ThreadID: 201
+ Deposit Iterations: 4035
+Withdraw Iterations: 1897
+      Final Balance: 491044000
+   Expected Balance: 204485000
+==========================================================
+          File name: Log_201.txt
+                Run: 10
+           ThreadID: 201
+ Deposit Iterations: 2116
+Withdraw Iterations: 1352
+      Final Balance: 201798000
+   Expected Balance: 201798000
+==========================================================
+          File name: Log_201.txt
+                Run: 11
+           ThreadID: 201
+ Deposit Iterations: 6251
+Withdraw Iterations: 1297
+      Final Balance: 192638000
+   Expected Balance: 192638000
+==========================================================
+          File name: Log_201.txt
+                Run: 12
+           ThreadID: 201
+ Deposit Iterations: 399
+Withdraw Iterations: 2589
+      Final Balance: 528811000
+   Expected Balance: 4538133296
+==========================================================
+          File name: Log_201.txt
+                Run: 13
+           ThreadID: 201
+ Deposit Iterations: 900
+Withdraw Iterations: 3235
+      Final Balance: 513341000
+   Expected Balance: 4513439296
+==========================================================
+          File name: Log_201.txt
+                Run: 14
+           ThreadID: 201
+ Deposit Iterations: 238
+Withdraw Iterations: 1680
+      Final Balance: 178643000
+   Expected Balance: 4473610296
+==========================================================
+          File name: Log_201.txt
+                Run: 15
+           ThreadID: 201
+ Deposit Iterations: 6100
+Withdraw Iterations: 3936
+      Final Balance: 215400000
+   Expected Balance: 215400000
+==========================================================
+          File name: Log_201.txt
+                Run: 16
+           ThreadID: 201
+ Deposit Iterations: 624
+Withdraw Iterations: 359
+      Final Balance: 456099000
+   Expected Balance: 214085000
+==========================================================
+          File name: Log_201.txt
+                Run: 17
+           ThreadID: 201
+ Deposit Iterations: 7292
+Withdraw Iterations: 2053
+      Final Balance: 170990000
+   Expected Balance: 170990000
+==========================================================
+          File name: Log_201.txt
+                Run: 18
+           ThreadID: 201
+ Deposit Iterations: 756
+Withdraw Iterations: 3332
+      Final Balance: 204591000
+   Expected Balance: 4499558296
+==========================================================
+          File name: Log_201.txt
+                Run: 19
+           ThreadID: 201
+ Deposit Iterations: 6527
+Withdraw Iterations: 1293
+      Final Balance: 524213000
+   Expected Balance: 214942000
+==========================================================
+          File name: Log_201.txt
+                Run: 20
+           ThreadID: 201
+ Deposit Iterations: 5355
+Withdraw Iterations: 466
+      Final Balance: 439638000
+   Expected Balance: 146790000
+==========================================================
+          File name: Log_201.txt
+                Run: 21
+           ThreadID: 201
+ Deposit Iterations: 6060
+Withdraw Iterations: 3749
+      Final Balance: 187047000
+   Expected Balance: 187047000
+==========================================================
+          File name: Log_201.txt
+                Run: 22
+           ThreadID: 201
+ Deposit Iterations: 142
+Withdraw Iterations: 1370
+      Final Balance: 425202000
+   Expected Balance: 4517419296
+==========================================================
+          File name: Log_201.txt
+                Run: 23
+           ThreadID: 201
+ Deposit Iterations: 4992
+Withdraw Iterations: 4033
+      Final Balance: 509391000
+   Expected Balance: 245490000
+==========================================================
+          File name: Log_201.txt
+                Run: 24
+           ThreadID: 201
+ Deposit Iterations: 6724
+Withdraw Iterations: 1924
+      Final Balance: 551930000
+   Expected Balance: 255343000
+==========================================================
+          File name: Log_201.txt
+                Run: 25
+           ThreadID: 201
+ Deposit Iterations: 5520
+Withdraw Iterations: 810
+      Final Balance: 247013000
+   Expected Balance: 247013000
+==========================================================
+          File name: Log_201.txt
+                Run: 26
+           ThreadID: 201
+ Deposit Iterations: 2717
+Withdraw Iterations: 1954
+      Final Balance: 256722000
+   Expected Balance: 256722000
+==========================================================
+          File name: Log_201.txt
+                Run: 27
+           ThreadID: 201
+ Deposit Iterations: 3070
+Withdraw Iterations: 252
+      Final Balance: 479015000
+   Expected Balance: 181597000
+==========================================================
+          File name: Log_201.txt
+                Run: 28
+           ThreadID: 201
+ Deposit Iterations: 7555
+Withdraw Iterations: 2376
+      Final Balance: 204630000
+   Expected Balance: 204630000
+==========================================================
+          File name: Log_201.txt
+                Run: 29
+           ThreadID: 201
+ Deposit Iterations: 5790
+Withdraw Iterations: 3612
+      Final Balance: 236510000
+   Expected Balance: 236510000
+==========================================================
+          File name: Log_201.txt
+                Run: 30
+           ThreadID: 201
+ Deposit Iterations: 5479
+Withdraw Iterations: 3872
+      Final Balance: 463167000
+   Expected Balance: 218513000
+==========================================================
+          File name: Log_201.txt
+                Run: 31
+           ThreadID: 201
+ Deposit Iterations: 4940
+Withdraw Iterations: 1426
+      Final Balance: 444652000
+   Expected Balance: 219703000
+==========================================================
+          File name: Log_201.txt
+                Run: 32
+           ThreadID: 201
+ Deposit Iterations: 3438
+Withdraw Iterations: 2255
+      Final Balance: 364112000
+   Expected Balance: 141364000
+==========================================================
+          File name: Log_201.txt
+                Run: 33
+           ThreadID: 201
+ Deposit Iterations: 6271
+Withdraw Iterations: 1716
+      Final Balance: 270742000
+   Expected Balance: 270742000
+==========================================================
+          File name: Log_201.txt
+                Run: 34
+           ThreadID: 201
+ Deposit Iterations: 2239
+Withdraw Iterations: 3953
+      Final Balance: 496589000
+   Expected Balance: 4525837296
+==========================================================
+          File name: Log_201.txt
+                Run: 35
+           ThreadID: 201
+ Deposit Iterations: 7003
+Withdraw Iterations: 1705
+      Final Balance: 471137000
+   Expected Balance: 170632000
+==========================================================
+          File name: Log_201.txt
+                Run: 36
+           ThreadID: 201
+ Deposit Iterations: 3261
+Withdraw Iterations: 3929
+      Final Balance: 427557000
+   Expected Balance: 4542350296
+==========================================================
+          File name: Log_201.txt
+                Run: 37
+           ThreadID: 201
+ Deposit Iterations: 2495
+Withdraw Iterations: 598
+      Final Balance: 181030000
+   Expected Balance: 182457000
+==========================================================
+          File name: Log_201.txt
+                Run: 38
+           ThreadID: 201
+ Deposit Iterations: 6432
+Withdraw Iterations: 554
+      Final Balance: 475763000
+   Expected Balance: 184759000
+==========================================================
+          File name: Log_201.txt
+                Run: 39
+           ThreadID: 201
+ Deposit Iterations: 7877
+Withdraw Iterations: 2373
+      Final Balance: 172036000
+   Expected Balance: 172036000
+==========================================================
+          File name: Log_201.txt
+                Run: 40
+           ThreadID: 201
+ Deposit Iterations: 1894
+Withdraw Iterations: 139
+      Final Balance: 162380000
+   Expected Balance: 162380000
+==========================================================
+          File name: Log_201.txt
+                Run: 41
+           ThreadID: 201
+ Deposit Iterations: 660
+Withdraw Iterations: 2689
+      Final Balance: 532139000
+   Expected Balance: 4519273296
+==========================================================
+          File name: Log_201.txt
+                Run: 42
+           ThreadID: 201
+ Deposit Iterations: 6265
+Withdraw Iterations: 1206
+      Final Balance: 498330000
+   Expected Balance: 240544000
+==========================================================
+          File name: Log_201.txt
+                Run: 43
+           ThreadID: 201
+ Deposit Iterations: 1099
+Withdraw Iterations: 2938
+      Final Balance: 272375000
+   Expected Balance: 4567342296
+==========================================================
+          File name: Log_201.txt
+                Run: 44
+           ThreadID: 201
+ Deposit Iterations: 3239
+Withdraw Iterations: 761
+      Final Balance: 410776000
+   Expected Balance: 185607000
+==========================================================
+          File name: Log_201.txt
+                Run: 45
+           ThreadID: 201
+ Deposit Iterations: 1481
+Withdraw Iterations: 1432
+      Final Balance: 220345000
+   Expected Balance: 220345000
+==========================================================
+          File name: Log_201.txt
+                Run: 46
+           ThreadID: 201
+ Deposit Iterations: 4625
+Withdraw Iterations: 592
+      Final Balance: 468309000
+   Expected Balance: 221524000
+==========================================================
+          File name: Log_201.txt
+                Run: 47
+           ThreadID: 201
+ Deposit Iterations: 2680
+Withdraw Iterations: 3459
+      Final Balance: 520952000
+   Expected Balance: 4523934296
+==========================================================
+          File name: Log_201.txt
+                Run: 48
+           ThreadID: 201
+ Deposit Iterations: 1839
+Withdraw Iterations: 2559
+      Final Balance: 190380000
+   Expected Balance: 4485347296
+==========================================================
+          File name: Log_201.txt
+                Run: 49
+           ThreadID: 201
+ Deposit Iterations: 6346
+Withdraw Iterations: 3098
+      Final Balance: 400702000
+   Expected Balance: 193881000
+==========================================================
+          File name: Log_201.txt
+                Run: 50
+           ThreadID: 201
+ Deposit Iterations: 5958
+Withdraw Iterations: 344
+      Final Balance: 227212000
+   Expected Balance: 227212000
+==========================================================
+          File name: Log_201.txt
+                Run: 51
+           ThreadID: 201
+ Deposit Iterations: 4984
+Withdraw Iterations: 1034
+      Final Balance: 471516000
+   Expected Balance: 210530000
+==========================================================
+          File name: Log_201.txt
+                Run: 52
+           ThreadID: 201
+ Deposit Iterations: 2664
+Withdraw Iterations: 1000
+      Final Balance: 177597000
+   Expected Balance: 177597000
+==========================================================
+          File name: Log_201.txt
+                Run: 53
+           ThreadID: 201
+ Deposit Iterations: 8008
+Withdraw Iterations: 50
+      Final Balance: 412925000
+   Expected Balance: 190224000
+==========================================================
+          File name: Log_201.txt
+                Run: 54
+           ThreadID: 201
+ Deposit Iterations: 4694
+Withdraw Iterations: 3353
+      Final Balance: 188027000
+   Expected Balance: 188027000
+==========================================================
+          File name: Log_201.txt
+                Run: 55
+           ThreadID: 201
+ Deposit Iterations: 856
+Withdraw Iterations: 2580
+      Final Balance: 181428000
+   Expected Balance: 4476395296
+==========================================================
+          File name: Log_201.txt
+                Run: 56
+           ThreadID: 201
+ Deposit Iterations: 5560
+Withdraw Iterations: 1707
+      Final Balance: 469689000
+   Expected Balance: 200262000
+==========================================================
+          File name: Log_201.txt
+                Run: 57
+           ThreadID: 201
+ Deposit Iterations: 7644
+Withdraw Iterations: 1263
+      Final Balance: 248677000
+   Expected Balance: 248677000
+==========================================================
+          File name: Log_201.txt
+                Run: 58
+           ThreadID: 201
+ Deposit Iterations: 3592
+Withdraw Iterations: 4078
+      Final Balance: 505805000
+   Expected Balance: 4518840296
+==========================================================
+          File name: Log_201.txt
+                Run: 59
+           ThreadID: 201
+ Deposit Iterations: 7041
+Withdraw Iterations: 780
+      Final Balance: 438755000
+   Expected Balance: 232124000
+==========================================================
+          File name: Log_201.txt
+                Run: 60
+           ThreadID: 201
+ Deposit Iterations: 1086
+Withdraw Iterations: 2308
+      Final Balance: 444264000
+   Expected Balance: 4534057296
+==========================================================
+          File name: Log_201.txt
+                Run: 61
+           ThreadID: 201
+ Deposit Iterations: 5946
+Withdraw Iterations: 3108
+      Final Balance: 427114000
+   Expected Balance: 166017000
+==========================================================
+          File name: Log_201.txt
+                Run: 62
+           ThreadID: 201
+ Deposit Iterations: 7622
+Withdraw Iterations: 1391
+      Final Balance: 501731000
+   Expected Balance: 219997000
+==========================================================
+          File name: Log_201.txt
+                Run: 63
+           ThreadID: 201
+ Deposit Iterations: 2642
+Withdraw Iterations: 507
+      Final Balance: 543505000
+   Expected Balance: 229145000
+==========================================================
+          File name: Log_201.txt
+                Run: 64
+           ThreadID: 201
+ Deposit Iterations: 7924
+Withdraw Iterations: 2660
+      Final Balance: 3344000
+   Expected Balance: 3344000
+==========================================================
+          File name: Log_201.txt
+                Run: 65
+           ThreadID: 201
+ Deposit Iterations: 5134
+Withdraw Iterations: 2477
+      Final Balance: 382551000
+   Expected Balance: 133001000
+==========================================================
+          File name: Log_201.txt
+                Run: 66
+           ThreadID: 201
+ Deposit Iterations: 560
+Withdraw Iterations: 1088
+      Final Balance: 246083000
+   Expected Balance: 4541050296
+==========================================================
+          File name: Log_201.txt
+                Run: 67
+           ThreadID: 201
+ Deposit Iterations: 1778
+Withdraw Iterations: 681
+      Final Balance: 422554000
+   Expected Balance: 227627000
+==========================================================
+          File name: Log_201.txt
+                Run: 68
+           ThreadID: 201
+ Deposit Iterations: 3822
+Withdraw Iterations: 4041
+      Final Balance: 395976000
+   Expected Balance: 4450532296
+==========================================================
+          File name: Log_201.txt
+                Run: 69
+           ThreadID: 201
+ Deposit Iterations: 2268
+Withdraw Iterations: 1285
+      Final Balance: 517912000
+   Expected Balance: 228454000
+==========================================================
+          File name: Log_201.txt
+                Run: 70
+           ThreadID: 201
+ Deposit Iterations: 5423
+Withdraw Iterations: 1433
+      Final Balance: 164773000
+   Expected Balance: 164773000
+==========================================================
+          File name: Log_201.txt
+                Run: 71
+           ThreadID: 201
+ Deposit Iterations: 6699
+Withdraw Iterations: 3702
+      Final Balance: 498570000
+   Expected Balance: 216155000
+==========================================================
+          File name: Log_201.txt
+                Run: 72
+           ThreadID: 201
+ Deposit Iterations: 180
+Withdraw Iterations: 646
+      Final Balance: 231638000
+   Expected Balance: 4526605296
+==========================================================
+          File name: Log_201.txt
+                Run: 73
+           ThreadID: 201
+ Deposit Iterations: 3310
+Withdraw Iterations: 3402
+      Final Balance: 196324000
+   Expected Balance: 4491291296
+==========================================================
+          File name: Log_201.txt
+                Run: 74
+           ThreadID: 201
+ Deposit Iterations: 2223
+Withdraw Iterations: 2014
+      Final Balance: 490881000
+   Expected Balance: 216800000
+==========================================================
+          File name: Log_201.txt
+                Run: 75
+           ThreadID: 201
+ Deposit Iterations: 5693
+Withdraw Iterations: 3452
+      Final Balance: 159685000
+   Expected Balance: 159685000
+==========================================================
+          File name: Log_201.txt
+                Run: 76
+           ThreadID: 201
+ Deposit Iterations: 2542
+Withdraw Iterations: 360
+      Final Balance: 239314000
+   Expected Balance: 239314000
+==========================================================
+          File name: Log_201.txt
+                Run: 77
+           ThreadID: 201
+ Deposit Iterations: 5832
+Withdraw Iterations: 3240
+      Final Balance: 506996000
+   Expected Balance: 283245000
+==========================================================
+          File name: Log_201.txt
+                Run: 78
+           ThreadID: 201
+ Deposit Iterations: 5352
+Withdraw Iterations: 428
+      Final Balance: 465714000
+   Expected Balance: 197637000
+==========================================================
+          File name: Log_201.txt
+                Run: 79
+           ThreadID: 201
+ Deposit Iterations: 3424
+Withdraw Iterations: 3118
+      Final Balance: 384763000
+   Expected Balance: 164723000
+==========================================================
+          File name: Log_201.txt
+                Run: 80
+           ThreadID: 201
+ Deposit Iterations: 4379
+Withdraw Iterations: 797
+      Final Balance: 241144000
+   Expected Balance: 241144000
+==========================================================
+          File name: Log_201.txt
+                Run: 81
+           ThreadID: 201
+ Deposit Iterations: 1994
+Withdraw Iterations: 448
+      Final Balance: 148498000
+   Expected Balance: 148498000
+==========================================================
+          File name: Log_201.txt
+                Run: 82
+           ThreadID: 201
+ Deposit Iterations: 1567
+Withdraw Iterations: 1177
+      Final Balance: 545258000
+   Expected Balance: 233471000
+==========================================================
+          File name: Log_201.txt
+                Run: 83
+           ThreadID: 201
+ Deposit Iterations: 4971
+Withdraw Iterations: 3291
+      Final Balance: 501152000
+   Expected Balance: 220098000
+==========================================================
+          File name: Log_201.txt
+                Run: 84
+           ThreadID: 201
+ Deposit Iterations: 2514
+Withdraw Iterations: 1988
+      Final Balance: 187632000
+   Expected Balance: 187632000
+==========================================================
+          File name: Log_201.txt
+                Run: 85
+           ThreadID: 201
+ Deposit Iterations: 1613
+Withdraw Iterations: 3161
+      Final Balance: 450798000
+   Expected Balance: 4457364296
+==========================================================
+          File name: Log_201.txt
+                Run: 86
+           ThreadID: 201
+ Deposit Iterations: 1455
+Withdraw Iterations: 1000
+      Final Balance: 423141000
+   Expected Balance: 201409000
+==========================================================
+          File name: Log_201.txt
+                Run: 87
+           ThreadID: 201
+ Deposit Iterations: 4662
+Withdraw Iterations: 2259
+      Final Balance: 433534000
+   Expected Balance: 229660000
+==========================================================
+          File name: Log_201.txt
+                Run: 88
+           ThreadID: 201
+ Deposit Iterations: 815
+Withdraw Iterations: 2010
+      Final Balance: 225523000
+   Expected Balance: 4520490296
+==========================================================
+          File name: Log_201.txt
+                Run: 89
+           ThreadID: 201
+ Deposit Iterations: 3862
+Withdraw Iterations: 2491
+      Final Balance: 177621000
+   Expected Balance: 177621000
+==========================================================
+          File name: Log_201.txt
+                Run: 90
+           ThreadID: 201
+ Deposit Iterations: 6804
+Withdraw Iterations: 2694
+      Final Balance: 184599000
+   Expected Balance: 184599000
+==========================================================
+          File name: Log_201.txt
+                Run: 91
+           ThreadID: 201
+ Deposit Iterations: 6575
+Withdraw Iterations: 3314
+      Final Balance: 234943000
+   Expected Balance: 234943000
+==========================================================
+          File name: Log_201.txt
+                Run: 92
+           ThreadID: 201
+ Deposit Iterations: 760
+Withdraw Iterations: 390
+      Final Balance: 183518000
+   Expected Balance: 183518000
+==========================================================
+          File name: Log_201.txt
+                Run: 93
+           ThreadID: 201
+ Deposit Iterations: 4428
+Withdraw Iterations: 3842
+      Final Balance: 200964000
+   Expected Balance: 200964000
+==========================================================
+          File name: Log_201.txt
+                Run: 94
+           ThreadID: 201
+ Deposit Iterations: 4100
+Withdraw Iterations: 1237
+      Final Balance: 486372000
+   Expected Balance: 242549000
+==========================================================
+          File name: Log_201.txt
+                Run: 95
+           ThreadID: 201
+ Deposit Iterations: 777
+Withdraw Iterations: 2692
+      Final Balance: 222604000
+   Expected Balance: 4517571296
+==========================================================
+          File name: Log_201.txt
+                Run: 96
+           ThreadID: 201
+ Deposit Iterations: 4245
+Withdraw Iterations: 2229
+      Final Balance: 219572000
+   Expected Balance: 219572000
+==========================================================
+          File name: Log_201.txt
+                Run: 97
+           ThreadID: 201
+ Deposit Iterations: 215
+Withdraw Iterations: 696
+      Final Balance: 394747000
+   Expected Balance: 4486440296
+==========================================================
+          File name: Log_201.txt
+                Run: 98
+           ThreadID: 201
+ Deposit Iterations: 2063
+Withdraw Iterations: 1053
+      Final Balance: 363211000
+   Expected Balance: 182404000
+==========================================================
+          File name: Log_201.txt
+                Run: 99
+           ThreadID: 201
+ Deposit Iterations: 515
+Withdraw Iterations: 512
+      Final Balance: 172268000
+   Expected Balance: 172268000
