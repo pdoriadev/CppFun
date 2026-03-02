@@ -24,7 +24,17 @@ APPLICATION SUMMARY
 Simulates a race condition by having multiple threads operate on the same
 	struct object.
 Logs the results of each thread's operations to a separate log file.
-Merges all log files into one log file by the end. 
+Merges all log files into one log file by the end.
+
+--- ADDITIONAL REQUIREMENTS  ---
+Write log files in separate directory.
+Rewrite to operate on 'n' Bank Accounts without a race condition.
+- mutexes, etc.
+
+Create sequential version.
+Profile sequential.
+Profile multi-threaded.
+
 */
 
 void nowInMicroseconds(uint64_t &useconds)
