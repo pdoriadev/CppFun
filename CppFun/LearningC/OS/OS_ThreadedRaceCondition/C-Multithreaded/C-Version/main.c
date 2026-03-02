@@ -12,10 +12,10 @@
 #include <time.h>
 ////////////////////////
 // User-defined headers
-#include "BankAccount.hpp"
-#include "AccountActions.hpp"
-#include "Errorlog.hpp"
-#include "ThreadLog.hpp"
+#include "BankAccount.h"
+#include "AccountActions.h"
+#include "Errorlog.h"
+#include "ThreadLog.h"
 
 /*
 ///////////////////////////////

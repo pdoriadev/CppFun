@@ -1,6 +1,7 @@
-#include <cstdint>
-#include <climits>
-#include <cstddef>
+#pragma once
+#include <stdint>
+#include <limits>
+#include <stddef>
 
 typedef struct BankAccount
 {
