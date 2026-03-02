@@ -3,7 +3,7 @@
           File name: Log_151.txt
                 Run: 0
            ThreadID: 151
- Deposit Iterations: 5074
-Withdraw Iterations: 689
-      Final Balance: 114108000
-   Expected Balance: 114108000
+ Deposit Iterations: 2477
+Withdraw Iterations: 2561
+      Final Balance: 89630000
+   Expected Balance: 4384597296

@@ -1,9 +1,0 @@
-
-==========================================================
-          File name: Log_138.txt
-                Run: 0
-           ThreadID: 138
- Deposit Iterations: 2177
-Withdraw Iterations: 619
-      Final Balance: 94055000
-   Expected Balance: 94055000

@@ -3,7 +3,7 @@
           File name: Log_58.txt
                 Run: 0
            ThreadID: 58
- Deposit Iterations: 2331
-Withdraw Iterations: 2091
-      Final Balance: 41990000
-   Expected Balance: 41990000
+ Deposit Iterations: 1094
+Withdraw Iterations: 1805
+      Final Balance: 225743000
+   Expected Balance: 4327768296

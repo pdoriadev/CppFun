@@ -1,9 +1,0 @@
-
-==========================================================
-          File name: Log_135.txt
-                Run: 0
-           ThreadID: 135
- Deposit Iterations: 2643
-Withdraw Iterations: 462
-      Final Balance: 348396000
-   Expected Balance: 96433000

@@ -3,7 +3,7 @@
           File name: Log_208.txt
                 Run: 0
            ThreadID: 208
- Deposit Iterations: 2549
-Withdraw Iterations: 3650
-      Final Balance: 421182000
-   Expected Balance: 4458659296
+ Deposit Iterations: 112
+Withdraw Iterations: 240
+      Final Balance: 146274000
+   Expected Balance: 4441241296

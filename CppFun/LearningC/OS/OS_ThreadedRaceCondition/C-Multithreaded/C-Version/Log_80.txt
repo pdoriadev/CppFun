@@ -3,7 +3,7 @@
           File name: Log_80.txt
                 Run: 0
            ThreadID: 80
- Deposit Iterations: 3305
-Withdraw Iterations: 3337
-      Final Balance: 204608000
-   Expected Balance: 4296521296
+ Deposit Iterations: 7597
+Withdraw Iterations: 1716
+      Final Balance: 47672000
+   Expected Balance: 47672000

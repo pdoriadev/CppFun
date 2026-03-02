@@ -3,7 +3,7 @@
           File name: Log_49.txt
                 Run: 0
            ThreadID: 49
- Deposit Iterations: 984
-Withdraw Iterations: 455
-      Final Balance: 29241000
-   Expected Balance: 29241000
+ Deposit Iterations: 4859
+Withdraw Iterations: 1150
+      Final Balance: 33277000
+   Expected Balance: 33277000

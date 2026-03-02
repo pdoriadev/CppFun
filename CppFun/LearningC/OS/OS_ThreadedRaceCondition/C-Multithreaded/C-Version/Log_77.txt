@@ -3,7 +3,7 @@
           File name: Log_77.txt
                 Run: 0
            ThreadID: 77
- Deposit Iterations: 7962
-Withdraw Iterations: 3689
-      Final Balance: 289630000
-   Expected Balance: 41994000
+ Deposit Iterations: 5998
+Withdraw Iterations: 2480
+      Final Balance: 253320000
+   Expected Balance: 45309000

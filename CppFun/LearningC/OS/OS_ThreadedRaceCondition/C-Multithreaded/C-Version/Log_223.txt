@@ -1,9 +1,0 @@
-
-==========================================================
-          File name: Log_223.txt
-                Run: 0
-           ThreadID: 223
- Deposit Iterations: 1029
-Withdraw Iterations: 1752
-      Final Balance: 437585000
-   Expected Balance: 4469416296

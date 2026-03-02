@@ -30,6 +30,7 @@ Merges all log files into one log file by the end.
 Convert cpp/hpp files to c/h files. *CHECK*
 Move header function bodies into c source files.
 	- Only prototypes in headers.
+  - https://beej.us/guide/bgc/html/split/multifile-projects.html#multifile-projects
 Write log files in separate directory.
 Rewrite to operate on 'n' Bank Accounts without a race condition.
 - mutexes, etc.

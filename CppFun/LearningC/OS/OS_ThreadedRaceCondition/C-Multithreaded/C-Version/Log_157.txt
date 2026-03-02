@@ -1,9 +1,0 @@
-
-==========================================================
-          File name: Log_157.txt
-                Run: 0
-           ThreadID: 157
- Deposit Iterations: 4300
-Withdraw Iterations: 3691
-      Final Balance: 117007000
-   Expected Balance: 117007000

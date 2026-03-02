@@ -1,9 +1,0 @@
-
-==========================================================
-          File name: Log_144.txt
-                Run: 0
-           ThreadID: 144
- Deposit Iterations: 6518
-Withdraw Iterations: 2569
-      Final Balance: 360925000
-   Expected Balance: 104967000

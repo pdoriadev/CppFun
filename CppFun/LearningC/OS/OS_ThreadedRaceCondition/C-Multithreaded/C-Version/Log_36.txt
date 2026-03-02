@@ -3,7 +3,7 @@
           File name: Log_36.txt
                 Run: 0
            ThreadID: 36
- Deposit Iterations: 4486
-Withdraw Iterations: 1959
-      Final Balance: 24281000
-   Expected Balance: 24281000
+ Deposit Iterations: 1409
+Withdraw Iterations: 1090
+      Final Balance: 12303000
+   Expected Balance: 12303000

@@ -1,9 +1,0 @@
-
-==========================================================
-          File name: Log_150.txt
-                Run: 0
-           ThreadID: 150
- Deposit Iterations: 6255
-Withdraw Iterations: 1315
-      Final Balance: 369893000
-   Expected Balance: 114663000

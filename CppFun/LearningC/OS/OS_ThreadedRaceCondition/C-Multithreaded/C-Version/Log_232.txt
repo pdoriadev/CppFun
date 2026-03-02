@@ -3,7 +3,7 @@
           File name: Log_232.txt
                 Run: 0
            ThreadID: 232
- Deposit Iterations: 4799
-Withdraw Iterations: 281
-      Final Balance: 182221000
-   Expected Balance: 182221000
+ Deposit Iterations: 7646
+Withdraw Iterations: 3816
+      Final Balance: 169045000
+   Expected Balance: 169045000

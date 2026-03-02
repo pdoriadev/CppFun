@@ -3,7 +3,7 @@
           File name: Log_112.txt
                 Run: 0
            ThreadID: 112
- Deposit Iterations: 524
-Withdraw Iterations: 2023
-      Final Balance: 61596000
-   Expected Balance: 4356563296
+ Deposit Iterations: 1108
+Withdraw Iterations: 247
+      Final Balance: 51856000
+   Expected Balance: 51856000

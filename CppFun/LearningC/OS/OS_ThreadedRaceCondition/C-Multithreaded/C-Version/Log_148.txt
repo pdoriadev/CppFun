@@ -1,9 +1,0 @@
-
-==========================================================
-          File name: Log_148.txt
-                Run: 0
-           ThreadID: 148
- Deposit Iterations: 6643
-Withdraw Iterations: 208
-      Final Balance: 364953000
-   Expected Balance: 111487000

@@ -3,7 +3,7 @@
           File name: Log_44.txt
                 Run: 0
            ThreadID: 44
- Deposit Iterations: 1128
-Withdraw Iterations: 3896
-      Final Balance: 258344000
-   Expected Balance: 4315302296
+ Deposit Iterations: 7244
+Withdraw Iterations: 3746
+      Final Balance: 26047000
+   Expected Balance: 26047000

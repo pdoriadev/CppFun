@@ -1,4 +1,5 @@
-#pragma once
+#ifndef BANK_ACCOUNT_H
+#define BANK_ACCOUNT_H
 #include <stdint.h>
 #include <limits.h>
 #include <stddef.h>
@@ -8,61 +9,11 @@ typedef struct BankAccount
 	int64_t balance;
 } BankAccount;
 
-bool createAccount(BankAccount *account, const int64_t initialValue)
-{
-	if (account == NULL)
-	{
-		return false;
-	}
-	account->balance = initialValue;
-	return true;
-}
+bool createAccount(BankAccount*, const int64_t);
 
-bool deposit(BankAccount *account, int64_t amount)
-{
-	if (account == NULL)
-	{
-		return false;
-	}
+bool deposit(BankAccount*, int64_t);
 
-  if (amount < 0)
-	{
-		// deposit cannot be a negative amount
-		return false;
-	}
-
-	if (account->balance + amount > LLONG_MAX)
-	{
-		// cannot exceed more money than is possible
-		amount = LLONG_MAX - amount;
-	}
-
-	account->balance += amount;
-	return true;
-}
-
-bool withdraw(BankAccount *account, int64_t amount)
-{
-	if (account == NULL)
-	{
-		return false;
-	}
-
-	if (amount > 0)
-	{
-		// withdrawl cannot be a positive amount
-		return false;
-	}
-
-	if (account->balance - amount < LLONG_MIN)
-	{
-		amount = LLONG_MIN - amount;
-	}
-
-	account->balance += amount;
-	return true;
-}
-
+bool withdraw(BankAccount*, int64_t);
 
 typedef struct ThreadArg
 {
@@ -73,14 +24,6 @@ typedef struct ThreadArg
   uint32_t withdrawls;
 } ThreadArg;
 
-bool initThreadArg(ThreadArg *arg)
-{
-	arg->account = NULL;
-	arg->threadIndex = 0;
-	arg->runCount = 0;
-	arg->deposits = 0;
-	arg->withdrawls = 0;
+bool initThreadArg(ThreadArg*);
 
-	return true;
-}
-
+#endif
