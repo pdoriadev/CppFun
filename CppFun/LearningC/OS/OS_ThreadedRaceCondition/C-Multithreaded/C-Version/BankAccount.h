@@ -5,7 +5,7 @@
 
 typedef struct BankAccount
 {
-	int64_t balance = 0;
+	int64_t balance;
 } BankAccount;
 
 bool createAccount(BankAccount *account, const int64_t initialValue)
@@ -66,9 +66,19 @@ bool withdraw(BankAccount *account, int64_t amount)
 
 typedef struct ThreadArg
 {
-  BankAccount *account = NULL;
+  BankAccount *account;
   uint32_t threadIndex = 0;
-	uint32_t runCount = 0;
-	uint32_t deposits = 0;
-	uint32_t withdrawls = 0;
+  uint32_t runCount = 0;
+  uint32_t deposits = 0;
+  uint32_t withdrawls = 0;
 } ThreadArg;
+
+bool initThreadArg(ThreadArg *arg)
+{
+	arg->account = NULL;
+	threadIndex = 0;
+	runCount = 0;
+	deposits = 0;
+	withdrawls = 0;
+}
+
