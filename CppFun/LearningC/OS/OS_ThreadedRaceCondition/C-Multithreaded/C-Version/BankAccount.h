@@ -1,7 +1,7 @@
 #pragma once
-#include <stdint>
-#include <limits>
-#include <stddef>
+#include <stdint.h>
+#include <limits.h>
+#include <stddef.h>
 
 typedef struct BankAccount
 {
