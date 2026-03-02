@@ -17,6 +17,16 @@
 #include "Errorlog.hpp"
 #include "ThreadLog.hpp"
 
+/*
+///////////////////////////////
+APPLICATION SUMMARY
+//////////////////////////////
+Simulates a race condition by having multiple threads operate on the same
+	struct object.
+Logs the results of each thread's operations to a separate log file.
+Merges all log files into one log file by the end. 
+*/
+
 void nowInMicroseconds(uint64_t &useconds)
 {
   timespec ts;
