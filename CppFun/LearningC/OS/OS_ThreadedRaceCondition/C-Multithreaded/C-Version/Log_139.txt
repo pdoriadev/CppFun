@@ -1,0 +1,9 @@
+
+==========================================================
+          File name: Log_139.txt
+                Run: 0
+           ThreadID: 139
+ Deposit Iterations: 3413
+Withdraw Iterations: 307
+      Final Balance: 101473000
+   Expected Balance: 101473000

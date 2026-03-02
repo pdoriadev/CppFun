@@ -1,0 +1,9 @@
+
+==========================================================
+          File name: Log_212.txt
+                Run: 0
+           ThreadID: 212
+ Deposit Iterations: 5379
+Withdraw Iterations: 2895
+      Final Balance: 171906000
+   Expected Balance: 171906000

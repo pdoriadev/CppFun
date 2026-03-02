@@ -1,0 +1,9 @@
+
+==========================================================
+          File name: Log_145.txt
+                Run: 0
+           ThreadID: 145
+ Deposit Iterations: 1872
+Withdraw Iterations: 3639
+      Final Balance: 358518000
+   Expected Balance: 4394218296

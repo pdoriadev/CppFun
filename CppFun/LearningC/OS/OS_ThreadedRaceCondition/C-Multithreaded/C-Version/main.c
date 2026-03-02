@@ -37,11 +37,11 @@ Profile multi-threaded.
 
 */
 
-void nowInMicroseconds(uint64_t &useconds)
+void nowInMicroseconds(uint64_t *useconds)
 {
-  timespec ts;
+  struct timespec ts;
   clock_gettime(CLOCK_MONOTONIC, &ts);
-  useconds = (uint64_t)ts.tv_sec * 1000000 + (uint64_t)ts.tv_nsec / 1000;
+  *useconds = (uint64_t)ts.tv_sec * 1000000 + (uint64_t)ts.tv_nsec / 1000;
 }
 
 bool testDepositsWithdrawls(ThreadArg *tArgs)
@@ -138,6 +138,7 @@ int main (int argv, char* argc[])
       // allocates memory the size of a ThreadArg struct.
 	  		// casts the void* returned by malloc to a ThreadArg*.
       ThreadArg *argCopy = (ThreadArg*) malloc(sizeof(ThreadArg));
+			initThreadArg(argCopy);
 
       // copy the thread arg to avoid any multi-threading race condition.
         // The thread will make its own copy and free the malloc: https://beej.us/guide/bgc/html/split/multithreading.html
@@ -148,7 +149,7 @@ int main (int argv, char* argc[])
       // seeding the rand_r() to get consistent random behavior between threads.
         // rand_r required an unsigned_int* seed.
       uint64_t nowOut;
-      nowInMicroseconds(nowOut);
+      nowInMicroseconds(&nowOut);
       srand((uint64_t)i + nowOut);
       argCopy->deposits = ( rand() % 8112 ) + 1;
       argCopy->withdrawls = ( rand() % 4096 ) + 1;

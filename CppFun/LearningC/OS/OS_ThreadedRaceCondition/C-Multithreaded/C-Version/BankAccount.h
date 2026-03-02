@@ -67,18 +67,20 @@ bool withdraw(BankAccount *account, int64_t amount)
 typedef struct ThreadArg
 {
   BankAccount *account;
-  uint32_t threadIndex = 0;
-  uint32_t runCount = 0;
-  uint32_t deposits = 0;
-  uint32_t withdrawls = 0;
+  uint32_t threadIndex;
+  uint32_t runCount;
+  uint32_t deposits;
+  uint32_t withdrawls;
 } ThreadArg;
 
 bool initThreadArg(ThreadArg *arg)
 {
 	arg->account = NULL;
-	threadIndex = 0;
-	runCount = 0;
-	deposits = 0;
-	withdrawls = 0;
+	arg->threadIndex = 0;
+	arg->runCount = 0;
+	arg->deposits = 0;
+	arg->withdrawls = 0;
+
+	return true;
 }
 

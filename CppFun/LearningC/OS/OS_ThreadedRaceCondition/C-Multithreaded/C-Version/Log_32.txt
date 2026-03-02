@@ -1,0 +1,9 @@
+
+==========================================================
+          File name: Log_32.txt
+                Run: 0
+           ThreadID: 32
+ Deposit Iterations: 2718
+Withdraw Iterations: 3320
+      Final Balance: 257914000
+   Expected Balance: 4316119296

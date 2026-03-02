@@ -1,0 +1,9 @@
+
+==========================================================
+          File name: Log_98.txt
+                Run: 0
+           ThreadID: 98
+ Deposit Iterations: 5382
+Withdraw Iterations: 488
+      Final Balance: 313425000
+   Expected Balance: 60585000

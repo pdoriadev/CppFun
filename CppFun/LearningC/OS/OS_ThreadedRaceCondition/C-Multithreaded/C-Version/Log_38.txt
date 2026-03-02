@@ -1,0 +1,9 @@
+
+==========================================================
+          File name: Log_38.txt
+                Run: 0
+           ThreadID: 38
+ Deposit Iterations: 5004
+Withdraw Iterations: 1925
+      Final Balance: 259689000
+   Expected Balance: 27639000

@@ -15,10 +15,19 @@ bool outputBalance(BankAccount *account, FILE* outputFile)
 
 typedef struct Action
 {
-  uint64_t iterations = 0;
-  int64_t amount = 0;
+  uint64_t iterations;
+  int64_t amount;
   bool (*actionFunction)(BankAccount*, int64_t);
 } Action;
+
+bool initAction(Action* action)
+{
+	action->iterations = 0;
+	action->amount = 0;
+	action->actionFunction = NULL;
+
+	return true;
+}
 
 
 // Assumes the outputFP is open and writable!

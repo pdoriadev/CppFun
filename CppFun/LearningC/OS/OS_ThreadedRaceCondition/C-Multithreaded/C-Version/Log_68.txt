@@ -1,0 +1,9 @@
+
+==========================================================
+          File name: Log_68.txt
+                Run: 0
+           ThreadID: 68
+ Deposit Iterations: 1434
+Withdraw Iterations: 939
+      Final Balance: 279635000
+   Expected Balance: 42119000

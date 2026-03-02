@@ -1,0 +1,9 @@
+
+==========================================================
+          File name: Log_40.txt
+                Run: 0
+           ThreadID: 40
+ Deposit Iterations: 1999
+Withdraw Iterations: 4055
+      Final Balance: 257633000
+   Expected Balance: 4315204296

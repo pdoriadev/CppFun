@@ -1,0 +1,9 @@
+
+==========================================================
+          File name: Log_13.txt
+                Run: 0
+           ThreadID: 13
+ Deposit Iterations: 7781
+Withdraw Iterations: 2446
+      Final Balance: 18112000
+   Expected Balance: 18112000

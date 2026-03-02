@@ -1,0 +1,9 @@
+
+==========================================================
+          File name: Log_19.txt
+                Run: 0
+           ThreadID: 19
+ Deposit Iterations: 860
+Withdraw Iterations: 3963
+      Final Balance: 234943000
+   Expected Balance: 4309976296

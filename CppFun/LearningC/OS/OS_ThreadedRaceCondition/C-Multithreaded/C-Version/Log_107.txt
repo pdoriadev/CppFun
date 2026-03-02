@@ -1,0 +1,9 @@
+
+==========================================================
+          File name: Log_107.txt
+                Run: 0
+           ThreadID: 107
+ Deposit Iterations: 5303
+Withdraw Iterations: 3331
+      Final Balance: 324899000
+   Expected Balance: 64831000

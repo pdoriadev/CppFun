@@ -1,0 +1,9 @@
+
+==========================================================
+          File name: Log_180.txt
+                Run: 0
+           ThreadID: 180
+ Deposit Iterations: 7240
+Withdraw Iterations: 2369
+      Final Balance: 136462000
+   Expected Balance: 136462000
