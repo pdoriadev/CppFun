@@ -27,6 +27,9 @@ Logs the results of each thread's operations to a separate log file.
 Merges all log files into one log file by the end.
 
 --- ADDITIONAL REQUIREMENTS  ---
+Convert cpp/hpp files to c/h files. *CHECK*
+Move header function bodies into c source files.
+	- Only prototypes in headers.
 Write log files in separate directory.
 Rewrite to operate on 'n' Bank Accounts without a race condition.
 - mutexes, etc.
