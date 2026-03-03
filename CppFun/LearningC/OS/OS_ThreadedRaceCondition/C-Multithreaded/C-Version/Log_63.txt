@@ -1,9 +1,0 @@
-
-==========================================================
-          File name: Log_63.txt
-                Run: 0
-           ThreadID: 63
- Deposit Iterations: 5919
-Withdraw Iterations: 3784
-      Final Balance: 231906000
-   Expected Balance: 38200000

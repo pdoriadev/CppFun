@@ -1,9 +1,0 @@
-
-==========================================================
-          File name: Log_46.txt
-                Run: 0
-           ThreadID: 46
- Deposit Iterations: 3038
-Withdraw Iterations: 1924
-      Final Balance: 27161000
-   Expected Balance: 27161000

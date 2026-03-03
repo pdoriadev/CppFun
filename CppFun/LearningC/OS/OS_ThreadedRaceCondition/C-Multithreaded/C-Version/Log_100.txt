@@ -1,9 +1,0 @@
-
-==========================================================
-          File name: Log_100.txt
-                Run: 0
-           ThreadID: 100
- Deposit Iterations: 1463
-Withdraw Iterations: 3556
-      Final Balance: 51177000
-   Expected Balance: 4346144296

@@ -1,9 +1,0 @@
-
-==========================================================
-          File name: Log_78.txt
-                Run: 0
-           ThreadID: 78
- Deposit Iterations: 617
-Withdraw Iterations: 1537
-      Final Balance: 252400000
-   Expected Balance: 4335838296

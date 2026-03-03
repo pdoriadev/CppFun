@@ -1,9 +1,0 @@
-
-==========================================================
-          File name: Log_79.txt
-                Run: 0
-           ThreadID: 79
- Deposit Iterations: 5041
-Withdraw Iterations: 4060
-      Final Balance: 253381000
-   Expected Balance: 42772000

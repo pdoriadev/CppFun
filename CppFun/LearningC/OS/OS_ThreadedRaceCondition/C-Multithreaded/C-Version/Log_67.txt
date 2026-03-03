@@ -1,9 +1,0 @@
-
-==========================================================
-          File name: Log_67.txt
-                Run: 0
-           ThreadID: 67
- Deposit Iterations: 5779
-Withdraw Iterations: 3701
-      Final Balance: 236064000
-   Expected Balance: 38143000

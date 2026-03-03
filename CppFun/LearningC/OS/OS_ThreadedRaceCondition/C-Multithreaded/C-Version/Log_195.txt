@@ -1,9 +1,0 @@
-
-==========================================================
-          File name: Log_195.txt
-                Run: 0
-           ThreadID: 195
- Deposit Iterations: 7577
-Withdraw Iterations: 872
-      Final Balance: 141182000
-   Expected Balance: 141182000

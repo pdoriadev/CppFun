@@ -1,9 +1,0 @@
-
-==========================================================
-          File name: Log_73.txt
-                Run: 0
-           ThreadID: 73
- Deposit Iterations: 2473
-Withdraw Iterations: 4043
-      Final Balance: 36594000
-   Expected Balance: 4331561296

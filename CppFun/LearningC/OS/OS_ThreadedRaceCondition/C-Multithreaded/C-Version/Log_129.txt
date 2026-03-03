@@ -1,9 +1,0 @@
-
-==========================================================
-          File name: Log_129.txt
-                Run: 0
-           ThreadID: 129
- Deposit Iterations: 1928
-Withdraw Iterations: 3665
-      Final Balance: 72455000
-   Expected Balance: 4367422296

@@ -1,9 +1,0 @@
-
-==========================================================
-          File name: Log_237.txt
-                Run: 0
-           ThreadID: 237
- Deposit Iterations: 6310
-Withdraw Iterations: 1847
-      Final Balance: 171965000
-   Expected Balance: 171965000

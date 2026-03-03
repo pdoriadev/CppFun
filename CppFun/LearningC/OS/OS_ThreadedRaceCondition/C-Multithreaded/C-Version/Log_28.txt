@@ -1,9 +1,0 @@
-
-==========================================================
-          File name: Log_28.txt
-                Run: 0
-           ThreadID: 28
- Deposit Iterations: 5665
-Withdraw Iterations: 3447
-      Final Balance: 208512000
-   Expected Balance: 13099000

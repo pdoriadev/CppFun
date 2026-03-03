@@ -1,9 +1,0 @@
-
-==========================================================
-          File name: Log_111.txt
-                Run: 0
-           ThreadID: 111
- Deposit Iterations: 5823
-Withdraw Iterations: 3930
-      Final Balance: 50995000
-   Expected Balance: 50995000

@@ -1,9 +1,0 @@
-
-==========================================================
-          File name: Log_48.txt
-                Run: 0
-           ThreadID: 48
- Deposit Iterations: 3983
-Withdraw Iterations: 2401
-      Final Balance: 212737000
-   Expected Balance: 31150000

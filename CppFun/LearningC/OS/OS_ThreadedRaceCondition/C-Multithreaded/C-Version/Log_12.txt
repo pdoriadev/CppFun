@@ -1,9 +1,0 @@
-
-==========================================================
-          File name: Log_12.txt
-                Run: 0
-           ThreadID: 12
- Deposit Iterations: 3202
-Withdraw Iterations: 1631
-      Final Balance: 197047000
-   Expected Balance: 4881000

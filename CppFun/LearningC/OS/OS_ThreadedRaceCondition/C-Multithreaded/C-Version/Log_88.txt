@@ -1,9 +1,0 @@
-
-==========================================================
-          File name: Log_88.txt
-                Run: 0
-           ThreadID: 88
- Deposit Iterations: 7471
-Withdraw Iterations: 556
-      Final Balance: 269106000
-   Expected Balance: 55624000

@@ -1,9 +1,0 @@
-
-==========================================================
-          File name: Log_131.txt
-                Run: 0
-           ThreadID: 131
- Deposit Iterations: 3695
-Withdraw Iterations: 843
-      Final Balance: 326265000
-   Expected Balance: 77555000

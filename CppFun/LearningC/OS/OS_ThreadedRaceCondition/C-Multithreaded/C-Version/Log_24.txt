@@ -1,9 +1,0 @@
-
-==========================================================
-          File name: Log_24.txt
-                Run: 0
-           ThreadID: 24
- Deposit Iterations: 2007
-Withdraw Iterations: 3789
-      Final Balance: 206736000
-   Expected Balance: 4300980296

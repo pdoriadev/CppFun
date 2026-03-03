@@ -1,9 +1,0 @@
-
-==========================================================
-          File name: Log_99.txt
-                Run: 0
-           ThreadID: 99
- Deposit Iterations: 1383
-Withdraw Iterations: 439
-      Final Balance: 48867000
-   Expected Balance: 48867000

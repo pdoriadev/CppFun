@@ -1,9 +1,0 @@
-
-==========================================================
-          File name: Log_8.txt
-                Run: 0
-           ThreadID: 8
- Deposit Iterations: 6812
-Withdraw Iterations: 144
-      Final Balance: 3310000
-   Expected Balance: 3310000

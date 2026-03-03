@@ -1,9 +1,0 @@
-
-==========================================================
-          File name: Log_125.txt
-                Run: 0
-           ThreadID: 125
- Deposit Iterations: 7170
-Withdraw Iterations: 2860
-      Final Balance: 72270000
-   Expected Balance: 72270000

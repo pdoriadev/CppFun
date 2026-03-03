@@ -1,9 +1,0 @@
-
-==========================================================
-          File name: Log_41.txt
-                Run: 0
-           ThreadID: 41
- Deposit Iterations: 4242
-Withdraw Iterations: 2238
-      Final Balance: 211155000
-   Expected Balance: 31572000
