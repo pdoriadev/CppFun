@@ -1,29 +1,12 @@
-#pragma once
+#ifndef ERROR_LOG_H
+#define ERROR_LOG_H
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdint.h>
 
-uint32_t errorCount = 0;
+void printErrorToErrorFile(const char[]);
 
-void printErrorToErrorFile(const char errorStr[])
-{
-	errorCount += 1;
+bool resetErrorLogFile();
 
-	FILE *fp = fopen("error.txt", "w");
-	fprintf(fp, "%s", errorStr);
-
-	fflush(fp);
-	fclose(fp);
-
-	char consoleMessageStr[500] = "\nExited with Error\n";
-	snprintf(consoleMessageStr,470, errorStr);
-	perror(consoleMessageStr);
-}
-
-bool resetErrorLogFile()
-{
-	FILE *fp = fopen("error.txt", "w");
-	fclose(fp);
-	return true;
-}
-
+#endif
