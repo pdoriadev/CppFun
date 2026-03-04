@@ -27,17 +27,22 @@ Logs the results of each thread's operations to a separate log file.
 Merges all log files into one log file by the end.
 
 --- ADDITIONAL REQUIREMENTS  ---
-Convert cpp/hpp files to c/h files. *CHECK*
-Move header function bodies into c source files.
-	- Only prototypes in headers.
+Convert cpp/hpp files to c/h files. 					   *CHECK*
+Move header function bodies into c source files. 	                   *CHECK*
+  - Only prototypes in headers. 	                                   *CHECK*
   - https://beej.us/guide/bgc/html/split/multifile-projects.html#multifile-projects
-Write log files in separate directory.
-Rewrite to operate on 'n' Bank Accounts without a race condition.
+Create a make file for compilation/linking				   **
+
+Write log files in separate directory.					   **
+Rewrite without race condition.						   **
+- Operates on "n" bank accounts. One thread per bank account
 - mutexes, etc.
 
-Create sequential version.
-Profile sequential.
-Profile multi-threaded.
+Create sequential version.												                            **
+Profile sequential.																**
+Profile multi-threaded.														                    **
+
+Look into static/extern use-caes									                                            **
 
 */
 
