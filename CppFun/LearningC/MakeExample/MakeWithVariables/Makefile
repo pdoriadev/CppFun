@@ -1,5 +1,5 @@
 # will always run. It's the first rule listed. It will look for a rule that matches one, two, or three if any of them don't exist.
-all: one two three
+all: one two three beegFile
 	echo "all command pre-reqs were fulfilled"
 
 one:
@@ -16,6 +16,7 @@ beegFile: $(files)
 
 file1.c:
 	touch file1.c
+
 x := This line is bad practice
 y := This line is good practice
 file2.c:
@@ -24,6 +25,6 @@ file2.c:
 
 	echo $x
 
-# only runs if "make clean" is sent to command line. Why it's placed at the bottom? I think it's a specific make keyword?
+# only runs if "make clean" is sent to command line because other rules will always run before it because it is at the bottom. If this were placed at the top, it would run every time. 
 clean:
 	rm -f file1.c file2.c beegFile
