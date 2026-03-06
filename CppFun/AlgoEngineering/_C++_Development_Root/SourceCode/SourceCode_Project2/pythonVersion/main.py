@@ -1,3 +1,4 @@
+
 def swapItem(names, weights, calories, i, j):
 			itemSwap:int = names[j]
 			weightSwap:int = weights[j]
@@ -43,21 +44,33 @@ def greedyAlgo(maxWeight, names, weights, calories):
 	greedyList = []
 	print(f"maxWeight = {maxWeight}")
 	for i in range(0, len(names)):
-		print(f"\tsumWeight + weight[{i}]: {sumWeight+weights[i]}")
+		# print(f"\tsumWeight + weight[{i}]: {sumWeight+weights[i]}")
 		if (sumWeight+weights[i]) > maxWeight:
 			continue
 		greedyList.append(i)
 		sumWeight += weights[i]
-		print(f"\tAdded {names[i]} to the greedy list.")
+		# print(f"\tAdded {names[i]} to the greedy list.")
 
 	print(f"Greedy Indices: {greedyList}")
 	print(f"Greedy Weight: {sumWeight}")
-	print("Completed Greedy Algo")
+	print(f"Completed Greedy Algo\n")
+
+
+# I need all valid permutations from
+# get the item at the bit index. Bit maps index of an item.
+	# 0's/1's binary indexing.
+ # include any additional information?
+def exaustiveOptimized(maxWeight, names, weights, calories):
+	# Generate candidate bitmasks
+	
+	# Verify candidates using bitmask operations
+	pass
 
 if __name__ == "__main__":
 	case1Names = ["apple", "cereal", "water", "coke", "bread"]
 	case1Weights = [15, 25, 90, 8, 8]
 	case1Calories = [30, 500, 0, 160, 800]
+	#store all possible combinations in a tree
 
 	#case1Tests
 	greedyAlgo(30, case1Names, case1Weights, case1Calories)
