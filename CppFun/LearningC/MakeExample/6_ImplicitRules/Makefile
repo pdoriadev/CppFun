@@ -8,6 +8,7 @@
 #   LDFLAGS: Extra flags to give to compilers when they are
 #											 supposed to invoke the linker
 
+
 CC = gcc
 CFLAGS = -g # Turns on debug info.
 
@@ -28,3 +29,4 @@ clean:
 	rm -f blah*
 
 
+# More info on Makefile conventions for CFLAGS: https://www.gnu.org/software/make/manual/html_node/Command-Variables.html
