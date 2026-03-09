@@ -21,7 +21,7 @@ blah.exe: blah.o
 
 # c file
 blah.c:
-	echo "int main() { return; }" > blah.c
+	echo "int main() { return 0; }" > blah.c
 
 # clean - removes all blah* files.
 clean:
