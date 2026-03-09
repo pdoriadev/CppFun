@@ -62,15 +62,23 @@ def greedyAlgo(maxWeight, names, weights, calories):
  # include any additional information?
 def exaustiveOptimized(maxWeight, names, weights, calories):
 	# Generate candidate bitmasks
-	
+	# Store all possible combos in a tree?
+	# Proof-ish for Candidate Generation
+	# 		Let the list of grocery items be a list of n elements long.
+	#			Let each element correspond to a binary bit in an unsigned integer type X of n bits long.
+ # 		Let the max value of this integer type equal MAX.
+	#			Each unique set of binary bits in X corresponds to a unique integer between 0 and MAX (inclusive).
+	#			Therefore, every value that can be represented by X corresponds to a unique set of grocery items, including the empty set.
+	# 		By iterating through all values of X, we can iterate through all candidates for exhaustive search.
+	#
 	# Verify candidates using bitmask operations
+	#
 	pass
 
 if __name__ == "__main__":
 	case1Names = ["apple", "cereal", "water", "coke", "bread"]
 	case1Weights = [15, 25, 90, 8, 8]
 	case1Calories = [30, 500, 0, 160, 800]
-	#store all possible combinations in a tree
 
 	#case1Tests
 	greedyAlgo(30, case1Names, case1Weights, case1Calories)
