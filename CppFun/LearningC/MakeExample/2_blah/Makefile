@@ -1,4 +1,5 @@
 #https://makefiletutorial.com/
+# Make constructs a dependency graph from rules. Some rules are explicit (all the ones in this file are). Other rules are implicit (magic! - for now).
 
 blah.exe: blah.o
 	gcc -o blah.exe blah.o
