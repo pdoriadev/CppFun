@@ -6,7 +6,7 @@ print: $(wildcard *.c)
 	ls -la $^
 
 all: source ${OBJS}
-	# @command- make usually outputs lines to the console before the line is executed. The '@' symbol stops that. This makes sense for print statements, echo commands, etc. https://www.gnu.org/software/make/manual/html_node/Echoing.html 
+	# @command- make usually outputs lines to the console before the line is executed. The '@' symbol stops that. This makes sense for print statements, echo commands, etc. The silent flag '-s' or '--silent' prevents all default echoing, as if all lines started with @. https://www.gnu.org/software/make/manual/html_node/Echoing.htm 
 	@echo "-------------------------------------"
 	@echo "------- Linking Executable ----------"
 gcc build.exe -o ${OBJS}
