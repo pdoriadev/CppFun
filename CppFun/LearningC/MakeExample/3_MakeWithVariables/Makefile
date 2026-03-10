@@ -14,7 +14,8 @@ three:
 	touch three
 
 beegFile: $(sourceFiles)
-	echo "look at this variable: " $(sourceFiles)
+	echo "look at FIRST source file name: " $< 
+	echo "look at LAST source file name: " $@
 	touch beegFile
 
 file1.c:
@@ -29,6 +30,9 @@ file2.c:
 
 $(objectFiles):
 	echo $@
+
+# $< will point to the first file in the depedency chain
+# $@ will point to the last file in the dependency chain
 
 # only runs if "make clean" is sent to command line because other rules will always run before it because it is at the bottom. If this were placed at the top, it would run every time. 
 clean:
