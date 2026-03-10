@@ -7,9 +7,9 @@ CFLAGS = -g
 # Implicit rule #2: *.o files built via the C compilation implicit rule, because>
 
 
-build:
+all:
 	make objs
- # $(CC) build -o $(OBJS)
+#	$(CC) build -o $(OBJS)
 
 SOURCE_DIR = /SOURCE/
 OBJS_DIR = /OBJS/
