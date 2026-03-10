@@ -10,11 +10,11 @@ build: source $(sourceFiles)
 $(objectFiles): source
 	gcc $@ $(sourceFiles)?
 
-
-# target (what the rule makes? Or just the nameof the rule?) : pre-req (what the rule needs)
+# This whole line is the dependency chain.
+# source is the target in this dependency chain. 
 source: $(sourceFiles)
 	printf "Source Files Verified"
-	#$@ references what the rule makes
+	#$@ references the last file in the dependency chain
 
 
 $(sourceFiles):
