@@ -1,16 +1,16 @@
 
 def swapItem(names, weights, calories, i, j):
-			itemSwap:int = names[j]
-			weightSwap:int = weights[j]
-			caloriesSwap:int = calories[j]
+	itemSwap:int = names[j]
+	weightSwap:int = weights[j]
+	caloriesSwap:int = calories[j]
 
-			names[j] = names[i]
-			weights[j] = weights[i]
-			calories[j] = calories[i]
+    names[j] = names[i]
+    weights[j] = weights[i]
+	calories[j] = calories[i]
 
-			names[i] = itemSwap
-			weights[i] = weightSwap
-			calories[i] = caloriesSwap
+	names[i] = itemSwap
+	weights[i] = weightSwap
+	calories[i] = caloriesSwap
 
 
 def greedyAlgo(maxWeight, names, weights, calories):
@@ -71,28 +71,28 @@ def exaustiveOptimized(maxWeight, names, weights, calories):
 	#			Therefore, every value that can be represented by X corresponds to a unique set of grocery items, including the empty set.
 	# 		By iterating through all values of X, we can iterate through all candidates for exhaustive search.
 	#	Could do it this way OR do it with a MST?
- #
+    #
 
 	# Verify candidates using bitmask operations
  # Bitshift verification per set
-	# 			Let P be a set of all possible sets of list L.
-	# 		 Let each set be denoted by P(sub i).
-	# 			Each set P(sub i) is a binary sequence of length n.
-	#				Each value at index 'place' in the binary sequence corresponds to an item in list L.
-	#					  A value of '0' at index 'place' in P(sub i) means L's item at the corresponding index 'place' is not included in set P(sub i).
- # 						A value of '1' at index 'place' in P(sub i) means L's item at the corresponding index 'place' is included in the set P(sub i). 
+    # Let P be a set of all possible sets of list L.
+	# Let each set be denoted by P(sub i).
+	# Each set P(sub i) is a binary sequence of length n.
+	# Each value at index 'place' in the binary sequence corresponds to an item in list L.
+	# A value of '0' at index 'place' in P(sub i) means L's item at the corresponding index 'place' is not included in set P(sub i).
+    # A value of '1' at index 'place' in P(sub i) means L's item at the corresponding index 'place' is included in the set P(sub i). 
 	# best = {} # empty set		  +1
 	# bestCalorieToWeight = 0 	  +1
  # Loop - For each set GENERATED_CANDIDATE P(sub i) of P:  +(2^n * (g + (n*VerificationLoop)))
-	#					totalWeight = 0    +1
-	#					totalCalories = 0				+1
-	# 				VerificationLoop - Bitshift 'y' times until a 1 is encountered:    +1
- # 				 			If element at 'y' place in list L does NOT have a valid weight    +1
-	#													continue
- #									totalWeight += L[length() - y - 1].weight				+1
-	#									totalCalories += L[length() - y - 1].calories					+1
-	#					If (totalCalories / totalWeight) > bestCalorieToWeight:					+1
-	#									best = P(sub i)					+1
+	#	totalWeight = 0    +1
+	#	totalCalories = 0				+1
+	# 	VerificationLoop - Bitshift 'y' times until a 1 is encountered:    +1
+    #    	If element at 'y' place in list L does NOT have a valid weight    +1
+	#			continue
+    #		totalWeight += L[length() - y - 1].weight				+1
+	#		totalCalories += L[length() - y - 1].calories					+1
+	#		If (totalCalories / totalWeight) > bestCalorieToWeight:		+1
+	#			best = P(sub i)		+1
  # return best
 	pass
 
