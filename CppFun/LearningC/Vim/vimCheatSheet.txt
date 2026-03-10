@@ -1,0 +1,12 @@
+Toggle showing spaces and tabs
+- set list 
+- set nolist
+
+Toggle showing line numbers
+- set number
+- set nonnumber
+
+Cut/Paste
+- v for visual mode.
+- highlight, then press d to cut
+- press p to paste
