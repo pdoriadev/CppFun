@@ -5,12 +5,22 @@ CFLAGS = -g
 
 # Implicit rule #1: object files are built via the C linker implicit rule
 # Implicit rule #2: *.o files built via the C compilation implicit rule, because>
-banking.exe : $(wildcard *.o)
-	$(CC) -o main.exe build/*.o
 
-build/$(wildcard *.o) : $(wildcard *.c)
 
+build:
+	make objs
+ # $(CC) build -o $(OBJS)
+
+SOURCE_DIR = /SOURCE/
+OBJS_DIR = /OBJS/
+
+SRC = $(patsubst %.c, %.o$(SOURCE_DIR)$(wildcard *.c))
+OBJS = $(patsubst %.c, %.o, $(SRC))
+objs : $(OBJS_DIR)$(OBJS)
+
+# $(OBJS) :
+#	$(CC) -c SRC -o $@
 
 clean:
- rm *.o *.exe
+	rm -f $(OBJS_DIR)*.o *.exe
 
