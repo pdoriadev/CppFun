@@ -1,0 +1,21 @@
+                              Lesson 2 SUMMARY
+
+  1. To delete from the cursor up to the next word type:        dw
+  2. To delete from the cursor up to the end of the word type:  de
+  3. To delete from the cursor to the end of a line type:       d$
+  4. To delete a whole line type:                               dd
+
+  5. To repeat a motion prepend it with a number:   2w
+  6. The format for a change command is:
+               operator   [number]   motion
+     where:
+       operator - is what to do, such as  d  for delete
+       [number] - is an optional count to repeat the motion
+       motion   - moves over the text to operate on, such as  w (word),
+                  e (end of word),  $ (end of the line), etc.
+
+  7. To move to the start of the line use a zero:  0
+
+  8. To undo previous actions, type:           u  (lowercase u)
+     To undo all the changes on a line, type:  U  (capital U)
+     To undo the undos, type:                  CTRL-R
