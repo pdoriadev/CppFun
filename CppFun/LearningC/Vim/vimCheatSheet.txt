@@ -10,3 +10,16 @@ Cut/Paste
 - v for visual mode.
 - highlight, then press d to cut
 - press p to paste
+
+Moving the cursor
+- 0 - beginning of line
+- $ - end of line
+- e - end of next word
+- w - beginning of next word
+- b - beginning of previous word
+
+Suggested Remappings
+https://www.reddit.com/r/neovim/comments/1be2fty/lifechanging_key_remaps/
+- Escape --> Capslock tap
+- CTRL --> Capslock long-press
+- some other ones 
