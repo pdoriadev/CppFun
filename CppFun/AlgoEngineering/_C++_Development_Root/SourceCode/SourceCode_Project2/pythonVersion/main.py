@@ -1,3 +1,5 @@
+import numpy as np
+
 class Item():
     # Instance initializer
     def __init__(self, name, weight, calories):
@@ -63,46 +65,28 @@ def greedyAlgo(maxWeight, names, weights, calories):
     print(f"Completed Greedy Algo\n")
 
 
-# I need all valid sets
-# get the item at the bit index. Bit maps index of an item.
-    # 0's/1's binary indexing.
- # include any additional information?
-def exaustiveOptimized(maxWeight, items):
-    # Generate candidate bitmasks
-    # Store all possible combos in a tree?
+# Generate candidate bitmasks
     # Proof for Candidate Generation by iterating through all possible integer values for an integer of n bits. 
-    #   Let the list of grocery items L be a list of n elements long.
-    #   Let each element correspond to a binary bit in an unsigned integer type X of n bits long.
- #      Let us represent the max value of X with MAX of this integer type equal MAX
-    #   Each unique set of binary bits in X corresponds to a unique integer between 0 and MAX (inclusive).
-    #   Therefore, every value that can be represented by X corresponds to a unique set of grocery items, including the empty set.
-    #   By iterating through all values of X, we can iterate through all candidates for exhaustive search.
-    #   Could do it this way OR do it with a MST?
-
-# Implementation    
-    #
-    # Generation
+        # Let the list of grocery items L be a list of n elements long.
+        # Let each element correspond to a binary bit in an unsigned integer type X of n bits long.
+        # Let us represent the max value of X with MAX of this integer type equal MAX
+        # Each unique set of binary bits in X corresponds to a unique integer between 0 and MAX (inclusive).
+        # Therefore, every value that can be represented by X corresponds to a unique set of grocery items, including the empty set.
+        # By iterating through all values of X, we can iterate through all candidates for exhaustive search.
+def exaustiveOptimized(maxWeight, items):
     best = 0
-    bestCalorieToWeight = 0
-    for i in range(0, 2 ** len(items)):
-        # Verification
-        # bit shift binary bit. keep track of how many shifts. If bit value is a 1, then check the index of items based on the number of shifts. 
-
-    # return array of items based on value of best. 
-            
-
-    # Verify candidates using bitmask operations
- # Bitshift verification per set
-    # Let P be a set of all possible sets of list L.
+    bestCalories = 0
+    # Generation Loop    
+   # Bitshift verification per set
+    # Let P be a set of all possible sets of list L's elements.
     # Let each set be denoted by P(sub i).
     # Each set P(sub i) is a binary sequence of length n.
     # Each value at index 'place' in the binary sequence corresponds to an item in list L.
-    # A value of '0' at index 'place' in P(sub i) means L's item at the corresponding index 'place' is not included in set P(sub i).
-    # A value of '1' at index 'place' in P(sub i) means L's item at the corresponding index 'place' is included in the set P(sub i). 
+        # A value of '0' at index 'place' in P(sub i) means P(sub i) does not contain the item at L's 'place' index.
+        # A value of '1' at index 'place' in P(sub i) means P(sub i) does not contain the item at L's 'place' index.
     # best = {} # empty set       +1
-    # bestCalorieToWeight = 0     +1
- # Loop - For each set GENERATED_CANDIDATE P(sub i) of P:  +(2^n * (g + (n*VerificationLoop)))
-    #   totalWeight = 0    +1
+    # bestCalorieToWeight = 0     +1 
+# GenerationLoop - For each set GENERATED_CANDIDATE P(sub i) of P:  +(2^n * (g + (n*VerificationLoop)))
     #   totalCalories = 0               +1
     #   VerificationLoop - Bitshift 'y' times until a 1 is encountered:    +1
     #       If element at 'y' place in list L does NOT have a valid weight    +1
@@ -111,10 +95,42 @@ def exaustiveOptimized(maxWeight, items):
     #       totalCalories += L[length() - y - 1].calories                   +1
     #       If (totalCalories / totalWeight) > bestCalorieToWeight:     +1
     #           best = P(sub i)     +1
- # return best
-    pass
+    i = np.uint64(0)
+    for i in range(0, 2 ** len(items)):
+        j = np.uint64(0) 
+        calories = 0
+        weight = 0
+        valid = True
+        for j in range(0, len(items)): 
+            if ((i << j & 0):
+                continue
+            weight += items[j].weight    
+            calories += items[j].calories
+        
+            if (weight > maxWeight):
+                valid = False
+                break
 
-def initializeItems(namesArr, weightsArr, caloriesArr):
+        if (valid == False):
+            continue
+
+        if (calories > bestCalories):
+            best = j
+            bestCalories = calories
+    bestSet = [] 
+    for i in range(0, len(items)):
+        if (best << i & 1):
+            bestSet.append(items[i])
+
+    return bestSet
+            
+
+# return best
+    pass
+# bit shift binary bit. keep track of how many shifts. If bit value is a 1, then check the index of items based on the number of shifts. 
+
+
+def initializeItems(namesArr, weightsArr, caloriesArr): 
     items = []
     for i in range(0, len(namesArr)):
         items.append(Item(namesArr[i], weightsArr[i], caloriesArr[i]))
