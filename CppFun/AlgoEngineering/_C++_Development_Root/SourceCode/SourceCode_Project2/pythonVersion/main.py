@@ -70,17 +70,26 @@ def greedyAlgo(maxWeight, names, weights, calories):
 def exaustiveOptimized(maxWeight, items):
     # Generate candidate bitmasks
     # Store all possible combos in a tree?
-    # Proof for Candidate Generation by iterating through all possible integer values
+    # Proof for Candidate Generation by iterating through all possible integer values for an integer of n bits. 
     #   Let the list of grocery items L be a list of n elements long.
     #   Let each element correspond to a binary bit in an unsigned integer type X of n bits long.
- #      Let the max value of this integer type equal MAX.
+ #      Let us represent the max value of X with MAX of this integer type equal MAX
     #   Each unique set of binary bits in X corresponds to a unique integer between 0 and MAX (inclusive).
     #   Therefore, every value that can be represented by X corresponds to a unique set of grocery items, including the empty set.
     #   By iterating through all values of X, we can iterate through all candidates for exhaustive search.
     #   Could do it this way OR do it with a MST?
-    #
 
-    
+# Implementation    
+    #
+    # Generation
+    best = 0
+    bestCalorieToWeight = 0
+    for i in range(0, 2 ** len(items)):
+        # Verification
+        # bit shift binary bit. keep track of how many shifts. If bit value is a 1, then check the index of items based on the number of shifts. 
+
+    # return array of items based on value of best. 
+            
 
     # Verify candidates using bitmask operations
  # Bitshift verification per set
