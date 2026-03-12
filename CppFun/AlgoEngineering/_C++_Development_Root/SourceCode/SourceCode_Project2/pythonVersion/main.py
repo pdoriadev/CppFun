@@ -96,37 +96,61 @@ def exhaustiveOptimized(maxWeight, items):
     print(f"maxWeight: {maxWeight}")
     best = 0
     bestCalories = 0
+    bestWeight = 0
     i = np.uint64(0)
+    print(f"MaxBinary: {bin( 2^len(items) - 1 )}")
+    #print(f"i in binary: {bin(i)}")
     for i in range(0, 2 ** len(items)):
-        j = np.uint64(0) 
         calories = 0
         weight = 0
-        valid = True
-        for j in range(0, len(items)): 
-            print(f"i: {i}")
-            print(f"j: {j}")
-
-            if ((i << j & 0)):
-               continue
-
-            weight += items[j].weight    
-            calories += items[j].calories
+        bestCandidate = True
+                
+        maxPlaces:int = len(items)
+        if (i.bit_length() < len(items)):
+            maxPlaces = i.bit_length() + 1
+        
+        #print(f"i: {i} {bin(i)}")
+        places = np.uint64(0) 
+        for places in range(0, maxPlaces): 
+            #print(f"\tplaces: {j}")
+            k = i >> places
+            #print(f"\ti shifted places times % 2: {k%2}")
+            if (((i >> places) % 2) == 0):
+                #print("\tNo 1 bit. Skip to next loop")
+                continue
+          
+            #print(f"\tAdding Weight. i shifted {places} times: {bin(k)}")
+            weight += items[places].weight    
+            calories += items[places].calories
             if (weight > maxWeight):
-                print(f"Invalid Weight: {weight}")
-                valid = False
+                #print(f"\tInbestCandidate Weight: {weight}")
+                bestCandidate = False
                 break
 
-        if (valid == False):
-            continue
+        #print(f"\tTotal Weight of Set = {weight}")
+        
+        if (calories < bestCalories):
+            bestCandidate = False
+        
+        if (calories == bestCalories):
+            if (bestWeight == 0 or calories/weight < bestCalories/bestWeight):
+                bestCandidate = False
 
-        if (calories > bestCalories):
-            best = j
-            bestCalories = calories
+        #print(f"\t\'i\' after loop: {i}")
+        if (bestCandidate == False):
+            continue
+        
+        best = i 
+        bestCalories = calories
+        bestWeight = weight
+        #print(f"\tNew Best")
+        #print(f"\t\tCalories: {calories}")
+        #print(f"\t\tBinary: {bin(i)}")
 
     bestSet = [] 
     for i in range(0, len(items)):
-        if (best << i & 1):
-            print(f"Appending {items[i]} to bestSet.")
+        if (((best >> i) % 2) == 1):
+            #print(f"Appending {items[i].name} to bestSet.")
             bestSet.append(items[i])
 
     return bestSet
@@ -148,16 +172,23 @@ def initializeItems(namesArr, weightsArr, caloriesArr):
     return items
 
 def outputItemsData(items):
-    print("Item\tWeight\tCalories")
+    print("Item\t\tWeight\t\tCalories")
     for i in range(0, len(items)):
-        print(f"{items[i].name}\t{items[i].weight}\t{items[i].calories}")
+        print(f"{items[i].name}\t\t{items[i].weight}\t\t{items[i].calories}")
 
-
-
+def testExhaustive(maxWeight, items, span):
+    print("---------------------------------\n--- Exhaustive Optimized Tests ---")
+    for i in range(0, span):
+        print(f"\n------- {i+1} ITEM(S) RUN ------- ") 
+        print("Starting... SET OF ALL ITEMS") 
+        outputItemsData(items[0:i+1])
+        best = exhaustiveOptimized(maxWeight, items[0:i+1])
+        print("Finished... BEST SET")
+        outputItemsData(best) 
 if __name__ == "__main__":
-    case1Names = ["apple", "cereal", "water", "coke", "bread"]
-    case1Weights = [15, 25, 90, 8, 8]
-    case1Calories = [30, 500, 0, 160, 800]
+    case1Names = ["apple", "cereal", "water", "coke", "bread", "bananaBunch", "coughSyrup"]
+    case1Weights = [15, 25, 90, 8, 8, 55, 10]
+    case1Calories = [30, 500, 0, 160, 800, 400, 90]
 
     #case1Tests - OLD APPROACH
     #greedyAlgo(30, case1Names, case1Weights, case1Calories)
@@ -165,7 +196,6 @@ if __name__ == "__main__":
     #greedyAlgo(8, case1Names, case1Weights, case1Calories)
 
     items = initializeItems(case1Names, case1Weights, case1Calories)
-    print(f"Main has received items. Item 3 test: {items[2].name}")
-    best = exhaustiveOptimized(1000, items) 
-    print(f"\nexhaustiveOptimized returned array...")
-    outputItemsData(best)
+    #print(f"Main has received items. Item 3 test: {items[2].name}")
+
+    testExhaustive(100, items, len(items))
