@@ -73,10 +73,7 @@ def greedyAlgo(maxWeight, names, weights, calories):
         # Each unique set of binary bits in X corresponds to a unique integer between 0 and MAX (inclusive).
         # Therefore, every value that can be represented by X corresponds to a unique set of grocery items, including the empty set.
         # By iterating through all values of X, we can iterate through all candidates for exhaustive search.
-def exaustiveOptimized(maxWeight, items):
-    best = 0
-    bestCalories = 0
-    # Generation Loop    
+# Generation Loop    
    # Bitshift verification per set
     # Let P be a set of all possible sets of list L's elements.
     # Let each set be denoted by P(sub i).
@@ -95,6 +92,10 @@ def exaustiveOptimized(maxWeight, items):
     #       totalCalories += L[length() - y - 1].calories                   +1
     #       If (totalCalories / totalWeight) > bestCalorieToWeight:     +1
     #           best = P(sub i)     +1
+def exhaustiveOptimized(maxWeight, items):
+    print(f"maxWeight: {maxWeight}")
+    best = 0
+    bestCalories = 0
     i = np.uint64(0)
     for i in range(0, 2 ** len(items)):
         j = np.uint64(0) 
@@ -102,12 +103,16 @@ def exaustiveOptimized(maxWeight, items):
         weight = 0
         valid = True
         for j in range(0, len(items)): 
-            if ((i << j & 0):
-                continue
+            print(f"i: {i}")
+            print(f"j: {j}")
+
+            if ((i << j & 0)):
+               continue
+
             weight += items[j].weight    
             calories += items[j].calories
-        
             if (weight > maxWeight):
+                print(f"Invalid Weight: {weight}")
                 valid = False
                 break
 
@@ -117,9 +122,11 @@ def exaustiveOptimized(maxWeight, items):
         if (calories > bestCalories):
             best = j
             bestCalories = calories
+
     bestSet = [] 
     for i in range(0, len(items)):
         if (best << i & 1):
+            print(f"Appending {items[i]} to bestSet.")
             bestSet.append(items[i])
 
     return bestSet
@@ -136,11 +143,16 @@ def initializeItems(namesArr, weightsArr, caloriesArr):
         items.append(Item(namesArr[i], weightsArr[i], caloriesArr[i]))
     
     print("Completed item initialization")
-    print("Item\tWeight\tCalories")
-    for i in range(0, len(case1Names)):
-        print(f"{items[i].name}\t{items[i].weight}\t{items[i].calories}")
+    outputItemsData(items)
 
     return items
+
+def outputItemsData(items):
+    print("Item\tWeight\tCalories")
+    for i in range(0, len(items)):
+        print(f"{items[i].name}\t{items[i].weight}\t{items[i].calories}")
+
+
 
 if __name__ == "__main__":
     case1Names = ["apple", "cereal", "water", "coke", "bread"]
@@ -153,5 +165,7 @@ if __name__ == "__main__":
     #greedyAlgo(8, case1Names, case1Weights, case1Calories)
 
     items = initializeItems(case1Names, case1Weights, case1Calories)
-    print("Main has received items. Item 3 test: {item[2].name}")
-    exhaustiveOptimized(10, items)    
+    print(f"Main has received items. Item 3 test: {items[2].name}")
+    best = exhaustiveOptimized(1000, items) 
+    print(f"\nexhaustiveOptimized returned array...")
+    outputItemsData(best)
