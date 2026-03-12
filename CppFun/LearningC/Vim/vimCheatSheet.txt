@@ -11,6 +11,18 @@ Cut/Paste
 - highlight, then press d to cut
 - press p to paste
 
+YANK!!! (Copy)
+- yy - copy line, including newline characer
+- 3yy - copy 3 lines starting from the current lne
+- y$ - copy from the cursor to the end of the line
+- y^ - copy from the cursor to the start of the line
+- yw - copy from the cursor to the start of the next word
+- yiw - copy the current word (without surrounding spaces)
+- yaw - copy the current word (with surrounding spaces)
+- yi( - copy the text inside parentheses
+- yi{ - copy the text inside curly braces
+- y% - copy to the matching bracket. Works with (), {}, and []
+
 Moving the cursor
 - 0 - beginning of line
 - $ - end of line
@@ -22,4 +34,11 @@ Suggested Remappings
 https://www.reddit.com/r/neovim/comments/1be2fty/lifechanging_key_remaps/
 - Escape --> Capslock tap
 - CTRL --> Capslock long-press
-- some other ones 
+- some other ones
+
+Control Flow Keys (terminal, not neovim?)
+- Ctrl-S - Pause  Display
+- Ctrl-Q - Restart Display
+- Ctrl-C - Cancel Operation
+- Ctrl-U - Cancel Line
+- Ctrl-D - Signal End of File
