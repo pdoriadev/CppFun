@@ -130,8 +130,7 @@ def exhaustiveOptimized(maxWeight, items):
         
         if (calories < bestCalories):
             bestCandidate = False
-        
-        if (calories == bestCalories):
+        elif (calories == bestCalories):
             if (bestWeight == 0 or calories/weight < bestCalories/bestWeight):
                 bestCandidate = False
 
