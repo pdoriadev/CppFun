@@ -9,21 +9,21 @@ class Item():
         self.calories = calories
 
 def swapItems(items, i, j):
-    print(f"Items - pre-swapped: {items[i].name, items[j].name}")
-    outputItemsData(items)
+    #print(f"Items - pre-swapped: {items[i].name, items[j].name}")
+    #outputItemsData(items)
     
     itemSwap = items[j]
     items[j] = items[i]
     items[i] = itemSwap
 
-    print(f"Items - post-swapped: {items[i].name, items[j].name}")
-    outputItemsData(items)
+    #print(f"Items - post-swapped: {items[i].name, items[j].name}")
+    #outputItemsData(items)
 
 def greedyAlgo(maxWeight, items):
     sumWeight:int = 0
 
-    print(f"Pre-sorted Items: ")
-    outputItemsData(items)
+    #print(f"Pre-sorted Items: ")
+    #outputItemsData(items)
 
     # selection sort
     # sort items by calories/weight
@@ -45,7 +45,7 @@ def greedyAlgo(maxWeight, items):
             swapItems(items, i, best)
         # print(f"END OF LOOP ITERATION: \n\ti = {i}\n\t{names}")
 
-    print(f"Post-sorted Items: ")
+    print(f"Post-sorted Items for Greedy Algo: ")
     outputItemsData(items)
 
     # list of indices
@@ -97,7 +97,7 @@ def exhaustiveOptimized(maxWeight, items):
     bestCalories = 0
     bestWeight = 0
     i = np.uint64(0)
-    print(f"MaxBinary: {bin( 2^len(items) - 1 )}")
+    print(f"MaxBinary: {bin(2**len(items) - 1 )}")
     #print(f"i in binary: {bin(i)}")
     for i in range(0, 2 ** len(items)):
         calories = 0
@@ -201,7 +201,7 @@ if __name__ == "__main__":
     greedyAlgo(30, greedyItems1)
     greedyAlgo(800, greedyItems1)
     
-    #items = initializeItems(case1Names, case1Weights, case1Calories)
+    items = initializeItems(case1Names, case1Weights, case1Calories)
     #print(f"Main has received items. Item 3 test: {items[2].name}")
 
-    #testExhaustive(100, items, len(items))
+    testExhaustive(100, items, len(items))
