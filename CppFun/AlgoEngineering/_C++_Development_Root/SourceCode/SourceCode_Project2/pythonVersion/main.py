@@ -8,33 +8,25 @@ class Item():
         self.weight = weight
         self.calories = calories
 
-def swapItem(names, weights, calories, i, j):
-    itemSwap:int = names[j]
-    weightSwap:int = weights[j]
-    caloriesSwap:int = calories[j]
+def swapItems(items, i, j):
+    itemSwap:int = items[j]
+    items[j] = items[i]
+    items[i] = items[j]
 
-    names[j] = names[i]
-    weights[j] = weights[i]
-    calories[j] = calories[i]
-
-    names[i] = itemSwap
-    weights[i] = weightSwap
-    calories[i] = caloriesSwap
-
-
-def greedyAlgo(maxWeight, names, weights, calories):
+def greedyAlgo(maxWeight, items):
     sumWeight:int = 0
 
-    print(f"Pre-sorted Items: {names}")
+    print(f"Pre-sorted Items: ")
+    outputItemsData(items)
 
     # selection sort
     # sort items by calories/weight
-    for i in range (0, len(names) - 1):
+    for i in range (0, len(items) - 1):
         best = i
         j = i + 1
-        while j < len(names):
-            bestCalToWeight = calories[best] / weights[best]
-            jCalToWeight = calories[j] / weights[j]
+        while j < len(items):
+            bestCalToWeight = items[best].calories / items[best].weight
+            jCalToWeight = items[j].calories / items[j].weight
             # print(f"whileLoop: \n\tbestCalToWeight = {bestCalToWeight}\n\tjCalToWeight = {jCalToWeight}")
             if jCalToWeight > bestCalToWeight:
                 # print(f"\n\tNew Best = {j}")
@@ -44,20 +36,21 @@ def greedyAlgo(maxWeight, names, weights, calories):
 
         # swap
         if best != i:
-            swapItem(names, weights, calories, i, best)
+            swapItems(items, i, best)
         # print(f"END OF LOOP ITERATION: \n\ti = {i}\n\t{names}")
 
-    print(f"Post-sorted Items: {names}")
+    print(f"Post-sorted Items: ")
+    outputItemsData(items)
 
     # list of indices
     greedyList = []
     print(f"maxWeight = {maxWeight}")
-    for i in range(0, len(names)):
+    for i in range(0, len(items)):
         # print(f"\tsumWeight + weight[{i}]: {sumWeight+weights[i]}")
-        if (sumWeight+weights[i]) > maxWeight:
+        if (sumWeight + items[i].weight) > maxWeight:
             continue
         greedyList.append(i)
-        sumWeight += weights[i]
+        sumWeight += items[i].weight
         # print(f"\tAdded {names[i]} to the greedy list.")
 
     print(f"Greedy Indices: {greedyList}")
@@ -176,6 +169,9 @@ def outputItemsData(items):
     for i in range(0, len(items)):
         print(f"{items[i].name}\t\t{items[i].weight}\t\t{items[i].calories}")
 
+def testGreedy(maxWeight, items):
+    pass
+
 def testExhaustive(maxWeight, items, span):
     print("---------------------------------\n--- Exhaustive Optimized Tests ---")
     for i in range(0, span):
@@ -195,7 +191,10 @@ if __name__ == "__main__":
     #greedyAlgo(30, case1Names, case1Weights, case1Calories)
     #greedyAlgo(800, case1Names, case1Weights, case1Calories)
     #greedyAlgo(8, case1Names, case1Weights, case1Calories)
-
+    greedyItems1 = initializeItems(case1Names, case1Weights, case1Calories)
+    greedyAlgo(30, greedyItems1)
+    greedyAlgo(800, greedyItems1)
+    
     items = initializeItems(case1Names, case1Weights, case1Calories)
     #print(f"Main has received items. Item 3 test: {items[2].name}")
 
