@@ -180,11 +180,12 @@ def testExhaustive(maxWeight, items, span):
     print("---------------------------------\n--- Exhaustive Optimized Tests ---")
     for i in range(0, span):
         print(f"\n------- {i+1} ITEM(S) RUN ------- ") 
-        print("Starting... SET OF ALL ITEMS") 
+        print("Pre-Exhaustive.... SET OF ALL ITEMS") 
         outputItemsData(items[0:i+1])
         best = exhaustiveOptimized(maxWeight, items[0:i+1])
-        print("Finished... BEST SET")
-        outputItemsData(best) 
+        print("Post-Exhaustive... BEST SET")
+        outputItemsData(best)
+
 if __name__ == "__main__":
     case1Names = ["apple", "cereal", "water", "coke", "bread", "bananaBunch", "coughSyrup"]
     case1Weights = [15, 25, 90, 8, 8, 55, 10]
