@@ -9,9 +9,15 @@ class Item():
         self.calories = calories
 
 def swapItems(items, i, j):
-    itemSwap:int = items[j]
+    print(f"Items - pre-swapped: {items[i].name, items[j].name}")
+    outputItemsData(items)
+    
+    itemSwap = items[j]
     items[j] = items[i]
-    items[i] = items[j]
+    items[i] = itemSwap
+
+    print(f"Items - post-swapped: {items[i].name, items[j].name}")
+    outputItemsData(items)
 
 def greedyAlgo(maxWeight, items):
     sumWeight:int = 0
@@ -195,7 +201,7 @@ if __name__ == "__main__":
     greedyAlgo(30, greedyItems1)
     greedyAlgo(800, greedyItems1)
     
-    items = initializeItems(case1Names, case1Weights, case1Calories)
+    #items = initializeItems(case1Names, case1Weights, case1Calories)
     #print(f"Main has received items. Item 3 test: {items[2].name}")
 
-    testExhaustive(100, items, len(items))
+    #testExhaustive(100, items, len(items))
