@@ -20,7 +20,7 @@ bool greedyAlgo(const uint16_t maxW, const std::vector<item> itemList, &std::vec
 	 * */
 	for (uint16_t i = 0; i < items.count() - 1; ++i)
 	{
-
+		best = i;
 		for (uint16_t j = i + 1; j < items.count(); ++j)
 		{
 			
