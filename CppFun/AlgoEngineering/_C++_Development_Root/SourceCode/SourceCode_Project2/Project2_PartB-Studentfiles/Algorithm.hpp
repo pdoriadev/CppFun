@@ -8,7 +8,8 @@
 
 // Food Item Descriptions
 #include <string>
-
+// uint#_t Types
+#include <stdint>
 /////////////////////// END-TO-DO (1) ////////////////////////////
 
 
@@ -87,13 +88,73 @@ struct Algorithm_1 : Algorithm
     /// ------------- USAGE & IMPLEMENTATION NOTES -------------------
     ///	inputFile - redirect scenario file into .exe
     ///	outputFile - redirect .exe's output to output-ForDelivery.txt
-    /// 
-    ///
-    /// 
-     
+    
+    // selection sort FoodItems by ratio of calories to weight
+    for (uint8_t i = 0; i < Algorithm::_todays_inventory.size(); ++i)
+    {
+      uint8_t best = i;
+      uint8_t bestCal = 0;
+      uint8_t bestW = 0; 
+      for (uint8_t j = 0; j < Algorithm::_todays_inventory.size(); ++j) 
+      {
+        const double curCal = Algorithm::_todays_inventory[j].calories();
+        const unsigned curW = Algorithm::_todays_inventory[j].weight();
+         
+        // check if weight exceeds weight limit 
+        if (curW >= weight_limit)
+        {
+          continue;  
+        }
 
+        // check if calories/weight is less than the best 
+        if (curCal/curW < bestCal/bestW) 
+        {
+          continue;
+        }
+        
+        // edge-case checks if cal/weight ratios are equal
+        if (curCal/curW == bestCal/bestW)
+        {
+          if (curCal < bestCal)
+          {
+            continue
+          }
 
+          if (curW > bestW)
+          {
+            continue; 
+          }
+        }
 
+        best = j;
+        bestCal = curCal;
+        bestW = curW; 
+      }
+
+      if (best == i)
+      {
+        continue;
+      }
+
+      FoodItem const* swap = Algorithm::_todays_inventory[i];
+      Algorithm::_todays_inventory[i] = Algorithm::_todays_inventory[j]
+      Algorithm::_todays_inventory[j] = swap; 
+    }
+
+    std::vector<uint8_t> greedyItems = {}; 
+    unsigned sumW = 0;  
+    for (uint8_t i = 0; i < Algorithm::_todays_inventory().size(); ++i)
+    {
+      // check if sumW would exceed weight limit by adding the current item
+      if (sumW + Algorithm::_todays_inventory()[i].weight() > weight_limit)
+      {
+        continue;         
+      }
+      
+      greedyItems.push_back(i);
+      std::print(std::cout, "{:>5}: {::s}\n", i, Algorithm::_todays_inventory()[i].description(), Algorithm::_todays_inventory()[i].weight(), Algorithm::_todays_inventory()[i].calories(), Algorithm::_todays_inventory[i].calories() / Algorithm::_todays_inventory[i].weight());
+    }
+    
     ///	/////////////////////// END-TO-DO (2) ////////////////////////////
   }
 };
@@ -121,7 +182,7 @@ struct Algorithm_2 : Algorithm
   FoodPantry::SelectedFoodItems run( unsigned weight_limit ) const override
   {
     ///////////////////////// TO-DO (3) //////////////////////////////
-
+    return Algorithm::_todays_inventory();
     /////////////////////// END-TO-DO (3) ////////////////////////////
   }
 };
