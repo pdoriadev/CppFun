@@ -20,8 +20,6 @@ def swapItems(items, i, j):
     #outputItemsData(items)
 
 def greedyAlgo(maxWeight, items):
-    sumWeight:int = 0
-
     #print(f"Pre-sorted Items: ")
     #outputItemsData(items)
 
@@ -50,6 +48,7 @@ def greedyAlgo(maxWeight, items):
 
     # list of indices
     greedyList = []
+    sumWeight = 0
     print(f"maxWeight = {maxWeight}")
     for i in range(0, len(items)):
         # print(f"\tsumWeight + weight[{i}]: {sumWeight+weights[i]}")
