@@ -1,0 +1,4 @@
+Weight Limit    Min Weight    Max Weight   Quantity
+ 200             4            50           10
+ 129             3            120           7
+1100            50            150          19
