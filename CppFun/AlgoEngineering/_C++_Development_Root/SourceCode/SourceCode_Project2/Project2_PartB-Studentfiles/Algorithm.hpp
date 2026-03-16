@@ -6,6 +6,9 @@
   ///
   /// Do not put anything else in this section, i.e. comments, classes, functions, etc.  Only #include directives
 
+// Food Item Descriptions
+#include <string>
+
 /////////////////////// END-TO-DO (1) ////////////////////////////
 
 
@@ -78,11 +81,20 @@ struct Algorithm_1 : Algorithm
     /// - Run the program using Scenarios-ForDelivery.txt as input
     /// - creating output-ForDelivery.txt with your output.
     ///
-		///	-------------------------------------------------------------
-		/// -------------------- IMPLEMENTATION NOTES -------------------
-		///	inputFile - file name is redirected i: 
-		///	  
-		///	/////////////////////// END-TO-DO (2) ////////////////////////////
+    ///
+    ///	-------------------------------------------------------------
+    ///
+    /// ------------- USAGE & IMPLEMENTATION NOTES -------------------
+    ///	inputFile - redirect scenario file into .exe
+    ///	outputFile - redirect .exe's output to output-ForDelivery.txt
+    /// 
+    ///
+    /// 
+     
+
+
+
+    ///	/////////////////////// END-TO-DO (2) ////////////////////////////
   }
 };
 
