@@ -6,20 +6,21 @@ CFLAGS = -g
 # Implicit rule #1: object files are built via the C linker implicit rule
 # Implicit rule #2: *.o files built via the C compilation implicit rule, because>
 
-
-all:
-	make objs
-#	$(CC) build -o $(OBJS)
-
 SOURCE_DIR = /SOURCE/
 OBJS_DIR = /OBJS/
 
-SRC = $(patsubst %.c, %.o$(SOURCE_DIR)$(wildcard *.c))
-OBJS = $(patsubst %.c, %.o, $(SRC))
-objs : $(OBJS_DIR)$(OBJS)
+SRCS := AccountActions.c BankAccount.c ErrorLog.c ThreadLog.c main.c 
+OBJS := AccountActions.o BankAccount.o ErrorLog.o ThreadLog.o main.o  
 
-# $(OBJS) :
-#	$(CC) -c SRC -o $@
+all: $(SRCS) $(OBJS)
+	@echo "---------------------------------"
+	@echo "------- LINKING EXECUTABLE ------"
+	$(CC) $(SRCS) -o ./build.exe
+
+%.o : %.c
+	@echo "---------------------------------"
+	@echo "------- COMPILING C FILES -------"
+	$(CC) -c $<
 
 clean:
 	rm -f $(OBJS_DIR)*.o *.exe
