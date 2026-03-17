@@ -9,7 +9,10 @@
 // Food Item Descriptions
 #include <string>
 // uint#_t Types
-#include <stdint>
+#include <cstdint>
+#include "FoodPantry.hpp"
+#include <cstdio>
+  // print
 /////////////////////// END-TO-DO (1) ////////////////////////////
 
 
@@ -90,15 +93,16 @@ struct Algorithm_1 : Algorithm
     ///	outputFile - redirect .exe's output to output-ForDelivery.txt
     
     // selection sort FoodItems by ratio of calories to weight
+    std::vector<FoodItem *>{Algorithm::_todays_inventory};
     for (uint8_t i = 0; i < Algorithm::_todays_inventory.size(); ++i)
     {
       uint8_t best = i;
-      uint8_t bestCal = 0;
-      uint8_t bestW = 0; 
+      double bestCal = 0;
+      unsigned bestW = 0; 
       for (uint8_t j = 0; j < Algorithm::_todays_inventory.size(); ++j) 
       {
-        const double curCal = Algorithm::_todays_inventory[j].calories();
-        const unsigned curW = Algorithm::_todays_inventory[j].weight();
+        const double curCal = Algorithm::_todays_inventory[j]->calories();
+        const unsigned curW = Algorithm::_todays_inventory[j]->weight();
          
         // check if weight exceeds weight limit 
         if (curW >= weight_limit)
@@ -113,11 +117,13 @@ struct Algorithm_1 : Algorithm
         }
         
         // edge-case checks if cal/weight ratios are equal
-        if (curCal/curW == bestCal/bestW)
+        // Note: Using NOT GREATER THAN because using == for two floats
+        //    creates a warning: "comparing floating point with == or != is unsafe [-Werror,-Wfloat-equal]"
+        if ((curCal/curW > bestCal/bestW) == false)
         {
           if (curCal < bestCal)
           {
-            continue
+            continue;
           }
 
           if (curW > bestW)
@@ -137,24 +143,24 @@ struct Algorithm_1 : Algorithm
       }
 
       FoodItem const* swap = Algorithm::_todays_inventory[i];
-      Algorithm::_todays_inventory[i] = Algorithm::_todays_inventory[j]
-      Algorithm::_todays_inventory[j] = swap; 
+      Algorithm::_todays_inventory[i] = Algorithm::_todays_inventory[best];
+      Algorithm::_todays_inventory[best] = swap; 
     }
 
     std::vector<uint8_t> greedyItems = {}; 
     unsigned sumW = 0;  
-    for (uint8_t i = 0; i < Algorithm::_todays_inventory().size(); ++i)
+    for (uint8_t i = 0; i < Algorithm::_todays_inventory.size(); ++i)
     {
       // check if sumW would exceed weight limit by adding the current item
-      if (sumW + Algorithm::_todays_inventory()[i].weight() > weight_limit)
+      if (sumW + Algorithm::_todays_inventory[i]->weight() > weight_limit)
       {
         continue;         
       }
       
       greedyItems.push_back(i);
-      std::print(std::cout, "{:>5}: {::s}\n", i, Algorithm::_todays_inventory()[i].description(), Algorithm::_todays_inventory()[i].weight(), Algorithm::_todays_inventory()[i].calories(), Algorithm::_todays_inventory[i].calories() / Algorithm::_todays_inventory[i].weight());
+      std::print(std::cout, "{:>5}: {::s}\n", i, Algorithm::_todays_inventory[i]->description(), Algorithm::_todays_inventory[i]->weight(), Algorithm::_todays_inventory[i]->calories(), Algorithm::_todays_inventory[i]->calories() / Algorithm::_todays_inventory[i]->weight());
     }
-    
+    return Algorithm::_todays_inventory;
     ///	/////////////////////// END-TO-DO (2) ////////////////////////////
   }
 };
@@ -181,8 +187,9 @@ struct Algorithm_2 : Algorithm
   //      to the weight limit
   FoodPantry::SelectedFoodItems run( unsigned weight_limit ) const override
   {
+    std::print(std::cout , "%d", weight_limit);
     ///////////////////////// TO-DO (3) //////////////////////////////
-    return Algorithm::_todays_inventory();
+    return Algorithm::_todays_inventory;
     /////////////////////// END-TO-DO (3) ////////////////////////////
   }
 };
