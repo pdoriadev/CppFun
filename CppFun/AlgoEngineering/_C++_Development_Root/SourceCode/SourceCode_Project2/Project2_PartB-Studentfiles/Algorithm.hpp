@@ -93,7 +93,8 @@ struct Algorithm_1 : Algorithm
     ///	outputFile - redirect .exe's output to output-ForDelivery.txt
     
     // selection sort FoodItems by ratio of calories to weight
-    std::vector<FoodItem *>{Algorithm::_todays_inventory};
+    std::vector<FoodItem *> inv = {};
+
     for (uint8_t i = 0; i < Algorithm::_todays_inventory.size(); ++i)
     {
       uint8_t best = i;
@@ -143,8 +144,9 @@ struct Algorithm_1 : Algorithm
       }
 
       FoodItem const* swap = Algorithm::_todays_inventory[i];
-      Algorithm::_todays_inventory[i] = Algorithm::_todays_inventory[best];
-      Algorithm::_todays_inventory[best] = swap; 
+      //std::swap(Algorithm::_todays_inventory[i], Algorithm::_todays_inventory[best]);
+      //Algorithm::_todays_inventory[i] = Algorithm::_todays_inventory[best];
+      //Algorithm::_todays_inventory[best] = swap; 
     }
 
     std::vector<uint8_t> greedyItems = {}; 
