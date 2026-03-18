@@ -92,9 +92,11 @@ struct Algorithm_1 : Algorithm
     ///	inputFile - redirect scenario file into .exe
     ///	outputFile - redirect .exe's output to output-ForDelivery.txt
     
-    // selection sort FoodItems by ratio of calories to weight
-    std::vector<FoodItem *> inv = {};
-
+    // Vector to track FoodItem and ratio for sorting. 
+    std::vector<std::pair<FoodItem const *, const double>> foodByRatio = {};
+    foodByRatio.reserve(Algorithm::_todays_inventory.size());
+    
+    // Selection sort FoodItems by ratio of calories to weight
     for (uint8_t i = 0; i < Algorithm::_todays_inventory.size(); ++i)
     {
       uint8_t best = i;
@@ -138,30 +140,24 @@ struct Algorithm_1 : Algorithm
         bestW = curW; 
       }
 
-      if (best == i)
-      {
-        continue;
-      }
-
-      FoodItem const* swap = Algorithm::_todays_inventory[i];
-      //std::swap(Algorithm::_todays_inventory[i], Algorithm::_todays_inventory[best]);
-      //Algorithm::_todays_inventory[i] = Algorithm::_todays_inventory[best];
-      //Algorithm::_todays_inventory[best] = swap; 
+      foodByRatio.push_back(std::pair(Algorithm::_todays_inventory[best], bestCal/bestW));
     }
 
-    std::vector<uint8_t> greedyItems = {}; 
+
     unsigned sumW = 0;  
-    for (uint8_t i = 0; i < Algorithm::_todays_inventory.size(); ++i)
+    for (uint8_t i = 0; i < foodByRatio.size(); ++i)
     {
       // check if sumW would exceed weight limit by adding the current item
-      if (sumW + Algorithm::_todays_inventory[i]->weight() > weight_limit)
+      if (sumW + std::get<0>(foodByRatio[i])->weight() > weight_limit)
       {
         continue;         
       }
-      
-      greedyItems.push_back(i);
-      std::print(std::cout, "{:>5}: {::s}\n", i, Algorithm::_todays_inventory[i]->description(), Algorithm::_todays_inventory[i]->weight(), Algorithm::_todays_inventory[i]->calories(), Algorithm::_todays_inventory[i]->calories() / Algorithm::_todays_inventory[i]->weight());
+      sumW += std::get<0>(foodByRatio[i])->weight();
+
+      std::print(std::cout, "{:>6}: {::s}\n", i, std::get<0>(foodByRatio[i])->description(), std::get<0>(foodByRatio[i])->weight(), std::get<0>(foodByRatio[i])->calories(), "12345");
     }
+
+    // Required by the function's return type
     return Algorithm::_todays_inventory;
     ///	/////////////////////// END-TO-DO (2) ////////////////////////////
   }
