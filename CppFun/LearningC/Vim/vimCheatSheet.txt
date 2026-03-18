@@ -23,9 +23,19 @@ YANK!!! (Copy)
 - yi{ - copy the text inside curly braces
 - y% - copy to the matching bracket. Works with (), {}, and []
 
+Search for Pattern
+- /word - all occurrences of "word"
+- /\<word\> - patterns that are just "word"
+
 Replace string
 - %s/stringToReplace/replacementString - replaces all instances of the string
 - 0, 6s/stringToReplace/replacementString - replaces all instances of stringToReplace with replacementString between lines 0 and 6 (inclusive). 
+
+Tabs
+- set tabstop=2 - sets tab size to two spaces
+- set shiftwidth=2 - NOT SURE WHAT THIS IS. NEED TO LOOK IT UP.
+- set expandtab - converts tabs to spaces
+- original reference: https://stackoverflow.com/questions/2054627/how-do-i-change-tab-size-in-vim
 
 Moving the cursor
 - 0 - beginning of line
