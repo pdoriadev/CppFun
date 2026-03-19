@@ -6,13 +6,15 @@
   ///
   /// Do not put anything else in this section, i.e. comments, classes, functions, etc.  Only #include directives
 
-// Food Item Descriptions
 #include <string>
-// uint#_t Types
+  // Food Item Descriptions
 #include <cstdint>
+  // uint_t Types
 #include "FoodPantry.hpp"
 #include <cstdio>
-  // print
+  // print()
+#include <cmath>
+  // pow()
 /////////////////////// END-TO-DO (1) ////////////////////////////
 
 
@@ -190,6 +192,23 @@ struct Algorithm_2 : Algorithm
   {
     std::print(std::cout , "%d", weight_limit);
     ///////////////////////// TO-DO (3) //////////////////////////////
+    uint64_t best = 0;
+    double bestCalories = 0;
+    unsigned bestWeight = 0;
+    // items pointer so it isn't a pain to keep retyping "Algorithm::_todays_inventory.size()". 
+    const FoodPantry * items = Algorithm::_todays_inventory;
+    for (uint64_t i = 0; i < std::pow(2, Algorithm::_todays_inventory.size()); ++i)
+    {
+      double calories = 0;
+      unsigned weight = 0;
+      bool bestCandidate = True
+
+      uint8_t maxPlaces = items->size();
+      for (uint8_t places = 0; places < maxPlaces; ++i)
+      {
+      
+      }        
+    }
     return Algorithm::_todays_inventory;
     /////////////////////// END-TO-DO (3) ////////////////////////////
   }
