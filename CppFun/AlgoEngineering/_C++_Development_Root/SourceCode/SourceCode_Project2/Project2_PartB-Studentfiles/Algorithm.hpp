@@ -154,11 +154,14 @@ struct Algorithm_1 : Algorithm
       }
       sumW += std::get<0>(foodByRatio[i])->weight();
 
-      std::print(std::cout, "{:>6}: {::s}\n", i, std::get<0>(foodByRatio[i])->description(), std::get<0>(foodByRatio[i])->weight(), std::get<0>(foodByRatio[i])->calories(), "12345");
+
+      std::print(std::cout, "{:>6}: {::s}\n", "i", "Description", "Weight", "Calories", "12345");
+      //std::print(std::cout, "{:>6}: {::s}\n", i, std::get<0>(foodByRatio[i])->description(), std::get<0>(foodByRatio[i])->weight(), std::get<0>(foodByRatio[i])->calories(), "12345");
     }
 
     // Required by the function's return type
     return Algorithm::_todays_inventory;
+    
     ///	/////////////////////// END-TO-DO (2) ////////////////////////////
   }
 };
