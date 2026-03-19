@@ -156,9 +156,9 @@ struct Algorithm_1 : Algorithm
       }
       sumW += std::get<0>(foodByRatio[i])->weight();
 
-
-      std::print(std::cout, "{:>6}: {::s}\n", "i", "Description", "Weight", "Calories", "12345");
-      //std::print(std::cout, "{:>6}: {::s}\n", i, std::get<0>(foodByRatio[i])->description(), std::get<0>(foodByRatio[i])->weight(), std::get<0>(foodByRatio[i])->calories(), "12345");
+      // Throwing error because std::print is a non-const function
+      // std::print(std::cout, "{:>6}: {::s}\n", "i", "Description", "Weight", "Calories", "12345");
+      // std::print(std::cout, "{:>6}: {::s}\n", i, std::get<0>(foodByRatio[i])->description(), std::get<0>(foodByRatio[i])->weight(), std::get<0>(foodByRatio[i])->calories(), "12345");
     }
 
     // Required by the function's return type
@@ -192,22 +192,91 @@ struct Algorithm_2 : Algorithm
   {
     std::print(std::cout , "%d", weight_limit);
     ///////////////////////// TO-DO (3) //////////////////////////////
+/* Generate candidate bitmasks - Proof for Candidate Generation by iterating through all possible integer values for an integer of n bits.
+    Let the list of grocery items L be a list of n elements long.
+    Let each element correspond to a binary bit in an unsigned integer type X of n bits long.
+    Let us represent the max value of X with MAX. 
+    Each unique set of binary bits in X corresponds to a unique integer between 0 and MAX (inclusive).
+    Therefore, every value that can be represented by X corresponds to a unique binary set of 1's and 0's of length n. 
+    Since we have n grocery items, each unique set of grocery items can be represented by a matching binary set of 1's and 0's of length n. Therefore, each value of X (i.e. X(0), X(1), X(...), X(n-1), X(n)) is made of a binary value that corresponds to every set of grocery items, including the empty set.
+    By iterating through all values of X, we can iterate through all candidates for exhaustive search.
+     
+    For a grocery list of length n=2.
+      X(0) = 00. Empty set. No grocery Algorithm::_todays_inventory. 
+      X(1) = 01. Includes Item 1.
+      X(2) = 10. Includes Item 2.
+      X(2) = 11. Includes ALL grocery Algorithm::_todays_inventory. 
+*/
+    uint64_t numberOfSets = 0;
+    // Workaround because c++ doesn't have an integer pow function.
+    for (size_t place = 0; place < Algorithm::_todays_inventory.size(); ++place)
+    {
+      // for each place, shift a 1 onto the numberOfSets
+      numberOfSets += 1;
+      numberOfSets = numberOfSets << 1; 
+    }  
+  
     uint64_t best = 0;
     double bestCalories = 0;
     unsigned bestWeight = 0;
-    // items pointer so it isn't a pain to keep retyping "Algorithm::_todays_inventory.size()". 
-    const FoodPantry * items = Algorithm::_todays_inventory;
-    for (uint64_t i = 0; i < std::pow(2, Algorithm::_todays_inventory.size()); ++i)
+
+    for (uint64_t i = 0; i < numberOfSets; ++i)
     {
       double calories = 0;
       unsigned weight = 0;
-      bool bestCandidate = True
+      bool bestCandidate = true;
 
-      uint8_t maxPlaces = items->size();
-      for (uint8_t places = 0; places < maxPlaces; ++i)
+      // Verification Algorithm  
+      size_t maxPlaces = Algorithm::_todays_inventory.size();
+      for (size_t places = 0; places < maxPlaces; ++i)
       {
-      
-      }        
+        // DOES BIT SHIFTING WORK THE SAME LIKE THIS IN CPP
+        if (((i >> places) % 2) == 0)
+            continue;
+        
+        weight += Algorithm::_todays_inventory[places]->weight();
+        calories += Algorithm::_todays_inventory[places]->calories();
+        if (weight > weight_limit)
+        {
+          bestCandidate = false;
+          break;  
+        }
+      } 
+     
+
+      // edge-case checks if cal/weight ratios are equal
+      if (calories < bestCalories)
+      {
+        bestCandidate = false;
+      }
+      else if((calories > bestCalories) == false)
+      {
+        /* Note: Using NOT GREATER THAN because using == for two floats
+            creates a warning: "comparing floating point with == or != 
+            is unsafe [-Werror,-Wfloat-equal]"*/
+        if (weight > bestWeight)
+        {
+          bestCandidate = false;  
+        }
+      }
+
+      if (bestCandidate == false)
+        continue;
+
+      best = i;
+      bestCalories = calories;
+      bestWeight = weight;
+    }
+
+    for (uint8_t i = 0; i < Algorithm::_todays_inventory.size(); ++i)
+    {
+      if (((best >> i) % 2) == 1)
+      {
+        std::print(std::cout, "%d", 1);
+        std::print(std::cout, "{:>2}:\n", 1, 2);
+        std::print(std::cout, "{:>3}: {::s}\n", 1, 2, 3);
+       //std::print(std::cout, "{:>6}: {::s}\n", i, std::get<0>(foodByRatio[i])->description(), std::get<0>(foodByRatio[i])->weight(), std::get<0>(foodByRatio[i])->calories(), "12345");       
+      }
     }
     return Algorithm::_todays_inventory;
     /////////////////////// END-TO-DO (3) ////////////////////////////
