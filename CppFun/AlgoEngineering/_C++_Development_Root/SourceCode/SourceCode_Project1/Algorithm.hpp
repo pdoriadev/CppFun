@@ -71,7 +71,9 @@ struct Algorithm_1 : Algorithm
       {
         mowDirection *= (-1);
         halfMows += 1;
-        // :>3 means 3 columns, right justified.
+        // :>3 - 3 columns, right justified.
+	// ':' - after the first format-spec "{:>3}" means output a colon after the first argument's output.
+	// "{::s}" - not sure what this means. 
         std::print( std::cout, "{:>3}: {::s}\n", halfMows, disks);
       }
     }
