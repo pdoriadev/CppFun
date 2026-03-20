@@ -159,6 +159,8 @@ struct Algorithm_1 : Algorithm
       // Throwing error because std::print is a non-const function
       // std::print(std::cout, "{:>6}: {::s}\n", "i", "Description", "Weight", "Calories", "12345");
       // std::print(std::cout, "{:>6}: {::s}\n", i, std::get<0>(foodByRatio[i])->description(), std::get<0>(foodByRatio[i])->weight(), std::get<0>(foodByRatio[i])->calories(), "12345");
+      std::print(std::cout, "{0:>4}: {{\"{1:<50}\", {2:>4}, {3:>5.{4}}, {5:>7.{6}}}}\n", i, std::get<0>(foodByRatio[i])->description(), std::get<0>(foodByRatio[i])->weight(), std::get<0>(foodByRatio[i])->calories(), std::to_string(std::get<0>(foodByRatio[i])->calories()).size(), std::get<1>(foodByRatio[i]), std::to_string(std::get<1>(foodByRatio[i])).size());
+      // std::print(std::cout, "{0:>4}: \{\"{1:<50}\", {2:>4}, {3:>5.5}, {4:>7.7}\}\n", i, std::get<0>(foodByRatio[i])->description(), std::get<0>(foodByRatio[i])->weight(), std::get<0>(foodByRatio[i])->calories(), std::get<1>(foodByRatio[i]);
     }
 
     // Required by the function's return type
@@ -272,9 +274,9 @@ struct Algorithm_2 : Algorithm
     {
       if (((best >> i) % 2) == 1)
       {
-        std::print(std::cout, "%d", 1);
-        std::print(std::cout, "{:>2}:\n", 1, 2);
-        std::print(std::cout, "{:>3}: {::s}\n", 1, 2, 3);
+        //std::print(std::cout, "%d", 1);
+        //std::print(std::cout, "{:>2}:\n", 1, 2);
+        //std::print(std::cout, "{:>3}:\n", 1, 2, 3);
        //std::print(std::cout, "{:>6}: {::s}\n", i, std::get<0>(foodByRatio[i])->description(), std::get<0>(foodByRatio[i])->weight(), std::get<0>(foodByRatio[i])->calories(), "12345");       
       }
     }

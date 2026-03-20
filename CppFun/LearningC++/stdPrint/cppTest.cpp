@@ -54,5 +54,14 @@ int main(void)
 
   std::print(std::cout, "{:<12.5} {:>10.9s}\n", 1.234567, "I want a box of chocolates");
   
+  std::print(std::cout, "{{\"{:<4},\"}}\n", doubNum); 
+
+  // tests to find the error
+  std::print(std::cout, "{0:>4}:\n", 0); 
+  std::print(std::cout, "{0:>4}: {{\"{1:<50}\"}}\n", 0, "Description"); 
+  std::print(std::cout, "{0:>4}: {{\"{1:<50}\", {2:>4}}}\n", 0, "Description", 999); 
+  std::print(std::cout, "{0:>4}: {{\"{1:<50}\", {2:>4}, {3:>5}}}\n", 0, "Description", 999, 666); 
+  std::print(std::cout, "{0:>4}: {{\"{1:<50}\", {2:>4}, {3:>5}, {4:>7.{5}}}}\n", 0, "Description", 999, 666, 3.134, std::to_string(3.134).size()); 
+ 
   return 0;
 }
