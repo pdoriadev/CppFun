@@ -93,8 +93,6 @@ struct Algorithm_1 : Algorithm
     /// ------------- USAGE & IMPLEMENTATION NOTES -------------------
     ///	inputFile - redirect scenario file into .exe
     ///	outputFile - redirect .exe's output to output-ForDelivery.txt
-    // std::print(std::cout, "Starting Greedy Algo");
-    // std::fflush(stdout);
 
     // Vector to track FoodItem and ratio for sorting. 
     std::vector<std::pair<FoodItem const *, const double>> foodByRatio = {};
@@ -124,8 +122,10 @@ struct Algorithm_1 : Algorithm
         }
         
         // edge-case checks if cal/weight ratios are equal
-        // Note: Using NOT GREATER THAN because using == for two floats
-        //    creates a warning: "comparing floating point with == or != is unsafe [-Werror,-Wfloat-equal]"
+        /* Note: Using NOT GREATER THAN because using == 
+         * for two floats creates a warning: 
+         * "comparing floating point with == or != 
+            is unsafe [-Werror,-Wfloat-equal]"*/
         if ((curCal/curW > bestCal/bestW) == false)
         {
           if (curCal < bestCal)
@@ -157,26 +157,11 @@ struct Algorithm_1 : Algorithm
       {
         continue;         
       }
+
       sumW += std::get<0>(foodByRatio[i])->weight();
       pantry.push_back(std::get<0>(foodByRatio[i]));
-      // Throwing error because std::print is a non-const function
-      // std::print(std::cout, "{:>6}: {::s}\n", "i", "Description", "Weight", "Calories", "12345");
-      // std::print(std::cout, "{:>6}: {::s}\n", i, std::get<0>(foodByRatio[i])->description(), std::get<0>(foodByRatio[i])->weight(), std::get<0>(foodByRatio[i])->calories(), "12345");
-      /*std::print(std::cout, "{0:>4}: {{\"{1:<50}\", {2:>4}, {3:>5.{4}}, {5:>7.{6}}}}\n", 
-        i,
-        std::get<0>(foodByRatio[i])->description(),
-        std::get<0>(foodByRatio[i])->weight(),
-        std::get<0>(foodByRatio[i])->calories(),
-        std::to_string(std::get<0>(foodByRatio[i])->calories()).size(),
-        std::get<1>(foodByRatio[i]),
-        std::to_string(std::get<1>(foodByRatio[i])).size());
-      */
-      // std::print(std::cout, "{0:>4}: \{\"{1:<50}\", {2:>4}, {3:>5.5}, {4:>7.7}\}\n", i, std::get<0>(foodByRatio[i])->description(), std::get<0>(foodByRatio[i])->weight(), std::get<0>(foodByRatio[i])->calories(), std::get<1>(foodByRatio[i]);
     }
-    // std::print(std::cout, "Finished greedy algo.");
-    // std::fflush(stdout);
 
-    // Required by the function's return type
     return pantry; 
     
     ///	/////////////////////// END-TO-DO (2) ////////////////////////////
@@ -207,7 +192,7 @@ struct Algorithm_2 : Algorithm
   {
     std::print(std::cout , "%d", weight_limit);
     ///////////////////////// TO-DO (3) //////////////////////////////
-/* Generate candidate bitmasks - Proof for Candidate Generation by iterating through all possible integer values for an integer of n bits.
+/* Generate candidate bitmasks - PROOF FOR CANDIDATE GENERATION BY ITERATING THROUGH ALL POSSIBLE INTEGER VALUES FOR AN INTEGER OF n BITS. Mathematical Induction.
     Let the list of grocery items L be a list of n elements long.
     Let each element correspond to a binary bit in an unsigned integer type X of n bits long.
     Let us represent the max value of X with MAX. 
@@ -223,8 +208,6 @@ struct Algorithm_2 : Algorithm
       X(2) = 11. Includes ALL grocery Algorithm::_todays_inventory. 
 */
     
-    //std::print(std::cout, "Starting exhaustive algo.");
-    //std::fflush(stdout);
     
     uint64_t numberOfSets = 0;
     // Workaround because c++ doesn't have an integer pow function.
@@ -234,15 +217,11 @@ struct Algorithm_2 : Algorithm
       numberOfSets += 1;
       numberOfSets = numberOfSets << 1; 
     }  
-    std::print(std::cout, "number of sets: {}\n", numberOfSets);
+    //std::print(std::cout, "number of sets: {}\n", numberOfSets);
 
     uint64_t best = 0;
     double bestCalories = 0;
     unsigned bestWeight = 0;
-    uint64_t passedBitShift = 0;
-    uint64_t passedWeightLimit = 0;
-    uint64_t passedCalorieChecks = 0;
-    uint64_t timesABestCandidateShouldHaveBeenAssigned = 0;
     for (uint64_t i = 0; i < numberOfSets; ++i)
     {
       double calories = 0;
@@ -253,28 +232,22 @@ struct Algorithm_2 : Algorithm
       size_t maxPlaces = Algorithm::_todays_inventory.size();
       for (size_t places = 0; places < maxPlaces; ++places)
       {
-        // DOES BIT SHIFTING WORK THE SAME LIKE THIS IN CPP
         if (((i >> places) % 2) == 0)
           continue;
         
         weight += Algorithm::_todays_inventory[places]->weight();
         calories += Algorithm::_todays_inventory[places]->calories();
-        //statusOutput += "Passed bitshift check: {}\n"
-        passedBitShift += 1;
+        
         if (weight > weight_limit)
         {
           bestCandidate = false;
-          continue;  
         }
 	
-        passedWeightLimit += 1;
-
       }
 
       if (calories < bestCalories)
       {
         bestCandidate = false;
-        continue;
       }
         // edge-case checks if cal/weight ratios are equal
         /* Note: Using NOT GREATER THAN because using == 
@@ -286,54 +259,28 @@ struct Algorithm_2 : Algorithm
         if (weight > bestWeight)
         {
           bestCandidate = false;
-          continue; 
         }
       }
 
-      passedCalorieChecks += 1;
 
       if (bestCandidate == false)
         continue;
       
-      //statusOutput += "New best value = " + std::to_string(i) + '\n';
-      timesABestCandidateShouldHaveBeenAssigned += 1;
       best = i;
       bestCalories = calories;
       bestWeight = weight;
     }
     
-    //std::print(std::cout, "Status Logs: {}\n", statusOutput);
-    std::print(std::cout, "Times passed BitShiftCheck: {}\n", passedBitShift);
-    std::print(std::cout, "Times passed WeightLimit: {}\n", passedWeightLimit);
-    std::print(std::cout, "Times passed CalorieChecks: {}\n", passedCalorieChecks);
-    std::print(std::cout, "Times best should have been assigned : {}\n", timesABestCandidateShouldHaveBeenAssigned); 
-
-    std::print(std::cout, "best value = {}\n", best); 
     FoodPantry pantry = {};
     for (uint8_t i = 0; i < Algorithm::_todays_inventory.size(); ++i)
     {
       if (((best >> i) % 2) == 1)
       { 
-        std::print(std::cout, "Should add {} to pantry vector.", Algorithm::_todays_inventory[i]->description()); 
-        //double ratio = Algorithm::_todays_inventory[i]->calories() / Algorithm::_todays_inventory[i]->weight();
+        //std::print(std::cout, "Should add {} to pantry vector.", Algorithm::_todays_inventory[i]->description()); 
         pantry.push_back(Algorithm::_todays_inventory[i]);
-        /*
-        std::print(std::cout, "{0:>4}: {{\"{1:<50}\", {2:>4}, {3:>5.{4}}, {5:>7.{6}}}}\n",
-          i, 
-          Algorithm::_todays_inventory[i]->description(), 
-          Algorithm::_todays_inventory[i]->weight(),
-          Algorithm::_todays_inventory[i]->calories(),
-          std::to_string(Algorithm::_todays_inventory[i]->calories()).size(),
-          ratio,
-          std::to_string(ratio).size());
-          */
-      //std::print(std::cout, "%d", 1);
-       //std::print(std::cout, "{:>2}:\n", 1, 2);
-        //std::print(std::cout, "{:>3}:\n", 1, 2, 3);
-       //std::print(std::cout, "{:>6}: {::s}\n", i, std::get<0>(foodByRatio[i])->description(), std::get<0>(foodByRatio[i])->weight(), std::get<0>(foodByRatio[i])->calories(), "12345");       
       }
     }
-    std::print(std::cout, "Pantry size: {}", pantry.size());
+    
     return pantry;
     /////////////////////// END-TO-DO (3) ////////////////////////////
   }
