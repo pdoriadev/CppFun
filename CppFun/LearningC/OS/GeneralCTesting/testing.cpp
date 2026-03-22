@@ -117,6 +117,7 @@ void commandLineIntProcessingTest_Sum(int argc, char* argv[])
 	fprintf(stdout, "Sum = %d\n", sum);
 }
 
+
 int main(int argc,char* argv[])
 {
 	// write the function call for  whichever funtionality you want to test.
