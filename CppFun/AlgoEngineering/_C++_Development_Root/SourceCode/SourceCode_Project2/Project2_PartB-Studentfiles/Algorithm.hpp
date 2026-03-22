@@ -225,6 +225,7 @@ struct Algorithm_2 : Algorithm
     
     //std::print(std::cout, "Starting exhaustive algo.");
     //std::fflush(stdout);
+    
     uint64_t numberOfSets = 0;
     // Workaround because c++ doesn't have an integer pow function.
     for (size_t place = 0; place < Algorithm::_todays_inventory.size(); ++place)
@@ -238,7 +239,10 @@ struct Algorithm_2 : Algorithm
     uint64_t best = 0;
     double bestCalories = 0;
     unsigned bestWeight = 0;
-
+    uint64_t passedBitShift = 0;
+    uint64_t passedWeightLimit = 0;
+    uint64_t passedCalorieChecks = 0;
+    uint64_t timesABestCandidateShouldHaveBeenAssigned = 0;
     for (uint64_t i = 0; i < numberOfSets; ++i)
     {
       double calories = 0;
@@ -247,27 +251,30 @@ struct Algorithm_2 : Algorithm
 
       // Verification Algorithm  
       size_t maxPlaces = Algorithm::_todays_inventory.size();
-      for (size_t places = 0; places < maxPlaces; ++i)
+      for (size_t places = 0; places < maxPlaces; ++places)
       {
         // DOES BIT SHIFTING WORK THE SAME LIKE THIS IN CPP
         if (((i >> places) % 2) == 0)
-            continue;
+          continue;
         
         weight += Algorithm::_todays_inventory[places]->weight();
         calories += Algorithm::_todays_inventory[places]->calories();
-        std::print(std::cout, "Passed bitshift check: {}\n", Algorithm::_todays_inventory[places]->description());
+        //statusOutput += "Passed bitshift check: {}\n"
+        passedBitShift += 1;
         if (weight > weight_limit)
         {
           bestCandidate = false;
-          break;  
+          continue;  
         }
+	
+        passedWeightLimit += 1;
 
-        std::print(std::cout, "Passed weight_limit check. Weight = {}. Limit = {}", weight, weight_limit);
-      } 
+      }
 
       if (calories < bestCalories)
       {
         bestCandidate = false;
+        continue;
       }
         // edge-case checks if cal/weight ratios are equal
         /* Note: Using NOT GREATER THAN because using == 
@@ -278,19 +285,30 @@ struct Algorithm_2 : Algorithm
       {
         if (weight > bestWeight)
         {
-          bestCandidate = false;  
+          bestCandidate = false;
+          continue; 
         }
       }
 
+      passedCalorieChecks += 1;
+
       if (bestCandidate == false)
         continue;
-
+      
+      //statusOutput += "New best value = " + std::to_string(i) + '\n';
+      timesABestCandidateShouldHaveBeenAssigned += 1;
       best = i;
       bestCalories = calories;
       bestWeight = weight;
     }
     
-    std::print(std::cout, "best value = {}", best); 
+    //std::print(std::cout, "Status Logs: {}\n", statusOutput);
+    std::print(std::cout, "Times passed BitShiftCheck: {}\n", passedBitShift);
+    std::print(std::cout, "Times passed WeightLimit: {}\n", passedWeightLimit);
+    std::print(std::cout, "Times passed CalorieChecks: {}\n", passedCalorieChecks);
+    std::print(std::cout, "Times best should have been assigned : {}\n", timesABestCandidateShouldHaveBeenAssigned); 
+
+    std::print(std::cout, "best value = {}\n", best); 
     FoodPantry pantry = {};
     for (uint8_t i = 0; i < Algorithm::_todays_inventory.size(); ++i)
     {
