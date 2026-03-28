@@ -17,7 +17,7 @@ Starting execution
 .........................
 Execution completed
 
-Execution time          :  801 nanoseconds (ns)
+Execution time          :  1.14 microseconds (us)
 Number of selected items:  5 of 5
 Total weight            :  147 of 200
 Total calories          :  495.41
@@ -35,10 +35,10 @@ Selected Food Items     :
 Algorithm 2:  The Exhaustive Pattern
 Starting execution
 .........................
-%d.........................
+.........................
 Execution completed
 
-Execution time          :  3.659 microseconds (us)
+Execution time          :  3.571 microseconds (us)
 Number of selected items:  5 of 5
 Total weight            :  147 of 200
 Total calories          :  495.41
@@ -80,7 +80,7 @@ Starting execution
 .........................
 Execution completed
 
-Execution time          :  1.223 microseconds (us)
+Execution time          :  880 nanoseconds (ns)
 Number of selected items:  7 of 8
 Total weight            :  192 of 200
 Total calories          :  1087.42
@@ -100,10 +100,10 @@ Selected Food Items     :
 Algorithm 2:  The Exhaustive Pattern
 Starting execution
 .........................
-%d.........................
+.........................
 Execution completed
 
-Execution time          :  30.1 microseconds (us)
+Execution time          :  21.578 microseconds (us)
 Number of selected items:  7 of 8
 Total weight            :  190 of 200
 Total calories          :  1103.50
@@ -150,7 +150,7 @@ Starting execution
 .........................
 Execution completed
 
-Execution time          :  1.647 microseconds (us)
+Execution time          :  1.196 microseconds (us)
 Number of selected items:  7 of 11
 Total weight            :  192 of 200
 Total calories          :  1087.42
@@ -170,10 +170,10 @@ Selected Food Items     :
 Algorithm 2:  The Exhaustive Pattern
 Starting execution
 .........................
-%d.........................
+.........................
 Execution completed
 
-Execution time          :  310.751 microseconds (us)
+Execution time          :  243.159 microseconds (us)
 Number of selected items:  7 of 11
 Total weight            :  200 of 200
 Total calories          :  1630.47
@@ -223,7 +223,7 @@ Starting execution
 .........................
 Execution completed
 
-Execution time          :  1.791 microseconds (us)
+Execution time          :  1.869 microseconds (us)
 Number of selected items:  7 of 14
 Total weight            :  192 of 200
 Total calories          :  1087.42
@@ -243,10 +243,10 @@ Selected Food Items     :
 Algorithm 2:  The Exhaustive Pattern
 Starting execution
 .........................
-%d.........................
+.........................
 Execution completed
 
-Execution time          :  2.47922 milliseconds (ms)
+Execution time          :  3.7607 milliseconds (ms)
 Number of selected items:  8 of 14
 Total weight            :  200 of 200
 Total calories          :  2077.67
@@ -300,7 +300,7 @@ Starting execution
 .........................
 Execution completed
 
-Execution time          :  2.855 microseconds (us)
+Execution time          :  1.552 microseconds (us)
 Number of selected items:  7 of 17
 Total weight            :  192 of 200
 Total calories          :  1087.42
@@ -320,10 +320,10 @@ Selected Food Items     :
 Algorithm 2:  The Exhaustive Pattern
 Starting execution
 .........................
-%d.........................
+.........................
 Execution completed
 
-Execution time          :  20.5626 milliseconds (ms)
+Execution time          :  25.0746 milliseconds (ms)
 Number of selected items:  7 of 17
 Total weight            :  200 of 200
 Total calories          :  2215.81
@@ -379,7 +379,7 @@ Starting execution
 .........................
 Execution completed
 
-Execution time          :  3.255 microseconds (us)
+Execution time          :  1.833 microseconds (us)
 Number of selected items:  8 of 20
 Total weight            :  200 of 200
 Total calories          :  1159.91
@@ -400,10 +400,10 @@ Selected Food Items     :
 Algorithm 2:  The Exhaustive Pattern
 Starting execution
 .........................
-%d.........................
+.........................
 Execution completed
 
-Execution time          :  221.552 milliseconds (ms)
+Execution time          :  434.243 milliseconds (ms)
 Number of selected items:  8 of 20
 Total weight            :  197 of 200
 Total calories          :  2585.29
@@ -463,7 +463,7 @@ Starting execution
 .........................
 Execution completed
 
-Execution time          :  3.201 microseconds (us)
+Execution time          :  1.861 microseconds (us)
 Number of selected items:  8 of 23
 Total weight            :  200 of 200
 Total calories          :  1159.91
@@ -484,10 +484,10 @@ Selected Food Items     :
 Algorithm 2:  The Exhaustive Pattern
 Starting execution
 .........................
-%d.........................
+.........................
 Execution completed
 
-Execution time          :  1.85558 seconds
+Execution time          :  2.51238 seconds
 Number of selected items:  9 of 23
 Total weight            :  197 of 200
 Total calories          :  2839.85
@@ -551,7 +551,7 @@ Starting execution
 .........................
 Execution completed
 
-Execution time          :  3.729 microseconds (us)
+Execution time          :  1.977 microseconds (us)
 Number of selected items:  8 of 26
 Total weight            :  200 of 200
 Total calories          :  1159.91
@@ -572,10 +572,10 @@ Selected Food Items     :
 Algorithm 2:  The Exhaustive Pattern
 Starting execution
 .........................
-%d.........................
+.........................
 Execution completed
 
-Execution time          :  14.2817 seconds
+Execution time          :  17.8013 seconds
 Number of selected items:  9 of 26
 Total weight            :  197 of 200
 Total calories          :  2839.85
@@ -642,7 +642,7 @@ Starting execution
 .........................
 Execution completed
 
-Execution time          :  4.028 microseconds (us)
+Execution time          :  2.529 microseconds (us)
 Number of selected items:  8 of 29
 Total weight            :  200 of 200
 Total calories          :  1159.91
@@ -663,10 +663,10 @@ Selected Food Items     :
 Algorithm 2:  The Exhaustive Pattern
 Starting execution
 .........................
-%d.........................
+.........................
 Execution completed
 
-Execution time          :  93.4983 seconds
+Execution time          :  00:01:58.089071852 (hh:mm:ss.ss)
 Number of selected items:  8 of 29
 Total weight            :  200 of 200
 Total calories          :  2947.68
@@ -735,7 +735,7 @@ Starting execution
 .........................
 Execution completed
 
-Execution time          :  5.567 microseconds (us)
+Execution time          :  2.633 microseconds (us)
 Number of selected items:  8 of 32
 Total weight            :  200 of 200
 Total calories          :  1159.91
@@ -756,10 +756,10 @@ Selected Food Items     :
 Algorithm 2:  The Exhaustive Pattern
 Starting execution
 .........................
-%d.........................
+.........................
 Execution completed
 
-Execution time          :  00:12:50.045058453 (hh:mm:ss.ss)
+Execution time          :  00:10:45.899279511 (hh:mm:ss.ss)
 Number of selected items:  8 of 32
 Total weight            :  200 of 200
 Total calories          :  3026.61
@@ -801,7 +801,7 @@ Starting execution
 .........................
 Execution completed
 
-Execution time          :  1.069 microseconds (us)
+Execution time          :  1.032 microseconds (us)
 Number of selected items:  5 of 5
 Total weight            :  147 of 600
 Total calories          :  495.41
@@ -819,10 +819,10 @@ Selected Food Items     :
 Algorithm 2:  The Exhaustive Pattern
 Starting execution
 .........................
-%d.........................
+.........................
 Execution completed
 
-Execution time          :  3.569 microseconds (us)
+Execution time          :  2.6 microseconds (us)
 Number of selected items:  5 of 5
 Total weight            :  147 of 600
 Total calories          :  495.41
@@ -864,7 +864,7 @@ Starting execution
 .........................
 Execution completed
 
-Execution time          :  1.272 microseconds (us)
+Execution time          :  1.323 microseconds (us)
 Number of selected items:  8 of 8
 Total weight            :  212 of 600
 Total calories          :  1114.17
@@ -885,10 +885,10 @@ Selected Food Items     :
 Algorithm 2:  The Exhaustive Pattern
 Starting execution
 .........................
-%d.........................
+.........................
 Execution completed
 
-Execution time          :  64.033 microseconds (us)
+Execution time          :  23.206 microseconds (us)
 Number of selected items:  8 of 8
 Total weight            :  212 of 600
 Total calories          :  1114.17
@@ -936,7 +936,7 @@ Starting execution
 .........................
 Execution completed
 
-Execution time          :  1.606 microseconds (us)
+Execution time          :  1.407 microseconds (us)
 Number of selected items:  11 of 11
 Total weight            :  336 of 600
 Total calories          :  1927.47
@@ -960,10 +960,10 @@ Selected Food Items     :
 Algorithm 2:  The Exhaustive Pattern
 Starting execution
 .........................
-%d.........................
+.........................
 Execution completed
 
-Execution time          :  282.689 microseconds (us)
+Execution time          :  235.622 microseconds (us)
 Number of selected items:  11 of 11
 Total weight            :  336 of 600
 Total calories          :  1927.47
@@ -1017,7 +1017,7 @@ Starting execution
 .........................
 Execution completed
 
-Execution time          :  2.339 microseconds (us)
+Execution time          :  1.129 microseconds (us)
 Number of selected items:  14 of 14
 Total weight            :  443 of 600
 Total calories          :  2640.47
@@ -1044,10 +1044,10 @@ Selected Food Items     :
 Algorithm 2:  The Exhaustive Pattern
 Starting execution
 .........................
-%d.........................
+.........................
 Execution completed
 
-Execution time          :  2.50763 milliseconds (ms)
+Execution time          :  2.22069 milliseconds (ms)
 Number of selected items:  14 of 14
 Total weight            :  443 of 600
 Total calories          :  2640.47
@@ -1107,7 +1107,7 @@ Starting execution
 .........................
 Execution completed
 
-Execution time          :  2.57 microseconds (us)
+Execution time          :  1.386 microseconds (us)
 Number of selected items:  17 of 17
 Total weight            :  545 of 600
 Total calories          :  3035.90
@@ -1137,10 +1137,10 @@ Selected Food Items     :
 Algorithm 2:  The Exhaustive Pattern
 Starting execution
 .........................
-%d.........................
+.........................
 Execution completed
 
-Execution time          :  22.6807 milliseconds (ms)
+Execution time          :  23.1889 milliseconds (ms)
 Number of selected items:  17 of 17
 Total weight            :  545 of 600
 Total calories          :  3035.90
@@ -1206,7 +1206,7 @@ Starting execution
 .........................
 Execution completed
 
-Execution time          :  2.771 microseconds (us)
+Execution time          :  2.463 microseconds (us)
 Number of selected items:  20 of 20
 Total weight            :  598 of 600
 Total calories          :  3586.33
@@ -1239,10 +1239,10 @@ Selected Food Items     :
 Algorithm 2:  The Exhaustive Pattern
 Starting execution
 .........................
-%d.........................
+.........................
 Execution completed
 
-Execution time          :  234.639 milliseconds (ms)
+Execution time          :  435.376 milliseconds (ms)
 Number of selected items:  20 of 20
 Total weight            :  598 of 600
 Total calories          :  3586.33
@@ -1314,7 +1314,7 @@ Starting execution
 .........................
 Execution completed
 
-Execution time          :  3.406 microseconds (us)
+Execution time          :  2.087 microseconds (us)
 Number of selected items:  20 of 23
 Total weight            :  598 of 600
 Total calories          :  3586.33
@@ -1347,10 +1347,10 @@ Selected Food Items     :
 Algorithm 2:  The Exhaustive Pattern
 Starting execution
 .........................
-%d.........................
+.........................
 Execution completed
 
-Execution time          :  1.93031 seconds
+Execution time          :  2.51984 seconds
 Number of selected items:  21 of 23
 Total weight            :  592 of 600
 Total calories          :  4324.63
@@ -1426,7 +1426,7 @@ Starting execution
 .........................
 Execution completed
 
-Execution time          :  4.173 microseconds (us)
+Execution time          :  2.298 microseconds (us)
 Number of selected items:  20 of 26
 Total weight            :  598 of 600
 Total calories          :  3586.33
@@ -1459,10 +1459,10 @@ Selected Food Items     :
 Algorithm 2:  The Exhaustive Pattern
 Starting execution
 .........................
-%d.........................
+.........................
 Execution completed
 
-Execution time          :  14.8655 seconds
+Execution time          :  17.8054 seconds
 Number of selected items:  22 of 26
 Total weight            :  594 of 600
 Total calories          :  4416.48
@@ -1542,7 +1542,7 @@ Starting execution
 .........................
 Execution completed
 
-Execution time          :  4.834 microseconds (us)
+Execution time          :  2.89 microseconds (us)
 Number of selected items:  20 of 29
 Total weight            :  598 of 600
 Total calories          :  3586.33
@@ -1575,10 +1575,10 @@ Selected Food Items     :
 Algorithm 2:  The Exhaustive Pattern
 Starting execution
 .........................
-%d.........................
+.........................
 Execution completed
 
-Execution time          :  98.5326 seconds
+Execution time          :  00:01:58.091569567 (hh:mm:ss.ss)
 Number of selected items:  22 of 29
 Total weight            :  590 of 600
 Total calories          :  4873.16
@@ -1661,7 +1661,7 @@ Starting execution
 .........................
 Execution completed
 
-Execution time          :  5.413 microseconds (us)
+Execution time          :  2.749 microseconds (us)
 Number of selected items:  20 of 32
 Total weight            :  598 of 600
 Total calories          :  3586.33
@@ -1694,10 +1694,10 @@ Selected Food Items     :
 Algorithm 2:  The Exhaustive Pattern
 Starting execution
 .........................
-%d.........................
+.........................
 Execution completed
 
-Execution time          :  00:14:33.755342144 (hh:mm:ss.ss)
+Execution time          :  00:10:45.780488907 (hh:mm:ss.ss)
 Number of selected items:  22 of 32
 Total weight            :  598 of 600
 Total calories          :  5575.04
@@ -1734,4 +1734,4 @@ Selected Food Items     :
 
 
 
-Total execution time:  00:14:33.845534939 (hh:mm:ss.ss)
+Total execution time:  00:10:45.986414784 (hh:mm:ss.ss)

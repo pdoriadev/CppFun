@@ -5,16 +5,16 @@
   /// Hint:  Include what you use, use what you include
   ///
   /// Do not put anything else in this section, i.e. comments, classes, functions, etc.  Only #include directives
-
-#include <string>
+// -#include <string>
   // Food Item Descriptions
 #include <cstdint>
   // uint_t Types
-#include "FoodPantry.hpp"
 #include <cstdio>
   // print()
-#include <cmath>
-  // pow()
+#include <vector>
+#include <utility>
+  // std::pair
+#include "FoodPantry.hpp"
 /////////////////////// END-TO-DO (1) ////////////////////////////
 
 
@@ -56,7 +56,8 @@ class Algorithm
 
 // The Greedy Pattern
 struct Algorithm_1 : Algorithm
-{ using Algorithm::Algorithm;
+{
+  using Algorithm::Algorithm;
 
   std::string description() const override    { return "Algorithm 1:  The Greedy Pattern"; }
 
@@ -99,12 +100,12 @@ struct Algorithm_1 : Algorithm
     foodByRatio.reserve(Algorithm::_todays_inventory.size());
     
     // Selection sort FoodItems by ratio of calories to weight
-    for (uint8_t i = 0; i < Algorithm::_todays_inventory.size(); ++i)
+    for (size_t i = 0; i < Algorithm::_todays_inventory.size(); ++i)
     {
-      uint8_t best = i;
+      size_t best = i;
       double bestCal = 0;
       unsigned bestW = 0; 
-      for (uint8_t j = 0; j < Algorithm::_todays_inventory.size(); ++j) 
+      for (size_t j = 0; j < Algorithm::_todays_inventory.size(); ++j) 
       {
         const double curCal = Algorithm::_todays_inventory[j]->calories();
         const unsigned curW = Algorithm::_todays_inventory[j]->weight();
@@ -144,27 +145,26 @@ struct Algorithm_1 : Algorithm
         bestW = curW; 
       }
 
-      foodByRatio.push_back(std::pair(Algorithm::_todays_inventory[best], bestCal/bestW));
+      foodByRatio.emplace_back(std::pair(Algorithm::_todays_inventory[best], bestCal/bestW));
     }
 
 
     unsigned sumW = 0; 
     FoodPantry pantry = {}; 
-    for (uint8_t i = 0; i < foodByRatio.size(); ++i)
+    for (auto & pair : foodByRatio)
     {
       // check if sumW would exceed weight limit by adding the current item
-      if (sumW + std::get<0>(foodByRatio[i])->weight() > weight_limit)
+      if (sumW + std::get<0>(pair)->weight() > weight_limit)
       {
-        continue;         
+        continue;
       }
 
-      sumW += std::get<0>(foodByRatio[i])->weight();
-      pantry.push_back(std::get<0>(foodByRatio[i]));
+      sumW += std::get<0>(pair)->weight();
+      pantry.push_back(std::get<0>(pair));
     }
 
-    return pantry; 
-    
-    ///	/////////////////////// END-TO-DO (2) ////////////////////////////
+    return pantry;
+    /////////////////////// END-TO-DO (2) ////////////////////////////
   }
 };
 
@@ -190,8 +190,7 @@ struct Algorithm_2 : Algorithm
   //      to the weight limit
   FoodPantry::SelectedFoodItems run( unsigned weight_limit ) const override
   {
-    std::print(std::cout , "%d", weight_limit);
-    ///////////////////////// TO-DO (3) //////////////////////////////
+    ///////////////////////// TO-DO (3) //////////////////////////////    
 /* Generate candidate bitmasks - PROOF FOR CANDIDATE GENERATION BY ITERATING THROUGH ALL POSSIBLE INTEGER VALUES FOR AN INTEGER OF n BITS. Mathematical Induction.
     Let the list of grocery items L be a list of n elements long.
     Let each element correspond to a binary bit in an unsigned integer type X of n bits long.
@@ -229,7 +228,7 @@ struct Algorithm_2 : Algorithm
       bool bestCandidate = true;
 
       // Verification Algorithm  
-      size_t maxPlaces = Algorithm::_todays_inventory.size();
+      const size_t maxPlaces = Algorithm::_todays_inventory.size();
       for (size_t places = 0; places < maxPlaces; ++places)
       {
         if (((i >> places) % 2) == 0)
@@ -263,7 +262,7 @@ struct Algorithm_2 : Algorithm
       }
 
 
-      if (bestCandidate == false)
+      if (!bestCandidate)
         continue;
       
       best = i;
@@ -272,7 +271,7 @@ struct Algorithm_2 : Algorithm
     }
     
     FoodPantry pantry = {};
-    for (uint8_t i = 0; i < Algorithm::_todays_inventory.size(); ++i)
+    for (size_t i = 0; i < Algorithm::_todays_inventory.size(); ++i)
     {
       if (((best >> i) % 2) == 1)
       { 
@@ -285,4 +284,3 @@ struct Algorithm_2 : Algorithm
     /////////////////////// END-TO-DO (3) ////////////////////////////
   }
 };
-

@@ -45,7 +45,7 @@ Starting execution
 .........................
 Execution completed
 
-Execution time          :  6.213 microseconds (us)
+Execution time          :  5.509 microseconds (us)
 Number of selected items:  19 of 33
 Total weight            :  899 of 900
 Total calories          :  3939.36
@@ -77,16 +77,10 @@ Selected Food Items     :
 Algorithm 2:  The Exhaustive Pattern
 Starting execution
 .........................
-%dnumber of sets: 17179869182
-Times passed BitShiftCheck: 283467841471
-Times passed WeightLimit: 251879809375
-Times passed CalorieChecks: 75199740
-Times best should have been assigned : 245
-best value = 12258877217
-Should add refried spicy delicious beans to pantry vector.Should add shredded chicken chocolate cookies to pantry vector.Should add refried garbanzo beans to pantry vector.Should add Chinese baked delicious green beans to pantry vector.Should add shredded refried chunky chocolate to pantry vector.Should add Chinese spicy mild green beans to pantry vector.Should add Chinese chicken cookies pasta to pantry vector.Should add refried chicken breast with green beans to pantry vector.Should add chunky whole corn to pantry vector.Should add refried spicy beef with bacon to pantry vector.Should add cheese cookies with potatoes to pantry vector.Should add turkey baked mild pork gravy to pantry vector.Should add Chinese cheese beef with pickled vegetables to pantry vector.Should add spicy light pickled vegetables to pantry vector.Should add refried cheese chunky whole corn to pantry vector.Should add turkey mild green beans to pantry vector.Should add shredded refried beans with pork gravy to pantry vector.Should add Chinese spicy delicious pork with eggs to pantry vector.Should add Chinese baked delicious little pickled vegetables to pantry vector.Pantry size: 19.........................
+.........................
 Execution completed
 
-Execution time          :  00:23:49.590733855 (hh:mm:ss.ss)
+Execution time          :  00:18:33.419716930 (hh:mm:ss.ss)
 Number of selected items:  19 of 33
 Total weight            :  882 of 900
 Total calories          :  5624.33
@@ -165,7 +159,7 @@ Starting execution
 .........................
 Execution completed
 
-Execution time          :  4.863 microseconds (us)
+Execution time          :  7.037 microseconds (us)
 Number of selected items:  10 of 31
 Total weight            :  675 of 675
 Total calories          :  2438.94
@@ -188,16 +182,10 @@ Selected Food Items     :
 Algorithm 2:  The Exhaustive Pattern
 Starting execution
 .........................
-%dnumber of sets: 4294967294
-Times passed BitShiftCheck: 66571993027
-Times passed WeightLimit: 37487540036
-Times passed CalorieChecks: 2212369706
-Times best should have been assigned : 84
-best value = 3257568016
-Should add refried garbanzo beans to pantry vector.Should add chunky whole corn to pantry vector.Should add cheese cookies with potatoes to pantry vector.Should add Chinese cheese beef with pickled vegetables to pantry vector.Should add refried cheese chunky whole corn to pantry vector.Should add shredded refried beans with pork gravy to pantry vector.Should add Chinese spicy delicious pork with eggs to pantry vector.Should add Chinese refried mild pork with rice to pantry vector.Should add shredded chicken mild beef with green beans to pantry vector.Should add Chinese cheese chicken breast with eggs to pantry vector.Pantry size: 10.........................
+.........................
 Execution completed
 
-Execution time          :  00:06:01.439567113 (hh:mm:ss.ss)
+Execution time          :  00:03:56.524887075 (hh:mm:ss.ss)
 Number of selected items:  10 of 31
 Total weight            :  674 of 675
 Total calories          :  3782.63
@@ -222,4 +210,4 @@ Selected Food Items     :
 
 
 
-Total execution time:  00:23:49.614185366 (hh:mm:ss.ss)
+Total execution time:  00:18:33.513851917 (hh:mm:ss.ss)
