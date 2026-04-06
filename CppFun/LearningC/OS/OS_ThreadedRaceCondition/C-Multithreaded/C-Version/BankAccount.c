@@ -15,7 +15,7 @@ bool createAccount(BankAccount *account, const int64_t initialValue)
 	return true;
 }
 
-bool deposit(BankAccount *account, int64_t amount)
+bool deposit(BankAccount *account, int64_t amount, pthread_mutex_t *mtx)
 {
 	if (account == NULL)
 	{
@@ -28,6 +28,7 @@ bool deposit(BankAccount *account, int64_t amount)
 		return false;
 	}
 
+  pthread_mutex_lock(mtx); 
 	if (account->balance + amount > LLONG_MAX)
 	{
 		// cannot exceed more money than is possible
@@ -35,10 +36,12 @@ bool deposit(BankAccount *account, int64_t amount)
 	}
 
 	account->balance += amount;
+  pthread_mutex_unlock(mtx);
+
 	return true;
 }
 
-bool withdraw(BankAccount *account, int64_t amount)
+bool withdraw(BankAccount *account, int64_t amount, pthread_mutex_t * mtx)
 {
 	if (account == NULL)
 	{
@@ -50,25 +53,18 @@ bool withdraw(BankAccount *account, int64_t amount)
 		// withdrawl cannot be a positive amount
 		return false;
 	}
-
+	
+	pthread_mutex_lock(mtx);
 	if (account->balance - amount < LLONG_MIN)
 	{
 		amount = LLONG_MIN - amount;
 	}
 
 	account->balance += amount;
+	pthread_mutex_unlock(mtx);
+
 	return true;
 }
-
-
-typedef struct ThreadArg
-{
-  BankAccount *account;
-  uint32_t threadIndex;
-  uint32_t runCount;
-  uint32_t deposits;
-  uint32_t withdrawls;
-} ThreadArg;
 
 bool initThreadArg(ThreadArg *arg)
 {
@@ -77,6 +73,7 @@ bool initThreadArg(ThreadArg *arg)
 	arg->runCount = 0;
 	arg->deposits = 0;
 	arg->withdrawls = 0;
+	arg->mtx = NULL;
 
 	return true;
 }

@@ -17,7 +17,7 @@ bool initAction(Action* action)
 
 // Assumes the outputFP is open and writable!
 // Does not close the outputFP!
-bool outputAndDoBankingAction(BankAccount *account, Action *action, FILE *outputFP)
+bool outputAndDoBankingAction(BankAccount *account, Action *action, pthread_mutex_t * mtx, FILE *outputFP)
 {
   if (action->actionFunction == NULL)
   {
@@ -44,7 +44,7 @@ bool outputAndDoBankingAction(BankAccount *account, Action *action, FILE *output
 
   for (uint64_t i = 0; i < action->iterations; i++)
   {
-    if ((*action->actionFunction)(account, action->amount) == false)
+    if ((*action->actionFunction)(account, action->amount, mtx) == false)
     {
       return false;
     }

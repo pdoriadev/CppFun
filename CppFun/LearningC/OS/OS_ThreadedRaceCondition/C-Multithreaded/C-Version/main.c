@@ -34,9 +34,7 @@ Move header function bodies into c source files. 	                   *CHECK*
 Create a make file for compilation/linking				                   *CHECK*
 
 Write log files in separate directory.					                     *CHECK*
-Rewrite without race condition.						                           **
-- Operates on "n" bank accounts. One thread per bank account
-- mutexes, etc.
+Rewrite without race condition.						                           *CHECK* - Operates on "n" bank accounts. One thread per bank account - mutexes, etc.
 
 Create sequential version.												                    **
 Profile sequential.																                    **
@@ -90,8 +88,8 @@ bool testDepositsWithdrawls(ThreadArg *tArgs)
 
   Action depositAction = {.iterations=tArgs->deposits, .amount=1000, .actionFunction=deposit};
   Action withdrawAction = {.iterations=tArgs->withdrawls, .amount=-1000, .actionFunction=withdraw};
-  outputAndDoBankingAction(tArgs->account, &depositAction, NULL); 
-	outputAndDoBankingAction(tArgs->account, &withdrawAction, NULL);
+  outputAndDoBankingAction(tArgs->account, &depositAction, tArgs->mtx, NULL); 
+	outputAndDoBankingAction(tArgs->account, &withdrawAction, tArgs->mtx, NULL);
 
   fprintf(logFile, "\n      Final Balance: %llu", tArgs->account->balance);
   fprintf(logFile, "\n   Expected Balance: %llu", expectedFinalBalance);
@@ -130,6 +128,9 @@ int main (int argv, char* argc[])
   	printErrorToErrorFile("Failed to reset error log file.");
   }
 
+	// Mutex 
+  pthread_mutex_t mtx;
+
   const uint32_t RUNS_TARGET = 30;
   const uint32_t THREAD_COUNT = 32;
   pthread_t threads[THREAD_COUNT];
@@ -142,22 +143,27 @@ int main (int argv, char* argc[])
     BankAccount *accountPtr = (BankAccount*)(malloc(sizeof(BankAccount)));
     createAccount(accountPtr, 0);
 
+		// Initialize the mutex before thread creation.
+		// pthread.h - https://man7.org/linux/man-pages/man0/pthread.h.0p.html
+		// mutex attribute type: https://pubs.opengroup.org/onlinepubs/7908799/xsh/pthread_mutexattr_settype.html
+		pthread_mutex_init(&mtx, PTHREAD_MUTEX_NORMAL);
+
     fprintf(stdout, "\nSpinning up %lu threads for run %lu.", THREAD_COUNT, runCount);
     fflush(stdout);
-
+	
     // spin up n threads
     for (uint32_t i = 0; i < THREAD_COUNT; i++)
     {
       // allocates memory the size of a ThreadArg struct.
 	  		// casts the void* returned by malloc to a ThreadArg*.
-      ThreadArg *argCopy = (ThreadArg*) malloc(sizeof(ThreadArg));
-			initThreadArg(argCopy);
+      ThreadArg *argCopy = (ThreadArg*) malloc(sizeof(ThreadArg)); initThreadArg(argCopy);
 
       // copy the thread arg to avoid any multi-threading race condition.
         // The thread will make its own copy and free the malloc: https://beej.us/guide/bgc/html/split/multithreading.html
       argCopy->account = accountPtr;
       argCopy->threadIndex = i;
       argCopy->runCount = runCount;
+			argCopy->mtx = &mtx;
 
       // seeding the rand_r() to get consistent random behavior between threads.
         // rand_r required an unsigned_int* seed.
@@ -200,6 +206,16 @@ int main (int argv, char* argc[])
     snprintf(intStr, 29, "%llu", expectedBalance);
     strcat(finalExpectedBalanceStr, intStr);
 
+		if (expectedBalance != accountPtr->balance)
+		{
+			
+			strcat(finalExpectedBalanceStr, " xxx RACE CONDITION");			
+		}
+		else
+		{
+			strcat(finalExpectedBalanceStr, " ooo NO RACE CONDITION");
+		}
+
     fprintf(stdout, finalExpectedBalanceStr);
     strcat(finalExpectedBalancesAllRuns, finalExpectedBalanceStr);
 
@@ -207,7 +223,9 @@ int main (int argv, char* argc[])
     memset(accountPtr, 0, sizeof(BankAccount)); // sets accountPtr block to consant bytes
     free(accountPtr); // frees allocated memory.
     accountPtr = NULL;
-
+		
+		// destroys the object referenced by mutex - https://man7.org/linux/man-pages/man3/pthread_mutex_destroy.3p.html	
+		pthread_mutex_destroy(&mtx);
   }
 
   ////////////////////////////////////////////////////////
