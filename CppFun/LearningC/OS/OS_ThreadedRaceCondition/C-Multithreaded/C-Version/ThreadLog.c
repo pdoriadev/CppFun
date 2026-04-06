@@ -56,7 +56,7 @@ bool copyFileToDestinationFile(const char logFileNameStr[], FILE *destinationFP)
 // Given an empty string and an index value, provides the correct log file name.
 bool getThreadLogFileName(uint32_t threadIndex, char logFileStrOut[], uint16_t bufferLength)
 {
-  if (bufferLength < 20)
+  if (bufferLength < 30)
   {
     char errorTxt[] = "Thread Log File Name String's Buffer is insufficient size";
     printErrorToErrorFile(errorTxt);
@@ -65,7 +65,7 @@ bool getThreadLogFileName(uint32_t threadIndex, char logFileStrOut[], uint16_t b
 
   // Create Log File name for thread
   // append thread ID to end of log file name.
-  snprintf(logFileStrOut, 5, "Log_");
+  snprintf(logFileStrOut, 9, "Logs/Log_");
   char threadIDString[bufferLength-9];
   snprintf(threadIDString, bufferLength-7, "%lu", threadIndex);
   strcat(logFileStrOut, threadIDString);

@@ -130,8 +130,8 @@ int main (int argv, char* argc[])
   	printErrorToErrorFile("Failed to reset error log file.");
   }
 
-  const uint32_t RUNS_TARGET = 100;
-  const uint32_t THREAD_COUNT = 256;
+  const uint32_t RUNS_TARGET = 30;
+  const uint32_t THREAD_COUNT = 32;
   pthread_t threads[THREAD_COUNT];
   char finalExpectedBalancesAllRuns[10000] = "";
   for (uint32_t runCount = 0; runCount < RUNS_TARGET; runCount++)
@@ -233,6 +233,7 @@ int main (int argv, char* argc[])
   {
     printErrorToErrorFile("Failed to output error file contents to stdout");
   }
+	fprintf(stdout, "\n");
 
   return 0;
 }
