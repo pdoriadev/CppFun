@@ -33,7 +33,7 @@ Move header function bodies into c source files. 	                   *CHECK*
   - https://beej.us/guide/bgc/html/split/multifile-projects.html#multifile-projects
 Create a make file for compilation/linking				                   *CHECK*
 
-Write log files in separate directory.					                     **
+Write log files in separate directory.					                     *CHECK*
 Rewrite without race condition.						                           **
 - Operates on "n" bank accounts. One thread per bank account
 - mutexes, etc.
