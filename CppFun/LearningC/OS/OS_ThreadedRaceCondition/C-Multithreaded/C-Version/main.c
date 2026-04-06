@@ -27,19 +27,19 @@ Logs the results of each thread's operations to a separate log file.
 Merges all log files into one log file by the end.
 
 --- ADDITIONAL REQUIREMENTS  ---
-Convert cpp/hpp files to c/h files. 					   *CHECK*
+Convert cpp/hpp files to c/h files. 					                       *CHECK*
 Move header function bodies into c source files. 	                   *CHECK*
   - Only prototypes in headers. 	                                   *CHECK*
   - https://beej.us/guide/bgc/html/split/multifile-projects.html#multifile-projects
-Create a make file for compilation/linking				   **
+Create a make file for compilation/linking				                   *CHECK*
 
-Write log files in separate directory.					   **
-Rewrite without race condition.						   **
+Write log files in separate directory.					                     **
+Rewrite without race condition.						                           **
 - Operates on "n" bank accounts. One thread per bank account
 - mutexes, etc.
 
-Create sequential version.												                            **
-Profile sequential.																**
+Create sequential version.												                    **
+Profile sequential.																                    **
 Profile multi-threaded.														                    **
 
 Look into static/extern use-caes									                                            **
@@ -70,10 +70,11 @@ bool testDepositsWithdrawls(ThreadArg *tArgs)
 
 	if (logFile == NULL)
 	{
-		printErrorToErrorFile("Failed to open thread log file");
+		printErrorToErrorFile("Failed to open thread log file: ");
+	  return false;
 	}
 
-  /////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////
   // Write to file. Perform withdrawls/deposits.
   uint64_t expectedFinalBalance = tArgs->account->balance + (tArgs->deposits - tArgs->withdrawls)*1000;
   fprintf(logFile, "\n==========================================================");
@@ -89,8 +90,8 @@ bool testDepositsWithdrawls(ThreadArg *tArgs)
 
   Action depositAction = {.iterations=tArgs->deposits, .amount=1000, .actionFunction=deposit};
   Action withdrawAction = {.iterations=tArgs->withdrawls, .amount=-1000, .actionFunction=withdraw};
-  outputAndDoBankingAction(tArgs->account, &depositAction, NULL);
-  outputAndDoBankingAction(tArgs->account, &withdrawAction, NULL);
+  outputAndDoBankingAction(tArgs->account, &depositAction, NULL); 
+	outputAndDoBankingAction(tArgs->account, &withdrawAction, NULL);
 
   fprintf(logFile, "\n      Final Balance: %llu", tArgs->account->balance);
   fprintf(logFile, "\n   Expected Balance: %llu", expectedFinalBalance);
@@ -112,7 +113,10 @@ void* runThreadedLoggingRaceCondition(void *args)
 	// Trusting that we are being given a unique index.
   getThreadLogFileName(threadArg.threadIndex, logFileStrOut, 30);
 
-  testDepositsWithdrawls(&threadArg);
+  if (testDepositsWithdrawls(&threadArg) == false)
+  {
+		exit(EXIT_FAILURE);
+  }
 
   //  https://www.man7.org/linux/man-pages/man3/pthread_exit.3.html
   pthread_exit(0);
@@ -169,7 +173,7 @@ int main (int argv, char* argc[])
       if (pthread_create(&threads[i], NULL, runThreadedLoggingRaceCondition, (void*)argCopy) != 0)
       {
         fprintf(stdout, "FAILED TO CREATE PTHREAD. ThreadID: %lu", threads[i]);
-        return 1;
+        exit(EXIT_FAILURE);
       }
 
       // fprintf(stdout, "\nCreated thread: %lu", i);
@@ -200,8 +204,8 @@ int main (int argv, char* argc[])
     strcat(finalExpectedBalancesAllRuns, finalExpectedBalanceStr);
 
     // Clean-up malloc
-    memset(accountPtr, 0, sizeof(BankAccount));
-    free(accountPtr);
+    memset(accountPtr, 0, sizeof(BankAccount)); // sets accountPtr block to consant bytes
+    free(accountPtr); // frees allocated memory.
     accountPtr = NULL;
 
   }
@@ -224,9 +228,10 @@ int main (int argv, char* argc[])
 
   ///////////////////////////////////////////////////////
     // OUTPUT ANY ERRORS TO CONSOLE
+  fprintf(stdout, "\n====== ERRORS =======");
   if (copyFileToDestinationFile("error.txt", stdout) == false)
   {
-    printErrorToErrorFile("Failed to ouput error file contents to stdout");
+    printErrorToErrorFile("Failed to output error file contents to stdout");
   }
 
   return 0;
