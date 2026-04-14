@@ -12,9 +12,10 @@ smallCases = [smallCase1, smallCase2, smallCase3, smallCase4, smallCase5, smallC
 # - nested-loop - finds index for value that belongs at beginning of unsorted partition.
 # - After completion of nested loop: perform swap if necessary
 # - Moves super-loop index value up. Repeat until index = maxIndex-1
-def selectionSort(case):
+def selectionSort(constCase):
     print("selectionSort")
     print(f"pre-sort:  {case}")
+    case = constCase
 
     if (len(case) <= 1):
         return
@@ -24,7 +25,6 @@ def selectionSort(case):
         for j in range(i+1, len(case)):
             if case[j] < case[best]:
                 best = j
-        
         if best != i:
             swap = case[i]
             case[i] = case[best]
@@ -32,16 +32,32 @@ def selectionSort(case):
     
     print(f"post-sort: {case}")
 
-def mergeSort(case):
+# In-place merge sort
+# Divides the list into even partitions until partition size <= 2.
+#   Sort each partition, then merge it with another partition. Since each 
+#   partition is sorted, merging them comes down to checking the 
+#   extreme-indices' values of each partition, then 
+#   swapping them as necessary.
+# Partition function - takes in a partition. Divides the partition into right
+#   and left sides. Recursively calls partition for each new partition.
+#   Calls merge after the partition calls. Merges the partitions. 
+# Merge function - checks the which partition's greatest value is less than the other. 
+#
+# NOTE: In-place for array vs linkedlist approach
+# Array - pass beginning and end indices of partition (pay attention for when partition size = 1 or 2. Can run into edge-cases if not checking indices before comprison)
+# LinkedList - If doubly linked, this isn't so bad. We pass the nodes at the beginning and end of the partition. If singly linked, pass the starting node and the number of nodes to traverse forward. 
+def mergeSort(constCase):
     print("mergeSort")
+
     #print(f"pre-sort:  {case}")
     #print(f"post-sort: {case}")
 
-def quickSort(case):
+def quickSort(constCase):
     print("quickSort")
 
 if __name__ == "__main__":
-    i = 1 
+    i = 1
+    
     for case in smallCases :
         print(f"\nCase {i}")
         selectionSort(case)
