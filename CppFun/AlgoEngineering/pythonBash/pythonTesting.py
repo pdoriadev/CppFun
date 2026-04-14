@@ -12,6 +12,12 @@ def stringEquality():
 	if color != "Blue":
 		return 1
 
+import array
+# https://docs.python.org/3/library/array.html
+def fixedSizeArrayInitializationTest():
+    pass    
+
 if __name__ == "__main__":
-	castingTest()
-	stringEquality()
+	#castingTest()
+	#stringEquality()
+    #fixedSizeArrayInitializationTest()
