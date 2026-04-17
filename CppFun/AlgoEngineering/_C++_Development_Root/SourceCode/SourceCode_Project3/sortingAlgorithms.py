@@ -1,11 +1,11 @@
 import array
 
-smallCase1 = [0, 1, 2, 3, 4, 5, 6]
-smallCase2 = [6, 3, 0, 1, 5, 4, 2]
+smallCase1 = ["a", "b", "c", "d", "e", "f"]
+smallCase2 = ["f", "d", "ab", "b", "aa", "e", "c", "a"]
 smallCase3 = []
-smallCase4 = [1]
-smallCase5 = [0, 1]
-smallCase6 = [1, 0]
+smallCase4 = ["a"]
+smallCase5 = ["a", "b"]
+smallCase6 = ["b", "a"]
 smallCases = [smallCase1, smallCase2, smallCase3, smallCase4, smallCase5, smallCase6]
 
 #In-place selection sort
@@ -15,8 +15,8 @@ smallCases = [smallCase1, smallCase2, smallCase3, smallCase4, smallCase5, smallC
 # - After completion of nested loop: perform swap if necessary
 # - Moves super-loop index value up. Repeat until index = maxIndex-1
 def selectionSort(constCase):
-    print("selectionSort")
-    case = constCase
+    print("SELECTION_SORT")
+    case = constCase.copy()
     print(f"pre-sort:  {case}")
 
     if (len(case) <= 1):
@@ -35,7 +35,6 @@ def selectionSort(constCase):
     print(f"post-sort: {case}")
 
 # Out-of-place merge sort
-# Divides the list into even partitions until partition size <= 2.
 #   Sort each partition, then merge it with another partition. Since each 
 #   partition is sorted, merging them comes down to checking the 
 #   extreme-indices' values of each partition, then 
@@ -49,40 +48,45 @@ def selectionSort(constCase):
 # Array - pass beginning and end indices of partition (pay attention for when partition size = 1 or 2. Can run into edge-cases if not checking indices before comprison)
 # LinkedList - If doubly linked, this isn't so bad. We pass the nodes at the beginning and end of the partition. If singly linked, pass the starting node and the number of nodes to traverse forward. 
 def mergeSortVector(constCase):
-    print("mergeSort")
-    case = constCase
-    print(f"pre-sort:  {case}")
-    sortedCase = partition(case, 0, len(case) - 1) 
+    print("MERGE_SORT") 
+    print(f"pre-sort:  {constCase}")
+    #if (len(constCase) <= 1):
+    #    return constCase
+
+    sortedCase = partitionVector(constCase.copy(), 0, len(constCase) - 1) 
+     
     print(f"post-sort: {sortedCase}")
 
 # recursively calls itself. Divides the passed-in list into a left and right
-#   partition by recursively calling the partition function. 
-#   Then merges the two partitions by calling the merge function.
-# Base case: partition size is less than or equal to 2.
-def partition(case, i, m):
-    if (m - i <= 1):
-        return case[::] 
+#   partitionVector by recursively calling the partition function. 
+#   Then merges the two partitionVectors by calling the merge function.
+# Base case: partitionVector size is less than or equal to 2.
+def partitionVector(case, i, m):
+    #print(f"i={i}, m={m}") 
+    if (m - i < 1):
+        return case[i:m+1] 
     
-    if (m - i == 2):
+    if (m - i == 1):
         if (case[i] > case[m]):
             swap = case[i]
             case[i] = case[m]
             case[m] = swap
-        return case[::]
+            #print(f"Post-swap: {case[i:m+1]}")
+        return case[i:m+1]
 
-    sortedLeft = partition(case, i, int(m/2))
-    sortedRight = partition(case, int((m/2))+1, m)
+    sortedLeft = partitionVector(case, i, i + int((m-i)/2))
+    sortedRight = partitionVector(case, i + int(((m-i)/2))+1, m)
     
     sortedLeftAndRight = sortedLeft + sortedRight
     #sortedLeftAndRight.append(sortedRight)
-    mergedList = merge(sortedLeftAndRight, 0, int((m-i)/2), int((m-i)/2)+1, m-i) 
+    mergedList = mergeVector(sortedLeftAndRight, 0, int((m-i)/2), int((m-i)/2)+1, m-i) 
     return mergedList 
 
-def merge(unMerged, i, m, j, n):
+def mergeVector(unMerged, i, m, j, n):
     mergedList = []
-    print(unMerged)
+    #print(f"Partitions Unsorted: {unMerged}")
     while (i <= m and j <= n):
-        if (unMerged[i] < case[j]):
+        if (unMerged[i] < unMerged[j]):
             mergedList.append(unMerged[i])
             i+=1
         else:
@@ -94,6 +98,7 @@ def merge(unMerged, i, m, j, n):
     while (j <= n):
         mergedList.append(unMerged[j])
         j+=1
+    #print(f"Partitions Sorted:  {mergedList}")
     return mergedList
 
 def quickSort(constCase):
