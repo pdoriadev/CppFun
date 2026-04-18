@@ -6,7 +6,8 @@ smallCase3 = []
 smallCase4 = ["a"]
 smallCase5 = ["a", "b"]
 smallCase6 = ["b", "a"]
-smallCases = [smallCase1, smallCase2, smallCase3, smallCase4, smallCase5, smallCase6]
+smallCase7 = ["axe", "bear", "washer", "z", "y"]
+smallCases = [smallCase1, smallCase2, smallCase3, smallCase4, smallCase5, smallCase6, smallCase7]
 
 #In-place selection sort
 # - sorts the list by dividing it into sorted and unsorted partitions. 
@@ -74,32 +75,33 @@ def partitionVector(case, i, m):
             #print(f"Post-swap: {case[i:m+1]}")
         return case[i:m+1]
 
-    sortedLeft = partitionVector(case, i, i + int((m-i)/2))
-    sortedRight = partitionVector(case, i + int(((m-i)/2))+1, m)
+    mid = i + int((m-i)/2)
+    sortedLeft = partitionVector(case, i, mid)
+    sortedRight = partitionVector(case, mid+1, m)
     
-    sortedLeftAndRight = sortedLeft + sortedRight
     #sortedLeftAndRight.append(sortedRight)
-    mergedList = mergeVector(sortedLeftAndRight, 0, int((m-i)/2), int((m-i)/2)+1, m-i) 
-    return mergedList 
+    mergedVectorOut = [] 
+    mergeVector(sortedLeft, sortedRight, mergedVectorOut)
+    return mergedVectorOut 
 
-def mergeVector(unMerged, i, m, j, n):
-    mergedList = []
+def mergeVector(left, right, mergedVectorOut):
+    i = 0
+    j = 0
     #print(f"Partitions Unsorted: {unMerged}")
-    while (i <= m and j <= n):
-        if (unMerged[i] < unMerged[j]):
-            mergedList.append(unMerged[i])
+    while (i < len(left) and j < len(right)):
+        if (left[i] < right[j]):
+            mergedVectorOut.append(left[i])
             i+=1
         else:
-            mergedList.append(unMerged[j])
+            mergedVectorOut.append(right[j])
             j+=1
-    while (i <= m):
-        mergedList.append(unMerged[i])
+    while (i < len(left)):
+        mergedVectorOut.append(left[i])
         i+=1
-    while (j <= n):
-        mergedList.append(unMerged[j])
+    while (j < len(right)):
+        mergedVectorOut.append(right[j])
         j+=1
-    #print(f"Partitions Sorted:  {mergedList}")
-    return mergedList
+    #print(f"Partitions Sorted:  {mergedVectorOut}")
 
 def quickSort(constCase):
     print("quickSort")
