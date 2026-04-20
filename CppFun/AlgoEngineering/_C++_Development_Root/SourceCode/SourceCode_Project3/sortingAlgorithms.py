@@ -103,7 +103,85 @@ def mergeVector(left, right, mergedVectorOut):
         j+=1
     #print(f"Partitions Sorted:  {mergedVectorOut}")
 
+########################
+class LinkedList:
+    count = 0
+    def __init__(self, head, tail):
+        self.head = head
+        self.tail = tail
+        self.count+=1
+    # prevNode = None to make a new head.
+    # For any other node, insert the node you want to insert after 
+    def insertNodeAfter(prevNode, node):
+        if head == None: # count = 0
+            head = node
+            tail = node
+        elif count == 1: # count = 1 
+            tail = node
+        elif prevNode == None: # insert new head
+            node.prevNode = None
+            self.head.prevNode = node
+            node.nextNode = head
+            self.head = node
+        elif prevNode == self.tail # insert new tail
+            prevNode.nextNode = node
+            node.prevNode = prevNode
+            node.nextNode = None
+            self.tail = node
+        else # insert new node in middle of list
+            node.nextNode = prevNode.nextNode
+            node.prevNode = prevNode
+            node.nextNode.prevNode = newNode
+            prevNode.nextNode = node
+
+        count+=1
+
+    def removeNode(node):
+        node.prevNode.nextNode = node.nextNode
+        node.nextNode.prevNode = node.prevNode
+        node.prevNode = None
+        node.nextNode = None
+        count-=1
+        return node
+
+    def moveNodeAfter(prevNode, node):
+        removeNode(node)
+        insertNodeAfter(prevNode, node)
+
+    def swapNodes(nodeA, nodeB):
+        prevA = nodeA.prevNode
+        moveNodeAfter(nodeB.prevNode, nodeA)
+        moveNodeAfter(prevA, nodeB)
+
+##################
+class Node:
+    def __init__(self, prevNode, nextNode, value):
+        self.prevNode = prevNode
+        self.nextNode = nextNode
+        self.value = value
+
+##################
+def mergeSortLinkedList(constCase):
+    head = Node(None, None, -1) 
+    prev = Node(None, None, -1)
+    s = []
+    for i in range(0, len(constCase)):
+        node = Node(None, None, constCase[i])
+        if (prev.nextNode is None): 
+            head = node
+        else:
+            prev.nextNode = node 
+            node.prevNode = prev 
+        prev = node 
+        s.append(node.value) 
+    tail = prev
+
+    linkedList = LinkedList(head, tail)  
+    print(s)
+
+# QUICK-SORT
 def quickSort(constCase):
+
     print("quickSort")
 
 if __name__ == "__main__":
@@ -112,5 +190,6 @@ if __name__ == "__main__":
         print(f"\nCase {i}")
         selectionSort(case)
         mergeSortVector(case)
+        mergeSortLinkedList(case) 
         quickSort(case)
         i+=1
