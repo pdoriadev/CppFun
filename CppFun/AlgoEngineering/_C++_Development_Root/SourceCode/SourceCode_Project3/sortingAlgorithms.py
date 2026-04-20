@@ -190,6 +190,7 @@ class LinkedList:
                 node.nextNode.prevNode = node
             else:
                 prevNode.nextNode = node.nextNode
+
             node.prevNode = prevNode
             if(node.nextNode is not None):
                 node.nextNode.prevNode = node
