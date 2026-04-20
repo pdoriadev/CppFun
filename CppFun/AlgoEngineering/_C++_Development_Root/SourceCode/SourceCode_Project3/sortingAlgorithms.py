@@ -103,55 +103,6 @@ def mergeVector(left, right, mergedVectorOut):
         j+=1
     #print(f"Partitions Sorted:  {mergedVectorOut}")
 
-########################
-class LinkedList:
-    count = 0
-    def __init__(self, head, tail):
-        self.head = head
-        self.tail = tail
-        self.count+=1
-    # prevNode = None to make a new head.
-    # For any other node, insert the node you want to insert after 
-    def insertNodeAfter(prevNode, node):
-        if head == None: # count = 0
-            head = node
-            tail = node
-        elif count == 1: # count = 1 
-            tail = node
-        elif prevNode == None: # insert new head
-            node.prevNode = None
-            self.head.prevNode = node
-            node.nextNode = head
-            self.head = node
-        elif prevNode == self.tail # insert new tail
-            prevNode.nextNode = node
-            node.prevNode = prevNode
-            node.nextNode = None
-            self.tail = node
-        else # insert new node in middle of list
-            node.nextNode = prevNode.nextNode
-            node.prevNode = prevNode
-            node.nextNode.prevNode = newNode
-            prevNode.nextNode = node
-
-        count+=1
-
-    def removeNode(node):
-        node.prevNode.nextNode = node.nextNode
-        node.nextNode.prevNode = node.prevNode
-        node.prevNode = None
-        node.nextNode = None
-        count-=1
-        return node
-
-    def moveNodeAfter(prevNode, node):
-        removeNode(node)
-        insertNodeAfter(prevNode, node)
-
-    def swapNodes(nodeA, nodeB):
-        prevA = nodeA.prevNode
-        moveNodeAfter(nodeB.prevNode, nodeA)
-        moveNodeAfter(prevA, nodeB)
 
 ##################
 class Node:
@@ -160,25 +111,174 @@ class Node:
         self.nextNode = nextNode
         self.value = value
 
+########################
+class LinkedList:
+    count = 0
+    head = None 
+    tail = None 
+    
+    def __init__(self, head, tail):
+        if (head is not None):
+            insertNodeAfter(None, head)
+            self.count+=1
+        if (tail is not None):
+            insertNodeAfter(self.tail, tail)
+            self.count+=1
+    
+    def newList(self, head, tail, count):
+        self.head = head
+        self.tail = tail
+        self.count = count
+
+
+    # prevNode = None to make a new head.
+    # For any other node, insert the node you want to insert after 
+    def insertNodeAfter(self, prevNode, node):
+        if self.head == None: # count = 0
+            self.head = node
+            self.tail = node
+        elif self.count == 1:
+            self.tail = node
+            self.tail.prevNode = self.head
+            self.head.nextNode = self.tail
+        elif prevNode == None: # insert new head
+            node.prevNode = None
+            self.head.prevNode = node
+            node.nextNode = self.head
+            self.head = node
+        elif prevNode == self.tail: # insert new tail
+            prevNode.nextNode = node
+            node.prevNode = prevNode
+            node.nextNode = None
+            self.tail = node
+        else: # insert new node in middle of list
+            node.nextNode = prevNode.nextNode
+            node.prevNode = prevNode
+            node.nextNode.prevNode = node
+            prevNode.nextNode = node
+
+        self.count+=1
+
+    def removeNode(self, node):
+        node.prevNode.nextNode = node.nextNode
+        node.nextNode.prevNode = node.prevNode
+        node.prevNode = None
+        node.nextNode = None
+        self.count-=1
+        return node
+
+    def moveNodeAfter(self, prevNode, node):
+        self.removeNode(node)
+        self.insertNodeAfter(prevNode, node)
+
+    def swapNodes(self, nodeA, nodeB):
+        prevA = nodeA.prevNode
+        isAGood = nodeA is not None
+        isBGood = nodeB is not None
+        if (isAGood && isBGood):
+            self.moveNodeAfter(nodeB.prevNode, nodeA)
+            self.moveNodeAfter(prevA, nodeB)
+            return
+        elif (isAGood):
+            self.moveNodeAfter(nodeB, nodeA)
+            return
+        elif (isBGood):
+            self.moveNodeAfter(nodeA, nodeB)
+            return
+        
+        print("Both swap nodes are None")
+
+def printHeadToTail(linkedList):
+    print("Print List: Head to Tail")
+    print(f"Count = {linkedList.count}")
+    node = linkedList.head
+    while node is not None:
+        print(node.value, sep=' ', end=None)
+        node = node.nextNode
+    print()
+
+def printTailToHead(linkedList):
+    print("Print List: Tail to Head")
+    print(f"Count = {linkedList.count}")
+    node = linkedList.tail
+    while node is not None:
+        print(node.value, sep=' ', end=None)
+        node = node.prevNode
+    print()
+
 ##################
 def mergeSortLinkedList(constCase):
-    head = Node(None, None, -1) 
-    prev = Node(None, None, -1)
-    s = []
+    linkedList = LinkedList(None, None)  
+    # Construct the linked list
+    prev = None
     for i in range(0, len(constCase)):
         node = Node(None, None, constCase[i])
-        if (prev.nextNode is None): 
-            head = node
+        linkedList.insertNodeAfter(prev, node)
+        prev = node
+    printHeadToTail(linkedList)
+    printTailToHead(linkedList)
+    
+    partitionLinkedList(linkedList, linkedList.head, linkedList.tail, linkedList.count)
+    printHeadToTail(linkedList)
+
+def partitionLinkedList(linkedList, start, end, partSize):
+    # base cases
+        # n < 2 
+        # n == 2
+    if (partSize < 2):
+        return 
+    if (partSize == 2):
+        if (start.value > end.value):
+            linkedList.swapNodes(start, end)
+        return 
+    
+    # split into left
+    leftEnd = start
+    for i in range(0, int(partSize / 2)):
+        leftEnd = leftEnd.nextNode
+    partitionLinkedList(linkedList, start, leftEnd, int((partSize / 2)) + 1) 
+    # split into right
+    partitionLinkedList(linkedList, leftEnd, end, int(partSize / 2)) 
+    # merge left and right. In-place?
+    mergeLinkedList(linkedList, start, leftEnd.nextNode, end)
+
+def mergeLinkedList(linkedList, leftStart, rightStart, rightEnd, count):
+    left = leftStart
+    right = rightStart
+    while (left is not right and right is not None):
+        if (right.value < left.value):
+            node = right.nextNode 
+            linkedList.swapNodes(left.prevNode, right)
+            right = node 
         else:
-            prev.nextNode = node 
-            node.prevNode = prev 
-        prev = node 
-        s.append(node.value) 
-    tail = prev
+            left = left.nextNode
 
-    linkedList = LinkedList(head, tail)  
-    print(s)
-
+    insertionPoint = head
+    groupStart = rightStart
+    groupEnd = groupStart 
+    while (insertionPoint is not rightStart):
+        
+        if (insertionPoint.value < groupEnd):
+            if (groupEnd.nextNode is None):
+                # insert group
+                break
+            if (groupEnd.nextnode >= insertionPoint.value):
+                #insert group
+                insertionPoint = insertionPoint.nextNode
+                continue
+            # groupEnd.nextNode < insertionPoint.value
+            groupEnd = groupEnd.nextNode
+    for i in range(0, count):
+        if (groupStart.value  
+    # do something like selection sort but in one go?
+    while (left is not rightStart and right is not rightEnd):
+        if (left.value > right.value):
+            nextLeft = left.nextNode
+            nextRight = right.nextNode
+            linkedList.swapNodes(left, right)
+        left = left.nextNode
+        right = right.nextNode
+    # Don't need to do any more adding/swapping because we've swapped in-place?
 # QUICK-SORT
 def quickSort(constCase):
 
