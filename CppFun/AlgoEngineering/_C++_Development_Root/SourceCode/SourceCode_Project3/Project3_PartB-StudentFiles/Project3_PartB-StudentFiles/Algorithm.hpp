@@ -140,7 +140,30 @@ struct Algorithm_2 : Algorithm<std::vector<std::string>>                        
     //              | A | B | C | D | E | F | G | H | I | J |              //
     //              +---+---+---+---+---+---+---+---+---+---+              //
     ///////////////////////// TO-DO (3) //////////////////////////////
+    if (words.size() <= 1)
+    {
+      return words;
+    }  
 
+    if (words.size() == 2)
+    {
+      if (words[0] > words[1])
+      {
+        Collection_Type swap = words[0]
+        words[0] = words[1]
+        words[1] = swap
+      }
+      return words;
+    }
+    
+    uint32_t mid = words.size() / 2;
+    std::vector<Collection_Type>& left(words[0], words[mid]);
+    std::vector<Collection_Type>& right(words[mid], words[words.size() - 1]);
+    
+    left = merge_sort(left); 
+    right = merge_sort(right); 
+    
+    merge(left, right)
     /////////////////////// END-TO-DO (3) ////////////////////////////
   }
 
