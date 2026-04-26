@@ -1,0 +1,137 @@
+
+
+
+Scenario 1:  Sorting 56,565 words
+
+========================================
+Algorithm 1:  In-Place Selection Sort
+Number of words to sort : 56,565
+
+Starting execution
+.........................
+.........................
+Execution completed
+
+Execution time          : 2.81962 seconds
+Content properly sorted : true
+========================================
+
+
+========================================
+Algorithm 2:  Merge Sort on Vectors
+Number of words to sort : 56,565
+
+Starting execution
+.........................
+.........................
+Execution completed
+
+Execution time          : 12.9159 milliseconds (ms)
+Content properly sorted : true
+========================================
+
+
+========================================
+Algorithm 3:  Merge Sort on Linked Lists
+Number of words to sort : 56,565
+
+Starting execution
+.........................
+.........................
+Execution completed
+
+Execution time          : 55.2946 milliseconds (ms)
+Content properly sorted : true
+========================================
+
+
+========================================
+Algorithm 4:  Quick Sort
+Number of words to sort : 56,565
+
+Starting execution
+.........................
+.........................
+Execution completed
+
+Execution time          : 5.0607 milliseconds (ms)
+Content properly sorted : true
+========================================
+
+
+
+
+
+
+
+
+
+
+
+Scenario 2:  Sorting 113,130 words
+
+========================================
+Algorithm 1:  In-Place Selection Sort
+Number of words to sort : 113,130
+
+Starting execution
+.........................
+.........................
+Execution completed
+
+Execution time          : 10.8342 seconds
+Content properly sorted : true
+========================================
+
+
+========================================
+Algorithm 2:  Merge Sort on Vectors
+Number of words to sort : 113,130
+
+Starting execution
+.........................
+.........................
+Execution completed
+
+Execution time          : 25.1657 milliseconds (ms)
+Content properly sorted : true
+========================================
+
+
+========================================
+Algorithm 3:  Merge Sort on Linked Lists
+Number of words to sort : 113,130
+
+Starting execution
+.........................
+.........................
+Execution completed
+
+Execution time          : 131.69 milliseconds (ms)
+Content properly sorted : true
+========================================
+
+
+========================================
+Algorithm 4:  Quick Sort
+Number of words to sort : 113,130
+
+Starting execution
+.........................
+.........................
+Execution completed
+
+Execution time          : 10.5613 milliseconds (ms)
+Content properly sorted : true
+========================================
+
+
+
+
+
+
+
+
+
+
+Total execution time:  00:04:23.774401164 (hh:mm:ss.ss)
