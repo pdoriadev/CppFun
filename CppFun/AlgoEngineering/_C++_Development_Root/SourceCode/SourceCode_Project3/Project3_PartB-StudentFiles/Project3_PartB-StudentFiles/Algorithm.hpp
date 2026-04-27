@@ -1,4 +1,4 @@
-pragma once
+#pragma once
 
 ///////////////////////// TO-DO (1) //////////////////////////////
   /// Include necessary header files
@@ -76,22 +76,22 @@ struct Algorithm_1 : Algorithm<std::vector<std::string>>              // Collect
       return;
     }
 
-    for (uint32_t i = 0; i < words.size() - 1; i++)
+    for (std::size_t i = 0; i < words.size() - 1; ++i)
     {
-      lower = i
-      for (uint32_t r = i+1; i < words.size(); j++)
+     std::size_t lower = i;
+      for (std::size_t r = i+1; i < words.size(); ++r)
       {
         if (words[i] > words[r])
         {
-          lower = r
+          lower = r;
         } 
       }
 
       if (lower != i)
       {
-        Collection_Type swap = words[i]
-        words[i] = words[lower]
-        words[lower] = swap
+        std::string swap = words[i];
+        words[i] = words[lower];
+        words[lower] = swap;
       }
     }
     /////////////////////// END-TO-DO (2) ////////////////////////////
@@ -154,20 +154,22 @@ struct Algorithm_2 : Algorithm<std::vector<std::string>>                        
     {
       if (words[0] > words[1])
       {
-        Collection_Type swap = words[0]
-        words[0] = words[1]
-        words[1] = swap
+        Collection_Type sorted;
+        sorted.push_back(words[1]);
+        sorted.push_back(words[0]);
+        return sorted;
       }
+      
       return words;
     }
     
     std::size_t mid = words.size() / 2;
-    std::vector<Collection_Type>& left(words[0], words[mid]);
-    std::vector<Collection_Type>& right(words[mid], words[words.size() - 1]);
+    Collection_Type left(words.begin(), words.begin() + mid);
+    Collection_Type right(words.begin() + mid, words.end() - 1); 
     left = merge_sort(left); 
     right = merge_sort(right); 
     
-    return merge(left, right)
+    return merge(left, right);
     /////////////////////// END-TO-DO (3) ////////////////////////////
   }
 
@@ -178,7 +180,7 @@ struct Algorithm_2 : Algorithm<std::vector<std::string>>                        
     ///////////////////////// TO-DO (4) //////////////////////////////
     std::size_t i = 0;
     std::size_t j = 0;
-    std::vector<Collection_Type> merged;
+    Collection_Type merged;
     merged.reserve(left.size() + right.size());
     while(i < left.size() && j < right.size())
     {
@@ -263,28 +265,37 @@ struct Algorithm_3 : Algorithm<std::list<std::string>>                          
     // create new list of words for right
     if (words.size() == 1)
     {
-      return;
+      return words;
     }
     
     if (words.size() == 2)
     {
       if(words.front() > words.back())
       {
-        std::string swap = words.front();
-        words.emplace_front(words.back());
-        words.emplace_back(swap);
+        Collection_Type sorted;
+        sorted.emplace_back(words.back());
+        sorted.emplace_back(words.front());
+        
+        return sorted;
       }
 
-      return; 
+      return words; 
     }
 
-    std::size_t mid = words.size() / 2; 
-    CollectionType left(words.begin(), mid);
-    CollectionType right(words.begin() + mid + 1, words.end() - 1);
-    left = merge_sort(&left);
-    right = merge_sort(&right);
+    // Creating and advancing iterator to midpoint.
+    auto mid = words.begin();
+    std::advance(mid, words.size() / 2); 
+    Collection_Type left(words.begin(), mid);
 
-    merged = merge(&left, &right);
+    auto end = words.begin();
+    std::advance(end, words.size() - 1);
+    std::advance(mid, 1);
+    // This may be wrong. Should use words.end() instead?
+    Collection_Type right(mid, end);
+    left = merge_sort(left);
+    right = merge_sort(right);
+
+    return merge(left, right);
     /////////////////////// END-TO-DO (5) ////////////////////////////
   }
 
@@ -374,8 +385,8 @@ struct Algorithm_4 : Algorithm<std::vector<std::string>>                        
     {
       if (words[start] > words[end])
       {
-        std::string swap = words[start]
-        words[start] = words[end]
+        std::string swap = words[start];
+        words[start] = words[end];
         words[end] = swap;
       }
 
@@ -420,13 +431,14 @@ struct Algorithm_4 : Algorithm<std::vector<std::string>>                        
     // 32-bit Unsigned int generator using the std::mersenne_twister_engine: https://cplusplus.com/reference/random/mersenne_twister_engine/
         // Alters internal state by "twisting" with an xor mask on a mis of bits. Neat!
     std::mt19937 gen(rd());
-    // Produces a uniform distribution of ints constrained to a range.
-    std::uniform_int_distribution<> amount_dist(start, end);
+    // Produces a uniform distribution of ints constrained to a range. 
+        // https://en.cppreference.com/cpp/numeric/random/uniform_int_distribution    
+    std::uniform_int_distribution<size_t> distribution(start, end);
    
     // select random pivot. swap to end. 
-    size_t pivot = uniform_dist(gen);
+    size_t pivot = distribution(gen);
     std::swap(words[pivot], words[end]);
-
+    
     size_t i = start;
     size_t j = end - 1;
 
