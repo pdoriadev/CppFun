@@ -9,8 +9,6 @@ pragma once
   // std:: vector
 #include <string> 
   // std::string
-#include <stdint> 
-  // unsigned ints
 #include <random> 
   // random uniform distribution for quicksort
 #include <algorithm> 
@@ -163,7 +161,7 @@ struct Algorithm_2 : Algorithm<std::vector<std::string>>                        
       return words;
     }
     
-    uint32_t mid = words.size() / 2;
+    std::size_t mid = words.size() / 2;
     std::vector<Collection_Type>& left(words[0], words[mid]);
     std::vector<Collection_Type>& right(words[mid], words[words.size() - 1]);
     left = merge_sort(left); 
@@ -178,8 +176,8 @@ struct Algorithm_2 : Algorithm<std::vector<std::string>>                        
   Collection_Type merge( const Collection_Type & left, const Collection_Type & right ) const
   {
     ///////////////////////// TO-DO (4) //////////////////////////////
-    uint32_t i = 0;
-    uint32_t j = 0;
+    std::size_t i = 0;
+    std::size_t j = 0;
     std::vector<Collection_Type> merged;
     merged.reserve(left.size() + right.size());
     while(i < left.size() && j < right.size())
