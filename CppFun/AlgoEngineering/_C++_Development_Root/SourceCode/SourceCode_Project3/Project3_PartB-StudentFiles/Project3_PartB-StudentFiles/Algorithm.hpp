@@ -258,6 +258,8 @@ struct Algorithm_3 : Algorithm<std::list<std::string>>                          
     //           | A |<->| B |<->| C |<->| D |<->| E |<->| F |<->| G |<->| H |<->| I |<->| J |          //
     //           +---+   +---+   +---+   +---+   +---+   +---+   +---+   +---+   +---+   +---+          //
     ///////////////////////// TO-DO (5) //////////////////////////////
+   
+    return words;  
     // base case
     // create new list of words for left
     //   - leftSize = size / 2
@@ -380,7 +382,7 @@ struct Algorithm_4 : Algorithm<std::vector<std::string>>                        
     {
       return;
     }
-
+    
     if (end - start == 1)
     {
       if (words[start] > words[end])
@@ -392,10 +394,18 @@ struct Algorithm_4 : Algorithm<std::vector<std::string>>                        
 
       return;
     }
-
+    
     std::size_t p = qs_partition(words, start, end);
-    qs_range(words, start, p);
-    qs_range(words, p+1, end);
+
+    if (p > start)
+    {
+      qs_range(words, start, p);
+    }
+    if (p < end)
+    {
+      return;
+      qs_range(words, p+1, end);
+    }
     
     /////////////////////// END-TO-DO (8) ////////////////////////////
   }
@@ -433,25 +443,26 @@ struct Algorithm_4 : Algorithm<std::vector<std::string>>                        
     std::mt19937 gen(rd());
     // Produces a uniform distribution of ints constrained to a range. 
         // https://en.cppreference.com/cpp/numeric/random/uniform_int_distribution    
-    std::uniform_int_distribution<size_t> distribution(start, end);
-   
+    std::uniform_int_distribution<std::size_t> distribution(start, end);
     // select random pivot. swap to end. 
-    size_t pivot = distribution(gen);
-    std::swap(words[pivot], words[end]);
-    
-    size_t i = start;
-    size_t j = end - 1;
-
-    // shrink to-do zone. swap as needed.
-    while (i <= j)
+    std::size_t pivot = distribution(gen);
+    if (pivot != end)
     {
-      if (words[i] < words[pivot])
+      std::swap(words[pivot], words[end]);
+    }
+
+    std::size_t i = start;
+    std::size_t j = end - 1;
+    // shrink to-do zone. swap as needed.
+    while (i < j && j < end)
+    {
+      if (words[i] <= words[end])
       {
         ++i;
       }
-      else if (words[j] >= words[pivot])
+      else if (words[j] > words[end])
       {
-        ++j;
+        --j;
       }
       else
       {
@@ -460,9 +471,13 @@ struct Algorithm_4 : Algorithm<std::vector<std::string>>                        
         --j;
       }
     }
-   
-    std::swap(words[i], words[j]);
-    return pivot; 
+
+    if (words[i] > words[end])
+    {
+      std::swap(words[i], words[end]);
+    }
+
+    return i;
     /////////////////////// END-TO-DO (9) ////////////////////////////
   }
 };    // struct Algorithm_4
