@@ -5,9 +5,16 @@ pragma once
   /// Hint:  Include what you use, use what you include
   ///
   /// Do not put anything else in this section, i.e. comments, classes, functions, etc.  Only #include directives
-#include <vector>
-#include <string>
-#include <stdint>
+#include <vector> 
+  // std:: vector
+#include <string> 
+  // std::string
+#include <stdint> 
+  // unsigned ints
+#include <random> 
+  // random uniform distribution for quicksort
+#include <algorithm> 
+  // std::swap() on same vector
 /////////////////////// END-TO-DO (1) ////////////////////////////
 
 
@@ -159,11 +166,10 @@ struct Algorithm_2 : Algorithm<std::vector<std::string>>                        
     uint32_t mid = words.size() / 2;
     std::vector<Collection_Type>& left(words[0], words[mid]);
     std::vector<Collection_Type>& right(words[mid], words[words.size() - 1]);
-    
     left = merge_sort(left); 
     right = merge_sort(right); 
     
-    merge(left, right)
+    return merge(left, right)
     /////////////////////// END-TO-DO (3) ////////////////////////////
   }
 
@@ -172,7 +178,35 @@ struct Algorithm_2 : Algorithm<std::vector<std::string>>                        
   Collection_Type merge( const Collection_Type & left, const Collection_Type & right ) const
   {
     ///////////////////////// TO-DO (4) //////////////////////////////
+    uint32_t i = 0;
+    uint32_t j = 0;
+    std::vector<Collection_Type> merged;
+    merged.reserve(left.size() + right.size());
+    while(i < left.size() && j < right.size())
+    {
+      if (left[i] <= right[j])
+      {
+        merged.emplace_back(left[i]);
+        ++i; 
+      } 
+      else
+      {
+        merged.emplace_back(right[j]);
+        ++j;
+      }
+    }
+    while(i < left.size())
+    {
+      merged.emplace_back(left[i]);
+      ++i;
+    }
+    while(j < right.size())
+    {
+      merged.emplace_back(right[j]);
+      ++j;
+    }
 
+    return merged;
     /////////////////////// END-TO-DO (4) ////////////////////////////
   }
 };  // struct Algorithm_2
@@ -224,7 +258,35 @@ struct Algorithm_3 : Algorithm<std::list<std::string>>                          
     //           | A |<->| B |<->| C |<->| D |<->| E |<->| F |<->| G |<->| H |<->| I |<->| J |          //
     //           +---+   +---+   +---+   +---+   +---+   +---+   +---+   +---+   +---+   +---+          //
     ///////////////////////// TO-DO (5) //////////////////////////////
+    // base case
+    // create new list of words for left
+    //   - leftSize = size / 2
+    //   - head = head. tail = words.begin + words.size() / 2
+    // create new list of words for right
+    if (words.size() == 1)
+    {
+      return;
+    }
+    
+    if (words.size() == 2)
+    {
+      if(words.front() > words.back())
+      {
+        std::string swap = words.front();
+        words.emplace_front(words.back());
+        words.emplace_back(swap);
+      }
 
+      return; 
+    }
+
+    std::size_t mid = words.size() / 2; 
+    CollectionType left(words.begin(), mid);
+    CollectionType right(words.begin() + mid + 1, words.end() - 1);
+    left = merge_sort(&left);
+    right = merge_sort(&right);
+
+    merged = merge(&left, &right);
     /////////////////////// END-TO-DO (5) ////////////////////////////
   }
 
@@ -233,7 +295,37 @@ struct Algorithm_3 : Algorithm<std::list<std::string>>                          
   Collection_Type merge( const Collection_Type & left, const Collection_Type & right ) const
   {
     ///////////////////////// TO-DO (6) //////////////////////////////
+    Collection_Type merged;
+    // check if left is greater than right. if so, swap. 
+    auto left_it = left.begin();
+    auto right_it = right.begin();
+    while (left_it != left.end() && right_it != right.end())
+    {
+      if (*left_it < *right_it)
+      {
+        merged.push_front(*left_it);
+        ++left_it; 
+      }
+      else
+      {
+        merged.push_front(*right_it);
+        ++right_it;
+      }
+    }
 
+    while (left_it != left.end())
+    {
+      merged.push_front(*left_it);
+      ++left_it;
+    }
+
+    while (right_it != right.end())
+    {
+      merged.push_front(*right_it);
+      ++right_it;
+    }
+
+    return merged; 
     /////////////////////// END-TO-DO (6) ////////////////////////////
   }
 };  // struct Algorithm_3
@@ -259,7 +351,8 @@ struct Algorithm_4 : Algorithm<std::vector<std::string>>                        
   void run( Collection_Type & words ) const override
   {
     ///////////////////////// TO-DO (7) //////////////////////////////
-
+    // calls qs_range with the whole range of elements
+    qs_range(words, 0, words.size() - 1);
     /////////////////////// END-TO-DO (7) ////////////////////////////
   }
 
@@ -269,7 +362,32 @@ struct Algorithm_4 : Algorithm<std::vector<std::string>>                        
   void qs_range( Collection_Type & words, std::size_t start, std::size_t end ) const
   {
     ///////////////////////// TO-DO (8) //////////////////////////////
+    // sorts the vector into two sorted partitions
+    // recursively calls qs_range until partition size <= 2 and is confirmed sorted.
+    // partition based on a pivot value. 
+    // call qs_range for left and right sides the words collection, using the pivot index as the separator between left and right sides. 
+    
+    if (end - start < 1)
+    {
+      return;
+    }
 
+    if (end - start == 1)
+    {
+      if (words[start] > words[end])
+      {
+        std::string swap = words[start]
+        words[start] = words[end]
+        words[end] = swap;
+      }
+
+      return;
+    }
+
+    std::size_t p = qs_partition(words, start, end);
+    qs_range(words, start, p);
+    qs_range(words, p+1, end);
+    
     /////////////////////// END-TO-DO (8) ////////////////////////////
   }
 
@@ -298,7 +416,43 @@ struct Algorithm_4 : Algorithm<std::vector<std::string>>                        
     //     std::uniform_int_distribution for more information on how to use the C++ random number library.
 
     ///////////////////////// TO-DO (9) //////////////////////////////
+    // RANDOM GENERATION SETUP
+    // Random number generator for ints across uniform distribution. Used as the seed source for the unsigned int generator.
+    std::random_device rd;
+    // 32-bit Unsigned int generator using the std::mersenne_twister_engine: https://cplusplus.com/reference/random/mersenne_twister_engine/
+        // Alters internal state by "twisting" with an xor mask on a mis of bits. Neat!
+    std::mt19937 gen(rd());
+    // Produces a uniform distribution of ints constrained to a range.
+    std::uniform_int_distribution<> amount_dist(start, end);
+   
+    // select random pivot. swap to end. 
+    size_t pivot = uniform_dist(gen);
+    std::swap(words[pivot], words[end]);
 
+    size_t i = start;
+    size_t j = end - 1;
+
+    // shrink to-do zone. swap as needed.
+    while (i <= j)
+    {
+      if (words[i] < words[pivot])
+      {
+        ++i;
+      }
+      else if (words[j] >= words[pivot])
+      {
+        ++j;
+      }
+      else
+      {
+        std::swap(words[i], words[j]);
+        ++i;
+        --j;
+      }
+    }
+   
+    std::swap(words[i], words[j]);
+    return pivot; 
     /////////////////////// END-TO-DO (9) ////////////////////////////
   }
 };    // struct Algorithm_4
