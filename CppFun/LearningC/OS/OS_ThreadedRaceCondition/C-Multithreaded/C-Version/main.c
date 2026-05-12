@@ -40,7 +40,7 @@ Create sequential version.												                    **
 Profile sequential.																                    **
 Profile multi-threaded.														                    **
 
-Look into static/extern use-caes									                                            **
+Look into static/extern use-cases 								                    **
 
 */
 
@@ -137,16 +137,16 @@ int main (int argv, char* argc[])
   char finalExpectedBalancesAllRuns[10000] = "";
   for (uint32_t runCount = 0; runCount < RUNS_TARGET; runCount++)
   {
-		uint32_t totalDeposits = 0;
+  		uint32_t totalDeposits = 0;
     uint32_t totalWithdrawls = 0;
     // malloc BankAccount
     BankAccount *accountPtr = (BankAccount*)(malloc(sizeof(BankAccount)));
     createAccount(accountPtr, 0);
 
-		// Initialize the mutex before thread creation.
-		// pthread.h - https://man7.org/linux/man-pages/man0/pthread.h.0p.html
-		// mutex attribute type: https://pubs.opengroup.org/onlinepubs/7908799/xsh/pthread_mutexattr_settype.html
-		pthread_mutex_init(&mtx, PTHREAD_MUTEX_NORMAL);
+		  // Initialize the mutex before thread creation.
+		  // pthread.h - https://man7.org/linux/man-pages/man0/pthread.h.0p.html
+		  // mutex attribute type: https://pubs.opengroup.org/onlinepubs/7908799/xsh/pthread_mutexattr_settype.html
+	  	pthread_mutex_init(&mtx, PTHREAD_MUTEX_NORMAL);
 
     fprintf(stdout, "\nSpinning up %lu threads for run %lu.", THREAD_COUNT, runCount);
     fflush(stdout);
