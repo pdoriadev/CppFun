@@ -1,0 +1,53 @@
+/*******************************************************************************
+** After setting keybindings to Visual Studio 6.0, change the "next error" from
+** f8 to f4 to match MS Visual Studio by coping this file to
+**   Linux:    ~/.config/Code/User/keybindings.json
+**   WSL:      ~/.vscode-server/data/Machine/keybindings.json
+**   Windows:  %APPDATA%\Code\User\keybindings.json  (e.g. C:\Users\you\AppData\Roaming\Code\User\keybindings.json)
+*******************************************************************************/
+[
+  {
+    "key": "f4",
+    "command": "editor.action.marker.nextInFiles",
+    "when": "editorFocus"
+  },
+  {
+    "key": "f8",
+    "command": "-editor.action.marker.nextInFiles",
+    "when": "editorFocus"
+  },
+  {
+    "key": "shift+f4",
+    "command": "editor.action.marker.prevInFiles",
+    "when": "editorFocus"
+  },
+  {
+    "key": "shift+f8",
+    "command": "-editor.action.marker.prevInFiles",
+    "when": "editorFocus"
+  },
+  {
+    "key": "alt+f4",
+    "command": "editor.action.marker.next",
+    "when": "editorFocus"
+  },
+  {
+    "key": "alt+f8",
+    "command": "-editor.action.marker.next",
+    "when": "editorFocus"
+  },
+  {
+    "key": "shift+alt+f4",
+    "command": "editor.action.marker.prev",
+    "when": "editorFocus"
+  },
+  {
+    "key": "shift+alt+f8",
+    "command": "-editor.action.marker.prev",
+    "when": "editorFocus"
+  },
+  {
+    "key": "ctrl+r",
+    "command": "workbench.action.tasks.reRunTask"
+  }
+]

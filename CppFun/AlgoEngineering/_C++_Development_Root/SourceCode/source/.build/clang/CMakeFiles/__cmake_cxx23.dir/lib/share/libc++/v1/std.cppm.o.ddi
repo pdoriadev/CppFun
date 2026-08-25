@@ -1,0 +1,16 @@
+{
+  "revision": 0,
+  "rules": [
+    {
+      "primary-output": "CMakeFiles/__cmake_cxx23.dir/lib/share/libc++/v1/std.cppm.o",
+      "provides": [
+        {
+          "is-interface": true,
+          "logical-name": "std",
+          "source-path": "/lib/share/libc++/v1/std.cppm"
+        }
+      ]
+    }
+  ],
+  "version": 1
+}

@@ -1,0 +1,45 @@
+{
+	"bmi-installation" : null,
+	"compiler-frontend-variant" : "GNU",
+	"compiler-id" : "Clang",
+	"compiler-simulate-id" : "",
+	"config" : "Release",
+	"cxx-modules" : 
+	{
+		"CMakeFiles/__cmake_cxx26.dir/lib/share/libc++/v1/std.compat.cppm.o" : 
+		{
+			"bmi-only" : false,
+			"destination" : null,
+			"name" : "std",
+			"relative-directory" : "",
+			"source" : "/lib/share/libc++/v1/std.compat.cppm",
+			"type" : "CXX_MODULES",
+			"visibility" : "PUBLIC"
+		},
+		"CMakeFiles/__cmake_cxx26.dir/lib/share/libc++/v1/std.cppm.o" : 
+		{
+			"bmi-only" : false,
+			"destination" : null,
+			"name" : "std",
+			"relative-directory" : "",
+			"source" : "/lib/share/libc++/v1/std.cppm",
+			"type" : "CXX_MODULES",
+			"visibility" : "PUBLIC"
+		}
+	},
+	"database-info" : null,
+	"dir-cur-bld" : "/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/.build/clang",
+	"dir-cur-src" : "/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/cmake",
+	"dir-top-bld" : "/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/.build/clang",
+	"dir-top-src" : "/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/cmake",
+	"exports" : [],
+	"forward-modules-from-target-dirs" : [],
+	"include-dirs" : 
+	[
+		"/lib/x86_64-linux-gnu/../share/libc++/v1"
+	],
+	"language" : "CXX",
+	"linked-target-dirs" : [],
+	"module-dir" : "/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/.build/clang/CMakeFiles/__cmake_cxx26.dir",
+	"sources" : {}
+}

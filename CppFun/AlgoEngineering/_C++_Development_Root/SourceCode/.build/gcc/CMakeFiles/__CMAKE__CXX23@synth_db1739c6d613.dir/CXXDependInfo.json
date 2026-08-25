@@ -1,0 +1,42 @@
+{
+	"bmi-installation" : null,
+	"compiler-frontend-variant" : "GNU",
+	"compiler-id" : "GNU",
+	"compiler-simulate-id" : "",
+	"config" : "Release",
+	"cxx-modules" : 
+	{
+		"CMakeFiles/__CMAKE__CXX23@synth_db1739c6d613.dir/6c7e1919e325.bmi" : 
+		{
+			"bmi-only" : true,
+			"destination" : null,
+			"name" : "std",
+			"relative-directory" : "",
+			"source" : "/usr/local/gcc-15.2.0/include/c++/15.2.0/bits/std.cc",
+			"type" : "CXX_MODULES",
+			"visibility" : "INTERFACE"
+		},
+		"CMakeFiles/__CMAKE__CXX23@synth_db1739c6d613.dir/b493f36079d1.bmi" : 
+		{
+			"bmi-only" : true,
+			"destination" : null,
+			"name" : "std",
+			"relative-directory" : "",
+			"source" : "/usr/local/gcc-15.2.0/include/c++/15.2.0/bits/std.compat.cc",
+			"type" : "CXX_MODULES",
+			"visibility" : "INTERFACE"
+		}
+	},
+	"database-info" : null,
+	"dir-cur-bld" : "/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/.build/gcc",
+	"dir-cur-src" : "/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/cmake",
+	"dir-top-bld" : "/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/.build/gcc",
+	"dir-top-src" : "/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/cmake",
+	"exports" : [],
+	"forward-modules-from-target-dirs" : [],
+	"include-dirs" : [],
+	"language" : "CXX",
+	"linked-target-dirs" : [],
+	"module-dir" : "/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/.build/gcc/CMakeFiles/__CMAKE__CXX23@synth_db1739c6d613.dir",
+	"sources" : {}
+}

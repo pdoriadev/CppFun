@@ -1,0 +1,30 @@
+Try navigating the below text up and down using hjkl in vim. 
+- Go from end of word to end of word. Backtrack until you can go straight-up or down to the next word.
+~~~~~~
+Hello
+It's
+Me
+!
+The
+ spaced
+  out
+   tabby
+    cat.
+   No
+  tabs
+ for
+me.
+~~~~~~
+	Hello
+       It's
+      Me
+     !
+     The
+      spaced
+       out
+        space
+	cat.
+       Mostly
+      spaces
+     for
+     me.

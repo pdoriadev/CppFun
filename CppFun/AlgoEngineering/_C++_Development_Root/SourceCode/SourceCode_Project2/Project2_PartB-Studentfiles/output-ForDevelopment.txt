@@ -1,0 +1,218 @@
+Scenario             : 1
+Per item weight range: 4..50
+Weight limit         : 200
+Selection pool size  : 10
+Selection Pool       :
+       Description                              Oz  Cals    Cal/Oz 
+   0: {"baked MSG-free lasagna",                50, 157.61,  3.1522}
+   1: {"refried baked mild green beans",        40,  43.03,  1.0757}
+   2: {"shredded chicken chocolate cookies",    15, 123.98,  8.2653}
+   3: {"turkey baked MSG-free with potatoes",   22,  10.67,  0.4850}
+   4: {"Chinese baked delicious green beans",   20, 160.12,  8.0060}
+   5: {"shredded refried chunky chocolate",     25, 158.03,  6.3212}
+   6: {"Chinese chicken cookies pasta",         20, 433.98, 21.6990}
+   7: {"turkey spicy chicken breast with eggs", 20,  26.75,  1.3375}
+   8: {"baked MSG-free chocolate",              44, 101.97,  2.3175}
+   9: {"chunky whole corn",                     48, 471.60,  9.8250}
+
+========================================
+Algorithm 1:  The Greedy Pattern
+Starting execution
+.........................
+.........................
+Execution completed
+
+Execution time          :  1.888 microseconds (us)
+Number of selected items:  7 of 10
+Total weight            :  192 of 200
+Total calories          :  1087.42
+Selected Food Items     :
+       Description                            Oz  Cals    Cal/Oz 
+   0: {"baked MSG-free lasagna",              50, 157.61,  3.1522}
+   1: {"refried baked mild green beans",      40,  43.03,  1.0757}
+   2: {"shredded refried chunky chocolate",   25, 158.03,  6.3212}
+   3: {"turkey baked MSG-free with potatoes", 22,  10.67,  0.4850}
+   4: {"Chinese chicken cookies pasta",       20, 433.98, 21.6990}
+   5: {"Chinese baked delicious green beans", 20, 160.12,  8.0060}
+   6: {"shredded chicken chocolate cookies",  15, 123.98,  8.2653}
+========================================
+
+
+========================================
+Algorithm 2:  The Exhaustive Pattern
+Starting execution
+.........................
+.........................
+Execution completed
+
+Execution time          :  146.635 microseconds (us)
+Number of selected items:  7 of 10
+Total weight            :  198 of 200
+Total calories          :  1532.07
+Selected Food Items     :
+       Description                              Oz  Cals    Cal/Oz 
+   0: {"baked MSG-free lasagna",                50, 157.61,  3.1522}
+   1: {"chunky whole corn",                     48, 471.60,  9.8250}
+   2: {"shredded refried chunky chocolate",     25, 158.03,  6.3212}
+   3: {"Chinese chicken cookies pasta",         20, 433.98, 21.6990}
+   4: {"Chinese baked delicious green beans",   20, 160.12,  8.0060}
+   5: {"turkey spicy chicken breast with eggs", 20,  26.75,  1.3375}
+   6: {"shredded chicken chocolate cookies",    15, 123.98,  8.2653}
+========================================
+
+
+
+
+
+
+
+
+Scenario             : 2
+Per item weight range: 3..120
+Weight limit         : 129
+Selection pool size  : 7
+Selection Pool       :
+       Description                            Ozs  Cals    Cal/Oz 
+   0: {"refried spicy delicious beans",         3, 207.91, 69.3033}
+   1: {"baked MSG-free lasagna",               50, 157.61,  3.1522}
+   2: {"Chinese chicken breast nuggets",      105, 136.97,  1.3045}
+   3: {"refried baked mild green beans",       40,  43.03,  1.0757}
+   4: {"refried cheese MSG-free pasta",        90, 266.21,  2.9579}
+   5: {"shredded chicken chocolate cookies",   15, 123.98,  8.2653}
+   6: {"turkey baked MSG-free with potatoes",  22,  10.67,  0.4850}
+
+========================================
+Algorithm 1:  The Greedy Pattern
+Starting execution
+.........................
+.........................
+Execution completed
+
+Execution time          :  1.887 microseconds (us)
+Number of selected items:  4 of 7
+Total weight            :  108 of 129
+Total calories          :  532.53
+Selected Food Items     :
+       Description                           Oz  Cals    Cal/Oz 
+   0: {"baked MSG-free lasagna",             50, 157.61,  3.1522}
+   1: {"refried baked mild green beans",     40,  43.03,  1.0757}
+   2: {"shredded chicken chocolate cookies", 15, 123.98,  8.2653}
+   3: {"refried spicy delicious beans",       3, 207.91, 69.3033}
+========================================
+
+
+========================================
+Algorithm 2:  The Exhaustive Pattern
+Starting execution
+.........................
+.........................
+Execution completed
+
+Execution time          :  11.803 microseconds (us)
+Number of selected items:  3 of 7
+Total weight            :  108 of 129
+Total calories          :  598.10
+Selected Food Items     :
+       Description                           Oz  Cals    Cal/Oz 
+   0: {"refried cheese MSG-free pasta",      90, 266.21,  2.9579}
+   1: {"shredded chicken chocolate cookies", 15, 123.98,  8.2653}
+   2: {"refried spicy delicious beans",       3, 207.91, 69.3033}
+========================================
+
+
+
+
+
+
+
+
+Scenario             : 3
+Per item weight range: 50..150
+Weight limit         : 1100
+Selection pool size  : 19
+Selection Pool       :
+       Description                                      Ozs  Cals    Cal/Oz
+   0: {"baked MSG-free lasagna",                         50, 157.61, 3.1522}
+   1: {"Chinese chicken breast nuggets",                105, 136.97, 1.3045}
+   2: {"refried cheese MSG-free pasta",                  90, 266.21, 2.9579}
+   3: {"shredded refried mild whole corn",              125,  50.92, 0.4074}
+   4: {"refried garbanzo beans",                         73, 404.77, 5.5448}
+   5: {"Chinese spicy mild green beans",                 66, 288.14, 4.3658}
+   6: {"refried chicken breast with green beans",       112, 392.82, 3.5073}
+   7: {"cheese cookies with potatoes",                   51, 399.64, 7.8361}
+   8: {"Chinese spicy cookies little shredded mansion",  67,  59.83, 0.8930}
+   9: {"Chinese baked breast with potatoes",            108, 244.51, 2.2640}
+  10: {"spicy light pickled vegetables",                 96, 354.00, 3.6875}
+  11: {"refried cheese chunky whole corn",              109, 470.60, 4.3174}
+  12: {"refried chunky whole corn",                     120, 330.81, 2.7567}
+  13: {"refried baked MSG-free pork with rice",         111, 137.84, 1.2418}
+  14: {"Chinese spicy delicious pork with eggs",         87, 448.36, 5.1536}
+  15: {"Chinese refried mild pork with rice",           101, 441.17, 4.3680}
+  16: {"refried chicken breast with eggs",              101, 255.55, 2.5302}
+  17: {"Chinese cheese MSG-free green beans",            72, 238.62, 3.3142}
+  18: {"shredded chicken mild beef with green beans",    61, 446.28, 7.3161}
+
+========================================
+Algorithm 1:  The Greedy Pattern
+Starting execution
+.........................
+.........................
+Execution completed
+
+Execution time          :  2.489 microseconds (us)
+Number of selected items:  12 of 19
+Total weight            :  1052 of 1100
+Total calories          :  3226.02
+Selected Food Items     :
+       Description                                      Ozs  Cals    Cal/Oz
+   0: {"shredded refried mild whole corn",              125,  50.92, 0.4074}
+   1: {"refried chicken breast with green beans",       112, 392.82, 3.5073}
+   2: {"refried cheese chunky whole corn",              109, 470.60, 4.3174}
+   3: {"Chinese baked breast with potatoes",            108, 244.51, 2.2640}
+   4: {"Chinese chicken breast nuggets",                105, 136.97, 1.3045}
+   5: {"spicy light pickled vegetables",                 96, 354.00, 3.6875}
+   6: {"refried cheese MSG-free pasta",                  90, 266.21, 2.9579}
+   7: {"refried garbanzo beans",                         73, 404.77, 5.5448}
+   8: {"Chinese spicy cookies little shredded mansion",  67,  59.83, 0.8930}
+   9: {"Chinese spicy mild green beans",                 66, 288.14, 4.3658}
+  10: {"cheese cookies with potatoes",                   51, 399.64, 7.8361}
+  11: {"baked MSG-free lasagna",                         50, 157.61, 3.1522}
+========================================
+
+
+========================================
+Algorithm 2:  The Exhaustive Pattern
+Starting execution
+.........................
+.........................
+Execution completed
+
+Execution time          :  71.052 milliseconds (ms)
+Number of selected items:  13 of 19
+Total weight            :  1088 of 1100
+Total calories          :  4639.03
+Selected Food Items     :
+       Description                                    Ozs  Cals    Cal/Oz
+   0: {"refried chunky whole corn",                   120, 330.81, 2.7567}
+   1: {"refried chicken breast with green beans",     112, 392.82, 3.5073}
+   2: {"refried cheese chunky whole corn",            109, 470.60, 4.3174}
+   3: {"Chinese refried mild pork with rice",         101, 441.17, 4.3680}
+   4: {"spicy light pickled vegetables",               96, 354.00, 3.6875}
+   5: {"refried cheese MSG-free pasta",                90, 266.21, 2.9579}
+   6: {"Chinese spicy delicious pork with eggs",       87, 448.36, 5.1536}
+   7: {"refried garbanzo beans",                       73, 404.77, 5.5448}
+   8: {"Chinese cheese MSG-free green beans",          72, 238.62, 3.3142}
+   9: {"Chinese spicy mild green beans",               66, 288.14, 4.3658}
+  10: {"shredded chicken mild beef with green beans",  61, 446.28, 7.3161}
+  11: {"cheese cookies with potatoes",                 51, 399.64, 7.8361}
+  12: {"baked MSG-free lasagna",                       50, 157.61, 3.1522}
+========================================
+
+
+
+
+
+
+
+
+Total execution time:  140.132 milliseconds (ms)

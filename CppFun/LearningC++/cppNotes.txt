@@ -1,0 +1,2 @@
+To compile in a different version (i.e. c++23), format command like so:
+	g++ -std=c++23 cppFile -o executableTarget

@@ -1,0 +1,5 @@
+executable $(< inputFile) > outputFile
+- executable: The executable (or command) we are running. It should take input from stdin.
+- $(): not 100% sure on this one, but I think this encapsulates everything in the () as one command argument to be processed.
+- < inputFile: redirects the contents of inputFile as input to the executable target.
+- > outputFile: redirects the output of executable to outputFile. 

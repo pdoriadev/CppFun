@@ -1,0 +1,35 @@
+{
+	"modules" : 
+	{
+		"std" : 
+		{
+			"bmi" : "CMakeFiles/__CMAKE__CXX23@synth_691cf5f9afd0.dir/6c7e1919e325.bmi",
+			"is-private" : false
+		},
+		"std.compat" : 
+		{
+			"bmi" : "CMakeFiles/__CMAKE__CXX23@synth_691cf5f9afd0.dir/b493f36079d1.bmi",
+			"is-private" : false
+		}
+	},
+	"references" : 
+	{
+		"std" : 
+		{
+			"lookup-method" : "by-name",
+			"path" : "CMakeFiles/__CMAKE__CXX23@synth_691cf5f9afd0.dir/6c7e1919e325.bmi"
+		},
+		"std.compat" : 
+		{
+			"lookup-method" : "by-name",
+			"path" : "CMakeFiles/__CMAKE__CXX23@synth_691cf5f9afd0.dir/b493f36079d1.bmi"
+		}
+	},
+	"usages" : 
+	{
+		"std.compat" : 
+		[
+			"std"
+		]
+	}
+}

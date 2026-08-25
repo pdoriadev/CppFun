@@ -1,0 +1,5 @@
+
+         ID: 1348441792
+          i: 6
+SumPtrValue: 8
+  CachedSum: 5

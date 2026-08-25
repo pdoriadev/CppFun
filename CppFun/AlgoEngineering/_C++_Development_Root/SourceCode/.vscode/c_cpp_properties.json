@@ -1,0 +1,46 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "forcedInclude": [
+                "${workspaceFolder}/.vscode/intellisense_std.hpp"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/g++",
+            "compilerArgs": [
+              "-Wall", "-Wextra", "-pedantic",
+              "-Wconversion",
+              "-Wdelete-non-virtual-dtor",
+              "-Wduplicated-branches",
+              "-Wduplicated-cond",
+              "-Wextra-semi",
+              "-Wfloat-equal",
+              "-Wformat=2",
+              "-Winit-self",
+              "-Wleading-whitespace=spaces",
+              "-Wlogical-op",
+              "-Wnoexcept",
+              "-Wshadow",
+              "-Wnull-dereference",
+              "-Wnon-virtual-dtor",
+              "-Wold-style-cast",
+              "-Wstrict-null-sentinel",
+              "-Wsuggest-override",
+              "-Wswitch-default",
+              "-Wswitch-enum",
+              "-Woverloaded-virtual",
+              "-Wuseless-cast"
+            ],
+            "cStandard": "c23",
+            "cppStandard": "c++23",
+            "intelliSenseMode": "linux-gcc-x64",
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true
+            }
+        }
+    ],
+    "version": 4
+}

@@ -1,0 +1,20 @@
+# ninja log v7
+66	97	1769632183352585000	CMakeFiles/__CMAKE__CXX23@synth_db1739c6d613.dir/b493f36079d1.bmi.ddi	317c8193a4acb359
+59	2301	1769632183352585000	CMakeFiles/__CMAKE__CXX23@synth_db1739c6d613.dir/6c7e1919e325.bmi.ddi	9b03751e813e64c
+2302	2340	1769632185707141300	CMakeFiles/__CMAKE__CXX23@synth_db1739c6d613.dir/CXX.dd	dceb1c81741da6c9
+2302	2340	1769632185707141300	CMakeFiles/__CMAKE__CXX23@synth_db1739c6d613.dir/CXXModules.json	dceb1c81741da6c9
+2302	2340	1769632185707141300	CMakeFiles/__CMAKE__CXX23@synth_db1739c6d613.dir/6c7e1919e325.bmi.modmap	dceb1c81741da6c9
+2302	2340	1769632185707141300	CMakeFiles/__CMAKE__CXX23@synth_db1739c6d613.dir/b493f36079d1.bmi.modmap	dceb1c81741da6c9
+2349	3098	1769632185722204500	CMakeFiles/build_gcc_exe.dir/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/main.cpp.o.ddi	b5cba803bd64064f
+3099	3186	1769632186584685700	CMakeFiles/build_gcc_exe.dir/CXX.dd	fa4964963ccebebf
+3099	3186	1769632186584685700	CMakeFiles/build_gcc_exe.dir/CXXModules.json	fa4964963ccebebf
+3099	3186	1769632186584685700	CMakeFiles/build_gcc_exe.dir/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/main.cpp.o.modmap	fa4964963ccebebf
+3196	4223	1769632186612807000	CMakeFiles/build_gcc_exe.dir/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/main.cpp.o	398b6a35b7dcfee9
+4257	4636	1769632187709091800	/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/bin/project_gxx_Release	21f9871ee0de9227
+55	97	1769632202048253900	CMakeFiles/__CMAKE__CXX23@synth_db1739c6d613.dir/CXX.dd	dceb1c81741da6c9
+55	97	1769632202048253900	CMakeFiles/__CMAKE__CXX23@synth_db1739c6d613.dir/CXXModules.json	dceb1c81741da6c9
+55	97	1769632202048253900	CMakeFiles/__CMAKE__CXX23@synth_db1739c6d613.dir/6c7e1919e325.bmi.modmap	dceb1c81741da6c9
+55	97	1769632202048253900	CMakeFiles/__CMAKE__CXX23@synth_db1739c6d613.dir/b493f36079d1.bmi.modmap	dceb1c81741da6c9
+107	170	1769632202097175000	CMakeFiles/build_gcc_exe.dir/CXX.dd	fa4964963ccebebf
+107	170	1769632202097175000	CMakeFiles/build_gcc_exe.dir/CXXModules.json	fa4964963ccebebf
+107	170	1769632202097175000	CMakeFiles/build_gcc_exe.dir/mnt/c/users/peter/dev/CppFun/CppFun/AlgoEngineering/_C++_Development_Root/SourceCode/main.cpp.o.modmap	fa4964963ccebebf

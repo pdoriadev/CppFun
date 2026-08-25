@@ -1,0 +1,10 @@
+
+FoodItem.hpp - is this for performance reasons?
+ 49   private:
+ 50     // Place the most likely and fastest to check attributes first.
+ 51     double      _calories;
+ 52     unsigned    _weight_ounces;
+ 53     std::string _description;
+
+I can't swap values in the std::vector<FoodItem const*>. How am I supposed to do my algorithm? Copy all the values??
+
