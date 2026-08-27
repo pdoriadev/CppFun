@@ -99,4 +99,4 @@ ipch/
 
 ##########################
 ### Compressed Folders ###
-**/*.zip/
+*.zip
