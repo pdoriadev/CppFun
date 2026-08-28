@@ -36,6 +36,13 @@
 //      -- see the "INPUT HANDLING" section below for why.
 //
 // =============================================================================
+/*
+
+m
+
+
+*/
+
 
 #include "glad.h"          // OpenGL function loader -- must be included before glfw3.h
 #include <GLFW/glfw3.h>    // window/context creation, input, timing
@@ -113,12 +120,14 @@ layout (location = 1) in vec3 aNormal;  // this vertex's normal (which way its f
 // "out" variables are computed once per vertex here, then automatically
 // interpolated across each triangle before the fragment shader below sees
 // them (that interpolation step is called rasterization).
+
 out vec3 Normal;                        // will be picked up by "in vec3 Normal" in the fragment shader
 
 // A "uniform" is a value we set once per draw call from the CPU (see
 // glUniformMatrix4fv in the render loop) that stays constant across every
 // vertex/pixel of that draw call -- unlike aPos/aNormal, which are
 // different for every vertex.
+
 uniform mat4 transform;                 // this letter's combined rotate+scale+position matrix, set from the CPU
 
 void main() {                           // GLSL entry point -- runs once per vertex
@@ -131,7 +140,40 @@ void main() {                           // GLSL entry point -- runs once per ver
     // where this vertex lands on screen (in clip space).
     gl_Position = transform * vec4(aPos, 1.0); // transform this vertex's position into its final on-screen location
 }
+
 )GLSL";
+
+// PETER - WE ARE PASSING A WHOLE ASS `main` method to GLSL???
+
+/*  PETER
+vertex shader
+HERE
+- for every vertex. OR for every triangle?? 
+    - I think this only makes sense for triangles, the way that Normals are used in main. 
+- transform - is this the transform shared by all the vertices of a single letter?
+
+frag shader
+- for every pixel
+
+main()
+{
+    HERE
+    
+    Normal = mat3(transform) * aNormal. 
+    // Rotating/scaling the normal is same as rotating/scaling the face???
+
+    HERE
+    gl_Position = transform * vec4(aPos,1.0)
+    // vec4() - Vector of 4 Floats. Column vector of size 4? 
+        - https://thebookofshaders.com/glossary/?search=vec4
+        - I think we're passing the aPos vector and scaling each value of aPos by 1. 
+        
+    
+}
+
+
+*/
+
 
 const char* fragmentShaderSource = R"GLSL(
 #version 330 core
