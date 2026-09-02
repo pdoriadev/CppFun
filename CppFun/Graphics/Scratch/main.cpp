@@ -1,6 +1,20 @@
 // Last LearnOpenGL page - https://learnopengl.com/Getting-started/Hello-Window
 // GLSL Data Type page - https://wikis.khronos.org/opengl/Data_Type_(GLSL) 
 
+//-/////////////////////////////////////////////////////////////////////
+// BUILDING THIS PROGRAM FROM COMMAND LINE
+// Use g++ since we're using Cpp.
+// Add main.cpp and glad.c as source targets.
+// -o param to create objects
+// executable name
+// link GLAD and GLFW libraries
+// -lglfw -lGL -ldl     
+//      -lglfw - ?? links GLFW ??
+//      -lGL ?? links OpenGL ??
+//      -ldl ?? what does this link ??
+
+#pragma region HEADERS
+
 // OPENGL-RELATED HEADERS
 //-//////////////////////////
 // glad
@@ -11,12 +25,25 @@
 // CPP RELATED HEADERS
 #include <iostream>
 
+#pragma endregion
+
+#pragma region PROTOYTPES
+
 // CPP Prototypes
+// Is this a CPP prototype??? Cuz the naming is C-style??
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+
+#pragma endregion
+
+#pragma region FIELDS
+
+const char* DASH_LINE = "--------------------------";
+
+#pragma endregion
 
 int main()
 {
-    std::cout << "--------------------------\nSTARTING PROGRAM\n " << std::endl;
+    std::cout << DASH_LINE << "\nSTARTING PROGRAM\n " << DASH_LINE << std::endl;
 
     // Initialize GLFW
     if (glfwInit() == false)
@@ -88,9 +115,38 @@ int main()
     // The viewport dimensions can be smaller than the window. 
     glViewport(0, 0, 800, 600);
 
-    
+    //-/////////////////////////////////////////////
+    // RENDER LOOP
+    //
+    // glfwWindowShouldClose() call
+    // - returns a flag. If true, do we close the window manually???? Or does glfw handle that??
+    // ?? how is the flag set/determined ??
+    while (glfwWindowShouldClose(window) == false)
+    {
+        // glfwSwapBuffers call
+        // swaps the new buffer to the screen.
+        // ?? waits until fully drawn ??
+        glfwSwapBuffers(window);
+        // glfwPollEvents call
+        // Checks for inputs. 
+        glfwPollEvents();
+    }
 
-    std::cout << "ENDING PROGRAM \n--------------------------\n" << std::endl;
+    //-/////////////////////////////////////////////
+    // CLEAN-UP - clean/delete allocated GLFW resources
+    // 
+    // glfwTerminate()
+    //      - Destroys remaining windows
+    //      - Frees allocated resources
+    //      - Sets library data to an uninitialized state
+    // After calling glfwTerminate(), call glfwInit to use GLFW functions again.
+    // Call glfw whenever exiting the render loop
+    //      ?? What if there are multiple viewports / windows ??
+    //      ?? Will terminating kill those viwports / windows, too? ?? 
+    // 
+    glfwTerminate();
+
+    std::cout << DASH_LINE << "\nENDING PROGRAM\n" << DASH_LINE << std::endl;
     return 0;
 }
 
@@ -101,11 +157,14 @@ int main()
 // Also called when window is first displayed. 
 // Interesting Note - For retina displays width and height will end up 
 //      significantly higher than the original input values. 
+//
+// ?? How does glfw know to call this? 
+//      How does it know main.cpp implements this function at compile time? ??
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
     // When window is resized, viewport should be resized.
     // Register a callback. 
-    glViewPort(0, 0, width, height);
+    glViewport(0, 0, width, height);
 }
 
 
