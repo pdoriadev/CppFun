@@ -22,10 +22,9 @@
 #include <cctype>           // std::toupper, std::tolower
 #include <cstdlib>          // std::getenv -- used by isRunningUnderWSL() below
 #include <fstream>          // std::ifstream -- used by isRunningUnderWSL() below
-#include <iostream>         // std::iostream -- I/O
 #include <string>           // std::string - used by isRunningUnderWSL() below
 // My C / CPP HEADERS
-// #include "Logging.h"
+#include "Logging.h"
 
 #pragma endregion
 
@@ -49,93 +48,17 @@ const std::string DASH_LINE = "--------------------------";
 
 #pragma endregion
 
-#pragma region LOGGING_TEST
-
-namespace Logging
-{
-// #include "Logging.h"
-#include <assert.h>         // One of the LogType types https://en.cppreference.com/c/error/assert
-
-enum class LogType : int32_t
-{
-    LogType = -100,
-    INVALID = -1,
-    LOG = 0,
-    ERROR = 1,
-    ASSERT = 2,
-    COUNT = ASSERT + 1
-};
-
-// assigne default params at prototype level. Doing so at both prototype and
-//  implementation level throws an error. 
-bool ConsoleLog(Logging::LogType type, const char* logMessage, bool flush = true);
-std::string getLogTypeString(Logging::LogType type);
-
-
-std::string getLogTypeString(Logging::LogType type)
-{
-    switch(type)
-    {
-        case LogType::LogType:
-            return "LogType";
-        case LogType::INVALID:
-            return "INVALID";
-        case LogType::LOG:
-            return "LOG";
-        case LogType::ERROR:
-            return "ERROR";
-        case LogType::ASSERT:
-            return "ASSERT";
-        case LogType::COUNT:
-            return "COUNT";
-        default:
-            const std::string errorMessage = "Type for " + getLogTypeString(LogType::ERROR) + " is not implemented. May be invalid: " + getLogTypeString(type);
-            ConsoleLog(Logging::LogType::ERROR, errorMessage.c_str());
-            return "NON-IMPLEMENTED_TYPE";
-    }
-
-    Logging::ConsoleLog(LogType::ASSERT, "Switch statement faailed to break or return.");
-    return "FAILED";
-}
-
-// LATER wrap functionality around an #ifdef for DEBUG vs RELEASE
-bool ConsoleLog(Logging::LogType type, const char* logMessage, bool flush)
-{
-    switch(type)
-    {
-        case LogType::LOG:
-            std::cout << logMessage;
-            return true;
-        case LogType::ERROR:
-            std::cerr << logMessage;
-            return true;
-        case LogType::ASSERT:
-            assert(0 && logMessage);
-            return true;
-        default:
-            std::string errorMessage = getLogTypeString(type) + " is not an implemented " + getLogTypeString(LogType::LogType) + ". May be invalid.";
-            ConsoleLog(LogType::ERROR, errorMessage.c_str());
-            return false;
-    }
-
-    // Called after #ifdef NOT IMPLEMENTED YET
-    return false;
-}
-}
-
-#pragma endregion
-
-
-
 int main()
 {
-    Logging::ConsoleLog(Logging::LogType::LOG, ("STARTING PROGRAM\n" + DASH_LINE + "\n").c_str());
+    Logging::ConsoleLog(Logging::LogType::LOG, \
+        ("STARTING PROGRAM\n" + DASH_LINE + "\n").c_str());
 
     //-//////////////////////////////////////////////////////////////////////
     // 
     bool setupForWSL = setupWSL();
     std::string setupResultString = setupForWSL ? "TRUE" : "FALSE";
-    std::cout << "SETUP FOR WSL: " << setupResultString << std::endl;
+    Logging::ConsoleLog(Logging::LogType::LOG,
+        ("SETUP FOR WSL: " + setupResultString + "\n").c_str());
 
     //-////////////////////////////////////////////////////////////////////
     // glfwWindowHint call - sets data for hints for next glfwCreateWindow call. 
@@ -153,7 +76,8 @@ int main()
     // Initialize GLFW
     if (glfwInit() == false)
     {
-        std::cerr << DASH_LINE << "\nFailed to initialize GLFW\n" << DASH_LINE << std::endl;
+        Logging::ConsoleLog(Logging::LogType::ERROR,
+            (DASH_LINE + "\nFailed to initialize GLFW\n" + DASH_LINE).c_str());
         return -1;
     }
 
@@ -168,7 +92,8 @@ int main()
     GLFWwindow* window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
     if (window == NULL)
     {
-        std::cerr << DASH_LINE << "\nFailed to create GLFW window\n" << DASH_LINE << std::endl;
+        Logging::ConsoleLog(Logging::LogType::ERROR,
+            (DASH_LINE + "\nFailed to create GLFW window\n" + DASH_LINE).c_str());
         glfwTerminate();
         return -1;
     }
@@ -180,7 +105,8 @@ int main()
     // glfwGetProcAddress - defines the correct function based on which OS we're compiling for. 
     if (gladLoadGLLoader((GLADloadproc)glfwGetProcAddress) == false)
     {
-        std::cerr << DASH_LINE << "\nFailed to initialize GLAD\n" << DASH_LINE <<  std::endl;
+        Logging::ConsoleLog(Logging::LogType::ERROR,
+            (DASH_LINE + "\nFailed to initialize GLAD\n" + DASH_LINE).c_str());
         return -1;
     }   
 
@@ -239,7 +165,8 @@ int main()
     // 
     glfwTerminate();
 
-    std::cout << DASH_LINE << "\nENDING PROGRAM" << std::endl;
+    Logging::ConsoleLog(Logging::LogType::ERROR,
+        (DASH_LINE + "\nENDING PROGRAM\n").c_str());
     return 0;
 }
 
@@ -360,7 +287,8 @@ static const bool IsNullThenThrow(void* pointer, std::string typeStr)
 {
     if (pointer == NULL)
     {
-        Logging::ConsoleLog(Logging::LogType::ERROR, ("Pointer of type " + typeStr + "is null").c_str());
+        Logging::ConsoleLog(Logging::LogType::ERROR, 
+            ("Pointer of type " + typeStr + "is null").c_str());
         return true;
     }
 
