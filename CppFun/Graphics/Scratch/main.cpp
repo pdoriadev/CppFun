@@ -16,22 +16,26 @@
 #pragma region HEADERS
 
 // OPENGL-RELATED HEADERS
-//-//////////////////////////
-// glad
-// - manages function pointers for OpenGL
-#include "glad.h" // must include before GLFW
-#include <GLFW/glfw3.h>
-
-// CPP RELATED HEADERS
-#include <iostream>
+#include "glad.h"           // manages function pointers for OpenGL.  must include before GLFW
+#include <GLFW/glfw3.h>     // window/context creation, input, timing
+// C / CPP HEADERS
+#include <cctype>           // std::toupper, std::tolower
+#include <cstdlib>          // std::getenv -- used by isRunningUnderWSL() below
+#include <fstream>          // std::ifstream -- used by isRunningUnderWSL() below
+#include <iostream>         // std::iostream -- I/O
+#include <string>           // std::string - used by isRunningUnderWSL() below
 
 #pragma endregion
 
 #pragma region PROTOYTPES
 
-// CPP Prototypes
 // Is this a CPP prototype??? Cuz the naming is C-style??
+// GLFW prototypes
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+
+// CPP Prototypes
+bool setupWSL();
+bool isRunningUnderWSL();
 
 #pragma endregion
 
@@ -43,13 +47,13 @@ const char* DASH_LINE = "--------------------------";
 
 int main()
 {
-    std::cout << DASH_LINE << "\nSTARTING PROGRAM\n " << DASH_LINE << std::endl;
+    std::cout << "STARTING PROGRAM\n" << DASH_LINE << std::endl;
 
-    // Initialize GLFW
-    if (glfwInit() == false)
-    {
-        return -1;
-    } 
+    //-//////////////////////////////////////////////////////////////////////
+    // 
+    bool setupForWSL = setupWSL();
+    std::string setupResultString = setupForWSL ? "TRUE" : "FALSE";
+    std::cout << "SETUP FOR WSL: " << setupResultString << std::endl;
 
     //-////////////////////////////////////////////////////////////////////
     // glfwWindowHint call - sets data for hints for next glfwCreateWindow call. 
@@ -64,6 +68,13 @@ int main()
     // COMPATITIBILITY_PROFILE would expose backwards-compatible features: https://community.khronos.org/t/opengl-core-profile-and-opengl-compat-profile/108643
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
+    // Initialize GLFW
+    if (glfwInit() == false)
+    {
+        std::cerr << DASH_LINE << "\nFailed to initialize GLFW\n" << DASH_LINE << std::endl;
+        return -1;
+    }
+
     //-//////////////////////////////////////////////////////////////
     // glfwCreateWindow call. 
     //
@@ -75,7 +86,7 @@ int main()
     GLFWwindow* window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
     if (window == NULL)
     {
-        std::cout << "Failed to create GLFW window" << std::endl;
+        std::cerr << DASH_LINE << "\nFailed to create GLFW window\n" << DASH_LINE << std::endl;
         glfwTerminate();
         return -1;
     }
@@ -87,7 +98,7 @@ int main()
     // glfwGetProcAddress - defines the correct function based on which OS we're compiling for. 
     if (gladLoadGLLoader((GLADloadproc)glfwGetProcAddress) == false)
     {
-        std::cout << "Failed to initialize GLAD" << std::endl;
+        std::cerr << DASH_LINE << "\nFailed to initialize GLAD\n" << DASH_LINE <<  std::endl;
         return -1;
     }   
 
@@ -146,7 +157,7 @@ int main()
     // 
     glfwTerminate();
 
-    std::cout << DASH_LINE << "\nENDING PROGRAM\n" << DASH_LINE << std::endl;
+    std::cout << DASH_LINE << "\nENDING PROGRAM" << std::endl;
     return 0;
 }
 
@@ -167,4 +178,77 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
     glViewport(0, 0, width, height);
 }
 
+//-//////////////////////////////////////////////////
+// Called before any glfw calls, including glfwInit().
+// 
+bool setupWSL()
+{
+    //-//////////////////////////////////////////////
+    // WSL SETUP
+    // ---- Step 0: steer GLFW away from WSLg's buggy Wayland backend -----
+    // This MUST happen before glfwInit() -- GLFW_PLATFORM is an init hint,
+    // not something you can change once a window exists. GLFW_PLATFORM was
+    // added in GLFW 3.4; the #if keeps this file building against older
+    // GLFW too (it just silently skips the hint, so you'd still see the
+    // resize artifact on an old GLFW under WSL, but everything else works).
+    //
+    // ^ PROF'S NOTES ^
 
+#if defined(GLFW_VERSION_MAJOR) && (GLFW_VERSION_MAJOR > 3 || (GLFW_VERSION_MAJOR == 3 && GLFW_VERSION_MINOR >= 4))
+    // glfwPlatformSupported() also needs glfwInit() to *not* have run yet,
+    // so this whole check has to live right here. Belt-and-suspenders: only
+    // force X11 if this GLFW build actually has X11 support compiled in.
+    // 
+    // ^ PROF'S NOTES ^
+	
+    // are we under WSL, AND does this GLFW build support X11?
+    if (isRunningUnderWSL() && glfwPlatformSupported(GLFW_PLATFORM_X11)) 
+    {                                                      
+        // yes to both -- tell GLFW to use X11 instead of its default
+        glfwInitHint(GLFW_PLATFORM, GLFW_PLATFORM_X11);  
+        return true;
+    }
+
+    return false;
+#endif
+}
+
+/* *************************************************** */
+// =============================================================================
+// PLATFORM DETECTION (Linux/WSL only -- a no-op on Windows/macOS)
+// =============================================================================
+// On Linux, GLFW can talk to the window system through either the X11 or
+// Wayland backend. Under WSLg (WSL's built-in display server), the Wayland
+// backend has a known bug: a window's surface doesn't get resized when you
+// maximize it or make it fullscreen, so the rendered image stays clipped to
+// its old size while the window itself grows -- an ugly "frozen" artifact.
+// The X11 backend doesn't have this bug, and WSLg supports both, so the fix
+// is simply: under WSL specifically, ask GLFW to use X11 instead of letting
+// it default to Wayland. Everywhere else (a real Linux desktop, Windows,
+// macOS) we leave GLFW's own default alone, since the bug is a WSLg quirk,
+// not a general Wayland problem.
+//
+// Returns true if this process is running inside Windows Subsystem for
+// Linux. WSL sets one of a couple of environment variables in every
+// process; if neither is present we fall back to checking /proc/version,
+// which WSL's kernel always stamps with "microsoft".
+//
+//  ^ PROF'S NOTES ^
+bool isRunningUnderWSL() 
+{
+    // Check environment variables first
+    if (std::getenv("WSL_DISTRO_NAME") != nullptr) return true; // set by WSL for every process -- fastest check first
+    if (std::getenv("WSL_INTEROP") != nullptr) return true;     // another WSL-specific environment variable, as a backup
+
+    // Check for "microsoft" stamp on the linux kernel version. 
+    std::ifstream versionFile("/proc/version"); // open the kernel version file (Linux-specific, always readable)
+    if (versionFile) {                          // did it open successfully?
+        std::string contents((std::istreambuf_iterator<char>(versionFile)), // read the ENTIRE file into one string...
+                              std::istreambuf_iterator<char>());            // ...using the "range constructor" idiom
+        for (char& c : contents) {              // walk every character in the file's contents, by reference
+            c = static_cast<char>(std::tolower(static_cast<unsigned char>(c))); // lowercase it in place, for a case-insensitive search
+        }
+        if (contents.find("microsoft") != std::string::npos) return true; // WSL's kernel version string always contains "microsoft"
+    }
+    return false; // none of the WSL signals were present -- probably not running under WSL
+}
