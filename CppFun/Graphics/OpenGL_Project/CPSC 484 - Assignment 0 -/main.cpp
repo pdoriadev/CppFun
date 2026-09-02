@@ -154,7 +154,7 @@ HERE
 
 frag shader
 - for every pixel
-
+0
 main()
 {
     HERE
