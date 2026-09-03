@@ -19,30 +19,33 @@ int* generateInt()
 	return x;
 }
 
-int* updatePtr()
+// passing by reference.
+bool updatePtr(int& outInt)
 {
-	int* y = generateInt();
-	if (y == NULL)
+	// assigning reference's address to the address of an int ptr returned from another function
+	outInt = *generateInt();
+	if (&outInt == NULL)
 	{
 		std::cout << "int ptr is null in local function." << std::endl;
+		return false;	
 	}
 
-	return y; 
+	return true; 
 }
 
 int main()
 {
-	bool result;
-	int* z;
-	z = updatePtr();
-	if(z == NULL)
+	bool result = false;
+	int z; // default initialization
+	result = updatePtr(z);
+	if(&z == NULL)
 	{
 		return -1;
 		std::cout << "int ptr is null in main()" << std::endl;
 		return -1;
 	}
 
-	std::cout << "int ptr's value in main(): " << *z << std::endl;
+	std::cout << "int ptr's value in main(): " << z << std::endl;
 	std::cout << "bool result value: " << result << std::endl;
 
 	return 0;
