@@ -37,7 +37,10 @@ void framebuffer_size_callback(GLFWwindow*, int, int);
 // CPP Prototypes
 bool setupWSL();
 bool isRunningUnderWSL();
-bool processInput();
+bool InitStep1();
+bool InitStep2_WindowAndViewport(GLFWwindow* window_close);;
+bool processInput(GLFWwindow*);
+
 static const bool IsNullPtr(void*, const std::string);
 
 #pragma endregion
@@ -52,7 +55,88 @@ int main()
 {
     Logging::ConsoleLog(Logging::LogType::LOG, \
         ("STARTING PROGRAM\n" + DASH_LINE + "\n").c_str());
+        
+    InitStep1();
 
+    //-//////////////////////////////////////////////////////////////
+    // glfwCreateWindow call. - https://www.glfw.org/docs/latest/group__window.html#ga3555a418df92ad53f917597fe2f64aeb
+    //
+    // param 1 - width (columns)
+    // param 2 - height (rows)
+    // param 3 - window name
+    // param 4 - ? 
+    // param 5 - ?
+    GLFWwindow* window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
+    if (IsNullPtr(window, "GLFWwindow"))
+    {
+        Logging::ConsoleLog(Logging::LogType::ASSERT,
+            (DASH_LINE + "\nFailed to create GLFW window\n" + DASH_LINE).c_str());
+        glfwTerminate();
+        return -1;
+    }
+
+    InitStep2_WindowAndViewport(window);
+    
+    //-/////////////////////////////////////////////
+    // RENDER LOOP
+    //
+    // glfwWindowShouldClose() call
+    // - returns a flag. If true, do we close the window manually???? Or does glfw handle that??
+    // ?? how is the flag set/determined ??
+    double color = 0;
+    while (glfwWindowShouldClose(window) == false)
+    {
+        color += 0.01;
+        if (color >= 1)
+        {
+            color = 0;
+        }
+        glClearColor(color, color, color, color);
+        // Are we only ever actively drawing/updating settings for the buffer we can't see?
+        // Or actually, both buffers probably share the came COLOR_BUFFER, but only one is
+        // updated at a time based on that data. 
+        glClear(GL_COLOR_BUFFER_BIT);
+        processInput(window);
+
+        // glfwSwapBuffers call
+        // swaps the new buffer to the screen.
+        // ?? waits until fully drawn ??
+        glfwSwapBuffers(window);
+        // glfwPollEvents call
+        // Checks for inputs. 
+        glfwPollEvents();
+    }
+
+    //-/////////////////////////////////////////////
+    // CLEAN-UP - clean/delete allocated GLFW resources
+    // 
+    // glfwTerminate()
+    //      - Destroys remaining windows
+    //      - Frees allocated resources
+    //      - Sets library data to an uninitialized state
+    // After calling glfwTerminate(), call glfwInit to use GLFW functions again.
+    // Call glfw whenever exiting the render loop
+    //      ?? What if there are multiple viewports / windows ??
+    //      ?? Will terminating kill those viwports / windows, too? ?? 
+    // 
+    glfwTerminate();
+
+    Logging::ConsoleLog(Logging::LogType::LOG,
+        (DASH_LINE + "\nENDING PROGRAM\n").c_str());
+
+    return 0;
+}
+
+#pragma region INITIALIZATION
+
+//-///////////////////////////////////////////////////////
+// WSL
+// WindowHints 
+//      (OpenGL version for GLFW to use)
+//      CORE or COMPATIBILITY profile
+// Init glfw
+bool InitStep1()
+{
     //-//////////////////////////////////////////////////////////////////////
     // 
     bool setupForWSL = setupWSL();
@@ -65,7 +149,8 @@ int main()
     // - param 1 - select option from possible options prefixed with GLFW_.
     //      - full list of options found here: http://www.glfw.org/docs/latest/window.html#window_hints
     // - param 2 - integer. sets the value of our option. 
-    // sets to OPENGL version 3.3
+    //
+    // Together, sets to OPENGL version 3.3
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 
@@ -74,29 +159,23 @@ int main()
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     // Initialize GLFW
-    if (glfwInit() == false)
+    if (glfwInit())
     {
-        Logging::ConsoleLog(Logging::LogType::ERROR,
-            (DASH_LINE + "\nFailed to initialize GLFW\n" + DASH_LINE).c_str());
-        return -1;
+        Logging::ConsoleLog(Logging::LogType::LOG,
+            ("INITIALIZED: TRUE\n"));
+    }
+    else
+    {
+        Logging::ConsoleLog(Logging::LogType::ASSERT,
+            ("INITIALIZED: FALSE\n" + DASH_LINE).c_str());
+        return false;
     }
 
-    //-//////////////////////////////////////////////////////////////
-    // glfwCreateWindow call. 
-    //
-    // param 1 - width (columns)
-    // param 2 - height (rows)
-    // param 3 - window name
-    // param 4 - ?
-    // param 5 - ?
-    GLFWwindow* window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
-    if (window == NULL)
-    {
-        Logging::ConsoleLog(Logging::LogType::ERROR,
-            (DASH_LINE + "\nFailed to create GLFW window\n" + DASH_LINE).c_str());
-        glfwTerminate();
-        return -1;
-    }
+    return true;
+}
+
+bool InitStep2_WindowAndViewport(GLFWwindow* window)
+{
     // make the created window the current context. 
     glfwMakeContextCurrent(window);
 
@@ -105,9 +184,9 @@ int main()
     // glfwGetProcAddress - defines the correct function based on which OS we're compiling for. 
     if (gladLoadGLLoader((GLADloadproc)glfwGetProcAddress) == false)
     {
-        Logging::ConsoleLog(Logging::LogType::ERROR,
+        Logging::ConsoleLog(Logging::LogType::ASSERT,
             (DASH_LINE + "\nFailed to initialize GLAD\n" + DASH_LINE).c_str());
-        return -1;
+        return false;
     }   
 
     //-/////////////////////////////////////////////////////////////////////////
@@ -133,42 +212,11 @@ int main()
     //
     // The viewport dimensions can be smaller than the window. 
     glViewport(0, 0, 800, 600);
-
-    //-/////////////////////////////////////////////
-    // RENDER LOOP
-    //
-    // glfwWindowShouldClose() call
-    // - returns a flag. If true, do we close the window manually???? Or does glfw handle that??
-    // ?? how is the flag set/determined ??
-    while (glfwWindowShouldClose(window) == false)
-    {
-        // glfwSwapBuffers call
-        // swaps the new buffer to the screen.
-        // ?? waits until fully drawn ??
-        glfwSwapBuffers(window);
-        // glfwPollEvents call
-        // Checks for inputs. 
-        glfwPollEvents();
-    }
-
-    //-/////////////////////////////////////////////
-    // CLEAN-UP - clean/delete allocated GLFW resources
-    // 
-    // glfwTerminate()
-    //      - Destroys remaining windows
-    //      - Frees allocated resources
-    //      - Sets library data to an uninitialized state
-    // After calling glfwTerminate(), call glfwInit to use GLFW functions again.
-    // Call glfw whenever exiting the render loop
-    //      ?? What if there are multiple viewports / windows ??
-    //      ?? Will terminating kill those viwports / windows, too? ?? 
-    // 
-    glfwTerminate();
-
-    Logging::ConsoleLog(Logging::LogType::ERROR,
-        (DASH_LINE + "\nENDING PROGRAM\n").c_str());
-    return 0;
+    
+    return true;
 }
+
+#pragma endregion
 
 #pragma region RENDER_LOOP_HELPERS
 
@@ -180,13 +228,20 @@ bool processInput(GLFWwindow *window)
     if (IsNullPtr(window, "GLFWwindow")) return false;
 
     //-/////////////////////////////////////////////
-    // glfwGetKey()
+    // glfwGetKey() - https://www.glfw.org/docs/latest/input_guide.html#input_key  
     // param 1 - GLFWwindow pointer.
     // param 2 - A keycode macro. Full list: https://www.glfw.org/docs/latest/group__keys.html 
     // 
-    // returns a key action. See: https://www.glfw.org/docs/latest/input_guide.html#input_key 
+    // returns a key action.
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
     {
+        //-//////////////////////////////////////// 
+        // glfwSetWindowShouldClose() - https://www.glfw.org/docs/latest/group__window.html#ga49c449dde2a6f87d996f4daaa09d6708
+        // Sets the close flag on the specified window. Can override the user, or signal the window should be closed.
+        // param 1 - pointer to a GLFWwindow. 
+        // param 2 - int. ?? Is passing a non-zero/one value undefined?
+        // returns - void.
+        // Closing and Close flag - Closing and close flag: https://www.glfw.org/docs/latest/window_guide.html#window_close
         glfwSetWindowShouldClose(window, true);
         return true;
     }
