@@ -13,9 +13,9 @@ namespace Logging
         LogType = -100,
         INVALID = -1,
         LOG = 0,
-        ERROR = 1,
-        ASSERT = 2,
-        COUNT = ASSERT + 1
+        ERROR = 10,
+        ASSERT = 20,
+        COUNT = ASSERT + 10
     };
     
     std::string getLogTypeString(Logging::LogType type);

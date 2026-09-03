@@ -4,7 +4,7 @@
 //-/////////////////////////////////////////////////////////////////////
 // BUILDING THIS PROGRAM FROM COMMAND LINE
 // Use g++ since we're using Cpp.
-// Add main.cpp and glad.c as source targets.
+// Add main.cpp and glad.c as source targets. Add any other source targets. 
 // -o param to create objects
 // executable name
 // link GLAD and GLFW libraries
