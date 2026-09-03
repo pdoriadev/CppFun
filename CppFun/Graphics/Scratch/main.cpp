@@ -38,7 +38,7 @@ void framebuffer_size_callback(GLFWwindow*, int, int);
 bool setupWSL();
 bool isRunningUnderWSL();
 bool processInput();
-static const bool IsNullThenThrow(void*, const std::string);
+static const bool IsNullPtr(void*, const std::string);
 
 #pragma endregion
 
@@ -170,6 +170,32 @@ int main()
     return 0;
 }
 
+#pragma region RENDER_LOOP_HELPERS
+
+//-///////////////////////////////////////////
+// Called in main()'s RENDER LOOP.
+// 
+bool processInput(GLFWwindow *window)
+{
+    if (IsNullPtr(window, "GLFWwindow")) return false;
+
+    //-/////////////////////////////////////////////
+    // glfwGetKey()
+    // param 1 - GLFWwindow pointer.
+    // param 2 - A keycode macro. Full list: https://www.glfw.org/docs/latest/group__keys.html 
+    // 
+    // returns a key action. See: https://www.glfw.org/docs/latest/input_guide.html#input_key 
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+    {
+        glfwSetWindowShouldClose(window, true);
+        return true;
+    }
+
+    return false;
+}
+
+#pragma endregion
+
 //-////////////////////////////////////////////////////////////////////////
 // framebuffer_size_callback
 // 
@@ -186,6 +212,8 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
     // Register a callback. 
     glViewport(0, 0, width, height);
 }
+
+#pragma region WSL_FUNCTIONS
 
 //-//////////////////////////////////////////////////
 // Called before any glfw calls, including glfwInit().
@@ -262,28 +290,13 @@ bool isRunningUnderWSL()
     return false; // none of the WSL signals were present -- probably not running under WSL
 }
 
-//-///////////////////////////////////////////
-// Called in main()'s RENDER LOOP.
-// 
-bool processInput(GLFWwindow *window)
-{
-    IsNullThenThrow(window, "GLFWwindow");
+#pragma endregion
 
-    //-/////////////////////////////////////////////
-    // glfwGetKey()
-    // param 1 - GLFWwindow pointer.
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-    {
-        glfwSetWindowShouldClose(window, true);
-        return true;
-    }
-
-    return false;
-}
+#pragma region UTIL_FUNCTIONS
 
 //-///////////////////////////////////////////////
 //
-static const bool IsNullThenThrow(void* pointer, std::string typeStr)
+static const bool IsNullPtr(void* pointer, std::string typeStr)
 {
     if (pointer == NULL)
     {
@@ -295,3 +308,4 @@ static const bool IsNullThenThrow(void* pointer, std::string typeStr)
     return false;
 }
 
+#pragma endregion
