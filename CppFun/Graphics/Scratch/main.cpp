@@ -16,8 +16,8 @@
 #pragma region HEADERS
 
 // OPENGL-RELATED HEADERS
-#include "glad.h"           // manages function pointers for OpenGL.  must include before GLFW
-#include <GLFW/glfw3.h>     // window/context creation, input, timing
+#include "glad.h"           // Function pointers to hardware implementation of OpenGL. Must include before GLFW
+#include <GLFW/glfw3.h>     // Window + Input Library - window/context creation, input, timing
 // C / CPP HEADERS
 #include <cctype>           // std::toupper, std::tolower
 #include <cstdlib>          // std::getenv -- used by isRunningUnderWSL() below
@@ -84,14 +84,16 @@ int main()
     // - returns a flag. If true, do we close the window manually???? Or does glfw handle that??
     // ?? how is the flag set/determined ??
     double color = 0;
+    double adder = 0.001f;
     while (glfwWindowShouldClose(window) == false)
     {
-        color += 0.01;
-        if (color >= 1)
+        color += adder;
+        if (color >= 1 || color < 0)
         {
-            color = 0;
+            adder *= -1.0f;
         }
-        glClearColor(color, color, color, color);
+
+        glClearColor(color, color * 0.5f, color * 0.5f, color * 0.5f);
         // Are we only ever actively drawing/updating settings for the buffer we can't see?
         // Or actually, both buffers probably share the came COLOR_BUFFER, but only one is
         // updated at a time based on that data. 
