@@ -61,26 +61,29 @@ const std::string DASH_LINE = "--------------------------";
 
 #pragma region SHADER_SOURCE_STRUCTS_FUNCTIONS
 const char* vertexShaderSource =  R"GLSL(
-// OpenGL version to run the shader
 #version 330 core
+// OpenGL version to run the shader
 // layout?? location??
 // in is input vector data.
-layout (location = 0) in vec3 a;
+layout (location = 0) in vec3 aPos;
 
 void main()
 {
-    // gl_Position is a predefined variable. 
-    //      ?? Used for each vertex that passes through the vertex shader??
-    gl_Position(a.X, a.Y, a.Z, 1.0f);
-})GLSL";
+    // Note from Assignment_0
+    // gl_Position is a special built-in output: OpenGL reads it to know
+    // where this vertex lands on screen (in clip space).
+    gl_Position = vec4(aPos, 1.0);
+}
+)GLSL";
 
 const char* fragmentShaderSource = R"GLSL(
 #version 330 core
 out vec4 fragColor;
 void main()
 {
-    fragColor = vec4(0.2f, 1f, 0.5f, 1.0f);
-})GLSL";
+    fragColor = vec4(0.2, 1, 0.5, 1.0);
+}
+)GLSL";
 
 struct CompileShaderParams
 {
