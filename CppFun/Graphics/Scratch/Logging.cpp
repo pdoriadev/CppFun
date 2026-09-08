@@ -36,12 +36,36 @@ namespace Logging
     }
 
     //-//////////////////////////////////
+    //
+    bool isValidLogType(LogType type)
+    {
+        switch(type)
+        {
+            case LogType::LOG:
+                return true;
+            case LogType::ERROR:
+                return true;
+            case LogType::ASSERT:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    //-//////////////////////////////////
     // LATER wrap functionality around an #ifdef for DEBUG vs RELEASE
     bool consoleLog(LogType type, std::string logMessage, bool flush)
-    {
+    {       
+        if (isValidLogType(type) == false)
+        {
+            std::string errorMessage = getLogTypeString(type) + " is not an implemented " + getLogTypeString(LogType::LogType) + ". May be invalid.";
+            consoleLog(LogType::ERROR, errorMessage);
+            return false;
+        }
+
         std::string typeStr = getLogTypeString(type);
         logMessage.insert(0, typeStr + ": ");
-        
+
         openLogFileIfClosed();
         outputToLogFile(type, logMessage, flush);
 
@@ -58,12 +82,13 @@ namespace Logging
                 assert((logMessage.c_str()) && false);
                 return true;
             default:
+                // This *SHOULD* be impossible to hit given the isValid check earlier.
                 std::string errorMessage = getLogTypeString(type) + " is not an implemented " + getLogTypeString(LogType::LogType) + ". May be invalid.";
                 consoleLog(LogType::ERROR, errorMessage);
                 return false;
         }
 
-        // Called after #ifdef NOT IMPLEMENTED YET
+        // Called after #ifdef wraps everything before this. NOT IMPLEMENTED YET
         return false;
     }
 

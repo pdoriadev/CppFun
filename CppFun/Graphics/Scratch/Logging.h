@@ -24,6 +24,10 @@ namespace Logging
     //-//////////////////////////////////
     //
     std::string getLogTypeString(LogType type);
+    
+    //-//////////////////////////////////
+    //
+    bool isValidLogType(LogType type);
 
     //-//////////////////////////////////
     // NOTE: assigns default params at prototype level. Assigning in prototypeand implementation throws an error. 
