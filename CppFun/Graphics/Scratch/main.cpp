@@ -128,7 +128,8 @@ bool compileShader(CompileShaderParams params)
     if (params.refToShaderID == 0)
     {
         // TODO - add additional info for the shadersource. etc.
-        Logging::consoleLog(Logging::LogType::ASSERT, (std::string("ERROR: glCreateShader returned 0.\n Shader Type: ") + std::to_string(params.shaderType)).c_str());
+        Logging::consoleLog(Logging::LogType::ASSERT, 
+            std::string("ERROR: glCreateShader returned 0.\n Shader Type: ") + std::to_string(params.shaderType));
     }
     // use strcat to concatenate the char * with the string. 
 
@@ -378,7 +379,7 @@ bool InitStep1()
     bool setupForWSL = setupWSL();
     std::string setupResultString = setupForWSL ? "TRUE" : "FALSE";
     Logging::consoleLog(Logging::LogType::LOG,
-        ("SETUP FOR WSL: " + setupResultString + "\n").c_str());
+        "SETUP FOR WSL: " + setupResultString);
 
     //-////////////////////////////////////////////////////////////////////
     // glfwWindowHint call - sets data for hints for next glfwCreateWindow call. 
@@ -398,7 +399,7 @@ bool InitStep1()
     if (glfwInit())
     {
         Logging::consoleLog(Logging::LogType::LOG,
-            ("INITIALIZED: TRUE\n"));
+            ("INITIALIZED: TRUE"));
     }
     else
     {

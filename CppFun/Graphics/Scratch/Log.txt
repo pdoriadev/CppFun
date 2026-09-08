@@ -2,9 +2,7 @@ LOG: STARTING PROGRAM
 --------------------------
 
 LOG: SETUP FOR WSL: TRUE
-
 LOG: INITIALIZED: TRUE
-
 ASSERT: ERROR::SHADER::COMPILATION_FAILED
 0:12(14): error: invalid swizzle / mask `X'
 0:12(14): error: type mismatch
