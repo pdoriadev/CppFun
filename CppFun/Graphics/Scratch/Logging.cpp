@@ -40,8 +40,9 @@ namespace Logging
     bool consoleLog(LogType type, std::string logMessage, bool flush)
     {
         std::string typeStr = getLogTypeString(type);
-        logMessage.insert(0, "LOG TYPE '" + typeStr + "': ");
-
+        logMessage.insert(0, typeStr + ": ");
+        
+        openLogFileIfClosed();
         outputToLogFile(type, logMessage, flush);
 
         switch(type)
@@ -54,7 +55,7 @@ namespace Logging
                 return true;
             case LogType::ASSERT:
                 closeLogFileIfOpen();
-                assert(0 && logMessage.c_str());
+                assert((logMessage.c_str()) && false);
                 return true;
             default:
                 std::string errorMessage = getLogTypeString(type) + " is not an implemented " + getLogTypeString(LogType::LogType) + ". May be invalid.";
@@ -72,7 +73,17 @@ namespace Logging
     {
         if (logFile.is_open()) return false;
 
-        logFile.open("Log.txt");
+        const std::string logFileName = "Log.txt";
+        //std::cout << "Attempting to open log file: " << logFileName << std::endl;
+        logFile.open(logFileName, std::fstream::out); // https://stackoverflow.com/questions/8835888/stdfstream-doesnt-create-file
+
+        if (logFile.is_open() == false)
+        {
+            const std::string errorMessage = "Failed to open log file: " + logFileName;
+            std::cerr << errorMessage << std::endl;
+            assert((errorMessage, false));
+        }
+
         return true;
     }
 
@@ -82,6 +93,7 @@ namespace Logging
     {
         if (logFile.is_open() == false) return false;
 
+        consoleLog(LogType::LOG, "Closing log file");
         logFile.close();
         return true;
     }
