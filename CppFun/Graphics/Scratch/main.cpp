@@ -101,7 +101,8 @@ struct CompileShaderParams
             case GL_FRAGMENT_SHADER:
                 break;
             default:
-                ConsoleLogStr(Logging::LogType::ASSERT, std::to_string(_shaderType) + " does not match a valid shader type. See: https://registry.khronos.org/OpenGL-Refpages/gl4/html/glCreateShader.xhtml");
+                ConsoleLogStr(Logging::LogType::ASSERT, 
+                    std::to_string(_shaderType) + " does not match a valid shader type. See: https://registry.khronos.org/OpenGL-Refpages/gl4/html/glCreateShader.xhtml");
                 shaderType = 0;
                 ptrToShaderSource = NULL;
                 isInitialized = false;
@@ -268,8 +269,6 @@ bool setupShaderProgram()
     return true;
 }
 
-
-
 #pragma endregion
 
 int main()
@@ -331,8 +330,6 @@ int main()
     // ?? how is the flag set/determined ??
     while (glfwWindowShouldClose(window) == false)
     {
-        
-
         processInput(window);
 
         // glfwSwapBuffers call
@@ -565,7 +562,7 @@ bool processInput(GLFWwindow *window)
         // param 1 - pointer to a GLFWwindow. 
         // param 2 - int. ?? Is passing a non-zero/one value undefined?
         // returns - void.
-        // Closing and Close flag - Closing and close flag: https://www.glfw.org/docs/latest/window_guide.html#window_close
+        // Closing and Close flag - https://www.glfw.org/docs/latest/window_guide.html#window_close
         glfwSetWindowShouldClose(window, true);
         return true;
     }
