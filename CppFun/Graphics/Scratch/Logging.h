@@ -18,8 +18,10 @@ namespace Logging
         COUNT = ASSERT + 10
     };
     
-    std::string getLogTypeString(Logging::LogType type);
+    std::string getLogTypeString(LogType type);
     // assign default params at prototype level. Doing so at both prototype and
     //  implementation level throws an error. 
-    bool ConsoleLog(Logging::LogType type, const char* logMessage, bool flush = true);
+    bool ConsoleLog(LogType type, const char* logMessage, bool flush = true);
+    // wrapper for ConsoleLog.
+    bool ConsoleLogStr(LogType type, std::string logMessage, bool flush = true);
 }

@@ -1,5 +1,6 @@
 // Last LearnOpenGL page - https://learnopengl.com/Getting-started/Hello-Window
 // GLSL Data Type page - https://wikis.khronos.org/opengl/Data_Type_(GLSL) 
+// OpenGL Enums Cheatsheet - https://loshkinoleg.github.io/cheatsheets/OpenGL_Enums_Cheatsheet 
 
 //-/////////////////////////////////////////////////////////////////////
 // BUILDING THIS PROGRAM FROM COMMAND LINE
@@ -13,6 +14,7 @@
 //      -lGL ?? links OpenGL ??
 //      -ldl ?? what does this link ??
 
+#include <cstddef>
 #pragma region HEADERS
 
 // OPENGL-RELATED HEADERS
@@ -46,13 +48,13 @@ static const bool IsNullPtr(void*, const std::string);
 #pragma endregion
 
 #pragma region FIELDS
-enum Platform
+enum Platform : int32_t
 {
     UNKNOWN = -1,
-    LINUX = 0
+    LINUX = 0,
     WSL = 1
 };
-Platform platform = Platform.UNKNOWN;
+Platform platform = Platform::UNKNOWN;
 
 const std::string DASH_LINE = "--------------------------";
 #pragma endregion
@@ -78,18 +80,19 @@ out vec4 fragColor;
 void main()
 {
     fragColor = vec4(0.2f, 1f, 0.5f, 1.0f);
-})GLSL"
+})GLSL";
 
 struct CompileShaderParams
 {
     bool isInitialized = false;
     unsigned int shaderType;
     const char* ptrToShaderSource;
-    unsigned int& refToOutShader;
+    unsigned int& refToShaderID;
 
     CompileShaderParams(unsigned int _shaderType, 
         const char* _ptrToShaderSource,
-        unsigned int& _refToOutShader)
+        unsigned int& _refToShaderID) 
+        : refToShaderID(_refToShaderID) // explicitly initialize reference. https://stackoverflow.com/questions/19576458/constructor-for-must-explicitly-initialize-the-reference-member
     {
         switch(_shaderType)
         {
@@ -98,15 +101,20 @@ struct CompileShaderParams
             case GL_FRAGMENT_SHADER:
                 break;
             default:
-                ConsoleLog(Logging::LogType::ASSERT, _shaderType + " does not match a valid shader type. See: https://registry.khronos.org/OpenGL-Refpages/gl4/html/glCreateShader.xhtml");
+                ConsoleLogStr(Logging::LogType::ASSERT, std::to_string(_shaderType) + " does not match a valid shader type. See: https://registry.khronos.org/OpenGL-Refpages/gl4/html/glCreateShader.xhtml");
+                shaderType = 0;
+                ptrToShaderSource = NULL;
+                isInitialized = false;
                 return;
         }
+
+        shaderType = _shaderType;
 
         // TODO Needs validation. Skipping for now. 
         ptrToShaderSource = _ptrToShaderSource;
 
         // Do I need validation here??
-        refToOutShader = _refToOutShader;
+        refToShaderID = _refToShaderID;
 
         isInitialized = true;
     }
@@ -115,12 +123,11 @@ struct CompileShaderParams
 bool compileShader(CompileShaderParams params)
 {
     // Create a shader object of given type. Returns the object's id.
-    params.refToOutShader = glCreateShader(params.shaderType);
-    if (refToOutShader == 0)
+    params.refToShaderID = glCreateShader(params.shaderType);
+    if (params.refToShaderID == 0)
     {
         // TODO - add additional info for the shadersource. etc.
-        Logging::ConsoleLog(Logging::LogType::ASSERT, "ERROR: glCreateShader returned 0." + \
-                                                    "\nShader Type: " + params.shaderType);
+        Logging::ConsoleLog(Logging::LogType::ASSERT, (std::string("ERROR: glCreateShader returned 0.\n Shader Type: ") + std::to_string(params.shaderType)).c_str());
     }
     // use strcat to concatenate the char * with the string. 
 
@@ -130,17 +137,17 @@ bool compileShader(CompileShaderParams params)
     // param 3 - const char**. shader source code
     // param 4 - length of source code string. nullptr - no explicit length
     // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glShaderSource.xhtml 
-    glShaderSource(params.refToOutShader, 1, &params.ptrToShaderSource, NULL);
+    glShaderSource(params.refToShaderID, 1, &params.ptrToShaderSource, NULL);
 
-    glCompileShader(params.refToOutShader);
+    glCompileShader(params.refToShaderID);
 
     // Copied and updated from Assignment_0 
     int success;                                       // will hold GL_TRUE/GL_FALSE after the check below
     char infoLog[512];                                  // buffer to hold any compiler error message
-    glGetShaderiv(shader, GL_COMPILE_STATUS, &success); // ask OpenGL: did it compile successfully?
+    glGetShaderiv(params.refToShaderID, GL_COMPILE_STATUS, &success); // ask OpenGL: did it compile successfully?
     if (!success) {                                     // it didn't --
-        glGetShaderInfoLog(shader, 512, nullptr, infoLog); // ask the driver *why not*, into infoLog
-        Logging::ConsoleLog(Logging::LogType::ASSERT, "ERROR::SHADER::COMPILATION_FAILED\n" + infoLog); // print the reason
+        glGetShaderInfoLog(params.refToShaderID, 512, nullptr, infoLog); // ask the driver *why not*, into infoLog
+        Logging::ConsoleLogStr(Logging::LogType::ASSERT, std::string("ERROR::SHADER::COMPILATION_FAILED\n") + std::string(infoLog)); // print the reason
         return false;
     }
 
@@ -150,7 +157,7 @@ bool compileShader(CompileShaderParams params)
 bool setupShaderProgram()
 {
     // Create vertex shader object
-    unsigned int& vertexShaderID;
+    unsigned int vertexShaderID;
     {
         CompileShaderParams vertexParams = CompileShaderParams(
             GL_VERTEX_SHADER, 
@@ -160,13 +167,13 @@ bool setupShaderProgram()
     }
 
     // Create frag shader object
-    unsigned int& fragmentShaderID;
+    unsigned int fragmentShaderID;
     {
         CompileShaderParams fragParams = CompileShaderParams(
             GL_FRAGMENT_SHADER,
             fragmentShaderSource,
             fragmentShaderID);
-        compileShader(fragmentShaderID);
+        compileShader(fragParams);
     }
 
     // Create program object. 
@@ -237,13 +244,13 @@ bool setupShaderProgram()
         //      - C - Info about the last validate operation.
         // - A program object's info log is empty at creation.
         // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGetProgramInfoLog.xhtml
-        char[2048] logBuffer;
+        char logBuffer[2048];
         glGetProgramInfoLog(
             shaderProgramID, 
             2047,
             NULL,
             logBuffer);
-        Logging::ConsoleLog(Logging::LogType::LOG, "PROGRAM INFO LOG AFTER LINKING:\n".c_str());
+        Logging::ConsoleLog(Logging::LogType::LOG, "PROGRAM INFO LOG AFTER LINKING:\n");
         Logging::ConsoleLog(Logging::LogType::LOG, logBuffer);
         Logging::ConsoleLog(Logging::LogType::LOG, "\nEND OF PROGRAM INFO LOG\n");
 
@@ -478,10 +485,10 @@ bool setupWSL()
     // are we under WSL, AND does this GLFW build support X11?
     if (isRunningUnderWSL())
     {
-        platform = PLATFORM.WSL;
+        platform = Platform::WSL;
     }
     
-    if (platform == PLATFORM.WSL && glfwPlatformSupported(GLFW_PLATFORM_X11)) 
+    if (platform == Platform::WSL && glfwPlatformSupported(GLFW_PLATFORM_X11)) 
     {                                                      
         // yes to both -- tell GLFW to use X11 instead of its default
         glfwInitHint(GLFW_PLATFORM, GLFW_PLATFORM_X11);  
@@ -606,7 +613,7 @@ bool colorLoop()
     // A *state-using* function
     glClear(GL_COLOR_BUFFER_BIT);
 
-    
+    return true;
 }
 
 #pragma region UTIL_FUNCTIONS

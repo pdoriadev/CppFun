@@ -53,4 +53,9 @@ namespace Logging
         // Called after #ifdef NOT IMPLEMENTED YET
         return false;
     }
+
+    bool ConsoleLogStr(LogType type, std::string logMessage, bool flush)
+    {
+        return ConsoleLog(type, logMessage.c_str(), flush);
+    }
 }
