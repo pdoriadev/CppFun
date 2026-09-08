@@ -1,10 +1,15 @@
-#include "Logging.h"
+    #include "Logging.h"
 #include <assert.h>         // One of the LogType types https://en.cppreference.com/c/error/assert
 #include <iostream>
+#include <fstream>
 
 namespace Logging
 {
-    std::string getLogTypeString(Logging::LogType type)
+    std::fstream logFile;
+
+    //-//////////////////////////////////
+    //
+    std::string getLogTypeString(LogType type)
     {
         switch(type)
         {
@@ -22,17 +27,23 @@ namespace Logging
                 return "COUNT";
             default:
                 const std::string errorMessage = "Type for " + getLogTypeString(LogType::ERROR) + " is not implemented. May be invalid: " + getLogTypeString(type);
-                ConsoleLog(Logging::LogType::ERROR, errorMessage.c_str());
+                consoleLog(LogType::ERROR, errorMessage.c_str());
                 return "NON-IMPLEMENTED_TYPE";
         }
 
-        Logging::ConsoleLog(LogType::ASSERT, "Switch statement faailed to break or return.");
+        consoleLog(LogType::ASSERT, "Switch statement faailed to break or return.");
         return "FAILED";
     }
 
+    //-//////////////////////////////////
     // LATER wrap functionality around an #ifdef for DEBUG vs RELEASE
-    bool ConsoleLog(Logging::LogType type, const char* logMessage, bool flush)
+    bool consoleLog(LogType type, std::string logMessage, bool flush)
     {
+        std::string typeStr = getLogTypeString(type);
+        logMessage.insert(0, "LOG TYPE '" + typeStr + "': ");
+
+        outputToLogFile(type, logMessage, flush);
+
         switch(type)
         {
             case LogType::LOG:
@@ -42,11 +53,12 @@ namespace Logging
                 std::cerr << logMessage;
                 return true;
             case LogType::ASSERT:
-                assert(0 && logMessage);
+                closeLogFileIfOpen();
+                assert(0 && logMessage.c_str());
                 return true;
             default:
                 std::string errorMessage = getLogTypeString(type) + " is not an implemented " + getLogTypeString(LogType::LogType) + ". May be invalid.";
-                ConsoleLog(LogType::ERROR, errorMessage.c_str());
+                consoleLog(LogType::ERROR, errorMessage);
                 return false;
         }
 
@@ -54,8 +66,32 @@ namespace Logging
         return false;
     }
 
-    bool ConsoleLogStr(LogType type, std::string logMessage, bool flush)
+    //-//////////////////////////////////
+    // Returns true if opens a new log file.
+    bool openLogFileIfClosed()
     {
-        return ConsoleLog(type, logMessage.c_str(), flush);
+        if (logFile.is_open()) return false;
+
+        logFile.open("Log.txt");
+        return true;
+    }
+
+    //-//////////////////////////////////
+    // Returns true if closes an open log file
+    bool closeLogFileIfOpen()
+    {
+        if (logFile.is_open() == false) return false;
+
+        logFile.close();
+        return true;
+    }
+
+    //-//////////////////////////////////
+    // 
+    bool outputToLogFile(LogType type, std::string logMessage, bool flush)
+    {
+        logFile << logMessage;
+        if (flush) logFile << std::endl;
+        return true;
     }
 }

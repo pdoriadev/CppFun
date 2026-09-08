@@ -101,7 +101,7 @@ struct CompileShaderParams
             case GL_FRAGMENT_SHADER:
                 break;
             default:
-                ConsoleLogStr(Logging::LogType::ASSERT, 
+                Logging::consoleLog(Logging::LogType::ASSERT, 
                     std::to_string(_shaderType) + " does not match a valid shader type. See: https://registry.khronos.org/OpenGL-Refpages/gl4/html/glCreateShader.xhtml");
                 shaderType = 0;
                 ptrToShaderSource = NULL;
@@ -128,7 +128,7 @@ bool compileShader(CompileShaderParams params)
     if (params.refToShaderID == 0)
     {
         // TODO - add additional info for the shadersource. etc.
-        Logging::ConsoleLog(Logging::LogType::ASSERT, (std::string("ERROR: glCreateShader returned 0.\n Shader Type: ") + std::to_string(params.shaderType)).c_str());
+        Logging::consoleLog(Logging::LogType::ASSERT, (std::string("ERROR: glCreateShader returned 0.\n Shader Type: ") + std::to_string(params.shaderType)).c_str());
     }
     // use strcat to concatenate the char * with the string. 
 
@@ -148,7 +148,7 @@ bool compileShader(CompileShaderParams params)
     glGetShaderiv(params.refToShaderID, GL_COMPILE_STATUS, &success); // ask OpenGL: did it compile successfully?
     if (!success) {                                     // it didn't --
         glGetShaderInfoLog(params.refToShaderID, 512, nullptr, infoLog); // ask the driver *why not*, into infoLog
-        Logging::ConsoleLogStr(Logging::LogType::ASSERT, std::string("ERROR::SHADER::COMPILATION_FAILED\n") + std::string(infoLog)); // print the reason
+        Logging::consoleLog(Logging::LogType::ASSERT, std::string("ERROR::SHADER::COMPILATION_FAILED\n") + std::string(infoLog)); // print the reason
         return false;
     }
 
@@ -251,9 +251,9 @@ bool setupShaderProgram()
             2047,
             NULL,
             logBuffer);
-        Logging::ConsoleLog(Logging::LogType::LOG, "PROGRAM INFO LOG AFTER LINKING:\n");
-        Logging::ConsoleLog(Logging::LogType::LOG, logBuffer);
-        Logging::ConsoleLog(Logging::LogType::LOG, "\nEND OF PROGRAM INFO LOG\n");
+        Logging::consoleLog(Logging::LogType::LOG, "PROGRAM INFO LOG AFTER LINKING:\n");
+        Logging::consoleLog(Logging::LogType::LOG, logBuffer);
+        Logging::consoleLog(Logging::LogType::LOG, "\nEND OF PROGRAM INFO LOG\n");
 
         //-//////////////////////////
         // glUseProgram()
@@ -273,7 +273,7 @@ bool setupShaderProgram()
 
 int main()
 {
-    Logging::ConsoleLog(Logging::LogType::LOG, \
+    Logging::consoleLog(Logging::LogType::LOG, \
         ("STARTING PROGRAM\n" + DASH_LINE + "\n").c_str());
 
     //-//////////////////////////////////////////////////////////////
@@ -293,7 +293,7 @@ int main()
     GLFWwindow* window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
     if (IsNullPtr(window, "GLFWwindow"))
     {
-        Logging::ConsoleLog(Logging::LogType::ASSERT,
+        Logging::consoleLog(Logging::LogType::ASSERT,
             (DASH_LINE + "\nFailed to create GLFW window\n" + DASH_LINE).c_str());
         glfwTerminate();
         return -1;
@@ -344,7 +344,6 @@ int main()
     //-//////////////////////////////////////////////////////////////
     // CLEAN-UP - clean/delete allocated GLFW resources
     //-//////////////////////////////////////////////////////////////
-
      
     // glfwTerminate()
     //      - Destroys remaining windows
@@ -357,8 +356,9 @@ int main()
     // 
     glfwTerminate();
 
-    Logging::ConsoleLog(Logging::LogType::LOG,
+    Logging::consoleLog(Logging::LogType::LOG,
         (DASH_LINE + "\nENDING PROGRAM\n").c_str());
+    Logging::closeLogFileIfOpen();
 
     return 0;
 }
@@ -377,7 +377,7 @@ bool InitStep1()
     // 
     bool setupForWSL = setupWSL();
     std::string setupResultString = setupForWSL ? "TRUE" : "FALSE";
-    Logging::ConsoleLog(Logging::LogType::LOG,
+    Logging::consoleLog(Logging::LogType::LOG,
         ("SETUP FOR WSL: " + setupResultString + "\n").c_str());
 
     //-////////////////////////////////////////////////////////////////////
@@ -397,12 +397,12 @@ bool InitStep1()
     // Initialize GLFW
     if (glfwInit())
     {
-        Logging::ConsoleLog(Logging::LogType::LOG,
+        Logging::consoleLog(Logging::LogType::LOG,
             ("INITIALIZED: TRUE\n"));
     }
     else
     {
-        Logging::ConsoleLog(Logging::LogType::ASSERT,
+        Logging::consoleLog(Logging::LogType::ASSERT,
             ("INITIALIZED: FALSE\n" + DASH_LINE).c_str());
         return false;
     }
@@ -420,7 +420,7 @@ bool InitStep2_WindowAndViewport(GLFWwindow* window)
     // glfwGetProcAddress - defines the correct function based on which OS we're compiling for. 
     if (gladLoadGLLoader((GLADloadproc)glfwGetProcAddress) == false)
     {
-        Logging::ConsoleLog(Logging::LogType::ASSERT,
+        Logging::consoleLog(Logging::LogType::ASSERT,
             (DASH_LINE + "\nFailed to initialize GLAD\n" + DASH_LINE).c_str());
         return false;
     }   
@@ -621,7 +621,7 @@ static const bool IsNullPtr(void* pointer, std::string typeStr)
 {
     if (pointer == NULL)
     {
-        Logging::ConsoleLog(Logging::LogType::ERROR, 
+        Logging::consoleLog(Logging::LogType::ERROR, 
             ("Pointer of type " + typeStr + "is null").c_str());
         return true;
     }
