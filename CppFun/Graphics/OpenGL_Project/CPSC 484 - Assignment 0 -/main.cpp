@@ -136,7 +136,7 @@ void main() {                           // GLSL entry point -- runs once per ver
 
 )GLSL";
 
-// PETER - WE ARE PASSING A WHOLE ASS `main` method to GLSL???
+// PETER - WE ARE PASSING A WHOLE ASS `main` method???
 
 /*  PETER
 vertex shader
