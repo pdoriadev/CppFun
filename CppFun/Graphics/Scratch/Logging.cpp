@@ -73,13 +73,22 @@ namespace Logging
         {
             case LogType::LOG:
                 std::cout << logMessage;
+                if (flush)
+                {
+                    std::cout << std::endl;
+                }
                 return true;
             case LogType::ERROR:
                 std::cerr << logMessage;
+                if (flush)
+                {
+                    std::cerr << std::endl;
+                }
                 return true;
             case LogType::ASSERT:
                 closeLogFileIfOpen();
-                assert((logMessage.c_str()) && false);
+                std::cerr << false << std::endl;
+                assert(false);
                 return true;
             default:
                 // This *SHOULD* be impossible to hit given the isValid check earlier.
