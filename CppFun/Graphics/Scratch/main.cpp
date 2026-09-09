@@ -14,7 +14,6 @@
 //      -lGL ?? links OpenGL ??
 //      -ldl ?? what does this link ??
 
-#include <cstddef>
 #pragma region HEADERS
 
 // OPENGL-RELATED HEADERS
@@ -22,7 +21,7 @@
 #include <GLFW/glfw3.h>     // Window + Input Library - window/context creation, input, timing
                             // HTML Documentation - https://www.glfw.org/docs/latest/
 // C / CPP HEADERS
-#include <cctype>           // std::toupper, std::tolower
+#include <cmath>            // sin, cos, M_PI
 #include <cstdlib>          // std::getenv -- used by isRunningUnderWSL() below
 #include <fstream>          // std::ifstream -- used by isRunningUnderWSL() below
 #include <string>           // std::string - used by isRunningUnderWSL() below
@@ -83,15 +82,18 @@ out vec3 Normal; // will be picked up by "in vec3 Normal" in the fragment shader
 // vertex/pixel of that draw call -- unlike aPos/aNormal, which are
 // different for every vertex.
 
-uniform mat4 transform;                 // this letter's combined rotate+scale+position matrix, set from the CPU
+uniform mat4 transform;                 // this model's combined rotate+scale+position matrix, set from the CPU
 
 void main()
 {
     // Note from Assignment_0
     // gl_Position is a special built-in output: OpenGL reads it to know
     // where this vertex lands on screen (in clip space).
-    gl_Position = vec4(aPos, 1.0);
-    gl_Normal = vec4(aNor, 1.0);
+    gl_Position = transform * vec4(aPos, 1.0);
+    // mat3(transform) keeps only the rotation+scale part of the 4x4 matrix
+    // (it drops the translation column), which is what you want when
+    // transforming a *direction* like a normal instead of a *point*.
+    Normal = mat3(transform) * aNor;
 }
 )GLSL";
 
@@ -106,7 +108,17 @@ uniform vec3 color;      // this letter's current color, set from the CPU each f
 
 void main()
 {
-    fragColor = vec4(0.2, 1, 0.5, 1.0);
+    fragColor = vec4(color, 1.0);
+
+    if (fragColor.x > 1)
+    {
+        fragColor *= 0;
+        fragColor.w = 1;
+    }
+        
+    fragColor.x += 0.01;
+    fragColor.y += 0.01;
+    fragColor.z += 0.01;
 }
 )GLSL";
 
@@ -188,7 +200,7 @@ bool compileShader(CompileShaderParams params)
     return true;
 }
 
-bool setupShaderProgram()
+bool setupShaderProgram(unsigned int& shaderProgramID)
 {
     // Create vertex shader object
     unsigned int vertexShaderID;
@@ -210,86 +222,92 @@ bool setupShaderProgram()
         compileShader(fragParams);
     }
 
-    // Create program object. 
-    // Attach shader objects to program.
-    // Link program object. Create an executable for each shader type (i.e. vert, frag, etc.).
+    //-////////////////////////////////////////////////////////////////////////
+    // 1. Create program object. 
+    // 2. Attach shader objects to program.
+    // 3. Link program object. Create an executable for each shader type (i.e. vert, frag, etc.).
     //      Log linking results.
-    // Add linked program object to current rendering context. 
-    unsigned int shaderProgramID;
+    // 4. Add linked program object to current rendering context. 
+
+    //-//////////////////////////
+    // glCreateProgram()
+    // 
+    // creates an empty shader program object. Returns the program's ID. 
+    // returns - void
+    // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glCreateProgram.xhtml
+    shaderProgramID = glCreateProgram();
+    if (shaderProgramID == 0)
     {
-        //-//////////////////////////
-        // glCreateProgram()
-        // 
-        // creates an empty shader program object. Returns the program's ID. 
-        // returns - void
-        // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glCreateProgram.xhtml
-        shaderProgramID = glCreateProgram();
-        
-        //-//////////////////////////
-        // glAttachShader(unsigned int, unsigned int)
-        // param 1 - program ID
-        // param 2 - a shader object ID (i.e. frag, vert, etc.) 
-        // returns - void
-        //
-        // Attaches a shader object to a program. Programs link shader objects together.
-        // 
-        // Permissible to attach a shader object before source code is loaded or before it is compiled.
-        // Can attach multiple shader objects of the same type. 
-        // When an attached shader object is deleted, call glDetachShader to detach from programs.
-        // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glAttachShader.xhtml
-        glAttachShader(shaderProgramID, vertexShaderID);
-        glAttachShader(shaderProgramID, fragmentShaderID);
+        Logging::consoleLog(Logging::LogType::ASSERT,
+            "FAILED TO CREATE PROGRAM OBJECT");
 
-        //-//////////////////////////
-        // glLinkProgram()
-        // param 1 - program ID. 
-        //
-        // Create an executable for each set of shaders (vert, geo, frag, etc.) attached to a program.
-        // The exectuable will run on that shader's corresponding processor (vert on vertex, geo on geomoetry, etc.)
-        // On successful link
-        //      - the program's active user-defined ?? uniform ?? variables are initialized to 0. 
-        //      - the program's active ?? uniform ?? variables are assigned a location. 
-        //          - the location can be queried by ?? glGetUniformLocation ??. 
-        //      - ?? Unbound active user-defined variables are bound to a generic vertex attribute index ??
-        //      - Changes to shader objects do not affect program exectuables. 
-        // On failed link
-        //      - link status is set to GL_FALSE. 
-        //      - If this is a *re-link*, exectuables remain part of current state. Call glUseProgram to remove them. 
-        // NOTE: Always include a frag shader. Not including one leads to undefined behavior.
-        //
-        // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glLinkProgram.xhtml
-        //      - includes list of why programs fail to link. 
-        glLinkProgram(shaderProgramID);
-
-        logShaderProgramInfo(shaderProgramID);
-
-        //-///////////////////////////
-        // glGetProgramiv - get value of one of program object's data
-        // param 1 - int. program ID
-        // param 2 - GLenum. desired data.
-        // param 3 - out pointer to return desired data value
-        // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGetProgram.xhtml
-        // 
-        // Check if the last link was successful.
-        {
-            int param;
-            glGetProgramiv(shaderProgramID,
-                GL_LINK_STATUS,
-                &param);
-            if (param == GL_FALSE) {
-                Logging::consoleLog(Logging::LogType::ASSERT, "FAILED TO LINK SHADER PROGRAM. ID = " + std::to_string(shaderProgramID));
-            }
-            else {
-                Logging::consoleLog(Logging::LogType::LOG, "LINK SUCCESSFUL! ID = " + std::to_string(shaderProgramID));
-            }
-        }
-
-        //-//////////////////////////
-        // glUseProgram()
-        // Installs a program object as part of current rendering state
-        // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glUseProgram.xhtml 
-        glUseProgram(shaderProgramID);
+        return false;
     }
+
+    //-//////////////////////////
+    // glAttachShader(unsigned int, unsigned int)
+    // param 1 - program ID
+    // param 2 - a shader object ID (i.e. frag, vert, etc.) 
+    // returns - void
+    //
+    // Attaches a shader object to a program. Programs link shader objects together.
+    // 
+    // Permissible to attach a shader object before source code is loaded or before it is compiled.
+    // Can attach multiple shader objects of the same type. 
+    // When an attached shader object is deleted, call glDetachShader to detach from programs.
+    // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glAttachShader.xhtml
+    glAttachShader(shaderProgramID, vertexShaderID);
+    glAttachShader(shaderProgramID, fragmentShaderID);
+
+    //-//////////////////////////
+    // glLinkProgram()
+    // param 1 - program ID. 
+    //
+    // Create an executable for each set of shaders (vert, geo, frag, etc.) attached to a program.
+    // The exectuable will run on that shader's corresponding processor (vert on vertex, geo on geomoetry, etc.)
+    // On successful link
+    //      - the program's active user-defined ?? uniform ?? variables are initialized to 0. 
+    //      - the program's active ?? uniform ?? variables are assigned a location. 
+    //          - the location can be queried by ?? glGetUniformLocation ??. 
+    //      - ?? Unbound active user-defined variables are bound to a generic vertex attribute index ??
+    //      - Changes to shader objects do not affect program exectuables. 
+    // On failed link
+    //      - link status is set to GL_FALSE. 
+    //      - If this is a *re-link*, exectuables remain part of current state. Call glUseProgram to remove them. 
+    // NOTE: Always include a frag shader. Not including one leads to undefined behavior.
+    //
+    // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glLinkProgram.xhtml
+    //      - includes list of why programs fail to link. 
+    glLinkProgram(shaderProgramID);
+
+    logShaderProgramInfo(shaderProgramID);
+
+    //-///////////////////////////
+    // glGetProgramiv - get value of one of program object's data
+    // param 1 - int. program ID
+    // param 2 - GLenum. desired data.
+    // param 3 - out pointer to return desired data value
+    // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGetProgram.xhtml
+    // 
+    // Check if the last link was successful.
+    {
+        int param;
+        glGetProgramiv(shaderProgramID,
+            GL_LINK_STATUS,
+            &param);
+        if (param == GL_FALSE) {
+            Logging::consoleLog(Logging::LogType::ASSERT, "FAILED TO LINK SHADER PROGRAM. ID = " + std::to_string(shaderProgramID));
+        }
+        else {
+            Logging::consoleLog(Logging::LogType::LOG, "LINK SUCCESSFUL! ID = " + std::to_string(shaderProgramID));
+        }
+    }
+
+    //-//////////////////////////
+    // glUseProgram()
+    // Installs a program object as part of current rendering state
+    // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glUseProgram.xhtml 
+    glUseProgram(shaderProgramID);
 
     // Clean-up shader objects
     glDeleteShader(vertexShaderID);
@@ -362,11 +380,13 @@ bool addTri(std::vector<float>& out, tri t)
         t.points[i].add_to_vector(out);
         t.normal.add_to_vector(out);
     }
+
+    return true;
 }
 
 //-////////////////////////////////////
 // Make the triangles for each face of the cube. 
-bool makeCube(std::vector<float>& out)
+bool buildCubeTris(std::vector<float>& out)
 {
     vector3 zero        (0.5, 0.5, -0.5);
     vector3 one         (-0.5, 0.5, -0.5);
@@ -411,33 +431,84 @@ bool makeCube(std::vector<float>& out)
     return true; 
 }
 
-bool setupVAOandVBO()
+struct modelBuffer
+{
+    unsigned int VAO = 0;
+    unsigned int VBO = 0;
+    unsigned int verticesCount = 0;
+    
+    modelBuffer(unsigned int _VAO,
+                unsigned int _VBO,
+                unsigned int _verticesCount)
+    {
+        VAO = _VAO;
+        VBO = _VBO;
+        verticesCount = _verticesCount;
+    }
+};
+
+class modelBufferCache
+{
+public:
+    std::vector<unsigned int> name;
+    std::vector<modelBuffer> cache;
+
+    bool add(modelBuffer& buf)
+    {
+        name.emplace_back(buf.VAO + buf.VBO);
+        cache.emplace_back(buf);
+
+        return true;
+    }
+};
+
+modelBufferCache bCache;
+
+bool makeCubeBuffer()
 {
     std::vector<float> vertices;
     vertices.resize(48); // 6 (faces) * 2 (tris per face) * 4 (3 pos vertices + 1 norm per tri)
-    makeCube(vertices);
-
-    unsigned int VAO; // https://wikis.khronos.org/opengl/Vertex_Specification#Vertex_Array_Object
-    {
-        glGenVertexArrays(1, &VAO); // creates a VAO 'name'. Assigns it our passed in VAO address.
-        glBindVertexArray(VAO);
-        glEnableVertexAttribArray(VAO);
-
+    buildCubeTris(vertices);
+    
+    if (vertices.size() == 0) {
+        return false;
     }
-
-    unsigned int VBO; // https://wikis.khronos.org/opengl/Vertex_Specification#Vertex_Array_Object
+    
+    // A VBO (Vertex Buffer Object) is a block of GPU memory holding raw vertex
+    // data. A VAO (Vertex Array Object) records HOW to interpret that memory --
+    // which floats are the position, which are the normal, how far apart each
+    // vertex is (the "stride"), etc. -- so that later we can just bind the VAO
+    // and draw, without re-describing the layout every time.
+    //
+    // These are built ONCE at startup, not every frame. An earlier version of
+    // this demo created and destroyed a VAO/VBO every frame for every letter --
+    // that's wasted GPU churn 60 times a second for geometry that never
+    // changes, and it's not a habit worth picking up.
+    modelBuffer buf = modelBuffer(0, 0, vertices.size());
     {
-        glGenBuffers(1, &VBO); // creates VBO 'name'. Assigns it to our passed in VBO address.
+         // https://wikis.khronos.org/opengl/Vertex_Specification#Vertex_Array_Object
+        glGenVertexArrays(1, &buf.VAO); // creates a VAO 'name'. Assigns it our passed in VAO.
+        // https://wikis.khronos.org/opengl/Vertex_Specification#Vertex_Array_Object
+        glGenBuffers(1, &buf.VBO); // creates VBO 'name'. Assigns it to our passed in VBO.
+        
+        glBindVertexArray(buf.VAO); // "everything below configures THIS VAO"
 
         //-//////////////////////////////
-        // glBindBuffer() - binds a buffer to GL target. If no matching buffer name is found, a buffer name is created.
+        // glBindBuffer() - binds a buffer to GL target. 
+        //      If no matching buffer name is found, a buffer name is created.
         // param 1 - enum. target. binds buffer to this target.
         //      see doc for what target matches what buffer type.
         // param 2 - unsigned int. buffer name. *yes, the buffer name is an unsigned int*.
         // 
         // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBindBuffer.xhtml
-        glBindBuffer(GL_ARRAY_BUFFER, VBO);
-        
+        glBindBuffer(GL_ARRAY_BUFFER, buf.VBO);
+
+        //-//////////////////////////////
+        // glBufferData()
+        //
+        // copies our CPU-side `vertices` vector into GPU memory. GL_STATIC_DRAW
+        //   is a hint to the driver: "this data won't change often," which lets
+        //   it choose faster storage than if we were rewriting it every frame.
         glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_STATIC_DRAW);
 
         //-//////////////////////////////
@@ -449,16 +520,20 @@ bool setupVAOandVBO()
         // param 5 - size type. size of attribute or space between consecutive attributes
         // param 6 - (void*)unsigned int. offset to where the attribute's position is in the buffer.
         // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glVertexAttribPointer.xhtml
-        // ignoring the 4th component of gl_Position? Or are we not using that?
-        glVertexAttribPointer(0, 3, GL_FLOAT, false, 3 * sizeof(float), (void*)0);
-        glad_glEnableVertexAttribArray(0);
+        // 
+        // 3 position vertices. 6 floats (or 24 bytes) from position of attribute's first position element to the next attribute's first position element. 
+        glVertexAttribPointer(0, 3, GL_FLOAT, false, 6 * sizeof(float), (void*)0);
+        glEnableVertexAttribArray(0); // turn attribute 0 on so the GPU actually reads it
 
+        // setup VAO with vertex shader's normal info. 
+        glVertexAttribPointer(1, 3, GL_FLOAT, false, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+        glEnableVertexAttribArray(1);
+
+        // unbind VAO to avoid mishaps
+        glBindVertexArray(0);
     }
 
-
-    
-
-
+    bCache.add(buf);
 
     return true;
 }
@@ -502,6 +577,8 @@ bool logShaderProgramInfo(unsigned int shaderProgramID)
 }
 
 #pragma endregion ================================
+
+#pragma region MAIN_LOOP
 
 int main()
 {
@@ -551,8 +628,14 @@ int main()
     // SHADER SETUP
     //-//////////////////////////////////////////////////////////////
     
-    setupShaderProgram();
-    setupVAOandVBO();
+    unsigned int shaderProgramID;
+    setupShaderProgram(shaderProgramID);
+
+    // Enable depth testing -- this is what makes nearer surfaces correctly
+    // hide farther ones instead of fighting for the same pixels.
+    glEnable(GL_DEPTH_TEST); // turn on depth testing
+
+    makeCubeBuffer();
     
     //-//////////////////////////////////////////////////////////////
     // RENDER LOOP
@@ -563,6 +646,30 @@ int main()
     // ?? how is the flag set/determined ??
     while (glfwWindowShouldClose(window) == false)
     {
+        // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glClearColor.xhtml
+        // Inputs colors for glClear to use when it clears and sets the color buffer.
+        // A *state-setting* function
+        glClearColor(0.1, 0.1, 0.1, 1);
+        
+        // Clears the on screen buffer. Sets its buffer values *?for next render?*
+        // A *state-using* function
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the color buffer and depth buffer for this frame
+        
+        glUseProgram(shaderProgramID);
+        
+        float red = (sin(glfwGetTime()+ 0.2f));            // red channel, oscillating between 0 and 1 over time
+        float green = (sin(glfwGetTime() + 0.5f));   // green channel, phase-shifted from red
+        float blue = (sin(glfwGetTime()+ 0.9f));    // blue channel, phase-shifted from both
+        int colorLoc = glGetUniformLocation(shaderProgramID, "color"); // ask the shader program where its "color" uniform lives
+        glUniform3f(colorLoc, red, green, blue);                     // upload this frame's color for this letter
+
+        for(size_t i = 0; i < bCache.cache.size(); ++i)
+        {
+            glBindVertexArray(bCache.cache[i].VAO);
+            glDrawArrays(GL_TRIANGLES, 0, bCache.cache[i].verticesCount);
+        }
+        glBindVertexArray(0); // unbind VAO object to avoid mishaps.
+
         processInput(window);
 
         // glfwSwapBuffers call
@@ -591,11 +698,13 @@ int main()
     glfwTerminate();
 
     Logging::consoleLog(Logging::LogType::LOG,
-        (DASH_LINE + "\nENDING PROGRAM\n").c_str());
+        ("\n" + DASH_LINE + "\nENDING PROGRAM\n").c_str());
     Logging::closeLogFileIfOpen();
 
     return 0;
 }
+
+#pragma endregion
 
 #pragma region INITIALIZATION
 

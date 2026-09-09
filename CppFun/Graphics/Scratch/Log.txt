@@ -10,7 +10,8 @@ LOG:
 END OF PROGRAM INFO LOG
 
 LOG: LINK SUCCESSFUL! ID = 3
-LOG: --------------------------
+LOG: 
+--------------------------
 ENDING PROGRAM
 
 LOG: Closing log file

@@ -350,8 +350,7 @@ void appendExtrudedRect(std::vector<float>& out, const Rect& r, float halfDepth)
 // keeps the demo's draw call as close as possible to what you saw for a
 // single triangle in lecture. You'll see indexed drawing (EBOs) in
 // Assignment 2 and beyond, where reusing shared vertices actually matters.
-// Each vertex in the returned list is (position, normal) = 6 floats.
-
+// Each vertex in the returned list is (position, normal) = 6 floats
 std::vector<float> buildLetterVertices(char ch) {
     std::vector<float> verts;                    // will accumulate all triangles (as position+normal floats) for this one letter
     auto it = kLetterRects.find(ch);              // look up this character's stroke list in the table above
@@ -475,7 +474,7 @@ void createLetterBuffer(char ch) {
         glEnableVertexAttribArray(1); // turn attribute 1 on so the GPU actually reads it
 
         glBindVertexArray(0); // unbind -- good hygiene, avoids accidentally editing this VAO later
-    }
+    }   
 
     letterBuffers[ch] = buf; // store this letter's (possibly empty) buffer info in the cache
 }
