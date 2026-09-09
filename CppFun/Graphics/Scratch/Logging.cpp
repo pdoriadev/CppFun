@@ -63,6 +63,11 @@ namespace Logging
             return false;
         }
 
+        if (logMessage.length() == 0)
+        {
+            logMessage = "Passed empty string to logger";
+        }
+
         std::string typeStr = getLogTypeString(type);
         logMessage.insert(0, typeStr + ": ");
 
