@@ -908,7 +908,7 @@ int main()
 #pragma region INITIALIZATION
 
 //-//////////////////////////////////////////////////////////////
-// WSL
+// Setup WSL (if needed)
 // WindowHints 
 //      (OpenGL version for GLFW to use)
 //      CORE or COMPATIBILITY profile
