@@ -26,10 +26,11 @@
 #include <cstdlib>          // std::getenv -- used by isRunningUnderWSL() below
 #include <fstream>          // std::ifstream -- used by isRunningUnderWSL() below
 #include <string>           // std::string - used by isRunningUnderWSL() below
+#include <vector>
 // My C / CPP HEADERS
 #include "Logging.h"
 
-#pragma endregion
+#pragma endregion ================================
 
 #pragma region PROTOYTPES
 
@@ -42,10 +43,12 @@ bool setupWSL();
 bool isRunningUnderWSL();
 bool InitStep1();
 bool InitStep2_WindowAndViewport(GLFWwindow* window_close);;
+
+bool logShaderProgramInfo(unsigned int shaderProgramID);
 bool processInput(GLFWwindow*);
 
 static const bool IsNullPtr(void*, const std::string);
-#pragma endregion
+#pragma endregion ================================
 
 #pragma region FIELDS
 enum Platform : int32_t
@@ -57,15 +60,30 @@ enum Platform : int32_t
 Platform platform = Platform::UNKNOWN;
 
 const std::string DASH_LINE = "--------------------------";
-#pragma endregion
+#pragma endregion ================================
 
-#pragma region SHADER_SOURCE_STRUCTS_FUNCTIONS
+#pragma region SHADER_SOURCE 
+
 const char* vertexShaderSource =  R"GLSL(
 #version 330 core
 // OpenGL version to run the shader
 // layout?? location??
 // in is input vector data.
 layout (location = 0) in vec3 aPos;
+layout (location = 1) in vec3 aNor;
+
+// "out" variables are computed once per vertex here, then automatically
+// interpolated across each triangle before the fragment shader below sees
+// them (that interpolation step is called rasterization).
+
+out vec3 Normal; // will be picked up by "in vec3 Normal" in the fragment shader
+
+// A "uniform" is a value we set once per draw call from the CPU (see
+// glUniformMatrix4fv in the render loop) that stays constant across every
+// vertex/pixel of that draw call -- unlike aPos/aNormal, which are
+// different for every vertex.
+
+uniform mat4 transform;                 // this letter's combined rotate+scale+position matrix, set from the CPU
 
 void main()
 {
@@ -73,17 +91,28 @@ void main()
     // gl_Position is a special built-in output: OpenGL reads it to know
     // where this vertex lands on screen (in clip space).
     gl_Position = vec4(aPos, 1.0);
+    gl_Normal = vec4(aNor, 1.0);
 }
 )GLSL";
 
+/////////////////////////////////////////////////
+
 const char* fragmentShaderSource = R"GLSL(
 #version 330 core
+
 out vec4 fragColor;
+in vec3 Normal;
+uniform vec3 color;      // this letter's current color, set from the CPU each frame
+
 void main()
 {
     fragColor = vec4(0.2, 1, 0.5, 1.0);
 }
 )GLSL";
+
+#pragma endregion ================================
+
+#pragma region SHADER_STRUCTS_FUNCTIONS
 
 struct CompileShaderParams
 {
@@ -191,7 +220,7 @@ bool setupShaderProgram()
         //-//////////////////////////
         // glCreateProgram()
         // 
-        // creates an empty shader program. Returns the program's ID. 
+        // creates an empty shader program object. Returns the program's ID. 
         // returns - void
         // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glCreateProgram.xhtml
         shaderProgramID = glCreateProgram();
@@ -232,32 +261,28 @@ bool setupShaderProgram()
         //      - includes list of why programs fail to link. 
         glLinkProgram(shaderProgramID);
 
+        logShaderProgramInfo(shaderProgramID);
+
         //-///////////////////////////
-        // void glGetProgramInfoLog()
-        // param 1 - unsigned int - program ID
-        // param 2 - size_t - max length of log in character buffer
-        // param 3 - size_t - actual length of log, excluding the null terminator character.
-        //                  - Can pass in NULL if the length is not required. 
-        //                  - Can get actual length by passing GL_INFO_LOG_LENGTH into glGetProgram.
-        // param 4 - char* - character buffer to copy log into.
+        // glGetProgramiv - get value of one of program object's data
+        // param 1 - int. program ID
+        // param 2 - GLenum. desired data.
+        // param 3 - out pointer to return desired data value
+        // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGetProgram.xhtml
         // 
-        // Copies a program's info log into a buffer up to a max length. 
-        // - Info log is updated when a program is linked or validated. 
-        // - Info log is in one of three states. 
-        //      - A - Empty
-        //      - B - Info about the last link operation.
-        //      - C - Info about the last validate operation.
-        // - A program object's info log is empty at creation.
-        // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGetProgramInfoLog.xhtml
-        char logBuffer[2048];
-        glGetProgramInfoLog(
-            shaderProgramID, 
-            2047,
-            NULL,
-            logBuffer);
-        Logging::consoleLog(Logging::LogType::LOG, "PROGRAM INFO LOG AFTER LINKING:\n");
-        Logging::consoleLog(Logging::LogType::LOG, logBuffer);
-        Logging::consoleLog(Logging::LogType::LOG, "\nEND OF PROGRAM INFO LOG\n");
+        // Check if the last link was successful.
+        {
+            int param;
+            glGetProgramiv(shaderProgramID,
+                GL_LINK_STATUS,
+                &param);
+            if (param == GL_FALSE) {
+                Logging::consoleLog(Logging::LogType::ASSERT, "FAILED TO LINK SHADER PROGRAM. ID = " + std::to_string(shaderProgramID));
+            }
+            else {
+                Logging::consoleLog(Logging::LogType::LOG, "LINK SUCCESSFUL! ID = " + std::to_string(shaderProgramID));
+            }
+        }
 
         //-//////////////////////////
         // glUseProgram()
@@ -266,14 +291,217 @@ bool setupShaderProgram()
         glUseProgram(shaderProgramID);
     }
 
-    // Clean-up
+    // Clean-up shader objects
     glDeleteShader(vertexShaderID);
     glDeleteShader(fragmentShaderID);
 
     return true;
 }
 
-#pragma endregion
+// Look into alternative math library for later: https://ggt.sourceforge.net/
+class vector3
+{
+public:
+    float vec_xyz[3];
+
+    float x() { return vec_xyz[0]; }
+    float y() { return vec_xyz[1]; }
+    float z() { return vec_xyz[2]; }
+    bool set_x(float _x) { vec_xyz[0] = _x; return true;}
+    bool set_y(float _y) { vec_xyz[1] = _y; return true;}
+    bool set_z(float _z) { vec_xyz[2] = _z; return true;}
+
+    vector3()
+    {
+        vec_xyz[0] = 0.0;
+        vec_xyz[1] = 0.0;
+        vec_xyz[2] = 0.0;
+    };
+
+    vector3(float _x, float _y, float _z)
+    {
+        vec_xyz[0] = _x;
+        vec_xyz[1] = _y;
+        vec_xyz[2] = _z;
+    };
+
+    bool add_to_vector(std::vector<float>& out)
+    {
+        out.emplace_back(x());
+        out.emplace_back(y());
+        out.emplace_back(z());
+        return true;
+    }
+
+    // static const vector3 zeroVector()
+    // {
+    //     static const vector3 = vector3(0, 0, 0);
+    // }
+    // static vector3 const zeroVector (0, 0, 0);
+};
+
+class tri
+{
+public:
+    vector3 points[3];
+    vector3 normal;
+
+    tri(vector3 a, vector3 b, vector3 c, vector3 norm)
+    {
+        points[0] = a;
+        points[1] = b;
+        points[2] = c;
+        normal = norm;
+    }
+};
+
+bool addTri(std::vector<float>& out, tri t)
+{
+    for (unsigned int i = 0; i < 3; ++i)
+    {
+        t.points[i].add_to_vector(out);
+        t.normal.add_to_vector(out);
+    }
+}
+
+//-////////////////////////////////////
+// Make the triangles for each face of the cube. 
+bool makeCube(std::vector<float>& out)
+{
+    vector3 zero        (0.5, 0.5, -0.5);
+    vector3 one         (-0.5, 0.5, -0.5);
+    vector3 two         (-0.5, 0.5, 0.5);
+    vector3 three       (0.5, 0.5, 0.5);
+    vector3 four        (0.5, -0.5, 0.5);
+    vector3 five        (-0.5, -0.5, 0.5);
+    vector3 six         (-0.5, -0.5, -0.5);
+    vector3 seven       (0.5, -0.5, -0.5);
+
+    vector3 sideANorm   (1, 0, 0);
+    vector3 topNorm     (0, 1, 0);
+    vector3 frontNorm   (0, 0, 1);
+    vector3 backNorm    (0, 0, -1);
+    vector3 botNorm     (0, -1, 0);
+    vector3 sideBNorm   (-1, 0, 0);
+
+    // Back Face
+    addTri(out, tri(zero, one, six, backNorm));
+    addTri(out, tri(zero, six, seven, backNorm));
+
+    // Top Face
+    addTri(out, tri(zero, one, two, topNorm));
+    addTri(out, tri(zero, two, three, topNorm));
+
+    // Front Face
+    addTri(out, tri(two, three, four, frontNorm));
+    addTri(out, tri(two, four, five, frontNorm));
+
+    // Bottom Face
+    addTri(out, tri(four, five, six, botNorm));
+    addTri(out, tri(four, six, seven, botNorm));
+
+    // sideA Face
+    addTri(out, tri(zero, three, four, sideANorm));
+    addTri(out, tri(zero, four, seven, sideANorm));
+
+    // sideB Face
+    addTri(out, tri(one, two, five, sideBNorm));
+    addTri(out, tri(one, two, six, sideBNorm));
+
+    return true; 
+}
+
+bool setupVAOandVBO()
+{
+    std::vector<float> vertices;
+    vertices.resize(48); // 6 (faces) * 2 (tris per face) * 4 (3 pos vertices + 1 norm per tri)
+    makeCube(vertices);
+
+    unsigned int VAO; // https://wikis.khronos.org/opengl/Vertex_Specification#Vertex_Array_Object
+    {
+        glGenVertexArrays(1, &VAO); // creates a VAO 'name'. Assigns it our passed in VAO address.
+        glBindVertexArray(VAO);
+        glEnableVertexAttribArray(VAO);
+
+    }
+
+    unsigned int VBO; // https://wikis.khronos.org/opengl/Vertex_Specification#Vertex_Array_Object
+    {
+        glGenBuffers(1, &VBO); // creates VBO 'name'. Assigns it to our passed in VBO address.
+
+        //-//////////////////////////////
+        // glBindBuffer() - binds a buffer to GL target. If no matching buffer name is found, a buffer name is created.
+        // param 1 - enum. target. binds buffer to this target.
+        //      see doc for what target matches what buffer type.
+        // param 2 - unsigned int. buffer name. *yes, the buffer name is an unsigned int*.
+        // 
+        // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBindBuffer.xhtml
+        glBindBuffer(GL_ARRAY_BUFFER, VBO);
+        
+        glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_STATIC_DRAW);
+
+        //-//////////////////////////////
+        // glVertexAttribPointer()
+        // param 1 - unsigned int. position of vertex attribute we want to configure. 
+        // param 2 - unsigned int. # of componeents per vertex attribute
+        // param 3 - enum. Corresponds to the attribute's data type 
+        // param 4 - bool. normalize data?
+        // param 5 - size type. size of attribute or space between consecutive attributes
+        // param 6 - (void*)unsigned int. offset to where the attribute's position is in the buffer.
+        // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glVertexAttribPointer.xhtml
+        // ignoring the 4th component of gl_Position? Or are we not using that?
+        glVertexAttribPointer(0, 3, GL_FLOAT, false, 3 * sizeof(float), (void*)0);
+        glad_glEnableVertexAttribArray(0);
+
+    }
+
+
+    
+
+
+
+    return true;
+}
+
+bool logShaderProgramInfo(unsigned int shaderProgramID)
+{
+    //-///////////////////////////
+    // void glGetProgramInfoLog()
+    // param 1 - unsigned int - program ID
+    // param 2 - size_t - max length of log in character buffer
+    // param 3 - size_t - actual length of log, excluding the null terminator character.
+    //                  - Can pass in NULL if the length is not required. 
+    //                  - Can get actual length by passing GL_INFO_LOG_LENGTH into glGetProgram.
+    // param 4 - char* - character buffer to copy log into.
+    // 
+    // Copies a program's info log into a buffer up to a max length. 
+    // - Info log is updated when a program is linked or validated. 
+    // - Info log is in one of three states. 
+    //      - A - Empty
+    //      - B - Info about the last link operation.
+    //      - C - Info about the last validate operation.
+    // - A program object's info log is empty at creation.
+    // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGetProgramInfoLog.xhtml
+    char logBuffer[2048];
+    glGetProgramInfoLog(
+        shaderProgramID, 
+        2047,
+        NULL,
+        logBuffer);
+
+    std::string message = "EMPTY LOG";
+    if (sizeof(logBuffer) / sizeof(char) > 0 ) {
+        message = logBuffer;
+    }
+
+    Logging::consoleLog(Logging::LogType::LOG, "\nPROGRAM INFO LOG AFTER LINKING:");
+    Logging::consoleLog(Logging::LogType::LOG, message);
+    Logging::consoleLog(Logging::LogType::LOG, "\nEND OF PROGRAM INFO LOG\n");
+
+    return true;
+}
+
+#pragma endregion ================================
 
 int main()
 {
@@ -324,6 +552,7 @@ int main()
     //-//////////////////////////////////////////////////////////////
     
     setupShaderProgram();
+    setupVAOandVBO();
     
     //-//////////////////////////////////////////////////////////////
     // RENDER LOOP
@@ -349,6 +578,7 @@ int main()
     // CLEAN-UP - clean/delete allocated GLFW resources
     //-//////////////////////////////////////////////////////////////
      
+    //-//////////////////
     // glfwTerminate()
     //      - Destroys remaining windows
     //      - Frees allocated resources
@@ -456,7 +686,7 @@ bool InitStep2_WindowAndViewport(GLFWwindow* window)
     return true;
 }
 
-#pragma endregion
+#pragma endregion ================================
 
 #pragma region WSL_FUNCTIONS
 
@@ -541,7 +771,7 @@ bool isRunningUnderWSL()
     return false; // none of the WSL signals were present -- probably not running under WSL
 }
 
-#pragma endregion
+#pragma endregion ================================
 
 #pragma region RENDER_LOOP_HELPERS
 
@@ -574,7 +804,7 @@ bool processInput(GLFWwindow *window)
     return false;
 }
 
-#pragma endregion
+#pragma endregion ================================
 
 //-////////////////////////////////////////////////////////////////////////
 // framebuffer_size_callback
@@ -633,4 +863,4 @@ static const bool IsNullPtr(void* pointer, std::string typeStr)
     return false;
 }
 
-#pragma endregion
+#pragma endregion ================================
