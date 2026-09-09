@@ -26,28 +26,48 @@
 #include <fstream>          // std::ifstream -- used by isRunningUnderWSL() below
 #include <string>           // std::string - used by isRunningUnderWSL() below
 #include <vector>
+
 // My C / CPP HEADERS
 #include "Logging.h"
+#
 
-#pragma endregion ================================
+#pragma endregion =====================================================================================================================
 
-#pragma region PROTOYTPES
+#pragma region PROTOYTPES_FORWARD_DECLARATIONS
 
 // Is this a CPP prototype??? Cuz the naming is C-style??
 // GLFW prototypes
 void framebuffer_size_callback(GLFWwindow*, int, int);
 
-// CPP Prototypes
+// FORWARD DECLARATIONS //
+
+// Initialization
 bool setupWSL();
 bool isRunningUnderWSL();
 bool InitStep1();
-bool InitStep2_WindowAndViewport(GLFWwindow* window_close);;
+bool InitStep2_WindowAndViewport(GLFWwindow* window_close);
 
+// Shader Compilation. Shader Object Creation. Shader Program Creation.
+struct CompileShaderParams;
+bool compileShader(CompileShaderParams params);
+bool setupShaderProgram(unsigned int& shaderProgramID);
 bool logShaderProgramInfo(unsigned int shaderProgramID);
+bool logShaderProgramInfo(unsigned int shaderProgramID);
+
+// Model-making
+class vector3;
+class tri;
+bool addTri(std::vector<float>& out, tri t);
+bool buildCubeTris(std::vector<float>& out);
+struct modelBuffer;
+class modelBufferCache;
+bool makeCube();
+bool makeAndCacheBuffer(std::vector<float>& vertices);
+// I/O
 bool processInput(GLFWwindow*);
 
 static const bool IsNullPtr(void*, const std::string);
-#pragma endregion ================================
+#pragma endregion =====================================================================================================================
 
 #pragma region FIELDS
 enum Platform : int32_t
@@ -59,7 +79,34 @@ enum Platform : int32_t
 Platform platform = Platform::UNKNOWN;
 
 const std::string DASH_LINE = "--------------------------";
-#pragma endregion ================================
+#pragma endregion =====================================================================================================================
+
+#pragma region DEBUG_UTILITY
+//-///////////////////////////////////////////////
+// See "Catching errors (the easy way)" here: https://wikis.khronos.org/opengl/OpenGL_Error
+void GLAPIENTRY MessageCallback( GLenum source,
+                 GLenum type,
+                 GLuint id,
+                 GLenum severity,
+                 GLsizei length,
+                 const GLchar* message,
+                 const void* userParam )
+{
+    std::string callbackStr = type == GL_DEBUG_TYPE_ERROR ? "** GL ERROR **" : "";
+    //fprintf( stderr, "GL CALLBACK: %s type = 0x%x, severity = 0x%x, message = %s\n",
+    //       callbackStr.c_str(), type, severity, message);
+
+    Logging::LogType logType = type == GL_DEBUG_TYPE_ERROR 
+                            ? Logging::LogType::ASSERT : Logging::LogType::LOG;
+
+    std::string messageStr = message;
+    Logging::consoleLog(logType, 
+        "\n\tGL CALLBACK: " + callbackStr + 
+                    "\n\t\ttype = 0x" + std::to_string(type) + 
+                    "\n\t\tseverity = 0x" + std::to_string(severity) +
+                    "\n\t\tmessage = " + messageStr);
+}
+#pragma endregion =====================================================================================================================
 
 #pragma region SHADER_SOURCE 
 
@@ -122,21 +169,21 @@ void main()
 }
 )GLSL";
 
-#pragma endregion ================================
+#pragma endregion =====================================================================================================================
 
-#pragma region SHADER_STRUCTS_FUNCTIONS
+#pragma region SETUP_SHADER_PROGRAM_OBJECTS
 
 struct CompileShaderParams
 {
     bool isInitialized = false;
-    unsigned int shaderType;
-    const char* ptrToShaderSource;
-    unsigned int& refToShaderID;
+    unsigned int shaderType = 0;
+    const char* shaderSourceString = NULL;
+    unsigned int& shaderID;
 
     CompileShaderParams(unsigned int _shaderType, 
-        const char* _ptrToShaderSource,
-        unsigned int& _refToShaderID) 
-        : refToShaderID(_refToShaderID) // explicitly initialize reference. https://stackoverflow.com/questions/19576458/constructor-for-must-explicitly-initialize-the-reference-member
+        const char* _shaderSourceString,
+        unsigned int& _shaderID) 
+        : shaderID(_shaderID) // explicitly initialize reference. https://stackoverflow.com/questions/19576458/constructor-for-must-explicitly-initialize-the-reference-member
     {
         switch(_shaderType)
         {
@@ -147,29 +194,26 @@ struct CompileShaderParams
             default:
                 Logging::consoleLog(Logging::LogType::ASSERT, 
                     std::to_string(_shaderType) + " does not match a valid shader type. See: https://registry.khronos.org/OpenGL-Refpages/gl4/html/glCreateShader.xhtml");
-                shaderType = 0;
-                ptrToShaderSource = NULL;
-                isInitialized = false;
                 return;
         }
 
         shaderType = _shaderType;
 
         // TODO Needs validation. Skipping for now. 
-        ptrToShaderSource = _ptrToShaderSource;
+        shaderSourceString = _shaderSourceString;
 
         // Do I need validation here??
-        refToShaderID = _refToShaderID;
+        shaderID = _shaderID;
 
         isInitialized = true;
     }
 };
-
+ 
 bool compileShader(CompileShaderParams params)
 {
     // Create a shader object of given type. Returns the object's id.
-    params.refToShaderID = glCreateShader(params.shaderType);
-    if (params.refToShaderID == 0)
+    params.shaderID = glCreateShader(params.shaderType);
+    if (params.shaderID == 0)
     {
         // TODO - add additional info for the shadersource. etc.
         Logging::consoleLog(Logging::LogType::ASSERT, 
@@ -183,16 +227,16 @@ bool compileShader(CompileShaderParams params)
     // param 3 - const char**. shader source code
     // param 4 - length of source code string. nullptr - no explicit length
     // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glShaderSource.xhtml 
-    glShaderSource(params.refToShaderID, 1, &params.ptrToShaderSource, NULL);
+    glShaderSource(params.shaderID, 1, &params.shaderSourceString, NULL);
 
-    glCompileShader(params.refToShaderID);
+    glCompileShader(params.shaderID);
 
     // Copied and updated from Assignment_0 
     int success;                                       // will hold GL_TRUE/GL_FALSE after the check below
     char infoLog[512];                                  // buffer to hold any compiler error message
-    glGetShaderiv(params.refToShaderID, GL_COMPILE_STATUS, &success); // ask OpenGL: did it compile successfully?
+    glGetShaderiv(params.shaderID, GL_COMPILE_STATUS, &success); // ask OpenGL: did it compile successfully?
     if (!success) {                                     // it didn't --
-        glGetShaderInfoLog(params.refToShaderID, 512, nullptr, infoLog); // ask the driver *why not*, into infoLog
+        glGetShaderInfoLog(params.shaderID, 512, nullptr, infoLog); // ask the driver *why not*, into infoLog
         Logging::consoleLog(Logging::LogType::ASSERT, std::string("ERROR::SHADER::COMPILATION_FAILED\n") + std::string(infoLog)); // print the reason
         return false;
     }
@@ -316,228 +360,6 @@ bool setupShaderProgram(unsigned int& shaderProgramID)
     return true;
 }
 
-// Look into alternative math library for later: https://ggt.sourceforge.net/
-class vector3
-{
-public:
-    float vec_xyz[3];
-
-    float x() { return vec_xyz[0]; }
-    float y() { return vec_xyz[1]; }
-    float z() { return vec_xyz[2]; }
-    bool set_x(float _x) { vec_xyz[0] = _x; return true;}
-    bool set_y(float _y) { vec_xyz[1] = _y; return true;}
-    bool set_z(float _z) { vec_xyz[2] = _z; return true;}
-
-    vector3()
-    {
-        vec_xyz[0] = 0.0;
-        vec_xyz[1] = 0.0;
-        vec_xyz[2] = 0.0;
-    };
-
-    vector3(float _x, float _y, float _z)
-    {
-        vec_xyz[0] = _x;
-        vec_xyz[1] = _y;
-        vec_xyz[2] = _z;
-    };
-
-    bool add_to_vector(std::vector<float>& out)
-    {
-        out.emplace_back(x());
-        out.emplace_back(y());
-        out.emplace_back(z());
-        return true;
-    }
-
-    // static const vector3 zeroVector()
-    // {
-    //     static const vector3 = vector3(0, 0, 0);
-    // }
-    // static vector3 const zeroVector (0, 0, 0);
-};
-
-class tri
-{
-public:
-    vector3 points[3];
-    vector3 normal;
-
-    tri(vector3 a, vector3 b, vector3 c, vector3 norm)
-    {
-        points[0] = a;
-        points[1] = b;
-        points[2] = c;
-        normal = norm;
-    }
-};
-
-bool addTri(std::vector<float>& out, tri t)
-{
-    for (unsigned int i = 0; i < 3; ++i)
-    {
-        t.points[i].add_to_vector(out);
-        t.normal.add_to_vector(out);
-    }
-
-    return true;
-}
-
-//-////////////////////////////////////
-// Make the triangles for each face of the cube. 
-bool buildCubeTris(std::vector<float>& out)
-{
-    vector3 zero        (0.5, 0.5, -0.5);
-    vector3 one         (-0.5, 0.5, -0.5);
-    vector3 two         (-0.5, 0.5, 0.5);
-    vector3 three       (0.5, 0.5, 0.5);
-    vector3 four        (0.5, -0.5, 0.5);
-    vector3 five        (-0.5, -0.5, 0.5);
-    vector3 six         (-0.5, -0.5, -0.5);
-    vector3 seven       (0.5, -0.5, -0.5);
-
-    vector3 sideANorm   (1, 0, 0);
-    vector3 topNorm     (0, 1, 0);
-    vector3 frontNorm   (0, 0, 1);
-    vector3 backNorm    (0, 0, -1);
-    vector3 botNorm     (0, -1, 0);
-    vector3 sideBNorm   (-1, 0, 0);
-
-    // Back Face
-    addTri(out, tri(zero, one, six, backNorm));
-    addTri(out, tri(zero, six, seven, backNorm));
-
-    // Top Face
-    addTri(out, tri(zero, one, two, topNorm));
-    addTri(out, tri(zero, two, three, topNorm));
-
-    // Front Face
-    addTri(out, tri(two, three, four, frontNorm));
-    addTri(out, tri(two, four, five, frontNorm));
-
-    // Bottom Face
-    addTri(out, tri(four, five, six, botNorm));
-    addTri(out, tri(four, six, seven, botNorm));
-
-    // sideA Face
-    addTri(out, tri(zero, three, four, sideANorm));
-    addTri(out, tri(zero, four, seven, sideANorm));
-
-    // sideB Face
-    addTri(out, tri(one, two, five, sideBNorm));
-    addTri(out, tri(one, two, six, sideBNorm));
-
-    return true; 
-}
-
-struct modelBuffer
-{
-    unsigned int VAO = 0;
-    unsigned int VBO = 0;
-    unsigned int verticesCount = 0;
-    
-    modelBuffer(unsigned int _VAO,
-                unsigned int _VBO,
-                unsigned int _verticesCount)
-    {
-        VAO = _VAO;
-        VBO = _VBO;
-        verticesCount = _verticesCount;
-    }
-};
-
-class modelBufferCache
-{
-public:
-    std::vector<unsigned int> name;
-    std::vector<modelBuffer> cache;
-
-    bool add(modelBuffer& buf)
-    {
-        name.emplace_back(buf.VAO + buf.VBO);
-        cache.emplace_back(buf);
-
-        return true;
-    }
-};
-
-modelBufferCache bCache;
-
-bool makeCubeBuffer()
-{
-    std::vector<float> vertices;
-    vertices.resize(48); // 6 (faces) * 2 (tris per face) * 4 (3 pos vertices + 1 norm per tri)
-    buildCubeTris(vertices);
-    
-    if (vertices.size() == 0) {
-        return false;
-    }
-    
-    // A VBO (Vertex Buffer Object) is a block of GPU memory holding raw vertex
-    // data. A VAO (Vertex Array Object) records HOW to interpret that memory --
-    // which floats are the position, which are the normal, how far apart each
-    // vertex is (the "stride"), etc. -- so that later we can just bind the VAO
-    // and draw, without re-describing the layout every time.
-    //
-    // These are built ONCE at startup, not every frame. An earlier version of
-    // this demo created and destroyed a VAO/VBO every frame for every letter --
-    // that's wasted GPU churn 60 times a second for geometry that never
-    // changes, and it's not a habit worth picking up.
-    modelBuffer buf = modelBuffer(0, 0, vertices.size());
-    {
-         // https://wikis.khronos.org/opengl/Vertex_Specification#Vertex_Array_Object
-        glGenVertexArrays(1, &buf.VAO); // creates a VAO 'name'. Assigns it our passed in VAO.
-        // https://wikis.khronos.org/opengl/Vertex_Specification#Vertex_Array_Object
-        glGenBuffers(1, &buf.VBO); // creates VBO 'name'. Assigns it to our passed in VBO.
-        
-        glBindVertexArray(buf.VAO); // "everything below configures THIS VAO"
-
-        //-//////////////////////////////
-        // glBindBuffer() - binds a buffer to GL target. 
-        //      If no matching buffer name is found, a buffer name is created.
-        // param 1 - enum. target. binds buffer to this target.
-        //      see doc for what target matches what buffer type.
-        // param 2 - unsigned int. buffer name. *yes, the buffer name is an unsigned int*.
-        // 
-        // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBindBuffer.xhtml
-        glBindBuffer(GL_ARRAY_BUFFER, buf.VBO);
-
-        //-//////////////////////////////
-        // glBufferData()
-        //
-        // copies our CPU-side `vertices` vector into GPU memory. GL_STATIC_DRAW
-        //   is a hint to the driver: "this data won't change often," which lets
-        //   it choose faster storage than if we were rewriting it every frame.
-        glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_STATIC_DRAW);
-
-        //-//////////////////////////////
-        // glVertexAttribPointer()
-        // param 1 - unsigned int. position of vertex attribute we want to configure. 
-        // param 2 - unsigned int. # of componeents per vertex attribute
-        // param 3 - enum. Corresponds to the attribute's data type 
-        // param 4 - bool. normalize data?
-        // param 5 - size type. size of attribute or space between consecutive attributes
-        // param 6 - (void*)unsigned int. offset to where the attribute's position is in the buffer.
-        // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glVertexAttribPointer.xhtml
-        // 
-        // 3 position vertices. 6 floats (or 24 bytes) from position of attribute's first position element to the next attribute's first position element. 
-        glVertexAttribPointer(0, 3, GL_FLOAT, false, 6 * sizeof(float), (void*)0);
-        glEnableVertexAttribArray(0); // turn attribute 0 on so the GPU actually reads it
-
-        // setup VAO with vertex shader's normal info. 
-        glVertexAttribPointer(1, 3, GL_FLOAT, false, 6 * sizeof(float), (void*)(3 * sizeof(float)));
-        glEnableVertexAttribArray(1);
-
-        // unbind VAO to avoid mishaps
-        glBindVertexArray(0);
-    }
-
-    bCache.add(buf);
-
-    return true;
-}
-
 bool logShaderProgramInfo(unsigned int shaderProgramID)
 {
     //-///////////////////////////
@@ -576,7 +398,364 @@ bool logShaderProgramInfo(unsigned int shaderProgramID)
     return true;
 }
 
-#pragma endregion ================================
+#pragma endregion =====================================================================================================================
+
+#pragma region BUILD_MODEL
+
+// Look into alternative math library for later: GLM. Used and recommended by professor. 
+//      OR second choice https://ggt.sourceforge.net/
+class vector3
+{
+public:
+    float vec_xyz[3];
+
+    float x() { return vec_xyz[0]; }
+    float y() { return vec_xyz[1]; }
+    float z() { return vec_xyz[2]; }
+    bool set_x(float _x) { vec_xyz[0] = _x; return true;}
+    bool set_y(float _y) { vec_xyz[1] = _y; return true;}
+    bool set_z(float _z) { vec_xyz[2] = _z; return true;}
+
+    vector3()
+    {
+        vec_xyz[0] = 0.0;
+        vec_xyz[1] = 0.0;
+        vec_xyz[2] = 0.0;
+    };
+
+    vector3(float _x, float _y, float _z)
+    {
+        vec_xyz[0] = _x;
+        vec_xyz[1] = _y;
+        vec_xyz[2] = _z;
+    };
+
+    bool addVec3ToVector(std::vector<float>& out)
+    {
+        out.emplace_back(x());
+        out.emplace_back(y());
+        out.emplace_back(z());
+        return true;
+    }
+
+    // static const vector3 zeroVector()
+    // {
+    //     static const vector3 = vector3(0, 0, 0);
+    // }
+    // static vector3 const zeroVector (0, 0, 0);
+};
+
+class tri
+{
+public:
+    vector3 points[3];
+    vector3 normal;
+
+    tri(vector3 a, vector3 b, vector3 c, vector3 norm)
+    {
+        points[0] = a;
+        points[1] = b;
+        points[2] = c;
+        normal = norm;
+    }
+};
+
+bool addTri(std::vector<float>& out, tri t)
+{
+    for (unsigned int i = 0; i < 3; ++i)
+    {
+        t.points[i].addVec3ToVector(out);
+        t.normal.addVec3ToVector(out);
+    }
+
+    return true;
+}
+
+//-////////////////////////////////////
+// Make the triangles for each face of the cube. 
+bool buildCubeTris(std::vector<float>& out)
+{
+    static const vector3 zero        (0.5, 0.5, -0.5);
+    static const vector3 one         (-0.5, 0.5, -0.5);
+    static const vector3 two         (-0.5, 0.5, 0.5);
+    static const vector3 three       (0.5, 0.5, 0.5);
+    static const vector3 four        (0.5, -0.5, 0.5);
+    static const vector3 five        (-0.5, -0.5, 0.5);
+    static const vector3 six         (-0.5, -0.5, -0.5);
+    static const vector3 seven       (0.5, -0.5, -0.5);
+
+    static const vector3 sideANorm   (1, 0, 0);
+    static const vector3 topNorm     (0, 1, 0);
+    static const vector3 frontNorm   (0, 0, 1);
+    static const vector3 backNorm    (0, 0, -1);
+    static const vector3 botNorm     (0, -1, 0);
+    static const vector3 sideBNorm   (-1, 0, 0);
+
+    // Back Face
+    addTri(out, tri(zero, one, six, backNorm));
+    addTri(out, tri(zero, six, seven, backNorm));
+
+    // Top Face
+    addTri(out, tri(zero, one, two, topNorm));
+    addTri(out, tri(zero, two, three, topNorm));
+
+    // Front Face
+    addTri(out, tri(two, three, four, frontNorm));
+    addTri(out, tri(two, four, five, frontNorm));
+
+    // Bottom Face
+    addTri(out, tri(four, five, six, botNorm));
+    addTri(out, tri(four, six, seven, botNorm));
+
+    // sideA Face
+    addTri(out, tri(zero, three, four, sideANorm));
+    addTri(out, tri(zero, four, seven, sideANorm));
+
+    // sideB Face
+    addTri(out, tri(one, two, five, sideBNorm));
+    addTri(out, tri(one, two, six, sideBNorm));
+
+    return true; 
+}
+
+//-////////////////////////////////////
+// Make a viewpoint-facing triangle.
+bool buildTri(std::vector<float>& out)
+{
+    // origin at bottom center
+    static const vector3 zero       (-0.5, 0, 0);
+    static const vector3 one        (0.5, 0, 0);
+    static const vector3 two        (0, 1,0);
+
+    static const vector3 norm       (0, 0, 1);
+
+    addTri(out, tri(zero, one, two, norm));
+
+    return true;
+}
+
+// //-////////////////////////////////////
+// //
+// enum Shape : int32_t
+// {
+//     Shape = -20,
+//     INVALID = -10,
+//     TRI = 0,
+//     SQUARE = 10,
+//     CUBE = 100
+// };
+
+
+// //-////////////////////////////////////
+// //
+// bool isValidShape(enum Shape s)
+// {
+//     switch(s)
+//     {
+//         case Shape::TRI:
+//             break;
+//         case Shape::SQUARE:
+//             break;
+//         case Shape::CUBE:
+//             break;
+//         default:
+//             Logging::consoleLog(Logging::LogType::ASSERT, "NOT A VALID SHAPE");
+//             return false;
+//     }
+
+//     return true;
+// }
+
+// bool checkShape()
+// {
+//     // not implemented
+//     return false;
+// }
+
+struct modelBuffer
+{
+    unsigned int VAO = 0;
+    unsigned int VBO = 0;
+    unsigned int verticesCount = 0;
+    
+    modelBuffer(unsigned int _VAO,
+                unsigned int _VBO,
+                unsigned int _verticesCount)
+    {
+        VAO = _VAO;
+        VBO = _VBO;
+        verticesCount = _verticesCount;
+    }
+};
+
+class modelBufferCache
+{
+public:
+    std::vector<modelBuffer> cache;
+
+    bool addModelBuffer(modelBuffer& buf)
+    {
+        cache.emplace_back(buf);
+
+        return true;
+    }
+};
+
+modelBufferCache bufferCache;
+
+bool outputVertices(const std::vector<float>& vertices)
+{
+    std::string verticesString = "Vertex Data\n";
+    verticesString.reserve(vertices.size() * 5);
+    for(int i = 0; i < vertices.size() / 6; ++i)
+    {
+        int offsetIndex = i * 6;
+
+        // positions
+        verticesString.append("[");
+        verticesString.append(std::to_string(vertices[offsetIndex]) + ", ");
+        verticesString.append(std::to_string(vertices[offsetIndex+1]) + ", ");
+        verticesString.append(std::to_string(vertices[offsetIndex+2]) + " ");
+        verticesString.append("]");
+
+        // normals
+        verticesString.append("\t[");
+        verticesString.append(std::to_string(vertices[offsetIndex+3]) + ", ");
+        verticesString.append(std::to_string(vertices[offsetIndex+4]) + ", ");
+        verticesString.append(std::to_string(vertices[offsetIndex+5]) + " ");
+        verticesString.append("]");
+
+        verticesString.append("\n");
+    }
+
+    Logging::consoleLog(Logging::LogType::LOG, verticesString);
+
+    return true;
+}
+
+bool makeCube()
+{
+    // 6 (faces) * 2 (tris per face) * 3 points per tri * 6 (3 floats per vertex + 3 floats per vertex normal)
+    const unsigned int floatsPerCube = 216;
+    std::vector<float> vertices;
+    vertices.reserve(floatsPerCube); 
+
+    buildCubeTris(vertices);
+    if (vertices.size() > floatsPerCube) {
+        Logging::consoleLog(Logging::LogType::ASSERT, 
+            "Failed to correctly construct cube vertices. More vertices than there should be.\n \\"
+                "\tExpected = " + std::to_string(floatsPerCube) + "\n"
+                "\tActual   = " + std::to_string(vertices.size()));
+    }
+    else {
+        Logging::consoleLog(Logging::LogType::LOG, 
+            "Constructed cube with " + std::to_string(vertices.size()) + "vertices");
+    }
+
+    makeAndCacheBuffer(vertices);
+    return true;
+}
+
+bool makeTri()
+{
+    // 1 face * 1 tris * 3 points per tri * 6 floats per point (3 pos + 3 norm)
+    const unsigned int floatsPerTri = 18;
+    std::vector<float> vertices;
+    vertices.reserve(floatsPerTri);  
+    
+    buildTri(vertices);
+    if (vertices.size() > floatsPerTri) {
+        Logging::consoleLog(Logging::LogType::ASSERT, 
+            "Failed to correctly construct triangle vertices. More vertices than there should be.\n \\"
+                "\tExpected = " + std::to_string(floatsPerTri) + "\n"
+                "\tActual   = " + std::to_string(vertices.size()));
+    }
+    else {
+        Logging::consoleLog(Logging::LogType::LOG, 
+            "Constructed tri with " + std::to_string(vertices.size()) + " vertices");
+    }
+    
+    outputVertices(vertices);
+    
+    makeAndCacheBuffer(vertices);
+
+    return true;
+}
+
+bool makeAndCacheBuffer(std::vector<float>& vertices)
+{
+    if (vertices.size() == 0) {
+        Logging::consoleLog(Logging::LogType::ASSERT, 
+            "ATtempting to create buffer for vertex-less model");
+        return false;
+    }
+    
+    // A VBO (Vertex Buffer Object) is a block of GPU memory holding raw vertex
+    // data. A VAO (Vertex Array Object) records HOW to interpret that memory --
+    // which floats are the position, which are the normal, how far apart each
+    // vertex is (the "stride"), etc. -- so that later we can just bind the VAO
+    // and draw, without re-describing the layout every time.
+    //
+    // These are built ONCE at startup, not every frame. An earlier version of
+    // this demo created and destroyed a VAO/VBO every frame for every letter --
+    // that's wasted GPU churn 60 times a second for geometry that never
+    // changes, and it's not a habit worth picking up.
+    modelBuffer buf = modelBuffer(0, 
+        0, 
+        vertices.size() / 6); // 6 floats for each point = 3 pos + 3 norm.
+    {
+         // https://wikis.khronos.org/opengl/Vertex_Specification#Vertex_Array_Object
+        glGenVertexArrays(1, &buf.VAO); // creates a VAO 'name'. Assigns it our passed in VAO.
+        // https://wikis.khronos.org/opengl/Vertex_Specification#Vertex_Array_Object
+        glGenBuffers(1, &buf.VBO); // creates VBO 'name'. Assigns it to our passed in VBO.
+        
+        glBindVertexArray(buf.VAO); // "everything below configures THIS VAO"
+
+        //-//////////////////////////////
+        // glBindBuffer() - binds a buffer to GL target. 
+        //      If no matching buffer name is found, a buffer name is created.
+        // param 1 - enum. target. binds buffer to this target.
+        //      see doc for what target matches what buffer type.
+        // param 2 - unsigned int. buffer name. *yes, the buffer name is an unsigned int*.
+        // 
+        // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBindBuffer.xhtml
+        glBindBuffer(GL_ARRAY_BUFFER, buf.VBO);
+
+        //-//////////////////////////////
+        // glBufferData()
+        //
+        // copies our CPU-side `vertices` vector into GPU memory. GL_STATIC_DRAW
+        //   is a hint to the driver: "this data won't change often," which lets
+        //   it choose faster storage than if we were rewriting it every frame.
+        glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_STATIC_DRAW);
+
+        //-//////////////////////////////
+        // glVertexAttribPointer()
+        // param 1 - unsigned int. position of vertex attribute we want to configure. 
+        // param 2 - unsigned int. # of componeents per vertex attribute
+        // param 3 - enum. Corresponds to the attribute's data type 
+        // param 4 - bool. normalize data?
+        // param 5 - size type. size of attribute or space between consecutive attributes
+        // param 6 - (void*)unsigned int. offset to where the attribute's position is in the buffer.
+        // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glVertexAttribPointer.xhtml
+        //         // 3 position vertices. 6 floats (or 24 bytes) from position of attribute's first position element to the next attribute's first position element. 
+        glVertexAttribPointer(0, 3, GL_FLOAT, false, 6 * sizeof(float), (void*)0);
+        glEnableVertexAttribArray(0); // turn attribute 0 on so the GPU actually reads it
+
+        // setup VAO with vertex shader's normal info. 
+        glVertexAttribPointer(1, 3, GL_FLOAT, false, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+        glEnableVertexAttribArray(1);
+
+        // unbind VAO to avoid mishaps
+        glBindVertexArray(0);
+    }
+
+    bufferCache.addModelBuffer(buf);
+
+    return true;
+}
+
+#pragma endregion =====================================================================================================================
 
 #pragma region MAIN_LOOP
 
@@ -585,9 +764,9 @@ int main()
     Logging::consoleLog(Logging::LogType::LOG, \
         ("STARTING PROGRAM\n" + DASH_LINE + "\n").c_str());
 
-    //-//////////////////////////////////////////////////////////////
-    // PLATFORM SETUP, GLFW SETUP
-    //-//////////////////////////////////////////////////////////////
+//-//////////////////////////////////////////////////////////////
+// PLATFORM SETUP, GLFW SETUP
+//-//////////////////////////////////////////////////////////////
 
     InitStep1();
 
@@ -610,13 +789,10 @@ int main()
 
     InitStep2_WindowAndViewport(window);
 
-    //-//////////////////////////
-    // glfwMakeContextCurrent()
-    // Makes this window the only window current on the calling thread.
-    // https://www.glfw.org/docs/latest/group__context.html#ga1c04dc242268f827290fe40aa1c91157
-    //
-    // I'm not sure I need this??? It worked before having this call?
-    // glfwMakeContextCurrent(window);
+    // Enable debug output.
+    glEnable( GL_DEBUG_OUTPUT );
+    // specify debug callback
+    glDebugMessageCallback( MessageCallback, 0 );
     
     //-//////////////////////////
     // Disappearing arrow cursor fix for X11 + WSL platform. 
@@ -624,9 +800,9 @@ int main()
     GLFWcursor* arrowCursor = glfwCreateStandardCursor(GLFW_ARROW_CURSOR); // create a standard system arrow cursor shape
     glfwSetCursor(window, arrowCursor);                                    // apply it to this window
 
-    //-//////////////////////////////////////////////////////////////
-    // SHADER SETUP
-    //-//////////////////////////////////////////////////////////////
+//-//////////////////////////////////////////////////////////////
+// SHADER SETUP
+//-//////////////////////////////////////////////////////////////
     
     unsigned int shaderProgramID;
     setupShaderProgram(shaderProgramID);
@@ -635,11 +811,19 @@ int main()
     // hide farther ones instead of fighting for the same pixels.
     glEnable(GL_DEPTH_TEST); // turn on depth testing
 
-    makeCubeBuffer();
-    
-    //-//////////////////////////////////////////////////////////////
-    // RENDER LOOP
-    //-//////////////////////////////////////////////////////////////
+//-//////////////////////////////////////////////////////////////
+// MAKE MESHES
+//-//////////////////////////////////////////////////////////////
+
+    // Add mesh to buffer
+    makeTri();
+    if (bufferCache.cache.size() == 0) {
+        Logging::consoleLog(Logging::LogType::ASSERT, "Failed to cache buffer(s)");
+    }
+
+//-//////////////////////////////////////////////////////////////
+// RENDER LOOP
+//-//////////////////////////////////////////////////////////////
 
     // glfwWindowShouldClose() call
     // - returns a flag. If true, do we close the window manually???? Or does glfw handle that??
@@ -649,7 +833,7 @@ int main()
         // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glClearColor.xhtml
         // Inputs colors for glClear to use when it clears and sets the color buffer.
         // A *state-setting* function
-        glClearColor(0.1, 0.1, 0.1, 1);
+        glClearColor(0.3, 0.3, 0.3, 1);
         
         // Clears the on screen buffer. Sets its buffer values *?for next render?*
         // A *state-using* function
@@ -657,16 +841,21 @@ int main()
         
         glUseProgram(shaderProgramID);
         
-        float red = (sin(glfwGetTime()+ 0.2f));            // red channel, oscillating between 0 and 1 over time
-        float green = (sin(glfwGetTime() + 0.5f));   // green channel, phase-shifted from red
-        float blue = (sin(glfwGetTime()+ 0.9f));    // blue channel, phase-shifted from both
+        float red = (sin(glfwGetTime()+ 0.2f));       // red channel, oscillating between 0 and 1 over time
+        float green = (sin(glfwGetTime() + 0.5f));   // green channel, phase-shifted
+        float blue = (sin(glfwGetTime()+ 0.9f));    // blue channel, phase-shifted
         int colorLoc = glGetUniformLocation(shaderProgramID, "color"); // ask the shader program where its "color" uniform lives
         glUniform3f(colorLoc, red, green, blue);                     // upload this frame's color for this letter
 
-        for(size_t i = 0; i < bCache.cache.size(); ++i)
+        for(size_t i = 0; i < bufferCache.cache.size(); ++i)
         {
-            glBindVertexArray(bCache.cache[i].VAO);
-            glDrawArrays(GL_TRIANGLES, 0, bCache.cache[i].verticesCount);
+            if (bufferCache.cache[i].verticesCount == 0)
+            {
+                Logging::consoleLog(Logging::LogType::ASSERT, "ATTEMPTING TO DRAW SHAPE WITH ZERO VERTICES");
+                continue;
+            }
+            glBindVertexArray(bufferCache.cache[i].VAO);
+            glDrawArrays(GL_TRIANGLES, 0, bufferCache.cache[i].verticesCount);
         }
         glBindVertexArray(0); // unbind VAO object to avoid mishaps.
 
@@ -681,10 +870,20 @@ int main()
         glfwPollEvents();
     }
 
-    //-//////////////////////////////////////////////////////////////
-    // CLEAN-UP - clean/delete allocated GLFW resources
-    //-//////////////////////////////////////////////////////////////
-     
+//-//////////////////////////////////////////////////////////////
+// CLEAN-UP - clean/delete allocated GLFW resources
+//-//////////////////////////////////////////////////////////////
+    
+    // Clean-up Program and Buffers.
+    for(int i = 0; i < bufferCache.cache.size(); ++i)
+    {
+        glDeleteVertexArrays(1, &bufferCache.cache[i].VAO);
+        glDeleteBuffers(1, &bufferCache.cache[i].VBO);
+    }
+
+    glDeleteProgram(shaderProgramID);
+    glfwDestroyCursor(arrowCursor); // free the cursor object we created earlier
+
     //-//////////////////
     // glfwTerminate()
     //      - Destroys remaining windows
@@ -704,7 +903,7 @@ int main()
     return 0;
 }
 
-#pragma endregion
+#pragma endregion =====================================================================================================================
 
 #pragma region INITIALIZATION
 
@@ -755,7 +954,11 @@ bool InitStep1()
 
 bool InitStep2_WindowAndViewport(GLFWwindow* window)
 {
-    // make the created window the current context. 
+    //-//////////////////////////
+    // glfwMakeContextCurrent()
+    // Makes this window the only window current on the calling thread.
+    // https://www.glfw.org/docs/latest/group__context.html#ga1c04dc242268f827290fe40aa1c91157
+    //
     glfwMakeContextCurrent(window);
 
     // Initialize GLAD
@@ -795,7 +998,7 @@ bool InitStep2_WindowAndViewport(GLFWwindow* window)
     return true;
 }
 
-#pragma endregion ================================
+#pragma endregion =====================================================================================================================
 
 #pragma region WSL_FUNCTIONS
 
@@ -880,7 +1083,7 @@ bool isRunningUnderWSL()
     return false; // none of the WSL signals were present -- probably not running under WSL
 }
 
-#pragma endregion ================================
+#pragma endregion =====================================================================================================================
 
 #pragma region RENDER_LOOP_HELPERS
 
@@ -913,7 +1116,7 @@ bool processInput(GLFWwindow *window)
     return false;
 }
 
-#pragma endregion ================================
+#pragma endregion =====================================================================================================================
 
 //-////////////////////////////////////////////////////////////////////////
 // framebuffer_size_callback
@@ -956,7 +1159,7 @@ bool colorLoop()
     return true;
 }
 
-#pragma region UTIL_FUNCTIONS
+#pragma region UTILITY
 
 //-///////////////////////////////////////////////
 //
@@ -972,4 +1175,8 @@ static const bool IsNullPtr(void* pointer, std::string typeStr)
     return false;
 }
 
-#pragma endregion ================================
+
+
+
+
+#pragma endregion =====================================================================================================================
