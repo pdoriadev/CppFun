@@ -92,7 +92,7 @@ namespace Logging
                 return true;
             case LogType::ASSERT:
                 closeLogFileIfOpen();
-                std::cerr << false << std::endl;
+                std::cerr << logMessage << std::endl;
                 assert(false);
                 return true;
             default:
