@@ -63,10 +63,13 @@ struct modelBuffer;
 class modelBufferCache;
 bool makeCube();
 bool makeAndCacheBuffer(std::vector<float>& vertices);
+
 // I/O
 bool processInput(GLFWwindow*);
 
-static const bool IsNullPtr(void*, const std::string);
+// Utility
+const bool IsNullPtr(void*, const std::string);
+
 #pragma endregion =====================================================================================================================
 
 #pragma region FIELDS
@@ -1163,7 +1166,7 @@ bool colorLoop()
 
 //-///////////////////////////////////////////////
 //
-static const bool IsNullPtr(void* pointer, std::string typeStr)
+const bool IsNullPtr(void* pointer, std::string typeStr)
 {
     if (pointer == NULL)
     {
