@@ -10,12 +10,7 @@ LOG:
 END OF PROGRAM INFO LOG
 
 LOG: LINK SUCCESSFUL! ID = 3
-LOG: Constructed tri with 18 vertices
-LOG: Vertex Data
-[-0.500000, 0.000000, 0.000000 ]	[0.000000, 0.000000, 1.000000 ]
-[0.500000, 0.000000, 0.000000 ]	[0.000000, 0.000000, 1.000000 ]
-[0.000000, 1.000000, 0.000000 ]	[0.000000, 0.000000, 1.000000 ]
-
+LOG: Constructed cube with 216floats and 36 points.
 LOG: 
 --------------------------
 ENDING PROGRAM
