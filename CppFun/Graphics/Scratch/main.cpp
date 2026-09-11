@@ -21,7 +21,7 @@
 #include <GLFW/glfw3.h>     // Window + Input Library - window/context creation, input, timing
                             // HTML Documentation - https://www.glfw.org/docs/latest/
 // C / CPP HEADERS
-#include <cmath>            // sin, cos, M_PI
+// #include <cmath>            // sin, cos, M_PI
 #include <cstdlib>          // std::getenv -- used by isRunningUnderWSL() below
 #include <fstream>          // std::ifstream -- used by isRunningUnderWSL() below
 #include <string>           // std::string - used by isRunningUnderWSL() below
@@ -29,7 +29,7 @@
 
 // My C / CPP HEADERS
 #include "Logging.h"
-#
+#include "InputCache.h"
 
 #pragma endregion =====================================================================================================================
 
@@ -1133,6 +1133,13 @@ bool processInput(GLFWwindow *window)
 {
     if (IsNullPtr(window, "GLFWwindow")) return false;
 
+    enum InputCache::KeyState state;
+    if (InputCache::getState(GLFW_KEY_SPACE, state) == true)
+    {
+        consoleLog(Logging::LogType::LOG,
+            "I see spacebar. Its state is: " + InputCache::getKeyStateString(state));
+    }
+
     //-/////////////////////////////////////////////
     // glfwGetKey() - https://www.glfw.org/docs/latest/input_guide.html#input_key  
     // param 1 - GLFWwindow pointer.
@@ -1169,14 +1176,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 {
     if (IsNullPtr(window, "GLFWwindow")) return;
 
-    switch(key)
-    {
-        case GLFW_KEY_ESCAPE:
-            
-
-    }
-
-    
+    InputCache::cacheKeyState(key, action);
 }
 
 
