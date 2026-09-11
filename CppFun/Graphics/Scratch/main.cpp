@@ -797,7 +797,7 @@ int main()
     // param 3 - window name
     // param 4 - ? 
     // param 5 - ?
-    GLFWwindow* window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(800, 600, "Fall 2026 - Assignment 1 - Peter Doria", NULL, NULL);
     if (IsNullPtr(window, "GLFWwindow"))
     {
         Logging::consoleLog(Logging::LogType::ASSERT,
@@ -1002,7 +1002,7 @@ bool Init_Window_Viewport(GLFWwindow* window)
         Logging::consoleLog(Logging::LogType::ASSERT,
             (DASH_LINE + "\nFailed to initialize GLAD\n" + DASH_LINE).c_str());
         return false;
-    }   
+    }
 
     //-/////////////////////////////////////////////////////////////////////////
     // glViewPort - Tell OpenGL the size of rendering window
