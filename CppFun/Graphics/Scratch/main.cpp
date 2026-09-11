@@ -44,8 +44,8 @@ void framebuffer_size_callback(GLFWwindow*, int, int);
 // Initialization
 bool setupWSL();
 bool isRunningUnderWSL();
-bool InitStep1();
-bool InitStep2_WindowAndViewport(GLFWwindow* window_close);
+bool Init_Platform_GLFW();
+bool Init_Window_Viewport(GLFWwindow* window_close);
 
 // Shader Compilation. Shader Object Creation. Shader Program Creation.
 struct CompileShaderParams;
@@ -62,7 +62,7 @@ bool buildCubeTris(std::vector<float>& out);
 struct modelBuffer;
 class modelBufferCache;
 bool makeCube();
-bool makeAndCacheBuffer(std::vector<float>& vertices);
+bool cacheModelBuffer(std::vector<float>& vertices);
 
 // I/O
 bool processInput(GLFWwindow*);
@@ -478,20 +478,20 @@ bool addTri(std::vector<float>& out, tri t)
 // Make the triangles for each face of the cube. 
 bool buildCubeTris(std::vector<float>& out)
 {
-    static const vector3 zero        (0.5, 0.5, -0.5);
-    static const vector3 one         (-0.5, 0.5, -0.5);
-    static const vector3 two         (-0.5, 0.5, 0.5);
-    static const vector3 three       (0.5, 0.5, 0.5);
-    static const vector3 four        (0.5, -0.5, 0.5);
-    static const vector3 five        (-0.5, -0.5, 0.5);
-    static const vector3 six         (-0.5, -0.5, -0.5);
-    static const vector3 seven       (0.5, -0.5, -0.5);
+    static const vector3 zero        (0.5f, 0.5f, -0.5f);
+    static const vector3 one         (-0.5f, 0.5f, -0.5f);
+    static const vector3 two         (-0.5f, 0.5f, 0.5f);
+    static const vector3 three       (0.5f, 0.5f, 0.5f);
+    static const vector3 four        (0.5f, -0.5f, 0.5f);
+    static const vector3 five        (-0.5f, -0.5f, 0.5f);
+    static const vector3 six         (-0.5f, -0.5f, -0.5f);
+    static const vector3 seven       (0.5f, -0.5f, -0.5f);
 
-    static const vector3 sideANorm   (1, 0, 0);
-    static const vector3 topNorm     (0, 1, 0);
-    static const vector3 frontNorm   (0, 0, 1);
-    static const vector3 backNorm    (0, 0, -1);
-    static const vector3 botNorm     (0, -1, 0);
+    static const vector3 sideANorm   (1.0f, 0, 0);
+    static const vector3 topNorm     (0.0f, 1, 0);
+    static const vector3 frontNorm   (0.0f, 0, 1);
+    static const vector3 backNorm    (0.0f, 0, -1);
+    static const vector3 botNorm     (0.0f, -1, 0);
     static const vector3 sideBNorm   (-1, 0, 0);
 
     // Back Face
@@ -652,10 +652,10 @@ bool makeCube()
     }
     else {
         Logging::consoleLog(Logging::LogType::LOG, 
-            "Constructed cube with " + std::to_string(vertices.size()) + "vertices");
+            "Constructed cube with " + std::to_string(vertices.size()) + "floats and " + std::to_string(vertices.size() / 6) + " points.");
     }
 
-    makeAndCacheBuffer(vertices);
+    cacheModelBuffer(vertices);
     return true;
 }
 
@@ -667,25 +667,32 @@ bool makeTri()
     vertices.reserve(floatsPerTri);  
     
     buildTri(vertices);
-    if (vertices.size() > floatsPerTri) {
+    if (vertices.size() != floatsPerTri) {
+        Logging::consoleLog(Logging::LogType::ERROR, 
+            "Failed to construct triangle. Vertices: ");
+        outputVertices(vertices);
         Logging::consoleLog(Logging::LogType::ASSERT, 
-            "Failed to correctly construct triangle vertices. More vertices than there should be.\n \\"
+            "Expected vertices.\n \\"
                 "\tExpected = " + std::to_string(floatsPerTri) + "\n"
                 "\tActual   = " + std::to_string(vertices.size()));
     }
     else {
-        Logging::consoleLog(Logging::LogType::LOG, 
-            "Constructed tri with " + std::to_string(vertices.size()) + " vertices");
+        Logging::consoleLog(Logging::LogType::LOG,
+            "Constructed tri with " + std::to_string(vertices.size()) + " floats and " + std::to_string(vertices.size() / 6) + " points.");
     }
     
     outputVertices(vertices);
     
-    makeAndCacheBuffer(vertices);
+    cacheModelBuffer(vertices);
 
     return true;
 }
 
-bool makeAndCacheBuffer(std::vector<float>& vertices)
+//-//////////////////////////////////////////////////////////////////////////////////////////
+// Takes vertices array as input. 
+// Generates, binds, and sets modelBuffer's VAO and VBO.
+// Caches modelBuffer for later.
+bool cacheModelBuffer(std::vector<float>& vertices)
 {
     if (vertices.size() == 0) {
         Logging::consoleLog(Logging::LogType::ASSERT, 
@@ -707,19 +714,24 @@ bool makeAndCacheBuffer(std::vector<float>& vertices)
         0, 
         vertices.size() / 6); // 6 floats for each point = 3 pos + 3 norm.
     {
-         // https://wikis.khronos.org/opengl/Vertex_Specification#Vertex_Array_Object
-        glGenVertexArrays(1, &buf.VAO); // creates a VAO 'name'. Assigns it our passed in VAO.
+        //-/////////////////////////////////
+        // VAO uses attribute pointers to correctly reference different data in the VBO ??
+        // By changing attribute pointers, we change the VBO's configuration. The configuration should match the data. 
         // https://wikis.khronos.org/opengl/Vertex_Specification#Vertex_Array_Object
-        glGenBuffers(1, &buf.VBO); // creates VBO 'name'. Assigns it to our passed in VBO.
+        glGenVertexArrays(1, &buf.VAO); // creates a VBO object. Assigns its 'name' to our VAO handle.
+        //-/////////////////////////////////
+        // VBO is the raw vertex data. ?? 
+        // https://wikis.khronos.org/opengl/Vertex_Specification#Vertex_Array_Object
+        glGenBuffers(1, &buf.VBO); // creates a VBO object. Assigns its 'name' to our VBO handle.
         
         glBindVertexArray(buf.VAO); // "everything below configures THIS VAO"
 
         //-//////////////////////////////
-        // glBindBuffer() - binds a buffer to GL target. 
+        // glBindBuffer() - binds a buffer to GL target. After this, any changes to the target will affect the bound buffer.
         //      If no matching buffer name is found, a buffer name is created.
         // param 1 - enum. target. binds buffer to this target.
         //      see doc for what target matches what buffer type.
-        // param 2 - unsigned int. buffer name. *yes, the buffer name is an unsigned int*.
+        // param 2 - unsigned int. buffer name. *yes, the buffer 'name' is an unsigned int*.
         // 
         // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBindBuffer.xhtml
         glBindBuffer(GL_ARRAY_BUFFER, buf.VBO);
@@ -730,6 +742,8 @@ bool makeAndCacheBuffer(std::vector<float>& vertices)
         // copies our CPU-side `vertices` vector into GPU memory. GL_STATIC_DRAW
         //   is a hint to the driver: "this data won't change often," which lets
         //   it choose faster storage than if we were rewriting it every frame.
+        //
+        // Targeting GL_ARRAY_BUFFER, the buffer we just bound the VBO to. 
         glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_STATIC_DRAW);
 
         //-//////////////////////////////
@@ -762,6 +776,8 @@ bool makeAndCacheBuffer(std::vector<float>& vertices)
 
 #pragma region MAIN_LOOP
 
+//-//////////////////////////////////////////////////////////////////////////////////////////
+//
 int main()
 {
     Logging::consoleLog(Logging::LogType::LOG, \
@@ -771,7 +787,7 @@ int main()
 // PLATFORM SETUP, GLFW SETUP
 //-//////////////////////////////////////////////////////////////
 
-    InitStep1();
+    Init_Platform_GLFW();
 
     //-//////////////////////
     // glfwCreateWindow call. - https://www.glfw.org/docs/latest/group__window.html#ga3555a418df92ad53f917597fe2f64aeb
@@ -790,7 +806,7 @@ int main()
         return -1;
     }
 
-    InitStep2_WindowAndViewport(window);
+    Init_Window_Viewport(window);
 
     // Enable debug output.
     glEnable( GL_DEBUG_OUTPUT );
@@ -819,7 +835,7 @@ int main()
 //-//////////////////////////////////////////////////////////////
 
     // Add mesh to buffer
-    makeTri();
+    makeCube();
     if (bufferCache.cache.size() == 0) {
         Logging::consoleLog(Logging::LogType::ASSERT, "Failed to cache buffer(s)");
     }
@@ -844,6 +860,20 @@ int main()
         
         glUseProgram(shaderProgramID);
         
+            // This matrix combines three things at once: rotate around Y by
+            // `angle`, scale uniformly by `scale`, then translate along X so
+            // letter i lands in its spot in the string.
+			
+        float transform[16] = {
+            1, 0.0f, 0.0f, 0.0f, 
+            0.0f, 1, 0.0f, 0.0f,                                 
+            0.0f, 0.0f, 1, 0.0f,                  
+            0.0f, 0.0f, 0.0f, 1.0f
+        };
+
+        int transformLoc = glGetUniformLocation(shaderProgramID, "transform"); // ask the shader program where its "transform" uniform lives
+        glUniformMatrix4fv(transformLoc, 1, GL_TRUE, transform);    
+
         float red = (sin(glfwGetTime()+ 0.2f));       // red channel, oscillating between 0 and 1 over time
         float green = (sin(glfwGetTime() + 0.5f));   // green channel, phase-shifted
         float blue = (sin(glfwGetTime()+ 0.9f));    // blue channel, phase-shifted
@@ -916,7 +946,7 @@ int main()
 //      (OpenGL version for GLFW to use)
 //      CORE or COMPATIBILITY profile
 // Init glfw
-bool InitStep1()
+bool Init_Platform_GLFW()
 {
     //-//////////////////////////////////////////////////////////////////////
     // 
@@ -955,7 +985,7 @@ bool InitStep1()
     return true;
 }
 
-bool InitStep2_WindowAndViewport(GLFWwindow* window)
+bool Init_Window_Viewport(GLFWwindow* window)
 {
     //-//////////////////////////
     // glfwMakeContextCurrent()
