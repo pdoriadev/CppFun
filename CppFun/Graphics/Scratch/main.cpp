@@ -1159,6 +1159,8 @@ bool processInput(GLFWwindow *window)
         return true;    
     }
 
+    InputCache::updatePressedAndReleased();
+
     return false;
 }
 

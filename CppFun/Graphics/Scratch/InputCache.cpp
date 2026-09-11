@@ -267,7 +267,9 @@ namespace InputCache {
         return true;
     }
 
-#pragma endregion =====================================================================================================================}
+#pragma endregion =====================================================================================================================
+
+#pragma region STATE_CHANGING_FUNCTIONS
 
     bool cacheKeyState(int32_t key, int action) {
         if (isCacheInitialized() == false) return false;
@@ -311,6 +313,29 @@ namespace InputCache {
 
         return true;
     }
+
+    //-/////////////////////////////////////////////////////////
+    // updatePressedAndReleased() - updates one-frame state to persistent state
+    // Pressed --> Hold
+    // Released --> Neutral
+    //
+    // Call this after processing input in a frame so state is updated for next frame.
+    bool updatePressedAndReleased() {
+        for (unsigned int i = 0; i < states.size(); ++i)
+        {
+            // state is validated in other functions. Not checking all states here.
+            switch(states[i])
+            {
+                case KeyState::PRESS: { states[i] = KeyState::HOLD; break;}
+                case KeyState::RELEASE: { states[i] = KeyState::NEUTRAL; break;}
+                default: break;
+            }
+        }
+
+        return true;
+    }
+
+#pragma endregion =====================================================================================================================
 
     bool getState(int32_t glfwKeyCode, enum KeyState& state) {
         if (isCacheInitialized() == false) return false;

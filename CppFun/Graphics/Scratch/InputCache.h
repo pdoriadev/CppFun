@@ -27,7 +27,7 @@ namespace InputCache
     // returns true if cache is initialized by return. Could already be initialized.
     bool initializeCache();
 
-#pragma region CACHE_GET_FUNCTIONS
+#pragma region STATE_CHANGING_FUNCTIONS
 
     //-/////////////////////////////////////////////////////////
     // Updates key state based on captured key action.
@@ -36,11 +36,13 @@ namespace InputCache
     // Called by external functions. 
     bool cacheKeyState(int32_t glfwKeyCode, int32_t action);
 
+    bool updatePressedAndReleased();
+
+#pragma endregion =====================================================================================================================
+
     //-/////////////////////////////////////////////////////////
     // Gets cached state for keycode   
     bool getState(int32_t glfwKeyCode, enum KeyState& state);
-
-#pragma endregion =====================================================================================================================
 
 #pragma region HELPER_FUNCTIONS
 
