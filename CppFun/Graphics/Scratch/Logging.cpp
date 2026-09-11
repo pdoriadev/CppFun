@@ -1,4 +1,4 @@
-    #include "Logging.h"
+#include "Logging.h"
 #include <assert.h>         // One of the LogType types https://en.cppreference.com/c/error/assert
 #include <iostream>
 #include <fstream>
