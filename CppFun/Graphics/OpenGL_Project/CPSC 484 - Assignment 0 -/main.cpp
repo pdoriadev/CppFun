@@ -755,6 +755,9 @@ int main() {
                 0.0f, 0.0f, 0.0f, 1.0f                                    // row 3: homogeneous row, unchanged for this kind of transform
             };
 
+            // context might be reflective by the resolution of the window. Can pull the actual resolution and do things from. 
+            // Can find a good window initializaer
+            
             int transformLoc = glGetUniformLocation(shaderProgram, "transform"); // ask the shader program where its "transform" uniform lives
             glUniformMatrix4fv(transformLoc, 1, GL_TRUE, transform);              // upload it -- GL_TRUE transposes, since we wrote it row-major above
 
