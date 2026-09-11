@@ -113,6 +113,8 @@ void GLAPIENTRY MessageCallback( GLenum source,
 
 #pragma region SHADER_SOURCE 
 
+//-///////////////////////////////////////////////
+// VERT SHADER - Runs on every vertex before shape assembly
 const char* vertexShaderSource =  R"GLSL(
 #version 330 core
 // OpenGL version to run the shader
@@ -147,8 +149,8 @@ void main()
 }
 )GLSL";
 
-/////////////////////////////////////////////////
-
+//-///////////////////////////////////////////////
+// FRAG SHADER - Runs after rasterization. 
 const char* fragmentShaderSource = R"GLSL(
 #version 330 core
 
@@ -158,17 +160,12 @@ uniform vec3 color;      // this letter's current color, set from the CPU each f
 
 void main()
 {
-    fragColor = vec4(color, 1.0);
+    vec3 N = normalize(Normal * 1);      // interpolation can shrink the length; renormalize to unit length
+    vec3 lightDir = vec3(-0.2f, -0.4f, -0.4f);     // lightDir is effectively const. 
+    float dot = lightDir.x * N.x + lightDir.y + N.y + lightDir.z * N.z;
+    float intensity = dot + 1 * 0.5f;
 
-    if (fragColor.x > 1)
-    {
-        fragColor *= 0;
-        fragColor.w = 1;
-    }
-        
-    fragColor.x += 0.01;
-    fragColor.y += 0.01;
-    fragColor.z += 0.01;
+    fragColor = vec4(color * intensity, 1.0);
 }
 )GLSL";
 
@@ -874,9 +871,12 @@ int main()
         int transformLoc = glGetUniformLocation(shaderProgramID, "transform"); // ask the shader program where its "transform" uniform lives
         glUniformMatrix4fv(transformLoc, 1, GL_TRUE, transform);    
 
-        float red = (sin(glfwGetTime()+ 0.2f));       // red channel, oscillating between 0 and 1 over time
-        float green = (sin(glfwGetTime() + 0.5f));   // green channel, phase-shifted
-        float blue = (sin(glfwGetTime()+ 0.9f));    // blue channel, phase-shifted
+        // float red = (sin(glfwGetTime()+ 0.2f));       // red channel, oscillating between 0 and 1 over time
+        // float green = (sin(glfwGetTime() + 0.5f));   // green channel, phase-shifted
+        // float blue = (sin(glfwGetTime()+ 0.9f));    // blue channel, phase-shifted
+        float red = 0.6f;
+        float green = 0.2f;
+        float blue = 0.2f;
         int colorLoc = glGetUniformLocation(shaderProgramID, "color"); // ask the shader program where its "color" uniform lives
         glUniform3f(colorLoc, red, green, blue);                     // upload this frame's color for this letter
 
