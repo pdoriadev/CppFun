@@ -66,6 +66,8 @@ bool cacheModelBuffer(std::vector<float>& vertices);
 
 // I/O
 bool processInput(GLFWwindow*);
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+
 
 // Utility
 const bool IsNullPtr(void*, const std::string);
@@ -814,7 +816,9 @@ int main()
     // Disappearing arrow cursor fix for X11 + WSL platform. 
     // Copied from Assignment_0
     GLFWcursor* arrowCursor = glfwCreateStandardCursor(GLFW_ARROW_CURSOR); // create a standard system arrow cursor shape
-    glfwSetCursor(window, arrowCursor);                                    // apply it to this window
+    glfwSetCursor(window, arrowCursor);             
+    
+    glfwSetKeyCallback(window, key_callback); // apply it to this window
 
 //-//////////////////////////////////////////////////////////////
 // SHADER SETUP
@@ -836,16 +840,18 @@ int main()
     if (bufferCache.cache.size() == 0) {
         Logging::consoleLog(Logging::LogType::ASSERT, "Failed to cache buffer(s)");
     }
-
-//-//////////////////////////////////////////////////////////////
-// RENDER LOOP
-//-//////////////////////////////////////////////////////////////
-
+    
+    //-//////////////////////////////////////////////////////////////
+    // RENDER LOOP
+    //-//////////////////////////////////////////////////////////////
+    
     // glfwWindowShouldClose() call
     // - returns a flag. If true, do we close the window manually???? Or does glfw handle that??
     // ?? how is the flag set/determined ??
     while (glfwWindowShouldClose(window) == false)
     {
+        processInput(window);
+        
         // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glClearColor.xhtml
         // Inputs colors for glClear to use when it clears and sets the color buffer.
         // A *state-setting* function
@@ -892,7 +898,6 @@ int main()
         }
         glBindVertexArray(0); // unbind VAO object to avoid mishaps.
 
-        processInput(window);
 
         // glfwSwapBuffers call
         // swaps the new buffer to the screen.
@@ -1028,6 +1033,7 @@ bool Init_Window_Viewport(GLFWwindow* window)
     // The viewport dimensions can be smaller than the window. 
     glViewport(0, 0, 800, 600);
     
+    
     return true;
 }
 
@@ -1118,7 +1124,7 @@ bool isRunningUnderWSL()
 
 #pragma endregion =====================================================================================================================
 
-#pragma region RENDER_LOOP_HELPERS
+#pragma region RENDER_LOOP_HELPERS_AND_CALLBACKS
 
 //-///////////////////////////////////////////
 // Called in main()'s RENDER LOOP.
@@ -1132,7 +1138,7 @@ bool processInput(GLFWwindow *window)
     // param 1 - GLFWwindow pointer.
     // param 2 - A keycode macro. Full list: https://www.glfw.org/docs/latest/group__keys.html 
     // 
-    // returns a key action.
+    // returns a key's last cached state (GLFW_PRESS or GLFW_RELEASE)
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
     {
         //-//////////////////////////////////////// 
@@ -1143,13 +1149,36 @@ bool processInput(GLFWwindow *window)
         // returns - void.
         // Closing and Close flag - https://www.glfw.org/docs/latest/window_guide.html#window_close
         glfwSetWindowShouldClose(window, true);
-        return true;
+        return true;    
     }
 
     return false;
 }
 
-#pragma endregion =====================================================================================================================
+//-///////////////////////////////////////////
+// key_callback() - callback for glfw's key callback
+// param 1 - active context window when key action happened.
+// param 2 - returned key macro value. If value does not match a macro, matches GLFW_KEY_UNKNOWN.
+// param 3 - platform-specific scancode ??? What is a scancode though? An OS' code for each key?
+// param 4 - type of key action. PRESS, REPEAT, RELEASE.
+//              - Do not rely on REPEAT actions. They happen more/less often depending on the keyboard.
+// Set by glfwSetKeyCallback()
+// Input Guidewww.glfw.org/docs/3.3/input_guide.html 
+// Key Macros: https://www.glfw.org/docs/3.3/group__keys.html
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    if (IsNullPtr(window, "GLFWwindow")) return;
+
+    switch(key)
+    {
+        case GLFW_KEY_ESCAPE:
+            
+
+    }
+
+    
+}
+
 
 //-////////////////////////////////////////////////////////////////////////
 // framebuffer_size_callback
@@ -1168,6 +1197,10 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
     glViewport(0, 0, width, height);
 }
 
+//-////////////////////////////////////////////////////////////////////////
+// key_callback
+
+
 //-///////////////////////////////////////////////////////////////////////
 //
 double color = 0;
@@ -1179,7 +1212,7 @@ bool colorLoop()
     {
         adder *= -1.0f;
     }
-
+    
     // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glClearColor.xhtml
     // Inputs colors for glClear to use when it clears and sets the color buffer.
     // A *state-setting* function
@@ -1188,9 +1221,11 @@ bool colorLoop()
     // Clears the on screen buffer. Sets its buffer values *?for next render?*
     // A *state-using* function
     glClear(GL_COLOR_BUFFER_BIT);
-
+    
     return true;
 }
+
+#pragma endregion =====================================================================================================================
 
 #pragma region UTILITY
 
@@ -1207,9 +1242,6 @@ const bool IsNullPtr(void* pointer, std::string typeStr)
 
     return false;
 }
-
-
-
 
 
 #pragma endregion =====================================================================================================================
