@@ -11,8 +11,17 @@ END OF PROGRAM INFO LOG
 
 LOG: LINK SUCCESSFUL! ID = 3
 LOG: Constructed cube with 216floats and 36 points.
-LOG: 
---------------------------
-ENDING PROGRAM
-
-LOG: Closing log file
+LOG: Light move direction changed from (0.000000, 0.000000, 0.000000) to (-1.000000, 0.000000, 0.000000)
+LOG: Light move direction changed from (-1.000000, 0.000000, 0.000000) to (0.000000, 0.000000, 0.000000)
+LOG: Light move direction changed from (0.000000, 0.000000, 0.000000) to (1.000000, 0.000000, 0.000000)
+LOG: Light move direction changed from (1.000000, 0.000000, 0.000000) to (0.000000, 0.000000, 0.000000)
+LOG: Light move direction changed from (0.000000, 0.000000, 0.000000) to (1.000000, 0.000000, 0.000000)
+LOG: Light move direction changed from (1.000000, 0.000000, 0.000000) to (0.000000, 0.000000, 0.000000)
+LOG: Light move direction changed from (0.000000, 0.000000, 0.000000) to (0.000000, 1.000000, 0.000000)
+LOG: Light move direction changed from (0.000000, 1.000000, 0.000000) to (0.000000, 0.000000, 0.000000)
+LOG: Light move direction changed from (0.000000, 0.000000, 0.000000) to (0.000000, -1.000000, 0.000000)
+LOG: Light move direction changed from (0.000000, -1.000000, 0.000000) to (0.000000, 0.000000, 0.000000)
+LOG: Light move direction changed from (0.000000, 0.000000, 0.000000) to (0.000000, 0.000000, 1.000000)
+LOG: Light move direction changed from (0.000000, 0.000000, 1.000000) to (0.000000, 0.000000, 0.000000)
+LOG: Light move direction changed from (0.000000, 0.000000, 0.000000) to (0.000000, 0.000000, -1.000000)
+LOG: Light move direction changed from (0.000000, 0.000000, -1.000000) to (0.000000, 0.000000, 0.000000)

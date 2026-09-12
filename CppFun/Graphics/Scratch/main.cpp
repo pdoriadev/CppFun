@@ -28,6 +28,7 @@
 #include <vector>
 
 // My C / CPP HEADERS
+#include "Modeling.h"
 #include "Logging.h"
 #include "InputCache.h"
 
@@ -55,17 +56,12 @@ bool logShaderProgramInfo(unsigned int shaderProgramID);
 bool logShaderProgramInfo(unsigned int shaderProgramID);
 
 // Model-making
-class vector3;
-class tri;
-bool addTri(std::vector<float>& out, tri t);
-bool buildCubeTris(std::vector<float>& out);
-struct modelBuffer;
-class modelBufferCache;
 bool makeCube();
 bool cacheModelBuffer(std::vector<float>& vertices);
 
 // I/O
 bool processInput(GLFWwindow*);
+bool updateLightMoveDir();
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 
@@ -87,6 +83,7 @@ Platform platform = Platform::UNKNOWN;
 const std::string DASH_LINE = "--------------------------";
 
 bool nextColor = false;
+vector3 lightMoveDir = vector3();
 
 #pragma endregion =====================================================================================================================
 
@@ -407,205 +404,6 @@ bool logShaderProgramInfo(unsigned int shaderProgramID)
 #pragma endregion =====================================================================================================================
 
 #pragma region BUILD_MODEL
-
-// Look into alternative math library for later: GLM. Used and recommended by professor. 
-//      OR second choice https://ggt.sourceforge.net/
-class vector3
-{
-public:
-    float vec_xyz[3];
-
-    float x() { return vec_xyz[0]; }
-    float y() { return vec_xyz[1]; }
-    float z() { return vec_xyz[2]; }
-    bool set_x(float _x) { vec_xyz[0] = _x; return true;}
-    bool set_y(float _y) { vec_xyz[1] = _y; return true;}
-    bool set_z(float _z) { vec_xyz[2] = _z; return true;}
-
-    vector3()
-    {
-        vec_xyz[0] = 0.0;
-        vec_xyz[1] = 0.0;
-        vec_xyz[2] = 0.0;
-    };
-
-    vector3(float _x, float _y, float _z)
-    {
-        vec_xyz[0] = _x;
-        vec_xyz[1] = _y;
-        vec_xyz[2] = _z;
-    };
-
-    bool addVec3ToVector(std::vector<float>& out)
-    {
-        out.emplace_back(x());
-        out.emplace_back(y());
-        out.emplace_back(z());
-        return true;
-    }
-
-    // static const vector3 zeroVector()
-    // {
-    //     static const vector3 = vector3(0, 0, 0);
-    // }
-    // static vector3 const zeroVector (0, 0, 0);
-};
-
-class tri
-{
-public:
-    vector3 points[3];
-    vector3 normal;
-
-    tri(vector3 a, vector3 b, vector3 c, vector3 norm)
-    {
-        points[0] = a;
-        points[1] = b;
-        points[2] = c;
-        normal = norm;
-    }
-};
-
-bool addTri(std::vector<float>& out, tri t)
-{
-    for (unsigned int i = 0; i < 3; ++i)
-    {
-        t.points[i].addVec3ToVector(out);
-        t.normal.addVec3ToVector(out);
-    }
-
-    return true;
-}
-
-//-////////////////////////////////////
-// Make the triangles for each face of the cube. 
-bool buildCubeTris(std::vector<float>& out)
-{
-    static const vector3 zero        (0.5f, 0.5f, -0.5f);
-    static const vector3 one         (-0.5f, 0.5f, -0.5f);
-    static const vector3 two         (-0.5f, 0.5f, 0.5f);
-    static const vector3 three       (0.5f, 0.5f, 0.5f);
-    static const vector3 four        (0.5f, -0.5f, 0.5f);
-    static const vector3 five        (-0.5f, -0.5f, 0.5f);
-    static const vector3 six         (-0.5f, -0.5f, -0.5f);
-    static const vector3 seven       (0.5f, -0.5f, -0.5f);
-
-    static const vector3 sideANorm   (1.0f, 0, 0);
-    static const vector3 topNorm     (0.0f, 1, 0);
-    static const vector3 frontNorm   (0.0f, 0, 1);
-    static const vector3 backNorm    (0.0f, 0, -1);
-    static const vector3 botNorm     (0.0f, -1, 0);
-    static const vector3 sideBNorm   (-1, 0, 0);
-
-    // Back Face
-    addTri(out, tri(zero, one, six, backNorm));
-    addTri(out, tri(zero, six, seven, backNorm));
-
-    // Top Face
-    addTri(out, tri(zero, one, two, topNorm));
-    addTri(out, tri(zero, two, three, topNorm));
-
-    // Front Face
-    addTri(out, tri(two, three, four, frontNorm));
-    addTri(out, tri(two, four, five, frontNorm));
-
-    // Bottom Face
-    addTri(out, tri(four, five, six, botNorm));
-    addTri(out, tri(four, six, seven, botNorm));
-
-    // sideA Face
-    addTri(out, tri(zero, three, four, sideANorm));
-    addTri(out, tri(zero, four, seven, sideANorm));
-
-    // sideB Face
-    addTri(out, tri(one, two, five, sideBNorm));
-    addTri(out, tri(one, two, six, sideBNorm));
-
-    return true; 
-}
-
-//-////////////////////////////////////
-// Make a viewpoint-facing triangle.
-bool buildTri(std::vector<float>& out)
-{
-    // origin at bottom center
-    static const vector3 zero       (-0.5, 0, 0);
-    static const vector3 one        (0.5, 0, 0);
-    static const vector3 two        (0, 1,0);
-
-    static const vector3 norm       (0, 0, 1);
-
-    addTri(out, tri(zero, one, two, norm));
-
-    return true;
-}
-
-// //-////////////////////////////////////
-// //
-// enum Shape : int32_t
-// {
-//     Shape = -20,
-//     INVALID = -10,
-//     TRI = 0,
-//     SQUARE = 10,
-//     CUBE = 100
-// };
-
-
-// //-////////////////////////////////////
-// //
-// bool isValidShape(enum Shape s)
-// {
-//     switch(s)
-//     {
-//         case Shape::TRI:
-//             break;
-//         case Shape::SQUARE:
-//             break;
-//         case Shape::CUBE:
-//             break;
-//         default:
-//             Logging::consoleLog(Logging::LogType::ASSERT, "NOT A VALID SHAPE");
-//             return false;
-//     }
-
-//     return true;
-// }
-
-// bool checkShape()
-// {
-//     // not implemented
-//     return false;
-// }
-
-struct modelBuffer
-{
-    unsigned int VAO = 0;
-    unsigned int VBO = 0;
-    unsigned int verticesCount = 0;
-    
-    modelBuffer(unsigned int _VAO,
-                unsigned int _VBO,
-                unsigned int _verticesCount)
-    {
-        VAO = _VAO;
-        VBO = _VBO;
-        verticesCount = _verticesCount;
-    }
-};
-
-class modelBufferCache
-{
-public:
-    std::vector<modelBuffer> cache;
-
-    bool addModelBuffer(modelBuffer& buf)
-    {
-        cache.emplace_back(buf);
-
-        return true;
-    }
-};
 
 modelBufferCache bufferCache;
 
@@ -1156,11 +954,54 @@ bool processInput(GLFWwindow *window)
         return true;    
     }
 
+    if (isKeyState(GLFW_KEY_C, InputCache::KeyState::PRESS)) {  nextColor = true; }
 
-    // CALLED AT THE END OF PROCESS INPUT. 
+    vector3 previousLightDir = lightMoveDir;
+    updateLightMoveDir();
+
+    if (vector3::is_equal(previousLightDir,lightMoveDir, 0.0001f) == false)
+    {
+        std::string previousString = "(" + std::to_string(previousLightDir.x()) + ", " +
+                                    std::to_string(previousLightDir.y()) + ", " + 
+                                    std::to_string(previousLightDir.z()) + ")";
+        std::string currentString = "(" + std::to_string(lightMoveDir.x()) + ", " +
+                                    std::to_string(lightMoveDir.y()) + ", " + 
+                                    std::to_string(lightMoveDir.z()) + ")";
+        Logging::consoleLog(Logging::LogType::LOG, 
+            "Light move direction changed from " + previousString + " to " + currentString);
+    }
+
+    // *** CALLED AT THE END OF PROCESS INPUT.***
     InputCache::updateSingleFrameStates();
 
     return false;
+}
+
+//-/////////////////////////////////////////
+//
+// check each input value. Press or hold is -1/+1 depending on direction.
+bool updateLightMoveDir()
+{
+    lightMoveDir.set_to_zero();
+
+    // left-right
+    if (InputCache::isKeyState(GLFW_KEY_L, InputCache::PRESS) || 
+        InputCache::isKeyState(GLFW_KEY_L, InputCache::HOLD) ) { lightMoveDir.set_x(lightMoveDir.x() + 1.0f) ;}
+    if (InputCache::isKeyState(GLFW_KEY_J, InputCache::PRESS) || 
+        InputCache::isKeyState(GLFW_KEY_J, InputCache::HOLD) ) { lightMoveDir.set_x(lightMoveDir.x() - 1.0f) ;}
+    
+    // up-down
+    if (InputCache::isKeyState(GLFW_KEY_I, InputCache::PRESS) || 
+        InputCache::isKeyState(GLFW_KEY_I, InputCache::HOLD) ) { lightMoveDir.set_y(lightMoveDir.y() + 1.0f) ;}
+    if (InputCache::isKeyState(GLFW_KEY_K, InputCache::PRESS) || 
+        InputCache::isKeyState(GLFW_KEY_K, InputCache::HOLD) ) { lightMoveDir.set_y(lightMoveDir.y() - 1.0f) ;}
+
+    if (InputCache::isKeyState(GLFW_KEY_U, InputCache::PRESS) || 
+        InputCache::isKeyState(GLFW_KEY_U, InputCache::HOLD) ) { lightMoveDir.set_z(lightMoveDir.z() + 1.0f) ;}
+    if (InputCache::isKeyState(GLFW_KEY_O, InputCache::PRESS) || 
+        InputCache::isKeyState(GLFW_KEY_O, InputCache::HOLD) ) { lightMoveDir.set_z(lightMoveDir.z() - 1.0f) ;}
+
+    return true;
 }
 
 //-///////////////////////////////////////////
@@ -1179,7 +1020,6 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 
     InputCache::cacheKeyState(key, action);
 }
-
 
 //-////////////////////////////////////////////////////////////////////////
 // framebuffer_size_callback
