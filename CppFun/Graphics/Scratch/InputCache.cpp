@@ -285,7 +285,7 @@ namespace InputCache {
 
         if (actionState == KeyState::INVALID)
         {
-            std::cerr << "NOT using GLFW_REPEAT. Unreliable. See: https://www.glfw.org/docs/3.3/input_guide.html" << std::endl;
+            // std::cerr << "NOT using GLFW_REPEAT. Unreliable. See: https://www.glfw.org/docs/3.3/input_guide.html" << std::endl;
             return false;
         }
         
