@@ -9,10 +9,8 @@
 
 //-///////////////////////////////////////////////////
 // *NOT* THREAD-SAFE
-namespace InputCache
-{
-    enum KeyState : int32_t
-    {
+namespace InputCache {
+    enum KeyState : int32_t {
         KeyState = -100,
         INVALID = -1,
         NEUTRAL = 0,
