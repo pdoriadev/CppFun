@@ -1134,19 +1134,13 @@ bool processInput(GLFWwindow *window)
     if (IsNullPtr(window, "GLFWwindow")) return false;
 
     enum InputCache::KeyState state;
-    if (InputCache::getState(GLFW_KEY_SPACE, state) == true)
+    if (InputCache::getState(GLFW_KEY_ESCAPE, state) == false)
     {
         consoleLog(Logging::LogType::LOG,
-            "I see spacebar. Its state is: " + InputCache::getKeyStateString(state));
+            "ESCAPE KEY HAS INVALID STATE: " + InputCache::getKeyStateString(state));
     }
 
-    //-/////////////////////////////////////////////
-    // glfwGetKey() - https://www.glfw.org/docs/latest/input_guide.html#input_key  
-    // param 1 - GLFWwindow pointer.
-    // param 2 - A keycode macro. Full list: https://www.glfw.org/docs/latest/group__keys.html 
-    // 
-    // returns a key's last cached state (GLFW_PRESS or GLFW_RELEASE)
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+    if (state == InputCache::KeyState::PRESS)
     {
         //-//////////////////////////////////////// 
         // glfwSetWindowShouldClose() - https://www.glfw.org/docs/latest/group__window.html#ga49c449dde2a6f87d996f4daaa09d6708
