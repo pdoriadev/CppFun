@@ -1,4 +1,5 @@
 #include "InputCache.h"
+#include <GLFW/glfw3.h>
 
 namespace InputCache {
     bool initialized = false;
@@ -283,9 +284,14 @@ namespace InputCache {
         enum KeyState actionState;
         if (convertActionIntToKeyState(action, actionState) == false) return false;
 
-        if (actionState == KeyState::INVALID)
-        {
-            // std::cerr << "NOT using GLFW_REPEAT. Unreliable. See: https://www.glfw.org/docs/3.3/input_guide.html" << std::endl;
+        if (actionState == KeyState::INVALID) {
+            if (action != GLFW_REPEAT) {
+                std::cerr << "Attempted to cache INVALID GLFW action." << std::endl;
+            }
+            else {
+                //std::cerr << "NOT using GLFW_REPEAT. Unreliable. See: https://www.glfw.org/docs/3.3/input_guide.html" << std::endl;
+            }
+
             return false;
         }
         
