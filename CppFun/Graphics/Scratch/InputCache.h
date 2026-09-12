@@ -22,12 +22,12 @@ namespace InputCache
         COUNT
     };
 
+#pragma region STATE_CHANGING_FUNCTIONS
+
     //-/////////////////////////////////////////////////////////
     // Initializes the key state cache if not initialized. 
     // returns true if cache is initialized by return. Could already be initialized.
     bool initializeCache();
-
-#pragma region STATE_CHANGING_FUNCTIONS
 
     //-/////////////////////////////////////////////////////////
     // Updates key state based on captured key action.
@@ -36,13 +36,25 @@ namespace InputCache
     // Called by external functions. 
     bool cacheKeyState(int32_t glfwKeyCode, int32_t action);
 
-    bool updatePressedAndReleased();
+    bool updateSingleFrameStates();
 
 #pragma endregion =====================================================================================================================
+
+#pragma region STATE_ACCESSING_FUNCTIONS
 
     //-/////////////////////////////////////////////////////////
     // Gets cached state for keycode   
     bool getState(int32_t glfwKeyCode, enum KeyState& state);
+
+    //-///////////////////////////////////////////
+    // isKeyState() returns true if the key is in the passed in state
+    // param 1 - the key we care about
+    // param 2 - is the key in this state?
+    //
+    // We just want to know if a key is in a specific state. Returns true if true.
+    bool isKeyState(int32_t glfwKeyCode, enum InputCache::KeyState stateValue);
+
+#pragma endregion =====================================================================================================================
 
 #pragma region HELPER_FUNCTIONS
 
@@ -53,11 +65,11 @@ namespace InputCache
 
     //-/////////////////////////////////////////////////////////
     // returns false if the enum value is not a valid state. 
-    bool isValidState(enum KeyState stateEnum);
+    bool isValidStateValue(enum KeyState stateEnum);
 
     //-/////////////////////////////////////////////////////////
     // Internal Helper function. Finds index of matching key.
-    bool findKeyIndex(int32_t glfwKeyCode, int32_t& keyIndex);
+    bool findKeyCodeIndex(int32_t glfwKeyCode, int32_t& keyIndex);
 
     //-/////////////////////////////////////////////////////////
     // Helper function. Finds an int value's matching KeyState state. 

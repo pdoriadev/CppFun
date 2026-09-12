@@ -275,7 +275,7 @@ namespace InputCache {
         if (isCacheInitialized() == false) return false;
 
         int32_t keyIndex;
-        if (findKeyIndex(key, keyIndex) == false) return false;
+        if (findKeyCodeIndex(key, keyIndex) == false) return false;
 
         enum KeyState cachedState;
         if (convertStateIntToStateEnum(states[keyIndex], cachedState) == false) return false;
@@ -320,7 +320,7 @@ namespace InputCache {
     // Released --> Neutral
     //
     // Call this after processing input in a frame so state is updated for next frame.
-    bool updatePressedAndReleased() {
+    bool updateSingleFrameStates() {
         for (unsigned int i = 0; i < states.size(); ++i)
         {
             // state is validated in other functions. Not checking all states here.
@@ -337,18 +337,46 @@ namespace InputCache {
 
 #pragma endregion =====================================================================================================================
 
-    bool getState(int32_t glfwKeyCode, enum KeyState& state) {
+#pragma region STATE_ACCESSING_FUNCTIONS
+
+    bool getState(int32_t glfwKeyCode, enum KeyState& outState) {
         if (isCacheInitialized() == false) return false;
 
         int32_t index;
-        if (findKeyIndex(glfwKeyCode, index)== false ) return false;
+        if (findKeyCodeIndex(glfwKeyCode, index)== false ) return false;
 
-        if (isValidState(states[index]) == false) return false;
+        if (isValidStateValue(states[index]) == false) return false;
 
-        state = states[index];
+        outState = states[index];
         
         return true;
     }
+
+    bool isKeyState(int32_t glfwKeyCode, enum InputCache::KeyState stateValue) {
+        if (isCacheInitialized() == false) return false;
+        enum InputCache::KeyState outState;
+        InputCache::getState(glfwKeyCode, outState);
+        if (outState == stateValue) return true;
+        else                        return false;
+    }
+
+    bool findKeyCodeIndex(int32_t keyInt, int32_t& keyIndex) {
+        if (isCacheInitialized() == false) return false;
+
+        for (unsigned int i = 0; i < keys.size(); ++i) {
+            if (keyInt == keys[i]) {
+                keyIndex = i;
+                return true;
+            }
+        }
+
+        // Could not find keycode
+        std::cerr << "FAILED to find key matching value: " << std::to_string(keyInt);
+        return false;
+    }
+
+#pragma endregion =====================================================================================================================
+
 
 #pragma region HELPER_FUNCTIONS
 
@@ -362,50 +390,37 @@ namespace InputCache {
         return true;
     }
 
-    bool isValidState(enum KeyState stateEnum)
+    bool isValidStateValue(enum KeyState stateValue)
     {
-        switch(stateEnum) {
+        switch(stateValue) {
             case KeyState::NEUTRAL: break;
             case KeyState::PRESS:   break;
             case KeyState::HOLD:    break;
             case KeyState::RELEASE: break;
             default: // Not a valid key state. 
-                std::cerr << "Invalid key state: " << getKeyStateString(stateEnum) << ". Does not match a valid KeyState." << std::endl;
+                std::cerr << "Invalid key state: " << getKeyStateString(stateValue) << ". Does not match a valid KeyState." << std::endl;
                 return false;
         }
 
         return true;
     }
 
-    bool findKeyIndex(int32_t keyInt, int32_t& keyIndex){
-        for (unsigned int i = 0; i < keys.size(); ++i) {
-            if (keyInt == keys[i]) {
-                keyIndex = i;
-                return true;
-            }
-        }
-
-        // Could not find keycode
-        std::cerr << "FAILED to find key matching value: " << std::to_string(keyInt);
-        return false;
-    }
-
-    bool convertStateIntToStateEnum(int32_t stateInt, enum KeyState& stateEnum) {
+    bool convertStateIntToStateEnum(int32_t stateInt, enum KeyState& outState) {
         switch(stateInt) {
             case KeyState::NEUTRAL:
-                stateEnum = KeyState::NEUTRAL;
+                outState = KeyState::NEUTRAL;
                 break;
             case KeyState::PRESS:
-                stateEnum = KeyState::PRESS;
+                outState = KeyState::PRESS;
                 break;
             case KeyState::HOLD:
-                stateEnum = KeyState::HOLD;
+                outState = KeyState::HOLD;
                 break;
             case KeyState::RELEASE:
-                stateEnum = KeyState::RELEASE;
+                outState = KeyState::RELEASE;
                 break;
             default:
-                stateEnum = KeyState::INVALID;
+                outState = KeyState::INVALID;
                 std::cerr << "INVALID state int.: " << std::to_string(stateInt) << " Does not match any KeyState value." << std::endl;
                 // Not a valid key state. 
                 return false;
@@ -414,29 +429,29 @@ namespace InputCache {
         return true;
     }
 
-    bool convertActionIntToKeyState(int action, enum KeyState& actionState) {
+    bool convertActionIntToKeyState(int action, enum KeyState& outState) {
         switch(action) {
             case GLFW_PRESS:
-                actionState = KeyState::PRESS;
+                outState = KeyState::PRESS;
                 break;
             case GLFW_RELEASE:
-                actionState = KeyState::RELEASE;
+                outState = KeyState::RELEASE;
                 break;
             case GLFW_REPEAT:
-                actionState = KeyState::INVALID;
+                outState = KeyState::INVALID;
                 break;
             default:
                 // Not a valid GLFW action. 
                 std::cerr << "int param has no matching GLFW action: " << std::to_string(action) << std::endl;
-                actionState = KeyState::INVALID;
+                outState = KeyState::INVALID;
                 return false;
         }
 
         return true;
     }
 
-    std::string getKeyStateString(enum KeyState stateEnum) {
-        switch(stateEnum) {
+    std::string getKeyStateString(enum KeyState stateValue) {
+        switch(stateValue) {
             case KeyState::KeyState:return "KeyState";
             case KeyState::INVALID: return "INVALID";
             case KeyState::NEUTRAL: return "NEUTRAL";
@@ -445,7 +460,7 @@ namespace InputCache {
             case KeyState::RELEASE: return "RELEASE";
             case KeyState::COUNT:   return "COUNT";
             default: // Not a valid key state. 
-                std::cerr << "INVALID state enum: " << getKeyStateString(stateEnum) << ". Does not match any KeyState values." << std::endl;
+                std::cerr << "INVALID state enum: " << getKeyStateString(stateValue) << ". Does not match any KeyState values." << std::endl;
                 return "";
         }
     }

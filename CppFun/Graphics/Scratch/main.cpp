@@ -75,6 +75,7 @@ const bool IsNullPtr(void*, const std::string);
 #pragma endregion =====================================================================================================================
 
 #pragma region FIELDS
+
 enum Platform : int32_t
 {
     UNKNOWN = -1,
@@ -84,6 +85,9 @@ enum Platform : int32_t
 Platform platform = Platform::UNKNOWN;
 
 const std::string DASH_LINE = "--------------------------";
+
+bool nextColor = false;
+
 #pragma endregion =====================================================================================================================
 
 #pragma region DEBUG_UTILITY
@@ -841,9 +845,15 @@ int main()
         Logging::consoleLog(Logging::LogType::ASSERT, "Failed to cache buffer(s)");
     }
     
-    //-//////////////////////////////////////////////////////////////
-    // RENDER LOOP
-    //-//////////////////////////////////////////////////////////////
+//-//////////////////////////////////////////////////////////////
+// RENDER LOOP
+//-//////////////////////////////////////////////////////////////
+
+    unsigned int color = 0;
+    vector3 colors[3] = {   vector3(1.0f, 0.0f, 0.0f), 
+                            vector3(0.0f, 1.0f, 0.0f),
+                            vector3(0.0f, 0.0f, 1.0f)   };
+
     
     // glfwWindowShouldClose() call
     // - returns a flag. If true, do we close the window manually???? Or does glfw handle that??
@@ -1133,14 +1143,7 @@ bool processInput(GLFWwindow *window)
 {
     if (IsNullPtr(window, "GLFWwindow")) return false;
 
-    enum InputCache::KeyState state;
-    if (InputCache::getState(GLFW_KEY_ESCAPE, state) == false)
-    {
-        consoleLog(Logging::LogType::LOG,
-            "ESCAPE KEY HAS INVALID STATE: " + InputCache::getKeyStateString(state));
-    }
-
-    if (state == InputCache::KeyState::PRESS)
+    if (isKeyState(GLFW_KEY_ESCAPE, InputCache::KeyState::PRESS))
     {
         //-//////////////////////////////////////// 
         // glfwSetWindowShouldClose() - https://www.glfw.org/docs/latest/group__window.html#ga49c449dde2a6f87d996f4daaa09d6708
@@ -1153,7 +1156,9 @@ bool processInput(GLFWwindow *window)
         return true;    
     }
 
-    InputCache::updatePressedAndReleased();
+
+    // CALLED AT THE END OF PROCESS INPUT. 
+    InputCache::updateSingleFrameStates();
 
     return false;
 }
