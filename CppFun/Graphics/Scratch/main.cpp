@@ -21,7 +21,7 @@
 #include <GLFW/glfw3.h>     // Window + Input Library - window/context creation, input, timing
                             // HTML Documentation - https://www.glfw.org/docs/latest/
 // C / CPP HEADERS
-// #include <cmath>            // sin, cos, M_PI
+#include <cmath>            // sin, cos, M_PI
 #include <cstdlib>          // std::getenv -- used by isRunningUnderWSL() below
 #include <fstream>          // std::ifstream -- used by isRunningUnderWSL() below
 #include <string>           // std::string - used by isRunningUnderWSL() below
@@ -164,7 +164,7 @@ uniform vec3 color;      // this letter's current color, set from the CPU each f
 void main()
 {
     vec3 N = normalize(Normal * 1);      // interpolation can shrink the length; renormalize to unit length
-    vec3 lightDir = vec3(-0.2f, -0.4f, -0.4f);     // lightDir is effectively const. 
+    vec3 lightDir = vec3(-0.2f,- 0.4f, -0.4f);     // lightDir is effectively const. 
     float dot = lightDir.x * N.x + lightDir.y + N.y + lightDir.z * N.z;
     float intensity = dot + 1 * 0.5f;
 
@@ -647,10 +647,11 @@ int main()
 // RENDER LOOP
 //-//////////////////////////////////////////////////////////////
 
-    unsigned int color = 0;
-    vector3 colors[3] = {   vector3(1.0f, 0.0f, 0.0f), 
-                            vector3(0.0f, 1.0f, 0.0f),
-                            vector3(0.0f, 0.0f, 1.0f)   };
+    unsigned int colorIndex = 0;
+    unsigned int colorsSize = 3;
+    vector3 colors[3] = {   vector3(0.6f, 0.2f, 0.2f), 
+                            vector3(0.1f, 0.35f, 0.55f),
+                            vector3(0.5f, 0.05f, 0.45f)   };
 
     
     // glfwWindowShouldClose() call
@@ -671,28 +672,37 @@ int main()
         
         glUseProgram(shaderProgramID);
         
-            // This matrix combines three things at once: rotate around Y by
-            // `angle`, scale uniformly by `scale`, then translate along X so
-            // letter i lands in its spot in the string.
-			
-        float transform[16] = {
-            1, 0.0f, 0.0f, 0.0f, 
-            0.0f, 1, 0.0f, 0.0f,                                 
-            0.0f, 0.0f, 1, 0.0f,                  
-            0.0f, 0.0f, 0.0f, 1.0f
-        };
+        {
+            float transform[16] = {
+                1, 0.0f, 0.0f, 0.0f, 
+                0.0f, 1, 0.0f, 0.0f,                                 
+                0.0f, 0.0f, 1, 0.0f,                  
+                0.0f, 0.0f, 0.0f, 1.0f
+            };
+            int transformLoc = glGetUniformLocation(shaderProgramID, "transform"); // ask the shader program where its "transform" uniform lives
+            glUniformMatrix4fv(transformLoc, 1, GL_TRUE, transform);    
+        }
 
-        int transformLoc = glGetUniformLocation(shaderProgramID, "transform"); // ask the shader program where its "transform" uniform lives
-        glUniformMatrix4fv(transformLoc, 1, GL_TRUE, transform);    
-
-        // float red = (sin(glfwGetTime()+ 0.2f));       // red channel, oscillating between 0 and 1 over time
-        // float green = (sin(glfwGetTime() + 0.5f));   // green channel, phase-shifted
-        // float blue = (sin(glfwGetTime()+ 0.9f));    // blue channel, phase-shifted
-        float red = 0.6f;
-        float green = 0.2f;
-        float blue = 0.2f;
-        int colorLoc = glGetUniformLocation(shaderProgramID, "color"); // ask the shader program where its "color" uniform lives
-        glUniform3f(colorLoc, red, green, blue);                     // upload this frame's color for this letter
+        {
+            if (nextColor)
+            {
+                ++colorIndex;
+                if (colorIndex >= colorsSize) { colorIndex = 0; }
+                nextColor = false;
+            }
+    
+            vector3 nowColor (colors[colorIndex].x(), 
+                            colors[colorIndex].y(), 
+                            colors[colorIndex].z());
+    
+            float sinSquared = sin(glfwGetTime()) * sin(glfwGetTime());
+            nowColor.set_x(colors[colorIndex].x() * sinSquared);
+            nowColor.set_y(colors[colorIndex].y() * sinSquared);
+            nowColor.set_z(colors[colorIndex].z() * sinSquared);        
+            
+            int colorLoc = glGetUniformLocation(shaderProgramID, "color"); // ask the shader program where its "color" uniform lives
+            glUniform3f(colorLoc, nowColor.x(), nowColor.y(), nowColor.z());                     // upload this frame's color for this letter
+        }
 
         for(size_t i = 0; i < bufferCache.cache.size(); ++i)
         {
@@ -956,7 +966,7 @@ bool processInput(GLFWwindow *window)
 
     if (isKeyState(GLFW_KEY_C, InputCache::KeyState::PRESS)) {  nextColor = true; }
 
-    vector3 previousLightDir = lightMoveDir;
+    vector3 previousLightDir = vector3(lightMoveDir.x(), lightMoveDir.y(), lightMoveDir.z());
     updateLightMoveDir();
 
     if (vector3::is_equal(previousLightDir,lightMoveDir, 0.0001f) == false)
@@ -996,6 +1006,7 @@ bool updateLightMoveDir()
     if (InputCache::isKeyState(GLFW_KEY_K, InputCache::PRESS) || 
         InputCache::isKeyState(GLFW_KEY_K, InputCache::HOLD) ) { lightMoveDir.set_y(lightMoveDir.y() - 1.0f) ;}
 
+    // 
     if (InputCache::isKeyState(GLFW_KEY_U, InputCache::PRESS) || 
         InputCache::isKeyState(GLFW_KEY_U, InputCache::HOLD) ) { lightMoveDir.set_z(lightMoveDir.z() + 1.0f) ;}
     if (InputCache::isKeyState(GLFW_KEY_O, InputCache::PRESS) || 
@@ -1012,7 +1023,7 @@ bool updateLightMoveDir()
 // param 4 - type of key action. PRESS, REPEAT, RELEASE.
 //              - Do not rely on REPEAT actions. They happen more/less often depending on the keyboard.
 // Set by glfwSetKeyCallback()
-// Input Guidewww.glfw.org/docs/3.3/input_guide.html 
+// Input Guide: www.glfw.org/docs/3.3/input_guide.html 
 // Key Macros: https://www.glfw.org/docs/3.3/group__keys.html
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
@@ -1077,7 +1088,7 @@ const bool IsNullPtr(void* pointer, std::string typeStr)
     if (pointer == NULL)
     {
         Logging::consoleLog(Logging::LogType::ERROR, 
-            ("Pointer of type " + typeStr + "is null").c_str());
+            ("Pointer of type " + typeStr + "is null"));
         return true;
     }
 
