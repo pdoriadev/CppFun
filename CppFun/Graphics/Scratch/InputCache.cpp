@@ -383,7 +383,6 @@ namespace InputCache {
 
 #pragma endregion =====================================================================================================================
 
-
 #pragma region HELPER_FUNCTIONS
 
     bool isCacheInitialized(){
