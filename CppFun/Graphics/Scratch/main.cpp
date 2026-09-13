@@ -64,6 +64,9 @@ bool processInput(GLFWwindow*);
 bool updateLightMoveDir();
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
+// Render Loop
+struct RenderLoopData;
+bool renderLoop(RenderLoopData data);
 
 // Utility
 const bool IsNullPtr(void*, const std::string);
@@ -83,7 +86,9 @@ Platform platform = Platform::UNKNOWN;
 const std::string DASH_LINE = "--------------------------";
 
 bool nextColor = false;
+vector3 lightPos = vector3(1.0, 1.0, 5.0);
 vector3 lightMoveDir = vector3();
+float lightMoveSpeed = 0.5f;
 
 #pragma endregion =====================================================================================================================
 
@@ -131,13 +136,15 @@ layout (location = 1) in vec3 aNor;
 // them (that interpolation step is called rasterization).
 
 out vec3 Normal; // will be picked up by "in vec3 Normal" in the fragment shader
+out vec3 lightToVertex;
 
 // A "uniform" is a value we set once per draw call from the CPU (see
 // glUniformMatrix4fv in the render loop) that stays constant across every
 // vertex/pixel of that draw call -- unlike aPos/aNormal, which are
 // different for every vertex.
 
-uniform mat4 transform;                 // this model's combined rotate+scale+position matrix, set from the CPU
+uniform mat4 transform;     // this model's combined rotate+scale+position matrix, set from the CPU
+uniform vec3 lightPos;      // set in render loop.
 
 void main()
 {
@@ -149,6 +156,9 @@ void main()
     // (it drops the translation column), which is what you want when
     // transforming a *direction* like a normal instead of a *point*.
     Normal = mat3(transform) * aNor;
+
+    // Used to calculate if the light is in front or behind a plane.
+    lightToVertex = aPos - lightPos;
 }
 )GLSL";
 
@@ -157,16 +167,29 @@ void main()
 const char* fragmentShaderSource = R"GLSL(
 #version 330 core
 
-out vec4 fragColor;
 in vec3 Normal;
-uniform vec3 color;      // this letter's current color, set from the CPU each frame
+in vec3 lightToVertex;      // the light's position, set in render loop when the position changes.
+uniform vec3 color;         // this letter's current color, set from the CPU each frame
+// uniform vec3 lightDir;      // the light's direction, set in render loop when the direction changes. 
+
+out vec4 fragColor;
 
 void main()
 {
     vec3 N = normalize(Normal * 1);      // interpolation can shrink the length; renormalize to unit length
-    vec3 lightDir = vec3(-0.2f,- 0.4f, -0.4f);     // lightDir is effectively const. 
-    float dot = lightDir.x * N.x + lightDir.y + N.y + lightDir.z * N.z;
-    float intensity = dot + 1 * 0.5f;
+    vec3 invertedlightDir = vec3(-0.2f, -0.4f, -1.0f);     // lightDir is effectively const. 
+    // Is the light direction facing the plane's front-face?
+    float dotLightDir = invertedlightDir.x * N.x + 
+                        invertedlightDir.y * N.y + 
+                        invertedlightDir.z * N.z;
+    // Is the light behind this fragment's vertex?
+    float dotLightToVertex =    lightToVertex.x * N.x + 
+                                lightToVertex.y * N.y + 
+                                lightToVertex.z * N.z;
+    
+    // intensity is 0 if the light is not facing the plane.
+    // intensity is 0 if the light is behind the plane.
+    float intensity = max(dotLightDir, 0.0f) * max(dotLightToVertex, 0.0f);
 
     fragColor = vec4(color * intensity, 1.0);
 }
@@ -577,6 +600,18 @@ bool cacheModelBuffer(std::vector<float>& vertices)
 
 #pragma region MAIN_LOOP
 
+struct RenderLoopData
+{
+    GLFWwindow* window;
+    unsigned int shaderProgramID;
+
+    RenderLoopData(GLFWwindow* _window, 
+                    unsigned int _shaderProgramID) {
+        window = _window;
+        shaderProgramID = _shaderProgramID;
+    }
+};
+
 //-//////////////////////////////////////////////////////////////////////////////////////////
 //
 int main()
@@ -646,85 +681,8 @@ int main()
 //-//////////////////////////////////////////////////////////////
 // RENDER LOOP
 //-//////////////////////////////////////////////////////////////
-
-    unsigned int colorIndex = 0;
-    unsigned int colorsSize = 3;
-    vector3 colors[3] = {   vector3(0.6f, 0.2f, 0.2f), 
-                            vector3(0.1f, 0.35f, 0.55f),
-                            vector3(0.5f, 0.05f, 0.45f)   };
-
-    
-    // glfwWindowShouldClose() call
-    // - returns a flag. If true, do we close the window manually???? Or does glfw handle that??
-    // ?? how is the flag set/determined ??
-    while (glfwWindowShouldClose(window) == false)
-    {
-        processInput(window);
-        
-        // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glClearColor.xhtml
-        // Inputs colors for glClear to use when it clears and sets the color buffer.
-        // A *state-setting* function
-        glClearColor(0.3, 0.3, 0.3, 1);
-        
-        // Clears the on screen buffer. Sets its buffer values *?for next render?*
-        // A *state-using* function
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the color buffer and depth buffer for this frame
-        
-        glUseProgram(shaderProgramID);
-        
-        {
-            float transform[16] = {
-                1, 0.0f, 0.0f, 0.0f, 
-                0.0f, 1, 0.0f, 0.0f,                                 
-                0.0f, 0.0f, 1, 0.0f,                  
-                0.0f, 0.0f, 0.0f, 1.0f
-            };
-            int transformLoc = glGetUniformLocation(shaderProgramID, "transform"); // ask the shader program where its "transform" uniform lives
-            glUniformMatrix4fv(transformLoc, 1, GL_TRUE, transform);    
-        }
-
-        {
-            if (nextColor)
-            {
-                ++colorIndex;
-                if (colorIndex >= colorsSize) { colorIndex = 0; }
-                nextColor = false;
-            }
-    
-            vector3 nowColor (colors[colorIndex].x(), 
-                            colors[colorIndex].y(), 
-                            colors[colorIndex].z());
-    
-            float sinSquared = sin(glfwGetTime()) * sin(glfwGetTime());
-            nowColor.set_x(colors[colorIndex].x() * sinSquared);
-            nowColor.set_y(colors[colorIndex].y() * sinSquared);
-            nowColor.set_z(colors[colorIndex].z() * sinSquared);        
-            
-            int colorLoc = glGetUniformLocation(shaderProgramID, "color"); // ask the shader program where its "color" uniform lives
-            glUniform3f(colorLoc, nowColor.x(), nowColor.y(), nowColor.z());                     // upload this frame's color for this letter
-        }
-
-        for(size_t i = 0; i < bufferCache.cache.size(); ++i)
-        {
-            if (bufferCache.cache[i].verticesCount == 0)
-            {
-                Logging::consoleLog(Logging::LogType::ASSERT, "ATTEMPTING TO DRAW SHAPE WITH ZERO VERTICES");
-                continue;
-            }
-            glBindVertexArray(bufferCache.cache[i].VAO);
-            glDrawArrays(GL_TRIANGLES, 0, bufferCache.cache[i].verticesCount);
-        }
-        glBindVertexArray(0); // unbind VAO object to avoid mishaps.
-
-
-        // glfwSwapBuffers call
-        // swaps the new buffer to the screen.
-        // ?? waits until fully drawn ??
-        glfwSwapBuffers(window);
-        // glfwPollEvents call
-        // Checks for inputs. 
-        glfwPollEvents();
-    }
+ 
+    renderLoop(RenderLoopData(window, shaderProgramID));
 
 //-//////////////////////////////////////////////////////////////
 // CLEAN-UP - clean/delete allocated GLFW resources
@@ -757,6 +715,241 @@ int main()
     Logging::closeLogFileIfOpen();
 
     return 0;
+}
+
+#pragma endregion =====================================================================================================================
+
+#pragma region RENDER_LOOP_HELPERS_AND_CALLBACKS
+
+//-///////////////////////////////////////////
+// Called in main(). 
+// Sets up and executes the render loop
+bool renderLoop(RenderLoopData data)
+{
+    if (IsNullPtr(data.window, "GLFWwindow")) { return false; }
+
+    unsigned int colorIndex = 0;
+    unsigned int colorsSize = 3;
+    vector3 colors[3] = {   vector3(0.6f, 0.2f, 0.2f), 
+                            vector3(0.1f, 0.35f, 0.55f),
+                            vector3(0.5f, 0.05f, 0.45f)   };
+
+    //-///////////////////////////////////////////
+    // glfwWindowShouldClose() call
+    // - returns a Close flag. Set by 'glfwSetWindowShouldClose(window, true)'
+    //         
+    while (glfwWindowShouldClose(data.window) == false)
+    {
+        processInput(data.window);
+        
+        // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glClearColor.xhtml
+        // Inputs colors for glClear to use when it clears and sets the color buffer.
+        // A *state-setting* function
+        glClearColor(0.3, 0.3, 0.3, 1);
+        
+        // Clears the on screen buffer. Sets its buffer values *?for next render?*
+        // A *state-using* function
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the color buffer and depth buffer for this frame
+        
+        glUseProgram(data.shaderProgramID);
+        
+        {
+            float transform[16] = {
+                1, 0.0f, 0.0f, 0.0f, 
+                0.0f, 1, 0.0f, 0.0f,                                 
+                0.0f, 0.0f, 1, 0.0f,                  
+                0.0f, 0.0f, 0.0f, 1.0f
+            };
+            int transformLoc = glGetUniformLocation(data.shaderProgramID, "transform"); // ask the shader program where its "transform" uniform lives
+            glUniformMatrix4fv(transformLoc, 1, GL_TRUE, transform);    
+        }
+
+        {
+            if (nextColor)
+            {
+                ++colorIndex;
+                if (colorIndex >= colorsSize) { colorIndex = 0; }
+                nextColor = false;
+            }
+    
+            vector3 nowColor (colors[colorIndex].x(), 
+                            colors[colorIndex].y(), 
+                            colors[colorIndex].z());
+    
+            float sinSquared = sin(glfwGetTime()) * sin(glfwGetTime());
+            nowColor.set_x(colors[colorIndex].x() * sinSquared);
+            nowColor.set_y(colors[colorIndex].y() * sinSquared);
+            nowColor.set_z(colors[colorIndex].z() * sinSquared);        
+            
+            int colorLoc = glGetUniformLocation(data.shaderProgramID, "color"); // ask the shader program where its "color" uniform lives
+            glUniform3f(colorLoc, nowColor.x(), nowColor.y(), nowColor.z());                     // upload this frame's color for this letter
+        }
+
+        if (vector3::is_equal(lightMoveDir, vector3::vec_zero, 0.0001f) == false)
+        {
+            vector3::add_first_to_second(
+                vector3::scale_uniform(lightMoveSpeed, lightMoveDir),
+                lightPos);
+            int posLoc = glGetUniformLocation(data.shaderProgramID, "lightPos");
+            glUniform3f(posLoc, lightPos.x(), lightPos.y(), lightPos.z());
+
+            Logging::consoleLog(Logging::LogType::LOG,
+                "New light pos: " + std::to_string(lightPos.x()) + ", " +
+                                                std::to_string(lightPos.y()) + ", " +
+                                                std::to_string(lightPos.z()));
+        }
+
+        for(size_t i = 0; i < bufferCache.cache.size(); ++i)
+        {
+            if (bufferCache.cache[i].verticesCount == 0) {
+                Logging::consoleLog(Logging::LogType::ASSERT, "ATTEMPTING TO DRAW SHAPE WITH ZERO VERTICES");
+                continue;
+            }
+            glBindVertexArray(bufferCache.cache[i].VAO);
+            glDrawArrays(GL_TRIANGLES, 0, bufferCache.cache[i].verticesCount);
+        }
+        glBindVertexArray(0); // unbind VAO object to avoid mishaps.
+
+        // glfwSwapBuffers call
+        // swaps the new buffer to the screen.
+        // ?? waits until fully drawn ??
+        glfwSwapBuffers(data.window);
+        // glfwPollEvents call
+        // Checks for inputs. 
+        // ?? Do I really need this now that I'm using a key_callback function?
+        glfwPollEvents();
+    }
+
+    return true;
+}
+
+//-///////////////////////////////////////////
+// Called in main()'s RENDER LOOP.
+// 
+bool processInput(GLFWwindow *window)
+{
+    if (IsNullPtr(window, "GLFWwindow")) return false;
+
+    if (isKeyState(GLFW_KEY_ESCAPE, InputCache::KeyState::PRESS))
+    {
+        //-//////////////////////////////////////// 
+        // glfwSetWindowShouldClose() - https://www.glfw.org/docs/latest/group__window.html#ga49c449dde2a6f87d996f4daaa09d6708
+        // Sets the close flag on the specified window. Can override the user, or signal the window should be closed.
+        // param 1 - pointer to a GLFWwindow. 
+        // param 2 - int. ?? Is passing a non-zero/one value undefined?
+        // returns - void.
+        // Closing and Close flag - https://www.glfw.org/docs/latest/window_guide.html#window_close
+        glfwSetWindowShouldClose(window, true);
+        return true;    
+    }
+
+    if (isKeyState(GLFW_KEY_C, InputCache::KeyState::PRESS)) {  nextColor = true; }
+    
+    updateLightMoveDir();
+
+    // *** CALLED AT THE END OF PROCESS INPUT.***
+    InputCache::updateSingleFrameStates();
+
+    return false;
+}
+
+//-/////////////////////////////////////////
+//
+// check each input value. Press or hold is -1/+1 depending on direction.
+bool updateLightMoveDir()
+{
+    vector3 previousLightDir = vector3(lightMoveDir.x(), lightMoveDir.y(), lightMoveDir.z());
+    lightMoveDir.set_to_zero();
+
+    // left-right
+    if (InputCache::isKeyState(GLFW_KEY_L, InputCache::PRESS) || 
+        InputCache::isKeyState(GLFW_KEY_L, InputCache::HOLD) ) { lightMoveDir.set_x(lightMoveDir.x() + 1.0f) ;}
+    if (InputCache::isKeyState(GLFW_KEY_J, InputCache::PRESS) || 
+        InputCache::isKeyState(GLFW_KEY_J, InputCache::HOLD) ) { lightMoveDir.set_x(lightMoveDir.x() - 1.0f) ;}
+    
+    // up-down
+    if (InputCache::isKeyState(GLFW_KEY_I, InputCache::PRESS) || 
+        InputCache::isKeyState(GLFW_KEY_I, InputCache::HOLD) ) { lightMoveDir.set_y(lightMoveDir.y() + 1.0f) ;}
+    if (InputCache::isKeyState(GLFW_KEY_K, InputCache::PRESS) || 
+        InputCache::isKeyState(GLFW_KEY_K, InputCache::HOLD) ) { lightMoveDir.set_y(lightMoveDir.y() - 1.0f) ;}
+
+    // 
+    if (InputCache::isKeyState(GLFW_KEY_U, InputCache::PRESS) || 
+        InputCache::isKeyState(GLFW_KEY_U, InputCache::HOLD) ) { lightMoveDir.set_z(lightMoveDir.z() + 1.0f) ;}
+    if (InputCache::isKeyState(GLFW_KEY_O, InputCache::PRESS) || 
+        InputCache::isKeyState(GLFW_KEY_O, InputCache::HOLD) ) { lightMoveDir.set_z(lightMoveDir.z() - 1.0f) ;}
+
+    // if (vector3::is_equal(previousLightDir, lightMoveDir, 0.0001f) == false)
+    // {
+    //     std::string previousString = "(" + std::to_string(previousLightDir.x()) + ", " +
+    //                                 std::to_string(previousLightDir.y()) + ", " + 
+    //                                 std::to_string(previousLightDir.z()) + ")";
+    //     std::string currentString = "(" + std::to_string(lightMoveDir.x()) + ", " +
+    //                                 std::to_string(lightMoveDir.y()) + ", " + 
+    //                                 std::to_string(lightMoveDir.z()) + ")";
+    //     Logging::consoleLog(Logging::LogType::LOG, 
+    //         "Light move direction changed from " + previousString + " to " + currentString);
+    // }
+
+    return true;
+}
+
+//-///////////////////////////////////////////
+// key_callback() - callback for glfw's key callback
+// param 1 - active context window when key action happened.
+// param 2 - returned key macro value. If value does not match a macro, matches GLFW_KEY_UNKNOWN.
+// param 3 - platform-specific scancode ??? What is a scancode though? An OS' code for each key?
+// param 4 - type of key action. PRESS, REPEAT, RELEASE.
+//              - Do not rely on REPEAT actions. They happen more/less often depending on the keyboard.
+// Set by glfwSetKeyCallback()
+// Input Guide: www.glfw.org/docs/3.3/input_guide.html 
+// Key Macros: https://www.glfw.org/docs/3.3/group__keys.html
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    if (IsNullPtr(window, "GLFWwindow")) return;
+
+    InputCache::cacheKeyState(key, action);
+}
+
+//-////////////////////////////////////////////////////////////////////////
+// framebuffer_size_callback
+// 
+// Called when the window is resized
+// Also called when window is first displayed. 
+// Interesting Note - For retina displays width and height will end up 
+//      significantly higher than the original input values. 
+//
+// ?? How does glfw know to call this? 
+//      How does it know main.cpp implements this function at compile time? ??
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+    // When window is resized, viewport should be resized.
+    // Register a callback. 
+    glViewport(0, 0, width, height);
+}
+
+//-///////////////////////////////////////////////////////////////////////
+//
+double color = 0;
+double adder = 0.001f;
+bool colorLoop()
+{
+    color += adder;
+    if (color >= 1 || color < 0)
+    {
+        adder *= -1.0f;
+    }
+    
+    // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glClearColor.xhtml
+    // Inputs colors for glClear to use when it clears and sets the color buffer.
+    // A *state-setting* function
+    glClearColor(color, color * 0.5f,    color * 0.5f, color * 0.5f);
+    
+    // Clears the on screen buffer. Sets its buffer values *?for next render?*
+    // A *state-using* function
+    glClear(GL_COLOR_BUFFER_BIT);
+    
+    return true;
 }
 
 #pragma endregion =====================================================================================================================
@@ -942,143 +1135,6 @@ bool isRunningUnderWSL()
 
 #pragma endregion =====================================================================================================================
 
-#pragma region RENDER_LOOP_HELPERS_AND_CALLBACKS
-
-//-///////////////////////////////////////////
-// Called in main()'s RENDER LOOP.
-// 
-bool processInput(GLFWwindow *window)
-{
-    if (IsNullPtr(window, "GLFWwindow")) return false;
-
-    if (isKeyState(GLFW_KEY_ESCAPE, InputCache::KeyState::PRESS))
-    {
-        //-//////////////////////////////////////// 
-        // glfwSetWindowShouldClose() - https://www.glfw.org/docs/latest/group__window.html#ga49c449dde2a6f87d996f4daaa09d6708
-        // Sets the close flag on the specified window. Can override the user, or signal the window should be closed.
-        // param 1 - pointer to a GLFWwindow. 
-        // param 2 - int. ?? Is passing a non-zero/one value undefined?
-        // returns - void.
-        // Closing and Close flag - https://www.glfw.org/docs/latest/window_guide.html#window_close
-        glfwSetWindowShouldClose(window, true);
-        return true;    
-    }
-
-    if (isKeyState(GLFW_KEY_C, InputCache::KeyState::PRESS)) {  nextColor = true; }
-
-    vector3 previousLightDir = vector3(lightMoveDir.x(), lightMoveDir.y(), lightMoveDir.z());
-    updateLightMoveDir();
-
-    if (vector3::is_equal(previousLightDir,lightMoveDir, 0.0001f) == false)
-    {
-        std::string previousString = "(" + std::to_string(previousLightDir.x()) + ", " +
-                                    std::to_string(previousLightDir.y()) + ", " + 
-                                    std::to_string(previousLightDir.z()) + ")";
-        std::string currentString = "(" + std::to_string(lightMoveDir.x()) + ", " +
-                                    std::to_string(lightMoveDir.y()) + ", " + 
-                                    std::to_string(lightMoveDir.z()) + ")";
-        Logging::consoleLog(Logging::LogType::LOG, 
-            "Light move direction changed from " + previousString + " to " + currentString);
-    }
-
-    // *** CALLED AT THE END OF PROCESS INPUT.***
-    InputCache::updateSingleFrameStates();
-
-    return false;
-}
-
-//-/////////////////////////////////////////
-//
-// check each input value. Press or hold is -1/+1 depending on direction.
-bool updateLightMoveDir()
-{
-    lightMoveDir.set_to_zero();
-
-    // left-right
-    if (InputCache::isKeyState(GLFW_KEY_L, InputCache::PRESS) || 
-        InputCache::isKeyState(GLFW_KEY_L, InputCache::HOLD) ) { lightMoveDir.set_x(lightMoveDir.x() + 1.0f) ;}
-    if (InputCache::isKeyState(GLFW_KEY_J, InputCache::PRESS) || 
-        InputCache::isKeyState(GLFW_KEY_J, InputCache::HOLD) ) { lightMoveDir.set_x(lightMoveDir.x() - 1.0f) ;}
-    
-    // up-down
-    if (InputCache::isKeyState(GLFW_KEY_I, InputCache::PRESS) || 
-        InputCache::isKeyState(GLFW_KEY_I, InputCache::HOLD) ) { lightMoveDir.set_y(lightMoveDir.y() + 1.0f) ;}
-    if (InputCache::isKeyState(GLFW_KEY_K, InputCache::PRESS) || 
-        InputCache::isKeyState(GLFW_KEY_K, InputCache::HOLD) ) { lightMoveDir.set_y(lightMoveDir.y() - 1.0f) ;}
-
-    // 
-    if (InputCache::isKeyState(GLFW_KEY_U, InputCache::PRESS) || 
-        InputCache::isKeyState(GLFW_KEY_U, InputCache::HOLD) ) { lightMoveDir.set_z(lightMoveDir.z() + 1.0f) ;}
-    if (InputCache::isKeyState(GLFW_KEY_O, InputCache::PRESS) || 
-        InputCache::isKeyState(GLFW_KEY_O, InputCache::HOLD) ) { lightMoveDir.set_z(lightMoveDir.z() - 1.0f) ;}
-
-    return true;
-}
-
-//-///////////////////////////////////////////
-// key_callback() - callback for glfw's key callback
-// param 1 - active context window when key action happened.
-// param 2 - returned key macro value. If value does not match a macro, matches GLFW_KEY_UNKNOWN.
-// param 3 - platform-specific scancode ??? What is a scancode though? An OS' code for each key?
-// param 4 - type of key action. PRESS, REPEAT, RELEASE.
-//              - Do not rely on REPEAT actions. They happen more/less often depending on the keyboard.
-// Set by glfwSetKeyCallback()
-// Input Guide: www.glfw.org/docs/3.3/input_guide.html 
-// Key Macros: https://www.glfw.org/docs/3.3/group__keys.html
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
-{
-    if (IsNullPtr(window, "GLFWwindow")) return;
-
-    InputCache::cacheKeyState(key, action);
-}
-
-//-////////////////////////////////////////////////////////////////////////
-// framebuffer_size_callback
-// 
-// Called when the window is resized
-// Also called when window is first displayed. 
-// Interesting Note - For retina displays width and height will end up 
-//      significantly higher than the original input values. 
-//
-// ?? How does glfw know to call this? 
-//      How does it know main.cpp implements this function at compile time? ??
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
-    // When window is resized, viewport should be resized.
-    // Register a callback. 
-    glViewport(0, 0, width, height);
-}
-
-//-////////////////////////////////////////////////////////////////////////
-// key_callback
-
-
-//-///////////////////////////////////////////////////////////////////////
-//
-double color = 0;
-double adder = 0.001f;
-bool colorLoop()
-{
-    color += adder;
-    if (color >= 1 || color < 0)
-    {
-        adder *= -1.0f;
-    }
-    
-    // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glClearColor.xhtml
-    // Inputs colors for glClear to use when it clears and sets the color buffer.
-    // A *state-setting* function
-    glClearColor(color, color * 0.5f,    color * 0.5f, color * 0.5f);
-    
-    // Clears the on screen buffer. Sets its buffer values *?for next render?*
-    // A *state-using* function
-    glClear(GL_COLOR_BUFFER_BIT);
-    
-    return true;
-}
-
-#pragma endregion =====================================================================================================================
-
 #pragma region UTILITY
 
 //-///////////////////////////////////////////////
@@ -1094,6 +1150,5 @@ const bool IsNullPtr(void* pointer, std::string typeStr)
 
     return false;
 }
-
 
 #pragma endregion =====================================================================================================================
