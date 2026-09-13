@@ -22,6 +22,12 @@ public:
     static vector3 add(vector3 a, vector3 b);
     static vector3 scale_uniform(float s, vector3 vec);
     static bool modulo(int m, vector3& outVec);
+    //-////////////////////////////////////
+    // lerpVec3()
+    // param 1 - float - lower bound.
+    // param 2 - float - higher bound.
+    // param 3 - float - t. Domain [0, 1].
+    static bool lerpVec3(vector3, vector3, float, vector3& outVec);
     
     float x();
     float y();

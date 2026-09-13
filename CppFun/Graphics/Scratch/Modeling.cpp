@@ -68,6 +68,17 @@ bool vector3::set_to_zero() { set_x(0.0f); set_y(0.0f); set_z(0.0f); return true
     return true;
 }
 
+/*static*/ bool vector3::lerpVec3(vector3 lowerBound, vector3 upperBound, float t, vector3& outVec) {
+    if (t < 0 || t > 1) { return false;}
+
+    vector3 tTimesBminusA = scale_uniform(t, 
+                add(upperBound, scale_uniform(-1.0f, lowerBound))
+                );
+    outVec = add(lowerBound, tTimesBminusA);
+
+    return true;
+}
+
 bool vector3::add_vec3_to_vector(std::vector<float>& out) {
     out.emplace_back(x());
     out.emplace_back(y());

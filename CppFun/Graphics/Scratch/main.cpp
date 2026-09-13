@@ -14,6 +14,7 @@
 //      -lGL ?? links OpenGL ??
 //      -ldl ?? what does this link ??
 
+#include <cstdint>
 #pragma region HEADERS
 
 // OPENGL-RELATED HEADERS
@@ -74,6 +75,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 // Render Loop
 struct RenderLoopData;
 bool renderLoop(RenderLoopData data);
+bool renderLoop_colorUpdate(RenderLoopData const data);
 
 // Utility
 const bool IsNullPtr(void*, const std::string);
@@ -94,8 +96,18 @@ Platform platform = Platform::UNKNOWN;
 float const SCREEN_WIDTH = 2160.0f;
 float const SCREEN_HEIGHT = 1600.0f;
 
+enum ColorChangeMode : int32_t {
+    ColorChangeMode = -100,
+    INVALID = -1,
+    NO_CHANGE = 0,
+    INSTANT = 1,
+    SMOOTH = 2,
+    COUNT
+};
 // shader control fields
-bool nextColor = false;
+enum ColorChangeMode colorChangeMode = ColorChangeMode::NO_CHANGE;    
+float timeDeltaSmoothToTarget = 1.0f;
+float timeTargetSmoothToTarget = 0.0f;        
 vector3 lightPos = vector3(1.0, 1.0, 5.0);
 vector3 lightMoveDir = vector3();
 float lightMoveSpeed = 0.5f;
@@ -742,12 +754,6 @@ bool renderLoop(RenderLoopData data)
 {
     if (IsNullPtr(data.window, "GLFWwindow")) { return false; }
 
-    unsigned int colorIndex = 0;
-    unsigned int colorsSize = 3;
-    vector3 colors[3] = {   vector3(0.6f, 0.2f, 0.2f), 
-                            vector3(0.1f, 0.35f, 0.55f),
-                            vector3(0.5f, 0.05f, 0.45f)   };
-
     //-///////////////////////////////////////////
     // glfwWindowShouldClose() call
     // - returns a Close flag. Set by 'glfwSetWindowShouldClose(window, true)'
@@ -778,27 +784,7 @@ bool renderLoop(RenderLoopData data)
             glUniformMatrix4fv(transformLoc, 1, GL_TRUE, glm::value_ptr(trans));    
         }
 
-        // Change colors
-        {
-            if (nextColor)
-            {
-                ++colorIndex;
-                if (colorIndex >= colorsSize) { colorIndex = 0; }
-                nextColor = false;
-            }
-    
-            vector3 nowColor (colors[colorIndex].x(), 
-                            colors[colorIndex].y(), 
-                            colors[colorIndex].z());
-    
-            float sinSquared = sin(glfwGetTime()) * sin(glfwGetTime());
-            nowColor.set_x(colors[colorIndex].x() * sinSquared);
-            nowColor.set_y(colors[colorIndex].y() * sinSquared);
-            nowColor.set_z(colors[colorIndex].z() * sinSquared);        
-            
-            int colorLoc = glGetUniformLocation(data.shaderProgramID, "color"); // ask the shader program where its "color" uniform lives
-            glUniform3f(colorLoc, nowColor.x(), nowColor.y(), nowColor.z());                     // upload this frame's color for this letter
-        }
+        renderLoop_colorUpdate(data);
 
         // Move light position
         if (vector3::is_equal(lightMoveDir, vector3::vec_zero, 0.0001f) == false)
@@ -847,7 +833,7 @@ bool processInput(GLFWwindow *window)
 {
     if (IsNullPtr(window, "GLFWwindow")) return false;
 
-    if (isKeyState(GLFW_KEY_ESCAPE, InputCache::KeyState::PRESS))
+    if (InputCache::isKeyState(GLFW_KEY_ESCAPE, InputCache::KeyState::PRESS))
     {
         //-//////////////////////////////////////// 
         // glfwSetWindowShouldClose() - https://www.glfw.org/docs/latest/group__window.html#ga49c449dde2a6f87d996f4daaa09d6708
@@ -860,9 +846,19 @@ bool processInput(GLFWwindow *window)
         return true;    
     }
 
-    if (isKeyState(GLFW_KEY_C, InputCache::KeyState::PRESS)) {  nextColor = true; }
+    if (InputCache::isKeyState(GLFW_KEY_C, InputCache::KeyState::PRESS)) { 
+        colorChangeMode = ColorChangeMode::INSTANT; 
+        timeTargetSmoothToTarget = 0.0f;
+    }
+    else if (InputCache::isKeyState(GLFW_KEY_V, InputCache::KeyState::PRESS)) { 
+        if (colorChangeMode != ColorChangeMode::SMOOTH) {
+            colorChangeMode = ColorChangeMode::SMOOTH; 
+            timeTargetSmoothToTarget = glfwGetTime() + timeDeltaSmoothToTarget;
+        }
+    }
     
     updateLightMoveDir();
+
 
     // *** CALLED AT THE END OF PROCESS INPUT.***
     InputCache::updateSingleFrameStates();
@@ -911,6 +907,97 @@ bool updateLightMoveDir()
     return true;
 }
 
+//-///////////////////////////////////////////////////////////////////////
+// returns false if reached an invalid state. 
+bool isValidColorChangeMode(enum ColorChangeMode mode) {
+    switch(colorChangeMode) {
+        case ColorChangeMode::NO_CHANGE:
+            return true;       
+        case ColorChangeMode::INSTANT:
+            return true;
+        case ColorChangeMode::SMOOTH:
+            return true;
+        default:
+            Logging::consoleLog(Logging::LogType::ASSERT, 
+                "Invalid color change mode: " + std::to_string(colorChangeMode));
+            return false;
+    }
+}
+
+//-///////////////////////////////////////////////////////////////////////
+//
+// returns false if no color change. 
+bool renderLoop_colorUpdate(RenderLoopData const data) {
+    if (isValidColorChangeMode(colorChangeMode) == false) { return false; }
+    
+    static unsigned int colorIndex = 0;
+    static unsigned int colorsSize = 3;
+    vector3 colors[3] = {   vector3(0.6f, 0.2f, 0.2f), 
+                            vector3(0.1f, 0.35f, 0.55f),
+                            vector3(0.5f, 0.05f, 0.45f)   };
+
+    vector3 nowColor (  colors[colorIndex].x(),
+                        colors[colorIndex].y(),
+                        colors[colorIndex].z()  );
+   
+
+    unsigned int nextColorIndex = colorIndex + 1 >= colorsSize ? 0 : colorIndex + 1;
+    float t = 1.0f - (timeTargetSmoothToTarget - glfwGetTime()) / (timeDeltaSmoothToTarget);
+    switch(colorChangeMode) {  
+        case ColorChangeMode::NO_CHANGE:
+            break;
+        case ColorChangeMode::SMOOTH:
+            if (t < 1.0f) { 
+                vector3::lerpVec3(  colors[colorIndex], 
+                                    colors[nextColorIndex], 
+                                    t, 
+                                    nowColor);
+                break;
+            }
+            // FALLS THROUGH INTENTIONALLY
+        case ColorChangeMode::INSTANT:
+            colorChangeMode = ColorChangeMode::NO_CHANGE;
+            colorIndex = nextColorIndex;
+            nowColor = colors[colorIndex];
+            break;
+        default:
+            Logging::consoleLog(Logging::LogType::ASSERT, 
+                "Should only have modes that change color state in this switch" + std::to_string(colorChangeMode));
+            return false;
+    }
+
+    int colorLoc = glGetUniformLocation(data.shaderProgramID, "color"); // ask the shader program where its "color" uniform lives
+    glUniform3f(colorLoc, nowColor.x(), nowColor.y(), nowColor.z()); // upload this frame's color
+    return true;
+}
+
+//-///////////////////////////////////////////////////////////////////////
+//
+double bgColor = 0;
+double bgColorAdder = 0.001f;
+bool colorLoopScreenBackground() {
+    bgColor += bgColorAdder;
+    if (bgColor >= 1 || bgColor < 0)
+    {
+        bgColorAdder *= -1.0f;
+    }
+    
+    // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glClearColor.xhtml
+    // Inputs colors for glClear to use when it clears and sets the color buffer.
+    // A *state-setting* function
+    glClearColor(bgColor, bgColor * 0.5f,    bgColor * 0.5f, bgColor * 0.5f);
+    
+    // Clears the on screen buffer. Sets its buffer values *?for next render?*
+    // A *state-using* function
+    glClear(GL_COLOR_BUFFER_BIT);
+    
+    return true;
+}
+
+#pragma endregion =====================================================================================================================
+
+#pragma region USER_INPUT_CALLBACKS
+
 //-///////////////////////////////////////////
 // key_callback() - callback for glfw's key callback
 // param 1 - active context window when key action happened.
@@ -943,30 +1030,6 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
     // When window is resized, viewport should be resized.
     // Register a callback. 
     glViewport(0, 0, width, height);
-}
-
-//-///////////////////////////////////////////////////////////////////////
-//
-double bgColor = 0;
-double bgColorAdder = 0.001f;
-bool colorLoopScreenBackground()
-{
-    bgColor += bgColorAdder;
-    if (bgColor >= 1 || bgColor < 0)
-    {
-        bgColorAdder *= -1.0f;
-    }
-    
-    // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glClearColor.xhtml
-    // Inputs colors for glClear to use when it clears and sets the color buffer.
-    // A *state-setting* function
-    glClearColor(bgColor, bgColor * 0.5f,    bgColor * 0.5f, bgColor * 0.5f);
-    
-    // Clears the on screen buffer. Sets its buffer values *?for next render?*
-    // A *state-using* function
-    glClear(GL_COLOR_BUFFER_BIT);
-    
-    return true;
 }
 
 #pragma endregion =====================================================================================================================
