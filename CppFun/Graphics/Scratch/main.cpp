@@ -772,6 +772,7 @@ bool renderLoop(RenderLoopData data)
             glUniformMatrix4fv(transformLoc, 1, GL_TRUE, glm::value_ptr(trans));    
         }
 
+        // Change colors
         {
             if (nextColor)
             {
@@ -793,6 +794,7 @@ bool renderLoop(RenderLoopData data)
             glUniform3f(colorLoc, nowColor.x(), nowColor.y(), nowColor.z());                     // upload this frame's color for this letter
         }
 
+        // Move light position
         if (vector3::is_equal(lightMoveDir, vector3::vec_zero, 0.0001f) == false)
         {
             vector3::add_first_to_second(
@@ -807,6 +809,7 @@ bool renderLoop(RenderLoopData data)
                                                 std::to_string(lightPos.z()));
         }
 
+        // Bind VAO to OpenGL's VertexArray state. Process vertices configured by the VAO with glDrawArrays().
         for(size_t i = 0; i < bufferCache.cache.size(); ++i)
         {
             if (bufferCache.cache[i].verticesCount == 0) {
