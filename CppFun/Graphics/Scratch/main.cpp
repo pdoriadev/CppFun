@@ -14,8 +14,6 @@
 //      -lGL ?? links OpenGL ??
 //      -ldl ?? what does this link ??
 
-#include <glm/detail/qualifier.hpp>
-#include <glm/ext/matrix_transform.hpp>
 #pragma region HEADERS
 
 // OPENGL-RELATED HEADERS
@@ -25,6 +23,8 @@
 // glm INCLUDES FOR MATH. relative-paths bleh. 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/detail/qualifier.hpp>
+#include <glm/ext/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
                             // HTML Documentation - https://www.glfw.org/docs/latest/
 // C / CPP HEADERS
@@ -947,20 +947,20 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 
 //-///////////////////////////////////////////////////////////////////////
 //
-double color = 0;
-double adder = 0.001f;
-bool colorLoop()
+double bgColor = 0;
+double bgColorAdder = 0.001f;
+bool colorLoopScreenBackground()
 {
-    color += adder;
-    if (color >= 1 || color < 0)
+    bgColor += bgColorAdder;
+    if (bgColor >= 1 || bgColor < 0)
     {
-        adder *= -1.0f;
+        bgColorAdder *= -1.0f;
     }
     
     // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glClearColor.xhtml
     // Inputs colors for glClear to use when it clears and sets the color buffer.
     // A *state-setting* function
-    glClearColor(color, color * 0.5f,    color * 0.5f, color * 0.5f);
+    glClearColor(bgColor, bgColor * 0.5f,    bgColor * 0.5f, bgColor * 0.5f);
     
     // Clears the on screen buffer. Sets its buffer values *?for next render?*
     // A *state-using* function
