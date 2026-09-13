@@ -5,20 +5,23 @@
 #include <vector>
 #include <cmath>
 
-
-
 // Look into alternative math library for later: GLM. Used and recommended by professor. 
 //      OR second choice https://ggt.sourceforge.net/
 class vector3
 {
 public:
     float vec_xyz[3];
-    
+    static vector3 const vec_zero;
+
     vector3();
     vector3(float _x, float _y, float _z);
     
     static bool is_equal(vector3 a, vector3 b, float errorRange);
     static float square_magnitude(vector3 a);
+    static bool add_first_to_second(vector3 a, vector3& outVec);
+    static vector3 add(vector3 a, vector3 b);
+    static vector3 scale_uniform(float s, vector3 vec);
+    static bool modulo(int m, vector3& outVec);
     
     float x();
     float y();
@@ -28,10 +31,7 @@ public:
     bool set_y(float _y);
     bool set_z(float _z);
     bool set_to_zero();
-    
-    bool scale_uniform(float s, vector3& outVec);
-    bool modulo(int m, vector3& outVec);
-
+        
     bool add_vec3_to_vector(std::vector<float>& out);
 };
 
