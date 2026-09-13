@@ -11,6 +11,23 @@ END OF PROGRAM INFO LOG
 
 LOG: LINK SUCCESSFUL! ID = 3
 LOG: Constructed cube with 216floats and 36 points.
+LOG: New light pos: 1.000000, 1.000000, 4.500000
+LOG: New light pos: 1.000000, 1.000000, 4.000000
+LOG: New light pos: 1.000000, 1.000000, 3.500000
+LOG: New light pos: 1.000000, 1.000000, 3.000000
+LOG: New light pos: 1.000000, 1.000000, 2.500000
+LOG: New light pos: 1.000000, 1.000000, 2.000000
+LOG: New light pos: 1.000000, 1.000000, 1.500000
+LOG: New light pos: 1.000000, 1.000000, 1.000000
+LOG: New light pos: 1.000000, 1.000000, 0.500000
+LOG: New light pos: 1.000000, 1.000000, 0.000000
+LOG: New light pos: 1.000000, 1.000000, -0.500000
+LOG: New light pos: 1.000000, 1.000000, -1.000000
+LOG: New light pos: 1.000000, 1.000000, -1.500000
+LOG: New light pos: 1.000000, 1.000000, -2.000000
+LOG: New light pos: 1.000000, 1.000000, -2.500000
+LOG: New light pos: 1.000000, 1.000000, -3.000000
+LOG: New light pos: 1.000000, 1.000000, -3.500000
 LOG: 
 --------------------------
 ENDING PROGRAM
