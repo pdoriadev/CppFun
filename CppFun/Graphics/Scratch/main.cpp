@@ -1053,7 +1053,7 @@ bool Init_Window_Viewport(GLFWwindow* window)
     */
     //
     // The viewport dimensions can be smaller than the window. 
-    glViewport(0, 0, 800, 600);
+    glViewport(0, 0, 2160, 1600);
     
     
     return true;
