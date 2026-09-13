@@ -197,7 +197,7 @@ void main()
     
     // intensity is 0 if the light is not facing the plane.
     // intensity is 0 if the light is behind the plane.
-    float intensity = max(dotLightDir, 0.0f) * max(dotLightToVertex, 0.0f);
+    float intensity = max(dotLightDir, 0.0f) * max(-dotLightToVertex, 0.0f);
 
     fragColor = vec4(color * intensity, 1.0);
 }
