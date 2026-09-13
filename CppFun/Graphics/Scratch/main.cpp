@@ -90,12 +90,18 @@ enum Platform : int32_t
 };
 Platform platform = Platform::UNKNOWN;
 
-const std::string DASH_LINE = "--------------------------";
+// glfw
+float const SCREEN_WIDTH = 2160.0f;
+float const SCREEN_HEIGHT = 1600.0f;
 
+// shader control fields
 bool nextColor = false;
 vector3 lightPos = vector3(1.0, 1.0, 5.0);
 vector3 lightMoveDir = vector3();
 float lightMoveSpeed = 0.5f;
+
+// logging utility
+const std::string DASH_LINE = "--------------------------";
 
 #pragma endregion =====================================================================================================================
 
@@ -641,7 +647,7 @@ int main()
     // param 3 - window name
     // param 4 - ? 
     // param 5 - ?
-    GLFWwindow* window = glfwCreateWindow(800, 600, "Fall 2026 - Assignment 1 - Peter Doria", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Fall 2026 - Assignment 1 - Peter Doria", NULL, NULL);
     if (IsNullPtr(window, "GLFWwindow"))
     {
         Logging::consoleLog(Logging::LogType::ASSERT,
@@ -1053,8 +1059,7 @@ bool Init_Window_Viewport(GLFWwindow* window)
     */
     //
     // The viewport dimensions can be smaller than the window. 
-    glViewport(0, 0, 2160, 1600);
-    
+    glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     
     return true;
 }
