@@ -34,6 +34,12 @@ namespace InputCache {
     // Called by external functions. 
     bool cacheKeyState(int32_t glfwKeyCode, int32_t action);
 
+    //-/////////////////////////////////////////////////////////
+    // updateSingleFrameStates() - updates one-frame state to persistent state.
+    // Pressed --> Hold.
+    // Released --> Neutral.
+    //
+    // Call this after processing input in a frame so state is updated for next frame.
     bool updateSingleFrameStates();
 
 #pragma endregion =====================================================================================================================

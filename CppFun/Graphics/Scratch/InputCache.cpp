@@ -320,12 +320,6 @@ namespace InputCache {
         return true;
     }
 
-    //-/////////////////////////////////////////////////////////
-    // updatePressedAndReleased() - updates one-frame state to persistent state
-    // Pressed --> Hold
-    // Released --> Neutral
-    //
-    // Call this after processing input in a frame so state is updated for next frame.
     bool updateSingleFrameStates() {
         for (unsigned int i = 0; i < states.size(); ++i)
         {
