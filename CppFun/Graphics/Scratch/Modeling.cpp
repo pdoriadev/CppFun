@@ -125,45 +125,47 @@ bool addTri(std::vector<float>& out, tri t) {
 //-////////////////////////////////////
 // Make the triangles for each face of the cube. 
 bool buildCubeTris(std::vector<float>& out) {
-    static const vector3 zero        (0.5f, 0.5f, -0.5f);
-    static const vector3 one         (-0.5f, 0.5f, -0.5f);
-    static const vector3 two         (-0.5f, 0.5f, 0.5f);
-    static const vector3 three       (0.5f, 0.5f, 0.5f);
-    static const vector3 four        (0.5f, -0.5f, 0.5f);
-    static const vector3 five        (-0.5f, -0.5f, 0.5f);
-    static const vector3 six         (-0.5f, -0.5f, -0.5f);
-    static const vector3 seven       (0.5f, -0.5f, -0.5f);
+    static vector3 const zero        (0.5f,     0.5f,   -0.5f);
+    static vector3 const one         (-0.5f,    0.5f,   -0.5f);
+    static vector3 const two         (-0.5f,    0.5f,   0.5f);
+    static vector3 const three       (0.5f,     0.5f,   0.5f);
+    static vector3 const four        (0.5f,     -0.5f,  0.5f);
+    static vector3 const five        (-0.5f,    -0.5f,  0.5f);
+    static vector3 const six         (-0.5f,    -0.5f,  -0.5f);
+    static vector3 const seven       (0.5f,     -0.5f,  -0.5f);
 
-    static const vector3 sideANorm   (1.0f, 0, 0);
-    static const vector3 topNorm     (0.0f, 1, 0);
-    static const vector3 frontNorm   (0.0f, 0, 1);
-    static const vector3 backNorm    (0.0f, 0, -1);
-    static const vector3 botNorm     (0.0f, -1, 0);
-    static const vector3 sideBNorm   (-1, 0, 0);
+    static vector3 const sideANorm   (1.0f,     0,      0);
+    static vector3 const topNorm     (0.0f,     1.0f,   0);
+    static vector3 const frontNorm   (0.0f,     0,      1.0f);
+    static vector3 const backNorm    (0.0f,     0,      -1.0f);
+    static vector3 const botNorm     (0.0f,     -1.0f,  0);
+    static vector3 const sideBNorm   (-1.0f,    0,      0);
+
+    // tri vertices are always added by going around the outside of the square. Never across the square. 
 
     // Back Face
     addTri(out, tri(zero, one, six, backNorm));
-    addTri(out, tri(zero, six, seven, backNorm));
+    addTri(out, tri(zero, seven, six, backNorm));
 
     // Top Face
     addTri(out, tri(zero, one, two, topNorm));
-    addTri(out, tri(zero, two, three, topNorm));
+    addTri(out, tri(zero, three, two, topNorm));
 
     // Front Face
     addTri(out, tri(two, three, four, frontNorm));
-    addTri(out, tri(two, four, five, frontNorm));
+    addTri(out, tri(two, five, four, frontNorm));
 
     // Bottom Face
     addTri(out, tri(four, five, six, botNorm));
-    addTri(out, tri(four, six, seven, botNorm));
+    addTri(out, tri(four, seven, six, botNorm));
 
     // sideA Face
     addTri(out, tri(zero, three, four, sideANorm));
-    addTri(out, tri(zero, four, seven, sideANorm));
+    addTri(out, tri(zero, seven, four, sideANorm));
 
     // sideB Face
     addTri(out, tri(one, two, five, sideBNorm));
-    addTri(out, tri(one, two, six, sideBNorm));
+    addTri(out, tri(one, six, five, sideBNorm));
 
     return true; 
 }
