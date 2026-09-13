@@ -14,11 +14,18 @@
 //      -lGL ?? links OpenGL ??
 //      -ldl ?? what does this link ??
 
+#include <glm/detail/qualifier.hpp>
+#include <glm/ext/matrix_transform.hpp>
 #pragma region HEADERS
 
 // OPENGL-RELATED HEADERS
 #include "glad.h"           // Function pointers to hardware implementation of OpenGL. Must include before GLFW
 #include <GLFW/glfw3.h>     // Window + Input Library - window/context creation, input, timing
+
+// glm INCLUDES FOR MATH. relative-paths bleh. 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
                             // HTML Documentation - https://www.glfw.org/docs/latest/
 // C / CPP HEADERS
 #include <cmath>            // sin, cos, M_PI
@@ -95,6 +102,7 @@ float lightMoveSpeed = 0.5f;
 #pragma region DEBUG_UTILITY
 //-///////////////////////////////////////////////
 // See "Catching errors (the easy way)" here: https://wikis.khronos.org/opengl/OpenGL_Error
+// Also: https://registry.khronos.org/OpenGL-Refpages/gl4/html/glDebugMessageCallback.xhtml
 void GLAPIENTRY MessageCallback( GLenum source,
                  GLenum type,
                  GLuint id,
@@ -753,15 +761,15 @@ bool renderLoop(RenderLoopData data)
         
         glUseProgram(data.shaderProgramID);
         
+        // Rotate and scale transform
         {
-            float transform[16] = {
-                1, 0.0f, 0.0f, 0.0f, 
-                0.0f, 1, 0.0f, 0.0f,                                 
-                0.0f, 0.0f, 1, 0.0f,                  
-                0.0f, 0.0f, 0.0f, 1.0f
-            };
+            glm::mat4 trans = glm::mat4(1.0f); // creates new identity matrix.
+            float const angle = 3.14f * 0.25f * glfwGetTime();
+            trans = glm::rotate(trans, angle, glm::vec3(0.77f, 0.77f, 0.0f));
+            float const scalar = (sin(glfwGetTime()) + 2.0f) * 0.25f;
+            trans = glm::scale(trans, glm::vec3(scalar, scalar, scalar));
             int transformLoc = glGetUniformLocation(data.shaderProgramID, "transform"); // ask the shader program where its "transform" uniform lives
-            glUniformMatrix4fv(transformLoc, 1, GL_TRUE, transform);    
+            glUniformMatrix4fv(transformLoc, 1, GL_TRUE, glm::value_ptr(trans));    
         }
 
         {
@@ -806,7 +814,7 @@ bool renderLoop(RenderLoopData data)
                 continue;
             }
             glBindVertexArray(bufferCache.cache[i].VAO);
-            glDrawArrays(GL_TRIANGLES, 0, bufferCache.cache[i].verticesCount);
+            glDrawArrays(GL_TRIANGLES, 0, bufferCache.cache[i].verticesCount); // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glDrawArrays.xhtml
         }
         glBindVertexArray(0); // unbind VAO object to avoid mishaps.
 
