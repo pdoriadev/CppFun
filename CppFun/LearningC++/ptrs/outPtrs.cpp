@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <vector>
 /*
  * CONCLUSIONS ON WRITING THIS
  *
@@ -11,6 +11,18 @@
  * 	It also does not *enforce* being assigned in the called function. It's another thing for the programmer to track, which, can work. I'd rather be told when I've forgotten to assign something than have to debug it or setup error checks.
  */
 
+std::vector<int> arr = {1, 2, 3, 4};
+
+bool assignOutPointerToVector(std::vector<int>* outPtr){
+	outPtr = &arr;
+	std::cout << "In assignment function - size = " << outPtr->size() << std::endl;
+	return true;
+}
+
+std::vector<int>* returnPtrToVector(){
+	return &arr;
+}
+
 int* generateInt()
 {
 	int* x;
@@ -20,12 +32,10 @@ int* generateInt()
 }
 
 // passing by reference.
-bool updatePtr(int& outInt)
-{
+bool updatePtr(int& outInt) {
 	// assigning reference's address to the address of an int ptr returned from another function
 	outInt = *generateInt();
-	if (&outInt == NULL)
-	{
+	if (&outInt == NULL) {
 		std::cout << "int ptr is null in local function." << std::endl;
 		return false;	
 	}
@@ -33,13 +43,11 @@ bool updatePtr(int& outInt)
 	return true; 
 }
 
-int main()
-{
+bool testOutPtrVsReturnPtr() {
 	bool result = false;
 	int z; // default initialization
 	result = updatePtr(z);
-	if(&z == NULL)
-	{
+	if(&z == NULL) {
 		return -1;
 		std::cout << "int ptr is null in main()" << std::endl;
 		return -1;
@@ -49,4 +57,16 @@ int main()
 	std::cout << "bool result value: " << result << std::endl;
 
 	return 0;
+}
+
+int main() {
+	// testOutPtrVsReturnPtr();
+	std::vector<int>* vecPtr = NULL;
+	vecPtr = returnPtrToVector();
+	std::cout << "main loop. returned ptr. ptr->size() = " << vecPtr->size() << std::endl;
+	vecPtr = NULL;	
+	
+	assignOutPointerToVector(vecPtr);
+	std::cout << "main loop. out ptr. ptr->size() = " << vecPtr->size() << std::endl;
+	vecPtr = NULL;
 }
