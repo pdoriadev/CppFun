@@ -1,268 +1,222 @@
 #include "InputCache.h"
 #include <GLFW/glfw3.h>
+#include "utils.h"
 
 namespace InputCache {
     bool initialized = false;
-    std::vector<int32_t> keys;
-    std::vector<enum KeyState> states;
     // parallel arrays are easier to work with. 
+    std::vector<int32_t> keyTokens;
+    std::vector<enum InputState> keyStates;
+
+    std::vector<int32_t> mouseTokens;
+    std::vector<enum InputState> mouseButtonStates;
+
+    std::vector<double> mouseScrollInputs = {0.0f, 0.0f};
+
+#pragma region INPUT_INFO_CLASS_DEFINITIONS
+
+    //-/////////////////////////////////////////////////////////////////////////////////////////////
+
+    InputRawData::InputRawData(InputType _type, int32_t _token, int _action) {
+        type = _type;
+        token = _token;
+        convertActionIntToInputState(_action, state);
+    }
+    
+    InputRawData::InputRawData(InputType _type, int32_t _token, enum InputState _state) {
+        type = _type;
+        token = _token;
+        state = _state;
+        isValidStateValue(state);
+    }
+    
+    InputRawData::InputRawData(InputType _type, int32_t _token) {
+        type = _type;
+        token = _token;
+    }
+
+    //-/////////////////////////////////////////////////////////////////////////////////////////////
+    
+    InputStateLocation::InputStateLocation(std::vector<enum InputState>* _stateArr, unsigned int _index) {
+        statesArray = _stateArr;
+        index = _index;
+    }
+
+    // Empty default constructor
+    InputStateLocation::InputStateLocation() { }
+
+
+#pragma endregion =====================================================================================================================
 
 #pragma region INITIALIZATION
 
     bool initializeCache() {
         if (initialized) return true;
 
-        keys.reserve(130);
-        states.reserve(130);
+        /////////////////////////////////////////
+        // INITIALIZE KEYS ARRAYS
+        ////////////////////////////////////////
 
-        keys.emplace_back(GLFW_KEY_SPACE        );
-        keys.emplace_back(GLFW_KEY_APOSTROPHE   );
-        keys.emplace_back(GLFW_KEY_COMMA        );
-        keys.emplace_back(GLFW_KEY_MINUS        );
-        keys.emplace_back(GLFW_KEY_PERIOD       );
-        keys.emplace_back(GLFW_KEY_SLASH        );
-        keys.emplace_back(GLFW_KEY_0            );
-        keys.emplace_back(GLFW_KEY_1            );
-        keys.emplace_back(GLFW_KEY_2            );
-        keys.emplace_back(GLFW_KEY_3            );
-        keys.emplace_back(GLFW_KEY_4            );
-        keys.emplace_back(GLFW_KEY_5            );
-        keys.emplace_back(GLFW_KEY_6            );
-        keys.emplace_back(GLFW_KEY_7            );
-        keys.emplace_back(GLFW_KEY_8            );
-        keys.emplace_back(GLFW_KEY_9            );
-        keys.emplace_back(GLFW_KEY_SEMICOLON    );
-        keys.emplace_back(GLFW_KEY_EQUAL        );
-        keys.emplace_back(GLFW_KEY_A            );
-        keys.emplace_back(GLFW_KEY_B            );
-        keys.emplace_back(GLFW_KEY_C            );
-        keys.emplace_back(GLFW_KEY_D            );
-        keys.emplace_back(GLFW_KEY_E            );
-        keys.emplace_back(GLFW_KEY_F            );
-        keys.emplace_back(GLFW_KEY_G            );
-        keys.emplace_back(GLFW_KEY_H            );
-        keys.emplace_back(GLFW_KEY_I            );
-        keys.emplace_back(GLFW_KEY_J            );
-        keys.emplace_back(GLFW_KEY_K            );
-        keys.emplace_back(GLFW_KEY_L            );
-        keys.emplace_back(GLFW_KEY_M            );
-        keys.emplace_back(GLFW_KEY_N            );
-        keys.emplace_back(GLFW_KEY_O            );
-        keys.emplace_back(GLFW_KEY_P            );
-        keys.emplace_back(GLFW_KEY_Q            );
-        keys.emplace_back(GLFW_KEY_R            );
-        keys.emplace_back(GLFW_KEY_S            );
-        keys.emplace_back(GLFW_KEY_T            );
-        keys.emplace_back(GLFW_KEY_U            );
-        keys.emplace_back(GLFW_KEY_V            );
-        keys.emplace_back(GLFW_KEY_W            );
-        keys.emplace_back(GLFW_KEY_X            );
-        keys.emplace_back(GLFW_KEY_Y            );
-        keys.emplace_back(GLFW_KEY_Z            );
-        keys.emplace_back(GLFW_KEY_LEFT_BRACKET );
-        keys.emplace_back(GLFW_KEY_BACKSLASH    );
-        keys.emplace_back(GLFW_KEY_RIGHT_BRACKET);
-        keys.emplace_back(GLFW_KEY_GRAVE_ACCENT );
-        keys.emplace_back(GLFW_KEY_WORLD_1      );
-        keys.emplace_back(GLFW_KEY_WORLD_2      );
-        keys.emplace_back(GLFW_KEY_ESCAPE       );
-        keys.emplace_back(GLFW_KEY_ENTER        );
-        keys.emplace_back(GLFW_KEY_TAB          );
-        keys.emplace_back(GLFW_KEY_BACKSPACE    );
-        keys.emplace_back(GLFW_KEY_INSERT       );
-        keys.emplace_back(GLFW_KEY_DELETE       );
-        keys.emplace_back(GLFW_KEY_RIGHT        );
-        keys.emplace_back(GLFW_KEY_LEFT         );
-        keys.emplace_back(GLFW_KEY_DOWN         );
-        keys.emplace_back(GLFW_KEY_UP           );
-        keys.emplace_back(GLFW_KEY_PAGE_UP      );
-        keys.emplace_back(GLFW_KEY_PAGE_DOWN    );
-        keys.emplace_back(GLFW_KEY_HOME         );
-        keys.emplace_back(GLFW_KEY_END          );
-        keys.emplace_back(GLFW_KEY_CAPS_LOCK    );
-        keys.emplace_back(GLFW_KEY_SCROLL_LOCK  );
-        keys.emplace_back(GLFW_KEY_NUM_LOCK     );
-        keys.emplace_back(GLFW_KEY_PRINT_SCREEN );
-        keys.emplace_back(GLFW_KEY_PAUSE        );
-        keys.emplace_back(GLFW_KEY_F1           );
-        keys.emplace_back(GLFW_KEY_F2           );
-        keys.emplace_back(GLFW_KEY_F3           );
-        keys.emplace_back(GLFW_KEY_F4           );
-        keys.emplace_back(GLFW_KEY_F5           );
-        keys.emplace_back(GLFW_KEY_F6           );
-        keys.emplace_back(GLFW_KEY_F7           );
-        keys.emplace_back(GLFW_KEY_F8           );
-        keys.emplace_back(GLFW_KEY_F9           );
-        keys.emplace_back(GLFW_KEY_F10          );
-        keys.emplace_back(GLFW_KEY_F11          );
-        keys.emplace_back(GLFW_KEY_F12          );
-        keys.emplace_back(GLFW_KEY_F13          );
-        keys.emplace_back(GLFW_KEY_F14          );
-        keys.emplace_back(GLFW_KEY_F15          );
-        keys.emplace_back(GLFW_KEY_F16          );
-        keys.emplace_back(GLFW_KEY_F17          );
-        keys.emplace_back(GLFW_KEY_F18          );
-        keys.emplace_back(GLFW_KEY_F19          );
-        keys.emplace_back(GLFW_KEY_F20          );
-        keys.emplace_back(GLFW_KEY_F21          );
-        keys.emplace_back(GLFW_KEY_F22          );
-        keys.emplace_back(GLFW_KEY_F23          );
-        keys.emplace_back(GLFW_KEY_F24          );
-        keys.emplace_back(GLFW_KEY_F25          );
-        keys.emplace_back(GLFW_KEY_KP_0         );
-        keys.emplace_back(GLFW_KEY_KP_1         );
-        keys.emplace_back(GLFW_KEY_KP_2         );
-        keys.emplace_back(GLFW_KEY_KP_3         );
-        keys.emplace_back(GLFW_KEY_KP_4         );
-        keys.emplace_back(GLFW_KEY_KP_5         );
-        keys.emplace_back(GLFW_KEY_KP_6         );
-        keys.emplace_back(GLFW_KEY_KP_7         );
-        keys.emplace_back(GLFW_KEY_KP_8         );
-        keys.emplace_back(GLFW_KEY_KP_9         );
-        keys.emplace_back(GLFW_KEY_KP_DECIMAL   );
-        keys.emplace_back(GLFW_KEY_KP_DIVIDE    );
-        keys.emplace_back(GLFW_KEY_KP_MULTIPLY  );
-        keys.emplace_back(GLFW_KEY_KP_SUBTRACT  );
-        keys.emplace_back(GLFW_KEY_KP_ADD       );
-        keys.emplace_back(GLFW_KEY_KP_ENTER     );
-        keys.emplace_back(GLFW_KEY_KP_EQUAL     );
-        keys.emplace_back(GLFW_KEY_LEFT_SHIFT   );
-        keys.emplace_back(GLFW_KEY_LEFT_CONTROL );
-        keys.emplace_back(GLFW_KEY_LEFT_ALT     );
-        keys.emplace_back(GLFW_KEY_LEFT_SUPER   );
-        keys.emplace_back(GLFW_KEY_RIGHT_SHIFT  );
-        keys.emplace_back(GLFW_KEY_RIGHT_CONTROL);
-        keys.emplace_back(GLFW_KEY_RIGHT_ALT    );
-        keys.emplace_back(GLFW_KEY_RIGHT_SUPER  );
-        keys.emplace_back(GLFW_KEY_MENU         );
-        keys.emplace_back(GLFW_KEY_LAST         );
+        keyTokens.reserve(130);
+        // Add glfw tokens to array
+        {
+        keyTokens.emplace_back(GLFW_KEY_SPACE        );
+        keyTokens.emplace_back(GLFW_KEY_APOSTROPHE   );
+        keyTokens.emplace_back(GLFW_KEY_COMMA        );
+        keyTokens.emplace_back(GLFW_KEY_MINUS        );
+        keyTokens.emplace_back(GLFW_KEY_PERIOD       );
+        keyTokens.emplace_back(GLFW_KEY_SLASH        );
+        keyTokens.emplace_back(GLFW_KEY_0            );
+        keyTokens.emplace_back(GLFW_KEY_1            );
+        keyTokens.emplace_back(GLFW_KEY_2            );
+        keyTokens.emplace_back(GLFW_KEY_3            );
+        keyTokens.emplace_back(GLFW_KEY_4            );
+        keyTokens.emplace_back(GLFW_KEY_5            );
+        keyTokens.emplace_back(GLFW_KEY_6            );
+        keyTokens.emplace_back(GLFW_KEY_7            );
+        keyTokens.emplace_back(GLFW_KEY_8            );
+        keyTokens.emplace_back(GLFW_KEY_9            );
+        keyTokens.emplace_back(GLFW_KEY_SEMICOLON    );
+        keyTokens.emplace_back(GLFW_KEY_EQUAL        );
+        keyTokens.emplace_back(GLFW_KEY_A            );
+        keyTokens.emplace_back(GLFW_KEY_B            );
+        keyTokens.emplace_back(GLFW_KEY_C            );
+        keyTokens.emplace_back(GLFW_KEY_D            );
+        keyTokens.emplace_back(GLFW_KEY_E            );
+        keyTokens.emplace_back(GLFW_KEY_F            );
+        keyTokens.emplace_back(GLFW_KEY_G            );
+        keyTokens.emplace_back(GLFW_KEY_H            );
+        keyTokens.emplace_back(GLFW_KEY_I            );
+        keyTokens.emplace_back(GLFW_KEY_J            );
+        keyTokens.emplace_back(GLFW_KEY_K            );
+        keyTokens.emplace_back(GLFW_KEY_L            );
+        keyTokens.emplace_back(GLFW_KEY_M            );
+        keyTokens.emplace_back(GLFW_KEY_N            );
+        keyTokens.emplace_back(GLFW_KEY_O            );
+        keyTokens.emplace_back(GLFW_KEY_P            );
+        keyTokens.emplace_back(GLFW_KEY_Q            );
+        keyTokens.emplace_back(GLFW_KEY_R            );
+        keyTokens.emplace_back(GLFW_KEY_S            );
+        keyTokens.emplace_back(GLFW_KEY_T            );
+        keyTokens.emplace_back(GLFW_KEY_U            );
+        keyTokens.emplace_back(GLFW_KEY_V            );
+        keyTokens.emplace_back(GLFW_KEY_W            );
+        keyTokens.emplace_back(GLFW_KEY_X            );
+        keyTokens.emplace_back(GLFW_KEY_Y            );
+        keyTokens.emplace_back(GLFW_KEY_Z            );
+        keyTokens.emplace_back(GLFW_KEY_LEFT_BRACKET );
+        keyTokens.emplace_back(GLFW_KEY_BACKSLASH    );
+        keyTokens.emplace_back(GLFW_KEY_RIGHT_BRACKET);
+        keyTokens.emplace_back(GLFW_KEY_GRAVE_ACCENT );
+        keyTokens.emplace_back(GLFW_KEY_WORLD_1      );
+        keyTokens.emplace_back(GLFW_KEY_WORLD_2      );
+        keyTokens.emplace_back(GLFW_KEY_ESCAPE       );
+        keyTokens.emplace_back(GLFW_KEY_ENTER        );
+        keyTokens.emplace_back(GLFW_KEY_TAB          );
+        keyTokens.emplace_back(GLFW_KEY_BACKSPACE    );
+        keyTokens.emplace_back(GLFW_KEY_INSERT       );
+        keyTokens.emplace_back(GLFW_KEY_DELETE       );
+        keyTokens.emplace_back(GLFW_KEY_RIGHT        );
+        keyTokens.emplace_back(GLFW_KEY_LEFT         );
+        keyTokens.emplace_back(GLFW_KEY_DOWN         );
+        keyTokens.emplace_back(GLFW_KEY_UP           );
+        keyTokens.emplace_back(GLFW_KEY_PAGE_UP      );
+        keyTokens.emplace_back(GLFW_KEY_PAGE_DOWN    );
+        keyTokens.emplace_back(GLFW_KEY_HOME         );
+        keyTokens.emplace_back(GLFW_KEY_END          );
+        keyTokens.emplace_back(GLFW_KEY_CAPS_LOCK    );
+        keyTokens.emplace_back(GLFW_KEY_SCROLL_LOCK  );
+        keyTokens.emplace_back(GLFW_KEY_NUM_LOCK     );
+        keyTokens.emplace_back(GLFW_KEY_PRINT_SCREEN );
+        keyTokens.emplace_back(GLFW_KEY_PAUSE        );
+        keyTokens.emplace_back(GLFW_KEY_F1           );
+        keyTokens.emplace_back(GLFW_KEY_F2           );
+        keyTokens.emplace_back(GLFW_KEY_F3           );
+        keyTokens.emplace_back(GLFW_KEY_F4           );
+        keyTokens.emplace_back(GLFW_KEY_F5           );
+        keyTokens.emplace_back(GLFW_KEY_F6           );
+        keyTokens.emplace_back(GLFW_KEY_F7           );
+        keyTokens.emplace_back(GLFW_KEY_F8           );
+        keyTokens.emplace_back(GLFW_KEY_F9           );
+        keyTokens.emplace_back(GLFW_KEY_F10          );
+        keyTokens.emplace_back(GLFW_KEY_F11          );
+        keyTokens.emplace_back(GLFW_KEY_F12          );
+        keyTokens.emplace_back(GLFW_KEY_F13          );
+        keyTokens.emplace_back(GLFW_KEY_F14          );
+        keyTokens.emplace_back(GLFW_KEY_F15          );
+        keyTokens.emplace_back(GLFW_KEY_F16          );
+        keyTokens.emplace_back(GLFW_KEY_F17          );
+        keyTokens.emplace_back(GLFW_KEY_F18          );
+        keyTokens.emplace_back(GLFW_KEY_F19          );
+        keyTokens.emplace_back(GLFW_KEY_F20          );
+        keyTokens.emplace_back(GLFW_KEY_F21          );
+        keyTokens.emplace_back(GLFW_KEY_F22          );
+        keyTokens.emplace_back(GLFW_KEY_F23          );
+        keyTokens.emplace_back(GLFW_KEY_F24          );
+        keyTokens.emplace_back(GLFW_KEY_F25          );
+        keyTokens.emplace_back(GLFW_KEY_KP_0         );
+        keyTokens.emplace_back(GLFW_KEY_KP_1         );
+        keyTokens.emplace_back(GLFW_KEY_KP_2         );
+        keyTokens.emplace_back(GLFW_KEY_KP_3         );
+        keyTokens.emplace_back(GLFW_KEY_KP_4         );
+        keyTokens.emplace_back(GLFW_KEY_KP_5         );
+        keyTokens.emplace_back(GLFW_KEY_KP_6         );
+        keyTokens.emplace_back(GLFW_KEY_KP_7         );
+        keyTokens.emplace_back(GLFW_KEY_KP_8         );
+        keyTokens.emplace_back(GLFW_KEY_KP_9         );
+        keyTokens.emplace_back(GLFW_KEY_KP_DECIMAL   );
+        keyTokens.emplace_back(GLFW_KEY_KP_DIVIDE    );
+        keyTokens.emplace_back(GLFW_KEY_KP_MULTIPLY  );
+        keyTokens.emplace_back(GLFW_KEY_KP_SUBTRACT  );
+        keyTokens.emplace_back(GLFW_KEY_KP_ADD       );
+        keyTokens.emplace_back(GLFW_KEY_KP_ENTER     );
+        keyTokens.emplace_back(GLFW_KEY_KP_EQUAL     );
+        keyTokens.emplace_back(GLFW_KEY_LEFT_SHIFT   );
+        keyTokens.emplace_back(GLFW_KEY_LEFT_CONTROL );
+        keyTokens.emplace_back(GLFW_KEY_LEFT_ALT     );
+        keyTokens.emplace_back(GLFW_KEY_LEFT_SUPER   );
+        keyTokens.emplace_back(GLFW_KEY_RIGHT_SHIFT  );
+        keyTokens.emplace_back(GLFW_KEY_RIGHT_CONTROL);
+        keyTokens.emplace_back(GLFW_KEY_RIGHT_ALT    );
+        keyTokens.emplace_back(GLFW_KEY_RIGHT_SUPER  );
+        keyTokens.emplace_back(GLFW_KEY_MENU         );
+        keyTokens.emplace_back(GLFW_KEY_LAST         );
+        }
+        keyTokens.shrink_to_fit();
 
+        keyStates.reserve(keyTokens.size());
+        for (unsigned int i = 0; i < keyTokens.size(); ++i) {
+            keyStates.emplace_back(InputState::NEUTRAL);
+        }
+        keyStates.shrink_to_fit();
 
+        std::cout << "Key States Size = " << keyStates.size() << std::endl;
+        
+        /////////////////////////////////////////
+        // INITIALIZE MOUSE BUTTONS ARRAYS
+        ////////////////////////////////////////
+       
+        mouseTokens.reserve(10);
+        // Add glfw tokens to array
+        {
+            mouseTokens.emplace_back(GLFW_MOUSE_BUTTON_1);
+            mouseTokens.emplace_back(GLFW_MOUSE_BUTTON_2);
+            mouseTokens.emplace_back(GLFW_MOUSE_BUTTON_3);
+            mouseTokens.emplace_back(GLFW_MOUSE_BUTTON_4);
+            mouseTokens.emplace_back(GLFW_MOUSE_BUTTON_5);
+            mouseTokens.emplace_back(GLFW_MOUSE_BUTTON_6);
+            mouseTokens.emplace_back(GLFW_MOUSE_BUTTON_7);
+            mouseTokens.emplace_back(GLFW_MOUSE_BUTTON_8);
+        }
+        mouseTokens.shrink_to_fit();
 
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
-        states.emplace_back(KeyState::NEUTRAL);
+        mouseButtonStates.reserve(mouseTokens.size());
+        for (unsigned int i = 0; i < mouseTokens.size(); ++i) {
+            mouseButtonStates.emplace_back(InputState::NEUTRAL);
+        }
+        mouseButtonStates.shrink_to_fit();
 
-        keys.shrink_to_fit();
-        states.shrink_to_fit();
+        std::cout << "Mouse states Size = " << mouseButtonStates.size() << std::endl;
 
         initialized = true;
         return true;
@@ -272,20 +226,25 @@ namespace InputCache {
 
 #pragma region STATE_CHANGING_FUNCTIONS
 
-    bool cacheKeyState(int32_t key, int action) {
+    bool isValidInputType(InputType type){
+        switch(type){
+            case InputType::KEY:
+                return true;
+            case InputType::MOUSE_BUTTON:
+                return true;
+            case InputType::SCROLL:
+                return true;
+            default:
+                return false;
+        }
+        return true;
+    }
+
+    bool cacheInputState(InputRawData data) {
         if (isCacheInitialized() == false) return false;
-
-        int32_t keyIndex;
-        if (findKeyCodeIndex(key, keyIndex) == false) return false;
-
-        enum KeyState cachedState;
-        if (convertStateIntToStateEnum(states[keyIndex], cachedState) == false) return false;
-
-        enum KeyState actionState;
-        if (convertActionIntToKeyState(action, actionState) == false) return false;
-
-        if (actionState == KeyState::INVALID) {
-            if (action != GLFW_REPEAT) {
+        
+        if (data.state == InputState::INVALID) {
+            if (data.state != GLFW_REPEAT) {
                 std::cerr << "Attempted to cache INVALID GLFW action." << std::endl;
             }
             else {
@@ -294,40 +253,69 @@ namespace InputCache {
 
             return false;
         }
+
+        InputStateLocation stateLoc;
+        getStateLocationData(data, stateLoc);
         
-        switch(cachedState)
-        {
-            case KeyState::NEUTRAL:
-                states[keyIndex] = actionState; // new state *should* be press. Make a check??
+        enum InputState& cachedStateReference = (*stateLoc.statesArray)[stateLoc.index];
+        enum InputState cachedStateValue = (*stateLoc.statesArray)[stateLoc.index];;
+
+        switch(cachedStateValue) {
+            case InputState::NEUTRAL:
+                cachedStateReference = data.state; // new state *should* be press. Make a check??
                 break;
-            case KeyState::PRESS:
-                if (actionState == KeyState::PRESS) { states[keyIndex] = KeyState::HOLD; }
-                else                                { states[keyIndex] = KeyState::RELEASE; }
+            case InputState::PRESS:
+                if (data.state == InputState::PRESS) { cachedStateReference= InputState::HOLD; }
+                else                                { cachedStateReference= InputState::RELEASE; }
                 break;
-            case KeyState::HOLD:
-                if (actionState == KeyState::PRESS) { /* Do nothing */ }
-                else if (actionState == KeyState::RELEASE) {states[keyIndex] = KeyState::RELEASE; }
+            case InputState::HOLD:
+                if (data.state == InputState::PRESS) { /* Do nothing */ }
+                else if (data.state == InputState::RELEASE) {cachedStateReference = InputState::RELEASE; }
                 break;
-            case KeyState::RELEASE:
-                if (actionState == KeyState::PRESS) { states[keyIndex] = KeyState::PRESS; }
-                else                                { states[keyIndex] = KeyState::NEUTRAL; }
+            case InputState::RELEASE:
+                if (data.state == InputState::PRESS) { cachedStateReference = InputState::PRESS; }
+                else                                { cachedStateReference = InputState::NEUTRAL; }
+                break;
             default:
                 // Cached state is INVALID. Should NEVER happen.
-                std::cerr << "INVALID CACHED STATE: " << std::to_string(cachedState) << " Action State: " << std::to_string(actionState) << std::endl;
+                std::cerr << "INVALID CACHED STATE: " << std::to_string(cachedStateValue) << " Action State: " << std::to_string(data.state) << std::endl;
                 return false;
         }
+
+        // std::cout << "Key " << data.token 
+        //         << ". type: " << static_cast<int32_t>(data.type) 
+        //         << ". newCachedState: " << getInputStateString(cachedStateReference)
+        //         << ". stateValue: " << getInputStateString(data.state) << std::endl;
 
         return true;
     }
 
     bool updateSingleFrameStates() {
-        for (unsigned int i = 0; i < states.size(); ++i)
-        {
+        for (unsigned int i = 0; i < keyStates.size(); ++i) {
+            enum InputState prevState = keyStates[i]; 
+
             // state is validated in other functions. Not checking all states here.
-            switch(states[i])
+            switch(keyStates[i])
             {
-                case KeyState::PRESS: { states[i] = KeyState::HOLD; break;}
-                case KeyState::RELEASE: { states[i] = KeyState::NEUTRAL; break;}
+                case InputState::PRESS: { keyStates[i] = InputState::HOLD; break;}
+                case InputState::RELEASE: { keyStates[i] = InputState::NEUTRAL; break;}
+                default: break;
+            }
+
+            // Logging
+            // if (prevState != keyStates[i]) {
+            //     std::cout << "updated single frame state \n\t"
+            //                 << "Previous State = " << getInputStateString(prevState) << ". \n\t" 
+            //                 << "Current State = " << getInputStateString(keyStates[i]) << std::endl; 
+            // }
+        }
+
+        for (unsigned int i = 0; i < mouseButtonStates.size(); ++i) {
+            // state is validated in other functions. Not checking all states here.
+            switch(mouseButtonStates[i])
+            {
+                case InputState::PRESS: { mouseButtonStates[i] = InputState::HOLD; break;}
+                case InputState::RELEASE: { mouseButtonStates[i] = InputState::NEUTRAL; break;}
                 default: break;
             }
         }
@@ -339,39 +327,63 @@ namespace InputCache {
 
 #pragma region STATE_ACCESSING_FUNCTIONS
 
-    bool getState(int32_t glfwKeyCode, enum KeyState& outState) {
+    bool getStateLocationData(InputRawData rawData, InputStateLocation& outStateData) {
         if (isCacheInitialized() == false) return false;
 
-        int32_t index;
-        if (findKeyCodeIndex(glfwKeyCode, index)== false ) return false;
+        std::vector<int32_t>* tokensArr;
+        if ((tokensArr = getTokensArray(rawData.type)) == NULL) return false;
+        if (findTokenIndex(*tokensArr, 
+                        rawData.token, 
+                        outStateData.index) == false ) return false;
+        
+        if ((outStateData.statesArray = getStatesArray(rawData.type)) == NULL) return false;
 
-        if (isValidStateValue(states[index]) == false) return false;
+        return true;
+    }
 
-        outState = states[index];
+    bool getCurrentState(InputRawData rawData, enum InputState& outState) {
+        if (isCacheInitialized() == false) return false;
+
+        InputStateLocation stateData;
+        getStateLocationData(rawData, stateData);
+
+        enum InputState cachedState = (*stateData.statesArray)[stateData.index];
+        if (isValidStateValue(cachedState) == false) return false;
+        outState = cachedState;
+
+        // Logging update when state changes
+        // if (outState != InputState::NEUTRAL)
+        // {
+        //     std::cout << "GETTING STATE: " << getInputStateString(outState) 
+        //                 << " for input " << rawData.token 
+        //                 << " of type " << static_cast<int32_t>(rawData.type) << std::endl;
+        // }
         
         return true;
     }
 
-    bool isKeyState(int32_t glfwKeyCode, enum InputCache::KeyState stateValue) {
+    bool isInputState(InputRawData data) {
         if (isCacheInitialized() == false) return false;
-        enum InputCache::KeyState outState;
-        InputCache::getState(glfwKeyCode, outState);
-        if (outState == stateValue) return true;
+
+        enum InputState outCurrentState;
+        getCurrentState(data, outCurrentState);
+
+        if (outCurrentState == data.state) return true;
         else                        return false;
     }
 
-    bool findKeyCodeIndex(int32_t keyInt, int32_t& keyIndex) {
+    bool findTokenIndex(std::vector<int32_t>& tokenArray, const int32_t inputToken, unsigned int& outTokenIndex) {
         if (isCacheInitialized() == false) return false;
 
-        for (unsigned int i = 0; i < keys.size(); ++i) {
-            if (keyInt == keys[i]) {
-                keyIndex = i;
+        for (unsigned int i = 0; i < tokenArray.size(); ++i) {
+            if (inputToken == tokenArray[i]) {
+                outTokenIndex = i;
                 return true;
             }
         }
 
         // Could not find keycode
-        std::cerr << "FAILED to find key matching value: " << std::to_string(keyInt);
+        std::cerr << "FAILED to find key matching value: " << inputToken;
         return false;
     }
 
@@ -379,7 +391,7 @@ namespace InputCache {
 
 #pragma region HELPER_FUNCTIONS
 
-    bool isCacheInitialized(){
+    bool isCacheInitialized() {
         if (initializeCache() == false)
         {
             std::cerr << "FAILED to initialize cache" << std::endl;
@@ -389,38 +401,66 @@ namespace InputCache {
         return true;
     }
 
-    bool isValidStateValue(enum KeyState stateValue)
-    {
+    bool isValidStateValue(enum InputState const stateValue) {
         switch(stateValue) {
-            case KeyState::NEUTRAL: break;
-            case KeyState::PRESS:   break;
-            case KeyState::HOLD:    break;
-            case KeyState::RELEASE: break;
+            case InputState::NEUTRAL: break;
+            case InputState::PRESS:   break;
+            case InputState::HOLD:    break;
+            case InputState::RELEASE: break;
             default: // Not a valid key state. 
-                std::cerr << "Invalid key state: " << getKeyStateString(stateValue) << ". Does not match a valid KeyState." << std::endl;
+                std::cerr << "Invalid key state: " << getInputStateString(stateValue) << ". Does not match a valid KeyState." << std::endl;
                 return false;
         }
-
         return true;
     }
 
-    bool convertStateIntToStateEnum(int32_t stateInt, enum KeyState& outState) {
+    std::vector<int32_t>* getTokensArray(InputType type) {
+        switch(type) {
+            case InputType::KEY:
+                return &keyTokens;
+            case InputType::MOUSE_BUTTON:
+                return &mouseTokens;
+            case InputType::SCROLL:
+                // std::cout << "SCROLL is not implemented" << std::endl;
+                return NULL;
+            default:
+                std::cout << "Invalid input type." << std::endl;
+                return NULL;
+        }
+    }
+
+    std::vector<enum InputState>* getStatesArray(InputType type) {
+        switch(type) {
+            case InputType::KEY:
+                return &keyStates;
+            case InputType::MOUSE_BUTTON:
+                return &mouseButtonStates;
+            case InputType::SCROLL:
+                // std::cout << "SCROLL is not implemented" << std::endl;
+                return NULL;
+            default:
+                std::cout << "Invalid input type." << std::endl;
+                return NULL;
+        }
+    }
+
+    bool convertStateIntToStateEnum(int32_t const stateInt, enum InputState& outState) {
         switch(stateInt) {
-            case KeyState::NEUTRAL:
-                outState = KeyState::NEUTRAL;
+            case InputState::NEUTRAL:
+                outState = InputState::NEUTRAL;
                 break;
-            case KeyState::PRESS:
-                outState = KeyState::PRESS;
+            case InputState::PRESS:
+                outState = InputState::PRESS;
                 break;
-            case KeyState::HOLD:
-                outState = KeyState::HOLD;
+            case InputState::HOLD:
+                outState = InputState::HOLD;
                 break;
-            case KeyState::RELEASE:
-                outState = KeyState::RELEASE;
+            case InputState::RELEASE:
+                outState = InputState::RELEASE;
                 break;
             default:
-                outState = KeyState::INVALID;
-                std::cerr << "INVALID state int.: " << std::to_string(stateInt) << " Does not match any KeyState value." << std::endl;
+                outState = InputState::INVALID;
+                std::cerr << "INVALID state int: " << std::to_string(stateInt) << " Does not match any KeyState value." << std::endl;
                 // Not a valid key state. 
                 return false;
         }
@@ -428,40 +468,65 @@ namespace InputCache {
         return true;
     }
 
-    bool convertActionIntToKeyState(int action, enum KeyState& outState) {
+    bool convertActionIntToInputState(int const action, enum InputState& outState) {
         switch(action) {
             case GLFW_PRESS:
-                outState = KeyState::PRESS;
+                outState = InputState::PRESS;
                 break;
             case GLFW_RELEASE:
-                outState = KeyState::RELEASE;
+                outState = InputState::RELEASE;
                 break;
             case GLFW_REPEAT:
-                outState = KeyState::INVALID;
+                outState = InputState::INVALID;
                 break;
             default:
                 // Not a valid GLFW action. 
                 std::cerr << "int param has no matching GLFW action: " << std::to_string(action) << std::endl;
-                outState = KeyState::INVALID;
+                outState = InputState::INVALID;
                 return false;
         }
 
         return true;
     }
 
-    std::string getKeyStateString(enum KeyState stateValue) {
+    std::string getInputStateString(enum InputState const stateValue) {
         switch(stateValue) {
-            case KeyState::KeyState:return "KeyState";
-            case KeyState::INVALID: return "INVALID";
-            case KeyState::NEUTRAL: return "NEUTRAL";
-            case KeyState::PRESS:   return "PRESS";
-            case KeyState::HOLD:    return "HOLD";
-            case KeyState::RELEASE: return "RELEASE";
-            case KeyState::COUNT:   return "COUNT";
+            case InputState::InputState:return "InputState";
+            case InputState::INVALID:   return "INVALID";
+            case InputState::NEUTRAL:   return "NEUTRAL";
+            case InputState::PRESS:     return "PRESS";
+            case InputState::HOLD:      return "HOLD";
+            case InputState::RELEASE:   return "RELEASE";
+            case InputState::COUNT:     return "COUNT";
             default: // Not a valid key state. 
-                std::cerr << "INVALID state enum: " << getKeyStateString(stateValue) << ". Does not match any KeyState values." << std::endl;
+                std::cerr << "INVALID state enum: " << getInputStateString(stateValue) << 
+                            ". Does not match any " + getInputStateString(InputState::InputState) + " values." << std::endl;
                 return "";
         }
+    }
+
+    bool outputTokensArray(std::vector<int32_t>& tokensArray) {
+        std::string outString = "{ ";
+        for (unsigned int i = 0; i < tokensArray.size(); ++i) { 
+            outString += std::to_string(tokensArray[i]);
+            if (i+1 < tokensArray.size()) { outString += ", "; }
+        }
+        outString += " }";
+
+        std::cout << outString << std::endl;
+        return true;
+    }
+
+    bool outputStatesArray(std::vector<enum InputState>& statesArray) {
+        std::string outString = "{ ";
+        for (unsigned int i = 0; i < statesArray.size(); ++i) { 
+            outString += getInputStateString(statesArray[i]);
+            if (i+1 < statesArray.size()) { outString += ", "; }
+        }
+        outString += " }";
+
+        std::cout << outString << std::endl;
+        return true;
     }
 
 #pragma endregion =====================================================================================================================

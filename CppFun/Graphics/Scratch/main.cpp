@@ -39,6 +39,7 @@
 #include "Modeling.h"
 #include "Logging.h"
 #include "InputCache.h"
+#include "utils.h"
 
 #pragma endregion =====================================================================================================================
 
@@ -71,6 +72,7 @@ bool cacheModelBuffer(std::vector<float>& vertices);
 bool processInput(GLFWwindow*);
 bool updateLightMoveDir();
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 
 // Render Loop
 struct RenderLoopData;
@@ -681,7 +683,10 @@ int main()
     GLFWcursor* arrowCursor = glfwCreateStandardCursor(GLFW_ARROW_CURSOR); // create a standard system arrow cursor shape
     glfwSetCursor(window, arrowCursor);             
     
+    //-/////////////////////////
+    // Set input callbacks
     glfwSetKeyCallback(window, key_callback); // apply it to this window
+    glfwSetMouseButtonCallback(window, mouse_button_callback);
 
 //-//////////////////////////////////////////////////////////////
 // SHADER SETUP
@@ -745,7 +750,7 @@ int main()
 
 #pragma endregion =====================================================================================================================
 
-#pragma region RENDER_LOOP_HELPERS_AND_CALLBACKS
+#pragma region RENDER_LOOP
 
 //-///////////////////////////////////////////
 // Called in main(). 
@@ -826,45 +831,9 @@ bool renderLoop(RenderLoopData data)
     return true;
 }
 
-//-///////////////////////////////////////////
-// Called in main()'s RENDER LOOP.
-// 
-bool processInput(GLFWwindow *window)
-{
-    if (IsNullPtr(window, "GLFWwindow")) return false;
+#pragma endregion =====================================================================================================================
 
-    if (InputCache::isKeyState(GLFW_KEY_ESCAPE, InputCache::KeyState::PRESS))
-    {
-        //-//////////////////////////////////////// 
-        // glfwSetWindowShouldClose() - https://www.glfw.org/docs/latest/group__window.html#ga49c449dde2a6f87d996f4daaa09d6708
-        // Sets the close flag on the specified window. Can override the user, or signal the window should be closed.
-        // param 1 - pointer to a GLFWwindow. 
-        // param 2 - int. ?? Is passing a non-zero/one value undefined?
-        // returns - void.
-        // Closing and Close flag - https://www.glfw.org/docs/latest/window_guide.html#window_close
-        glfwSetWindowShouldClose(window, true);
-        return true;    
-    }
-
-    if (InputCache::isKeyState(GLFW_KEY_C, InputCache::KeyState::PRESS)) { 
-        colorChangeMode = ColorChangeMode::INSTANT; 
-        timeTargetSmoothToTarget = 0.0f;
-    }
-    else if (InputCache::isKeyState(GLFW_KEY_V, InputCache::KeyState::PRESS)) { 
-        if (colorChangeMode != ColorChangeMode::SMOOTH) {
-            colorChangeMode = ColorChangeMode::SMOOTH; 
-            timeTargetSmoothToTarget = glfwGetTime() + timeDeltaSmoothToTarget;
-        }
-    }
-    
-    updateLightMoveDir();
-
-
-    // *** CALLED AT THE END OF PROCESS INPUT.***
-    InputCache::updateSingleFrameStates();
-
-    return false;
-}
+#pragma region RENDER_LOOP_HELPERS
 
 //-/////////////////////////////////////////
 //
@@ -873,24 +842,29 @@ bool updateLightMoveDir()
 {
     vector3 previousLightDir = vector3(lightMoveDir.x(), lightMoveDir.y(), lightMoveDir.z());
     lightMoveDir.set_to_zero();
+    
+    const InputCache::InputType KEY = InputCache::InputType::KEY;
+    const InputCache::InputType MOUSE_BUTTON = InputCache::InputType::MOUSE_BUTTON;
 
     // left-right
-    if (InputCache::isKeyState(GLFW_KEY_L, InputCache::PRESS) || 
-        InputCache::isKeyState(GLFW_KEY_L, InputCache::HOLD) ) { lightMoveDir.set_x(lightMoveDir.x() + 1.0f) ;}
-    if (InputCache::isKeyState(GLFW_KEY_J, InputCache::PRESS) || 
-        InputCache::isKeyState(GLFW_KEY_J, InputCache::HOLD) ) { lightMoveDir.set_x(lightMoveDir.x() - 1.0f) ;}
+    if (InputCache::isInputState(InputCache::InputRawData(KEY, GLFW_KEY_L, InputCache::PRESS)) || 
+        InputCache::isInputState(InputCache::InputRawData(KEY, GLFW_KEY_L, InputCache::HOLD))  )    { lightMoveDir.set_x(lightMoveDir.x() + 1.0f) ;}
+    if (InputCache::isInputState(InputCache::InputRawData(KEY, GLFW_KEY_J, InputCache::PRESS)) || 
+        InputCache::isInputState(InputCache::InputRawData(KEY, GLFW_KEY_J, InputCache::HOLD))  )    { lightMoveDir.set_x(lightMoveDir.x() - 1.0f) ;}
     
     // up-down
-    if (InputCache::isKeyState(GLFW_KEY_I, InputCache::PRESS) || 
-        InputCache::isKeyState(GLFW_KEY_I, InputCache::HOLD) ) { lightMoveDir.set_y(lightMoveDir.y() + 1.0f) ;}
-    if (InputCache::isKeyState(GLFW_KEY_K, InputCache::PRESS) || 
-        InputCache::isKeyState(GLFW_KEY_K, InputCache::HOLD) ) { lightMoveDir.set_y(lightMoveDir.y() - 1.0f) ;}
+
+    if (InputCache::isInputState(InputCache::InputRawData(KEY, GLFW_KEY_I, InputCache::PRESS)) || 
+        InputCache::isInputState(InputCache::InputRawData(KEY, GLFW_KEY_I, InputCache::HOLD))  )    { lightMoveDir.set_y(lightMoveDir.y() + 1.0f) ;}
+    if (InputCache::isInputState(InputCache::InputRawData(KEY, GLFW_KEY_K, InputCache::PRESS)) || 
+        InputCache::isInputState(InputCache::InputRawData(KEY, GLFW_KEY_K, InputCache::HOLD))  )    { lightMoveDir.set_y(lightMoveDir.y() - 1.0f) ;}
 
     // 
-    if (InputCache::isKeyState(GLFW_KEY_U, InputCache::PRESS) || 
-        InputCache::isKeyState(GLFW_KEY_U, InputCache::HOLD) ) { lightMoveDir.set_z(lightMoveDir.z() + 1.0f) ;}
-    if (InputCache::isKeyState(GLFW_KEY_O, InputCache::PRESS) || 
-        InputCache::isKeyState(GLFW_KEY_O, InputCache::HOLD) ) { lightMoveDir.set_z(lightMoveDir.z() - 1.0f) ;}
+
+    if (InputCache::isInputState(InputCache::InputRawData(KEY, GLFW_KEY_U, InputCache::PRESS)) || 
+        InputCache::isInputState(InputCache::InputRawData(KEY, GLFW_KEY_U, InputCache::HOLD))  )   { lightMoveDir.set_z(lightMoveDir.z() + 1.0f) ;}
+    if (InputCache::isInputState(InputCache::InputRawData(KEY, GLFW_KEY_O, InputCache::PRESS)) || 
+        InputCache::isInputState(InputCache::InputRawData(KEY, GLFW_KEY_O, InputCache::HOLD))  )   { lightMoveDir.set_z(lightMoveDir.z() - 1.0f) ;}
 
     // if (vector3::is_equal(previousLightDir, lightMoveDir, 0.0001f) == false)
     // {
@@ -996,7 +970,56 @@ bool colorLoopScreenBackground() {
 
 #pragma endregion =====================================================================================================================
 
-#pragma region USER_INPUT_CALLBACKS
+#pragma region I/O_FUNCTIONS_CALLBACKS
+
+//-///////////////////////////////////////////
+// Called in main()'s RENDER LOOP.
+// 
+bool processInput(GLFWwindow *window)
+{
+    if (IsNullPtr(window, "GLFWwindow")) return false;
+
+    const InputCache::InputType KEY = InputCache::InputType::KEY;
+    const InputCache::InputType MOUSE_BUTTON = InputCache::InputType::MOUSE_BUTTON;
+
+    if (InputCache::isInputState(
+        InputCache::InputRawData(KEY, GLFW_KEY_ESCAPE, InputCache::InputState::PRESS))) {
+        //-//////////////////////////////////////// 
+        // glfwSetWindowShouldClose() - https://www.glfw.org/docs/latest/group__window.html#ga49c449dde2a6f87d996f4daaa09d6708
+        // Sets the close flag on the specified window. Can override the user, or signal the window should be closed.
+        // param 1 - pointer to a GLFWwindow. 
+        // param 2 - int. ?? Is passing a non-zero/one value undefined?
+        // returns - void.
+        // Closing and Close flag - https://www.glfw.org/docs/latest/window_guide.html#window_close
+        glfwSetWindowShouldClose(window, true);
+        return true;    
+    }
+
+    if (InputCache::isInputState(
+        InputCache::InputRawData(KEY, GLFW_KEY_C, InputCache::InputState::PRESS))) { 
+        colorChangeMode = ColorChangeMode::INSTANT; 
+        timeTargetSmoothToTarget = 0.0f;
+    }
+    else if (InputCache::isInputState(
+        InputCache::InputRawData(KEY, GLFW_KEY_V, InputCache::InputState::PRESS))){ 
+        if (colorChangeMode != ColorChangeMode::SMOOTH) {
+            colorChangeMode = ColorChangeMode::SMOOTH; 
+            timeTargetSmoothToTarget = glfwGetTime() + timeDeltaSmoothToTarget;
+        }
+    }
+
+    if (InputCache::isInputState(
+        InputCache::InputRawData(MOUSE_BUTTON, GLFW_MOUSE_BUTTON_1, InputCache::InputState::PRESS))) {
+        Logging::consoleLog(Logging::LogType::LOG, "Pressed mouse button 1");
+    }
+    
+    updateLightMoveDir();
+
+    // *** CALLED AT THE END OF PROCESS INPUT.***
+    InputCache::updateSingleFrameStates();
+
+    return false;
+}
 
 //-///////////////////////////////////////////
 // key_callback() - callback for glfw's key callback
@@ -1008,11 +1031,31 @@ bool colorLoopScreenBackground() {
 // Set by glfwSetKeyCallback()
 // Input Guide: www.glfw.org/docs/3.3/input_guide.html 
 // Key Macros: https://www.glfw.org/docs/3.3/group__keys.html
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
-{
+void key_callback(GLFWwindow* window, int keyToken, int scancode, int action, int mods) {
     if (IsNullPtr(window, "GLFWwindow")) return;
 
-    InputCache::cacheKeyState(key, action);
+    const InputCache::InputType KEY = InputCache::InputType::KEY;
+    InputCache::InputRawData data(KEY, keyToken, action);
+    InputCache::cacheInputState(data);
+
+    if (InputCache::isInputState(data) == false && action != GLFW_REPEAT) {
+        std::cout << "New state " << InputCache::getInputStateString(data.state) << " failed to cache for key " << keyToken << std::endl;
+    }
+}
+
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods) {
+    if (IsNullPtr(window, "GLFWwindow")) return;
+
+    const InputCache::InputType MOUSE_BUTTON = InputCache::InputType::MOUSE_BUTTON;
+    InputCache::cacheInputState(
+            InputCache::InputRawData(MOUSE_BUTTON, button, action)
+        );
+}
+
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
+    if (IsNullPtr(window, "GLFWwindow")) return;
+
+    // NOT IMPLEMENTED YET
 }
 
 //-////////////////////////////////////////////////////////////////////////
@@ -1210,24 +1253,6 @@ bool isRunningUnderWSL()
     }
 
     return false; // none of the WSL signals were present -- probably not running under WSL
-}
-
-#pragma endregion =====================================================================================================================
-
-#pragma region UTILITY
-
-//-///////////////////////////////////////////////
-//
-const bool IsNullPtr(void* pointer, std::string typeStr)
-{
-    if (pointer == NULL)
-    {
-        Logging::consoleLog(Logging::LogType::ERROR, 
-            ("Pointer of type " + typeStr + "is null"));
-        return true;
-    }
-
-    return false;
 }
 
 #pragma endregion =====================================================================================================================
