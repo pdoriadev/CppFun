@@ -190,7 +190,7 @@ namespace InputCache {
         }
         keyStates.shrink_to_fit();
 
-        std::cout << "Key States Size = " << keyStates.size() << std::endl;
+        // std::cout << "Key States Size = " << keyStates.size() << std::endl;
         
         /////////////////////////////////////////
         // INITIALIZE MOUSE BUTTONS ARRAYS
@@ -216,7 +216,7 @@ namespace InputCache {
         }
         mouseButtonStates.shrink_to_fit();
 
-        std::cout << "Mouse states Size = " << mouseButtonStates.size() << std::endl;
+        // std::cout << "Mouse states Size = " << mouseButtonStates.size() << std::endl;
 
         initialized = true;
         return true;
