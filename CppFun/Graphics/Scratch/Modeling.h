@@ -69,7 +69,7 @@ public:
     bool addModelBuffer(modelBuffer& buf);
 };
 
-bool addTri(std::vector<float>& out, tri t);
+bool addTriToVector(std::vector<float>& out, tri t);
 
 //-////////////////////////////////////
 // Make the triangles for each face of the cube. 

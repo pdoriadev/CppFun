@@ -1,6 +1,6 @@
 #include "Modeling.h"
 
-#pragma region vector3
+#pragma region VECTOR3
 
 vector3::vector3() {
     vec_xyz[0] = 0.0;
@@ -98,32 +98,7 @@ tri::tri(vector3 a, vector3 b, vector3 c, vector3 norm)
     normal = norm;
 }
 
-#pragma endregion =====================================================================================================================
-
-#pragma region MODEL_BUFFER
-
-modelBuffer::modelBuffer(unsigned int _VAO,
-                unsigned int _VBO,
-                unsigned int _verticesCount)
-{
-    VAO = _VAO;
-    VBO = _VBO;
-    verticesCount = _verticesCount;
-}
-
-#pragma endregion =====================================================================================================================
-
-#pragma region MODEL_BUFFER_CACHE
-
-bool modelBufferCache::addModelBuffer(modelBuffer& buf)
-{
-    cache.emplace_back(buf);
-    return true;
-}
-
-#pragma endregion =====================================================================================================================
-
-bool addTri(std::vector<float>& out, tri t) {
+bool addTriToVector(std::vector<float>& out, tri t) {
     for (unsigned int i = 0; i < 3; ++i)
     {
         t.points[i].add_vec3_to_vector(out);
@@ -155,28 +130,28 @@ bool buildCubeTris(std::vector<float>& out) {
     // tri vertices are always added by going around the outside of the square. Never across the square. 
 
     // Back Face
-    addTri(out, tri(zero, one, six, backNorm));
-    addTri(out, tri(zero, seven, six, backNorm));
+    addTriToVector(out, tri(zero, one, six, backNorm));
+    addTriToVector(out, tri(zero, seven, six, backNorm));
 
     // Top Face
-    addTri(out, tri(zero, one, two, topNorm));
-    addTri(out, tri(zero, three, two, topNorm));
+    addTriToVector(out, tri(zero, one, two, topNorm));
+    addTriToVector(out, tri(zero, three, two, topNorm));
 
     // Front Face
-    addTri(out, tri(two, three, four, frontNorm));
-    addTri(out, tri(two, five, four, frontNorm));
+    addTriToVector(out, tri(two, three, four, frontNorm));
+    addTriToVector(out, tri(two, five, four, frontNorm));
 
     // Bottom Face
-    addTri(out, tri(four, five, six, botNorm));
-    addTri(out, tri(four, seven, six, botNorm));
+    addTriToVector(out, tri(four, five, six, botNorm));
+    addTriToVector(out, tri(four, seven, six, botNorm));
 
     // sideA Face
-    addTri(out, tri(zero, three, four, sideANorm));
-    addTri(out, tri(zero, seven, four, sideANorm));
+    addTriToVector(out, tri(zero, three, four, sideANorm));
+    addTriToVector(out, tri(zero, seven, four, sideANorm));
 
     // sideB Face
-    addTri(out, tri(one, two, five, sideBNorm));
-    addTri(out, tri(one, six, five, sideBNorm));
+    addTriToVector(out, tri(one, two, five, sideBNorm));
+    addTriToVector(out, tri(one, six, five, sideBNorm));
 
     return true; 
 }
@@ -191,7 +166,33 @@ bool buildTri(std::vector<float>& out) {
 
     static const vector3 norm       (0, 0, 1);
 
-    addTri(out, tri(zero, one, two, norm));
+    addTriToVector(out, tri(zero, one, two, norm));
 
     return true;
 }
+
+#pragma endregion =====================================================================================================================
+
+#pragma region MODEL_BUFFER
+
+modelBuffer::modelBuffer(unsigned int _VAO,
+                unsigned int _VBO,
+                unsigned int _verticesCount)
+{
+    VAO = _VAO;
+    VBO = _VBO;
+    verticesCount = _verticesCount;
+}
+
+#pragma endregion =====================================================================================================================
+
+#pragma region MODEL_BUFFER_CACHE
+
+bool modelBufferCache::addModelBuffer(modelBuffer& buf)
+{
+    cache.emplace_back(buf);
+    return true;
+}
+
+#pragma endregion =====================================================================================================================
+

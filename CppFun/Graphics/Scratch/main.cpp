@@ -362,7 +362,7 @@ bool setupShaderProgram(unsigned int& shaderProgramID)
     // param 1 - program ID. 
     //
     // Create an executable for each set of shaders (vert, geo, frag, etc.) attached to a program.
-    // The exectuable will run on that shader's corresponding processor (vert on vertex, geo on geomoetry, etc.)
+    // The exectuable will run on that shader's corresponding processor (vert on vertex, geo on geometry, etc.)
     // On successful link
     //      - the program's active user-defined ?? uniform ?? variables are initialized to 0. 
     //      - the program's active ?? uniform ?? variables are assigned a location. 
@@ -405,9 +405,10 @@ bool setupShaderProgram(unsigned int& shaderProgramID)
     // glUseProgram()
     // Installs a program object as part of current rendering state
     // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glUseProgram.xhtml 
-    glUseProgram(shaderProgramID);
+    glUseProgram(shaderProgramID); // ?? Do I need this? I'm already calling it every render loop????
 
     // Clean-up shader objects
+    // ??? SHOULD I DETACH THESE LATER? ???
     glDeleteShader(vertexShaderID);
     glDeleteShader(fragmentShaderID);
 
@@ -973,7 +974,7 @@ bool colorLoopScreenBackground() {
 #pragma region I/O_FUNCTIONS_CALLBACKS
 
 //-///////////////////////////////////////////
-// Called in main()'s RENDER LOOP.
+// Called in renderLoop()
 // 
 bool processInput(GLFWwindow *window)
 {
@@ -1198,19 +1199,20 @@ bool setupWSL()
     // ^ PROF'S NOTES ^
 	
     // are we under WSL, AND does this GLFW build support X11?
-    if (isRunningUnderWSL())
-    {
+    if (isRunningUnderWSL()) {
         platform = Platform::WSL;
     }
     
-    if (platform == Platform::WSL && glfwPlatformSupported(GLFW_PLATFORM_X11)) 
-    {                                                      
+    if (platform == Platform::WSL && glfwPlatformSupported(GLFW_PLATFORM_X11))  {                                                      
         // yes to both -- tell GLFW to use X11 instead of its default
         glfwInitHint(GLFW_PLATFORM, GLFW_PLATFORM_X11);  
         return true;
     }
 
     return false;
+
+#elif return false;
+
 #endif
 }
 
