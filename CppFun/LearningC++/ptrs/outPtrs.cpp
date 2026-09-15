@@ -59,7 +59,7 @@ bool testOutPtrVsReturnPtr() {
 	return 0;
 }
 
-int main() {
+bool testOutVecPtrVsReturnVecPtr() {
 	// testOutPtrVsReturnPtr();
 	std::vector<int>* vecPtr = NULL;
 	vecPtr = returnPtrToVector();
@@ -69,4 +69,10 @@ int main() {
 	assignOutPointerToVector(vecPtr);
 	std::cout << "main loop. out ptr. ptr->size() = " << vecPtr->size() << std::endl;
 	vecPtr = NULL;
+
+}
+
+int main() {
+	testOutVecPtrVsReturnVecPtr();
+
 }
