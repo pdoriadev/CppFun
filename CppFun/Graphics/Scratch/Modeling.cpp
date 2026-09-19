@@ -322,6 +322,7 @@ std::string getShapeVertexString(ShapeType const type) {
         case ShapeType::COUNT:          return "COUNT";
         default:
             Logging::consoleLog(Logging::LogType::ERROR, "Missing implementation for switch case.");
+            return "";
     }
 }
 
@@ -391,31 +392,8 @@ bool constructShapeBuffer(shapeConstructionParams shapeParams,
 
     outVertexBufferData.reserve(vertexCount * vertexElementSize);
 
-    // go through all combinations in a 2x2 matrix of 0's and 1's. 
-    // 0 = [ 0, 0, 0 ], 1 = [ 0, 1, 0 ], 2 = [ 1, 0, 0 ], 3 = [1, 1, 0]
-    // 4 = [ 0, 0, 1 ], 5 = [ 0, 1, 1 ], 6 = [ 1, 0, 1 ], 7 = [1, 1, 1]
-    // 3 variables. 8 possible vertices. 2^3 = 8. 
-    // How to indices in the correct order to the element buffer. It doesn't *technically* matter
-    // how they are arranged in the VBO, althought it may help with cache coherency? who gives a shit. just get something working.
-    // pick a plane that stays on one axis. . Then add the vertices in the clock-wise direction of that plane.
-    // The above indices are described wrt to the z plane not moving. counter clock-wise always goes positive horiz, pos up, neg horiz, neg down. 
-    // PosH, PosV, NegH, NegV. Horizontal and Vertical is wrt the plane *NOT* world or local transform.
-    // selecting a triangle's vertices: 
-    //                  constrain to a plane s.t. one of the x, y, or z basis vectors is always 0 or 1. 
-    //                  First triangle - find vertices whose difference in position is posHoriz, then posVert.
-    //                  Second triangle - start with the last triangle's vertex. find vertices whose difference in position is negHoriz, then negVert.
-    // z- | 0, 1, 2;  2, 3, 0;      1, 2, 3;   3, 0, 1;
-    // z+ | 5, 4, 7;  7, 6, 5;      4, 7, 6;   6, 5, 4;
-    // x+ | 1, 5, 6;  6, 2, 1;      5, 6, 2;   2, 1, 5;
-    // x- | 4, 0, 3;  3, 7, 4;      0, 3, 7;   7, 4, 0;
-    // y+ | 3, 2, 6;  6, 7, 3;      2, 6, 7;   7, 3, 2;
-    // y- | 0, 4, 5;  5, 1, 0;      1, 0, 4;   4, 5, 1; <-- this one. PosPos. NegNeg. 
-    //
-    // a cube forms 6 face loops. Each loop edge is equal to any two orthogonal vertices 
-    // Derive the index for the next vertex through bit shifting???????
-
-
     switch(shapeParams.shapeConfig.type) {
+        
         case ShapeType::TRI:
             for (unsigned int i = 0; i < vertexCount; ++i) {
                 
@@ -442,18 +420,18 @@ bool constructShapeBuffer(shapeConstructionParams shapeParams,
 
     // TODO replace with switch case that calls appropriate shape function. 
     // Add positions
-    for (unsigned int i = 0; i < outVertexBufferData.capacity(); ) {
-        outVertexBufferData.emplace_back(0)
+    // for (unsigned int i = 0; i < outVertexBufferData.capacity(); ) {
+    //     outVertexBufferData.emplace_back(0)
 
-        // for each basis vector (i.e x, y, or z). 
-        for (unsigned int j = 0; j < shapeParams.vertexConfig.dataSizes[i]; ++j) {
+    //     // for each basis vector (i.e x, y, or z). 
+    //     for (unsigned int j = 0; j < shapeParams.vertexConfig.dataSizes[i]; ++j) {
             
-        }
+    //     }
 
-        i += vertexElementSize;
-    }
+    //     i += vertexElementSize;
+    // }
 
-    for (unsigned int i = 0; i < outVertex)
+    // for (unsigned int i = 0; i < outVertex)
     
 
 

@@ -57,6 +57,7 @@ enum class ShapeType : int32_t {
     RECTANGLE,
     CIRCLE,
     CUBE,
+    SPHERE,
     COUNT
 };
 

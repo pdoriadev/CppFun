@@ -33,14 +33,14 @@
 #include <cstdlib>          // std::getenv -- used by isRunningUnderWSL() below
 #include <fstream>          // std::ifstream -- used by isRunningUnderWSL() below
 #include <string>           // std::string - used by isRunningUnderWSL() below
-#include <vector>
+#include <vector>           // std::vector
 
 // My C / CPP HEADERS
-#include "Modeling.h"
-#include "Logging.h"
-#include "InputCache.h"
-#include "utils.h"
-#include "shaderSources.h"
+#include "Modeling.h"       // functions and structs for construting meshes
+#include "Logging.h"        // static namespace logger with log types. 
+#include "InputCache.h"     // input cache system for GLFW input tokens
+#include "utils.h"          // IsNullPtr(void*)
+#include "shaderSources.h"  // shader source code wrapped in functions. 
 
 #pragma endregion =====================================================================================================================
 
