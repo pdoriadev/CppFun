@@ -8,7 +8,7 @@
 //
 // The split is what makes a per-topic solution library possible: the unit the
 // linker can swap is a whole translation unit, so the swappable code has to
-// live in a file of its own. See SOLUTION-LIBRARIES.md and ASSIGNMENTS.md.
+// live in a file of its own. See SO#LUTION-LIBRARIES.md and ASSIGNMENTS.md.
 //
 // The order is T * Rz * Ry * Rx * S, read right to left: scale the object in
 // its own frame, then rotate it, then move it. Any other order gives a
@@ -17,7 +17,6 @@
 
 #include "Shape.h"
 
-#include <cmath>
 
 glm::mat4 Shape::getModelMatrix() const {
     // TODO(transforms): compose the model matrix as T * Rx * Ry * Rz * S
