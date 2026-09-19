@@ -40,6 +40,7 @@
 #include "Logging.h"
 #include "InputCache.h"
 #include "utils.h"
+#include "shaderSources.h"
 
 #pragma endregion =====================================================================================================================
 
@@ -76,7 +77,7 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 
 // Render Loop
 struct RenderLoopData;
-bool renderLoop(RenderLoopData data);
+bool renderLoop(RenderLoopData const data);
 bool renderLoop_colorUpdate(RenderLoopData const data);
 
 // Utility
@@ -145,84 +146,6 @@ void GLAPIENTRY MessageCallback( GLenum source,
                     "\n\t\tseverity = 0x" + std::to_string(severity) +
                     "\n\t\tmessage = " + messageStr);
 }
-#pragma endregion =====================================================================================================================
-
-#pragma region SHADER_SOURCE 
-
-//-///////////////////////////////////////////////
-// VERT SHADER - Runs on every vertex before shape assembly
-const char* vertexShaderSource =  R"GLSL(
-#version 330 core
-// OpenGL version to run the shader
-// layout?? location??
-// in is input vector data.
-layout (location = 0) in vec3 aPos;
-layout (location = 1) in vec3 aNor;
-
-// "out" variables are computed once per vertex here, then automatically
-// interpolated across each triangle before the fragment shader below sees
-// them (that interpolation step is called rasterization).
-
-out vec3 Normal; // will be picked up by "in vec3 Normal" in the fragment shader
-out vec3 lightToVertex;
-
-// A "uniform" is a value we set once per draw call from the CPU (see
-// glUniformMatrix4fv in the render loop) that stays constant across every
-// vertex/pixel of that draw call -- unlike aPos/aNormal, which are
-// different for every vertex.
-
-uniform mat4 transform;     // this model's combined rotate+scale+position matrix, set from the CPU
-uniform vec3 lightPos;      // set in render loop.
-
-void main()
-{
-    // Note from Assignment_0
-    // gl_Position is a special built-in output: OpenGL reads it to know
-    // where this vertex lands on screen (in clip space).
-    gl_Position = transform * vec4(aPos, 1.0);
-    // mat3(transform) keeps only the rotation+scale part of the 4x4 matrix
-    // (it drops the translation column), which is what you want when
-    // transforming a *direction* like a normal instead of a *point*.
-    Normal = mat3(transform) * aNor;
-
-    // Used to calculate if the light is in front or behind a plane.
-    lightToVertex = aPos - lightPos;
-}
-)GLSL";
-
-//-///////////////////////////////////////////////
-// FRAG SHADER - Runs after rasterization. 
-const char* fragmentShaderSource = R"GLSL(
-#version 330 core
-
-in vec3 Normal;
-in vec3 lightToVertex;      // the light's position, set in render loop when the position changes.
-uniform vec3 color;         // this letter's current color, set from the CPU each frame
-// uniform vec3 lightDir;      // the light's direction, set in render loop when the direction changes. 
-
-out vec4 fragColor;
-
-void main()
-{
-    vec3 N = normalize(Normal * 1);      // interpolation can shrink the length; renormalize to unit length
-    vec3 invertedlightDir = vec3(-0.2f, -0.4f, -1.0f);     // lightDir is effectively const. 
-    // Is the light direction facing the plane's front-face?
-    float dotLightDir = invertedlightDir.x * N.x + 
-                        invertedlightDir.y * N.y + 
-                        invertedlightDir.z * N.z;
-    // Is the light behind this fragment's vertex?
-    float dotLightToVertex =    lightToVertex.x * N.x + 
-                                lightToVertex.y * N.y + 
-                                lightToVertex.z * N.z;
-    
-    // intensity is 0 if the light is not facing the plane.
-    // intensity is 0 if the light is behind the plane.
-    float intensity = max(dotLightDir, 0.0f) * max(-dotLightToVertex, 0.0f);
-
-    fragColor = vec4(color * intensity, 1.0);
-}
-)GLSL";
-
 #pragma endregion =====================================================================================================================
 
 #pragma region SETUP_SHADER_PROGRAM_OBJECTS
@@ -305,7 +228,7 @@ bool setupShaderProgram(unsigned int& shaderProgramID)
     {
         CompileShaderParams vertexParams = CompileShaderParams(
             GL_VERTEX_SHADER, 
-            vertexShaderSource,
+            getVertexShaderSource_no_color(),
             vertexShaderID);
         compileShader(vertexParams);
     }
@@ -315,7 +238,7 @@ bool setupShaderProgram(unsigned int& shaderProgramID)
     {
         CompileShaderParams fragParams = CompileShaderParams(
             GL_FRAGMENT_SHADER,
-            fragmentShaderSource,
+            getFragmentShaderSource(),
             fragmentShaderID);
         compileShader(fragParams);
     }
@@ -496,7 +419,7 @@ bool makeCube()
     std::vector<float> vertices;
     vertices.reserve(floatsPerCube); 
 
-    buildCubeTris(vertices);
+    buildCubeTris_NoElementBuffer(vertices);
     if (vertices.size() > floatsPerCube) {
         Logging::consoleLog(Logging::LogType::ASSERT, 
             "Failed to correctly construct cube vertices. More vertices than there should be.\n \\"
@@ -559,12 +482,15 @@ bool cacheModelBuffer(std::vector<float>& vertices)
     // vertex is (the "stride"), etc. -- so that later we can just bind the VAO
     // and draw, without re-describing the layout every time.
     //
+    // An EBO (Element Buffer Object) references elements in the VBO by index. 
+    //
     // These are built ONCE at startup, not every frame. An earlier version of
     // this demo created and destroyed a VAO/VBO every frame for every letter --
     // that's wasted GPU churn 60 times a second for geometry that never
     // changes, and it's not a habit worth picking up.
     modelBuffer buf = modelBuffer(0, 
-        0, 
+        0,
+        0,
         vertices.size() / 6); // 6 floats for each point = 3 pos + 3 norm.
     {
         //-/////////////////////////////////
@@ -576,6 +502,8 @@ bool cacheModelBuffer(std::vector<float>& vertices)
         // VBO is the raw vertex data. ?? 
         // https://wikis.khronos.org/opengl/Vertex_Specification#Vertex_Array_Object
         glGenBuffers(1, &buf.VBO); // creates a VBO object. Assigns its 'name' to our VBO handle.
+        //-/////////////////////////////////
+        // EBO. Each EBO index is for each point and its adjacent data (i.e. normal, color. )
         
         glBindVertexArray(buf.VAO); // "everything below configures THIS VAO"
 
@@ -609,9 +537,9 @@ bool cacheModelBuffer(std::vector<float>& vertices)
         // param 6 - (void*)unsigned int. offset to where the attribute's position is in the buffer.
         // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glVertexAttribPointer.xhtml
         //         // 3 position vertices. 6 floats (or 24 bytes) from position of attribute's first position element to the next attribute's first position element. 
-        glVertexAttribPointer(0, 3, GL_FLOAT, false, 6 * sizeof(float), (void*)0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, false, 6 * sizeof(float), (void*)0); // Vertex Attribute = Vertex Input Variable (i.e. in vec3)
         glEnableVertexAttribArray(0); // turn attribute 0 on so the GPU actually reads it
-
+        
         // setup VAO with vertex shader's normal info. 
         glVertexAttribPointer(1, 3, GL_FLOAT, false, 6 * sizeof(float), (void*)(3 * sizeof(float)));
         glEnableVertexAttribArray(1);
@@ -777,16 +705,19 @@ bool renderLoop(RenderLoopData data)
         // A *state-using* function
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the color buffer and depth buffer for this frame
         
-        glUseProgram(data.shaderProgramID);
+        glUseProgram(data.shaderProgramID); // Required for updating uniform values. (NOT for getting their location.)
         
         // Rotate and scale transform
         {
             glm::mat4 trans = glm::mat4(1.0f); // creates new identity matrix.
             float const angle = 3.14f * 0.25f * glfwGetTime();
             trans = glm::rotate(trans, angle, glm::vec3(0.77f, 0.77f, 0.0f));
-            float const scalar = (sin(glfwGetTime()) + 2.0f) * 0.25f;
+            float const scalar = (sin(glfwGetTime()) * 0.25f) + 0.4f;
             trans = glm::scale(trans, glm::vec3(scalar, scalar, scalar));
-            int transformLoc = glGetUniformLocation(data.shaderProgramID, "transform"); // ask the shader program where its "transform" uniform lives
+            std::string uniformName = "transform";
+            int transformLoc = glGetUniformLocation(data.shaderProgramID, uniformName.c_str()); // ask the shader program where its "transform" uniform lives
+            if (transformLoc == -1) Logging::consoleLog(Logging::LogType::ASSERT, 
+                                                        "FAILED TO FIND " + uniformName + " uniform's location");
             glUniformMatrix4fv(transformLoc, 1, GL_TRUE, glm::value_ptr(trans));    
         }
 
@@ -798,7 +729,10 @@ bool renderLoop(RenderLoopData data)
             vector3::add_first_to_second(
                 vector3::scale_uniform(lightMoveSpeed, lightMoveDir),
                 lightPos);
-            int posLoc = glGetUniformLocation(data.shaderProgramID, "lightPos");
+                std::string uniformName = "lightPos";
+            int posLoc = glGetUniformLocation(data.shaderProgramID, uniformName.c_str());
+            if (posLoc == -1) Logging::consoleLog(Logging::LogType::ASSERT, 
+                                            "FAILED TO FIND " + uniformName + " uniform's location");
             glUniform3f(posLoc, lightPos.x(), lightPos.y(), lightPos.z());
 
             Logging::consoleLog(Logging::LogType::LOG,
@@ -1258,3 +1192,8 @@ bool isRunningUnderWSL()
 }
 
 #pragma endregion =====================================================================================================================
+
+
+/*
+Calculate aggregate of normals for each triangle  
+*/
