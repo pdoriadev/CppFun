@@ -1,0 +1,6 @@
+* text=auto eol=lf
+*.png binary
+*.lib binary
+*.a   binary
+*.so  binary
+*.obj -text

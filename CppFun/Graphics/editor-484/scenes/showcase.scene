@@ -1,0 +1,169 @@
+editor-scene 1
+# Editor scene file. Plain text on purpose - safe to read and diff.
+
+[scene]
+shapeCounter=11
+
+[camera]
+position=-4.694527 3.6016607 9.034903
+target=0 0 0
+radius=10.8
+orbit=2.05 0.34
+
+[render]
+mode=1
+background=0.55 0.68 0.85
+width=800
+height=500
+maxDepth=6
+samplesPerPixel=1
+shadows=1
+reflections=1
+refractions=1
+transparentShadows=1
+shadowBias=0.001
+
+[shape]
+type=Cube
+id=1
+name=Floor
+position=0 -1.05 0
+rotation=0 0 0
+uniformScaling=0
+scale=1
+scaleXYZ=16 0.1 16
+colorIndex=30
+customColor=0 0 0
+material=0.35 0.85 0.05 32 0 0 1.5
+
+[shape]
+type=Sphere
+id=2
+name=Sphere
+position=-3.9 -0.45 -2.2
+rotation=0 0 0
+uniformScaling=1
+scale=1.1
+scaleXYZ=1 1 1
+colorIndex=2
+customColor=0 0 0
+material=0.25 0.85 0.6 64 0.15 0 1.5
+
+[shape]
+type=Torus
+id=3
+name=Torus
+position=-1.2 -0.35 -3.4
+rotation=25 0 0
+uniformScaling=1
+scale=1
+scaleXYZ=1 1 1
+colorIndex=12
+customColor=0 0 0
+material=0.25 0.8 0.5 48 0 0 1.5
+
+[shape]
+type=Pyramid
+id=4
+name=Pyramid
+position=2.6 -0.5 -3.4
+rotation=0 0 0
+uniformScaling=1
+scale=1.2
+scaleXYZ=1 1 1
+colorIndex=5
+customColor=0 0 0
+material=0.3 0.85 0.2 32 0 0 1.5
+
+[shape]
+type=Cube
+id=5
+name=Polished Cube
+position=3.6 -0.3 0.4
+rotation=0 45.6 0
+uniformScaling=1
+scale=1.4
+scaleXYZ=1 1 1
+colorIndex=8
+customColor=0 0 0
+material=0.15 0.35 0.9 128 0.55 0 1.5
+
+[shape]
+type=Icosahedron
+id=6
+name=Icosahedron
+position=-3 -0.45 2.2
+rotation=0 0 0
+uniformScaling=1
+scale=0.9
+scaleXYZ=1 1 1
+colorIndex=21
+customColor=0 0 0
+material=0.25 0.8 0.45 48 0 0 1.5
+
+[shape]
+type=Sphere
+id=7
+name=Glass Sphere
+position=-0.5 -0.35 0.3
+rotation=0 0 0
+uniformScaling=1
+scale=0.85
+scaleXYZ=1 1 1
+colorIndex=31
+customColor=0.85 0.93 1
+material=0.2 0.15 1 180 0.08 0.9 1.45
+
+[shape]
+type=Teapot
+id=8
+name=Teapot
+position=1.4 -1 2.6
+rotation=0 325 0
+uniformScaling=1
+scale=0.9
+scaleXYZ=1 1 1
+colorIndex=14
+customColor=0 0 0
+material=0.25 0.8 0.55 64 0 0 1.5
+
+[shape]
+type=Light
+id=9
+name=Key Light
+position=4.5 6 5
+rotation=0 0 0
+uniformScaling=1
+scale=1
+scaleXYZ=1 1 1
+colorIndex=30
+customColor=0 0 0
+material=1 1 1 32 0 0 1.5
+lightType=0
+enabled=1
+lightColor=1 1 1
+intensity=1
+scales=0.15 1 0.8
+direction=0 -1 0
+attenuation=1 0 0
+
+[shape]
+type=Light
+id=10
+name=Fill Light
+position=-5 3.5 -4
+rotation=0 0 0
+uniformScaling=1
+scale=1
+scaleXYZ=1 1 1
+colorIndex=30
+customColor=0 0 0
+material=1 1 1 32 0 0 1.5
+lightType=0
+enabled=1
+lightColor=1 1 1
+intensity=0.45
+scales=0.15 1 0.8
+direction=0 -1 0
+attenuation=1 0 0
+

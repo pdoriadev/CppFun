@@ -1,0 +1,109 @@
+# Build output.
+#
+# These are anchored with a leading slash so they match ONLY at the repo root.
+# An unanchored "obj/" matches a directory named obj at ANY depth, which also
+# swallows data/obj/ - the sample meshes (bunny, teapot, skull...). That is
+# exactly how they went missing from the reconstructed history.
+/obj/
+*.o
+/editor
+/editor.exe
+
+# Test binaries.
+#
+# A pattern rather than a line per suite. The per-test list below worked while
+# suites arrived one at a time; three landed at once (bvh_test,
+# import_curve_test, viewport_test) and all three were untracked and about to
+# be committed as ~11 MB binaries. The individual entries that follow are now
+# redundant, and harmless.
+#
+# Anchored, so it cannot match a source file: the suites' sources live in
+# tests/ and keep their .cpp extension.
+/*_test
+/*_test.exe
+
+# Test binaries
+/bench
+/bench.exe
+/raytrace_test
+/raytrace_test.exe
+/demo_render
+/demo_render.exe
+/scene_test
+/scene_test.exe
+/animation_test
+/animation_test.exe
+/custom_shape_test
+/custom_shape_test.exe
+/render_section_test
+/render_section_test.exe
+/dirty_state_test
+/dirty_state_test.exe
+/specular_through_glass
+/specular_through_glass.exe
+/ice_scene
+/ice_scene.exe
+/ice_checker_scene
+/ice_checker_scene.exe
+/ice_render
+/ice_render.exe
+/refraction_acne
+/refraction_acne.exe
+/transform_test
+/transform_test.exe
+/obj_parser_test
+/obj_parser_test.exe
+/keyframe_test
+/keyframe_test.exe
+/texture_test
+/texture_test.exe
+/texture_scene
+/texture_scene.exe
+/curves_test
+/curves_test.exe
+/skinning_test
+/skinning_test.exe
+
+# Compiled libraries (source lives in src/vecmath)
+*.a
+*.so
+
+# Runtime / editor state
+/imgui.ini
+/error_log.txt
+
+# Generated scenes.
+#
+# ice_scene.cpp and ice_checker_scene.cpp WRITE these on every run -- they were
+# committed for months as stale build output. scenes/showcase.scene is the
+# opposite case and IS tracked: tests/demo_scenes.cpp generates it, but a
+# student who never runs that tool still needs it in their clone.
+/scenes/ice-block.scene
+/scenes/ice-block-checker.scene
+
+# Rendered output from the ray tracer.
+#
+# Broad on purpose: the Save-image dialog defaults to render.bmp but accepts
+# any name you type, so there is no finite list of output filenames to
+# enumerate. Sample textures live under data/textures/ and are exempted below.
+*.ppm
+*.bmp
+!data/textures/
+!data/textures/*.bmp
+
+
+# Local backup clutter
+/_archive/
+*.bak
+*.orig
+Makefile.[0-9]
+*.zip
+
+# OS junk
+.DS_Store
+._*
+Thumbs.db
+
+#Local config file
+editor.cfg
+WiVRn/
