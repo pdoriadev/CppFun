@@ -1,5 +1,5 @@
-#include "ShapeManager.h"
-#include "Light.h"
+#include "../include/ShapeManager.h"
+#include "../include/Light.h"
 #include <algorithm>  // For std::find
 
 // shapeCounter was never initialized: every shape id was seeded from whatever

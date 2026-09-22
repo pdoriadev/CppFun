@@ -4,7 +4,7 @@
 #include "glad/glad.h"
 #include <GLFW/glfw3.h>
 
-#include <glm/glm.hpp>
+#include <glm/glm.hpp> // glm core. 
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
@@ -14,6 +14,11 @@
 #include "ColorPresets.h"
 #include "Globals.h"
 #include "Material.h"
+
+
+#define _USE_MATH_DEFINES 
+#include <cmath>
+double const PI();
 
 class Shape {
 

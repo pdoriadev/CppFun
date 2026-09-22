@@ -15,7 +15,7 @@
 //
 // A2: Geometry and Transformations, in both courses.
 
-#include "Shape.h"
+#include "../include/Shape.h"
 
 #include <cmath>
 

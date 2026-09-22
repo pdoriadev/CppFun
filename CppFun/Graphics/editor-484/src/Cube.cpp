@@ -1,7 +1,8 @@
-#include "Cube.h"
-#include "TexCoords.h"
+#include "../include/Cube.h"
+#include "../include/TexCoords.h"
 
 #include <cmath>
+#include <glm/geometric.hpp>
 
 Cube::Cube(float x, float y, float z, float scale, int colorIndex, int id)
 	: Shape(x, y, z, scale, colorIndex, id), VAO(0), VBO(0), EBO(0) {
@@ -18,11 +19,195 @@ Cube::~Cube() {
     glDeleteBuffers(1, &EBO);
 }
 
-void Cube::setupCube() {
+bool Cube::constructPlane(PlaneConstructionParams params) {
+
+    switch(params.type) {
+        case PlaneType::TOP : {
+            //-/////////////////////////////////////////////////////
+            // Add TRI indexes into element buffer.
+            // TRI 1
+            params.elementData.emplace_back(0);
+            params.elementData.emplace_back(1);
+            params.elementData.emplace_back(2);
+            // TRI 2
+            params.elementData.emplace_back(2);
+            params.elementData.emplace_back(3);
+            params.elementData.emplace_back(0);
+            
+            //-/////////////////////////////////////////////////////
+            // Update vert normals
+            glm::vec3 planeVerts[4];
+            for (uint32_t p = 0; p < 4; ++p) {
+                planeVerts[p] = glm::vec3(  params.vertexData[p * params.VALUES_PER_VERT    ], 
+                                            params.vertexData[p * params.VALUES_PER_VERT + 1],
+                                            params.vertexData[p * params.VALUES_PER_VERT + 2]      );
+            }
+        
+            glm::vec3 const zeroToOne = planeVerts[1] - planeVerts[0];
+            glm::vec3 const zerotoThree = planeVerts[3] - planeVerts[0];
+            glm::vec3 const topPlaneNormal = glm::cross(zeroToOne, zerotoThree); // CCW right-hand rule
+        
+            glm::vec3 const currentNormal = glm::vec3(  params.vertexData[3],
+                                                        params.vertexData[3 + 1],
+                                                        params.vertexData[3 + 2]);
+            
+            // NOT normalizing until all planes are constructed. 
+            glm::vec3 const newNormal = topPlaneNormal + currentNormal;
+                
+            for (uint32_t p = 0; p < 4; ++p) {
+                // Set normal values
+                params.vertexData[3 + p * params.VALUES_PER_VERT    ] = newNormal.x;
+                params.vertexData[3 + p * params.VALUES_PER_VERT + 1] = newNormal.y;
+                params.vertexData[3 + p * params.VALUES_PER_VERT + 2] = newNormal.z;
+
+                // Set color values
+                params.vertexData[6 + p * params.VALUES_PER_VERT    ] = 1.0f;
+                params.vertexData[6 + p * params.VALUES_PER_VERT + 1] = 1.0f;
+                params.vertexData[6 + p * params.VALUES_PER_VERT + 2] = 1.0f;
+                }    
+        
+
+            break;
+        } // scope operator to declare variables beneath label.
+        case PlaneType::INTERMEDIATE : {
+            // construct intermediate plane. i moves up and down. j movesleft and right. 
+
+            // covers i == 0 edge-case. 
+            uint32_t const LOOPS_COMPLETED_I_MINUS_ONE = (params.LOOPS_COMPLETED_I - 1) > params.MAX_LOOPS 
+                ? 0 
+                : (params.LOOPS_COMPLETED_I - 1);
+
+            uint32_t elementIndices[4];
+            elementIndices[0] = LOOPS_COMPLETED_I_MINUS_ONE * params.VERTS_PER_LOOP  + params.LOOP_PROGRESS_J - 1; // top left
+            elementIndices[1] = params.LOOPS_COMPLETED_I    * params.VERTS_PER_LOOP  + params.LOOP_PROGRESS_J - 1; // bottom left
+            elementIndices[2] = params.LOOPS_COMPLETED_I    * params.VERTS_PER_LOOP  + params.LOOP_PROGRESS_J; // bottom right
+            elementIndices[3] = LOOPS_COMPLETED_I_MINUS_ONE * params.VERTS_PER_LOOP  + params.LOOP_PROGRESS_J; // top right
+            
+            // TRI 1
+            params.elementData.emplace_back(elementIndices[0]);
+            params.elementData.emplace_back(elementIndices[1]); 
+            params.elementData.emplace_back(elementIndices[2]);
+            // TRI 2 
+            params.elementData.emplace_back(elementIndices[2]);
+            params.elementData.emplace_back(elementIndices[3]);
+            params.elementData.emplace_back(elementIndices[0]);
+
+            //-/////////////////////////////////////////////////////
+            // update the normals.
+            // get plane's vertex values
+            glm::vec3 planeVerts[4];
+            for (uint32_t p = 0; p < 4; ++p) {
+                planeVerts[p] = glm::vec3(  params.vertexData[elementIndices[p] * params.VALUES_PER_VERT    ], 
+                                            params.vertexData[elementIndices[p] * params.VALUES_PER_VERT + 1],
+                                            params.vertexData[elementIndices[p] * params.VALUES_PER_VERT + 2]      );
+            }
+
+            // get plane side vectors between vertices.
+            glm::vec3 zeroToOne = planeVerts[1] - planeVerts[0];
+            glm::vec3 zeroToThree = planeVerts[3] - planeVerts[0];
+            // cross product of side vectors. CCW Right-hand.
+            glm::vec3 planeNormal = cross(zeroToOne, zeroToThree);
+            
+            
+            for(uint p = 0; p < 4; ++p) {
+                glm::vec3 currentNormal (params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERT],
+                    params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERT + 1],
+                    params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERT + 2]);
+                // Add cross product with current normal to get new normal.
+                currentNormal += planeNormal;
+
+                // Set normal to equal new normal value
+                params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERT] = currentNormal.x;
+                params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERT + 1] = currentNormal.y;
+                params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERT + 2] = currentNormal.z;
+            }
+             
+            break;
+        }
+        case PlaneType::BOTTOM :
+            break;
+        default:
+            // ERROR
+            return false;
+    }
+    
+    return true;
+}
+
+bool Cube::setupCube() {
     texCoords.clear();
 
     std::vector<float> vertexData;
-    std::vector<unsigned int> indexData;
+    std::vector<unsigned int> elementData;
+    uint32_t const VALUES_PER_VERT = 9;
+    {
+        vertexData.reserve(8 * VALUES_PER_VERT); // 8 vertices per cube * 3 pos per vert * 3 normal per vert * 3 color per vert
+        elementData.reserve(36); // 6 sides * 2 triangles per side * 3 vertices per triangle
+    }
+
+//-//////////////////////////////////////////////////////////////
+// CREATE VERTS. CONSTRUCT TRIS. 
+//-//////////////////////////////////////////////////////////////
+
+    uint32_t const MAX_LOOPS = 2;
+    uint32_t const VERTS_PER_LOOP = 4;
+    for(uint32_t i = 0; i < MAX_LOOPS; ++i) {
+        
+        float const LOOP_HEIGHT = 0.5*scaleY - (static_cast<float>(i) / (MAX_LOOPS - 1)) * scaleY;
+        uint32_t const FULL_LOOP_OFFSET = i * VERTS_PER_LOOP * VALUES_PER_VERT;
+        
+        for (uint32_t j = 0; j < VERTS_PER_LOOP; ++j) {
+            if (j == 0) { // first vert of new loop
+                vertexData.emplace(vertexData.begin() + FULL_LOOP_OFFSET    , 0.5 * -scaleX);
+                vertexData.emplace(vertexData.begin() + FULL_LOOP_OFFSET + 1, LOOP_HEIGHT);
+                vertexData.emplace(vertexData.begin() + FULL_LOOP_OFFSET + 2, 0.5 * -scaleZ);
+                continue; // need more verts to make a plane.
+            }
+            
+            uint32_t const LAST_VERTEX_INDEX = FULL_LOOP_OFFSET + VALUES_PER_VERT * (j - 1);
+            uint32_t const THIS_VERTEX_INDEX = FULL_LOOP_OFFSET + VALUES_PER_VERT * j;
+            // Create next vertex
+            {
+                // derive new vertex's values
+                float x = vertexData[LAST_VERTEX_INDEX] // last vert's x
+                        + std::cos((PI() * static_cast<double>(j)) / static_cast<double>(VERTS_PER_LOOP)); // new x = last x shifted
+                float y = LOOP_HEIGHT; // y is constant for horizontal loop.
+                float z = vertexData[LAST_VERTEX_INDEX + 2] // last vert's z
+                        + std::sin((PI() * static_cast<double>(j)) / static_cast<double>(VERTS_PER_LOOP)); // new z = last z shifted
+                
+                // assign vertex values
+                vertexData.emplace(vertexData.begin() + THIS_VERTEX_INDEX    , x);
+                vertexData.emplace(vertexData.begin() + THIS_VERTEX_INDEX + 1, y);
+                vertexData.emplace(vertexData.begin() + THIS_VERTEX_INDEX + 2, z);
+            }
+
+            if (i == 0) { 
+                if (j == VERTS_PER_LOOP - 1) { 
+                    // construct top plane. 
+                    constructPlane(PlaneConstructionParams(PlaneType::TOP, MAX_LOOPS, VALUES_PER_VERT, VERTS_PER_LOOP, i, j, elementData, vertexData));
+                }
+
+                continue;
+            }
+
+            // construct intermediate plane. 
+            constructPlane(PlaneConstructionParams(PlaneType::INTERMEDIATE, MAX_LOOPS, VALUES_PER_VERT, VERTS_PER_LOOP, i, j, elementData, vertexData));
+            
+            if (i < MAX_LOOPS - 1) continue;
+            if (j < VERTS_PER_LOOP - 1) continue;
+            
+            // constuct bottom plane
+            // TRI 1
+            elementData.emplace_back( i * VERTS_PER_LOOP);
+            elementData.emplace_back( i * VERTS_PER_LOOP + 1);
+            elementData.emplace_back( i * VERTS_PER_LOOP + 2);
+            // TRI 2
+            elementData.emplace_back(i * VERTS_PER_LOOP + 2);
+            elementData.emplace_back(i * VERTS_PER_LOOP + 3);
+            elementData.emplace_back(i * VERTS_PER_LOOP);
+            
+        }
+    }
 
 
     // TODO(geometry): the cube: eight corners, six faces, twelve triangles
@@ -37,20 +222,65 @@ void Cube::setupCube() {
     // editor runs, the Insert menu does something visible, and you can see
     // your geometry replace it as you write it. Read src/Torus.cpp first;
     // it is the worked example of a procedural shape.
-    vertices = { {-0.5f, -0.5f, 0.0f}, { 0.5f, -0.5f, 0.0f},
-                 { 0.5f,  0.5f, 0.0f}, {-0.5f,  0.5f, 0.0f} };
-    normals  = { {0.0f, 0.0f, 1.0f}, {0.0f, 0.0f, 1.0f},
-                 {0.0f, 0.0f, 1.0f}, {0.0f, 0.0f, 1.0f} };
-    faces    = { {0, 1, 2}, {0, 2, 3} };
+    // std::vector<std::vector<float>> planePositions
+    //          = { {-0.5f, -0.5f, 0.0f}, { 0.5f, -0.5f, 0.0f},
+    //              { 0.5f,  0.5f, 0.0f}, {-0.5f,  0.5f, 0.0f} };
+    // normals  = { {0.0f, 0.0f, 1.0f}, {0.0f, 0.0f, 1.0f},
+    //              {0.0f, 0.0f, 1.0f}, {0.0f, 0.0f, 1.0f} };
+    // faces    = { {0, 1, 2}, {0, 2, 3} };
 
     // UVs are per triangle corner, not per vertex: a cube's eight corners each
     // belong to three faces wanting three different UVs. The loop below emits
-    // one vertex per corner, so a per-corner map lines up with it exactly.
+    // one vertex per corner, so a per-corner map lines up with it exactly. 
     texCoords = TexCoords::cube(vertices, faces, normals);
+
+    //-//////////////////////////////////////////////////////////////
+    // APPROACH
+    // for each new cube face, 
+        // transform the plane positions into new data.
+        // transform the normal direction to face out from the face. 
+        // assign face index. 
+    /*
+    // 
+    initialPair =   ( // Two points above and below each other. Parallel to y-axis. 
+                    vec3(-(1/2)*width, (1/2)*height, -(1/2)*depth)
+                    vec3(-(1/2)*width, -(1/2)*height, -(1/2)*depth)
+                    )
+    nextPair =      (
+                    eachVertex
+                    )
+    for (i = 0; i < faces; ++i)
+        for (j=0; j < planePositions.size(); ++j)
+            transform planePositions to create new positions.
+                if (i < 4) // create a side face
+                    planeRelative0 = transformed0.
+                    // all vertices are shifted. Not all vertices are shifted the same. 
+                    // shiftDirectionLeftVertices = vert2 - vert1
+                    // shiftDirectionRightVertices = 
+                    planeRelative = planePositions[j][0] + (length * (i % 2));
+                    planeRelative1 = transformed1.
+                    planeRelative2 = transformed2.
+                    planeRelative3 = transformed3.
+                else // create a bottom or top face
+
+
+        
+    
+    
+    
+    */
+
+
+
+    
 
     // Build vertex data and index data for OpenGL
    for (size_t i = 0; i < faces.size(); ++i) {
-   
+        glm::vec3 positions[3]
+                = {
+                    glm::vec3(0.0f,0.0f, 0.0f),
+                    glm::vec3(0.0f,0.0f, 0.0f),
+                    glm::vec3(0.0f,0.0f, 0.0f) };
         glm::vec3 normal = normals[i / 2]; // Assign face normal
         glm::vec3 color = (colorIndex == 31) 
             ? glm::vec3(
@@ -76,7 +306,7 @@ void Cube::setupCube() {
             // Vertices span -0.5 .. 0.5 on every axis, so + 0.5 lands in 0 .. 1.
         }
 
-        indexData.insert(indexData.end(), {static_cast<unsigned int>(i * 3), static_cast<unsigned int>(i * 3 + 1), static_cast<unsigned int>(i * 3 + 2)});
+        elementData.insert(elementData.end(), {static_cast<unsigned int>(i * 3), static_cast<unsigned int>(i * 3 + 1), static_cast<unsigned int>(i * 3 + 2)});
     }
 
 
@@ -91,7 +321,7 @@ void Cube::setupCube() {
     glBufferData(GL_ARRAY_BUFFER, vertexData.size() * sizeof(float), vertexData.data(), GL_STATIC_DRAW);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexData.size() * sizeof(unsigned int), indexData.data(), GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, elementData.size() * sizeof(unsigned int), elementData.data(), GL_STATIC_DRAW);
 
     // Configure vertex attributes
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)0); // Position
@@ -107,6 +337,8 @@ void Cube::setupCube() {
     uploadTexCoords();
 
     glBindVertexArray(0); // Unbind VAO
+
+    return true;
 }
 
 

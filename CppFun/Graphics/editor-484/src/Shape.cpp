@@ -1,9 +1,10 @@
-#include "Shape.h"
-#include "TextureCache.h"
+#include "../include/Shape.h"
+#include "../include/TextureCache.h"
 
 #include <vector>
-#include <cmath>
 #include <iostream>
+
+double const PI() { return M_PI; }
 
 Shape::Shape(float x, float y, float z, float uniformScale, int colorIndex, int id,
              float scaleX, float scaleY, float scaleZ, bool useUniformScale) 
