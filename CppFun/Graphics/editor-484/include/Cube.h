@@ -19,6 +19,8 @@ enum class PlaneType : int32_t {
     COUNT
 };
 
+std::string getPlaneTypeString(PlaneType type);
+
 struct PlaneConstructionParams {
     PlaneType const type;
     uint32_t const MAX_LOOPS;

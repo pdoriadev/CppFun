@@ -59,6 +59,8 @@ glm::mat4 Shape::getModelMatrix() const {
     // Combine rotation matrices into one matrix
     glm::mat4 m4_rot = x_rot * y_rot * z_rot;
 
+    // glm::mat4 m4_test = m4_pos * x_rot * y_rot * z_rot * m4_scale;
+
     // Compute model matrix
     return m4_pos * m4_rot * m4_scale;
     

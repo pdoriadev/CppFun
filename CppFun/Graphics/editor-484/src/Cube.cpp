@@ -1,8 +1,21 @@
 #include "../include/Cube.h"
 #include "../include/TexCoords.h"
 
+#include <iostream>
 #include <cmath>
 #include <glm/geometric.hpp>
+
+std::string getPlaneTypeString(PlaneType type) {
+    switch(type) {
+        case PlaneType::PLANE_TYPE:     return "PLANE_TYPE";
+        case PlaneType::INVALID:        return "INVALID";
+        case PlaneType::TOP:            return "TOP";
+        case PlaneType::INTERMEDIATE:   return "INTERMEDIATE";
+        case PlaneType::BOTTOM:         return "BOTTOM";
+        case PlaneType::COUNT:          return "COUNT";
+        default: return ""; // invalid type value
+    }
+}
 
 Cube::Cube(float x, float y, float z, float scale, int colorIndex, int id)
 	: Shape(x, y, z, scale, colorIndex, id), VAO(0), VBO(0), EBO(0) {
@@ -19,12 +32,12 @@ Cube::~Cube() {
     glDeleteBuffers(1, &EBO);
 }
 
-
 //-//////////////////////////////////////////////////////////////////
 // Sets element index data
 // Computes new un-normalized normal for each vertex that is part of the plane. Sets vertex normal data.
 // Sets vertex color data. 
 bool Cube::constructPlane(PlaneConstructionParams params) {
+    std::cout << "construct plane: " << getPlaneTypeString(params.type) << std::endl;
 
     switch(params.type) {
         case PlaneType::TOP : {
@@ -181,7 +194,7 @@ bool Cube::constructPlane(PlaneConstructionParams params) {
             break;
         }
         default:
-            // ERROR
+            // ERROR. Invalid case. 
             return false;
     }
     
@@ -193,28 +206,30 @@ bool Cube::constructPlane(PlaneConstructionParams params) {
 bool Cube::setupCube() {
     texCoords.clear();
 
-    std::vector<float> vertexData;
-    std::vector<unsigned int> elementData;
-    uint32_t const VALUES_PER_VERT = 9;
-    {
-        vertexData.reserve(8 * VALUES_PER_VERT); // 8 vertices per cube * 3 pos per vert * 3 normal per vert * 3 color per vert
-        elementData.reserve(36); // 6 sides * 2 triangles per side * 3 vertices per triangle
-    }
+    std::cout << "SETTINGUP CUBE" << std::endl;
     
+    uint32_t const VALUES_PER_VERT = 9;
+    std::vector<float> vertexData (8 * VALUES_PER_VERT, 0.0f);
+    std::vector<unsigned int> elementData (36 * VALUES_PER_VERT, 0.0f);
+
     uint32_t const MAX_LOOPS = 2;
     uint32_t const VERTS_PER_LOOP = 4;
+    
     for(uint32_t i = 0; i < MAX_LOOPS; ++i) {
+        std::cout << "LOOP " << i << std::endl;
 
         float const LOOP_HEIGHT = 0.5*scaleY - (static_cast<float>(i) / (MAX_LOOPS - 1)) * scaleY;
         uint32_t const FULL_LOOP_OFFSET = i * VERTS_PER_LOOP * VALUES_PER_VERT;
         
         for (uint32_t j = 0; j < VERTS_PER_LOOP; ++j) {
+            std::cout << "VERT THIS LOOP: " << j << std::endl;
 
             //-//////////////////////////////////////////////////////////////
             // CREATE VERTS. 
             //-//////////////////////////////////////////////////////////////
 
             if (j == 0) { // first vert of new loop
+                std::cout << "create first vertex" << j << std::endl;
                 vertexData.emplace(vertexData.begin() + FULL_LOOP_OFFSET    , 0.5 * -scaleX);
                 vertexData.emplace(vertexData.begin() + FULL_LOOP_OFFSET + 1, LOOP_HEIGHT);
                 vertexData.emplace(vertexData.begin() + FULL_LOOP_OFFSET + 2, 0.5 * -scaleZ);
@@ -223,15 +238,25 @@ bool Cube::setupCube() {
             
             uint32_t const LAST_VERTEX_INDEX = FULL_LOOP_OFFSET + VALUES_PER_VERT * (j - 1);
             uint32_t const THIS_VERTEX_INDEX = FULL_LOOP_OFFSET + VALUES_PER_VERT * j;
+
+            std::cout << "create next vertex" << j << std::endl;
+
             // Create next vertex
             {
-                // derive new vertex's values
-                float x = vertexData[LAST_VERTEX_INDEX] // last vert's x
-                        + std::cos((PI() * static_cast<double>(j)) / static_cast<double>(VERTS_PER_LOOP)); // new x = last x shifted
-                float y = LOOP_HEIGHT; // y is constant for horizontal loop.
-                float z = vertexData[LAST_VERTEX_INDEX + 2] // last vert's z
-                        + std::sin((PI() * static_cast<double>(j)) / static_cast<double>(VERTS_PER_LOOP)); // new z = last z shifted
+                std::cout << "LAST_VERTEX_INDEX: " << LAST_VERTEX_INDEX << std::endl;
+                std::cout << "THIS_VERTEX_INDEX: " << THIS_VERTEX_INDEX << std::endl;
                 
+                // derive new vertex's values
+                float x = vertexData.at(LAST_VERTEX_INDEX) // last vert's x
+                        + std::cos((ShapeMath::PI() * static_cast<double>(j)) / static_cast<double>(VERTS_PER_LOOP)); // new x = last x shifted
+                std::cout << "Computed x: " << x << std::endl;
+                float y = LOOP_HEIGHT; // y is constant for horizontal loop.
+                std::cout << "Computed y: " << y << std::endl;
+                float z = vertexData[LAST_VERTEX_INDEX + 2] // last vert's z
+                        + std::sin((ShapeMath::PI() * static_cast<double>(j)) / static_cast<double>(VERTS_PER_LOOP)); // new z = last z shifted
+                std::cout << "Computed z: " << z << std::endl;
+                
+                std::cout << "computed vertex values" << std::endl;
                 // assign vertex values
                 vertexData.emplace(vertexData.begin() + THIS_VERTEX_INDEX    , x);
                 vertexData.emplace(vertexData.begin() + THIS_VERTEX_INDEX + 1, y);
@@ -239,28 +264,45 @@ bool Cube::setupCube() {
             }
 
             //-//////////////////////////////////////////////////////////////
-            // CONSTRUCT PLANES. Add indexes and non-positional vertex data
+            // CONSTRUCT PLANES. 
+            // Add triangle indices to element index array.
+            // Add non-positional data to vertex data array.
             //-//////////////////////////////////////////////////////////////
 
             if (i == 0) { 
                 if (j == VERTS_PER_LOOP - 1) { // finished setting loop's vertex position data.
                     // construct top plane. 
-                    constructPlane(PlaneConstructionParams(PlaneType::TOP, MAX_LOOPS, VALUES_PER_VERT, VERTS_PER_LOOP, i, j, elementData, vertexData));
+                    if (constructPlane(PlaneConstructionParams(PlaneType::TOP, MAX_LOOPS, VALUES_PER_VERT, VERTS_PER_LOOP, i, j, elementData, vertexData))
+                        == false) { return false; }
                 }
 
                 continue;
             }
 
             // construct intermediate plane. 
-            constructPlane(PlaneConstructionParams(PlaneType::INTERMEDIATE, MAX_LOOPS, VALUES_PER_VERT, VERTS_PER_LOOP, i, j, elementData, vertexData));
+            if (constructPlane(PlaneConstructionParams(PlaneType::INTERMEDIATE, MAX_LOOPS, VALUES_PER_VERT, VERTS_PER_LOOP, i, j, elementData, vertexData))
+                == false) { return false; }
             
             if (i < MAX_LOOPS - 1) continue;
             if (j < VERTS_PER_LOOP - 1) continue;
             
             // construct bottom plane
-            constructPlane(PlaneConstructionParams(PlaneType::BOTTOM, MAX_LOOPS, VALUES_PER_VERT, VERTS_PER_LOOP, i, j, elementData, vertexData));
-            
+            if (constructPlane(PlaneConstructionParams(PlaneType::BOTTOM, MAX_LOOPS, VALUES_PER_VERT, VERTS_PER_LOOP, i, j, elementData, vertexData))
+                == false) { return false; }
         }
+    }
+
+    // normalize normals.
+    // the plane construction algorithm sums a new plane's normal into the old normal value. We normalize at the
+    //      end to get correct values we square_root(x^2 + y^2 + z^2);
+    for (uint32_t i = 0; i < MAX_LOOPS * VERTS_PER_LOOP; ++i) {
+        glm::vec3 normal (vertexData[3 + i * VALUES_PER_VERT],
+                        vertexData[3 + i * VALUES_PER_VERT + 1],
+                        vertexData[3 + i * VALUES_PER_VERT + 2]);
+        normal = normalize(normal);
+        vertexData[3 + i * VALUES_PER_VERT] = normal.x;
+        vertexData[3 + i * VALUES_PER_VERT + 1] = normal.y;
+        vertexData[3 + i * VALUES_PER_VERT + 2] = normal.z;
     }
 
     // TODO(geometry): the cube: eight corners, six faces, twelve triangles
@@ -301,13 +343,13 @@ bool Cube::setupCube() {
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, elementData.size() * sizeof(unsigned int), elementData.data(), GL_STATIC_DRAW);
 
     // Configure vertex attributes
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)0); // Position
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, VALUES_PER_VERT * sizeof(float), (void*)0); // Position
     glEnableVertexAttribArray(0);
 
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)(3 * sizeof(float))); // Normal
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, VALUES_PER_VERT * sizeof(float), (void*)(3 * sizeof(float))); // Normal
     glEnableVertexAttribArray(1);
 
-    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)(6 * sizeof(float))); // Color
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, VALUES_PER_VERT * sizeof(float), (void*)(6 * sizeof(float))); // Color
     glEnableVertexAttribArray(2);
 
     // UVs go in their own buffer on attribute 3, while the VAO is still bound.
@@ -318,6 +360,11 @@ bool Cube::setupCube() {
     return true;
 }
 
+
+/* Sphere vertex position. See assignment pdf. 
+(i / LatSteps) * 180
+(j / LongSteps) * 360
+*/
 
 void Cube::draw(GLuint shaderProgram) {
 

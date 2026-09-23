@@ -18,7 +18,10 @@
 
 #define _USE_MATH_DEFINES 
 #include <cmath>
-double const PI();
+
+namespace ShapeMath {
+    double const PI();
+}
 
 class Shape {
 

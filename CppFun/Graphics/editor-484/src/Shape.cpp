@@ -4,7 +4,9 @@
 #include <vector>
 #include <iostream>
 
-double const PI() { return M_PI; }
+namespace ShapeMath {
+    double const PI() { return M_PI; }
+}
 
 Shape::Shape(float x, float y, float z, float uniformScale, int colorIndex, int id,
              float scaleX, float scaleY, float scaleZ, bool useUniformScale) 
