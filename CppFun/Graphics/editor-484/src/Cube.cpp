@@ -19,6 +19,11 @@ Cube::~Cube() {
     glDeleteBuffers(1, &EBO);
 }
 
+
+//-//////////////////////////////////////////////////////////////////
+// Sets element index data
+// Computes new un-normalized normal for each vertex that is part of the plane. Sets vertex normal data.
+// Sets vertex color data. 
 bool Cube::constructPlane(PlaneConstructionParams params) {
 
     switch(params.type) {
@@ -64,7 +69,7 @@ bool Cube::constructPlane(PlaneConstructionParams params) {
                 params.vertexData[6 + p * params.VALUES_PER_VERT    ] = 1.0f;
                 params.vertexData[6 + p * params.VALUES_PER_VERT + 1] = 1.0f;
                 params.vertexData[6 + p * params.VALUES_PER_VERT + 2] = 1.0f;
-                }    
+            }    
         
 
             break;
@@ -108,8 +113,7 @@ bool Cube::constructPlane(PlaneConstructionParams params) {
             // cross product of side vectors. CCW Right-hand.
             glm::vec3 planeNormal = cross(zeroToOne, zeroToThree);
             
-            
-            for(uint p = 0; p < 4; ++p) {
+            for(uint32_t p = 0; p < 4; ++p) {
                 glm::vec3 currentNormal (params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERT],
                     params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERT + 1],
                     params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERT + 2]);
@@ -124,8 +128,58 @@ bool Cube::constructPlane(PlaneConstructionParams params) {
              
             break;
         }
-        case PlaneType::BOTTOM :
+        case PlaneType::BOTTOM : {
+            uint32_t elementIndices[4];
+            for (uint32_t k = 0; k < 4; ++k) {
+                elementIndices[k] = params.LOOPS_COMPLETED_I * params.VERTS_PER_LOOP  + params.LOOP_PROGRESS_J - (3 - k);
+            }
+
+            // add in correct winding order. Adding CW top-facing will add CCW bottom-facing
+            // TRI 1
+            params.elementData.emplace_back(elementIndices[3]);
+            params.elementData.emplace_back(elementIndices[2]);
+            params.elementData.emplace_back(elementIndices[1]);
+            // TRI 2
+            params.elementData.emplace_back(elementIndices[1]);
+            params.elementData.emplace_back(elementIndices[0]);
+            params.elementData.emplace_back(elementIndices[3]);
+
+            //-/////////////////////////////////////////////////////
+            // update the normals.
+            // get plane's vertex values
+            glm::vec3 planeVerts[4];
+            for (uint32_t p = 0; p < 4; ++p) {
+                planeVerts[p] = glm::vec3(  params.vertexData[elementIndices[p] * params.VALUES_PER_VERT    ], 
+                                            params.vertexData[elementIndices[p] * params.VALUES_PER_VERT + 1],
+                                            params.vertexData[elementIndices[p] * params.VALUES_PER_VERT + 2]      );
+            }
+
+            // compute plane normal
+            glm::vec3 threeToTwo = planeVerts[2] - planeVerts[3];
+            glm::vec3 threeToZero = planeVerts[3] - planeVerts[0];
+            glm::vec3 planeNormal = cross(threeToTwo, threeToZero);
+
+            // set normal values (un-normalized)
+            for (uint32_t p = 0; p < 4; ++p) {
+                glm::vec3 currentNormal(params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERT    ],
+                                        params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERT + 1],
+                                        params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERT + 2]   );
+
+                currentNormal += planeNormal;
+                params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERT    ] = currentNormal.x;
+                params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERT + 1] = currentNormal.y;
+                params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERT + 2] = currentNormal.z;
+            }
+
+            // set color
+            for (uint32_t p = 0; p < 4; ++p) {
+                params.vertexData[6 + elementIndices[p] * params.VALUES_PER_VERT    ] = 0.7f;
+                params.vertexData[6 + elementIndices[p] * params.VALUES_PER_VERT + 1] = 0.7f;
+                params.vertexData[6 + elementIndices[p] * params.VALUES_PER_VERT + 2] = 0.7f;
+            }
+            
             break;
+        }
         default:
             // ERROR
             return false;
@@ -145,14 +199,14 @@ bool Cube::setupCube() {
         elementData.reserve(36); // 6 sides * 2 triangles per side * 3 vertices per triangle
     }
 
-//-//////////////////////////////////////////////////////////////
-// CREATE VERTS. CONSTRUCT TRIS. 
-//-//////////////////////////////////////////////////////////////
-
+    
     uint32_t const MAX_LOOPS = 2;
     uint32_t const VERTS_PER_LOOP = 4;
     for(uint32_t i = 0; i < MAX_LOOPS; ++i) {
         
+//-//////////////////////////////////////////////////////////////
+// CREATE VERTS. 
+//-//////////////////////////////////////////////////////////////
         float const LOOP_HEIGHT = 0.5*scaleY - (static_cast<float>(i) / (MAX_LOOPS - 1)) * scaleY;
         uint32_t const FULL_LOOP_OFFSET = i * VERTS_PER_LOOP * VALUES_PER_VERT;
         
@@ -181,8 +235,12 @@ bool Cube::setupCube() {
                 vertexData.emplace(vertexData.begin() + THIS_VERTEX_INDEX + 2, z);
             }
 
+//-//////////////////////////////////////////////////////////////
+// CONSTRUCT PLANES
+//-//////////////////////////////////////////////////////////////
+
             if (i == 0) { 
-                if (j == VERTS_PER_LOOP - 1) { 
+                if (j == VERTS_PER_LOOP - 1) { // finished setting loop's vertex position data.
                     // construct top plane. 
                     constructPlane(PlaneConstructionParams(PlaneType::TOP, MAX_LOOPS, VALUES_PER_VERT, VERTS_PER_LOOP, i, j, elementData, vertexData));
                 }
@@ -196,15 +254,8 @@ bool Cube::setupCube() {
             if (i < MAX_LOOPS - 1) continue;
             if (j < VERTS_PER_LOOP - 1) continue;
             
-            // constuct bottom plane
-            // TRI 1
-            elementData.emplace_back( i * VERTS_PER_LOOP);
-            elementData.emplace_back( i * VERTS_PER_LOOP + 1);
-            elementData.emplace_back( i * VERTS_PER_LOOP + 2);
-            // TRI 2
-            elementData.emplace_back(i * VERTS_PER_LOOP + 2);
-            elementData.emplace_back(i * VERTS_PER_LOOP + 3);
-            elementData.emplace_back(i * VERTS_PER_LOOP);
+            // construct bottom plane
+            constructPlane(PlaneConstructionParams(PlaneType::BOTTOM, MAX_LOOPS, VALUES_PER_VERT, VERTS_PER_LOOP, i, j, elementData, vertexData));
             
         }
     }
@@ -233,6 +284,36 @@ bool Cube::setupCube() {
     // belong to three faces wanting three different UVs. The loop below emits
     // one vertex per corner, so a per-corner map lines up with it exactly. 
     texCoords = TexCoords::cube(vertices, faces, normals);
+
+    // Create and bind VAO, VBO, and EBO
+    glGenVertexArrays(1, &VAO);
+    glGenBuffers(1, &VBO);
+    glGenBuffers(1, &EBO);
+
+    glBindVertexArray(VAO);
+
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, vertexData.size() * sizeof(float), vertexData.data(), GL_STATIC_DRAW);
+
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, elementData.size() * sizeof(unsigned int), elementData.data(), GL_STATIC_DRAW);
+
+    // Configure vertex attributes
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)0); // Position
+    glEnableVertexAttribArray(0);
+
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)(3 * sizeof(float))); // Normal
+    glEnableVertexAttribArray(1);
+
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)(6 * sizeof(float))); // Color
+    glEnableVertexAttribArray(2);
+
+    // UVs go in their own buffer on attribute 3, while the VAO is still bound.
+    uploadTexCoords();
+
+    glBindVertexArray(0); // Unbind VAO
+
+    return true;
 
     //-//////////////////////////////////////////////////////////////
     // APPROACH
@@ -274,71 +355,41 @@ bool Cube::setupCube() {
 
     
 
-    // Build vertex data and index data for OpenGL
-   for (size_t i = 0; i < faces.size(); ++i) {
-        glm::vec3 positions[3]
-                = {
-                    glm::vec3(0.0f,0.0f, 0.0f),
-                    glm::vec3(0.0f,0.0f, 0.0f),
-                    glm::vec3(0.0f,0.0f, 0.0f) };
-        glm::vec3 normal = normals[i / 2]; // Assign face normal
-        glm::vec3 color = (colorIndex == 31) 
-            ? glm::vec3(
-                customColor[0], 
-                customColor[1], 
-                customColor[2]
-            )
-            : glm::vec3(
-                colorPresets[colorIndex].color[0], 
-                colorPresets[colorIndex].color[1], 
-                colorPresets[colorIndex].color[2]
-             );
+//     // Build vertex data and index data for OpenGL
+//    for (size_t i = 0; i < faces.size(); ++i) {
+//         glm::vec3 positions[3]
+//                 = {
+//                     glm::vec3(0.0f,0.0f, 0.0f),
+//                     glm::vec3(0.0f,0.0f, 0.0f),
+//                     glm::vec3(0.0f,0.0f, 0.0f) };
+//         glm::vec3 normal = normals[i / 2]; // Assign face normal
+//         glm::vec3 color = (colorIndex == 31) 
+//             ? glm::vec3(
+//                 customColor[0], 
+//                 customColor[1], 
+//                 customColor[2]
+//             )
+//             : glm::vec3(
+//                 colorPresets[colorIndex].color[0], 
+//                 colorPresets[colorIndex].color[1], 
+//                 colorPresets[colorIndex].color[2]
+//              );
 
-        for (int j = 0; j < 3; ++j) {
-            int vertexIndex = faces[i][j];
-            const glm::vec3& position = vertices[vertexIndex];
+//         for (int j = 0; j < 3; ++j) {
+//             int vertexIndex = faces[i][j];
+//             const glm::vec3& position = vertices[vertexIndex];
 
-            // Append position, normal, and color to vertexData
-            vertexData.insert(vertexData.end(), {position.x, position.y, position.z});
-            vertexData.insert(vertexData.end(), {normal.x, normal.y, normal.z});
-            vertexData.insert(vertexData.end(), {color.r, color.g, color.b});
+//             // Append position, normal, and color to vertexData
+//             vertexData.insert(vertexData.end(), {position.x, position.y, position.z});
+//             vertexData.insert(vertexData.end(), {normal.x, normal.y, normal.z});
+//             vertexData.insert(vertexData.end(), {color.r, color.g, color.b});
 
-            // Vertices span -0.5 .. 0.5 on every axis, so + 0.5 lands in 0 .. 1.
-        }
+//             // Vertices span -0.5 .. 0.5 on every axis, so + 0.5 lands in 0 .. 1.
+//         }
 
-        elementData.insert(elementData.end(), {static_cast<unsigned int>(i * 3), static_cast<unsigned int>(i * 3 + 1), static_cast<unsigned int>(i * 3 + 2)});
-    }
+//         elementData.insert(elementData.end(), {static_cast<unsigned int>(i * 3), static_cast<unsigned int>(i * 3 + 1), static_cast<unsigned int>(i * 3 + 2)});
+    
 
-
-    // Create and bind VAO, VBO, and EBO
-    glGenVertexArrays(1, &VAO);
-    glGenBuffers(1, &VBO);
-    glGenBuffers(1, &EBO);
-
-    glBindVertexArray(VAO);
-
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, vertexData.size() * sizeof(float), vertexData.data(), GL_STATIC_DRAW);
-
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, elementData.size() * sizeof(unsigned int), elementData.data(), GL_STATIC_DRAW);
-
-    // Configure vertex attributes
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)0); // Position
-    glEnableVertexAttribArray(0);
-
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)(3 * sizeof(float))); // Normal
-    glEnableVertexAttribArray(1);
-
-    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)(6 * sizeof(float))); // Color
-    glEnableVertexAttribArray(2);
-
-    // UVs go in their own buffer on attribute 3, while the VAO is still bound.
-    uploadTexCoords();
-
-    glBindVertexArray(0); // Unbind VAO
-
-    return true;
 }
 
 
