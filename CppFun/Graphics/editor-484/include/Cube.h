@@ -15,6 +15,7 @@ enum class PlaneType : int32_t {
     INVALID = -1,
     TOP = 0,
     INTERMEDIATE,
+    WRAP_AROUND_LOOP,
     BOTTOM,
     COUNT
 };
