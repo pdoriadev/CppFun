@@ -188,6 +188,8 @@ bool Cube::constructPlane(PlaneConstructionParams params) {
     return true;
 }
 
+//-//////////////////////////////////////////////////////////////
+//
 bool Cube::setupCube() {
     texCoords.clear();
 
@@ -198,19 +200,20 @@ bool Cube::setupCube() {
         vertexData.reserve(8 * VALUES_PER_VERT); // 8 vertices per cube * 3 pos per vert * 3 normal per vert * 3 color per vert
         elementData.reserve(36); // 6 sides * 2 triangles per side * 3 vertices per triangle
     }
-
     
     uint32_t const MAX_LOOPS = 2;
     uint32_t const VERTS_PER_LOOP = 4;
     for(uint32_t i = 0; i < MAX_LOOPS; ++i) {
-        
-//-//////////////////////////////////////////////////////////////
-// CREATE VERTS. 
-//-//////////////////////////////////////////////////////////////
+
         float const LOOP_HEIGHT = 0.5*scaleY - (static_cast<float>(i) / (MAX_LOOPS - 1)) * scaleY;
         uint32_t const FULL_LOOP_OFFSET = i * VERTS_PER_LOOP * VALUES_PER_VERT;
         
         for (uint32_t j = 0; j < VERTS_PER_LOOP; ++j) {
+
+            //-//////////////////////////////////////////////////////////////
+            // CREATE VERTS. 
+            //-//////////////////////////////////////////////////////////////
+
             if (j == 0) { // first vert of new loop
                 vertexData.emplace(vertexData.begin() + FULL_LOOP_OFFSET    , 0.5 * -scaleX);
                 vertexData.emplace(vertexData.begin() + FULL_LOOP_OFFSET + 1, LOOP_HEIGHT);
@@ -235,9 +238,9 @@ bool Cube::setupCube() {
                 vertexData.emplace(vertexData.begin() + THIS_VERTEX_INDEX + 2, z);
             }
 
-//-//////////////////////////////////////////////////////////////
-// CONSTRUCT PLANES
-//-//////////////////////////////////////////////////////////////
+            //-//////////////////////////////////////////////////////////////
+            // CONSTRUCT PLANES. Add indexes and non-positional vertex data
+            //-//////////////////////////////////////////////////////////////
 
             if (i == 0) { 
                 if (j == VERTS_PER_LOOP - 1) { // finished setting loop's vertex position data.
@@ -259,7 +262,6 @@ bool Cube::setupCube() {
             
         }
     }
-
 
     // TODO(geometry): the cube: eight corners, six faces, twelve triangles
     // Build the shape: fill `vertices`, `faces`, and `normals` (directly or
@@ -314,82 +316,6 @@ bool Cube::setupCube() {
     glBindVertexArray(0); // Unbind VAO
 
     return true;
-
-    //-//////////////////////////////////////////////////////////////
-    // APPROACH
-    // for each new cube face, 
-        // transform the plane positions into new data.
-        // transform the normal direction to face out from the face. 
-        // assign face index. 
-    /*
-    // 
-    initialPair =   ( // Two points above and below each other. Parallel to y-axis. 
-                    vec3(-(1/2)*width, (1/2)*height, -(1/2)*depth)
-                    vec3(-(1/2)*width, -(1/2)*height, -(1/2)*depth)
-                    )
-    nextPair =      (
-                    eachVertex
-                    )
-    for (i = 0; i < faces; ++i)
-        for (j=0; j < planePositions.size(); ++j)
-            transform planePositions to create new positions.
-                if (i < 4) // create a side face
-                    planeRelative0 = transformed0.
-                    // all vertices are shifted. Not all vertices are shifted the same. 
-                    // shiftDirectionLeftVertices = vert2 - vert1
-                    // shiftDirectionRightVertices = 
-                    planeRelative = planePositions[j][0] + (length * (i % 2));
-                    planeRelative1 = transformed1.
-                    planeRelative2 = transformed2.
-                    planeRelative3 = transformed3.
-                else // create a bottom or top face
-
-
-        
-    
-    
-    
-    */
-
-
-
-    
-
-//     // Build vertex data and index data for OpenGL
-//    for (size_t i = 0; i < faces.size(); ++i) {
-//         glm::vec3 positions[3]
-//                 = {
-//                     glm::vec3(0.0f,0.0f, 0.0f),
-//                     glm::vec3(0.0f,0.0f, 0.0f),
-//                     glm::vec3(0.0f,0.0f, 0.0f) };
-//         glm::vec3 normal = normals[i / 2]; // Assign face normal
-//         glm::vec3 color = (colorIndex == 31) 
-//             ? glm::vec3(
-//                 customColor[0], 
-//                 customColor[1], 
-//                 customColor[2]
-//             )
-//             : glm::vec3(
-//                 colorPresets[colorIndex].color[0], 
-//                 colorPresets[colorIndex].color[1], 
-//                 colorPresets[colorIndex].color[2]
-//              );
-
-//         for (int j = 0; j < 3; ++j) {
-//             int vertexIndex = faces[i][j];
-//             const glm::vec3& position = vertices[vertexIndex];
-
-//             // Append position, normal, and color to vertexData
-//             vertexData.insert(vertexData.end(), {position.x, position.y, position.z});
-//             vertexData.insert(vertexData.end(), {normal.x, normal.y, normal.z});
-//             vertexData.insert(vertexData.end(), {color.r, color.g, color.b});
-
-//             // Vertices span -0.5 .. 0.5 on every axis, so + 0.5 lands in 0 .. 1.
-//         }
-
-//         elementData.insert(elementData.end(), {static_cast<unsigned int>(i * 3), static_cast<unsigned int>(i * 3 + 1), static_cast<unsigned int>(i * 3 + 2)});
-    
-
 }
 
 
