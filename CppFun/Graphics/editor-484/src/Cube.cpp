@@ -7,6 +7,31 @@
 #include <glm/geometric.hpp>
 #include <sys/types.h>
 
+#pragma region DEBUG_UTILITY
+//-///////////////////////////////////////////////
+// See "Catching errors (the easy way)" here: https://wikis.khronos.org/opengl/OpenGL_Error
+// Also: https://registry.khronos.org/OpenGL-Refpages/gl4/html/glDebugMessageCallback.xhtml
+void GLAPIENTRY MessageCallback( GLenum source,
+                 GLenum type,
+                 GLuint id,
+                 GLenum severity,
+                 GLsizei length,
+                 const GLchar* message,
+                 const void* userParam )
+{
+    std::string callbackStr = type == GL_DEBUG_TYPE_ERROR ? "** GL ERROR **" : "";
+    //fprintf( stderr, "GL CALLBACK: %s type = 0x%x, severity = 0x%x, message = %s\n",
+    //       callbackStr.c_str(), type, severity, message);
+
+    std::string messageStr = message;
+    std::cout << 
+        "\n\tGL CALLBACK: " + callbackStr + 
+                    "\n\t\ttype = 0x" + std::to_string(type) + 
+                    "\n\t\tseverity = 0x" + std::to_string(severity) +
+                    "\n\t\tmessage = " + messageStr << std::endl;
+}
+#pragma endregion =====================================================================================================================
+
 std::string getPlaneTypeString(PlaneType type) {
     switch(type) {
         case PlaneType::PLANE_TYPE:         return "PLANE_TYPE";
@@ -44,12 +69,41 @@ bool outputVertices(const std::vector<float>& vertices, uint32_t const VALUES_PE
     return true;
 }
 
+bool outputElements(const std::vector<uint32_t>& elements, uint32_t const VALUES_PER_ELEMENT)
+{
+    std::string verticesString = "Elements Data\n";
+    verticesString.reserve(elements.size() * 5);
+
+    uint32_t const VALUES_PER_PLANE = VALUES_PER_ELEMENT * 2;
+    for(uint32_t i = 0; i < elements.size(); i += VALUES_PER_PLANE)
+    {
+        for (uint32_t j = 0; j < VALUES_PER_PLANE; j += VALUES_PER_ELEMENT) {
+            verticesString.append("[");
+            verticesString.append(std::to_string(elements[i + j    ]) + ", ");
+            verticesString.append(std::to_string(elements[i + j + 1]) + ", ");
+            verticesString.append(std::to_string(elements[i + j + 2]) + " ");
+            verticesString.append("]\t\t");
+        }
+
+        verticesString.append("\n");
+    }
+
+    std::cout << verticesString << std::endl;
+
+    return true;
+}
+
 Cube::Cube(float x, float y, float z, float scale, int colorIndex, int id)
 	: Shape(x, y, z, scale, colorIndex, id), VAO(0), VBO(0), EBO(0) {
     shapeType = "Cube";  // Set the type as "Cube"
 
+    // Enable debug output.
+    glEnable( GL_DEBUG_OUTPUT );
+    // specify debug callback
+    glDebugMessageCallback( MessageCallback, 0 );
+
     // Set up OpenGL buffers
-    setupCube();
+    if (setupCube() == false) std::cerr << "FAILED TO SETUP CUBE" << std::endl;
 }
 
 Cube::~Cube() {
@@ -289,15 +343,21 @@ bool Cube::constructPlane(PlaneConstructionParams params) {
             return false;
     }
     
+
     outputVertices(params.vertexData, params.VALUES_PER_VERT);
+
     std::cout << "COMPLETED PLANE CONSTRUCTION" << std::endl;
+    std::cout << "ELEMENTS OUTPUT" << std::endl;
+    outputElements(params.elementData, 3);
+    std::cout << "ELEMENTS OUTPUT COMPLETE" << std::endl;
+
+
     return true;
 }
 
 //-//////////////////////////////////////////////////////////////
 //
 bool Cube::setupCube() {
-    texCoords.clear();
 
     std::cout << "SETTINGUP CUBE" << std::endl;
     
@@ -326,9 +386,15 @@ bool Cube::setupCube() {
 
             if (j == 0) { // first vert of new loop
                 std::cout << "FIRST VERTEX: " << j << std::endl;
-                vertexData.push_back(0.5 * -scale);
-                vertexData.push_back(LOOP_HEIGHT);
-                vertexData.push_back(0.5 * -scale);
+                float const x = 0.5 * -scale;
+                float const y = LOOP_HEIGHT;
+                float const z = 0.5 * -scale;
+                vertexData.push_back(x);
+                vertexData.push_back(y);
+                vertexData.push_back(z);
+
+                vertices.push_back(glm::vec3(x, y , z));
+
                 // assign dummy values to normal and color. These will be changed later. 
                 for (uint8_t k = 0; k < VALUES_PER_VERT - 3; ++k) {
                     vertexData.push_back(0.0f);
@@ -422,12 +488,16 @@ bool Cube::setupCube() {
         vertexData[3 + i * VALUES_PER_VERT] = normal.x;
         vertexData[3 + i * VALUES_PER_VERT + 1] = normal.y;
         vertexData[3 + i * VALUES_PER_VERT + 2] = normal.z;
+
+        normals.reserve(vertexData.size() / 3);
+        normals.push_back(normal);
     }
 
     vertexData.shrink_to_fit();
     outputVertices(vertexData, VALUES_PER_VERT);
 
     elementData.shrink_to_fit();
+    outputElements(elementData, 3);
 
     // TODO(geometry): the cube: eight corners, six faces, twelve triangles
     // Build the shape: fill `vertices`, `faces`, and `normals` (directly or
@@ -448,10 +518,12 @@ bool Cube::setupCube() {
     //              {0.0f, 0.0f, 1.0f}, {0.0f, 0.0f, 1.0f} };
     // faces    = { {0, 1, 2}, {0, 2, 3} };
 
+    // texCoords.clear();
+
     // UVs are per triangle corner, not per vertex: a cube's eight corners each
     // belong to three faces wanting three different UVs. The loop below emits
     // one vertex per corner, so a per-corner map lines up with it exactly. 
-    texCoords = TexCoords::cube(vertices, faces, normals);
+    // texCoords = TexCoords::cube(vertices, faces, normals);
 
     // Create and bind VAO, VBO, and EBO
     glGenVertexArrays(1, &VAO);
@@ -477,7 +549,7 @@ bool Cube::setupCube() {
     glEnableVertexAttribArray(2);
 
     // UVs go in their own buffer on attribute 3, while the VAO is still bound.
-    uploadTexCoords();
+    // uploadTexCoords();
 
     glBindVertexArray(0); // Unbind VAO
 
@@ -512,7 +584,7 @@ void Cube::draw(GLuint shaderProgram) {
 
     // Render the cube
     glBindVertexArray(VAO);
-    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(faces.size() * 3), GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(36), GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
 
     // Disable lighting after drawing the cube (for axis rendering)

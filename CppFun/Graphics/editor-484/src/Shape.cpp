@@ -1,6 +1,7 @@
 #include "../include/Shape.h"
 #include "../include/TextureCache.h"
 
+#include <GLFW/glfw3.h>
 #include <vector>
 #include <iostream>
 
@@ -107,13 +108,19 @@ void Shape::applyTransform(GLuint shaderProgram) const {
 
     // Pass the model matrix to the shader
     GLint modelLoc = glGetUniformLocation(shaderProgram, "model");
+    glm::mat4 trans = glm::mat4(1.0f); // creates new identity matrix.
+    float const angle = 3.14f * 0.25f * glfwGetTime();
+    trans = glm::rotate(trans, angle, glm::vec3(0.77f, 0.77f, 0.0f));
+    // ?? WHY AM I PASSING IN THE TRANSPOSE?
+    glUniformMatrix4fv(modelLoc, 1, GL_TRUE, glm::value_ptr(trans));
+    return;
+
     if (modelLoc != -1) {
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(modelMatrix));
     } else {
         std::cerr << "Warning: 'model' uniform not found in shader program." << std::endl;
     }
 }
-
 
 void Shape::setRotation(float ax, float ay, float az) {
 

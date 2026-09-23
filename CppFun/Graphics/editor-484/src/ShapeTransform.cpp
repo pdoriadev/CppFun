@@ -61,8 +61,10 @@ glm::mat4 Shape::getModelMatrix() const {
 
     // glm::mat4 m4_test = m4_pos * x_rot * y_rot * z_rot * m4_scale;
 
+    return glm::mat4(1.0f);
     // Compute model matrix
-    return m4_pos * m4_rot * m4_scale;
+    //return m4_pos * m4_rot * m4_scale;
+
     
     //-/////////////////////////////////////////////////
     // ORIGINAL COMMENTS 
