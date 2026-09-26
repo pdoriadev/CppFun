@@ -109,10 +109,12 @@ void Shape::applyTransform(GLuint shaderProgram) const {
     // Pass the model matrix to the shader
     GLint modelLoc = glGetUniformLocation(shaderProgram, "model");
     glm::mat4 trans = glm::mat4(1.0f); // creates new identity matrix.
+    
+    // ROTATE SHAPE TEST
     float const angle = 3.14f * 0.25f * glfwGetTime();
     trans = glm::rotate(trans, angle, glm::vec3(0.77f, 0.77f, 0.0f));
     // ?? WHY AM I PASSING IN THE TRANSPOSE?
-    glUniformMatrix4fv(modelLoc, 1, GL_TRUE, glm::value_ptr(trans));
+    glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(trans));
     return;
 
     if (modelLoc != -1) {
