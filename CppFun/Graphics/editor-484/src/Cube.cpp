@@ -120,236 +120,108 @@ Cube::~Cube() {
 bool Cube::constructPlane(PlaneConstructionParams params) {
     std::cout << "Construct Plane: " << getPlaneTypeString(params.type) << std::endl;
 
+    if (params.type != PlaneType::TOP && params.LOOPS_COMPLETED_I == 0) {
+        std::cerr << "Impossible parameters for algorithm. Loop hasn't completed when constructing the top. First loop has completed when constructed any other plane." << std::endl;
+        return false;
+    }
+
+    uint32_t elementIndices[4];
+    glm::vec3 planeVertPositions[4]; 
+    glm::vec3 planeNormal = glm::vec3(INFINITY);
+
+    // Compute indices for cube-plane
     switch(params.type) {
-        case PlaneType::TOP : {
-            //-/////////////////////////////////////////////////////
-            // Add TRI indexes into element buffer.
-            // TRI 1
-            params.elementData.emplace_back(0);
-            params.elementData.emplace_back(1);
-            params.elementData.emplace_back(2);
-            // TRI 2
-            params.elementData.emplace_back(2);
-            params.elementData.emplace_back(3);
-            params.elementData.emplace_back(0);
+        case PlaneType::TOP : 
+            elementIndices[0] = 0;
+            elementIndices[1] = 1;
+            elementIndices[2] = 2;
+            elementIndices[3] = 3;
             
-            //-/////////////////////////////////////////////////////
-            // Update vert normals
-            glm::vec3 planeVerts[4];
-            for (uint32_t p = 0; p < 4; ++p) {
-                planeVerts[p] = glm::vec3(  params.vertexData[p * params.VALUES_PER_VERT    ], 
-                                            params.vertexData[p * params.VALUES_PER_VERT + 1],
-                                            params.vertexData[p * params.VALUES_PER_VERT + 2]      );
-            }
-        
-            glm::vec3 const zeroToOne = planeVerts[1] - planeVerts[0];
-            glm::vec3 const zeroToThree = planeVerts[3] - planeVerts[0];
-            glm::vec3 const topPlaneNormal = glm::cross(zeroToThree, zeroToOne); // CCW right-hand rule
-        
-            glm::vec3 const currentNormal = glm::vec3(  params.vertexData[3],
-                                                        params.vertexData[3 + 1],
-                                                        params.vertexData[3 + 2]);
-            
-            // NOT normalizing until all planes are constructed. 
-            glm::vec3 const newNormal = topPlaneNormal + currentNormal;
-                
-            for (uint32_t p = 0; p < 4; ++p) {
-                // Set normal values
-                params.vertexData[3 + p * params.VALUES_PER_VERT    ] = newNormal.x;
-                params.vertexData[3 + p * params.VALUES_PER_VERT + 1] = newNormal.y;
-                params.vertexData[3 + p * params.VALUES_PER_VERT + 2] = newNormal.z;
-
-                // Set color values
-                params.vertexData[6 + p * params.VALUES_PER_VERT    ] = 1.0f;
-                params.vertexData[6 + p * params.VALUES_PER_VERT + 1] = 1.0f;
-                params.vertexData[6 + p * params.VALUES_PER_VERT + 2] = 1.0f;
-            }    
-        
             break;
-
-        } // scope operator to declare variables beneath label.
-        case PlaneType::INTERMEDIATE : {
+        // scope operator to declare variables beneath label.
+        case PlaneType::INTERMEDIATE ... PlaneType::WRAP_AROUND_LOOP : {
             // construct intermediate plane. i moves up and down. j movesleft and right. 
+            uint32_t const LOOPS_COMPLETED_I_MINUS_ONE = params.LOOPS_COMPLETED_I - 1;
+            uint32_t const J_OFFSET_01 = params.LOOP_PROGRESS_J - (PlaneType::INTERMEDIATE == params.type); // -1 offset
+            uint32_t const J_OFFSET_23 = params.LOOP_PROGRESS_J * (PlaneType::INTERMEDIATE == params.type); // + Loop Progress
 
-            // covers i == 0 edge-case. 
-            uint32_t const LOOPS_COMPLETED_I_MINUS_ONE = (params.LOOPS_COMPLETED_I - 1) >= params.MAX_LOOPS 
-                ? 0 
-                : (params.LOOPS_COMPLETED_I - 1);
-
-            uint32_t elementIndices[4];
-            elementIndices[0] = LOOPS_COMPLETED_I_MINUS_ONE * params.VERTS_PER_LOOP  + params.LOOP_PROGRESS_J - 1; // top left
-            elementIndices[1] = params.LOOPS_COMPLETED_I    * params.VERTS_PER_LOOP  + params.LOOP_PROGRESS_J - 1; // bottom left
-            elementIndices[2] = params.LOOPS_COMPLETED_I    * params.VERTS_PER_LOOP  + params.LOOP_PROGRESS_J; // bottom right
-            elementIndices[3] = LOOPS_COMPLETED_I_MINUS_ONE * params.VERTS_PER_LOOP  + params.LOOP_PROGRESS_J; // top right
-            
-            // TRI 1
-            params.elementData.emplace_back(elementIndices[0]);
-            params.elementData.emplace_back(elementIndices[1]); 
-            params.elementData.emplace_back(elementIndices[2]);
-            // TRI 2 
-            params.elementData.emplace_back(elementIndices[2]);
-            params.elementData.emplace_back(elementIndices[3]);
-            params.elementData.emplace_back(elementIndices[0]);
-
-            //-/////////////////////////////////////////////////////
-            // update the normals.
-            // get plane's vertex values
-            glm::vec3 planeVerts[4];
-            for (uint32_t p = 0; p < 4; ++p) {
-                planeVerts[p] = glm::vec3(  params.vertexData[elementIndices[p] * params.VALUES_PER_VERT    ], 
-                                            params.vertexData[elementIndices[p] * params.VALUES_PER_VERT + 1],
-                                            params.vertexData[elementIndices[p] * params.VALUES_PER_VERT + 2]      );
-            }
-
-            // get plane side vectors between vertices.
-            glm::vec3 zeroToOne = planeVerts[1] - planeVerts[0];
-            glm::vec3 zeroToThree = planeVerts[3] - planeVerts[0];
-            // cross product of side vectors. CCW Right-hand.
-            glm::vec3 planeNormal = cross(zeroToThree, zeroToOne);
-            
-            for(uint32_t p = 0; p < 4; ++p) {
-                glm::vec3 currentNormal (params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERT],
-                    params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERT + 1],
-                    params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERT + 2]);
-                // Add cross product with current normal to get new normal.
-                currentNormal += planeNormal;
-
-                // Set normal to equal new normal value
-                params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERT] = currentNormal.x;
-                params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERT + 1] = currentNormal.y;
-                params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERT + 2] = currentNormal.z;
-
-                // Set color values
-                params.vertexData[6 + p * params.VALUES_PER_VERT    ] = 1.0f;
-                params.vertexData[6 + p * params.VALUES_PER_VERT + 1] = 1.0f;
-                params.vertexData[6 + p * params.VALUES_PER_VERT + 2] = 1.0f;
-            }
-             
+            elementIndices[0] = LOOPS_COMPLETED_I_MINUS_ONE * params.VERTS_PER_LOOP  + J_OFFSET_01; // top left
+            elementIndices[1] = params.LOOPS_COMPLETED_I    * params.VERTS_PER_LOOP  + J_OFFSET_01; // bottom left
+            elementIndices[2] = params.LOOPS_COMPLETED_I    * params.VERTS_PER_LOOP  + J_OFFSET_23; // bottom right
+            elementIndices[3] = LOOPS_COMPLETED_I_MINUS_ONE * params.VERTS_PER_LOOP  + J_OFFSET_23; // top right
+        }     
+         
             break;
-        }
-        case PlaneType::WRAP_AROUND_LOOP : {
-            // construct intermediate plane. i moves up and down. j movesleft and right. 
-
-            // covers i == 0 edge-case. 
-            uint32_t const LOOPS_COMPLETED_I_MINUS_ONE = (params.LOOPS_COMPLETED_I - 1) >= params.MAX_LOOPS 
-                ? 0 
-                : (params.LOOPS_COMPLETED_I - 1);
-
-            uint32_t elementIndices[4];
-            elementIndices[0] = LOOPS_COMPLETED_I_MINUS_ONE * params.VERTS_PER_LOOP + params.LOOP_PROGRESS_J; // top left. Last loop end. 
-            elementIndices[1] = params.LOOPS_COMPLETED_I    * params.VERTS_PER_LOOP + params.LOOP_PROGRESS_J; // Bottom left. This loop end.
-            elementIndices[2] = params.LOOPS_COMPLETED_I    * params.VERTS_PER_LOOP; // bottom right. This loop beginning.
-            elementIndices[3] = LOOPS_COMPLETED_I_MINUS_ONE * params.VERTS_PER_LOOP; // top right. Last loop beginning.
-            
-            // TRI 1
-            params.elementData.emplace_back(elementIndices[0]);
-            params.elementData.emplace_back(elementIndices[1]); 
-            params.elementData.emplace_back(elementIndices[2]);
-            // TRI 2 
-            params.elementData.emplace_back(elementIndices[2]);
-            params.elementData.emplace_back(elementIndices[3]);
-            params.elementData.emplace_back(elementIndices[0]);
-
-            //-/////////////////////////////////////////////////////
-            // update the normals.
-            // get plane's vertex values
-            glm::vec3 planeVerts[4];
-            for (uint32_t p = 0; p < 4; ++p) {
-                planeVerts[p] = glm::vec3(  params.vertexData[elementIndices[p] * params.VALUES_PER_VERT    ], 
-                                            params.vertexData[elementIndices[p] * params.VALUES_PER_VERT + 1],
-                                            params.vertexData[elementIndices[p] * params.VALUES_PER_VERT + 2]      );
-            }
-
-            // get plane side vectors for cross product.
-            glm::vec3 zeroToOne = planeVerts[1] - planeVerts[0];
-            glm::vec3 zeroToThree = planeVerts[3] - planeVerts[0];
-            // cross product of side vectors. CCW Right-hand.
-            glm::vec3 planeNormal = cross(zeroToThree, zeroToOne);
-            
-            for(uint32_t p = 0; p < 4; ++p) {
-                glm::vec3 currentNormal (params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERT],
-                    params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERT + 1],
-                    params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERT + 2]);
-                // Add cross product with current normal to get new normal.
-                currentNormal += planeNormal;
-
-                // Set normal to equal new normal value
-                params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERT] = currentNormal.x;
-                params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERT + 1] = currentNormal.y;
-                params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERT + 2] = currentNormal.z;
-
-                // Set color values
-                params.vertexData[6 + p * params.VALUES_PER_VERT    ] = 1.0f;
-                params.vertexData[6 + p * params.VALUES_PER_VERT + 1] = 1.0f;
-                params.vertexData[6 + p * params.VALUES_PER_VERT + 2] = 1.0f;
-            }
-             
-            break;
-        }
-        case PlaneType::BOTTOM : {
-            uint32_t elementIndices[4];
-            for (uint32_t k = 0; k < 4; ++k) {
-                elementIndices[k] = params.LOOPS_COMPLETED_I * params.VERTS_PER_LOOP  + params.LOOP_PROGRESS_J - (3 - k);
-            }
-
-            // add in correct winding order. Adding CW top-facing will add CCW bottom-facing
-            // TRI 1
-            params.elementData.emplace_back(elementIndices[3]);
-            params.elementData.emplace_back(elementIndices[2]);
-            params.elementData.emplace_back(elementIndices[1]);
-            // TRI 2
-            params.elementData.emplace_back(elementIndices[1]);
-            params.elementData.emplace_back(elementIndices[0]);
-            params.elementData.emplace_back(elementIndices[3]);
-
-            //-/////////////////////////////////////////////////////
-            // update the normals.
-            // get plane's vertex values
-            glm::vec3 planeVerts[4];
-            for (uint32_t p = 0; p < 4; ++p) {
-                planeVerts[p] = glm::vec3(  params.vertexData[elementIndices[p] * params.VALUES_PER_VERT    ], 
-                                            params.vertexData[elementIndices[p] * params.VALUES_PER_VERT + 1],
-                                            params.vertexData[elementIndices[p] * params.VALUES_PER_VERT + 2]      );
-            }
-
-            // compute plane normal
-            glm::vec3 threeToTwo = planeVerts[2] - planeVerts[3];
-            glm::vec3 threeToZero = planeVerts[3] - planeVerts[0];
-            glm::vec3 planeNormal = cross(threeToTwo, threeToZero);
-
-            // set normal values (un-normalized)
-            for (uint32_t p = 0; p < 4; ++p) {
-                glm::vec3 currentNormal(params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERT    ],
-                                        params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERT + 1],
-                                        params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERT + 2]   );
-
-                currentNormal += planeNormal;
-                params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERT    ] = currentNormal.x;
-                params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERT + 1] = currentNormal.y;
-                params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERT + 2] = currentNormal.z;
-            }
-
-            // set color
-            for (uint32_t p = 0; p < 4; ++p) {
-                params.vertexData[6 + elementIndices[p] * params.VALUES_PER_VERT    ] = 0.7f;
-                params.vertexData[6 + elementIndices[p] * params.VALUES_PER_VERT + 1] = 0.7f;
-                params.vertexData[6 + elementIndices[p] * params.VALUES_PER_VERT + 2] = 0.7f;
+        case PlaneType::BOTTOM : 
+            // CW from top-view is CCW from bottom-view. 
+            for (uint32_t k = 0; k < params.VERTS_PER_LOOP ; ++k) {
+                elementIndices[k] = params.LOOPS_COMPLETED_I * params.VERTS_PER_LOOP + params.LOOP_PROGRESS_J - k;
             }
             
             break;
-        }
-        default:
-            // ERROR. Invalid case. 
+        default: // ERROR. Invalid case. 
+            std::cerr << "INVALID PLANE TYPE FOR CUBE PLANE: " << getPlaneTypeString(params.type) << std::endl;
             return false;
     }
+
+    // TRI 1
+    params.elementData.emplace_back(elementIndices[0]);
+    params.elementData.emplace_back(elementIndices[1]);
+    params.elementData.emplace_back(elementIndices[2]);
+    // TRI 2
+    params.elementData.emplace_back(elementIndices[2]);
+    params.elementData.emplace_back(elementIndices[3]);
+    params.elementData.emplace_back(elementIndices[0]);
+    std::cout << "ELEMENTS OUTPUT" << std::endl;
+    outputElements(params.elementData, 3);
+    std::cout << "ELEMENTS OUTPUT COMPLETE" << std::endl;
     
+    //-/////////////////////////////////////////////////////
+    // COMPUTE NORMALS. ADD COLORS.
+    //-/////////////////////////////////////////////////////
+    
+    for (uint32_t p = 0; p < 4; ++p) {
+        planeVertPositions[p] = glm::vec3(  params.vertexData[elementIndices[p] * params.VALUES_PER_VERT    ], 
+                                            params.vertexData[elementIndices[p] * params.VALUES_PER_VERT + 1],
+                                            params.vertexData[elementIndices[p] * params.VALUES_PER_VERT + 2]      );
+    }
+
+    glm::vec3 const zeroToOne = planeVertPositions[1] - planeVertPositions[0];
+    glm::vec3 const zeroToThree = planeVertPositions[3] - planeVertPositions[0]; 
+    // if (params.type == PlaneType::BOTTOM) planeNormal = glm::cross(zeroToThree, zeroToOne); 
+    planeNormal = glm::cross(zeroToOne, zeroToThree); 
+    // // Compute new plane's normal
+    // switch(params.type) {
+    //     case PlaneType::TOP ... PlaneType::WRAP_AROUND_LOOP : 
+    //         planeNormal = glm::cross(zeroToThree, zeroToOne); break; // CCW right-hand rule 
+    //     case PlaneType::BOTTOM : 
+    //         planeNormal = glm::cross(zeroToOne, zeroToThree); break;
+    //     default: // ERROR
+    //         return false;
+    // }
+    
+    for(uint32_t p = 0; p < 4; ++p) {
+        glm::vec3 normal (  params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERT    ],
+                            params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERT + 1],
+                            params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERT + 2]   );
+        // Add cross product with current normal to get new normal.
+        normal += planeNormal;
+
+        // Set normal to equal new normal value
+        params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERT] = normal.x;
+        params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERT + 1] = normal.y;
+        params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERT + 2] = normal.z;
+
+        // Set color values
+        float const newColor = static_cast<float>(elementIndices[p]) / static_cast<float>(params.VERTS_PER_LOOP * params.MAX_LOOPS);
+        params.vertexData[6 + elementIndices[p] * params.VALUES_PER_VERT    ] = newColor;
+        params.vertexData[6 + elementIndices[p] * params.VALUES_PER_VERT + 1] = newColor;
+        params.vertexData[6 + elementIndices[p] * params.VALUES_PER_VERT + 2] = newColor;
+    }
 
     outputVertices(params.vertexData, params.VALUES_PER_VERT);
 
     std::cout << "COMPLETED PLANE CONSTRUCTION" << std::endl;
-    std::cout << "ELEMENTS OUTPUT" << std::endl;
-    outputElements(params.elementData, 3);
-    std::cout << "ELEMENTS OUTPUT COMPLETE" << std::endl;
 
 
     return true;
@@ -408,19 +280,19 @@ bool Cube::setupCube() {
             uint32_t const THIS_VERTEX_INDEX = FULL_LOOP_OFFSET + VALUES_PER_VERT * j;
 
             std::cout << "create next vertex" << j << std::endl;
+            std::cout << "LAST_VERTEX_INDEX: " << LAST_VERTEX_INDEX << std::endl;
+            std::cout << "THIS_VERTEX_INDEX: " << THIS_VERTEX_INDEX << std::endl;
 
             // Create next vertex
             {
-                std::cout << "LAST_VERTEX_INDEX: " << LAST_VERTEX_INDEX << std::endl;
-                std::cout << "THIS_VERTEX_INDEX: " << THIS_VERTEX_INDEX << std::endl;
                 double trigInputForOffset = 2 * ShapeMath::PI() * (static_cast<double>(j - 1) / static_cast<double>(VERTS_PER_LOOP));
 
                 // derive new vertex's values
-                float x = vertexData.at(LAST_VERTEX_INDEX) + scale * std::cos(trigInputForOffset); // new x = last x shifted
+                float const x = vertexData.at(LAST_VERTEX_INDEX) + scale * std::cos(trigInputForOffset); // new x = last x shifted
                 // std::cout << "Computed x: " << x << std::endl;
-                float y = LOOP_HEIGHT; // y is constant for horizontal loop.
+                float const y = LOOP_HEIGHT; // y is constant for horizontal loop.
                 // std::cout << "Computed y: " << y << std::endl;
-                float z = vertexData.at(LAST_VERTEX_INDEX + 2) + scale * std::sin(trigInputForOffset); // new z = last z shifted
+                float const z = vertexData.at(LAST_VERTEX_INDEX + 2) + scale * std::sin(trigInputForOffset); // new z = last z shifted
                 // std::cout << "Computed z: " << z << std::endl;
                 
                 // std::cout << "computed vertex values" << std::endl;
@@ -438,41 +310,34 @@ bool Cube::setupCube() {
 
             //-//////////////////////////////////////////////////////////////
             // CONSTRUCT PLANES. 
-            // Add triangle indices to element index array.
-            // Add non-positional data to vertex data array.
             //-//////////////////////////////////////////////////////////////
             
             std::vector<PlaneType> planeTypes;
-            planeTypes.reserve(3);
+            planeTypes.reserve(3); // max of 3 planes constructed per cube
 
+            // Always add a side plane when i > 0 and j > 0. 
             if (i > 0) { planeTypes.push_back(PlaneType::INTERMEDIATE); }
             
-            if (j < VERTS_PER_LOOP - 1) { // not finished loop.
-                if (i > 0) { // can construct a side plane. 
-                    constructPlane(PlaneConstructionParams(planeTypes.at(0), MAX_LOOPS, VERTS_PER_LOOP, VALUES_PER_VERT, i, j, elementData, vertexData));
+            if (j == VERTS_PER_LOOP - 1) {
+                // loop-completion planes. Tops, Bottoms, Wrap-arounds. 
+                switch(i) {
+                    case 0:                     
+                        planeTypes.push_back(PlaneType::TOP); 
+                        break;
+                    case 1 ... MAX_LOOPS - 1:   
+                        planeTypes.push_back(PlaneType::WRAP_AROUND_LOOP);
+                        if (i == MAX_LOOPS - 1) { 
+                            planeTypes.push_back(PlaneType::BOTTOM); 
+                        }
+                        break;
+                    default:
+                        std::cerr << "INVALID i VALUE in Cube::setupCube(): " << i << std::endl;
+                        return false;
                 }
-                
-                continue;
-            }
-
-            // loop-completion planes. Tops, Bottoms, Wrap-arounds. 
-            switch(i) {
-                case 0:                     
-                    planeTypes.push_back(PlaneType::TOP); 
-                    break;
-                case 1 ... MAX_LOOPS - 1:   
-                    planeTypes.push_back(PlaneType::WRAP_AROUND_LOOP);
-                    if (i == MAX_LOOPS - 1) { 
-                        planeTypes.push_back(PlaneType::BOTTOM); 
-                    }
-                    break;
-                default:
-                    std::cerr << "INVALID i VALUE in Cube::setupCube(): " << i << std::endl;
-                    return false;
             }
                         
-            for (uint32_t c = 0; c < planeTypes.size(); ++c) {
-                constructPlane(PlaneConstructionParams(planeTypes[c], MAX_LOOPS, VERTS_PER_LOOP, VALUES_PER_VERT, i, j, elementData, vertexData));
+            for (uint32_t p = 0; p < planeTypes.size(); ++p) {
+                constructPlane(PlaneConstructionParams(planeTypes[p], MAX_LOOPS, VERTS_PER_LOOP, VALUES_PER_VERT, i, j, elementData, vertexData));
             }
         }
     }
