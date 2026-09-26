@@ -32,66 +32,6 @@ void GLAPIENTRY MessageCallback( GLenum source,
 }
 #pragma endregion =====================================================================================================================
 
-std::string getPlaneTypeString(PlaneType type) {
-    switch(type) {
-        case PlaneType::PLANE_TYPE:         return "PLANE_TYPE";
-        case PlaneType::INVALID:            return "INVALID";
-        case PlaneType::TOP:                return "TOP";
-        case PlaneType::INTERMEDIATE:       return "INTERMEDIATE";
-        case PlaneType::WRAP_AROUND_LOOP:    return "WRAP_AROUND_LOOP";
-        case PlaneType::BOTTOM:             return "BOTTOM";
-        case PlaneType::COUNT:              return "COUNT";
-        default: return ""; // invalid type value
-    }
-}
-
-bool outputVertices(const std::vector<float>& vertices, uint32_t const VALUES_PER_VERT)
-{
-    std::string verticesString = "Vertex Data\n";
-    verticesString.reserve(vertices.size() * 5);
-    for(uint32_t i = 0; i < vertices.size() / VALUES_PER_VERT; ++i)
-    {
-        uint32_t offsetIndex = i * VALUES_PER_VERT;
-
-        for (uint32_t j = 0; j < VALUES_PER_VERT / 3; ++j) {
-            verticesString.append("[");
-            verticesString.append(std::to_string(vertices[j*(VALUES_PER_VERT / 3) + offsetIndex]) + ", ");
-            verticesString.append(std::to_string(vertices[j*(VALUES_PER_VERT / 3) + offsetIndex+1]) + ", ");
-            verticesString.append(std::to_string(vertices[j*(VALUES_PER_VERT / 3) + offsetIndex+2]) + " ");
-            verticesString.append("]\t\t");
-        }
-
-        verticesString.append("\n");
-    }
-
-    std::cout << verticesString << std::endl;
-
-    return true;
-}
-
-bool outputElements(const std::vector<uint32_t>& elements, uint32_t const VALUES_PER_ELEMENT)
-{
-    std::string verticesString = "Elements Data\n";
-    verticesString.reserve(elements.size() * 5);
-
-    uint32_t const VALUES_PER_PLANE = VALUES_PER_ELEMENT * 2;
-    for(uint32_t i = 0; i < elements.size(); i += VALUES_PER_PLANE)
-    {
-        for (uint32_t j = 0; j < VALUES_PER_PLANE; j += VALUES_PER_ELEMENT) {
-            verticesString.append("[");
-            verticesString.append(std::to_string(elements[i + j    ]) + ", ");
-            verticesString.append(std::to_string(elements[i + j + 1]) + ", ");
-            verticesString.append(std::to_string(elements[i + j + 2]) + " ");
-            verticesString.append("]\t\t");
-        }
-
-        verticesString.append("\n");
-    }
-
-    std::cout << verticesString << std::endl;
-
-    return true;
-}
 
 Cube::Cube(float x, float y, float z, float scale, int colorIndex, int id)
 	: Shape(x, y, z, scale, colorIndex, id), VAO(0), VBO(0), EBO(0) {
@@ -117,7 +57,7 @@ Cube::~Cube() {
 // Sets element index data
 // Computes new un-normalized normal for each vertex that is part of the plane. Sets vertex normal data.
 // Sets vertex color data. 
-bool Cube::constructPlane(PlaneConstructionParams params) {
+bool Shape::constructPlane(PlaneConstructionParams params) {
     std::cout << "Construct Plane: " << getPlaneTypeString(params.type) << std::endl;
 
     if (params.type != PlaneType::TOP && params.LOOPS_COMPLETED_I == 0) {

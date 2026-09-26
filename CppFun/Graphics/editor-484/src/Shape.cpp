@@ -9,6 +9,72 @@ namespace ShapeMath {
     double const PI() { return M_PI; }
 }
 
+#pragma region I/O
+
+bool outputVertices(const std::vector<float>& vertices, uint32_t const VALUES_PER_VERT)
+{
+    std::string verticesString = "Vertex Data\n";
+    verticesString.reserve(vertices.size() * 5);
+    for(uint32_t i = 0; i < vertices.size() / VALUES_PER_VERT; ++i)
+    {
+        uint32_t offsetIndex = i * VALUES_PER_VERT;
+
+        for (uint32_t j = 0; j < VALUES_PER_VERT / 3; ++j) {
+            verticesString.append("[");
+            verticesString.append(std::to_string(vertices[j*(VALUES_PER_VERT / 3) + offsetIndex]) + ", ");
+            verticesString.append(std::to_string(vertices[j*(VALUES_PER_VERT / 3) + offsetIndex+1]) + ", ");
+            verticesString.append(std::to_string(vertices[j*(VALUES_PER_VERT / 3) + offsetIndex+2]) + " ");
+            verticesString.append("]\t\t");
+        }
+
+        verticesString.append("\n");
+    }
+
+    std::cout << verticesString << std::endl;
+
+    return true;
+}
+
+bool outputElements(const std::vector<uint32_t>& elements, uint32_t const VALUES_PER_ELEMENT)
+{
+    std::string verticesString = "Elements Data\n";
+    verticesString.reserve(elements.size() * 5);
+
+    uint32_t const VALUES_PER_PLANE = VALUES_PER_ELEMENT * 2;
+    for(uint32_t i = 0; i < elements.size(); i += VALUES_PER_PLANE)
+    {
+        for (uint32_t j = 0; j < VALUES_PER_PLANE; j += VALUES_PER_ELEMENT) {
+            verticesString.append("[");
+            verticesString.append(std::to_string(elements[i + j    ]) + ", ");
+            verticesString.append(std::to_string(elements[i + j + 1]) + ", ");
+            verticesString.append(std::to_string(elements[i + j + 2]) + " ");
+            verticesString.append("]\t\t");
+        }
+
+        verticesString.append("\n");
+    }
+
+    std::cout << verticesString << std::endl;
+
+    return true;
+}
+
+#pragma endregion ==================================================================================================================
+
+std::string getPlaneTypeString(PlaneType type) {
+    switch(type) {
+        case PlaneType::PLANE_TYPE:         return "PLANE_TYPE";
+        case PlaneType::INVALID:            return "INVALID";
+        case PlaneType::TOP:                return "TOP";
+        case PlaneType::INTERMEDIATE:       return "INTERMEDIATE";
+        case PlaneType::WRAP_AROUND_LOOP:    return "WRAP_AROUND_LOOP";
+        case PlaneType::BOTTOM:             return "BOTTOM";
+        case PlaneType::COUNT:              return "COUNT";
+        default: return ""; // invalid type value
+    }
+}
+
+
 Shape::Shape(float x, float y, float z, float uniformScale, int colorIndex, int id,
              float scaleX, float scaleY, float scaleZ, bool useUniformScale) 
     // Order follows Shape.h - see the note in Joint.cpp.

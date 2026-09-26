@@ -23,6 +23,50 @@ namespace ShapeMath {
     double const PI();
 }
 
+enum class PlaneType : int32_t {
+    PLANE_TYPE = -100,
+    INVALID = -1,
+    TOP = 0,
+    INTERMEDIATE,
+    WRAP_AROUND_LOOP,
+    BOTTOM,
+    COUNT
+};
+
+std::string getPlaneTypeString(PlaneType type);
+bool outputVertices(const std::vector<float>& vertices, uint32_t const VALUES_PER_VERT);
+bool outputElements(const std::vector<uint32_t>& elements, uint32_t const VALUES_PER_ELEMENT);
+
+struct PlaneConstructionParams {
+    PlaneType const type;
+    uint32_t const MAX_LOOPS;
+    uint32_t const VERTS_PER_LOOP;
+    uint32_t const VALUES_PER_VERT;
+    uint32_t const LOOPS_COMPLETED_I;
+    uint32_t const LOOP_PROGRESS_J;
+    std::vector<unsigned int>& elementData; // index buffer
+    std::vector<float>& vertexData; // raw vertex data
+
+    PlaneConstructionParams(
+        PlaneType const _type, 
+        uint32_t const _MAX_LOOPS,
+        uint32_t const _VERTS_PER_LOOP,
+        uint32_t const _VALUES_PER_VERT, 
+        uint32_t const _LOOPS_COMPLETED_I,
+        uint32_t const _LOOP_PROGRESS_J,
+        std::vector<unsigned int>& _elementData,
+        std::vector<float>& _vertexData) 
+        :
+        type(_type),
+        MAX_LOOPS(_MAX_LOOPS),
+        VERTS_PER_LOOP(_VERTS_PER_LOOP),
+        VALUES_PER_VERT(_VALUES_PER_VERT),
+        LOOPS_COMPLETED_I(_LOOPS_COMPLETED_I),
+        LOOP_PROGRESS_J(_LOOP_PROGRESS_J),
+        elementData(_elementData), 
+        vertexData(_vertexData){}
+};
+
 class Shape {
 
 public:
@@ -72,6 +116,8 @@ public:
     // Set the shape type
     void setShapeType(std::string newShapeType);
 
+    bool constructPlane(PlaneConstructionParams);
+    
     void addVertex(const glm::vec3 vertex);
     void addNormal(const glm::vec3 normal);
     void addFace(int v1, int v2, int v3);
