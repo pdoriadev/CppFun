@@ -41,7 +41,7 @@ struct PlaneConstructionParams {
     PlaneType const type;
     uint32_t const MAX_LOOPS;
     uint32_t const VERTS_PER_LOOP;
-    uint32_t const VALUES_PER_VERT;
+    uint32_t const VALUES_PER_VERTEX;
     uint32_t const LOOPS_COMPLETED_I;
     uint32_t const LOOP_PROGRESS_J;
     std::vector<unsigned int>& elementData; // index buffer
@@ -51,7 +51,7 @@ struct PlaneConstructionParams {
         PlaneType const _type, 
         uint32_t const _MAX_LOOPS,
         uint32_t const _VERTS_PER_LOOP,
-        uint32_t const _VALUES_PER_VERT, 
+        uint32_t const VALUES_PER_VERTEX, 
         uint32_t const _LOOPS_COMPLETED_I,
         uint32_t const _LOOP_PROGRESS_J,
         std::vector<unsigned int>& _elementData,
@@ -60,7 +60,7 @@ struct PlaneConstructionParams {
         type(_type),
         MAX_LOOPS(_MAX_LOOPS),
         VERTS_PER_LOOP(_VERTS_PER_LOOP),
-        VALUES_PER_VERT(_VALUES_PER_VERT),
+        VALUES_PER_VERTEX(VALUES_PER_VERTEX),
         LOOPS_COMPLETED_I(_LOOPS_COMPLETED_I),
         LOOP_PROGRESS_J(_LOOP_PROGRESS_J),
         elementData(_elementData), 
@@ -252,7 +252,7 @@ private:
     float defaultRotationX, defaultRotationY, defaultRotationZ;
     int defaultColorIndex;
     float defaultCustomColor[3];  // For custom color if used    
-    
+        
 };
 
 #endif
