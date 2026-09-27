@@ -21,7 +21,7 @@ public:
     
 private:
     GLuint VAO, VBO, EBO; // OpenGL handles for pyramid geometry
-    void setupPyramid();  // Initializes the VAO/VBO/EBO for the pyramid    
+    bool setupPyramid();  // Initializes the VAO/VBO/EBO for the pyramid    
 };
 
 #endif
