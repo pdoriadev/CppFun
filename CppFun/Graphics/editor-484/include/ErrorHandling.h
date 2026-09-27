@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <string>
-#include <glad/glad.h>
+#include "../include/glad/glad.h"
 // glm 1.0+ hard-errors on gtx/ headers unless experimental extensions are
 // explicitly enabled. Older glm (0.9.9, what Ubuntu ships) tolerated it, so
 // this only shows up on newer toolchains such as MSYS2's glm 1.0.3.

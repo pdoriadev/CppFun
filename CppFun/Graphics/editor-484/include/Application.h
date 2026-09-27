@@ -1,11 +1,11 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
-#include "ShaderLoader.h"
-#include "Renderer.h"
-#include "ShapeManager.h"
-#include "TimeStepper.h"
-#include "FileImporter.h"
+#include "../include/ShaderLoader.h"
+#include "../include/Renderer.h"
+#include "../include/ShapeManager.h"
+#include "../include/TimeStepper.h"
+#include "../include/FileImporter.h"
 // #include "FileManager.h"
 #include "ErrorHandling.h"
 

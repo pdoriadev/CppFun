@@ -20,7 +20,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include <tinyfiledialogs.h>
+#include "../include/tinydialog/tinyfiledialogs.h"
 
 #include <unistd.h>
 #include <limits.h>

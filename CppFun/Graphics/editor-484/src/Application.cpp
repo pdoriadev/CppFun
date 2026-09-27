@@ -1,13 +1,13 @@
-#include "Globals.h"
-#include "Application.h"
-#include "Keyframe.h"
-#include "ErrorHandling.h"
+#include "../include/Globals.h"
+#include "../include/Application.h"
+#include "../include/Keyframe.h"
+#include "../include/ErrorHandling.h"
 
-#include "imgui.h"
-#include "imgui_impl_glfw.h"
-#include "imgui_impl_opengl3.h"
+#include "../include/imgui/imgui.h"
+#include "../include/imgui/imgui_impl_glfw.h"
+#include "../include/imgui/imgui_impl_opengl3.h"
 
-#include "glad/glad.h"
+#include "../include/glad/glad.h"
 #include <GLFW/glfw3.h>
 
 #include <iostream>
@@ -28,12 +28,12 @@
 #include <sstream>
 #include <array>
 #include <algorithm>  // For std::find
-#include "tinyfiledialogs.h"
+#include "../include/tinydialog/tinyfiledialogs.h"
 
-#include "ColorPresets.h"
-#include "Settings.h"
-#include "Light.h"
-#include "AnimationController.h"
+#include "../include/ColorPresets.h"
+#include "../include/Settings.h"
+#include "../include/Light.h"
+#include "../include/AnimationController.h"
 
 // Static members
 Renderer Application::renderer;

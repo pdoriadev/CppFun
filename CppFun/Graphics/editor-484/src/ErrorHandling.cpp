@@ -1,7 +1,7 @@
-#include "ErrorHandling.h"
+#include "../include/ErrorHandling.h"
 #include <iostream>
 #include <fstream>
-#include <glad/glad.h>   // For OpenGL error checking
+#include "../include/glad/glad.h"   // For OpenGL error checking
 #include <GLFW/glfw3.h>  // For GLFW error callback
 
 void ErrorHandling::glfwErrorCallback(int error, const char* description) {
