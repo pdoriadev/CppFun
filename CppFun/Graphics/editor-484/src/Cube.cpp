@@ -7,40 +7,10 @@
 #include <glm/geometric.hpp>
 #include <sys/types.h>
 
-#pragma region DEBUG_UTILITY
-//-///////////////////////////////////////////////
-// See "Catching errors (the easy way)" here: https://wikis.khronos.org/opengl/OpenGL_Error
-// Also: https://registry.khronos.org/OpenGL-Refpages/gl4/html/glDebugMessageCallback.xhtml
-void GLAPIENTRY MessageCallback( GLenum source,
-                 GLenum type,
-                 GLuint id,
-                 GLenum severity,
-                 GLsizei length,
-                 const GLchar* message,
-                 const void* userParam )
-{
-    std::string callbackStr = type == GL_DEBUG_TYPE_ERROR ? "** GL ERROR **" : "";
-    //fprintf( stderr, "GL CALLBACK: %s type = 0x%x, severity = 0x%x, message = %s\n",
-    //       callbackStr.c_str(), type, severity, message);
-
-    std::string messageStr = message;
-    std::cout << 
-        "\n\tGL CALLBACK: " + callbackStr + 
-                    "\n\t\ttype = 0x" + std::to_string(type) + 
-                    "\n\t\tseverity = 0x" + std::to_string(severity) +
-                    "\n\t\tmessage = " + messageStr << std::endl;
-}
-#pragma endregion =====================================================================================================================
-
 
 Cube::Cube(float x, float y, float z, float scale, int colorIndex, int id)
 	: Shape(x, y, z, scale, colorIndex, id), VAO(0), VBO(0), EBO(0) {
     shapeType = "Cube";  // Set the type as "Cube"
-
-    // Enable debug output.
-    glEnable( GL_DEBUG_OUTPUT );
-    // specify debug callback
-    glDebugMessageCallback( MessageCallback, 0 );
 
     // Set up OpenGL buffers
     if (setupCube() == false) std::cerr << "FAILED TO SETUP CUBE" << std::endl;
