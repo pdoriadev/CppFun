@@ -33,14 +33,15 @@ glm::mat4 Shape::getModelMatrix() const {
     m4_pos[3] = glm::vec4(x, y, z, 1.0f);
     
     // Construct scale matrix
-    glm::mat4 m4_scale = glm::mat4(1.0f) * scale;
+    glm::mat4 m4_scale = glm::mat4( glm::vec4(scale, 0.0f, 0.0f, 0.0f), 
+                                    glm::vec4(0.0f, scale, 0.0f, 0.0f),
+                                    glm::vec4(0.0f, 0.0f, scale, 0.0f),
+                                    glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
+
     if (useUniformScale == false) {
-        m4_scale[0] *= scaleX;
-        m4_scale[1] *= scaleY;
-        m4_scale[2] *= scaleZ;
-        // m4_scale[0] = glm::vec4(scaleX, 0.0f, 0.0f, 0.0f);
-        // m4_scale[1] = glm::vec4(0.0f, scaleY, 0.0f, 0.0f);
-        // m4_scale[2] = glm::vec4(0.0f, 0.0f, scaleZ, 0.0f);
+        m4_scale[0][0] = scaleX;
+        m4_scale[1][1] = scaleY;
+        m4_scale[2][2] = scaleZ;
     }
     
     // Construct rotation matrices
@@ -49,8 +50,8 @@ glm::mat4 Shape::getModelMatrix() const {
     x_rot[2] = glm::vec4(0.0f, -sin(angleX), cos(angleX), 0.0f);
 
     glm::mat4 y_rot(1.0f);
-    y_rot[0] = glm::vec4(cos(angleY), 0.0f, -sin(angleY), 0.0f);
-    y_rot[2] = glm::vec4(sin(angleY), 0.0f, cos(angleY), 0.0f);
+    y_rot[0] = glm::vec4(cos(angleY), 0.0f, sin(angleY), 0.0f);
+    y_rot[2] = glm::vec4(-sin(angleY), 0.0f, cos(angleY), 0.0f);
 
     glm::mat4 z_rot(1.0f);
     z_rot[0] = glm::vec4(cos(angleZ), -sin(angleZ), 0.0f, 0.0f);
