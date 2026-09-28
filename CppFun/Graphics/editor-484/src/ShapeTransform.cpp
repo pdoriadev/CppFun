@@ -16,6 +16,7 @@
 // a rotation swings the object round the origin instead of spinning in place.
 
 #include "../include/Shape.h"
+#include <glm/trigonometric.hpp>
 
 //-///////////////////////////////////////////////
 // Scale first. Scale local to the model.
@@ -46,16 +47,25 @@ glm::mat4 Shape::getModelMatrix() const {
     
     // Construct rotation matrices
     glm::mat4 x_rot(1.0f);
-    x_rot[1] = glm::vec4(0.0f, cos(angleX), sin(angleX), 0.0f);
-    x_rot[2] = glm::vec4(0.0f, -sin(angleX), cos(angleX), 0.0f);
+    {
+        float const radianX = glm::radians(angleX);
+        x_rot[1] = glm::vec4(0.0f, cos(radianX), sin(radianX), 0.0f);
+        x_rot[2] = glm::vec4(0.0f, -sin(radianX), cos(radianX), 0.0f);
+    }
 
     glm::mat4 y_rot(1.0f);
-    y_rot[0] = glm::vec4(cos(angleY), 0.0f, sin(angleY), 0.0f);
-    y_rot[2] = glm::vec4(-sin(angleY), 0.0f, cos(angleY), 0.0f);
+    {
+        float const radianY = glm::radians(angleY);
+        y_rot[0] = glm::vec4(cos(radianY), 0.0f, sin(radianY), 0.0f);
+        y_rot[2] = glm::vec4(-sin(radianY), 0.0f, cos(radianY), 0.0f);
+    }
 
     glm::mat4 z_rot(1.0f);
-    z_rot[0] = glm::vec4(cos(angleZ), -sin(angleZ), 0.0f, 0.0f);
-    z_rot[1] = glm::vec4(sin(angleZ), cos(angleZ), 0.0f, 0.0f);
+    {
+        float const radianZ = glm::radians(angleZ);
+        z_rot[0] = glm::vec4(cos(radianZ), -sin(radianZ), 0.0f, 0.0f);
+        z_rot[1] = glm::vec4(sin(radianZ), cos(radianZ), 0.0f, 0.0f);
+    }
     
     // Combine rotation matrices into one matrix
     glm::mat4 m4_rot = x_rot * y_rot * z_rot;
