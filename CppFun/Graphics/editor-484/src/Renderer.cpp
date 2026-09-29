@@ -1,24 +1,24 @@
-#include "Application.h"
-#include "Renderer.h"
-#include "Keyframe.h"
-#include "TextureCache.h"
-#include "FileImporter.h"
+#include "../include/Application.h"
+#include "../include/Renderer.h"
+#include "../include/Keyframe.h"
+#include "../include/TextureCache.h"
+#include "../include/FileImporter.h"
 
-#include "glad/glad.h"
+#include "../include/glad/glad.h"
 #include <GLFW/glfw3.h>
 
 #include <glm/glm.hpp>                  // Core GLM types
 #include <glm/gtc/matrix_transform.hpp> // Transformations (translate, rotate, scale)
 #include <glm/gtc/type_ptr.hpp>         // To pass matrices to OpenGL shaders
 
-#include "SceneLight.h"
-#include "Settings.h"
-#include "Light.h"
-#include "SceneIO.h"
-#include "AnimationController.h"
-#include "Mobius.h"
-#include "Torus.h"
-#include "tinyfiledialogs.h"
+#include "../include/SceneLight.h"
+#include "../include/Settings.h"
+#include "../include/Light.h"
+#include "../include/SceneIO.h"
+#include "../include/AnimationController.h"
+#include "../include/Mobius.h"
+#include "../include/Torus.h"
+#include "../include/tinydialog/tinyfiledialogs.h"
 
 #include <cmath>
 #include <cstdio>
@@ -593,36 +593,36 @@ void Renderer::renderScene(ShapeManager& shapeManager, TimeStepper* timeStepper)
         // resolve to the same ImGui ID and trigger a conflict assert.
         if (ImGui::CollapsingHeader("Transform", ImGuiTreeNodeFlags_DefaultOpen)) {
             ImGui::PushID("transformSection");
-	// Position
-        float pos[3] = { shapeManager.getSelectedShape()->getX(), shapeManager.getSelectedShape()->getY(), shapeManager.getSelectedShape()->getZ() };
-        if (ImGui::DragFloat3("Position", pos, 0.1f)) {
-            shapeManager.getSelectedShape()->setPosition(pos[0], pos[1], pos[2]);
-        }
+            // Position
+            float pos[3] = { shapeManager.getSelectedShape()->getX(), shapeManager.getSelectedShape()->getY(), shapeManager.getSelectedShape()->getZ() };
+            if (ImGui::DragFloat3("Position", pos, 0.1f)) {
+                shapeManager.getSelectedShape()->setPosition(pos[0], pos[1], pos[2]);
+            }
 
-	// Scaling options
-	bool useUniformScaling = shapeManager.getSelectedShape()->isUsingUniformScaling();
-	if (ImGui::Checkbox("Uniform Scaling", &useUniformScaling)) {
-		shapeManager.getSelectedShape()->useUniformScaling(useUniformScaling);
-	}
+            // Scaling options
+            bool useUniformScaling = shapeManager.getSelectedShape()->isUsingUniformScaling();
+            if (ImGui::Checkbox("Uniform Scaling", &useUniformScaling)) {
+                shapeManager.getSelectedShape()->useUniformScaling(useUniformScaling);
+            }
 
-	if (useUniformScaling) {
-		float scale = shapeManager.getSelectedShape()->getScale();
-		if (ImGui::DragFloat("Uniform Scale", &scale, 0.1f, 0.1f, 10.0f)) {
-			shapeManager.getSelectedShape()->setScale(scale);
-		}
-	} else {
-		glm::vec3 nonUniformScale = shapeManager.getSelectedShape()->getNonUniformScale();
-		float scale[3] = {nonUniformScale.x, nonUniformScale.y, nonUniformScale.z};
-		if (ImGui::DragFloat3("Scale (X, Y, Z)", scale, 0.1f, 0.1f, 10.0f)) {
-			shapeManager.getSelectedShape()->setScale(scale[0], scale[1], scale[2]);
-		}
-	}
+            if (useUniformScaling) {
+                float scale = shapeManager.getSelectedShape()->getScale();
+                if (ImGui::DragFloat("Uniform Scale", &scale, 0.1f, 0.1f, 10.0f)) {
+                    shapeManager.getSelectedShape()->setScale(scale);
+                }
+            } else {
+                glm::vec3 nonUniformScale = shapeManager.getSelectedShape()->getNonUniformScale();
+                float scale[3] = {nonUniformScale.x, nonUniformScale.y, nonUniformScale.z};
+                if (ImGui::DragFloat3("Scale (X, Y, Z)", scale, 0.1f, 0.1f, 10.0f)) {
+                    shapeManager.getSelectedShape()->setScale(scale[0], scale[1], scale[2]);
+                }
+            }
 
-	// Rotation
-        float rotation[3] = { shapeManager.getSelectedShape()->getAngleX(), shapeManager.getSelectedShape()->getAngleY(), shapeManager.getSelectedShape()->getAngleZ() };
-        if (ImGui::DragFloat3("Rotation", rotation, 1.0f, -360.0f, 720.0f)) {
-            shapeManager.getSelectedShape()->setRotation(rotation[0], rotation[1], rotation[2]);
-        }
+            // Rotation
+            float rotation[3] = { shapeManager.getSelectedShape()->getAngleX(), shapeManager.getSelectedShape()->getAngleY(), shapeManager.getSelectedShape()->getAngleZ() };
+            if (ImGui::DragFloat3("Rotation", rotation, 1.0f, -360.0f, 720.0f)) {
+                shapeManager.getSelectedShape()->setRotation(rotation[0], rotation[1], rotation[2]);
+            }
 
             ImGui::PopID();
         }
@@ -630,52 +630,52 @@ void Renderer::renderScene(ShapeManager& shapeManager, TimeStepper* timeStepper)
         if (!selectionIsLight &&
             ImGui::CollapsingHeader("Color", ImGuiTreeNodeFlags_DefaultOpen)) {
             ImGui::PushID("colorSection");
-        // Color Selection
-        static int selectedColorIdx = 0;
-        static float customColor[3] = {0.0f, 0.0f, 0.0f};  // Initialize for custom color picker
+            // Color Selection
+            static int selectedColorIdx = 0;
+            static float customColor[3] = {0.0f, 0.0f, 0.0f};  // Initialize for custom color picker
 
-        if (shapeManager.getSelectedShape()) {
-            selectedColorIdx = shapeManager.getSelectedShape()->getColorIndex();  // Sync with shape's current color
+            if (shapeManager.getSelectedShape()) {
+                selectedColorIdx = shapeManager.getSelectedShape()->getColorIndex();  // Sync with shape's current color
 
-            // If it's a custom color, update customColor array with shape's current custom color
-            if (selectedColorIdx == 31) {
-                const float* currentCustomColor = shapeManager.getSelectedShape()->getCustomColor();
-                customColor[0] = currentCustomColor[0];
-                customColor[1] = currentCustomColor[1];
-                customColor[2] = currentCustomColor[2];
-            }
-        }
-
-
-        if (ImGui::BeginCombo("Preset", colorPresets[selectedColorIdx].name)) {
-            for (int i = 0; i < 32; i++) {
-                ImGui::PushID(i);
-                ImGui::ColorButton("##color", ImVec4(colorPresets[i].color[0], colorPresets[i].color[1], colorPresets[i].color[2], 1.0f), ImGuiColorEditFlags_NoTooltip | ImGuiColorEditFlags_NoInputs, ImVec2(20, 20));
-                ImGui::SameLine();
-                if (ImGui::Selectable(colorPresets[i].name, selectedColorIdx == i)) {
-                    selectedColorIdx = i;
-                    if (i != 31) {  // Not "Custom"
-                        shapeManager.getSelectedShape()->setColor(i);
-                    } else {
-                        // If "Custom" is selected, preserve the current custom color
-                        shapeManager.getSelectedShape()->setColor(i);
-                        shapeManager.getSelectedShape()->setCustomColor(customColor[0], customColor[1], customColor[2]);
-                    }
+                // If it's a custom color, update customColor array with shape's current custom color
+                if (selectedColorIdx == 31) {
+                    const float* currentCustomColor = shapeManager.getSelectedShape()->getCustomColor();
+                    customColor[0] = currentCustomColor[0];
+                    customColor[1] = currentCustomColor[1];
+                    customColor[2] = currentCustomColor[2];
                 }
-                ImGui::PopID();
             }
-            ImGui::EndCombo();
-        }
 
-        // Custom Color Picker if "Custom" is selected
-        if (selectedColorIdx == 31) {
-            if (ImGui::ColorEdit3("Custom Color", customColor)) {
-                // Update the custom color preset and shape color dynamically
-                shapeManager.getSelectedShape()->setColor(31); // Use custom color
-                shapeManager.getSelectedShape()->setCustomColor(customColor[0], customColor[1], customColor[2]);
+
+            if (ImGui::BeginCombo("Preset", colorPresets[selectedColorIdx].name)) {
+                for (int i = 0; i < 32; i++) {
+                    ImGui::PushID(i);
+                    ImGui::ColorButton("##color", ImVec4(colorPresets[i].color[0], colorPresets[i].color[1], colorPresets[i].color[2], 1.0f), ImGuiColorEditFlags_NoTooltip | ImGuiColorEditFlags_NoInputs, ImVec2(20, 20));
+                    ImGui::SameLine();
+                    if (ImGui::Selectable(colorPresets[i].name, selectedColorIdx == i)) {
+                        selectedColorIdx = i;
+                        if (i != 31) {  // Not "Custom"
+                            shapeManager.getSelectedShape()->setColor(i);
+                        } else {
+                            // If "Custom" is selected, preserve the current custom color
+                            shapeManager.getSelectedShape()->setColor(i);
+                            shapeManager.getSelectedShape()->setCustomColor(customColor[0], customColor[1], customColor[2]);
+                        }
+                    }
+                    ImGui::PopID();
+                }
+
+                ImGui::EndCombo();
             }
-        }
 
+            // Custom Color Picker if "Custom" is selected
+            if (selectedColorIdx == 31) {
+                if (ImGui::ColorEdit3("Custom Color", customColor)) {
+                    // Update the custom color preset and shape color dynamically
+                    shapeManager.getSelectedShape()->setColor(31); // Use custom color
+                    shapeManager.getSelectedShape()->setCustomColor(customColor[0], customColor[1], customColor[2]);
+                }
+            }
 
             ImGui::PopID();
         }
