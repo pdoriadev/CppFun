@@ -19,11 +19,13 @@ bool outputVertices(const std::vector<float>& vertices, uint32_t const VALUES_PE
     {
         uint32_t offsetIndex = i * VALUES_PER_VERT;
 
+        // assumes vec3's.
         for (uint32_t j = 0; j < VALUES_PER_VERT / 3; ++j) {
+            uint32_t const DATA_TYPE_OFFSET = j*(VALUES_PER_VERT / 3);
             verticesString.append("[");
-            verticesString.append(std::to_string(vertices[j*(VALUES_PER_VERT / 3) + offsetIndex]) + ", ");
-            verticesString.append(std::to_string(vertices[j*(VALUES_PER_VERT / 3) + offsetIndex+1]) + ", ");
-            verticesString.append(std::to_string(vertices[j*(VALUES_PER_VERT / 3) + offsetIndex+2]) + " ");
+            verticesString.append(std::to_string(vertices[DATA_TYPE_OFFSET + offsetIndex  ]) + ", ");
+            verticesString.append(std::to_string(vertices[DATA_TYPE_OFFSET + offsetIndex+1]) + ", ");
+            verticesString.append(std::to_string(vertices[DATA_TYPE_OFFSET + offsetIndex+2]) + " ");
             verticesString.append("]\t\t");
         }
 
@@ -176,13 +178,6 @@ void Shape::applyTransform(GLuint shaderProgram) const {
     GLint modelLoc = glGetUniformLocation(shaderProgram, "model");
     glm::mat4 trans = glm::mat4(1.0f); // creates new identity matrix.
     
-    // ROTATE SHAPE TEST
-    float const angle = 3.14f * 0.25f * glfwGetTime();
-    trans = glm::rotate(trans, angle, glm::vec3(0.77f, 0.77f, 0.0f));
-    // ?? WHY AM I PASSING IN THE TRANSPOSE?
-    glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(trans));
-    return;
-
     if (modelLoc != -1) {
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(modelMatrix));
     } else {
