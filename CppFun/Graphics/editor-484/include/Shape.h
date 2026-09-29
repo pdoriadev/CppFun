@@ -74,6 +74,14 @@ public:
           float scaleX = 1.0f, float scaleY = 1.0f, float scaleZ = 1.0f, bool useUniformScale = true);
     virtual ~Shape() = default;
 
+    enum NormalConfig {
+        NORMAL_CONFIG = -100,
+        INVALID = -1, 
+        EACH_VERTEX = 0,
+        SHARED,
+        COUNT
+    };
+
     virtual void draw(GLuint shaderProgram) = 0;
 
     // Transformation-related methods
@@ -93,7 +101,7 @@ public:
     void setCustomColor(float r, float g, float b);
 
     // Calculate normal values
-    void calculateNormals();
+    bool calculateNormals();
     
     // Getter methods
     float getX() const;
@@ -221,6 +229,7 @@ protected:
     int colorIndex;
     float customColor[3];
     int id;
+    NormalConfig normalConfig = NormalConfig::INVALID;
     std::string shapeType;
 
     // Surface properties

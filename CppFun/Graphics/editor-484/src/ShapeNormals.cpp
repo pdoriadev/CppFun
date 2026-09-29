@@ -19,7 +19,7 @@
 
 #include <cmath>
 
-void Shape::calculateNormals() {
+bool Shape::calculateNormals() {
     // TODO(geometry): one normal per face, from the cross product of two edges
     // Fill `normals` with ONE unit normal per entry in `faces`, in the same
     // order, computed from the geometry in `vertices`.
@@ -45,5 +45,19 @@ void Shape::calculateNormals() {
     // scene renders, lit as though every surface were the ground. That is a
     // usable checkpoint, and fixing this one function lights up the Teapot,
     // the Torus and the Mobius strip all at once.
+
+// COME BACK TO THIS FUNCTION LATER
+
+    // if (normalConfig == SHARED) { return false; }
+
+    // // calculate each normal. Assign to normals.
+    // // each vertex gets repeated for each edge it is connected to because each edge corresponds to new plane. 
+    // // each plane has its own normal value. 
+    // for (uint32_t i = 0; i < faces.size(); ++i) {
+    //     glm::vec3 normal = 
+    // }
+
     normals.assign(faces.size(), glm::vec3(0.0f, 1.0f, 0.0f));
+
+    return true;
 }
