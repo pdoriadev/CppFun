@@ -1,8 +1,12 @@
-#include "Sphere.h"
-#include "TexCoords.h"
+#include "../include/Sphere.h"
+#include "../include/TexCoords.h"
 
+#include <glm/detail/qualifier.hpp>
+#include <glm/ext/quaternion_geometric.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include <vector>
 #include <cmath>
+#include <iostream>
 
 Sphere::Sphere(float x, float y, float z, float scale, int colorIndex, int id)
     : Shape(x, y, z, scale, colorIndex, id), VAO(0), VBO(0), EBO(0) {
@@ -19,38 +23,103 @@ Sphere::~Sphere() {
 }
 
 void Sphere::setupSphere() {
+    std::cout << "SETUP SPHERE STARTED" << std::endl;
     texCoords.clear();
 
     // Resolution and size, GIVEN and deliberately outside the marked region
     // below: the texture-coordinate code further down needs the two segment
     // counts to build its grid, so they have to survive when the geometry is
     // stripped. They are yours to read and use.
-    const unsigned int latitudeSegments = 20; // Number of latitude lines
-    const unsigned int longitudeSegments = 20; // Number of longitude lines
-    const float radius = 0.5f;
+    unsigned int const LATITUDE_SEGMENTS = 20; // Number of latitude lines
+    unsigned int const LONGITUDE_SEGMENTS = 20; // Number of longitude lines
+    float const radius = 0.5f;
 
-    // TODO(geometry): the sphere: spherical coordinates over a latitude/longitude grid
-    // Build the shape: fill `vertices`, `faces`, and `normals` (directly or
-    // by calling calculateNormals()). See ASSIGNMENTS.md, A2, for the
-    // conventions -- roughly one unit across, centred on the origin,
-    // counter-clockwise winding seen from outside, every face index a valid
-    // index into `vertices`.
-    //
-    // What is here is a placeholder: a single square in the XY plane. It is
-    // deliberately not the shape you were asked for -- it is here so the
-    // editor runs, the Insert menu does something visible, and you can see
-    // your geometry replace it as you write it. Read src/Torus.cpp first;
-    // it is the worked example of a procedural shape.
-    vertices = { {-0.5f, -0.5f, 0.0f}, { 0.5f, -0.5f, 0.0f},
-                 { 0.5f,  0.5f, 0.0f}, {-0.5f,  0.5f, 0.0f} };
-    normals  = { {0.0f, 0.0f, 1.0f}, {0.0f, 0.0f, 1.0f},
-                 {0.0f, 0.0f, 1.0f}, {0.0f, 0.0f, 1.0f} };
-    faces    = { {0, 1, 2}, {0, 2, 3} };
+    for (uint32_t i = 0; i < LATITUDE_SEGMENTS; ++i) {
+        float const phi = static_cast<float>(i) / static_cast<float>(LATITUDE_SEGMENTS-1) * ShapeMath::PI();
+        float const y = radius * glm::cos(phi);
+        for (uint32_t j = 0; j < LONGITUDE_SEGMENTS; ++j) {
+            float const theta = static_cast<float>(j) / static_cast<float>(LONGITUDE_SEGMENTS-1) * 2*ShapeMath::PI();
+            float const x = radius * glm::sin(phi) * glm::cos(theta);
+            float const z = radius * glm::sin(phi) * glm::sin(theta);
+
+            vertices.push_back(glm::vec3(x, y, z));
+            // normal = pos - origin. origin = vec3(0,0,0)
+            normals.push_back(glm::normalize(glm::vec3(x, y, z))); 
+
+            if (i == 0) continue;
+            if (j == 0) continue; 
+            
+            // Intermediate plane
+            int indices[4];
+            indices[0] = (i - 1) * LATITUDE_SEGMENTS + j - 1; 
+            indices[1] = i * LATITUDE_SEGMENTS + j - 1; 
+            indices[2] = i * LATITUDE_SEGMENTS + j; 
+            indices[3] = (i - 1) * LATITUDE_SEGMENTS + j; 
+            
+            faces.push_back({indices[0], indices[1], indices[2]});
+            faces.push_back({indices[2], indices[3], indices[0]});
+
+            // if (j < LONGITUDE_SEGMENTS - 1) continue;
+
+            // // Wrap-around plane
+            // indices[0] = (i - 1) * LATITUDE_SEGMENTS + j; 
+            // indices[1] = i * LATITUDE_SEGMENTS + j; 
+            // indices[2] = i * LATITUDE_SEGMENTS; 
+            // indices[3] = (i - 1) * LATITUDE_SEGMENTS; 
+
+            // faces.push_back({indices[0], indices[1], indices[2]});
+            // faces.push_back({indices[2], indices[3], indices[0]});
+
+            // Bottom-plane???
+
+        }
+    }
+
+    unsigned int const TOTAL_VERTICES = LATITUDE_SEGMENTS * LONGITUDE_SEGMENTS;
+    unsigned int const VALUES_PER_VERTEX = 9;
+    if (vertices.size() != TOTAL_VERTICES) std::cerr << "INCORRECT VERTEX COUNT? Expected = " 
+                                            << TOTAL_VERTICES << ". Actual = " << vertices.size() << std::endl;
 
     // Prepare OpenGL buffers using the populated attributes
     std::vector<float> vertexData;
-    std::vector<unsigned int> indexData;
+    vertexData.reserve(TOTAL_VERTICES * 9); // 3N values = N pos values + N norm values + N col values
+    std::vector<unsigned int> elementData;
+    elementData.reserve(faces.size() * 3); // each face has 3 values. 
 
+    // add vertices, normals, and color data to vertexData
+    for (uint32_t i = 0; i < TOTAL_VERTICES; ++i) {
+        // positions
+        vertexData.push_back(vertices[i].x);
+        vertexData.push_back(vertices[i].y);
+        vertexData.push_back(vertices[i].z);
+
+        // normals
+        vertexData.push_back(normals[i].x);
+        vertexData.push_back(normals[i].y);
+        vertexData.push_back(normals[i].z);
+
+        // color
+        float const newColor = static_cast<float>(i) / static_cast<float>(TOTAL_VERTICES);
+        vertexData.push_back(newColor);
+        vertexData.push_back(newColor);
+        vertexData.push_back(newColor);
+    }
+
+    outputVertices(vertexData, VALUES_PER_VERTEX);
+
+    // add faces data to element index data
+    for (uint32_t i = 0; i < faces.size(); ++i) {
+        for (uint32_t j = 0; j < 3; ++j) {
+            elementData.push_back(faces[i][j]);
+        }
+    }
+
+    outputElements(elementData, 3);
+
+    // COME BACK TO THIS LATER. I THINK IT'S READY????? CHECK THAT USING PROPER VALUES IN
+        // VAO, VBO, EBO SETUP. AND IN DRAW FUNCTION.  
+
+    // I DON'T KNOW HOW THE COLORINDEX SYSTEM WORKS ????
     glm::vec3 color = (colorIndex == 31) 
         ? glm::vec3(
             customColor[0], 
@@ -72,33 +141,42 @@ void Sphere::setupSphere() {
     // Getting this wrong is invisible in a ray-traced render and wrong in the
     // viewport: attribute 3 runs off the end of a too-short buffer after the
     // first ring and every vertex past it reads zero.
-    const std::vector<glm::vec2> vertexUVs =
-        TexCoords::sphere(latitudeSegments, longitudeSegments);
-    texCoords.clear();
-    texCoords.reserve(faces.size() * 3);
+    // const std::vector<glm::vec2> vertexUVs =
+    //     TexCoords::sphere(latitudeSegments, longitudeSegments);
+    // texCoords.clear();
+    // texCoords.reserve(faces.size() * 3);
 
-    for (const auto& face : faces) {
-        for (int vertexIndex : face) {
-            const glm::vec3& position = vertices[vertexIndex];
-            const glm::vec3& normal = normals[vertexIndex];
+    // for (const auto& face : faces) {
+    //     for (int vertexIndex : face) {
+    //         glm::vec3 const& position = vertices[vertexIndex];
+    //         glm::vec3 const& normal = normals[vertexIndex];
 
-            vertexData.insert(vertexData.end(), {position.x, position.y, position.z});
-            vertexData.insert(vertexData.end(), {normal.x, normal.y, normal.z});
-            vertexData.insert(vertexData.end(), {color.r, color.g, color.b});
+    //         vertexData.insert(vertexData.end(), {position.x, position.y, position.z});
+    //         vertexData.insert(vertexData.end(), {normal.x, normal.y, normal.z});
+    //         vertexData.insert(vertexData.end(), {color.r, color.g, color.b});
 
-            if (static_cast<size_t>(vertexIndex) < vertexUVs.size()) {
-                texCoords.push_back(vertexUVs[vertexIndex]);
-            } else {
-                texCoords.push_back(glm::vec2(0.0f));
-            }
-        }
-    }
+    //         if (static_cast<size_t>(vertexIndex) < vertexUVs.size()) {
+    //             texCoords.push_back(vertexUVs[vertexIndex]);
+    //         } else {
+    //             texCoords.push_back(glm::vec2(0.0f));
+    //         }
+    //     }
+    // }
 
-    for (size_t i = 0; i < faces.size(); ++i) {
-        indexData.insert(indexData.end(), {static_cast<unsigned int>(i * 3),
-                                           static_cast<unsigned int>(i * 3 + 1),
-                                           static_cast<unsigned int>(i * 3 + 2)});
-    }
+    // Does this even make sense?? 
+    // Vertex Elements are stored in vertexData.
+    // Faces stores int arrays of size 3 for each face. 
+    // Each value in a face array maps to a vertex element's index in vertexData. These three vertexElements make a triangle.
+    // The index of a face array does not inherently map to anything. 
+    // The *values* stored in each face array map to a vertex element index in vertexData like so:
+    //      faces[i][j] * valuesPerVertex = vertexDataIndex. 
+    // All this for loop does is store multiples of 3 with offsets.
+    //  It's gotta be placeholder code. 
+    // for (size_t i = 0; i < faces.size(); ++i) {
+    //     elementData.insert(elementData.end(), {static_cast<unsigned int>(i * 3),
+    //                                        static_cast<unsigned int>(i * 3 + 1),
+    //                                        static_cast<unsigned int>(i * 3 + 2)});
+    // }
 
     // Create and bind VAO, VBO, and EBO
     glGenVertexArrays(1, &VAO);
@@ -111,7 +189,7 @@ void Sphere::setupSphere() {
     glBufferData(GL_ARRAY_BUFFER, vertexData.size() * sizeof(float), vertexData.data(), GL_STATIC_DRAW);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexData.size() * sizeof(unsigned int), indexData.data(), GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, elementData.size() * sizeof(unsigned int), elementData.data(), GL_STATIC_DRAW);
 
     // Configure vertex attributes
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)0); // Position
@@ -124,9 +202,11 @@ void Sphere::setupSphere() {
     glEnableVertexAttribArray(2);
 
     // UVs go in their own buffer on attribute 3, while the VAO is still bound.
-    uploadTexCoords();
+    // uploadTexCoords();
 
     glBindVertexArray(0); // Unbind VAO
+
+    std::cout << "SETUP SPHERE FINISHED" << std::endl;
 }
 
 void Sphere::draw(GLuint shaderProgram) {
