@@ -142,7 +142,8 @@ bool Shape::constructPlane(PlaneConstructionParams params) {
 //
 bool Cube::setupCube() {
 
-    std::cout << "SETTING-UP CUBE" << std::endl;
+    std::cout << "SETTING-UP CUBE" << std::endl;        
+    normalConfig = NormalConfig::SHARED;
     
     uint32_t const VALUES_PER_VERTEX = 9; // 3 pos + 3 norm + 3 col
     uint32_t const VERTICES_PER_LOOP = 4;
@@ -276,6 +277,8 @@ bool Cube::setupCube() {
 
     elementData.shrink_to_fit();
     outputElements(elementData, 3);
+
+    normalConfig = NormalConfig::SHARED;
 
     // TODO(geometry): the cube: eight corners, six faces, twelve triangles
     // Build the shape: fill `vertices`, `faces`, and `normals` (directly or
