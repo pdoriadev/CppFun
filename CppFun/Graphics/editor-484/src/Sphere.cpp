@@ -58,20 +58,6 @@ void Sphere::setupSphere() {
             
             faces.push_back({indices[0], indices[1], indices[2]});
             faces.push_back({indices[2], indices[3], indices[0]});
-
-            // if (j < LONGITUDE_SEGMENTS - 1) continue;
-
-            // // Wrap-around plane
-            // indices[0] = (i - 1) * LATITUDE_SEGMENTS + j; 
-            // indices[1] = i * LATITUDE_SEGMENTS + j; 
-            // indices[2] = i * LATITUDE_SEGMENTS; 
-            // indices[3] = (i - 1) * LATITUDE_SEGMENTS; 
-
-            // faces.push_back({indices[0], indices[1], indices[2]});
-            // faces.push_back({indices[2], indices[3], indices[0]});
-
-            // Bottom-plane???
-
         }
     }
 
