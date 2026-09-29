@@ -1,5 +1,12 @@
-#include "Custom.h"
-#include "TexCoords.h"
+#include "../include/Custom.h"
+
+#include <glm/detail/qualifier.hpp>
+#include <glm/ext/quaternion_geometric.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#include <vector>
+#include <cmath>
+#include <random>
+#include <iostream>
 
 #include <cmath>
 
@@ -12,13 +19,13 @@ float signedPow(float base, float exponent) {
 }
 } // namespace
 
+
 Custom::Custom(float x, float y, float z, float uniformScale, int colorIndex, int id,
-               float scaleX, float scaleY, float scaleZ, bool useUniformScaling)
-    : Shape(x, y, z, uniformScale, colorIndex, id, scaleX, scaleY, scaleZ, useUniformScaling), VAO(0), VBO(0), EBO(0) {
-    shapeType = customShapeName;
-
-    setupCustom();      // Prepare OpenGL buffers
-
+           float scaleX, float scaleY, float scaleZ, bool useUniformScaling) 
+           : Shape(x, y, z, uniformScale, colorIndex, id), VAO(0), VBO(0), EBO(0) {
+    shapeType = customShapeName;  // Set the type as "Sphere"
+    
+    setupCustom(); // Initialize OpenGL objects for the sphere
 }
 
 Custom::~Custom() {
@@ -29,102 +36,124 @@ Custom::~Custom() {
 }
 
 void Custom::setupCustom() {
-    std::vector<float> vertexData;
-    std::vector<unsigned int> indexData;
-
-    // Grid resolution, GIVEN and deliberately outside the marked region below:
-    // the texture-coordinate code further down builds its grid from these, so
-    // they have to survive when the geometry is stripped. If your own shape is
-    // not built from a (u, v) grid, ignore them -- the UV code will simply not
-    // line up until Assignment 5, which is expected.
-    const int uSteps = 64;
-    const int vSteps = 48;
-
-    // TODO(geometry): a shape of your own choosing, at least twelve faces
-    // Build the shape: fill `vertices`, `faces`, and `normals` (directly or
-    // by calling calculateNormals()). See ASSIGNMENTS.md, A2, for the
-    // conventions -- roughly one unit across, centred on the origin,
-    // counter-clockwise winding seen from outside, every face index a valid
-    // index into `vertices`.
-    //
-    // This one is yours to design: at least twelve faces, and something you
-    // can explain. Name it by editing customShapeName in src/Globals.cpp.
-    //
-    // What is here is a placeholder square so the editor runs and the Insert
-    // menu does something visible. Read src/Torus.cpp first -- it is the
-    // worked example of a procedural shape.
-    vertices = { {-0.5f, -0.5f, 0.0f}, { 0.5f, -0.5f, 0.0f},
-                 { 0.5f,  0.5f, 0.0f}, {-0.5f,  0.5f, 0.0f} };
-    normals  = { {0.0f, 0.0f, 1.0f}, {0.0f, 0.0f, 1.0f},
-                 {0.0f, 0.0f, 1.0f}, {0.0f, 0.0f, 1.0f} };
-    faces    = { {0, 1, 2}, {0, 2, 3} };
-
-    // The shape's own (u, v) grid parameters, the same way the sphere uses
-    // its own. flipU for the same handedness reason as Sphere: a generator that
-    // sweeps u anticlockwise seen from above mirrors the image without it.
-    const std::vector<glm::vec2> gridUVs =
-        TexCoords::parametricGrid(uSteps, vSteps, true, false);
+    std::cout << "SETUP T-SPHERE STARTED" << std::endl;
     texCoords.clear();
+    
+    // Seed with a real random value, if available
+    std::random_device randomDevice;
+    
+    // Choose a random mean between 0 and 1
+    std::default_random_engine e1(randomDevice());
+    std::uniform_real_distribution<float> uniform_dist(0, 1); // min max values
+    
+    unsigned int const LATITUDE_SEGMENTS = 200; // Number of latitude lines
+    unsigned int const LONGITUDE_SEGMENTS = 200; // Number of longitude lines
+    float const RADIUS = 0.5f;
 
-    // Build vertex data and index data for OpenGL, using the PER-VERTEX normal
-    // so the surface is smooth rather than faceted.
-    //
-    // SKIPS ANY FACE THAT INDEXES OUTSIDE `vertices` OR `normals`. This shape
-    // is the one the student designs, so its topology is whatever they made it
-    // -- and an off-by-one in their face indices is a normal thing to hit
-    // halfway through. Without this guard that mistake is not a wrong-looking
-    // shape, it is an out-of-bounds read: undefined behaviour that usually
-    // lands in heap slack and renders garbage, and occasionally crashes on
-    // someone else's machine. The handout warns students about exactly this
-    // ("an out-of-range index reads memory that is not yours"), so the editor
-    // must not do it to them.
-    //
-    // Skipping rather than clamping is deliberate: a clamped face draws a
-    // plausible-looking triangle and hides the bug, while a missing one is
-    // visible and geometry_test says so in as many words.
-    size_t emitted = 0;
-    for (size_t i = 0; i < faces.size(); ++i) {
+    float const MAX_TESSELLATION_DISTANCE = 2 * static_cast<float>(1) / LATITUDE_SEGMENTS;
 
-        bool usable = (faces[i].size() == 3);
-        for (size_t j = 0; usable && j < 3; ++j) {
-            const int vi = faces[i][j];
-            if (vi < 0 ||
-                vi >= static_cast<int>(vertices.size()) ||
-                vi >= static_cast<int>(normals.size())) {
-                usable = false;
-            }
+    for (uint32_t i = 0; i < LATITUDE_SEGMENTS; ++i) {
+        float const PHI = static_cast<float>(i) / static_cast<float>(LATITUDE_SEGMENTS-1) * ShapeMath::PI();
+        float const PRE_Y = RADIUS * glm::cos(PHI);
+        
+        for (uint32_t j = 0; j < LONGITUDE_SEGMENTS; ++j) {
+            float const THETA = static_cast<float>(j) / static_cast<float>(LONGITUDE_SEGMENTS-1) * 2*ShapeMath::PI();
+            float const X = RADIUS * glm::sin(PHI) * glm::cos(THETA);
+            float const Z = RADIUS * glm::sin(PHI) * glm::sin(THETA);
+
+            float const SIGN = PRE_Y < 0 ? -1.0f : 1.0f;
+            //float const Y = SIGN * PRE_Y * PRE_Y;
+            float const Y = SIGN * PRE_Y * PRE_Y * PRE_Y * PRE_Y 
+                            + MAX_TESSELLATION_DISTANCE * 2 * glm::cos(X * 6 * ShapeMath::PI()) ;
+
+            glm::vec3 pos(X, Y, Z);
+            // tessellate
+            pos += glm::normalize(pos) * MAX_TESSELLATION_DISTANCE * uniform_dist(e1);
+
+            vertices.push_back(pos);
+            // normal = pos - origin. origin = vec3(0,0,0)
+            normals.push_back(glm::normalize(pos)); 
+
+            if (i == 0) continue;
+            if (j == 0) continue; 
+            
+            // Construct Plane
+            int indices[4];
+            indices[0] = (i - 1) * LATITUDE_SEGMENTS + j - 1; 
+            indices[1] = i * LATITUDE_SEGMENTS + j - 1; 
+            indices[2] = i * LATITUDE_SEGMENTS + j; 
+            indices[3] = (i - 1) * LATITUDE_SEGMENTS + j; 
+            faces.push_back({indices[0], indices[1], indices[2]});
+            faces.push_back({indices[2], indices[3], indices[0]});
+
+            if (j != LONGITUDE_SEGMENTS - 1) continue;
+
+            // Construct 'glue' wrap-around plane
+            indices[0] = (i - 1) * LATITUDE_SEGMENTS + j;
+            indices[1] = i * LATITUDE_SEGMENTS + j;
+            indices[2] = i * LATITUDE_SEGMENTS;
+            indices[3] = (i - 1) * LATITUDE_SEGMENTS;
+            faces.push_back({indices[0], indices[1], indices[2]});
+            faces.push_back({indices[2], indices[3], indices[0]});
         }
-        if (!usable) continue;
-
-        glm::vec3 color = (colorIndex == 31)
-            ? glm::vec3(customColor[0], customColor[1], customColor[2])
-            : glm::vec3(colorPresets[colorIndex].color[0],
-                        colorPresets[colorIndex].color[1],
-                        colorPresets[colorIndex].color[2]);
-
-        for (int j = 0; j < 3; ++j) {
-            int vertexIndex = faces[i][j];
-            const glm::vec3& position = vertices[vertexIndex];
-            const glm::vec3& normal   = normals[vertexIndex];
-
-            vertexData.insert(vertexData.end(), {position.x, position.y, position.z});
-            vertexData.insert(vertexData.end(), {normal.x, normal.y, normal.z});
-            vertexData.insert(vertexData.end(), {color.r, color.g, color.b});
-
-            // Expanded per corner: indexData below is sequential, so
-            // attribute 3 must match the interleaved buffer's length.
-            texCoords.push_back(vertexIndex < static_cast<int>(gridUVs.size())
-                                ? gridUVs[static_cast<size_t>(vertexIndex)]
-                                : glm::vec2(0.0f));
-        }
-
-        // Counts EMITTED faces, not the loop index: a skipped face must not
-        // leave a gap in the sequential index buffer.
-        indexData.insert(indexData.end(), {static_cast<unsigned int>(emitted * 3),
-                                            static_cast<unsigned int>(emitted * 3 + 1),
-                                            static_cast<unsigned int>(emitted * 3 + 2)});
-        ++emitted;
     }
+
+    unsigned int const TOTAL_VERTICES = LATITUDE_SEGMENTS * LONGITUDE_SEGMENTS;
+    unsigned int const VALUES_PER_VERTEX = 9;
+    if (vertices.size() != TOTAL_VERTICES) std::cerr << "INCORRECT VERTEX COUNT? Expected = " 
+                                            << TOTAL_VERTICES << ". Actual = " << vertices.size() << std::endl;
+
+    // Prepare OpenGL buffers using the populated attributes
+    std::vector<float> vertexData;
+    vertexData.reserve(TOTAL_VERTICES * 9); // 3N values = N pos values + N norm values + N col values
+    std::vector<unsigned int> elementData;
+    elementData.reserve(faces.size() * 3); // each face has 3 values. 
+
+    // add vertices, normals, and color data to vertexData
+    for (uint32_t i = 0; i < TOTAL_VERTICES; ++i) {
+        // positions
+        vertexData.push_back(vertices[i].x);
+        vertexData.push_back(vertices[i].y);
+        vertexData.push_back(vertices[i].z);
+
+        // normals
+        vertexData.push_back(normals[i].x);
+        vertexData.push_back(normals[i].y);
+        vertexData.push_back(normals[i].z);
+
+        // color
+        float const newColor = static_cast<float>(i) / static_cast<float>(TOTAL_VERTICES);
+        vertexData.push_back(newColor);
+        vertexData.push_back(newColor);
+        vertexData.push_back(newColor);
+    }
+
+    outputVertices(vertexData, VALUES_PER_VERTEX);
+
+    // add faces data to element index data
+    for (uint32_t i = 0; i < faces.size(); ++i) {
+        for (uint32_t j = 0; j < 3; ++j) {
+            elementData.push_back(faces[i][j]);
+        }
+    }
+
+    outputElements(elementData, 3);
+
+    // COME BACK TO THIS LATER. I THINK IT'S READY????? CHECK THAT USING PROPER VALUES IN
+        // VAO, VBO, EBO SETUP. AND IN DRAW FUNCTION.  
+
+    // I DON'T KNOW HOW THE COLORINDEX SYSTEM WORKS ????
+    glm::vec3 color = (colorIndex == 31) 
+        ? glm::vec3(
+            customColor[0], 
+            customColor[1], 
+            customColor[2]
+        )
+        : glm::vec3(
+            colorPresets[colorIndex].color[0], 
+            colorPresets[colorIndex].color[1], 
+            colorPresets[colorIndex].color[2]
+         );
 
     // Create and bind VAO, VBO, and EBO
     glGenVertexArrays(1, &VAO);
@@ -137,7 +166,7 @@ void Custom::setupCustom() {
     glBufferData(GL_ARRAY_BUFFER, vertexData.size() * sizeof(float), vertexData.data(), GL_STATIC_DRAW);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexData.size() * sizeof(unsigned int), indexData.data(), GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, elementData.size() * sizeof(unsigned int), elementData.data(), GL_STATIC_DRAW);
 
     // Configure vertex attributes
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)0); // Position
@@ -149,10 +178,12 @@ void Custom::setupCustom() {
     glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)(6 * sizeof(float))); // Color
     glEnableVertexAttribArray(2);
 
-    uploadTexCoords();
+    // UVs go in their own buffer on attribute 3, while the VAO is still bound.
+    // uploadTexCoords();
 
     glBindVertexArray(0); // Unbind VAO
-    
+
+    std::cout << "SETUP SPHERE FINISHED" << std::endl;
 }
 
 void Custom::draw(GLuint shaderProgram) {
@@ -180,9 +211,9 @@ void Custom::draw(GLuint shaderProgram) {
     glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(faces.size() * 3), GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
 
-    // Disable lighting after drawing the cube (for axis rendering)
+    // Disable lighting after drawing the sphere (for axis rendering)
     if (lightingLoc != -1) {
         glUniform1i(lightingLoc, 0);
     }
-}
 
+}

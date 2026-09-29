@@ -26,3 +26,13 @@ private:
 
 #endif
 
+// how this should work
+// shape construction should be somewhere.
+
+// Shape constructor object. 
+// shape constructor takes a parameter saying which shape to construct and return. 
+// the shape constructor always returns vertexData array. Can return an elementData array.
+// Encapsulated in a class object to allow for threading. 
+
+// shape class should just have data. 
+// methods/functions for constructing that data should be in separate classes. s
