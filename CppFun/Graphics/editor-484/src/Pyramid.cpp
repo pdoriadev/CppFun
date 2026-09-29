@@ -20,6 +20,8 @@ Pyramid::~Pyramid() {
 }
 
 bool Pyramid::setupPyramid() {
+    normalConfig = NormalConfig::SHARED;
+
     uint32_t const VERTICES_PER_LOOP = 4;
     uint32_t const VALUES_PER_VERTEX = 9;
     uint32_t const MAX_LOOPS = 1;
@@ -33,7 +35,7 @@ bool Pyramid::setupPyramid() {
         glm::vec3(-0.5f, -0.5f,  0.5f)       // bottom face. top left
     };
 
-    glm::vec3 normals[ FACES_COUNT ] = { 
+    normals = { 
         glm::vec3(0.0f), 
         glm::vec3(0.0f),
         glm::vec3(0.0f),
@@ -45,9 +47,9 @@ bool Pyramid::setupPyramid() {
     elementData.reserve(18); // 1 plane = 2 tris. (2 tris + 4 tris) * 3 vertices per tri
 
     // construct 3 intermediate side-tri's
-    for (int32_t i = 1; i < FACES_COUNT - 1; ++i) {
+    for (uint32_t i = 1; i < FACES_COUNT - 1; ++i) {
         // side triangle indices
-        faces.push_back({0, i, i+1});
+        faces.push_back({0, static_cast<int>(i), static_cast<int>(i)+1});
         for (uint32_t i = 0; i < 3; ++i) {
             elementData.push_back(faces[faces.size() - 1][i]);
         }
@@ -116,15 +118,16 @@ bool Pyramid::setupPyramid() {
         vertexData.push_back(normals[i].y);
         vertexData.push_back(normals[i].z);
         
-
         for (uint32_t j = 0; j < 3; ++j) {
             vertexData.push_back(static_cast<float>(i) / static_cast<float>(VERTICES_PER_LOOP + 1));
         }
         
-        outputVertices(vertexData, VALUES_PER_VERTEX);
+        // Add position data to shape's local positions/vertices array
+        vertices.push_back(positions[0]);
     }
-
+    
     std::cout << "Total Faces = " << faces.size() << std::endl;
+    outputVertices(vertexData, VALUES_PER_VERTEX);
 
     //outputElements(elementData, 3);
 
