@@ -19,6 +19,9 @@
 
 #include <cmath>
 
+
+//-////////////////////////////////////////////
+// Helper method for shape construction. 
 bool Shape::calculateNormals() {
     // TODO(geometry): one normal per face, from the cross product of two edges
     // Fill `normals` with ONE unit normal per entry in `faces`, in the same
@@ -58,6 +61,7 @@ bool Shape::calculateNormals() {
     // }
 
     normals.assign(faces.size(), glm::vec3(0.0f, 1.0f, 0.0f));
+
 
     return true;
 }
