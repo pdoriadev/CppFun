@@ -72,7 +72,8 @@ void Custom::setupCustom() {
 
             vertices.push_back(pos);
             // normal = pos - origin. origin = vec3(0,0,0)
-            normals.push_back(glm::normalize(pos)); 
+            // assign dummy value to normal 
+            normals.push_back(glm::vec3(0, 0, 0)); 
 
             if (i == 0) continue;
             if (j == 0) continue; 
@@ -86,6 +87,15 @@ void Custom::setupCustom() {
             faces.push_back({indices[0], indices[1], indices[2]});
             faces.push_back({indices[2], indices[3], indices[0]});
 
+            {
+                glm::vec3 const BOT_LEFT_TO_TOP_LEFT = vertices[indices[1]] - vertices[indices[0]]; 
+                glm::vec3 const BOT_LEFT_TO_BOT_RIGHT = vertices[indices[2]] - vertices[indices[0]]; 
+                glm::vec3 const PLANE_NORMAL = glm::normalize(glm::cross(BOT_LEFT_TO_BOT_RIGHT, BOT_LEFT_TO_TOP_LEFT));
+                for (uint32_t i = 0; i < 4; ++i ) {
+                    normals[indices[i]] = PLANE_NORMAL;
+                }
+            }
+
             if (j != LONGITUDE_SEGMENTS - 1) continue;
 
             // Construct 'glue' wrap-around plane
@@ -95,6 +105,15 @@ void Custom::setupCustom() {
             indices[3] = (i - 1) * LATITUDE_SEGMENTS;
             faces.push_back({indices[0], indices[1], indices[2]});
             faces.push_back({indices[2], indices[3], indices[0]});
+
+            {
+                glm::vec3 const BOT_LEFT_TO_TOP_LEFT = vertices[indices[1]] - vertices[indices[0]]; 
+                glm::vec3 const BOT_LEFT_TO_BOT_RIGHT = vertices[indices[2]] - vertices[indices[0]]; 
+                glm::vec3 const PLANE_NORMAL = glm::normalize(glm::cross(BOT_LEFT_TO_BOT_RIGHT, BOT_LEFT_TO_TOP_LEFT));
+                for (uint32_t i = 0; i < 4; ++i ) {
+                    normals[indices[i]] = PLANE_NORMAL;
+                }
+            }
         }
     }
 
