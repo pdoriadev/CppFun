@@ -51,7 +51,7 @@ bool Shape::calculateNormals() {
 
 // COME BACK TO THIS FUNCTION LATER
 
-    // if (normalConfig == SHARED) { return false; }
+    // if (normalConfig == SHARED) { return true; }
 
     // // calculate each normal. Assign to normals.
     // // each vertex gets repeated for each edge it is connected to because each edge corresponds to new plane. 
