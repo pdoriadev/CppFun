@@ -31,9 +31,11 @@
 // origin. That is exactly the view A2 is written against, which is why A2 needs
 // no code change of its own when this topic ships.
 
-#include "Camera.h"
+#include "../include/Camera.h"
 
 #include <glm/gtc/constants.hpp>
+
+#include <iostream>
 #include <cmath>
 
 // -----------------------------------------------------------------------------
@@ -58,7 +60,21 @@ void Camera::orbit(float dTheta, float dPhi) {
     //
     // theta is deliberately NOT clamped or wrapped -- yaw is periodic, and
     // cos/sin handle a theta of 400 radians perfectly well.
-    (void)dTheta; (void)dPhi;
+    theta += dTheta;
+    phi += dPhi;
+    
+    // Clamp
+    float halfPi = glm::half_pi<float>();
+    float upperBound = halfPi - 0.15f;
+    float lowerBound = -halfPi + 0.15f;
+    phi = phi > upperBound ? upperBound : phi;
+    phi = phi < lowerBound ? lowerBound : phi;
+
+    // std::cout << "Theta: " << theta << "\nPhi: " << phi << std::endl; 
+
+    updatePosition();
+
+    // std::cout << position.x << " " << position.y << " " << position.z << std::endl;
 }
 
 // -----------------------------------------------------------------------------
