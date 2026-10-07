@@ -46,8 +46,8 @@ void Custom::setupCustom() {
     std::default_random_engine e1(randomDevice());
     std::uniform_real_distribution<float> uniform_dist(0, 1); // min max values
     
-    unsigned int const LATITUDE_SEGMENTS = 200; // Number of latitude lines
-    unsigned int const LONGITUDE_SEGMENTS = 200; // Number of longitude lines
+    unsigned int const LATITUDE_SEGMENTS = 100; // Number of latitude lines
+    unsigned int const LONGITUDE_SEGMENTS = 100; // Number of longitude lines
     float const RADIUS = 0.5f;
 
     float const MAX_TESSELLATION_DISTANCE = 2 * static_cast<float>(1) / LATITUDE_SEGMENTS;
@@ -61,60 +61,53 @@ void Custom::setupCustom() {
             float const X = RADIUS * glm::sin(PHI) * glm::cos(THETA);
             float const Z = RADIUS * glm::sin(PHI) * glm::sin(THETA);
 
-            float const SIGN = PRE_Y < 0 ? -1.0f : 1.0f;
-            //float const Y = SIGN * PRE_Y * PRE_Y;
-            float const Y = SIGN * PRE_Y * PRE_Y * PRE_Y * PRE_Y 
-                            + MAX_TESSELLATION_DISTANCE * 2 * glm::cos(X * 6 * ShapeMath::PI()) ;
+            glm::vec3 pos;
+            if (j < LONGITUDE_SEGMENTS - 1) {
+                float const SIGN = PRE_Y < 0 ? -1.0f : 1.0f;
+                //float const Y = SIGN * PRE_Y * PRE_Y;
+                // cool shape tessellation
+                float const Y = SIGN * PRE_Y * PRE_Y * PRE_Y * PRE_Y
+                                + MAX_TESSELLATION_DISTANCE * 6 * glm::cos(X * 3 * ShapeMath::PI());
+    
+                pos = glm::vec3(X, Y, Z);
+                // local vertex tessellation
+                pos += glm::normalize(pos) * MAX_TESSELLATION_DISTANCE * 0.15f * uniform_dist(e1);
+    
+                vertices.push_back(pos);
+            }
+            else {
+                // last position of loop should match first position to avoid mismatch. 
+                vertices.push_back(vertices.at(i * LATITUDE_SEGMENTS)); // pos should match start position of longitude loop
+            }
 
-            glm::vec3 pos(X, Y, Z);
-            // tessellate
-            pos += glm::normalize(pos) * MAX_TESSELLATION_DISTANCE * uniform_dist(e1);
-
-            vertices.push_back(pos);
-            // normal = pos - origin. origin = vec3(0,0,0)
             // assign dummy value to normal 
             normals.push_back(glm::vec3(0, 0, 0)); 
 
             if (i == 0) continue;
             if (j == 0) continue; 
-            
+
             // Construct Plane
             int indices[4];
             indices[0] = (i - 1) * LATITUDE_SEGMENTS + j - 1; 
             indices[1] = i * LATITUDE_SEGMENTS + j - 1; 
             indices[2] = i * LATITUDE_SEGMENTS + j; 
-            indices[3] = (i - 1) * LATITUDE_SEGMENTS + j; 
+            indices[3] = (i - 1) * LATITUDE_SEGMENTS + j;
+
             faces.push_back({indices[0], indices[1], indices[2]});
             faces.push_back({indices[2], indices[3], indices[0]});
 
-            {
-                glm::vec3 const BOT_LEFT_TO_TOP_LEFT = vertices[indices[1]] - vertices[indices[0]]; 
-                glm::vec3 const BOT_LEFT_TO_BOT_RIGHT = vertices[indices[2]] - vertices[indices[0]]; 
-                glm::vec3 const PLANE_NORMAL = glm::normalize(glm::cross(BOT_LEFT_TO_BOT_RIGHT, BOT_LEFT_TO_TOP_LEFT));
-                for (uint32_t i = 0; i < 4; ++i ) {
-                    normals[indices[i]] = PLANE_NORMAL;
-                }
-            }
-
-            if (j != LONGITUDE_SEGMENTS - 1) continue;
-
-            // Construct 'glue' wrap-around plane
-            indices[0] = (i - 1) * LATITUDE_SEGMENTS + j;
-            indices[1] = i * LATITUDE_SEGMENTS + j;
-            indices[2] = i * LATITUDE_SEGMENTS;
-            indices[3] = (i - 1) * LATITUDE_SEGMENTS;
-            faces.push_back({indices[0], indices[1], indices[2]});
-            faces.push_back({indices[2], indices[3], indices[0]});
-
-            {
-                glm::vec3 const BOT_LEFT_TO_TOP_LEFT = vertices[indices[1]] - vertices[indices[0]]; 
-                glm::vec3 const BOT_LEFT_TO_BOT_RIGHT = vertices[indices[2]] - vertices[indices[0]]; 
-                glm::vec3 const PLANE_NORMAL = glm::normalize(glm::cross(BOT_LEFT_TO_BOT_RIGHT, BOT_LEFT_TO_TOP_LEFT));
-                for (uint32_t i = 0; i < 4; ++i ) {
-                    normals[indices[i]] = PLANE_NORMAL;
-                }
+            // Compute normal. Cach it into each vertex normal.
+            glm::vec3 const BOT_LEFT_TO_TOP_LEFT = vertices[indices[1]] - vertices[indices[0]]; 
+            glm::vec3 const BOT_LEFT_TO_BOT_RIGHT = vertices[indices[2]] - vertices[indices[0]]; 
+            glm::vec3 const PLANE_NORMAL = glm::normalize(glm::cross(BOT_LEFT_TO_BOT_RIGHT, BOT_LEFT_TO_TOP_LEFT));
+            for (uint32_t i = 0; i < 4; ++i ) {
+                normals[indices[i]] += PLANE_NORMAL;
             }
         }
+    }
+
+    for (uint32_t i = 0; i < normals.size(); ++i) {
+        normals[i] = glm::normalize(normals[i]);
     }
 
     unsigned int const TOTAL_VERTICES = LATITUDE_SEGMENTS * LONGITUDE_SEGMENTS;
@@ -147,7 +140,7 @@ void Custom::setupCustom() {
         vertexData.push_back(newColor);
     }
 
-    outputVertices(vertexData, VALUES_PER_VERTEX);
+    // outputVertices(vertexData, VALUES_PER_VERTEX);
 
     // add faces data to element index data
     for (uint32_t i = 0; i < faces.size(); ++i) {
@@ -156,7 +149,7 @@ void Custom::setupCustom() {
         }
     }
 
-    outputElements(elementData, 3);
+    // outputElements(elementData, 3);
 
     // COME BACK TO THIS LATER. I THINK IT'S READY????? CHECK THAT USING PROPER VALUES IN
         // VAO, VBO, EBO SETUP. AND IN DRAW FUNCTION.  
@@ -202,7 +195,7 @@ void Custom::setupCustom() {
 
     glBindVertexArray(0); // Unbind VAO
 
-    std::cout << "SETUP SPHERE FINISHED" << std::endl;
+    std::cout << "SETUP T-SPHERE FINISHED" << std::endl;
 }
 
 void Custom::draw(GLuint shaderProgram) {
