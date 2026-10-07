@@ -23,7 +23,7 @@
 //      Scaling after Rotation will scale along world bases instead of the model's local bases. 
 //          Causes shearing.
 // Rotate next. Rotate local to the model.
-//      Rotating after Scaling will rotate around world bases located at world origin. 
+//      Rotating after Translation will rotate around world bases located at world origin. 
 //          Causes "orbit" rotation around world origin instead of local rotation.
 // Translate last. Moves model origin to world. 
 // https://www.codinglabs.net/article_world_view_projection_matrix.aspx 
