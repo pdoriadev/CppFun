@@ -35,9 +35,6 @@
 
 #include <glm/gtc/constants.hpp>
 
-#include <iostream>
-#include <cmath>
-
 // -----------------------------------------------------------------------------
 // orbit -- right-drag. Swing the eye around the target.
 // -----------------------------------------------------------------------------
@@ -75,6 +72,7 @@ void Camera::orbit(float dTheta, float dPhi) {
     updatePosition();
 
     // std::cout << position.x << " " << position.y << " " << position.z << std::endl;
+    return;
 }
 
 // -----------------------------------------------------------------------------
@@ -102,7 +100,23 @@ void Camera::pan(float dxScreen, float dyScreen) {
     //   - guard the degenerate case. If the eye ever reaches the target,
     //     `forward` is the zero vector and normalizing the cross product is
     //     NaN. Bail out early when its length is tiny.
-    (void)dxScreen; (void)dyScreen;
+    // return false;
+
+    // compute camera bases to pan along.
+    glm::vec3 forward = target - position;
+    // If forward vector is zeroed, we'll get NAN when doing crossproduct. Bail out. 
+    if (glm::dot(forward, forward) < 0.0001f) { return; }
+
+    glm::vec3 right = glm::cross(forward, up);
+   
+    // compute new target position.
+    // The camera's new position will be derived from target in updatePosition.
+    target += right * -dxScreen;
+    target += up * -dyScreen;
+
+    updatePosition();
+
+    return;
 }
 
 // -----------------------------------------------------------------------------
@@ -122,5 +136,12 @@ void Camera::zoom(float amount) {
     // is mirrored.
     //
     // Then call updatePosition().
-    (void)amount;
+
+    // eye gets closer when amount is positive. gets farther when amount is negative.
+    radius -= amount;
+    if (radius < minRadius) radius = minRadius;
+
+    updatePosition();
+
+    return;
 }

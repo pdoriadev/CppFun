@@ -66,6 +66,7 @@ private:
     float theta;   // yaw, radians
     float phi;     // pitch, radians
     float radius;  // distance from target
+    float minRadius = 0.5f;
 
     float fovDegrees;
     float nearPlane;
