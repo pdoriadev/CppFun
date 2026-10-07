@@ -7,6 +7,18 @@
 
 #include <glm/glm.hpp>
 
+enum class MeshDataType : int {
+    MeshDataType = -100,
+    INVALID = -1,
+    POSITION = 0,
+    NORMAL,
+    TEXTURE,
+    FACE,
+    COUNT
+};
+
+MeshDataType const convertTypeStringToEnum(std::string type);
+
 // =============================================================================
 // Wavefront OBJ parsing
 // =============================================================================

@@ -1,5 +1,5 @@
-#include "ObjParser.h"
-#include "FileImporter.h"
+#include "../include/ObjParser.h"
+#include "../include/FileImporter.h"
 
 // Read control points from a file
 std::vector<glm::vec3> FileImporter::readCps(std::istream &file, unsigned dim) {    
