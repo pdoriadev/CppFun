@@ -81,22 +81,28 @@ bool parseObj(std::istream& in, ObjMesh& out) {
     uint16_t MAX_BUFFER_SIZE = 1024;
     char lineBuffer[MAX_BUFFER_SIZE];
     while(in.getline(lineBuffer, MAX_BUFFER_SIZE)) {
-        std::stringstream line(lineBuffer);
+        std::stringstream lineStream(lineBuffer);
         std::string dataTypeStr;
-        line >> dataTypeStr;
+        lineStream >> dataTypeStr;
         MeshDataType const MESH_DATA_TYPE = convertMeshDataTypeStringToEnum(dataTypeStr);
+
+        size_t vCount = 0;
+        size_t vtCount = 0;
+        size_t vnCount = 0;
 
         // assign data
         switch(MESH_DATA_TYPE) {
             /* vec3 cases */ {
             glm::vec3 vec3Data;
             case MeshDataType::POSITION:
-                line >> vec3Data[0] >> vec3Data[1] >> vec3Data[2];
+                lineStream >> vec3Data[0] >> vec3Data[1] >> vec3Data[2];
                 out.vertices.push_back(vec3Data);
+                ++vCount;
                 break;
             case MeshDataType::NORMAL:
-                line >> vec3Data[0] >> vec3Data[1] >> vec3Data[2];
+                lineStream >> vec3Data[0] >> vec3Data[1] >> vec3Data[2];
                 out.normals.push_back(vec3Data);
+                ++vnCount;
                 break;
             case MeshDataType::TEXTURE:
                 // not implemented yet. move to next line.
@@ -106,50 +112,63 @@ bool parseObj(std::istream& in, ObjMesh& out) {
                 // vectors to cache in faces vector<vector<int>>
                 std::vector<int> posVertIndices {0, 0, 0};
                 std::vector<int> normalVertIndices {0, 0, 0};
+                int dummyTexureIndex = 0;
 
-                // caching stream into string for easy parsing around ' ' and '/' characters.
-                std::string lineStr;
-                std::getline(line, lineStr, '\n');                
+                std::string cornerStr;
+                for (uint i = 0; i < 3; ++i) {
+                    lineStream >> cornerStr;
+                    parseCorner(cornerStr, vCount, vtCount, vnCount, posVertIndices[i], dummyTexureIndex, normalVertIndices[i]);
+                }
+
+
+                // I need to parse each 'corner' when I reach a face. I'll have already gotten the line, right?
+                // yes. I have the linestream. NOW, each case handles that line stream differently. The face has to 
+                // parse each face 'corner' or vertex. each corner has 1-3 indices. Always at least one position index. 
+                // Keep track of the count. 
+                //      Is 'count' how many faces have been counted? How many vertex indices?
+                // 
+
+                // OLD APPROACH
+                // caching stream into string for easy parsing around ' ' and '/' characters.            
                 
-                std::string const numbers = "0123456789";
-                uint8_t i = 0; // i'th number in string. 
-                std::size_t numStart = lineStr.find_first_of(numbers.c_str());
-                while (numStart != std::string::npos) {
-                    // covers ' ' and '/' cases. 
-                    // std::size_t firstNotNum = lineStr.find_first_not_of(numbers.c_str(), numStart+1);
+                // std::string const numbers = "0123456789";
+                // uint8_t i = 0; // i'th number in string. 
+                // std::size_t numStart = lineStr.find_first_of(numbers.c_str());
+                // while (numStart != std::string::npos) {
+                //     // covers ' ' and '/' cases. 
+                //     std::size_t firstNotNum = lineStr.find_first_not_of(numbers.c_str(), numStart+1);
 
-                    // int number = std::stoi(lineStr.substr(numStart, firstNotNum - 1)) - 1;
-                    // switch(i) {
-                    //     case 0: // pos a. 1st vert.
-                    //         posVertIndices[0] = number;
-                    //         break;
-                    //     case 1: break; // ignore b
-                    //     case 2: // normal c. 1st vert.
-                    //         normalVertIndices[0] = number;
-                    //         break;
-                    //     case 3: // pos d. 2nd vert.
-                    //         posVertIndices[1] = number;
-                    //         break;
-                    //     case 4: break; // igonre e
-                    //     case 5: // normal f. 2nd vert. 
-                    //         normalVertIndices[1] = number;
-                    //         break;
-                    //     case 6: // pos g. 3rd vert. 
-                    //         posVertIndices[2] = number;
-                    //         break;
-                    //     case 7: break; // h. ignore. 
-                    //     case 8: // normal i. 3rd vert.
-                    //         normalVertIndices[2] = number;
-                    //         break;
-                    //     default:
-                    //         std::cout << "ERROR - More than 8 numbers found in faces line." << std::endl;
-                    //         break;
-                    // }
+                //     int number = std::stoi(lineStr.substr(numStart, firstNotNum - 1)) - 1;
+                //     switch(i) {
+                //         case 0: // pos a. 1st vert.
+                //             posVertIndices[0] = number;
+                //             break;
+                //         case 1: break; // ignore b
+                //         case 2: // normal c. 1st vert.
+                //             normalVertIndices[0] = number;
+                //             break;
+                //         case 3: // pos d. 2nd vert.
+                //             posVertIndices[1] = number;
+                //             break;
+                //         case 4: break; // igonre e
+                //         case 5: // normal f. 2nd vert. 
+                //             normalVertIndices[1] = number;
+                //             break;
+                //         case 6: // pos g. 3rd vert. 
+                //             posVertIndices[2] = number;
+                //             break;
+                //         case 7: break; // h. ignore. 
+                //         case 8: // normal i. 3rd vert.
+                //             normalVertIndices[2] = number;
+                //             break;
+                //         default:
+                //             std::cout << "ERROR - More than 8 numbers found in faces line." << std::endl;
+                //             break;
+                //     }
 
-                    // // setup next loop. start from position after last ' ' or '/'
-                    // numStart = lineStr.find_first_of(numbers.c_str(), firstNotNum + 1);
-                    // ++i;
-                }               
+                //     // setup next loop. start from position after last ' ' or '/'
+                //     numStart = lineStr.find_first_of(numbers.c_str(), firstNotNum + 1);
+                //}
 
                 out.faces.push_back(posVertIndices);
                 out.faces.push_back(normalVertIndices); // how does this work though???
