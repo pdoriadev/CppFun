@@ -50,57 +50,49 @@ int FileImporter::importObjFile(ShapeManager& shapeManager) {
 
     std::string execDir = getExecutableDirectory();
     
-    if (!execDir.empty()) {
+    if (execDir.empty()) return -1;
 
-        // Assuming you want to set the default path to a "data" folder relative to the executable
-        std::string defaultPath = execDir + "/data/obj/*.obj";  // Linux/Mac
-        // std::string defaultPath = execDir + "\\data";        // Windows
+    // Assuming you want to set the default path to a "data" folder relative to the executable
+    std::string defaultPath = execDir + "/data/obj/*.obj";  // Linux/Mac
+    // std::string defaultPath = execDir + "\\data";        // Windows
 
 	// Filter for obj files
 	const char* fileFilters[] = {"*.obj"};
 	
-        // Open file chooser dialog for selecting an obj file	
-        const char* selectedFile = !pendingPath.empty()
-            ? pendingPath.c_str()
-            : tinyfd_openFileDialog(
-            "Select an OBJ file",
-            defaultPath.c_str(),  // Default relative path
-            1,                    // Number of filters
-            fileFilters,          // Filters array
-            "OBJ Files (*.obj)",  // Filter description
-            0                     // Allow multiple selection (0 = no, 1 = yes)
-        );
+    // Open file chooser dialog for selecting an obj file	
+    const char* selectedFile = !pendingPath.empty()
+        ? pendingPath.c_str()
+        : tinyfd_openFileDialog(
+        "Select an OBJ file",
+        defaultPath.c_str(),          // Default relative path
+        1,                          // Number of filters
+        fileFilters,                    // Filters array
+        "OBJ Files (*.obj)",  // Filter description
+        0                       // Allow multiple selection (0 = no, 1 = yes)
+    );
 
 	if (!selectedFile) {
 	    std::cerr << "File selection cancelled or failed." << std::endl;
 	    return 0;
-        }
+    }
+                        
+    std::ifstream file(selectedFile);
+    if (!file.is_open()) {
+        std::cerr << "Unable to open file: " << selectedFile << std::endl;
+        return 0;
+    }
 
-	// Get the shape type from the filename without the extension
-        std::string newShapeType = extractShapeType(selectedFile);
-        
-        newShapeType[0] = std::toupper(newShapeType[0]);
-        for (size_t i = 1; i < newShapeType.length(); ++i) {
-            newShapeType[i] = std::tolower(newShapeType[i]);
-        }
-							
-        std::ifstream file(selectedFile);
-        if (!file.is_open()) {
-            std::cerr << "Unable to open file: " << selectedFile << std::endl;
-            return 0;
-        }
+    // The parse itself lives in ObjParser.cpp so it can be unit tested
+    // without a dialog or a GL context, and so a solution library can
+    // replace it as a whole translation unit. See include/ObjParser.h.
+    ObjMesh mesh;
+    const bool parsed = parseObj(file, mesh);
+    file.close();
 
-        // The parse itself lives in ObjParser.cpp so it can be unit tested
-        // without a dialog or a GL context, and so a solution library can
-        // replace it as a whole translation unit. See include/ObjParser.h.
-        ObjMesh mesh;
-        const bool parsed = parseObj(file, mesh);
-        file.close();
-
-        if (!parsed) {
-            std::cerr << "No usable geometry in: " << selectedFile << std::endl;
-            return 0;
-        }
+    if (!parsed) {
+        std::cerr << "No usable geometry in: " << selectedFile << std::endl;
+        return 0;
+    }
 
 	// Create the new ImportShape and populate it
 	ImportShape* newShape = new ImportShape(0.0f, 0.0f, 0.0f, 1.0f, 1, shapeManager.incrementShapeCounter());
@@ -114,8 +106,16 @@ int FileImporter::importObjFile(ShapeManager& shapeManager) {
 	if (mesh.hasTexCoords && mesh.texCoords.size() == mesh.faces.size() * 3) {
 	    newShape->setTexCoords(mesh.texCoords);
 	}
+
+    // Get the shape type from the filename without the extension
+    std::string newShapeType = extractShapeType(selectedFile);
+    
+    newShapeType[0] = std::toupper(newShapeType[0]);
+    for (size_t i = 1; i < newShapeType.length(); ++i) {
+        newShapeType[i] = std::tolower(newShapeType[i]);
+    }
+
 	newShape->setupShape();
-	
 	// Add importedShape to your list of shapes or render it directly
 	shapeManager.addShape(newShape);
 	shapeManager.setSelectedShapeByLastAdded();  // Select the last shape added
@@ -123,10 +123,7 @@ int FileImporter::importObjFile(ShapeManager& shapeManager) {
 	shapeManager.getSelectedShape()->setSourcePath(selectedFile);
 	pendingPath.clear();
 
-    }
-  
     return 1;
-    
 }
 
 // Function to import a selected obj file
@@ -288,31 +285,34 @@ int FileImporter::importSwpFile(ShapeManager& shapeManager) {
 int FileImporter::importCharacterFile(ShapeManager& shapeManager) {
 
     std::string execDir = getExecutableDirectory();
-    if (!execDir.empty()) {
+    if (execDir.empty()) {
+        std::cerr << "Failed to get executable directory." << std::endl;
+        return -1;
+    }
 
-        // Assuming you want to set the default path to a "data" folder relative to the executable
-        std::string defaultPath = execDir + "/data/characters/*.obj";  // Linux/Mac 
-        // std::string defaultPath = execDir + "\\characters";         // Windows
+    // Assuming you want to set the default path to a "data" folder relative to the executable
+    std::string defaultPath = execDir + "/data/characters/*.obj";  // Linux/Mac 
+    // std::string defaultPath = execDir + "\\characters";         // Windows
 
 	// Filter for obj files
 	const char* fileFilters[] = {"*.obj"};
 	
 	// Open file chooser dialog for selecting an obj file	
-        const char* selectedFile = !pendingPath.empty()
-            ? pendingPath.c_str()
-            : tinyfd_openFileDialog(
-            "Select an OBJ file",
-            defaultPath.c_str(),  // Default relative path
-            1,                    // Number of filters
-            fileFilters,          // Filters array
-            "OBJ Files (*.swp)",  // Filter description
-            0                     // Allow multiple selection (0 = no, 1 = yes)
-        );
+    const char* selectedFile = !pendingPath.empty()
+        ? pendingPath.c_str()
+        : tinyfd_openFileDialog(
+        "Select an OBJ file using a relative path.",
+        defaultPath.c_str(),  // Default relative path
+        1,                    // Number of filters
+        fileFilters,          // Filters array
+        "OBJ Files (*.swp)",  // Filter description
+        0                     // Allow multiple selection (0 = no, 1 = yes)
+    );
 
-        if (!selectedFile) {
-            std::cerr << "File selection canceled or failed." << std::endl;
-            return 0;
-        }
+    if (!selectedFile) {
+        std::cerr << "File selection canceled or failed." << std::endl;
+        return 0;
+    }
 
 	// Get the shape type from the filename without the extension
 	std::string newShapeType = extractShapeType(selectedFile);
@@ -377,115 +377,111 @@ int FileImporter::importCharacterFile(ShapeManager& shapeManager) {
 		return 0;
 	} else {
 
-				std::string lineSkel;
+        std::string lineSkel;
 
-								
-				while(getline(fileSkel, lineSkel)){
-	
-					float x, y, z;
-					int parentIndex;
-					
+                        
+        while(getline(fileSkel, lineSkel)){
 
-					std::istringstream skeletonString;
-					skeletonString.str(lineSkel);
-					skeletonString >> x >> y >> z >> parentIndex;
+            float x, y, z;
+            int parentIndex;
+            
 
-					Joint *joint = new Joint;
-                                       joint->setTransform(glm::translate(glm::mat4(1.0f), glm::vec3(x, y, z)));
+            std::istringstream skeletonString;
+            skeletonString.str(lineSkel);
+            skeletonString >> x >> y >> z >> parentIndex;
 
-					joints.push_back(joint);
-					parentIndices.push_back(parentIndex);
+            Joint *joint = new Joint;
+                                joint->setTransform(glm::translate(glm::mat4(1.0f), glm::vec3(x, y, z)));
 
-				}
+            joints.push_back(joint);
+            parentIndices.push_back(parentIndex);
+
+        }
 
 
-				for (size_t i = 1; i < joints.size(); ++i) {
-					int parentIndex = parentIndices[i];
-					joints[parentIndex]->addChild(joints[i]);
-				}
+        for (size_t i = 1; i < joints.size(); ++i) {
+            int parentIndex = parentIndices[i];
+            joints[parentIndex]->addChild(joints[i]);
+        }
 
-				rootJoint = joints.front();
+        rootJoint = joints.front();
 
-			}
+    }
 
-			fileSkel.close();
+    fileSkel.close();
 
+    
+    std::vector< std::vector< float > > attachments;
+
+    
+    std::string selectedFileAttach = selectedFile;			
+    pos = selectedFileAttach.find_last_of('.');
+
+    // Check if an extension exists; if so, replace it
+    if (pos != std::string::npos) {
+        selectedFileAttach = selectedFileAttach.substr(0, pos) + ".attach";
+    } else {
+        selectedFileAttach = selectedFileAttach + ".attach";				
+    }
+
+    std::ifstream fileAttach(selectedFileAttach);
+    if (!fileAttach.is_open()) {
+        std::cerr << "Unable to open .skel file: " << selectedFileAttach << std::endl;
+        return 0;
+    } else {
+
+        // Read the attachment weights
+
+        std::string lineAttach;
+                        
+        while(getline(fileAttach, lineAttach)){
+
+            std::istringstream attachString;
+
+            float val;
+            attachString.str(lineAttach);
+            std::vector<float> attachList;
+
+            while(attachString >> val){
+
+                attachList.push_back(val);
+
+            }
+
+            attachments.push_back(attachList);
+
+        }
+
+    }
+        
+    // Get the shape type from the filename without the extension
+    
+    ImportCharacter* importCharacter = new ImportCharacter(0.0f, 0.0f, 0.0f, 1.0f, 12, shapeManager.incrementShapeCounter());
+    // Remember where this came from so a saved scene can re-import it.
+
+        importCharacter->setVertices(vertices);
+        importCharacter->setFaces(faces);
+        importCharacter->calculateNormals();
+        importCharacter->setBindVertices(vertices);
+        importCharacter->getSkeletalModel().setRootJoint(rootJoint);
+        importCharacter->getSkeletalModel().setJoints(joints);
+        importCharacter->setAttachments(attachments);
+
+        importCharacter->getSkeletalModel().computeBindWorldToJointTransforms();
+        importCharacter->getSkeletalModel().updateCurrentJointToWorldTransforms();
+
+                    importCharacter->setupMeshBuffer();
+                    importCharacter->setupJointBuffer();
+                    importCharacter->setupBoneBuffer();
+
+        // Add the ImportCharacter object to ShapeManager
+        shapeManager.addShape(importCharacter);	
+
+        // Add ImportCharacter to your list of shapes or render it directly
+
+        shapeManager.setSelectedShapeByLastAdded();  // Select the last shape added
+        shapeManager.getSelectedShape()->setShapeType(newShapeType); 
 			
-			std::vector< std::vector< float > > attachments;
-
-			
-			std::string selectedFileAttach = selectedFile;			
-			pos = selectedFileAttach.find_last_of('.');
-
-			// Check if an extension exists; if so, replace it
-			if (pos != std::string::npos) {
-				selectedFileAttach = selectedFileAttach.substr(0, pos) + ".attach";
-			} else {
-				selectedFileAttach = selectedFileAttach + ".attach";				
-			}
-
-			std::ifstream fileAttach(selectedFileAttach);
-			if (!fileAttach.is_open()) {
-				std::cerr << "Unable to open .skel file: " << selectedFileAttach << std::endl;
-				return 0;
-			} else {
-
-				// Read the attachment weights
-
-				std::string lineAttach;
-								
-				while(getline(fileAttach, lineAttach)){
-
-					std::istringstream attachString;
-
-					float val;
-					attachString.str(lineAttach);
-					std::vector<float> attachList;
-
-					while(attachString >> val){
-
-						attachList.push_back(val);
-
-					}
-
-					attachments.push_back(attachList);
-
-				}
-
-			}
-			
-			// Get the shape type from the filename without the extension
-			
-			ImportCharacter* importCharacter = new ImportCharacter(0.0f, 0.0f, 0.0f, 1.0f, 12, shapeManager.incrementShapeCounter());
-        // Remember where this came from so a saved scene can re-import it.
-
-			importCharacter->setVertices(vertices);
-			importCharacter->setFaces(faces);
-			importCharacter->calculateNormals();
-			importCharacter->setBindVertices(vertices);
-			importCharacter->getSkeletalModel().setRootJoint(rootJoint);
-			importCharacter->getSkeletalModel().setJoints(joints);
-			importCharacter->setAttachments(attachments);
-
-			importCharacter->getSkeletalModel().computeBindWorldToJointTransforms();
-			importCharacter->getSkeletalModel().updateCurrentJointToWorldTransforms();
-
-                        importCharacter->setupMeshBuffer();
-                        importCharacter->setupJointBuffer();
-                        importCharacter->setupBoneBuffer();
-
-			// Add the ImportCharacter object to ShapeManager
-			shapeManager.addShape(importCharacter);	
-
-			// Add ImportCharacter to your list of shapes or render it directly
-
-			shapeManager.setSelectedShapeByLastAdded();  // Select the last shape added
-			shapeManager.getSelectedShape()->setShapeType(newShapeType); 
-			
-
-
-		}
-	
 
 	return 1;
 
