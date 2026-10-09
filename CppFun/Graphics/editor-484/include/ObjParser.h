@@ -17,7 +17,7 @@ enum class MeshDataType : int {
     COUNT
 };
 
-MeshDataType const convertTypeStringToEnum(std::string type);
+MeshDataType const convertMeshDataTypeStringToEnum(std::string type);
 
 // =============================================================================
 // Wavefront OBJ parsing

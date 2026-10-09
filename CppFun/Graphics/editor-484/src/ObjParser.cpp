@@ -5,6 +5,7 @@
 
 #include <cstdlib>
 #include <sstream>
+#include <iostream>
 
 namespace {
 
@@ -49,16 +50,17 @@ void parseCorner(const std::string& field,
 
 } // namespace
 
-MeshDataType const convertTypeStringToEnum(std::string const type) {
-    int const INT_TYPES[static_cast<size_t>(MeshDataType::COUNT)] = {
+MeshDataType const convertMeshDataTypeStringToEnum(std::string const type) {
+    int static const INT_TYPES[static_cast<size_t>(MeshDataType::COUNT)] = {
         std::stoi("v"),     // POSITION_INT_STRING 
         std::stoi("vn"),    // NORMAL_INT_STRING 
         std::stoi("vt"),    // TEXTURE_INT_STRING
         std::stoi("f")      // FACE_INT_STRING 
     };
     
+    int const TYPE_AS_INT = std::stoi(type);
     for (int i = 0; i < (uint)MeshDataType::COUNT; ++i) {
-        if (std::stoi(type) == INT_TYPES[i]) { return (MeshDataType)i; }
+        if (TYPE_AS_INT == INT_TYPES[i]) { return (MeshDataType)i; }
     }
 
     return MeshDataType::INVALID;
@@ -72,9 +74,9 @@ bool parseObj(std::istream& in, ObjMesh& out) {
     // Resolve each vt index to a coordinate here and push one per corner,
     // so faces keep their stride of 2 (vertex, normal).
     
-
-
     // Ignoring vt for now (assuming that's texture data)
+
+    std::cout << "Parsing obj file" << std::endl;
 
     uint16_t MAX_BUFFER_SIZE = 1024;
     char lineBuffer[MAX_BUFFER_SIZE];
@@ -82,10 +84,11 @@ bool parseObj(std::istream& in, ObjMesh& out) {
         std::stringstream line(lineBuffer);
         std::string dataTypeStr;
         line >> dataTypeStr;
-        MeshDataType const dataType = convertTypeStringToEnum(dataTypeStr);
+        MeshDataType const MESH_DATA_TYPE = convertMeshDataTypeStringToEnum(dataTypeStr);
 
-        switch(dataType) {
-            {
+        // assign data
+        switch(MESH_DATA_TYPE) {
+            /* vec3 cases */ {
             glm::vec3 vec3Data;
             case MeshDataType::POSITION:
                 line >> vec3Data[0] >> vec3Data[1] >> vec3Data[2];
@@ -98,27 +101,68 @@ bool parseObj(std::istream& in, ObjMesh& out) {
             case MeshDataType::TEXTURE:
                 // not implemented yet. move to next line.
                 continue;
-            }
-            {
-            case MeshDataType::FACE:
-                for (int i = 0; i < 2; ++i) {
-                    std::vector<int> faceDataIndex {0, 0, 0};
-                    std::string indexStr;
-                    line.getline(indexStr, '/');
-                    // I need to extract the ints from the faces string. I want to ignore
-                        // or throw away the '/' characters. I don't think the >> skips those. 
-                    
+            } // End of vec3 cases
+            case MeshDataType::FACE: {
+                // vectors to cache in faces vector<vector<int>>
+                std::vector<int> posVertIndices {0, 0, 0};
+                std::vector<int> normalVertIndices {0, 0, 0};
 
-                }
+                // caching stream into string for easy parsing around ' ' and '/' characters.
+                std::string lineStr;
+                std::getline(line, lineStr, '\n');                
+                
+                std::string const numbers = "0123456789";
+                uint8_t i = 0; // i'th number in string. 
+                std::size_t numStart = lineStr.find_first_of(numbers.c_str());
+                while (numStart != std::string::npos) {
+                    // covers ' ' and '/' cases. 
+                    // std::size_t firstNotNum = lineStr.find_first_not_of(numbers.c_str(), numStart+1);
+
+                    // int number = std::stoi(lineStr.substr(numStart, firstNotNum - 1)) - 1;
+                    // switch(i) {
+                    //     case 0: // pos a. 1st vert.
+                    //         posVertIndices[0] = number;
+                    //         break;
+                    //     case 1: break; // ignore b
+                    //     case 2: // normal c. 1st vert.
+                    //         normalVertIndices[0] = number;
+                    //         break;
+                    //     case 3: // pos d. 2nd vert.
+                    //         posVertIndices[1] = number;
+                    //         break;
+                    //     case 4: break; // igonre e
+                    //     case 5: // normal f. 2nd vert. 
+                    //         normalVertIndices[1] = number;
+                    //         break;
+                    //     case 6: // pos g. 3rd vert. 
+                    //         posVertIndices[2] = number;
+                    //         break;
+                    //     case 7: break; // h. ignore. 
+                    //     case 8: // normal i. 3rd vert.
+                    //         normalVertIndices[2] = number;
+                    //         break;
+                    //     default:
+                    //         std::cout << "ERROR - More than 8 numbers found in faces line." << std::endl;
+                    //         break;
+                    // }
+
+                    // // setup next loop. start from position after last ' ' or '/'
+                    // numStart = lineStr.find_first_of(numbers.c_str(), firstNotNum + 1);
+                    // ++i;
+                }               
+
+                out.faces.push_back(posVertIndices);
+                out.faces.push_back(normalVertIndices); // how does this work though???
                 break;
-            }
+            } // End of FACE case.
             default:
                 // invalid type. move to next line.
+                std::cout << "ERROR - INVALID MESH DATA: " << (int)MESH_DATA_TYPE << std::endl;
                 continue;
-        }
-
+        }     
     }
     
-    out = ObjMesh();
-    return false;
+    std::cout << "finished parsing obj file" << std::endl;
+
+    return true;
 }
