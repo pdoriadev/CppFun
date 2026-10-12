@@ -506,6 +506,34 @@ functions that operate on arrays of polymorphic component types.
 
 */
 
+class Entity {
+public:
+    uint const idName;
+    Entity(int _idName) : idName(_idName) { }
+};
+
+// EntityManager - generates unused entity list. 
+class EntityManager {
+public:
+    std::vector<Entity> queue;
+    EntityManager(uint const MAX_SIZE = 10000) {
+        queue.reserve(MAX_SIZE);
+        for (uint i = 0; i < MAX_SIZE; ++i) {
+            queue.emplace_back(i);
+        }
+    }
+
+    // destructor needs to destroy all components that rely on the entity?
+
+    // create entity
+
+
+    // destroy entity
+
+
+
+};
+
 struct MeshData {
     std::vector<glm::vec3> positions;
     std::vector<glm::vec3> normals;
@@ -573,27 +601,22 @@ std::vector<MeshData> meshes;
 
 struct ComponentArrayReference {
     // pointer to components array
-    void * array = NULL;
-    std::size_t elementCount = 0; 
+    std::vector<void*> &componentsArray;
     ComponentType const type;
     
-    ComponentArrayReference(void * _array, std::size_t _count, ComponentType const _type) :  type(_type) {
-        array = _array;
-        elementCount = _count;
-    }
+    ComponentArrayReference(std::vector<void*> &_componentsArray, ComponentType const _type)
+        : componentsArray(_componentsArray), type(_type) { 
+            validate(); 
+        }
 
     bool validate() {
         bool success = true;
         std::string componentStr = getComponentTypeString(type);
         std::string errorLogMessage = "Failed to validate component array of type " + getComponentTypeString(type);
-        if (array == NULL) {
-            success = false;
-            errorLogMessage += "\nArray Pointer reference was NULL";
-        }
         
         if (getComponentTypeSize(type) < 0) {
             success = false;
-            errorLogMessage += "\nInvalid component type";
+            errorLogMessage += "\nInvalid component type.";
         }
 
         if (success == false) {
@@ -606,11 +629,12 @@ struct ComponentArrayReference {
     }
 };
 
-// this function does not allocate more room in the components array. 
-//
-bool addComponent(ComponentArrayReference arrRef) {
-    // inserting component with a raw c array sounds like a massssssssive pain. 
 
+bool addComponent(ComponentArrayReference arrRef, Entity entity) {
+    // inserting component with a raw c array sounds like a massssssssive pain. 
+    std::size_t const size = getComponentTypeSize(arrRef.type);
+
+    
 
     return true;
 }
