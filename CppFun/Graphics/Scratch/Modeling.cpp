@@ -1,5 +1,6 @@
 #include "Modeling.h"
 #include "Logging.h" // NOT MULTI-THREAD SAFE
+#include <glm/ext/matrix_float2x2.hpp>
 
 #pragma region VECTOR3
 
@@ -443,3 +444,208 @@ bool constructShapeBuffer(shapeConstructionParams shapeParams,
 
 #pragma endregion =====================================================================================================================
  
+
+
+
+/*
+Always include an element buffer?
+
+
+
+mesh factory functions
+- constructs mesh instances based on pre-defined mesh type algorithms and input data (i.e. scale, rotation). 
+mesh instance component. 
+- instanceID
+- Only data for a VAO, VBO, EBO. (i.e. pos, normal, faces. tex coords. etc.)
+    - data like pos and normals are stored in parallel arrays. 
+- shared ptr. Referenced by mesh renderer components.
+    - can be single instance. will stick with shared ptr approach for now.
+transform component (POD)
+- local pos, quaternion local rotation, local scale
+material component???
+- references shader code
+- material data (textures, color, etc.)
+
+array of all entities
+arrays of entity components. Each component has a handle to its entity. 
+
+entity. an index id. Used by the system to index into the entity's components. 
+    **Doesn't work when you have hundreds or thousands of components. what then??**
+
+entity manager
+- generates and hands out unused entity IDs. Destroys passed in IDs, puts them back in the unused ID collection. 
+- manages signatures array. each signature is a bitfield where each bit corresponds to a component. 
+
+component. component is data (i.e. transform data)
+
+system. system operates on data (i.e. transform.move())
+    - tracks what entities have components required for the system. ????
+    - system updates entity data as needed. 
+
+-----
+
+my use-case
+
+component insertion and deletion functions need to know. Just for functions that work on different types 
+of component arrays.
+- size of type (parallel arrays of enums and their sizes)
+- size of array (count * typeSize)
+- index for operation (i.e. insert, delete, etc.)
+- entity index if needed.
+
+polymorphism without templates or interfaces. 
+- void* for each type. adaptor functions for as needed. 
+- sub-type encapsulates the super-type.
+
+functions that operate on arrays of polymorphic component types. 
+- void* to array
+- size_t of the component type
+- enum for type name. 
+- indices for operation
+- other types. 
+
+*/
+
+struct MeshData {
+    std::vector<glm::vec3> positions;
+    std::vector<glm::vec3> normals;
+    std::vector<std::vector<int>> faceIndices;
+};
+
+struct TransformData {
+    glm::vec3 position;
+    glm::mat2 rotation;
+    glm::vec3 scale;
+};
+
+struct MeshRenderer {
+    MeshData* meshData; 
+};
+
+enum class ComponentType : int {
+    ComponentType = -100,
+    INVALID = -1,
+    TRANSFORM = 0,
+    MESH = 1
+};
+
+std::string getComponentTypeString(ComponentType type) {
+    switch(type) {
+        case ComponentType::TRANSFORM:      return "TRANSFORM";
+        case ComponentType::MESH:           return "MESH_RENDERER";
+        case ComponentType::INVALID:        return "INVALID";
+        case ComponentType::ComponentType:  return "ComponentType";
+        default:
+            Logging::consoleLog(Logging::LogType::ASSERT, "Unknown Component type passed.");
+            return "Unknown Type";
+    }
+}
+
+// This system is only used to manipulate the components array. 
+// This multi-enum approach to extract should not be used elsewhere. 
+// returns -1 when an invalid type is passed into the function. 
+int const getComponentTypeSize(ComponentType type) {
+    switch(type) {
+        case ComponentType::TRANSFORM:      return sizeof(TransformData);
+        case ComponentType::MESH:           return sizeof(MeshRenderer);
+        default:
+            Logging::consoleLog(Logging::LogType::ASSERT, getComponentTypeString(type) + " does not have a component size implementation.");
+            return -1;
+    }
+}
+// populate at start of runtime???? bleh. 
+// once you have a component's index, you can get all the component's data in any other array. 
+
+std::vector<ComponentType> componentTypes;
+std::vector<std::size_t> componentSizes;
+std::vector<std::string_view> componentNames;
+
+// array of component types. 
+// parallel arrays for each 
+
+ComponentType const getComponentType(ComponentType type);
+
+// what type does the component array hold?
+
+std::vector<TransformData> transforms;
+std::vector<MeshData> meshes;
+
+
+struct ComponentArrayReference {
+    // pointer to components array
+    void * array = NULL;
+    std::size_t elementCount = 0; 
+    ComponentType const type;
+    
+    ComponentArrayReference(void * _array, std::size_t _count, ComponentType const _type) :  type(_type) {
+        array = _array;
+        elementCount = _count;
+    }
+
+    bool validate() {
+        bool success = true;
+        std::string componentStr = getComponentTypeString(type);
+        std::string errorLogMessage = "Failed to validate component array of type " + getComponentTypeString(type);
+        if (array == NULL) {
+            success = false;
+            errorLogMessage += "\nArray Pointer reference was NULL";
+        }
+        
+        if (getComponentTypeSize(type) < 0) {
+            success = false;
+            errorLogMessage += "\nInvalid component type";
+        }
+
+        if (success == false) {
+            Logging::consoleLog(Logging::LogType::ASSERT, errorLogMessage);
+            return false;
+        }
+
+        Logging::consoleLog(Logging::LogType::LOG, "Successfully validated component array reference of type " + componentStr);
+        return true;
+    }
+};
+
+// this function does not allocate more room in the components array. 
+//
+bool addComponent(ComponentArrayReference arrRef) {
+    // inserting component with a raw c array sounds like a massssssssive pain. 
+
+
+    return true;
+}
+
+
+/*
+
+------
+
+what is a type?
+A type is a contract. 
+explicitly defines a label, a byte size, and rules for that type (i.e. int vs. uint)
+
+struct type { data };
+returnType func funcForType(func that initializes, operates on, reads, or destroys type);
+
+structs bundle data together for specific use cases. 
+THIS IS BAD. NO GOOD. BAD BAD. HAPPY NO. NUH UH. 
+
+
+
+
+------
+parallel arrays for all components. each array equals the entity count total. 
+index into each arrays with the entity id. Check if it has the components for a given system?
+
+construction algorithm. function pointer?
+always construct triangles. 
+
+
+----
+
+
+
+
+
+
+*/
