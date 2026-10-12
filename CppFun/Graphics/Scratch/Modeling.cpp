@@ -599,6 +599,63 @@ std::vector<TransformData> transforms;
 std::vector<MeshData> meshes;
 
 
+/* Implementing dynamic void* arrays for components. 
+-- Why do this --
+templates are annoying. increase compilation time. 
+    --> but you haven't made a template before? How annoying are they?
+I'm trying to make this section hyper-performant. interfaces will introduce vp's with indirection
+    --> vp's and the vtable are not true bottlenecks. You don't know enough to know. 
+        They will have some indirection. but you don't know. 
+I want to understand how to use memory like a sports car. Feels good.
+
+I want to understand how to do this for possible embedded direction. 
+
+I want to intimately understand how dynamic arrays function. Will give me an understanding for memory and how it is used in other domains. 
+
+
+void* is a way to store a sequence of any type in a contiguous block. 
+
+------
+void* does not actually point to a memory location. Its bytes store data for a given type. 
+
+
+-- walk through usage --
+construct array object. Its type and type size must be known at construction. 
+
+
+
+
+
+-- allocation --
+If reaches max size on an expanding operation, 
+    - allocate new place in memory. 
+    - copy pointers over
+    - 
+- al
+
+-- functions --
+sizeInBytes();
+type();
+elementSize();
+reserve(); - mallocs space
+
+
+
+-- variables --
+std::size_t const elementSize
+enum const type;
+size_t length;
+
+
+
+
+
+
+
+
+*/
+
+
 struct ComponentArrayReference {
     // pointer to components array
     std::vector<void*> &componentsArray;
