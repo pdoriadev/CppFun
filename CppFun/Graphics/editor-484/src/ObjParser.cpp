@@ -16,8 +16,8 @@ namespace {
 // was not present. OBJ counts from 1, and OBJ also allows NEGATIVE indices
 // meaning "counting back from the end of the list so far", which is why the
 // caller passes the current counts in.
-void parseCorner(const std::string& field,
-                 size_t vCount, size_t vtCount, size_t vnCount,
+void parseCorner(std::string const& field,
+                 size_t const vCount, size_t const vtCount, size_t const vnCount,
                  int& vi, int& ti, int& ni) {
     vi = ti = ni = -1;
 
@@ -34,7 +34,7 @@ void parseCorner(const std::string& field,
                                                     : field.substr(s2 + 1);
 
     struct Resolve {
-        static int one(const std::string& text, size_t count) {
+        static int one(const std::string& text, size_t const count) {
             if (text.empty()) return -1;
             const long raw = std::atol(text.c_str());
             if (raw > 0)  return static_cast<int>(raw - 1);
@@ -86,7 +86,7 @@ bool parseObj(std::istream& in, ObjMesh& out) {
         lineStream >> dataTypeStr;
         MeshDataType const MESH_DATA_TYPE = convertMeshDataTypeStringToEnum(dataTypeStr);
 
-        size_t vCount = 0;
+        size_t vpCount = 0;
         size_t vtCount = 0;
         size_t vnCount = 0;
 
@@ -97,7 +97,7 @@ bool parseObj(std::istream& in, ObjMesh& out) {
             case MeshDataType::POSITION:
                 lineStream >> vec3Data[0] >> vec3Data[1] >> vec3Data[2];
                 out.vertices.push_back(vec3Data);
-                ++vCount;
+                ++vpCount;
                 break;
             case MeshDataType::NORMAL:
                 lineStream >> vec3Data[0] >> vec3Data[1] >> vec3Data[2];
@@ -117,9 +117,10 @@ bool parseObj(std::istream& in, ObjMesh& out) {
                 std::string cornerStr;
                 for (uint i = 0; i < 3; ++i) {
                     lineStream >> cornerStr;
-                    parseCorner(cornerStr, vCount, vtCount, vnCount, posVertIndices[i], dummyTexureIndex, normalVertIndices[i]);
+                    parseCorner(cornerStr, vpCount, vtCount, vnCount, posVertIndices[i], dummyTexureIndex, normalVertIndices[i]);
                 }
-
+                
+                
 
                 // I need to parse each 'corner' when I reach a face. I'll have already gotten the line, right?
                 // yes. I have the linestream. NOW, each case handles that line stream differently. The face has to 
