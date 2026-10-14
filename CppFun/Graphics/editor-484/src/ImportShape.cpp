@@ -1,4 +1,4 @@
-#include "ImportShape.h"
+#include "../include/ImportShape.h"
 
 ImportShape::ImportShape(float x, float y, float z, float scale, int colorIndex, int id)
 	: Shape(x, y, z, scale, colorIndex, id), VAO(0), VBO(0), EBO(0) {
@@ -22,10 +22,15 @@ void ImportShape::setupShape() {
 
     // Populate vertex and normal data
     for (size_t i = 0; i < faces.size(); ++i) {
+        // each face element is a vector<int>. Each vector<int> contains 
         for (int j = 0; j < 3; ++j) { // Each face has 3 vertices
-            int vertexIndex = faces[i][j * 2];  // Access vertex index
-            int normalIndex = faces[i][j * 2 + 1]; // Access normal index
+            //std::cout << "Caching vertex index from faces" << std::endl;
+            int vertexIndex = faces[i].at(j);  // Access pos index
+            int normalIndex = faces[i].at(j + 3); // Access normal index
             
+            if (vertices.size() == 0) { std::cerr << "ERROR. NO VERTEX DATA" << std::endl; }
+            if (normals.size() == 0) { std::cerr << "ERROR. NO NORMALS DATA" << std::endl; }
+
             const glm::vec3& position = vertices[vertexIndex];
             const glm::vec3& normal = normals[normalIndex];
 
@@ -36,11 +41,13 @@ void ImportShape::setupShape() {
             // else, including in the vertex shader that reads it. It was
             // harmless only because FragColor is read solely when
             // useLighting == 0, and imported shapes always draw lit.
+            // std::cout << "Insert Vertex Data" << std::endl;
             vertexData.insert(vertexData.end(), {position.x, position.y, position.z});
             vertexData.insert(vertexData.end(), {normal.x, normal.y, normal.z});
             vertexData.insert(vertexData.end(), {color.r, color.g, color.b});
         }
 
+        // std::cout << "Insert index data" << std::endl; 
         // Add indices for this triangle
         indexData.insert(indexData.end(), {static_cast<unsigned int>(i * 3), 
                                            static_cast<unsigned int>(i * 3 + 1), 
@@ -72,7 +79,7 @@ void ImportShape::setupShape() {
 
     // UVs, if the OBJ carried vt lines. They arrive one per triangle corner,
     // in the same order this loop emitted vertices, so no reindexing is needed.
-    uploadTexCoords();
+    //uploadTexCoords();
 
     glBindVertexArray(0); // Unbind VAO
 }

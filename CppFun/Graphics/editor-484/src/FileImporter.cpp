@@ -94,27 +94,36 @@ int FileImporter::importObjFile(ShapeManager& shapeManager) {
         return 0;
     }
 
+    std::cout << "Obj File parsed. Importing shape." << std::endl;
+
 	// Create the new ImportShape and populate it
 	ImportShape* newShape = new ImportShape(0.0f, 0.0f, 0.0f, 1.0f, 1, shapeManager.incrementShapeCounter());
-	newShape->setVertices(mesh.vertices);
+	std::cout << "vertices" << std::endl;
+    newShape->setVertices(mesh.vertices);
+	std::cout << "normals" << std::endl;
 	newShape->setNormals(mesh.normals);
+	std::cout << "faces" << std::endl;
 	newShape->setFaces(mesh.faces);
 	// Only attach UVs when the file actually carried vt lines. A mesh with no
 	// parameterisation must leave texCoords empty, so attribute 3 stays
 	// disabled and hasTexture stays false -- untextured rendering is then
 	// bit-for-bit what it was before texturing existed.
 	if (mesh.hasTexCoords && mesh.texCoords.size() == mesh.faces.size() * 3) {
-	    newShape->setTexCoords(mesh.texCoords);
+        std::cout << "texCoords" << std::endl;
+        newShape->setTexCoords(mesh.texCoords);
 	}
-
+    
     // Get the shape type from the filename without the extension
+    std::cout << "extract shape type" << std::endl;
     std::string newShapeType = extractShapeType(selectedFile);
     
+    std::cout << "setting shape type string" << std::endl;
     newShapeType[0] = std::toupper(newShapeType[0]);
     for (size_t i = 1; i < newShapeType.length(); ++i) {
         newShapeType[i] = std::tolower(newShapeType[i]);
     }
-
+    
+    std::cout << "setting up shape" << std::endl;
 	newShape->setupShape();
 	// Add importedShape to your list of shapes or render it directly
 	shapeManager.addShape(newShape);
@@ -122,7 +131,8 @@ int FileImporter::importObjFile(ShapeManager& shapeManager) {
 	shapeManager.getSelectedShape()->setShapeType(newShapeType);
 	shapeManager.getSelectedShape()->setSourcePath(selectedFile);
 	pendingPath.clear();
-
+    
+    std::cout << "finished shape import" << std::endl;
     return 1;
 }
 

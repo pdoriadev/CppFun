@@ -110,23 +110,21 @@ bool parseObj(std::istream& in, ObjMesh& out) {
                 continue;
             case ObjMeshData::MeshDataType::FACE: {
                 // vectors to cache in faces vector<vector<int>>
-                std::vector<int> posVertIndices {0, 0, 0};
-                std::vector<int> normalVertIndices {0, 0, 0};
+                std::vector<int> dataIndices {0, 0, 0, 0, 0, 0};
                 int dummyTexureIndex = 0;
-
                 std::string cornerStr;
+                
                 for (uint i = 0; i < 3; ++i) {
                     lineStream >> cornerStr;
-                    parseCorner(cornerStr, vpCount, vtCount, vnCount, posVertIndices[i], dummyTexureIndex, normalVertIndices[i]);
+                    parseCorner(cornerStr, vpCount, vtCount, vnCount, dataIndices[i], dummyTexureIndex, dataIndices[i+3]);
                 }
 
-                out.faces.push_back(posVertIndices);
-                out.faces.push_back(normalVertIndices); // how does this work though???
+                out.faces.push_back(dataIndices);
                 break;
             } // End of FACE case.
             default:
                 // invalid type. move to next line.
-                std::cout << "ERROR - INVALID MESH DATA. String: " << dataTypeStr << ". Enum: " << (int)MESH_DATA_TYPE << std::endl;
+                // std::cout << "ERROR - INVALID MESH DATA. String: " << dataTypeStr << ". Enum: " << (int)MESH_DATA_TYPE << std::endl;
                 continue;
         }     
     }

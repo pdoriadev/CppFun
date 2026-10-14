@@ -36,10 +36,6 @@ namespace ObjMeshData {
     MeshDataType const convertStringTypeToEnumType(std::string const strType);
 }
 
-
-
-
-
 // =============================================================================
 // Wavefront OBJ parsing
 // =============================================================================
