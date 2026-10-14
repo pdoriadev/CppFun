@@ -3,6 +3,7 @@
 
 #include "../include/ObjParser.h"
 
+#include <cstddef>
 #include <cstdlib>
 #include <sstream>
 #include <iostream>
@@ -50,20 +51,19 @@ void parseCorner(std::string const& field,
 
 } // namespace
 
-MeshDataType const convertMeshDataTypeStringToEnum(std::string const type) {
-    int static const INT_TYPES[static_cast<size_t>(MeshDataType::COUNT)] = {
-        std::stoi("v"),     // POSITION_INT_STRING 
-        std::stoi("vn"),    // NORMAL_INT_STRING 
-        std::stoi("vt"),    // TEXTURE_INT_STRING
-        std::stoi("f")      // FACE_INT_STRING 
-    };
-    
-    int const TYPE_AS_INT = std::stoi(type);
-    for (int i = 0; i < (uint)MeshDataType::COUNT; ++i) {
-        if (TYPE_AS_INT == INT_TYPES[i]) { return (MeshDataType)i; }
+namespace ObjMeshData {
+    int const getStringTypeIndex(std::string const STR_TYPE) {
+        for (std::size_t i = 0; i < stringTypes.size(); ++i) {
+            if (STR_TYPE == stringTypes[i]) return i;
+        }
+        return -1;
     }
 
-    return MeshDataType::INVALID;
+    MeshDataType const convertStringTypeToEnumType(std::string const STR_TYPE) {
+        int const index = getStringTypeIndex(STR_TYPE);
+        if (index < 0) return MeshDataType::INVALID;
+        return meshDataTypes[index];     
+    }
 }
 
 bool parseObj(std::istream& in, ObjMesh& out) {
@@ -78,13 +78,13 @@ bool parseObj(std::istream& in, ObjMesh& out) {
 
     std::cout << "Parsing obj file" << std::endl;
 
-    uint16_t MAX_BUFFER_SIZE = 1024;
+    uint16_t MAX_BUFFER_SIZE = 256;
     char lineBuffer[MAX_BUFFER_SIZE];
     while(in.getline(lineBuffer, MAX_BUFFER_SIZE)) {
         std::stringstream lineStream(lineBuffer);
         std::string dataTypeStr;
         lineStream >> dataTypeStr;
-        MeshDataType const MESH_DATA_TYPE = convertMeshDataTypeStringToEnum(dataTypeStr);
+        ObjMeshData::MeshDataType const MESH_DATA_TYPE = ObjMeshData::convertStringTypeToEnumType(dataTypeStr);
 
         size_t vpCount = 0;
         size_t vtCount = 0;
@@ -94,21 +94,21 @@ bool parseObj(std::istream& in, ObjMesh& out) {
         switch(MESH_DATA_TYPE) {
             /* vec3 cases */ {
             glm::vec3 vec3Data;
-            case MeshDataType::POSITION:
+            case ObjMeshData::MeshDataType::POSITION:
                 lineStream >> vec3Data[0] >> vec3Data[1] >> vec3Data[2];
                 out.vertices.push_back(vec3Data);
                 ++vpCount;
                 break;
-            case MeshDataType::NORMAL:
+            case ObjMeshData::MeshDataType::NORMAL:
                 lineStream >> vec3Data[0] >> vec3Data[1] >> vec3Data[2];
                 out.normals.push_back(vec3Data);
                 ++vnCount;
                 break;
-            case MeshDataType::TEXTURE:
+            } // End of vec3 cases
+            case ObjMeshData::MeshDataType::TEXTURE:
                 // not implemented yet. move to next line.
                 continue;
-            } // End of vec3 cases
-            case MeshDataType::FACE: {
+            case ObjMeshData::MeshDataType::FACE: {
                 // vectors to cache in faces vector<vector<int>>
                 std::vector<int> posVertIndices {0, 0, 0};
                 std::vector<int> normalVertIndices {0, 0, 0};
@@ -119,57 +119,6 @@ bool parseObj(std::istream& in, ObjMesh& out) {
                     lineStream >> cornerStr;
                     parseCorner(cornerStr, vpCount, vtCount, vnCount, posVertIndices[i], dummyTexureIndex, normalVertIndices[i]);
                 }
-                
-                
-
-                // I need to parse each 'corner' when I reach a face. I'll have already gotten the line, right?
-                // yes. I have the linestream. NOW, each case handles that line stream differently. The face has to 
-                // parse each face 'corner' or vertex. each corner has 1-3 indices. Always at least one position index. 
-                // Keep track of the count. 
-                //      Is 'count' how many faces have been counted? How many vertex indices?
-                // 
-
-                // OLD APPROACH
-                // caching stream into string for easy parsing around ' ' and '/' characters.            
-                
-                // std::string const numbers = "0123456789";
-                // uint8_t i = 0; // i'th number in string. 
-                // std::size_t numStart = lineStr.find_first_of(numbers.c_str());
-                // while (numStart != std::string::npos) {
-                //     // covers ' ' and '/' cases. 
-                //     std::size_t firstNotNum = lineStr.find_first_not_of(numbers.c_str(), numStart+1);
-
-                //     int number = std::stoi(lineStr.substr(numStart, firstNotNum - 1)) - 1;
-                //     switch(i) {
-                //         case 0: // pos a. 1st vert.
-                //             posVertIndices[0] = number;
-                //             break;
-                //         case 1: break; // ignore b
-                //         case 2: // normal c. 1st vert.
-                //             normalVertIndices[0] = number;
-                //             break;
-                //         case 3: // pos d. 2nd vert.
-                //             posVertIndices[1] = number;
-                //             break;
-                //         case 4: break; // igonre e
-                //         case 5: // normal f. 2nd vert. 
-                //             normalVertIndices[1] = number;
-                //             break;
-                //         case 6: // pos g. 3rd vert. 
-                //             posVertIndices[2] = number;
-                //             break;
-                //         case 7: break; // h. ignore. 
-                //         case 8: // normal i. 3rd vert.
-                //             normalVertIndices[2] = number;
-                //             break;
-                //         default:
-                //             std::cout << "ERROR - More than 8 numbers found in faces line." << std::endl;
-                //             break;
-                //     }
-
-                //     // setup next loop. start from position after last ' ' or '/'
-                //     numStart = lineStr.find_first_of(numbers.c_str(), firstNotNum + 1);
-                //}
 
                 out.faces.push_back(posVertIndices);
                 out.faces.push_back(normalVertIndices); // how does this work though???
@@ -177,7 +126,7 @@ bool parseObj(std::istream& in, ObjMesh& out) {
             } // End of FACE case.
             default:
                 // invalid type. move to next line.
-                std::cout << "ERROR - INVALID MESH DATA: " << (int)MESH_DATA_TYPE << std::endl;
+                std::cout << "ERROR - INVALID MESH DATA. String: " << dataTypeStr << ". Enum: " << (int)MESH_DATA_TYPE << std::endl;
                 continue;
         }     
     }

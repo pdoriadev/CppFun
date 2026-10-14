@@ -7,17 +7,38 @@
 
 #include <glm/glm.hpp>
 
-enum class MeshDataType : int {
-    MeshDataType = -100,
-    INVALID = -1,
-    POSITION = 0,
-    NORMAL,
-    TEXTURE,
-    FACE,
-    COUNT
-};
+namespace ObjMeshData {
+    enum class MeshDataType : int {
+        MeshDataType = -100,
+        INVALID = -1,
+        POSITION = 0,
+        NORMAL,
+        TEXTURE,
+        FACE,
+        COUNT,
+    };
 
-MeshDataType const convertMeshDataTypeStringToEnum(std::string type);
+    // parallel array map
+    std::vector<std::string> const stringTypes = {
+        "v", 
+        "vn", 
+        "vt", 
+        "f"
+    };
+    std::vector<MeshDataType> const meshDataTypes { 
+        MeshDataType::POSITION, 
+        MeshDataType::NORMAL, 
+        MeshDataType::TEXTURE, 
+        MeshDataType::FACE
+    };
+
+    int const getStringTypeIndex(std::string const type);
+    MeshDataType const convertStringTypeToEnumType(std::string const strType);
+}
+
+
+
+
 
 // =============================================================================
 // Wavefront OBJ parsing
