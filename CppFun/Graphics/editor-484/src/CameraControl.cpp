@@ -34,6 +34,8 @@
 #include "../include/Camera.h"
 
 #include <glm/gtc/constants.hpp>
+#include <iostream>
+
 
 // -----------------------------------------------------------------------------
 // orbit -- right-drag. Swing the eye around the target.
@@ -75,6 +77,7 @@ void Camera::orbit(float dTheta, float dPhi) {
     return;
 }
 
+
 // -----------------------------------------------------------------------------
 // pan -- left-drag. Slide the target (and with it the eye) across the screen.
 // -----------------------------------------------------------------------------
@@ -108,12 +111,17 @@ void Camera::pan(float dxScreen, float dyScreen) {
     if (glm::dot(forward, forward) < 0.0001f) { return; }
 
     glm::vec3 right = glm::cross(forward, up);
+    glm::vec3 camRelativeUp = glm::cross(right, forward);
    
     // compute new target position.
     // The camera's new position will be derived from target in updatePosition.
     target += right * -dxScreen;
-    target += up * -dyScreen;
+    target += camRelativeUp * -dyScreen;
 
+    std::cout << "up: " << up.x << ", " << up.y << ", " << up.z 
+        << "forward: " << forward.x << ", " << forward.y << ", " << forward.z 
+        << ". -dyscreen: " << -dyScreen << std::endl;   
+  
     updatePosition();
 
     return;
