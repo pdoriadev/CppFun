@@ -116,12 +116,12 @@ void Camera::pan(float dxScreen, float dyScreen) {
     // compute new target position.
     // The camera's new position will be derived from target in updatePosition.
     target += right * -dxScreen;
-    target += camRelativeUp * -dyScreen;
+    target += camRelativeUp * -dyScreen; // up is a global up. Need camera relative. 
 
-    std::cout << "up: " << up.x << ", " << up.y << ", " << up.z 
+    /* std::cout << "up: " << up.x << ", " << up.y << ", " << up.z 
         << "forward: " << forward.x << ", " << forward.y << ", " << forward.z 
         << ". -dyscreen: " << -dyScreen << std::endl;   
-  
+    */
     updatePosition();
 
     return;
