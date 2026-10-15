@@ -13,7 +13,7 @@ Cube::Cube(float x, float y, float z, float scale, int colorIndex, int id)
     shapeType = "Cube";  // Set the type as "Cube"
 
     // Set up OpenGL buffers
-    if (setupCube() == false) std::cerr << "FAILED TO SETUP CUBE" << std::endl;
+    if (setupCubeAveragedNormals() == false) std::cerr << "FAILED TO SETUP CUBE" << std::endl;
 }
 
 Cube::~Cube() {
@@ -24,10 +24,39 @@ Cube::~Cube() {
 }
 
 //-//////////////////////////////////////////////////////////////////
+// assumes new element index every time for each plane. Yeeaaaa, but, actually.
+// OK. so 
+// 0, 1, 2, 3  TOP
+// 0, 4, 5, 1  SIDE 1 - new data for 0 vertex. new instance of 
+// Can I organize position and normal data differently s.t. normal and position data aren't part of the same element?
+//       
+//      to construct this, have a positions array and a normals array, then combine them. 
+//      positionDataOffset
+//      Cache locality?
+//          -- better to have position and other data adjacent?
+//          -- better to have all positions bundled, all normals bundled, etc.?            
+bool Shape::constructPlane(PlaneConstructionParams params) {
+    
+
+    return true;
+}
+
+//-//////////////////////////////////////////////////////////////////
+// 
+bool setupCube() {
+
+
+
+
+    return true;
+}
+
+
+//-//////////////////////////////////////////////////////////////////
 // Sets element index data
 // Computes new un-normalized normal for each vertex that is part of the plane. Sets vertex normal data.
 // Sets vertex color data. 
-bool Shape::constructPlane(PlaneConstructionParams params) {
+bool Shape::constructPlaneAveragedNormals(PlaneConstructionParams params) {
     std::cout << "Construct Plane: " << getPlaneTypeString(params.type) << std::endl;
 
     if (params.type != PlaneType::TOP && params.LOOPS_COMPLETED_I == 0) {
@@ -111,6 +140,8 @@ bool Shape::constructPlane(PlaneConstructionParams params) {
     //         return false;
     // }
     
+    // add more vertices and normals. Do not procedurally calculate normals using an average. leads to bad juju. 
+
     for(uint32_t p = 0; p < 4; ++p) {
         glm::vec3 normal (  params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERTEX    ],
                             params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERTEX + 1],
@@ -124,7 +155,7 @@ bool Shape::constructPlane(PlaneConstructionParams params) {
         params.vertexData[3 + elementIndices[p] * params.VALUES_PER_VERTEX + 2] = normal.z;
 
         // Set color values
-        float const newColor = static_cast<float>(elementIndices[p]) / static_cast<float>(params.VERTS_PER_LOOP * params.MAX_LOOPS);
+        float const newColor = 0.77f;
         params.vertexData[6 + elementIndices[p] * params.VALUES_PER_VERTEX    ] = newColor;
         params.vertexData[6 + elementIndices[p] * params.VALUES_PER_VERTEX + 1] = newColor;
         params.vertexData[6 + elementIndices[p] * params.VALUES_PER_VERTEX + 2] = newColor;
@@ -140,17 +171,17 @@ bool Shape::constructPlane(PlaneConstructionParams params) {
 
 //-//////////////////////////////////////////////////////////////
 //
-bool Cube::setupCube() {
+bool Cube::setupCubeAveragedNormals() {
 
     std::cout << "SETTING-UP CUBE" << std::endl;        
     normalConfig = NormalConfig::SHARED;
     
-    uint32_t const VALUES_PER_VERTEX = 9; // 3 pos + 3 norm + 3 col
-    uint32_t const VERTICES_PER_LOOP = 4;
+    uint32_t const FLOATS_PER_ELEMENT = 9; // 3 pos + 3 norm + 3 col
+    uint32_t const ELEMENTS_PER_LOOP = 4;
     uint32_t const MAX_LOOPS = 2;
     
     std::vector<float> vertexData;
-    vertexData.reserve(8 * VALUES_PER_VERTEX); // 8 vertices per cube
+    vertexData.reserve(8 * FLOATS_PER_ELEMENT); // 8 vertices per cube
 
     std::vector<unsigned int> elementData;
     elementData.reserve(36); // 6 sides * 2 triangles per side * 3 verts per triangle
@@ -158,18 +189,18 @@ bool Cube::setupCube() {
     for(uint32_t i = 0; i < MAX_LOOPS; ++i) {
         std::cout << "LOOP " << i << std::endl;
 
-        float const LOOP_HEIGHT = 0.5*scale - (static_cast<float>(i) / (MAX_LOOPS - 1)) * scale;
-        uint32_t const FULL_LOOP_OFFSET = i * VERTICES_PER_LOOP * VALUES_PER_VERTEX;
+        float const LOOP_HEIGHT = 0.5*scale - (static_cast<float>(i) / (MAX_LOOPS * 0.5)) * scale;
+        uint32_t const FULL_LOOP_OFFSET = i * ELEMENTS_PER_LOOP * FLOATS_PER_ELEMENT;
         
-        for (uint32_t j = 0; j < VERTICES_PER_LOOP; ++j) {
-            std::cout << "VERT THIS LOOP: " << j << std::endl;
+        for (uint32_t j = 0; j < ELEMENTS_PER_LOOP; ++j) {
+            std::cout << "ELEMENT THIS LOOP: " << j << std::endl;
 
             //-//////////////////////////////////////////////////////////////
             // CREATE VERTS. 
             //-//////////////////////////////////////////////////////////////
 
-            if (j == 0) { // first vert of new loop
-                std::cout << "FIRST VERTEX: " << j << std::endl;
+            if (j == 0) { // first ELEMENT of new loop
+                std::cout << "FIRST ELEMENT: " << j << std::endl;
                 float const x = 0.5 * -scale;
                 float const y = LOOP_HEIGHT;
                 float const z = 0.5 * -scale;
@@ -180,7 +211,7 @@ bool Cube::setupCube() {
                 vertices.push_back(glm::vec3(x, y , z));
 
                 // assign dummy values to normal and color. These will be changed later. 
-                for (uint8_t k = 0; k < VALUES_PER_VERTEX - 3; ++k) {
+                for (uint8_t k = 0; k < FLOATS_PER_ELEMENT - 3; ++k) {
                     vertexData.push_back(0.0f);
                 }
                 // outputVertices(vertexData, VALUES_PER_VERT);
@@ -188,8 +219,8 @@ bool Cube::setupCube() {
                 continue; // need more verts to make a plane.
             }
             
-            uint32_t const LAST_VERTEX_INDEX = FULL_LOOP_OFFSET + VALUES_PER_VERTEX * (j - 1);
-            uint32_t const THIS_VERTEX_INDEX = FULL_LOOP_OFFSET + VALUES_PER_VERTEX * j;
+            uint32_t const LAST_VERTEX_INDEX = FULL_LOOP_OFFSET + FLOATS_PER_ELEMENT * (j - 1);
+            uint32_t const THIS_VERTEX_INDEX = FULL_LOOP_OFFSET + FLOATS_PER_ELEMENT * j;
 
             std::cout << "create next vertex" << j << std::endl;
             std::cout << "LAST_VERTEX_INDEX: " << LAST_VERTEX_INDEX << std::endl;
@@ -197,7 +228,7 @@ bool Cube::setupCube() {
 
             // Create next vertex
             {
-                double trigInputForOffset = 2 * ShapeMath::PI() * (static_cast<double>(j - 1) / static_cast<double>(VERTICES_PER_LOOP));
+                double trigInputForOffset = 2 * ShapeMath::PI() * (static_cast<double>(j - 1) / static_cast<double>(ELEMENTS_PER_LOOP));
 
                 // derive new vertex's values
                 float const x = vertexData.at(LAST_VERTEX_INDEX) + scale * std::cos(trigInputForOffset); // new x = last x shifted
@@ -213,7 +244,7 @@ bool Cube::setupCube() {
                 vertexData.push_back(y);
                 vertexData.push_back(z);
                 // assign normal and color to 0f. They are updated during plane construction.
-                for (uint8_t k = 0; k < VALUES_PER_VERTEX - 3; ++k) {
+                for (uint8_t k = 0; k < FLOATS_PER_ELEMENT - 3; ++k) {
                     vertexData.push_back(0.0f);
                 }
 
@@ -230,7 +261,7 @@ bool Cube::setupCube() {
             // Always add a side plane when i > 0 and j > 0. 
             if (i > 0) { planeTypes.push_back(PlaneType::INTERMEDIATE); }
             
-            if (j == VERTICES_PER_LOOP - 1) {
+            if (j == ELEMENTS_PER_LOOP - 1) {
                 // loop-completion planes. Tops, Bottoms, Wrap-arounds. 
                 switch(i) {
                     case 0:                     
@@ -249,31 +280,31 @@ bool Cube::setupCube() {
             }
                         
             for (uint32_t p = 0; p < planeTypes.size(); ++p) {
-                constructPlane(PlaneConstructionParams(planeTypes[p], MAX_LOOPS, VERTICES_PER_LOOP, VALUES_PER_VERTEX, i, j, elementData, vertexData));
+                constructPlaneAveragedNormals(PlaneConstructionParams(planeTypes[p], MAX_LOOPS, ELEMENTS_PER_LOOP, FLOATS_PER_ELEMENT, i, j, elementData, vertexData));
             }
         }
 
-        outputVertices(vertexData, VALUES_PER_VERTEX);
+        outputVertices(vertexData, FLOATS_PER_ELEMENT);
     }
 
     // normalize normals.
     // the plane construction algorithm sums a new plane's normal into the old normal value. We normalize at the
     //      end to get correct values we square_root(x^2 + y^2 + z^2);
-    for (uint32_t i = 0; i < MAX_LOOPS * VERTICES_PER_LOOP; ++i) {
-        glm::vec3 normal (vertexData[3 + i * VALUES_PER_VERTEX],
-                        vertexData[3 + i * VALUES_PER_VERTEX + 1],
-                        vertexData[3 + i * VALUES_PER_VERTEX + 2]);
+    for (uint32_t i = 0; i < MAX_LOOPS * ELEMENTS_PER_LOOP; ++i) {
+        glm::vec3 normal (vertexData[3 + i * FLOATS_PER_ELEMENT],
+                        vertexData[3 + i * FLOATS_PER_ELEMENT + 1],
+                        vertexData[3 + i * FLOATS_PER_ELEMENT + 2]);
         normal = normalize(normal);
-        vertexData[3 + i * VALUES_PER_VERTEX] = normal.x;
-        vertexData[3 + i * VALUES_PER_VERTEX + 1] = normal.y;
-        vertexData[3 + i * VALUES_PER_VERTEX + 2] = normal.z;
+        vertexData[3 + i * FLOATS_PER_ELEMENT] = normal.x;
+        vertexData[3 + i * FLOATS_PER_ELEMENT + 1] = normal.y;
+        vertexData[3 + i * FLOATS_PER_ELEMENT + 2] = normal.z;
 
         normals.reserve(vertexData.size() / 3);
         normals.push_back(normal);
     }
 
     vertexData.shrink_to_fit();
-    outputVertices(vertexData, VALUES_PER_VERTEX);
+    outputVertices(vertexData, FLOATS_PER_ELEMENT);
 
     elementData.shrink_to_fit();
     outputElements(elementData, 3);
@@ -320,13 +351,13 @@ bool Cube::setupCube() {
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, elementData.size() * sizeof(unsigned int), elementData.data(), GL_STATIC_DRAW);
 
     // Configure vertex attributes
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, VALUES_PER_VERTEX * sizeof(float), (void*)0); // Position
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, FLOATS_PER_ELEMENT * sizeof(float), (void*)0); // Position
     glEnableVertexAttribArray(0);
 
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, VALUES_PER_VERTEX * sizeof(float), (void*)(3 * sizeof(float))); // Normal
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, FLOATS_PER_ELEMENT * sizeof(float), (void*)(3 * sizeof(float))); // Normal
     glEnableVertexAttribArray(1);
 
-    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, VALUES_PER_VERTEX * sizeof(float), (void*)(6 * sizeof(float))); // Color
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, FLOATS_PER_ELEMENT * sizeof(float), (void*)(6 * sizeof(float))); // Color
     glEnableVertexAttribArray(2);
 
     // UVs go in their own buffer on attribute 3, while the VAO is still bound.

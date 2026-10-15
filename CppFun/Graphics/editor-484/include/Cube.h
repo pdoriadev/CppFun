@@ -22,7 +22,8 @@ public:
     
     private:
     GLuint VAO, VBO, EBO; // OpenGL handles for the cube geometry
-    bool setupCube();     // Initializes the VAO/VBO/EBO for the cube
+    bool setupCubeAveragedNormals();     // Initializes the VAO/VBO/EBO for the cube
+    bool setupCube();
 };
 
 #endif

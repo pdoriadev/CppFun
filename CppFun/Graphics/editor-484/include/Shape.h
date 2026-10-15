@@ -124,6 +124,7 @@ public:
     // Set the shape type
     void setShapeType(std::string newShapeType);
 
+    bool constructPlaneAveragedNormals(PlaneConstructionParams);
     bool constructPlane(PlaneConstructionParams);
     
     void addVertex(const glm::vec3 vertex);
