@@ -15,7 +15,9 @@ Camera::Camera()
       nearPlane(0.1f),
       farPlane(100.0f),
       hasOverride(false),
-      viewOverride(1.0f) {
+      viewOverride(1.0f),
+      minRadius(0.5f),
+      oneOverMinRadius(1 / minRadius) {
     updatePosition();
 }
 

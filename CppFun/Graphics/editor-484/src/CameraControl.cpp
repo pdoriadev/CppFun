@@ -113,10 +113,14 @@ void Camera::pan(float dxScreen, float dyScreen) {
     glm::vec3 right = glm::cross(forward, up);
     glm::vec3 camRelativeUp = glm::cross(right, forward);
    
+    // panning doesn't go as fast when you get further away.
+    float const distanceSpeedMod = (minRadius + (radius * oneOverMinRadius - minRadius)) / radius; 
+    float const overallSpeedMod = 0.2f;
+
     // compute new target position.
     // The camera's new position will be derived from target in updatePosition.
-    target += right * -dxScreen;
-    target += camRelativeUp * -dyScreen; // up is a global up. Need camera relative. 
+    target += right * -dxScreen * distanceSpeedMod * overallSpeedMod;
+    target += camRelativeUp * -dyScreen * distanceSpeedMod * overallSpeedMod; // up is a global up. Need camera relative. 
 
     /* std::cout << "up: " << up.x << ", " << up.y << ", " << up.z 
         << "forward: " << forward.x << ", " << forward.y << ", " << forward.z 
