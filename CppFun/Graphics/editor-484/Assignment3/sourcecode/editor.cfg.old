@@ -1,0 +1,25 @@
+# Editor settings. Applied at startup - restart to take effect.
+#
+# platform: auto | x11 | wayland
+#   Windowing backend. Linux only; ignored on Windows and macOS.
+#   'auto' picks X11 under WSL, where Wayland mishandles maximize.
+platform=auto
+
+# software_rendering: 0 | 1
+#   Forces Mesa's llvmpipe software rasterizer (LIBGL_ALWAYS_SOFTWARE).
+software_rendering=0
+
+# auto_enter_vr: enter automatically only when a real device source is selected.
+auto_enter_vr=0
+
+# student_name: shown in the window title.
+student_name=
+
+# custom_shape_name: label for the Custom shape in the Insert menu.
+custom_shape_name=Custom Shape
+
+# scene_folder: where Open/Save start. Created on first save.
+scene_folder=scenes
+
+# recent_scene: one line per entry, newest first.
+recent_scene=/mnt/c/Users/dgarcia-gomez/Code/Editor/scenes/showcase.scene
