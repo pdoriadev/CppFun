@@ -45,7 +45,7 @@ std::vector<glm::vec3> const standardNormals {
     {0.0f, -1.0f, 0.0f},
 };
 
-glm::vec3 const standardColor  {0.77f, 0.77f, 0.77f };
+glm::vec3 const standardColor  { 0.77f, 0.77f, 0.77f };
 
 //-//////////////////////////////////////////////////////////////////
 // assumes new element index every time for each plane. Yeeaaaa, but, actually.
@@ -60,8 +60,7 @@ glm::vec3 const standardColor  {0.77f, 0.77f, 0.77f };
 //          -- better to have position and other data adjacent?
 //          -- better to have all positions bundled, all normals bundled, etc.?            
 bool Shape::constructPlane(PlaneConstructionParams params) {
-
-    std::cout << "CONSTRUCTING PLANE" << std::endl;
+    // std::cout << "CONSTRUCTING PLANE" << std::endl;
 
     if (params.positionIndices.size() != 4 ) {
         std::cerr << "FAILED TO SETUP CUBE. INCORRECT NUMBER OF POSITION INDICES: " << params.positionIndices.size() << std::endl;
@@ -79,8 +78,7 @@ bool Shape::constructPlane(PlaneConstructionParams params) {
 
     for (int k = 0; k < 4; ++k) {   
         int positionIndex = params.positionIndices.at(k);
-        std::cout << "positionIndex: " << positionIndex << std::endl;
-        if (positionIndex < 0) {
+        if (positionIndex < 0 || positionIndex >= standardPositions.size()) {
             std::cerr << "FAILED TO SETUP CUBE. positionIndices value at index " << k << " is less than 0: " << params.positionIndices[k] << std::endl;
         }
 
@@ -255,6 +253,7 @@ bool Cube::setupCube() {
         // This operation is what makes the buffer object an *Element* Buffer Object.
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, elementsData.size() * sizeof(uint), elementsData.data(), GL_STATIC_DRAW);
     
+    std::cout << "SETUP CUBE - COMPLETE" << std::endl;
 
     return true;
 }
