@@ -19,8 +19,8 @@ public:
     ~Cube();
 
     void draw(GLuint shaderProgram) override; // Render the cube
-    
-    private:
+
+private:
     GLuint VAO, VBO, EBO; // OpenGL handles for the cube geometry
     bool setupCubeAveragedNormals();     // Initializes the VAO/VBO/EBO for the cube
     bool setupCube();

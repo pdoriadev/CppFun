@@ -1,7 +1,9 @@
 #include "../include/Cube.h"
 #include "../include/TexCoords.h"
 
+#include <cstddef>
 #include <cstdint>
+#include <glm/detail/qualifier.hpp>
 #include <iostream>
 #include <cmath>
 #include <glm/geometric.hpp>
@@ -13,7 +15,7 @@ Cube::Cube(float x, float y, float z, float scale, int colorIndex, int id)
     shapeType = "Cube";  // Set the type as "Cube"
 
     // Set up OpenGL buffers
-    if (setupCubeAveragedNormals() == false) std::cerr << "FAILED TO SETUP CUBE" << std::endl;
+    if (setupCube() == false) std::cerr << "FAILED TO SETUP CUBE" << std::endl;
 }
 
 Cube::~Cube() {
@@ -22,6 +24,28 @@ Cube::~Cube() {
     glDeleteBuffers(1, &VBO);
     glDeleteBuffers(1, &EBO);
 }
+
+std::vector<glm::vec3> const standardPositions = {
+    {-0.5f, 0.5f, -0.5f},
+    {0.5f, 0.5f, -0.5f},
+    {0.5f, 0.5f, 0.5f},
+    {-0.5f, 0.5f, 0.5f},
+    {-0.5f, -0.5f, -0.5f},
+    {0.5f, -0.5f, -0.5f},
+    {0.5f, -0.5f, 0.5f},
+    {-0.5f, -0.5f, 0.5f},
+};
+
+std::vector<glm::vec3> const standardNormals {
+    {0.0f, 1.0f, 0.0f},
+    {0.0f, 0.0f, 1.0f},
+    {1.0f, 0.0f, 0.0f},
+    {0.0f, 0.0f, -1.0f},
+    {-1.0f, 0.0f, 0.0f},
+    {0.0f, -1.0f, 0.0f},
+};
+
+glm::vec3 const standardColor  {0.77f, 0.77f, 0.77f };
 
 //-//////////////////////////////////////////////////////////////////
 // assumes new element index every time for each plane. Yeeaaaa, but, actually.
@@ -36,27 +60,212 @@ Cube::~Cube() {
 //          -- better to have position and other data adjacent?
 //          -- better to have all positions bundled, all normals bundled, etc.?            
 bool Shape::constructPlane(PlaneConstructionParams params) {
-    
+
+    std::cout << "CONSTRUCTING PLANE" << std::endl;
+
+    if (params.positionIndices.size() != 4 ) {
+        std::cerr << "FAILED TO SETUP CUBE. INCORRECT NUMBER OF POSITION INDICES: " << params.positionIndices.size() << std::endl;
+        return false;
+    }
+
+    if (params.normalIndex < 0) {
+        std::cerr << "FAILED TO SETUP CUBE. INVALID NORMAL INDEX: " << params.normalIndex << std::endl;
+        return false;
+    }
+
+    if (params.normalIndex > standardNormals.size()) {
+        std::cerr << "FAILED TO SETUP CUBE. normalIndex is greater than normals vector size. normalIndex: " << params.normalIndex << std::endl;
+    }
+
+    for (int k = 0; k < 4; ++k) {   
+        int positionIndex = params.positionIndices.at(k);
+        std::cout << "positionIndex: " << positionIndex << std::endl;
+        if (positionIndex < 0) {
+            std::cerr << "FAILED TO SETUP CUBE. positionIndices value at index " << k << " is less than 0: " << params.positionIndices[k] << std::endl;
+        }
+
+        params.vertexData.push_back(standardPositions.at(positionIndex).x);
+        params.vertexData.push_back(standardPositions.at(positionIndex).y);
+        params.vertexData.push_back(standardPositions.at(positionIndex).z);
+        params.vertexData.push_back(standardNormals.at(params.normalIndex).x);
+        params.vertexData.push_back(standardNormals.at(params.normalIndex).y);
+        params.vertexData.push_back(standardNormals.at(params.normalIndex).z);
+        params.vertexData.push_back(standardColor.x);
+        params.vertexData.push_back(standardColor.y);
+        params.vertexData.push_back(standardColor.z);
+    }
+
+    // cache faces/element indices. 
+    int const topElementIndex = (params.vertexData.size() / 9) - 1;
+    std::vector<std::vector<int>> const TRIS = {
+        {topElementIndex - 3, topElementIndex - 2, topElementIndex - 1},
+        {topElementIndex - 1, topElementIndex, topElementIndex - 3}
+        };
+
+    for (std::size_t i = 0; i < TRIS.size(); ++i) {
+        faces.push_back(TRIS[i]);
+
+        for (std::size_t j = 0; j < TRIS[i].size(); ++j) {
+            params.elementData.push_back(TRIS[i][j]);
+        }
+    }
 
     return true;
 }
 
 //-//////////////////////////////////////////////////////////////////
 // 
-bool setupCube() {
+bool Cube::setupCube() {
+    std::cout << "SETUP CUBE - NON-AVERAGED NORMALS " << std::endl;
+    
+    std::vector<float> vertexData;
+    vertexData.reserve(9 * 4 * 6); // 9 floats per element * 4 elements per plane * 6 planes
+    std::vector<uint> elementsData; 
+    elementsData.reserve(4 * 6); // 4 elements per plane * 6 planes
+    
+    int const ELEMENTS_PER_LOOP = 4;
+    
+    for (uint i = 0 ; i < 3; ++i) {
+        std::vector<int> positionIndices = {-1, -1, -1, -1};
+        int normalIndex = -1;
+        for (uint j = 0; j < 4; ++j) {
+            // top plane
+            if (i == 0 && j == 0) {
+                positionIndices[0] = 0;
+                positionIndices[1] = 1;
+                positionIndices[2] = 2;
+                positionIndices[3] = 3;
+                normalIndex = 0;
+                constructPlane(PlaneConstructionParams(vertexData, elementsData, positionIndices, normalIndex));
+                
+                break;
+            } 
+            
+            if (i == 0) {
+                std::cerr << "INVALID STATE IN CUBE CONSTRUCTION. i = " << i << ". " << "j = " << j << std::endl;
+                return false;
+            }
 
+            // bottom plane
+            if (i == 2) {
+                positionIndices[0] = 4;
+                positionIndices[1] = 5;
+                positionIndices[2] = 6;
+                positionIndices[3] = 7;
+                normalIndex = 5;
+                constructPlane(PlaneConstructionParams(vertexData, elementsData, positionIndices, normalIndex));
 
+                break;
+            }
 
+            // if (i == 1) below
+
+            // wait til j is greater than 0
+            if (j == 0) { continue; }
+
+            // side plane
+            positionIndices[0] = j - 1;
+            positionIndices[1] = i * ELEMENTS_PER_LOOP + j - 1;
+            positionIndices[2] = i * ELEMENTS_PER_LOOP + j;
+            positionIndices[3] = j;
+            normalIndex = i + j - 1;
+            constructPlane(PlaneConstructionParams(vertexData, elementsData, positionIndices, normalIndex));
+
+            if (j < 3) { continue; }
+            if (j > 3) { std::cerr << "FAILED CUBE SETUP. j = " << j << " is greater than 3. No more than 0-3 elements per loop."; }
+
+            // wrap-around plane
+            positionIndices[0] = 3;
+            positionIndices[1] = 7;
+            positionIndices[2] = 4;
+            positionIndices[3] = 0;
+            normalIndex = 4;
+            constructPlane(PlaneConstructionParams(vertexData, elementsData, positionIndices, normalIndex));
+        }
+    }
+
+    vertexData.shrink_to_fit();
+    elementsData.shrink_to_fit();
+
+    for (uint i = 0; i < vertexData.size(); i = i + 9) {
+        vertices.push_back(glm::vec3(
+            vertexData[i],
+            vertexData[i+1],
+            vertexData[i+2]
+        ));
+        normals.push_back(glm::vec3(
+            vertexData[i+3],
+            vertexData[i+4],
+            vertexData[i+5]
+        ));
+
+    }
+
+    // Generate an ID for one Vertex Array Object. Caches the ID in the CUBE's VAO variable.
+    glGenVertexArrays(1, &VAO);
+    // Bind vertex array corresponding to VAO id. This array will reflect all 
+    // VBO and EBO operations until the VAO is unbound. 
+    glBindVertexArray(VAO); 
+
+    // Generate an ID for a Buffer Object. Caches the ID in the CUBE's VBO variable.
+    glGenBuffers(1, &VBO);
+    // Bind the Buffer Object corresponding to the cached VBO value to the GL_ARRAY_BUFFER target.
+        // All operations targeting the GL_ARRAY_BUFFER will affect the Vertex Buffer Object corresponding
+        // to the ID stored in the VBO variable until the ID is unbound. 
+    glBindBuffer(GL_ARRAY_BUFFER, VBO); 
+
+    // Generates an ID for a Buffer Object. Caches the ID in the EBO variable. 
+    glGenBuffers(1, &EBO);
+    // Binds the GL_ELEMENT_ARRAY_BUFFER target to the buffer object that matches the ID stored in the EBO variable.
+        // All operations to the GL_ELEMENT_ARRAY_BUFFER target will affect the EBO ID's matching buffer object. 
+        // GL_ELEMENT_ARRAY_BUFFER operations will affect the EBO ID's matching buffer object until the ID has
+            // been unbound from the GL_ELEMENT_ARRAY_BUFFER target. 
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+
+    // VBO buffer operations. 
+    // Copy vertexData into the VBO that is bound to GL_ARRAY_BUFFER. https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBufferData.xhtml
+        // Targets the buffer bound to the VBO. 
+    glBufferData(GL_ARRAY_BUFFER, vertexData.size() * sizeof(float), vertexData.data(), GL_STATIC_DRAW);
+    // 'index' is a pointer in the VAO. We are giving the pointer corresponding to that index
+        // metadata for the bound VBO. Each index in a VAO points to a specific set of data. 
+    // Set stride and offsets for the VBO's position, normal, and color information. 
+    // Set offset to start counting index, stride, etc. to the beginning of the buffer object, hence (void*)0.
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)0); // pos
+    // tell the VAO to use the VBO data that the index pointer is pointing to when making draw calls.
+    glEnableVertexAttribArray(0);
+    // Set the index pointer for the bound Vertex Array Object. 
+    // Set offset pointer (where the first normal is found). 
+    // Set size (number of floats for a normal)
+    // Set type (float data type for each normal value)
+    // Set normalized (values should not be normalized. They already are.)
+    // Set stride (byte offset to the next set of normals in the buffer object.)
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)(3 * sizeof(float))); // normal
+    // Tell the VAO to use VBO data that the index pointer is pointing to. 
+    glEnableVertexAttribArray(1);
+    // Set the VAO's index pointer value for color values in the bound VBO.
+    // Set the size (number of floats per color)
+    // Set the type (color uses floats)
+    // Set the normalized value (false. Don't want color values normalized).
+    // Set the offset. (byte offset to where color values start in the bound VBO)
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)(6 * sizeof(float))); // color
+    glEnableVertexAttribArray(2);
+    
+    // EBO buffer operations. Load in element data.
+        // Target - same one we bound the EBO ID matching the corresponding buffer object. 
+        // This operation is what makes the buffer object an *Element* Buffer Object.
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, elementsData.size() * sizeof(uint), elementsData.data(), GL_STATIC_DRAW);
+    
 
     return true;
 }
 
+#pragma region SETUP_CUBE_WITH_AVERAGED_CUBE_NORMALS
 
 //-//////////////////////////////////////////////////////////////////
 // Sets element index data
 // Computes new un-normalized normal for each vertex that is part of the plane. Sets vertex normal data.
 // Sets vertex color data. 
-bool Shape::constructPlaneAveragedNormals(PlaneConstructionParams params) {
+bool Shape::constructPlaneAveragedNormals(AveragedPlaneConstructionParams params) {
     std::cout << "Construct Plane: " << getPlaneTypeString(params.type) << std::endl;
 
     if (params.type != PlaneType::TOP && params.LOOPS_COMPLETED_I == 0) {
@@ -200,7 +409,7 @@ bool Cube::setupCubeAveragedNormals() {
             //-//////////////////////////////////////////////////////////////
 
             if (j == 0) { // first ELEMENT of new loop
-                std::cout << "FIRST ELEMENT: " << j << std::endl;
+                std::cout << "FIRST ELEMENT OF NEW LOOP: " << i * ELEMENTS_PER_LOOP << std::endl;
                 float const x = 0.5 * -scale;
                 float const y = LOOP_HEIGHT;
                 float const z = 0.5 * -scale;
@@ -280,7 +489,7 @@ bool Cube::setupCubeAveragedNormals() {
             }
                         
             for (uint32_t p = 0; p < planeTypes.size(); ++p) {
-                constructPlaneAveragedNormals(PlaneConstructionParams(planeTypes[p], MAX_LOOPS, ELEMENTS_PER_LOOP, FLOATS_PER_ELEMENT, i, j, elementData, vertexData));
+                constructPlaneAveragedNormals(AveragedPlaneConstructionParams(planeTypes[p], MAX_LOOPS, ELEMENTS_PER_LOOP, FLOATS_PER_ELEMENT, i, j, elementData, vertexData));
             }
         }
 
@@ -310,27 +519,6 @@ bool Cube::setupCubeAveragedNormals() {
     outputElements(elementData, 3);
 
     normalConfig = NormalConfig::SHARED;
-
-    // TODO(geometry): the cube: eight corners, six faces, twelve triangles
-    // Build the shape: fill `vertices`, `faces`, and `normals` (directly or
-    // by calling calculateNormals()). See ASSIGNMENTS.md, A2, for the
-    // conventions -- roughly one unit across, centred on the origin,
-    // counter-clockwise winding seen from outside, every face index a valid
-    // index into `vertices`.
-    //
-    // What is here is a placeholder: a single square in the XY plane. It is
-    // deliberately not the shape you were asked for -- it is here so the
-    // editor runs, the Insert menu does something visible, and you can see
-    // your geometry replace it as you write it. Read src/Torus.cpp first;
-    // it is the worked example of a procedural shape.
-    // std::vector<std::vector<float>> planePositions
-    //          = { {-0.5f, -0.5f, 0.0f}, { 0.5f, -0.5f, 0.0f},
-    //              { 0.5f,  0.5f, 0.0f}, {-0.5f,  0.5f, 0.0f} };
-    // normals  = { {0.0f, 0.0f, 1.0f}, {0.0f, 0.0f, 1.0f},
-    //              {0.0f, 0.0f, 1.0f}, {0.0f, 0.0f, 1.0f} };
-    // faces    = { {0, 1, 2}, {0, 2, 3} };
-
-    // texCoords.clear();
 
     // UVs are per triangle corner, not per vertex: a cube's eight corners each
     // belong to three faces wanting three different UVs. The loop below emits
@@ -368,6 +556,7 @@ bool Cube::setupCubeAveragedNormals() {
     return true;
 }
 
+#pragma endregion
 
 /* Sphere vertex position. See assignment pdf. 
 (i / LatSteps) * 180
@@ -396,7 +585,7 @@ void Cube::draw(GLuint shaderProgram) {
 
     // Render the cube
     glBindVertexArray(VAO);
-    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(36), GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES, faces.size() * 3, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
 
     // Disable lighting after drawing the cube (for axis rendering)

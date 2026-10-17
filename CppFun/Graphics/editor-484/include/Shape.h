@@ -38,6 +38,24 @@ bool outputVertices(const std::vector<float>& vertices, uint32_t const VALUES_PE
 bool outputElements(const std::vector<uint32_t>& elements, uint32_t const VALUES_PER_ELEMENT);
 
 struct PlaneConstructionParams {
+    std::vector<float> &vertexData;
+    std::vector<uint> &elementData;
+    std::vector<int> const &positionIndices;
+    int const normalIndex;
+
+    PlaneConstructionParams (
+        std::vector<float> &_vertexData, 
+        std::vector<uint> &_elementData,
+        std::vector<int> const &_positionIndices,
+        int const _normalIndex)
+        : 
+        vertexData(_vertexData), 
+        elementData(_elementData),
+        positionIndices(_positionIndices),
+        normalIndex(_normalIndex) { }
+};
+
+struct AveragedPlaneConstructionParams {
     PlaneType const type;
     uint32_t const MAX_LOOPS;
     uint32_t const VERTS_PER_LOOP;
@@ -47,7 +65,7 @@ struct PlaneConstructionParams {
     std::vector<unsigned int>& elementData; // index buffer
     std::vector<float>& vertexData; // raw vertex data
 
-    PlaneConstructionParams(
+    AveragedPlaneConstructionParams(
         PlaneType const _type, 
         uint32_t const _MAX_LOOPS,
         uint32_t const _VERTS_PER_LOOP,
@@ -124,7 +142,7 @@ public:
     // Set the shape type
     void setShapeType(std::string newShapeType);
 
-    bool constructPlaneAveragedNormals(PlaneConstructionParams);
+    bool constructPlaneAveragedNormals(AveragedPlaneConstructionParams);
     bool constructPlane(PlaneConstructionParams);
     
     void addVertex(const glm::vec3 vertex);
