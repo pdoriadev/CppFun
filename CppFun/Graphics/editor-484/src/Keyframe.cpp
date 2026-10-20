@@ -121,7 +121,7 @@ float applyEasing(EasingTypes const easingType, float const u) {
         case EASE_OUT :
             trueU = 1 - ( (1-u) * (1-u) );
             break;
-        case EASE_IN_OUT :
+        case EASE_IN_OUT : // smoothstep
             trueU = 3*u*u - 2*u*u*u;
             break;
         default:
@@ -327,7 +327,7 @@ bool AnimationTrack::evaluate(float t, Keyframe& out) const {
         return true;
     }
 
-    float const u = (t - a.time) / (b.time - t);
+    float const u = (t - a.time) / (b.time - a.time);
     applyEasing(a.easing, u);
 
     return false;
