@@ -86,10 +86,7 @@ glm::vec3 lerpEulerDegrees(const glm::vec3& a, const glm::vec3& b, float u) {
 // Remap u through an easing curve. See Keyframe.h for the contract; the one
 // rule that matters is f(0) = 0 and f(1) = 1, so a key still holds its own pose
 // at its own time.
-float applyEasing(int easing, float u) {
-    if (u <= 0.0f) return 0.0f;
-    if (u >= 1.0f) return 1.0f;
-
+float applyEasing(EasingTypes const easingType, float const u) {
     // TODO(animation): remap u through the easing curve
     // Return u remapped by the curve `easing` names. The enum is in
     // Keyframe.h; every curve must satisfy f(0) = 0 and f(1) = 1, or a key
@@ -105,7 +102,32 @@ float applyEasing(int easing, float u) {
     // works, the scene file remembers your choice, and nothing looks any
     // different. That is the checkpoint -- the motion is correct, just
     // mechanical.
-    (void)easing;
+    
+    if (u <= 0.0f) return 0.0f;
+    if (u >= 1.0f) return 1.0f;
+    float trueU = -1.0f;
+    switch(easingType) {
+        case EASE_STEP :
+            trueU = 0;
+            break;
+        case EASE_LINEAR :
+            trueU = u;
+            break;
+        case EASE_IN :
+            trueU = u*u;
+            break;
+        case EASE_OUT :
+            trueU = 1 - ( (1-u) * (1-u) );
+            break;
+        case EASE_IN_OUT :
+            trueU = 3*u*u - 2*u*u*u;
+            break;
+        default:
+            std::cerr << easingType << " is not a valid easing type." << std::endl;
+    }
+
+    if (trueU == -1.0f) { std::cerr << "Failed to apply an easing type. u = " << u << std::endl; }
+
     return u;
 }
 

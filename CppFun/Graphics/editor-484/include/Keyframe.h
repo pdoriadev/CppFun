@@ -36,7 +36,7 @@ class ShapeManager;
 // runs 0 to 1 across the interval and still ends where the next key is; the
 // curve decides how fast it gets there. That separation is why a single
 // remapping function can serve position, rotation and scale at once.
-enum EasingTypes {
+enum EasingTypes : int {
     Easing = -100,
     INVALID = -1,
     EASE_STEP = 0,   // hold the first key's pose, then jump. No interpolation.
@@ -116,7 +116,7 @@ glm::vec3 lerpEulerDegrees(const glm::vec3& a, const glm::vec3& b, float u);
 // hold its own pose at its own time, and the animation drifts a little further
 // off with every segment. EASE_STEP is the deliberate exception at the near
 // end: it returns 0 for everything below 1.
-float applyEasing(int easing, float u);
+float applyEasing(EasingTypes const easing, float const u);
 
 // --- the track --------------------------------------------------------------
 
