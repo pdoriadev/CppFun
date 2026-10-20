@@ -4,9 +4,9 @@
 // Everything here is given to the student. The interpolation that answers
 // "what is the pose at t?" lives in Keyframe.cpp, which is the assignment.
 
-#include "Keyframe.h"
-#include "Shape.h"
-#include "ShapeManager.h"
+#include "../include/Keyframe.h"
+#include "../include/Shape.h"
+#include "../include/ShapeManager.h"
 
 #include <algorithm>
 #include <cmath>
