@@ -20,10 +20,11 @@
 // the linker can swap is a whole translation unit, so the swappable code has to
 // live in a file of its own. See SOLUTION-LIBRARIES.md.
 
-#include "Keyframe.h"
+#include "../include/Keyframe.h"
 
 #include <algorithm>
 #include <cmath>
+#include <iostream>
 
 // Given: the labels, so the UI and the scene file agree on spelling.
 const char* const kEasingNames[EASE_COUNT] = {
@@ -34,9 +35,9 @@ const char* const kEasingNames[EASE_COUNT] = {
 // Linear interpolation with u clamped, so a caller that computes u from an
 // out-of-range t cannot extrapolate a pose that was never keyed.
 glm::vec3 lerpVec3(const glm::vec3& a, const glm::vec3& b, float u) {
-    // TODO(animation): linear interpolation, with u clamped to [0, 1]
-    (void)u;
-    return a + (b - a) * 0.0f;
+    if      (u < 0 )    u = 0;
+    else if (u > 1)     u = 1;
+    return a + (b - a) * u;
 }
 
 // Interpolate Euler angles the short way round.
@@ -50,8 +51,36 @@ glm::vec3 lerpEulerDegrees(const glm::vec3& a, const glm::vec3& b, float u) {
     // Per axis: wrap the difference b - a into (-180, 180] before applying
     // it, or a track crossing 350 -> 10 degrees spins backwards through
     // the whole circle instead of forwards through 20.
-    (void)b; (void)u;
-    return a;
+    if      (u < 0 )    u = 0;
+    else if (u > 1)     u = 1;
+
+    glm::vec3 lerped = glm::vec3(INFINITY, INFINITY, INFINITY);
+    for (uint8_t i = 0; i < 3; ++i) {
+        float aangle = a[i];
+        float bangle = b[i];
+        {   // make sure angle values are within a 360 degree domain. 
+            int twoPis = (aangle / 360.0f); 
+            aangle += twoPis * 360;
+            twoPis = (bangle / 360.0f);
+            bangle += twoPis * 360;
+        }
+            
+        // setup for fullRotation calculation. 
+        float const lesser = aangle < bangle ? aangle : bangle;
+        float const greater = lesser == aangle ? bangle : aangle;
+        int8_t const rotationDir = bangle > aangle ? 1 : -1;
+        
+        float const fullRotationAtoB = rotationDir * (lesser + 360.0f) - greater;
+        lerped[i] = fullRotationAtoB * u; 
+    }
+
+    for (uint8_t i = 0; i < 3; ++i) {
+        if (lerped[i] == INFINITY) {
+            std::cerr << "Failed to set new angle value for index " << i << std::endl; 
+        }
+    }
+
+    return lerped;
 }
 
 // Remap u through an easing curve. See Keyframe.h for the contract; the one
@@ -96,7 +125,28 @@ void AnimationTrack::addKey(const Keyframe& k) {
     // looks entirely alive -- keys land, tracks appear, diamonds drag -- and
     // it misbehaves the moment you key out of order or key the same instant
     // twice. Both are visible, and both are yours to fix.
-    keys.push_back(k);
+
+    // insert at end. 
+    if (k.time > keys.at(keys.size() - 1).time) {
+        keys.push_back(k);
+        return;
+    }
+    
+    // insert anywhere else. shift or replace.
+    for (uint i = 0; i < keys.size(); ++i) {
+        if (k.time > keys.at(i).time) {
+            continue;
+        }
+
+        if (k.time == keys.at(i).time) {
+            keys[i] = k;
+            return;
+        }
+        
+        // k.time < keys[i].time
+        keys.insert(keys.begin() + i, k);
+        return;
+    }
 }
 
 bool AnimationTrack::removeKeyNear(float t, float eps) {
@@ -108,13 +158,29 @@ bool AnimationTrack::removeKeyNear(float t, float eps) {
     //
     // As it stands this takes the first key within eps instead, which is the
     // wrong one whenever two keys sit close together.
+    if (t < 0.0f) t = 0.0f;
+
+    int closest = -1;
+    float closestDistSquared = INFINITY;
     for (size_t i = 0; i < keys.size(); ++i) {
-        if (std::fabs(keys[i].time - t) <= eps) {
-            keys.erase(keys.begin() + static_cast<long>(i));
-            return true;
+        float const distanceSquared = (keys[i].time - t) * (keys[i].time - t);
+        if (distanceSquared * distanceSquared > eps * eps) {
+            if (closest != -1) break; // outside epsilon's range
+            continue; 
         }
+
+        if (distanceSquared < closestDistSquared) {
+            closest = i;
+            closestDistSquared = distanceSquared;
+            continue;
+        }  
     }
-    return false;
+
+    if (closest == -1) return false;
+    
+    // keys are sorted. 
+    keys.erase(keys.begin() + closest);
+    return true;  
 }
 
 int AnimationTrack::moveKey(size_t index, float t, float eps) {
@@ -139,11 +205,31 @@ int AnimationTrack::moveKey(size_t index, float t, float eps) {
     //
     // As it stands this retimes in place and returns the index it was given.
     // Dragging works perfectly until a key crosses one of its neighbours.
-    if (index >= keys.size()) return -1;
-    if (t < 0.0f) t = 0.0f;
-    keys[index].time = t;
-    (void)eps;
-    return static_cast<int>(index);
+
+    if (index >= keys.size()) return -1; // invalid index.
+    if (t < 0.0f) t = 0.0f; // clamp t. 
+    if (t == keys.at(index).time) return index; // key is already at correct index
+
+    Keyframe const k = keys.at(index);
+    int const dir = t > k.time ? 1 : -1;
+    
+    int i = index;
+    for ( ; i >= 0 && i < keys.size(); i += dir) {
+        if (t > keys.at(i).time) { continue; }
+        
+        if (t == keys.at(i).time) { keys[i] = k; }
+        if (t < keys.at(i).time) { keys.insert(keys.begin() + i, k); }
+
+        keys.at(i).time = t;
+        break;
+    }
+
+    keys.erase(keys.begin() + index);
+    
+
+    std::cout << "Key with new t, moved to index " << i << std::endl;
+
+    return static_cast<int>(i);
 }
 
 bool AnimationTrack::evaluate(float t, Keyframe& out) const {
@@ -154,6 +240,20 @@ bool AnimationTrack::evaluate(float t, Keyframe& out) const {
     // compute u across the interval, remap it through
     // applyEasing(k[i].easing, u), and interpolate. See the full contract
     // in include/Keyframe.h.
-    (void)t;
+    if (keys.size() == 0) return false;
+
+    if (t < 0.0f) t = 0.0f;
+
+    float const END_TIME = keys.at(keys.size() - 1).time;
+    if (t > END_TIME) {
+        if (loop) {
+            uint const LOOPS = uint(t / END_TIME);
+            t -= END_TIME * LOOPS;
+        }
+        else t = keys.at(keys.size() - 1).time;
+    }
+
+    
+
     return false;
 }

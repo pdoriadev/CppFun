@@ -36,7 +36,9 @@ class ShapeManager;
 // runs 0 to 1 across the interval and still ends where the next key is; the
 // curve decides how fast it gets there. That separation is why a single
 // remapping function can serve position, rotation and scale at once.
-enum Easing {
+enum EasingTypes {
+    Easing = -100,
+    INVALID = -1,
     EASE_STEP = 0,   // hold the first key's pose, then jump. No interpolation.
     EASE_LINEAR,     // u unchanged -- constant speed, and visibly mechanical
     EASE_IN,         // start slow, end fast
@@ -53,9 +55,9 @@ extern const char* const kEasingNames[EASE_COUNT];
 struct Keyframe {
     float     time;
     glm::vec3 position;
-    glm::vec3 rotation;      // degrees
+    glm::vec3 rotation;     // degrees
     glm::vec3 scale;
-    int       easing;        // one of Easing; governs the interval to the RIGHT
+    EasingTypes easing;     // one of Easing; governs the interval to the RIGHT
 
     Keyframe()
         : time(0.0f),
