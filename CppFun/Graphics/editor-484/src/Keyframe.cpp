@@ -86,6 +86,7 @@ glm::vec3 lerpEulerDegrees(const glm::vec3& a, const glm::vec3& b, float u) {
 // Remap u through an easing curve. See Keyframe.h for the contract; the one
 // rule that matters is f(0) = 0 and f(1) = 1, so a key still holds its own pose
 // at its own time.
+// u is not for a whole track, but *between* two keys. 
 float applyEasing(EasingTypes const easingType, float const u) {
     // TODO(animation): remap u through the easing curve
     // Return u remapped by the curve `easing` names. The enum is in
@@ -108,7 +109,8 @@ float applyEasing(EasingTypes const easingType, float const u) {
     float trueU = -1.0f;
     switch(easingType) {
         case EASE_STEP :
-            trueU = 0;
+            if (u < 1.0f) trueU = 0.0f;
+            trueU = 1.0f;
             break;
         case EASE_LINEAR :
             trueU = u;
@@ -263,19 +265,70 @@ bool AnimationTrack::evaluate(float t, Keyframe& out) const {
     // applyEasing(k[i].easing, u), and interpolate. See the full contract
     // in include/Keyframe.h.
     if (keys.size() == 0) return false;
-
-    if (t < 0.0f) t = 0.0f;
-
-    float const END_TIME = keys.at(keys.size() - 1).time;
-    if (t > END_TIME) {
-        if (loop) {
-            uint const LOOPS = uint(t / END_TIME);
-            t -= END_TIME * LOOPS;
-        }
-        else t = keys.at(keys.size() - 1).time;
+    if (keys.size() == 1) {
+        out.time = keys.at(0).time;
+        out.easing = keys.at(0).easing; 
+        return false;
     }
 
+    if (t < 0.0f) t = 0.0f;
+    float const START_TIME = keys.at(0).time;
+    float const END_TIME = keys.at(keys.size() - 1).time;
     
+    // WRAP LOOP
+    if (loop) {
+        uint const LOOPS = uint(t / END_TIME);
+        t -= END_TIME * LOOPS;
+    }
+
+    // LAST KEY CASE 
+    if (t >= END_TIME) {
+        size_t const INDEX = keys.size() - 1;
+        out.time = keys.at(INDEX).time;
+        out.easing = keys.at(INDEX).easing;
+        return true;
+    }    
+
+    // FIRST KEY CASE
+    if (t <= START_TIME) {
+        size_t const INDEX = keys.size() - 1;
+        out.time = keys.at(INDEX).time;
+        out.easing = keys.at(INDEX).easing;
+        return true;
+    }
+
+    // IN-BETWEEN CASE
+    int aIndex = 0;
+    int bIndex = -1;
+    for (; aIndex < keys.size(); ++aIndex) {
+        float const iTime = keys.at(aIndex).time;
+        if (t > iTime) { continue; }
+
+        if (t == iTime) { 
+            bIndex = aIndex + 1;
+            break;
+        }
+
+        if (t < iTime) {
+            bIndex = aIndex;
+            --aIndex;
+            break;
+        }
+    }
+    
+    if (bIndex < 0) { std::cerr << "bIndex never assigned" << std::endl; }
+
+    Keyframe const & a = keys.at(aIndex);
+    Keyframe const & b = keys.at(bIndex);
+    if (a.time == b.time) {
+        std::cerr << "Keys have the same time value! a = " << a.time << ". b = " << b.time << std::endl;  
+        out.time = a.time;
+        out.easing = a.easing;
+        return true;
+    }
+
+    float const u = (t - a.time) / (b.time - t);
+    applyEasing(a.easing, u);
 
     return false;
 }
