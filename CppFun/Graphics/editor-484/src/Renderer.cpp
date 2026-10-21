@@ -2948,7 +2948,7 @@ void Renderer::drawKeyframeSection(ShapeManager& shapeManager) {
                 ImGui::SetNextItemWidth(-1);
                 int mode = k.easing;
                 if (ImGui::Combo(id, &mode, kEasingNames, EASE_COUNT)) {
-                    tr->keys[i].easing = mode;
+                    tr->keys[i].easing = (EasingTypes)mode;
                     g_timeline.apply(shapeManager);
                     sceneModified = true;
                 }
