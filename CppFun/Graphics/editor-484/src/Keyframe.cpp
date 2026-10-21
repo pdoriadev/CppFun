@@ -222,7 +222,7 @@ bool AnimationTrack::removeKeyNear(float t, float eps) {
     return true;  
 }
 
-int AnimationTrack::moveKey(size_t const INDEX, float t, float const EPS) {
+int AnimationTrack::moveKey(size_t const K_INDEX, float t, float const EPS) {
     // TODO(animation): retime the key, keep the list sorted, return where it ended up
     // Retime the key at `index` to time t, keep `keys` sorted, and RETURN
     // THE INDEX IT ENDED UP AT. Return -1 if `index` was out of range.
@@ -245,11 +245,11 @@ int AnimationTrack::moveKey(size_t const INDEX, float t, float const EPS) {
     // As it stands this retimes in place and returns the index it was given.
     // Dragging works perfectly until a key crosses one of its neighbours.
 
-    if (INDEX >= keys.size()) return -1; // invalid index.
+    if (K_INDEX >= keys.size()) return -1; // invalid index.
     if (t < 0.0f) t = 0.0f; // clamp t. 
-    if (t == keys.at(INDEX).time) return INDEX; // key is already at correct index
+    if (t == keys.at(K_INDEX).time) return K_INDEX; // key is already at correct index
 
-    Keyframe const K = keys.at(INDEX);
+    Keyframe const K = keys.at(K_INDEX);
         
     // CASES for t
         // t < firstKey.time - insertionIndex = 0 -------------
@@ -257,66 +257,53 @@ int AnimationTrack::moveKey(size_t const INDEX, float t, float const EPS) {
         // t > lastKey.time - insertionIndex = LAST_INDEX *****
         // t > keys[i].time - YOU MESSED UP. xxxxxxxxxxxxxxxxxx
     int i = 0;
-    int removalIndex = INDEX;
     size_t const LAST_INDEX = keys.size() - 1;
-    bool setEqual = false;
     // Find insertionIndex value.
     for ( ; i <= LAST_INDEX; ++i) {
-        if (t < keys.at(i).time) { break; }
-        if (t == keys.at(i).time) { keys[i] = K; setEqual = true; break; }
-        // t > keys.at(i).time
-        // if (i < LAST_INDEX) { continue; }
+        if (t <= keys.at(i).time) { break; }
     }
-
+    
     if (i > LAST_INDEX + 1) { std::cerr << "moveKey() i " << i << " is greater than key size " << std::endl; return -1; }
-
-    // Set/insert key.
+    
+    // Set i, removal index, insertions. 
     // CASES for insertionIndex
         // UPDATE END       - i == LAST_INDEX + 1 && index == LAST_INDEX - update end value
         // NEW END          - i == LAST_INDEX + 1 && index != LAST_INDEX 
         // UPDATE NON-END   - index = insertionIndex - update time value.
         // INSERT NON-END   - index < insertionIndex - insert at insertionIndex. 
         // index > insertionIndex - insert. 
-    if (i == LAST_INDEX) {
-        if (LAST_INDEX == INDEX) {
-            
-        }
-    }
-    
-        if (t )
-    if (setEqual)   { /* Already replaced. Update time. */}
-    if (i == INDEX) { /* Don't replace. Update time */ }
-    else { keys.insert(keys.begin() + i, K); } // insert before i
 
-    // if (i == LAST_INDEX + 1 && INDEX == LAST_INDEX) { i = LAST_INDEX;  /*Don't replace. Update time. */ }
-    // else if (i == LAST_INDEX + 1)                   { keys.push_back(K); }
-    // else if (i == INDEX)                            { /* Don't replace. Update time */ }
-    // else if (t == keys.at(i).time)                { } 
-    // else if (t < keys.at(i).time)                 { keys.insert(keys.begin() + i, K); }
-    // else { std::cerr << "INVALID set/insert key CASE in AnimationTrack::moveKey() - t = " << t 
-    //     << ". i = " << i 
-    //     << ". LAST_INDEX = " << LAST_INDEX 
-    //     << ". keys size = " << keys.size() << std::endl;
-    // }
+    int removalIndex = -1; // assume overwrite until not. 
+    // resolve OOB cases first. overwrite.
+    if (i == LAST_INDEX + 1 && LAST_INDEX == K_INDEX) { 
+        --i;
+    } 
+    // resolve OOB cases first. add new end. 
+    else if (i == LAST_INDEX + 1) { 
+        keys.push_back(K);
+        removalIndex = K_INDEX;
+    } 
+    // Update time. Overwrite.
+    else if (i == K_INDEX) { }
+    // t overlaps with another key's time. overwrite.
+    else if (t == keys.at(i).time) {
+         keys[i] = K;
+         removalIndex = K_INDEX; 
+    }
+    // insert before i
+    else {
+        keys.insert(keys.begin() + i, K); 
+        if (i < K_INDEX) { removalIndex = K_INDEX + 1; }
+        else removalIndex = K_INDEX;
+    } 
 
     keys.at(i).time = t;
 
-    // Set removal index
-    if      (i == INDEX)    { removalIndex = -1; } // don't remove. just updated value.
-    else if (i < INDEX)     { removalIndex = INDEX + 1; }
-    else if (i > INDEX)     { removalIndex = INDEX; }    
-    else { std::cerr << "INVALID removalIndex CASE in AnimationTrack::moveKey() - t = " << t 
-        << ". i = " << i 
-        << ". LAST_INDEX = " << LAST_INDEX 
-        << ". keys size = " << keys.size() << std::endl;
-    }
-
-    // erase after assigning key to new position.
     if (removalIndex >= 0) {
         keys.erase(keys.begin() + removalIndex); 
     }
 
-    std::cout << "Key old index: " << INDEX << ". New Index: " << i << ". new t = " << t << std::endl;
+    std::cout << "Key old index: " << K_INDEX << ". New Index: " << i << ". new t = " << t << std::endl;
 
     return i;
 }
