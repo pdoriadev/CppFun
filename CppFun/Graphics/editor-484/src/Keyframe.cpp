@@ -250,39 +250,65 @@ int AnimationTrack::moveKey(size_t const INDEX, float t, float const EPS) {
     if (t == keys.at(INDEX).time) return INDEX; // key is already at correct index
 
     Keyframe const K = keys.at(INDEX);
-
-    // Increased t of key at last index 
-    uint const LAST_INDEX = keys.size() - 1;
-    if (t > keys.at(LAST_INDEX).time) {
-        if (INDEX == LAST_INDEX) {
-            keys[LAST_INDEX].time = t;
-        }
-        else {
-            keys.erase(keys.begin() + INDEX);
-            keys.push_back(K);
-        }
         
-        return LAST_INDEX;
+    // CASES for t
+        // t < firstKey.time - insertionIndex = 0 -------------
+        // t < keys[i].time - insertionIndex = i **************
+        // t > lastKey.time - insertionIndex = LAST_INDEX *****
+        // t > keys[i].time - YOU MESSED UP. xxxxxxxxxxxxxxxxxx
+    int i = 0;
+    int removalIndex = INDEX;
+    size_t const LAST_INDEX = keys.size() - 1;
+    bool setEqual = false;
+    // Find insertionIndex value.
+    for ( ; i <= LAST_INDEX; ++i) {
+        if (t < keys.at(i).time) { break; }
+        if (t == keys.at(i).time) { keys[i] = K; setEqual = true; break; }
+        // t > keys.at(i).time
+        // if (i < LAST_INDEX) { continue; }
+    }
+
+    if (i > LAST_INDEX + 1) { std::cerr << "moveKey() i " << i << " is greater than key size " << std::endl; return -1; }
+
+    // Set/insert key.
+    // CASES for insertionIndex
+        // UPDATE END       - i == LAST_INDEX + 1 && index == LAST_INDEX - update end value
+        // NEW END          - i == LAST_INDEX + 1 && index != LAST_INDEX 
+        // UPDATE NON-END   - index = insertionIndex - update time value.
+        // INSERT NON-END   - index < insertionIndex - insert at insertionIndex. 
+        // index > insertionIndex - insert. 
+    if (i == LAST_INDEX) {
+        if (LAST_INDEX == INDEX) {
+            
+        }
     }
     
-    int const DIR = t > K.time ? 1 : -1;
-    int i = INDEX;
-    int removalIndex = INDEX;
-    for ( ; i >= 0 && i < keys.size(); i += DIR) {
-        if (t > keys.at(i).time) { continue; }
+        if (t )
+    if (setEqual)   { /* Already replaced. Update time. */}
+    if (i == INDEX) { /* Don't replace. Update time */ }
+    else { keys.insert(keys.begin() + i, K); } // insert before i
 
-        // hit a 
-        if      (t == keys.at(i).time) { 
-            keys[i] = K; 
-            if (i == INDEX) removalIndex = -1; // don't remove. already replaced.
-        } 
-        else if (t < keys.at(i).time) { 
-            keys.insert(keys.begin() + i, K);
-            if (i < INDEX) removalIndex = INDEX + 1; // offset from insertion. 
-        }
+    // if (i == LAST_INDEX + 1 && INDEX == LAST_INDEX) { i = LAST_INDEX;  /*Don't replace. Update time. */ }
+    // else if (i == LAST_INDEX + 1)                   { keys.push_back(K); }
+    // else if (i == INDEX)                            { /* Don't replace. Update time */ }
+    // else if (t == keys.at(i).time)                { } 
+    // else if (t < keys.at(i).time)                 { keys.insert(keys.begin() + i, K); }
+    // else { std::cerr << "INVALID set/insert key CASE in AnimationTrack::moveKey() - t = " << t 
+    //     << ". i = " << i 
+    //     << ". LAST_INDEX = " << LAST_INDEX 
+    //     << ". keys size = " << keys.size() << std::endl;
+    // }
 
-        keys.at(i).time = t;
-        break;
+    keys.at(i).time = t;
+
+    // Set removal index
+    if      (i == INDEX)    { removalIndex = -1; } // don't remove. just updated value.
+    else if (i < INDEX)     { removalIndex = INDEX + 1; }
+    else if (i > INDEX)     { removalIndex = INDEX; }    
+    else { std::cerr << "INVALID removalIndex CASE in AnimationTrack::moveKey() - t = " << t 
+        << ". i = " << i 
+        << ". LAST_INDEX = " << LAST_INDEX 
+        << ". keys size = " << keys.size() << std::endl;
     }
 
     // erase after assigning key to new position.
@@ -290,7 +316,7 @@ int AnimationTrack::moveKey(size_t const INDEX, float t, float const EPS) {
         keys.erase(keys.begin() + removalIndex); 
     }
 
-    std::cout << "Key with new t, moved to index " << i << std::endl;
+    std::cout << "Key old index: " << INDEX << ". New Index: " << i << ". new t = " << t << std::endl;
 
     return i;
 }
