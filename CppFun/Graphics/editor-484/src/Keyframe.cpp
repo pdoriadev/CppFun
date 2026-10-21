@@ -32,6 +32,7 @@ const char* const kEasingNames[EASE_COUNT] = {
 };
 
 
+// SHOULD THIS BE IN A GENERAL USE MATH LIBRARY FOR THE ENGINE???
 // Linear interpolation with u clamped, so a caller that computes u from an
 // out-of-range t cannot extrapolate a pose that was never keyed.
 glm::vec3 lerpVec3(const glm::vec3& a, const glm::vec3& b, float u) {
@@ -58,22 +59,34 @@ glm::vec3 lerpEulerDegrees(const glm::vec3& a, const glm::vec3& b, float u) {
     for (uint8_t i = 0; i < 3; ++i) {
         float aangle = a[i];
         float bangle = b[i];
-        {   // make sure angle values are within a 360 degree domain. 
-            int twoPis = (aangle / 360.0f); 
-            aangle += twoPis * 360;
-            twoPis = (bangle / 360.0f);
-            bangle += twoPis * 360;
+        {   // wraps angles to a [0 , 360) domain.  
+            int const aSign = aangle > 0 ? 1 : -1;
+            int const aRotations = aSign * (aangle / 360.0f); 
+            aangle += aRotations * 360;
+
+            int const bSign = bangle > 0 ? 1 : -1;
+            int const bRotations = bSign * (bangle / 360.0f);
+            bangle += bRotations * 360;
         }
-            
-        // setup for fullRotation calculation. 
+        
+
+        float const bMinusA = bangle - aangle;
+        // Approach A
+        if (bMinusA*bMinusA < 180*180) {
+            lerped[i] = aangle + (bangle - aangle) * u;
+            continue;
+        }
+
+        // Approach B when |b-a| > 180 
         float const lesser = aangle < bangle ? aangle : bangle;
         float const greater = lesser == aangle ? bangle : aangle;
         int8_t const rotationDir = bangle > aangle ? 1 : -1;
         
         float const fullRotationAtoB = rotationDir * (lesser + 360.0f) - greater;
-        lerped[i] = fullRotationAtoB * u; 
+        lerped[i] = aangle + fullRotationAtoB * u; 
     }
 
+    // LOGIC ERROR CHECK
     for (uint8_t i = 0; i < 3; ++i) {
         if (lerped[i] == INFINITY) {
             std::cerr << "Failed to set new angle value for index " << i << std::endl; 
@@ -106,29 +119,29 @@ float applyEasing(EasingTypes const easingType, float const u) {
     
     if (u <= 0.0f) return 0.0f;
     if (u >= 1.0f) return 1.0f;
-    float trueU = -1.0f;
+    float easedU = -1.0f;
     switch(easingType) {
         case EASE_STEP :
-            if (u < 1.0f) trueU = 0.0f;
-            trueU = 1.0f;
+            if (u < 1.0f) easedU = 0.0f;
+            easedU = 1.0f;
             break;
         case EASE_LINEAR :
-            trueU = u;
+            easedU = u;
             break;
         case EASE_IN :
-            trueU = u*u;
+            easedU = u*u;
             break;
         case EASE_OUT :
-            trueU = 1 - ( (1-u) * (1-u) );
+            easedU = 1 - ( (1-u) * (1-u) );
             break;
         case EASE_IN_OUT : // smoothstep
-            trueU = 3*u*u - 2*u*u*u;
+            easedU = 3*u*u - 2*u*u*u;
             break;
         default:
             std::cerr << easingType << " is not a valid easing type." << std::endl;
     }
 
-    if (trueU == -1.0f) { std::cerr << "Failed to apply an easing type. u = " << u << std::endl; }
+    if (easedU == -1.0f) { std::cerr << "Failed to apply an easing type. u = " << u << std::endl; }
 
     return u;
 }
@@ -150,6 +163,8 @@ void AnimationTrack::addKey(const Keyframe& k) {
     // it misbehaves the moment you key out of order or key the same instant
     // twice. Both are visible, and both are yours to fix.
 
+    if (keys.size() == 0) { keys.push_back(k); }
+    
     // insert at end. 
     if (k.time > keys.at(keys.size() - 1).time) {
         keys.push_back(k);
@@ -207,7 +222,7 @@ bool AnimationTrack::removeKeyNear(float t, float eps) {
     return true;  
 }
 
-int AnimationTrack::moveKey(size_t index, float t, float eps) {
+int AnimationTrack::moveKey(size_t const INDEX, float t, float const EPS) {
     // TODO(animation): retime the key, keep the list sorted, return where it ended up
     // Retime the key at `index` to time t, keep `keys` sorted, and RETURN
     // THE INDEX IT ENDED UP AT. Return -1 if `index` was out of range.
@@ -230,30 +245,54 @@ int AnimationTrack::moveKey(size_t index, float t, float eps) {
     // As it stands this retimes in place and returns the index it was given.
     // Dragging works perfectly until a key crosses one of its neighbours.
 
-    if (index >= keys.size()) return -1; // invalid index.
+    if (INDEX >= keys.size()) return -1; // invalid index.
     if (t < 0.0f) t = 0.0f; // clamp t. 
-    if (t == keys.at(index).time) return index; // key is already at correct index
+    if (t == keys.at(INDEX).time) return INDEX; // key is already at correct index
 
-    Keyframe const k = keys.at(index);
-    int const dir = t > k.time ? 1 : -1;
-    
-    int i = index;
-    for ( ; i >= 0 && i < keys.size(); i += dir) {
-        if (t > keys.at(i).time) { continue; }
+    Keyframe const K = keys.at(INDEX);
+
+    // Increased t of key at last index 
+    uint const LAST_INDEX = keys.size() - 1;
+    if (t > keys.at(LAST_INDEX).time) {
+        if (INDEX == LAST_INDEX) {
+            keys[LAST_INDEX].time = t;
+        }
+        else {
+            keys.erase(keys.begin() + INDEX);
+            keys.push_back(K);
+        }
         
-        if (t == keys.at(i).time) { keys[i] = k; }
-        if (t < keys.at(i).time) { keys.insert(keys.begin() + i, k); }
+        return LAST_INDEX;
+    }
+    
+    int const DIR = t > K.time ? 1 : -1;
+    int i = INDEX;
+    int removalIndex = INDEX;
+    for ( ; i >= 0 && i < keys.size(); i += DIR) {
+        if (t > keys.at(i).time) { continue; }
+
+        // hit a 
+        if      (t == keys.at(i).time) { 
+            keys[i] = K; 
+            if (i == INDEX) removalIndex = -1; // don't remove. already replaced.
+        } 
+        else if (t < keys.at(i).time) { 
+            keys.insert(keys.begin() + i, K);
+            if (i < INDEX) removalIndex = INDEX + 1; // offset from insertion. 
+        }
 
         keys.at(i).time = t;
         break;
     }
 
-    keys.erase(keys.begin() + index);
-    
+    // erase after assigning key to new position.
+    if (removalIndex >= 0) {
+        keys.erase(keys.begin() + removalIndex); 
+    }
 
     std::cout << "Key with new t, moved to index " << i << std::endl;
 
-    return static_cast<int>(i);
+    return i;
 }
 
 bool AnimationTrack::evaluate(float t, Keyframe& out) const {
@@ -271,6 +310,7 @@ bool AnimationTrack::evaluate(float t, Keyframe& out) const {
         return false;
     }
 
+    // Clamp 
     if (t < 0.0f) t = 0.0f;
     float const START_TIME = keys.at(0).time;
     float const END_TIME = keys.at(keys.size() - 1).time;
@@ -278,22 +318,19 @@ bool AnimationTrack::evaluate(float t, Keyframe& out) const {
     // WRAP LOOP
     if (loop) {
         uint const LOOPS = uint(t / END_TIME);
-        t -= END_TIME * LOOPS;
+        t -= END_TIME * (float)LOOPS;
     }
 
     // LAST KEY CASE 
     if (t >= END_TIME) {
         size_t const INDEX = keys.size() - 1;
-        out.time = keys.at(INDEX).time;
-        out.easing = keys.at(INDEX).easing;
+        easeKeyframe(EaseKeyframeParams(keys.at(INDEX-1), keys.at(INDEX), 1.0f, out));
         return true;
     }    
 
     // FIRST KEY CASE
     if (t <= START_TIME) {
-        size_t const INDEX = keys.size() - 1;
-        out.time = keys.at(INDEX).time;
-        out.easing = keys.at(INDEX).easing;
+        easeKeyframe(EaseKeyframeParams(keys.at(0), keys.at(1), 0.0f, out));
         return true;
     }
 
@@ -327,8 +364,18 @@ bool AnimationTrack::evaluate(float t, Keyframe& out) const {
         return true;
     }
 
-    float const u = (t - a.time) / (b.time - a.time);
-    applyEasing(a.easing, u);
+    float u = (t - a.time) / (b.time - a.time);
+    easeKeyframe(EaseKeyframeParams(a, b, u, out));
 
-    return false;
+    return true;
+}
+
+bool AnimationTrack::easeKeyframe(EaseKeyframeParams p) const {
+    p.out.time     = p.a.time + p.u;
+    p.out.easing   = p.a.easing;
+    p.out.position = lerpVec3(p.a.position, p.b.position, p.u);
+    p.out.rotation = lerpEulerDegrees(p.a.rotation, p.b.rotation, p.u);
+    p.out.scale    = lerpVec3(p.a.scale, p.b.scale, p.u);
+
+    return true;
 }

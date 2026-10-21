@@ -52,12 +52,12 @@ extern const char* const kEasingNames[EASE_COUNT];
 
 // One pose at one instant. Rotation is Euler degrees about X, Y, Z, matching
 // Shape's angleX/angleY/angleZ so no conversion is needed at either end.
-struct Keyframe {
+struct  Keyframe {
     float     time;
     glm::vec3 position;
     glm::vec3 rotation;     // degrees
     glm::vec3 scale;
-    EasingTypes easing;     // one of Easing; governs the interval to the RIGHT
+    int easing;     // one of Easing; governs the interval to the RIGHT
 
     Keyframe()
         : time(0.0f),
@@ -119,6 +119,16 @@ glm::vec3 lerpEulerDegrees(const glm::vec3& a, const glm::vec3& b, float u);
 float applyEasing(EasingTypes const easing, float const u);
 
 // --- the track --------------------------------------------------------------
+
+struct EaseKeyframeParams {
+    Keyframe const a;
+    Keyframe const b;
+    float const u;
+    Keyframe& out;
+
+    EaseKeyframeParams(Keyframe const _a, Keyframe const _b, float const _u, Keyframe& _out) 
+    : a(_a), b(_b), u(applyEasing((EasingTypes)a.easing, _u)), out(_out) { }
+};
 
 struct AnimationTrack {
     int                   shapeId;
@@ -193,6 +203,8 @@ struct AnimationTrack {
     // wrapping, if the track loops), and out.easing carries k[i]'s, so a caller
     // can tell which segment the pose came from.
     bool evaluate(float t, Keyframe& out) const;
+
+    bool easeKeyframe(EaseKeyframeParams params) const;
 };
 
 // --- the timeline (all given, AnimationTimeline.cpp) -------------------------
