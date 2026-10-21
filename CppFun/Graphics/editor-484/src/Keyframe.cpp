@@ -273,37 +273,58 @@ int AnimationTrack::moveKey(size_t const K_INDEX, float t, float const EPS) {
         // INSERT NON-END   - index < insertionIndex - insert at insertionIndex. 
         // index > insertionIndex - insert. 
 
+    // std::string actionsLog = "";
+
+    // NOTE: The extended if-else block smells like I didn't constrain the 
+        // state space enough before-hand. 
+
     int removalIndex = -1; // assume overwrite until not. 
     // resolve OOB cases first. overwrite.
     if (i == LAST_INDEX + 1 && LAST_INDEX == K_INDEX) { 
         --i;
+        // actionsLog += "Moved key is last key. Overwrote last key's t.";
     } 
     // resolve OOB cases first. add new end. 
     else if (i == LAST_INDEX + 1) { 
         keys.push_back(K);
         removalIndex = K_INDEX;
+        // actionsLog += "Added copy of moved key to the end.";
     } 
-    // Update time. Overwrite.
-    else if (i == K_INDEX) { }
+    // Update time. Overwrite. Moved a little left.
+    else if (i == K_INDEX) { 
+        // actionsLog += "Moved key left. Overwrote moving key's t value.";
+    }
+    // Update time. Overwrite. Moved a little right. 
+    else if (i == K_INDEX + 1) {
+        // actionsLog += "Moved key right. Overwrote moving key's t value.";
+        --i;
+    }
     // t overlaps with another key's time. overwrite.
     else if (t == keys.at(i).time) {
          keys[i] = K;
          removalIndex = K_INDEX; 
+         // actionsLog += "Moved key's new t is equal to key at index " + std::to_string(i) + ". Overwrite.";
     }
     // insert before i
     else {
         keys.insert(keys.begin() + i, K); 
         if (i < K_INDEX) { removalIndex = K_INDEX + 1; }
         else removalIndex = K_INDEX;
+        // actionsLog += "Inserted copy of moved key to index " + std::to_string(i - 1) + ".";
     } 
 
     keys.at(i).time = t;
 
     if (removalIndex >= 0) {
         keys.erase(keys.begin() + removalIndex); 
+        if (i > removalIndex) --i;
+        // actionsLog += " Removed key at index " + std::to_string(removalIndex);
     }
 
-    std::cout << "Key old index: " << K_INDEX << ". New Index: " << i << ". new t = " << t << std::endl;
+    /* std::cout << "Key old index: " << K_INDEX 
+                << ". New Index: " << i 
+                << ". New t = " << t << std::endl; */
+    // std::cout << actionsLog << std::endl;
 
     return i;
 }
