@@ -31,6 +31,14 @@ const char* const kEasingNames[EASE_COUNT] = {
     "Step", "Linear", "Ease In", "Ease Out", "Ease In-Out"
 };
 
+/*
+TO-DO 
+    - epsilon when replacing key on add. Should remove within a range. Can have keys with 0.01 difference right now. No bueno. 
+    - not currently rotating the opposite direction like it should. ): take a nother look. Take to prof. 
+        - not setting negative rotation values. related?
+        - run through math. May need to flip at the end??
+*/
+
 
 // SHOULD THIS BE IN A GENERAL USE MATH LIBRARY FOR THE ENGINE???
 // Linear interpolation with u clamped, so a caller that computes u from an
@@ -57,31 +65,27 @@ glm::vec3 lerpEulerDegrees(const glm::vec3& a, const glm::vec3& b, float u) {
 
     glm::vec3 lerped = glm::vec3(INFINITY, INFINITY, INFINITY);
     for (uint8_t i = 0; i < 3; ++i) {
+        if (a[i] == b[i]) { 
+            lerped[i] = a[i]; 
+            continue;
+        }
+
         float aangle = a[i];
         float bangle = b[i];
         {   // wraps angles to a [0 , 360) domain.  
             int const aRotations = ((int)aangle / 360); 
             int const bRotations = ((int)bangle / 360);
-            
-            aangle -= (float)aRotations * 360.0f;
-            bangle -= (float)bRotations * 360.0f;
-        }
-        
 
-        float const bMinusA = bangle - aangle;
-        // Approach A
-        if (bMinusA*bMinusA < 180*180) {
-            lerped[i] = aangle + (bangle - aangle) * u;
-            continue;
+            aangle -= (float)(aRotations /*+ aNegOffset*/) * 360.0f;
+            bangle -= (float)(bRotations /*+ bNegOffset*/) * 360.0f;
         }
 
-        // Approach B when |b-a| > 180 
-        float const lesser = aangle < bangle ? aangle : bangle;
-        float const greater = lesser == aangle ? bangle : aangle;
-        int8_t const rotationDir = bangle > aangle ? 1 : -1;
-        
-        float const fullRotationAtoB = rotationDir * (lesser + 360.0f) - greater;
-        lerped[i] = aangle + fullRotationAtoB * u; 
+        // angle difference. Adjust to be within [-180, 180) domain.
+        float diffAngle = bangle - aangle;
+        if      (diffAngle >= 180) diffAngle -= 360.0f;
+        else if (diffAngle < -180) diffAngle += 360.0f; 
+ 
+        lerped[i] = a[i] + diffAngle * u;
     }
 
     // LOGIC ERROR CHECK
