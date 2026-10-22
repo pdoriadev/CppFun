@@ -72,20 +72,20 @@ glm::vec3 lerpEulerDegrees(const glm::vec3& a, const glm::vec3& b, float u) {
 
         float aangle = a[i];
         float bangle = b[i];
-        {   // wraps angles to a [0 , 360) domain.  
-            int const aRotations = ((int)aangle / 360); 
-            int const bRotations = ((int)bangle / 360);
+        {   // wraps angles to a [-360 , 360) domain.  
+            int const aFullRotations = ((int)aangle / 360); 
+            int const bFullRotations = ((int)bangle / 360);
 
-            aangle -= (float)(aRotations /*+ aNegOffset*/) * 360.0f;
-            bangle -= (float)(bRotations /*+ bNegOffset*/) * 360.0f;
+            aangle -= (float)(aFullRotations) * 360.0f;
+            bangle -= (float)(bFullRotations) * 360.0f;
         }
 
-        // angle difference. Adjust to be within [-180, 180) domain.
-        float diffAngle = bangle - aangle;
-        if      (diffAngle >= 180) diffAngle -= 360.0f;
-        else if (diffAngle < -180) diffAngle += 360.0f; 
+        // Angle difference. Adjust to be within [-180, 180) domain.
+        float lerpRotation = bangle - aangle;
+        if      (lerpRotation >= 180) lerpRotation -= 360.0f;
+        else if (lerpRotation < -180) lerpRotation += 360.0f; 
  
-        lerped[i] = a[i] + diffAngle * u;
+        lerped[i] = a[i] + lerpRotation * u;
     }
 
     // LOGIC ERROR CHECK
