@@ -120,6 +120,8 @@ public:
 
     // Calculate normal values
     bool calculateNormals();
+
+    bool makeTri(std::vector<glm::vec3> const pos, glm::vec3 const col);
     
     // Getter methods
     float getX() const;

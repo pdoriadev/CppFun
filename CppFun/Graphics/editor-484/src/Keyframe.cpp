@@ -145,7 +145,7 @@ float applyEasing(EasingTypes const easingType, float const u) {
 
     if (easedU == -1.0f) { std::cerr << "Failed to apply an easing type. u = " << u << std::endl; }
 
-    return u;
+    return easedU;
 }
 
 // --- storage: keeping the keys sorted and unique in time --------------------
@@ -247,7 +247,7 @@ int AnimationTrack::moveKey(size_t const K_INDEX, float t, float const EPS) {
     // As it stands this retimes in place and returns the index it was given.
     // Dragging works perfectly until a key crosses one of its neighbours.
 
-    if (K_INDEX >= keys.size()) return -1; // invalid index.
+    if (K_INDEX < 0 || K_INDEX >= keys.size()) return -1; // invalid index.
     if (t < 0.0f) t = 0.0f; // clamp t. 
     if (t == keys.at(K_INDEX).time) return K_INDEX; // key is already at correct index
 

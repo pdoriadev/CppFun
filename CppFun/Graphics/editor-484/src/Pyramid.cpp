@@ -20,121 +20,64 @@ Pyramid::~Pyramid() {
 }
 
 bool Pyramid::setupPyramid() {
-    normalConfig = NormalConfig::SHARED;
+    normalConfig = NormalConfig::EACH_VERTEX;
 
-    uint32_t const VERTICES_PER_LOOP = 4;
-    uint32_t const VALUES_PER_VERTEX = 9;
-    uint32_t const MAX_LOOPS = 1;
-    uint32_t const FACES_COUNT = (MAX_LOOPS * VERTICES_PER_LOOP) + 1;
-
-    glm::vec3 const positions[ VERTICES_PER_LOOP + 1 ] = {   
-        glm::vec3(0, 0.5, 0),               // top vertex
-        glm::vec3(-0.5f, -0.5f, -0.5f),     // bottom face. bottom left
-        glm::vec3( 0.5f, -0.5f, -0.5f),      // bottom face. bottom right
-        glm::vec3( 0.5f, -0.5f,  0.5f),       // bottom face. top right
-        glm::vec3(-0.5f, -0.5f,  0.5f)       // bottom face. top left
+    glm::vec3 const pos[5] = {   
+        glm::vec3( 0.0f, 0.5f, 0.0f),        // top center. 
+        glm::vec3(-0.5f, -0.5f, -0.5f),      // bottom face. back left
+        glm::vec3( 0.5f, -0.5f, -0.5f),      // bottom face. back right
+        glm::vec3( 0.5f, -0.5f,  0.5f),      // bottom face. front right
+        glm::vec3(-0.5f, -0.5f,  0.5f)       // bottom face. front left
     };
 
-    normals = { 
-        glm::vec3(0.0f), 
-        glm::vec3(0.0f),
-        glm::vec3(0.0f),
-        glm::vec3(0.0f),
-        glm::vec3(0.0f) 
-    };
+    glm::vec3 const color = glm::vec3(1.0f, 0.4f, 0.2f);
 
-    std::vector<unsigned int> elementData;
-    elementData.reserve(18); // 1 plane = 2 tris. (2 tris + 4 tris) * 3 vertices per tri
+    std::cout << "Setup pos and color data" << std::endl;
 
-    // construct 3 intermediate side-tri's
-    for (uint32_t i = 1; i < FACES_COUNT - 1; ++i) {
-        // side triangle indices
-        faces.push_back({0, static_cast<int>(i), static_cast<int>(i)+1});
-        for (uint32_t i = 0; i < 3; ++i) {
-            elementData.push_back(faces[faces.size() - 1][i]);
-        }
-        
-        glm::vec3 const TOP_TO_BOTTOM_LEFT  = (positions[i] - positions[0] );
-        glm::vec3 const TOP_TO_BOTTOM_RIGHT = (positions[i+1] - positions[0] ); // bottom to side is not necessarily perpendicular to the bottom to top. Need alternative algorithm
-        glm::vec3 const PLANE_NORMAL        = glm::cross(TOP_TO_BOTTOM_LEFT, TOP_TO_BOTTOM_RIGHT);
-        
-        normals[0]      += PLANE_NORMAL;
-        normals[i]      += PLANE_NORMAL;
-        normals[i+1]    += PLANE_NORMAL;
-    } 
-
-    { // WRAP-AROUND TRI
-        // side triangle indices
-        faces.push_back({0, 4, 1});
-        for (uint32_t i = 0; i < 3; ++i) {
-            elementData.push_back(faces[faces.size() - 1][i]);
-        }
-
-        glm::vec3 const TOP_TO_BOTTOM_LEFT  = glm::normalize(positions[4] - positions[0]);
-        glm::vec3 const TOP_TO_BOTTOM_RIGHT = glm::normalize(positions[1] - positions[0]);
-        glm::vec3 const PLANE_NORMAL        = glm::cross(TOP_TO_BOTTOM_LEFT, TOP_TO_BOTTOM_RIGHT);
-
-        normals[0] += PLANE_NORMAL;
-        normals[4] += PLANE_NORMAL;
-        normals[1] += PLANE_NORMAL;
-    }
-
-    { // BOTTOM-FACE
-        // side triangle indices
-        faces.push_back({4, 3, 2});
-        for (uint32_t i = 0; i < 3; ++i) {
-            elementData.push_back(faces[faces.size() - 1][i]);
-        }
-
-        faces.push_back({2, 1, 4});
-        for (uint32_t i = 0; i < 3; ++i) {
-            elementData.push_back(faces[faces.size() - 1][i]);
-        }
-
-        glm::vec3 const THREE_TO_FOUR  = glm::normalize(positions[4] - positions[3]);
-        glm::vec3 const THREE_TO_TWO   = glm::normalize(positions[3] - positions[2]);
-        glm::vec3 const PLANE_NORMAL   = glm::cross(THREE_TO_TWO, THREE_TO_FOUR);
-
-        for (uint32_t i = 1; i < FACES_COUNT; ++i) {
-            normals[i] += PLANE_NORMAL;
-        }
-    }
-    
-    // normalize normals
-    for (uint32_t i = 1; i < FACES_COUNT; ++i) {
-        normals[i] = glm::normalize(normals[i]);
-    }
-    
-    std::vector<float> vertexData;
-    vertexData.reserve( VALUES_PER_VERTEX * (VERTICES_PER_LOOP + 1) ); // accounts for single-top vertex
-    
-    // Add position, normal, and color data to vertex data. 
-    for (uint32_t i = 0; i < (VERTICES_PER_LOOP + 1); ++i) {
-        vertexData.push_back(positions[i].x);
-        vertexData.push_back(positions[i].y);
-        vertexData.push_back(positions[i].z);
-
-        vertexData.push_back(normals[i].x);
-        vertexData.push_back(normals[i].y);
-        vertexData.push_back(normals[i].z);
-        
-        for (uint32_t j = 0; j < 3; ++j) {
-            vertexData.push_back(static_cast<float>(i) / static_cast<float>(VERTICES_PER_LOOP + 1));
-        }
-        
-        // Add position data to shape's local positions/vertices array
-        vertices.push_back(positions[0]);
-    }
+    // side tri's
+    std::vector<glm::vec3> tri = {pos[0], pos[2], pos[1]};
+    makeTri(tri, color);
+    tri = {pos[0], pos[3], pos[2]};
+    makeTri(tri, color);
+    tri = {pos[0], pos[4], pos[3]};
+    makeTri(tri, color);
+    tri = {pos[0], pos[1], pos[4]};
+    makeTri(tri, color);
+    // bottom plane
+    tri = {pos[4], pos[1], pos[2]};
+    makeTri(tri, color);
+    tri = {pos[2], pos[3], pos[4]};
+    makeTri(tri, color);
     
     std::cout << "Total Faces = " << faces.size() << std::endl;
-    outputVertices(vertexData, VALUES_PER_VERTEX);
 
-    //outputElements(elementData, 3);
+    std::vector<float> vertexData;
+    vertexData.reserve(6 * 9); // 6 triangles * 9 floats per triangle
+    for (size_t i = 0; i < vertices.size(); ++i) {
+        vertexData.push_back(vertices.at(i)[0]);
+        vertexData.push_back(vertices.at(i)[1]);
+        vertexData.push_back(vertices.at(i)[2]);
+    }
+
+    outputVertices(vertexData, 9);
+
+    std::vector<unsigned int> elementData;
+    elementData.reserve(6 * 3); // 6 triangles * 3 verts per triangle. 
+    for (size_t i = 0; i < faces.size(); ++i) {
+        for (size_t j = 0; j < faces.at(i).size(); ++j) {
+            elementData.push_back(faces.at(i).at(j));
+            if (j >= 3) {
+                std::cerr << "Too many verts for a triangle." << std::endl;
+            }
+        }
+    }
+
+    std::cout << "setup element data" << std::endl;
 
     // Planar per-face projection. Returns one UV per triangle corner, which is
     // exactly what the emission loop above produced -- indexData is sequential,
     // so attribute 3 must be the same length as the interleaved buffer.
-    //texCoords = TexCoords::planarPerFace(vertices, faces);
+    // texCoords = TexCoords::planarPerFace(vertices, faces);
 
     // Create and bind VAO, VBO, and EBO
     glGenVertexArrays(1, &VAO);
@@ -215,6 +158,7 @@ bool Pyramid::setupPyramid() {
     //     elementData.insert(elementData.end(), {static_cast<unsigned int>(i * 3), static_cast<unsigned int>(i * 3 + 1), static_cast<unsigned int>(i * 3 + 2)});
     // }
 
+    std::cout << "Finished pyramid setup" << std::endl;
     return true;
 }
 

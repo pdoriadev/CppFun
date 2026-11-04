@@ -100,6 +100,29 @@ Shape::Shape(float x, float y, float z, float uniformScale, int colorIndex, int 
     defaultCustomColor[2] = 0.0f;
 }
 
+// makes a tri and adds it to the vertices list.
+bool Shape::makeTri(std::vector<glm::vec3> const pos, glm::vec3 const col) {
+    if (pos.size() != 3) {
+        std::cerr << "3 and ONLY 3 positions when constructing triangles." << std::endl; 
+        return false; 
+    }
+
+    glm::vec3 const faceNormal = glm::normalize(glm::cross(pos.at(2) - pos.at(1), pos.at(0) - pos.at(1)));
+
+    for (size_t i = 0; i < pos.size(); ++i) {
+        vertices.push_back(pos.at(i));
+        vertices.push_back(faceNormal);
+        vertices.push_back(col);
+    }    
+
+
+    int startingIndex = (vertices.size() / 3) - 3; // extracts number of elements in vertices. finds 
+    std::vector<int> const face = { startingIndex, startingIndex + 1, startingIndex + 2 };
+    faces.push_back(face);
+
+    return true;
+}
+
 // --- Ray tracing material properties --------------------------------------
 
 void Shape::setReflectivity(float r) { material.reflectivity = glm::clamp(r, 0.0f, 1.0f); }

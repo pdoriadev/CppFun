@@ -1,0 +1,210 @@
+# Headless tests for the ray casting / ray tracing core.
+#
+# Run the main build first so the object files exist:
+#     make
+#     make -f tests/Makefile.test
+#     ./raytrace_test
+#
+# These link only against the non-GUI objects, so they run with no window,
+# no OpenGL context and no display.
+
+CXX      = g++
+CXXFLAGS = -std=c++11 -g -Wall -DGLM_ENABLE_EXPERIMENTAL -Iinclude -Iinclude/glad -Iinclude/tinydialog -Isrc/stb
+
+OBJ_DIR  = obj
+CORE_OBJS = $(OBJ_DIR)/Shape.o \
+            $(OBJ_DIR)/ShapeManager.o \
+            $(OBJ_DIR)/ColorPresets.o \
+            $(OBJ_DIR)/Camera.o \
+            $(OBJ_DIR)/SceneLight.o \
+            $(OBJ_DIR)/BVH.o \
+            $(OBJ_DIR)/RayScene.o \
+            $(OBJ_DIR)/RayTracer.o \
+            $(OBJ_DIR)/ImageIO.o \
+            $(OBJ_DIR)/ParticleSystem.o \
+            $(OBJ_DIR)/Light.o \
+            $(OBJ_DIR)/glad.o
+
+# The swappable translation units that raytrace_test actually reaches:
+# ShapeTransform (Shape::getModelMatrix) and Shading (RayTracer::shade). The
+# curves and skinning units are deliberately NOT here -- nothing in this object
+# set references them, and pulling Surface.o in would drag Curve.o with it.
+#
+# Wrapped in $(wildcard) on purpose: in
+# solution mode the main Makefile leaves these out of obj/, and a bare
+# prerequisite for a file that will never exist stops the build. Absent here,
+# the symbol is undefined and the archive below supplies it -- which is exactly
+# the mechanism the solution switch relies on.
+CORE_OBJS += $(wildcard $(OBJ_DIR)/RayIntersect.o) \
+             $(wildcard $(OBJ_DIR)/Lighting.o) \
+             $(wildcard $(OBJ_DIR)/ShapeTransform.o) \
+             $(wildcard $(OBJ_DIR)/ObjParser.o) \
+             $(wildcard $(OBJ_DIR)/Keyframe.o) \
+             $(wildcard $(OBJ_DIR)/TexCoords.o) \
+             $(wildcard $(OBJ_DIR)/TextureCache.o) \
+             $(wildcard $(OBJ_DIR)/Shading.o) \
+             $(wildcard $(OBJ_DIR)/AnimationTimeline.o)
+
+
+# Solution archives, if any have been built. This deliberately does NOT mirror
+# the main Makefile's per-topic switches -- it just appends every archive that
+# exists, which gives the right answer in both modes for free:
+#
+#   student mode    obj/ contains the student's object, so it defines the
+#                   symbol and the archive member is never extracted. No-op.
+#   solution mode   the main Makefile left that object out of obj/, the symbol
+#                   is undefined, and the archive supplies it.
+#
+# Exactly one of the two is ever on the link line, because the main Makefile
+# guarantees it -- so a multiple-definition collision cannot arise here.
+# Listed AFTER the objects, which is required: an archive placed first is
+# extracted eagerly and then collides.
+SOLUTION_LIBS = $(wildcard lib/solution/*.a) $(wildcard ../lib/solution/*.a)
+
+UNAME_S := $(shell uname -s)
+
+# LINK THE ARCHIVES AS A GROUP -- same reason as the main Makefile.
+#
+# This list comes from a wildcard, so it is ALPHABETICAL: liblighting.a lands
+# before libraytracer.a. A static archive is searched once, in order, for
+# symbols undefined at that moment, and Shading.cpp (raytracer) calls
+# lightGeometry() and phongContribution() (lighting) -- so the linker walks
+# past liblighting.a before anything needs it and then fails with
+#
+#     undefined reference to `lightGeometry(SceneLightSample const&, ...)'
+#
+# The instructor tree hides this: Lighting.o is compiled in, so the symbols are
+# already defined before any archive is reached. It only bites where lighting
+# comes FROM an archive -- which is every grading run that links upstream
+# solutions, i.e. exactly when it matters most.
+#
+# --start-group makes the linker re-scan until nothing is undefined, so archive
+# order stops mattering. ld64 (macOS) has no such flag and needs none.
+, := ,
+ifeq ($(UNAME_S), Darwin)
+    SOLUTION_LINK = $(SOLUTION_LIBS)
+else
+    SOLUTION_LINK = $(if $(SOLUTION_LIBS),-Wl$(,)--start-group $(SOLUTION_LIBS) -Wl$(,)--end-group,)
+endif
+ifeq ($(UNAME_S), Linux)
+    EXTRA_LIBS = -ldl
+    SCENE_LIBS = -lGL -lglfw
+endif
+ifeq ($(OS), Windows_NT)
+    SCENE_LIBS = -lgdi32 -lopengl32 -lglfw3 -lcomdlg32 -lole32 -lshell32 -luuid
+endif
+
+# Derived from what is actually present, not hardcoded.
+#
+# A course tree omits the grader suites for the other course's topics -- those
+# topics are stubbed there, so their suites would fail, and a failing suite for
+# an assignment that was never yours reads as "the given code is broken". With
+# an explicit list, a missing .cpp would break the build instead of quietly
+# dropping out. Deriving it means adding or removing a suite Just Works in both
+# the instructor tree and either student tree.
+#
+# specular_through_glass is appended by hand: it prints measurements rather
+# than assertions, so it does not carry the _test suffix.
+TEST_SRCS = $(wildcard tests/*_test.cpp)
+TESTS     = $(notdir $(basename $(TEST_SRCS))) specular_through_glass
+
+# Renderers rather than assertions: they emit an image to look at.
+# Run on demand, not as part of `check`: these take minutes and are judged by
+# eye. demo_scenes is the odd one out -- it writes .scene files rather than an
+# image -- but it is run the same way.
+#
+# FILTERED AGAINST WHAT IS ACTUALLY PRESENT. demo_scenes.cpp is instructor-only
+# and the stripper removes it, so a hardcoded list makes the default `all`
+# target die in every student clone with
+#
+#     make: *** No rule to make target 'tests/demo_scenes.cpp'
+#
+# before a single suite is built. Any future instructor-only tool goes in
+# ALL_RENDERS and is filtered out the same way.
+ALL_RENDERS = demo_render ice_scene ice_checker_scene refraction_acne ice_render \
+              texture_scene bench demo_scenes
+RENDERS = $(foreach r,$(ALL_RENDERS),$(if $(wildcard tests/$(r).cpp),$(r),))
+
+all: $(TESTS) $(RENDERS)
+
+# Run every suite that reports pass/fail. The renderers are excluded - they take
+# minutes and are judged by eye.
+check: $(TESTS)
+	@rc=0; for t in $(TESTS); do \
+	  echo "--- $$t"; ./$$t || rc=1; \
+	done; exit $$rc
+
+raytrace_test: tests/raytrace_test.cpp $(CORE_OBJS)
+	$(CXX) $(CXXFLAGS) $< $(CORE_OBJS) $(SOLUTION_LINK) -o $@ $(EXTRA_LIBS)
+
+# Neither of these needs a GL context or any of the shape classes, so they link
+# against just what they use. transform_test defines its own trivial Shape
+# subclass; obj_parser_test parses from a string.
+transform_test: tests/transform_test.cpp $(wildcard $(OBJ_DIR)/Shape.o) $(wildcard $(OBJ_DIR)/ShapeTransform.o) $(OBJ_DIR)/ColorPresets.o $(OBJ_DIR)/glad.o $(wildcard $(OBJ_DIR)/TextureCache.o) $(wildcard $(OBJ_DIR)/TexCoords.o)
+	$(CXX) $(CXXFLAGS) $< $(wildcard $(OBJ_DIR)/Shape.o) $(wildcard $(OBJ_DIR)/ShapeTransform.o) $(OBJ_DIR)/ColorPresets.o $(OBJ_DIR)/glad.o $(wildcard $(OBJ_DIR)/TextureCache.o) $(wildcard $(OBJ_DIR)/TexCoords.o) $(SOLUTION_LINK) -o $@ $(SCENE_LIBS) $(EXTRA_LIBS)
+
+# Deliberately minimal: literal triangles only, so it needs neither a GL
+# context nor any shape class. Shape.o comes in for getTransparency(), which
+# transmittance() calls, and drags ColorPresets/glad/TextureCache with it.
+bvh_test: tests/bvh_test.cpp $(wildcard $(OBJ_DIR)/BVH.o) $(wildcard $(OBJ_DIR)/RayIntersect.o) $(OBJ_DIR)/Shape.o $(OBJ_DIR)/ColorPresets.o $(OBJ_DIR)/glad.o $(wildcard $(OBJ_DIR)/TextureCache.o) $(wildcard $(OBJ_DIR)/TexCoords.o) $(wildcard $(OBJ_DIR)/ShapeTransform.o)
+	$(CXX) $(CXXFLAGS) $< $(wildcard $(OBJ_DIR)/BVH.o) $(wildcard $(OBJ_DIR)/RayIntersect.o) $(OBJ_DIR)/Shape.o $(OBJ_DIR)/ColorPresets.o $(OBJ_DIR)/glad.o $(wildcard $(OBJ_DIR)/TextureCache.o) $(wildcard $(OBJ_DIR)/TexCoords.o) $(wildcard $(OBJ_DIR)/ShapeTransform.o) $(SOLUTION_LINK) -o $@ $(SCENE_LIBS) $(EXTRA_LIBS)
+
+# Two pure functions and some vectors: no GL, no scene, no shapes.
+lighting_test: tests/lighting_test.cpp $(wildcard $(OBJ_DIR)/Lighting.o)
+	$(CXX) $(CXXFLAGS) $< $(wildcard $(OBJ_DIR)/Lighting.o) $(SOLUTION_LINK) -o $@ $(EXTRA_LIBS)
+
+obj_parser_test: tests/obj_parser_test.cpp $(wildcard $(OBJ_DIR)/ObjParser.o)
+	$(CXX) $(CXXFLAGS) $< $(wildcard $(OBJ_DIR)/ObjParser.o) $(SOLUTION_LINK) -o $@ $(EXTRA_LIBS)
+
+# Three numbers and some trigonometry: no GL, no scene, no shapes. Camera.o is
+# the given half (updatePosition, the matrices, generateRay); CameraControl.o is
+# the assignment, and is absent in solution mode -- hence the wildcard.
+camera_test: tests/camera_test.cpp $(OBJ_DIR)/Camera.o $(wildcard $(OBJ_DIR)/CameraControl.o)
+	$(CXX) $(CXXFLAGS) $< $(OBJ_DIR)/Camera.o $(wildcard $(OBJ_DIR)/CameraControl.o) $(SOLUTION_LINK) -o $@ $(EXTRA_LIBS)
+
+vr_view_test: tests/vr_view_test.cpp $(OBJ_DIR)/Camera.o $(wildcard $(OBJ_DIR)/CameraControl.o) $(OBJ_DIR)/HeadPose.o $(OBJ_DIR)/VRCamera.o
+	$(CXX) $(CXXFLAGS) $< $(OBJ_DIR)/Camera.o $(wildcard $(OBJ_DIR)/CameraControl.o) $(OBJ_DIR)/HeadPose.o $(OBJ_DIR)/VRCamera.o $(SOLUTION_LINK) -o $@ $(EXTRA_LIBS)
+
+# Curves and skinning need a GL context only because Surface and
+# ImportCharacter create VAOs in setup paths these tests do not call -- but the
+# objects still link against GL, so the GUI libs are needed.
+curves_test skinning_test viewport_test import_curve_test geometry_test: %: tests/%.cpp $(wildcard $(OBJ_DIR)/*.o)
+	$(CXX) $(CXXFLAGS) -Itests $< $(filter-out $(OBJ_DIR)/main.o $(OBJ_DIR)/Renderer.o $(OBJ_DIR)/Application.o,$(wildcard $(OBJ_DIR)/*.o)) -o $@ $(SOLUTION_LINK) $(SCENE_LIBS) $(EXTRA_LIBS)
+
+# Built with -O2: the showcase scene is ~6.7k triangles and is noticeably
+# slow in a debug build.
+# Links the full object set (and needs a GL context) because it now builds a
+# Custom shape, whose constructor creates VAOs.
+demo_render: tests/demo_render.cpp $(wildcard $(OBJ_DIR)/*.o)
+	$(CXX) $(CXXFLAGS) -O2 -Itests $< $(filter-out $(OBJ_DIR)/main.o $(OBJ_DIR)/Renderer.o $(OBJ_DIR)/Application.o,$(wildcard $(OBJ_DIR)/*.o)) -o $@ $(SOLUTION_LINK) $(SCENE_LIBS) $(EXTRA_LIBS)
+
+# Needs a GL context because shape constructors create VAOs. Under a headless
+# CI box, run it as: xvfb-run -a ./scene_test
+scene_test: tests/scene_test.cpp $(wildcard $(OBJ_DIR)/*.o)
+	$(CXX) $(CXXFLAGS) -Itests $< $(filter-out $(OBJ_DIR)/main.o $(OBJ_DIR)/Renderer.o $(OBJ_DIR)/Application.o,$(wildcard $(OBJ_DIR)/*.o)) -o $@ $(SOLUTION_LINK) $(SCENE_LIBS) $(EXTRA_LIBS)
+
+animation_test: tests/animation_test.cpp $(wildcard $(OBJ_DIR)/*.o)
+	$(CXX) $(CXXFLAGS) -Itests $< $(filter-out $(OBJ_DIR)/main.o $(OBJ_DIR)/Renderer.o $(OBJ_DIR)/Application.o,$(wildcard $(OBJ_DIR)/*.o)) -o $@ $(SOLUTION_LINK) $(SCENE_LIBS) $(EXTRA_LIBS)
+
+custom_shape_test: tests/custom_shape_test.cpp $(wildcard $(OBJ_DIR)/*.o)
+	$(CXX) $(CXXFLAGS) -Itests $< $(filter-out $(OBJ_DIR)/main.o $(OBJ_DIR)/Renderer.o $(OBJ_DIR)/Application.o,$(wildcard $(OBJ_DIR)/*.o)) -o $@ $(SOLUTION_LINK) $(SCENE_LIBS) $(EXTRA_LIBS)
+
+render_section_test dirty_state_test keyframe_test texture_test specular_through_glass: %: tests/%.cpp $(wildcard $(OBJ_DIR)/*.o)
+	$(CXX) $(CXXFLAGS) -Itests $< $(filter-out $(OBJ_DIR)/main.o $(OBJ_DIR)/Renderer.o $(OBJ_DIR)/Application.o,$(wildcard $(OBJ_DIR)/*.o)) -o $@ $(SOLUTION_LINK) $(SCENE_LIBS) $(EXTRA_LIBS)
+
+# -O2: these trace full frames and are painfully slow in a debug build.
+ice_scene ice_checker_scene refraction_acne ice_render texture_scene bench demo_scenes: %: tests/%.cpp $(wildcard $(OBJ_DIR)/*.o)
+	$(CXX) $(CXXFLAGS) -O2 -Itests $< $(filter-out $(OBJ_DIR)/main.o $(OBJ_DIR)/Renderer.o $(OBJ_DIR)/Application.o,$(wildcard $(OBJ_DIR)/*.o)) -o $@ $(SOLUTION_LINK) $(SCENE_LIBS) $(EXTRA_LIBS)
+
+test: raytrace_test
+	./raytrace_test
+
+clean:
+	rm -f $(TESTS) $(RENDERS)
+	rm -f $(addsuffix .exe, $(TESTS) $(RENDERS))
+	rm -f test_render.ppm test_render.bmp
+	rm -f demo_render.ppm ice_scene.ppm ice_checker.ppm ice_render.ppm
+	rm -f texture_scene.ppm texture_scene_checker.bmp
+	rm -f acne_*.ppm
+
+.PHONY: all check test clean

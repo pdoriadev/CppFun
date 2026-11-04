@@ -196,7 +196,6 @@ bool Cube::setupCube() {
             vertexData[i+4],
             vertexData[i+5]
         ));
-
     }
 
     // Generate an ID for one Vertex Array Object. Caches the ID in the CUBE's VAO variable.

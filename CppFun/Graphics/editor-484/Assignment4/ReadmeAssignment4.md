@@ -5,32 +5,31 @@
 # Collaboration: Solo.
 ------------------------------
 # References:
-**VAO, VBO, EBO refreshers**
-- https://learnopengl.com/Getting-started/Hello-Triangle
-- https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBufferData.xhtml
-- https://registry.khronos.org/OpenGL-Refpages/gl4/html/glVertexAttribPointer.xhtml
 **cppreference.com**
 - *https://en.cppreference.com/*
-**Obj parsing**
-- https://cs418.cs.illinois.edu/website/text/obj.html
+
+------------------------------
+# moveKey() - why return a new index?
+To update the GUI renderer side. Can provide feedback on keyframe data as it is dragged.
+
+------------------------------
+# What's gimbal lock?
+Gimbal lock happens when a rotational basis vector A becomes equal with another rotational basis B.
+When two vectors are equal to each other, they are not linearly independent, thereby, we lose an axis of rotation.  
+
 ------------------------------
 # Problems: 
-The pyramid's normals are still averaged. They don't look right. 
-
-It feels like I'm quickly approaching low frame-rates on a high-end laptop workstation. What optimizations can I do to improve frame rates?
-- The screenshot hovered around ~2 fps. It was ~10-20 fps before adding the dragon.
+- Animation data for imported obj's is lost somewhere between exiting the application and re-opening the scene.
+- On rare occurrence, moving a key A past key B will delete key B. I think this is related to moveKey being called every frame instead of being called when mouse input is released. 
 
 ------------------------------
-# OBJ files and import problems
-- steampunkdragon.obj
-
-OBJ import-related Problems
-- Constructing a scene takes a *long* time without gizmos. Will that be part of the class? Are there resources you'd recommend to make those?
-- After adding a sufficiently complex mesh, the editor crawls below 5fps. At thisframe-rate, editor buttons become unreliable (i.e. clicking on transform field to adjust values with mouse or keyboard did not work. CTRL+CLICK enables keyboard-only input, which let me work-around the issue.) 
-
-------------------------------
-# Additional Functionality
-Panning - slowed the panning speed as the radius increases. 
+# Shapes Animation Breakdown
+**Cube** - Loops. Rotates positively round y-axis. Moves up and down. Uses Ease-in and Ease-in-out. 
+**Tessellated Sphere** - Loops. 4 key-frames. Step (translation, rotation), Linear (translation, rotation), Ease-In (translation, rotation), and Ease-out (translation, rotation).  
+**Mario** - Loops. Linear (translation, scale), Linear (translation, rotation, scale). 
+**Pyramid** - No Loop. 5 key-frames. Rotates negatively around y-axis with linear ease. Then rotates around y-axis with ease-out. 
+**Bunny** - Loops. Scales from 0.1 to 0.3, rotates around y-axis with a linear ease. 
+**Teapot** - No Loop. Rotates around y-axis with an Ease In-Out.  
 
 ------------------------------
 # Comments: 

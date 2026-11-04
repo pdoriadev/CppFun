@@ -655,6 +655,8 @@ size_t length;
 
 */
 
+// parallel arrays of components. 
+
 
 struct ComponentArrayReference {
     // pointer to components array
