@@ -4,8 +4,8 @@
 // Student work. See include/TexCoords.h for why this is its own translation
 // unit and what stays on the given side.
 
-#include "TexCoords.h"
-#include "TextureCache.h"
+#include "../include/TexCoords.h"
+#include "../include/TextureCache.h"
 
 #include <cmath>
 #include <algorithm>

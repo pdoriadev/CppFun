@@ -22,7 +22,7 @@
 // callers. Only the translation unit differs, and `textures_SRC` swaps
 // TexCoords.cpp alone.
 
-#include "TexCoords.h"
+#include "../include/TexCoords.h"
 
 #include <cmath>
 #include <algorithm>
@@ -39,12 +39,14 @@ std::vector<glm::vec2> planarPerFace(const std::vector<glm::vec3>& vertices,
     // Bounding box, so the projection fills 0..1 whatever scale the mesh is
     // authored at. A pyramid spanning -1..1 and a cube spanning -0.5..0.5 then
     // both map the whole image onto each face.
+    // Resolves to min and max per-axis: https://salivity.github.io/glsl/article/how-do-glsl-min-and-max-functions-handle-vectors
     glm::vec3 mn = vertices[0], mx = vertices[0];
     for (size_t i = 1; i < vertices.size(); ++i) {
         mn = glm::min(mn, vertices[i]);
         mx = glm::max(mx, vertices[i]);
     }
-    glm::vec3 span = mx - mn;
+    glm::vec3 span = mx - mn; // me - captures bounds of axis-aligned box around mesh. 
+    // me - guarantees bounding box will have a thickness of 1e-6f or greater along each axis. 
     for (int k = 0; k < 3; ++k) if (span[k] < 1e-6f) span[k] = 1.0f;  // flat mesh
 
     for (size_t f = 0; f < faces.size(); ++f) {
@@ -63,6 +65,8 @@ std::vector<glm::vec2> planarPerFace(const std::vector<glm::vec3>& vertices,
         // the dominant axis would collapse the face to a line.
         const float ax = std::fabs(n.x), ay = std::fabs(n.y), az = std::fabs(n.z);
         int uAxis, vAxis;
+        // I think there is a bug here. In the second else if, we don't know az < ax. 
+        
         if (az >= ax && az >= ay)      { uAxis = 0; vAxis = 1; }
         else if (ax >= ay)             { uAxis = 2; vAxis = 1; }
         else                           { uAxis = 0; vAxis = 2; }
