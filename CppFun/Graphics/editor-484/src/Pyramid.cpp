@@ -103,7 +103,7 @@ bool Pyramid::setupPyramid() {
     glEnableVertexAttribArray(2);
 
     // UVs in their own buffer on attribute 3, while the VAO is still bound.
-    // uploadTexCoords();
+    uploadTexCoords();
 
     glBindVertexArray(0); // Unbind VAO
 

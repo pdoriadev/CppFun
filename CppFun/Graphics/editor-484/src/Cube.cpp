@@ -85,9 +85,11 @@ bool Shape::constructPlane(PlaneConstructionParams params) {
         params.vertexData.push_back(standardPositions.at(positionIndex).x);
         params.vertexData.push_back(standardPositions.at(positionIndex).y);
         params.vertexData.push_back(standardPositions.at(positionIndex).z);
+
         params.vertexData.push_back(standardNormals.at(params.normalIndex).x);
         params.vertexData.push_back(standardNormals.at(params.normalIndex).y);
         params.vertexData.push_back(standardNormals.at(params.normalIndex).z);
+
         params.vertexData.push_back(standardColor.x);
         params.vertexData.push_back(standardColor.y);
         params.vertexData.push_back(standardColor.z);
@@ -185,6 +187,7 @@ bool Cube::setupCube() {
     vertexData.shrink_to_fit();
     elementsData.shrink_to_fit();
 
+    // cache vertex data
     for (uint i = 0; i < vertexData.size(); i = i + 9) {
         vertices.push_back(glm::vec3(
             vertexData[i],
@@ -197,6 +200,8 @@ bool Cube::setupCube() {
             vertexData[i+5]
         ));
     }
+
+    texCoords = TexCoords::planarPerFace(vertices, faces);
 
     // Generate an ID for one Vertex Array Object. Caches the ID in the CUBE's VAO variable.
     glGenVertexArrays(1, &VAO);
@@ -252,6 +257,11 @@ bool Cube::setupCube() {
         // This operation is what makes the buffer object an *Element* Buffer Object.
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, elementsData.size() * sizeof(uint), elementsData.data(), GL_STATIC_DRAW);
     
+    // UVs go in their own buffer on attribute 3, while the VAO is still bound.
+    uploadTexCoords();
+
+    glBindVertexArray(0);
+
     std::cout << "SETUP CUBE - COMPLETE" << std::endl;
 
     return true;
@@ -521,7 +531,7 @@ bool Cube::setupCubeAveragedNormals() {
     // UVs are per triangle corner, not per vertex: a cube's eight corners each
     // belong to three faces wanting three different UVs. The loop below emits
     // one vertex per corner, so a per-corner map lines up with it exactly. 
-    // texCoords = TexCoords::cube(vertices, faces, normals);
+    texCoords = TexCoords::cube(vertices, faces, normals);
 
     // Create and bind VAO, VBO, and EBO
     glGenVertexArrays(1, &VAO);
@@ -547,7 +557,7 @@ bool Cube::setupCubeAveragedNormals() {
     glEnableVertexAttribArray(2);
 
     // UVs go in their own buffer on attribute 3, while the VAO is still bound.
-    // uploadTexCoords();
+    uploadTexCoords();
 
     glBindVertexArray(0); // Unbind VAO
 
