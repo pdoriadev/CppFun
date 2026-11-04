@@ -65,11 +65,12 @@ std::vector<glm::vec2> planarPerFace(const std::vector<glm::vec3>& vertices,
         // the dominant axis would collapse the face to a line.
         const float ax = std::fabs(n.x), ay = std::fabs(n.y), az = std::fabs(n.z);
         int uAxis, vAxis;
-        if (az >= ax && az >= ay)      { uAxis = 0; vAxis = 1; }
-        else if (ax >= az && ax >= ay) { uAxis = 2; vAxis = 1; }
-        else                           { uAxis = 0; vAxis = 2; }
+        if (az >= ax && az >= ay)      { uAxis = 0; vAxis = 1; } // xy
+        else if (ax >= az && ax >= ay) { uAxis = 2; vAxis = 1; } // yz
+        else                           { uAxis = 0; vAxis = 2; } // xz
 
         for (int j = 0; j < 3; ++j) {
+            // me - bounds of uv coordinates for a face
             const glm::vec3& p = vertices[static_cast<size_t>(faces[f][j])];
             uvs.push_back(glm::vec2((p[uAxis] - mn[uAxis]) / span[uAxis],
                                     (p[vAxis] - mn[vAxis]) / span[vAxis]));
