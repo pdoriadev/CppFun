@@ -65,10 +65,8 @@ std::vector<glm::vec2> planarPerFace(const std::vector<glm::vec3>& vertices,
         // the dominant axis would collapse the face to a line.
         const float ax = std::fabs(n.x), ay = std::fabs(n.y), az = std::fabs(n.z);
         int uAxis, vAxis;
-        // I think there is a bug here. In the second else if, we don't know az < ax. 
-        
         if (az >= ax && az >= ay)      { uAxis = 0; vAxis = 1; }
-        else if (ax >= ay)             { uAxis = 2; vAxis = 1; }
+        else if (ax >= az && ax >= ay) { uAxis = 2; vAxis = 1; }
         else                           { uAxis = 0; vAxis = 2; }
 
         for (int j = 0; j < 3; ++j) {
