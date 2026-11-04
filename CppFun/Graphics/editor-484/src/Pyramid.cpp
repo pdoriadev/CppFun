@@ -77,7 +77,7 @@ bool Pyramid::setupPyramid() {
     // Planar per-face projection. Returns one UV per triangle corner, which is
     // exactly what the emission loop above produced -- indexData is sequential,
     // so attribute 3 must be the same length as the interleaved buffer.
-    // texCoords = TexCoords::planarPerFace(vertices, faces);
+    texCoords = TexCoords::planarPerFace(vertices, faces);
 
     // Create and bind VAO, VBO, and EBO
     glGenVertexArrays(1, &VAO);
