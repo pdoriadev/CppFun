@@ -1,5 +1,5 @@
-#include "utils.h"
-#include "Logging.h"
+#include "../include/utils.h"
+#include "../include/Logging.h"
 
 const bool IsNullPtr(void* pointer, std::string typeStr)
 {

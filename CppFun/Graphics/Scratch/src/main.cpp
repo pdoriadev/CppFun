@@ -18,7 +18,7 @@
 #pragma region HEADERS
 
 // OPENGL-RELATED HEADERS
-#include "glad.h"           // Function pointers to hardware implementation of OpenGL. Must include before GLFW
+#include "../include/glad/glad.h"           // Function pointers to hardware implementation of OpenGL. Must include before GLFW
 #include <GLFW/glfw3.h>     // Window + Input Library - window/context creation, input, timing
 
 // glm INCLUDES FOR MATH. relative-paths bleh. 
@@ -36,11 +36,11 @@
 #include <vector>           // std::vector
 
 // My C / CPP HEADERS
-#include "Modeling.h"       // functions and structs for construting meshes
-#include "Logging.h"        // static namespace logger with log types. 
-#include "InputCache.h"     // input cache system for GLFW input tokens
-#include "utils.h"          // IsNullPtr(void*)
-#include "shaderSources.h"  // shader source code wrapped in functions. 
+#include "../include/Modeling.h"       // functions and structs for construting meshes
+#include "../include/Logging.h"        // static namespace logger with log types. 
+#include "../include/InputCache.h"     // input cache system for GLFW input tokens
+#include "../include/utils.h"          // IsNullPtr(void*)
+#include "../include/shaderSources.h"  // shader source code wrapped in functions. 
 
 #pragma endregion =====================================================================================================================
 

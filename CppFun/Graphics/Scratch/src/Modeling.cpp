@@ -1,5 +1,5 @@
-#include "Modeling.h"
-#include "Logging.h" // NOT MULTI-THREAD SAFE
+#include "../include/Modeling.h"
+#include "../include/Logging.h" // NOT MULTI-THREAD SAFE
 #include <glm/ext/matrix_float2x2.hpp>
 
 #pragma region VECTOR3

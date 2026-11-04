@@ -22,23 +22,14 @@ else
     EXE = editor
 endif
 
-IMGUI_HEADERS = include/imgui
-IMGUI_DIR = src/imgui
-TINYDIALOG_HEADERS = include/tinydialog
-TINYDIALOG_DIR = src/tinydialog
 SRC_HEADER = include
 SRC_DIR = src
-OBJ_DIR = obj
 GLAD_HEADER = include/glad
 GLAD_DIR = src/glad
-STB_DIR = src/stb
 
 SOURCES = main.cpp
 SOURCES += $(GLAD_DIR)/glad.c
-SOURCES += $(IMGUI_DIR)/imgui.cpp $(IMGUI_DIR)/imgui_demo.cpp $(IMGUI_DIR)/imgui_draw.cpp $(IMGUI_DIR)/imgui_tables.cpp $(IMGUI_DIR)/imgui_widgets.cpp
-SOURCES += $(IMGUI_DIR)/backends/imgui_impl_glfw.cpp $(IMGUI_DIR)/backends/imgui_impl_opengl3.cpp
-SOURCES += $(TINYDIALOG_DIR)/tinyfiledialogs.c
-SOURCES += $(SRC_DIR)/Shape.cpp $(SRC_DIR)/Teapot.cpp $(SRC_DIR)/Mobius.cpp $(SRC_DIR)/Torus.cpp $(SRC_DIR)/ImportShape.cpp $(SRC_DIR)/ImportCurve.cpp $(SRC_DIR)/ImportCharacter.cpp $(SRC_DIR)/Curve.cpp $(SRC_DIR)/Joint.cpp $(SRC_DIR)/MatrixStack.cpp $(SRC_DIR)/SkeletalModel.cpp $(SRC_DIR)/ColorPresets.cpp $(SRC_DIR)/FileImporter.cpp $(SRC_DIR)/Renderer.cpp $(SRC_DIR)/ShapeManager.cpp $(SRC_DIR)/TimeStepper.cpp $(SRC_DIR)/ParticleSystem.cpp $(SRC_DIR)/SimpleSystem.cpp $(SRC_DIR)/PendulumSystem.cpp  $(SRC_DIR)/SimplePendulum.cpp $(SRC_DIR)/SimpleChain.cpp $(SRC_DIR)/SimpleCloth.cpp $(SRC_DIR)/Application.cpp $(SRC_DIR)/Globals.cpp
+SOURCES += $(SRC_DIR)/main.cpp $(SRC_DIR)/InputCache.cpp $(SRC_DIR)/Logging.cpp $(SRC_DIR)/Modling.cpp $(SRC_DIR)/shaderSource.cpp $(SRC_DIR)/utils.cpp
 SOURCES += $(SRC_DIR)/ErrorHandling.cpp $(SRC_DIR)/ShaderLoader.cpp
 # Ray casting / ray tracing
 SOURCES += $(SRC_DIR)/Camera.cpp $(SRC_DIR)/SceneLight.cpp $(SRC_DIR)/BVH.cpp $(SRC_DIR)/RayScene.cpp $(SRC_DIR)/RayTracer.cpp $(SRC_DIR)/ImageIO.cpp

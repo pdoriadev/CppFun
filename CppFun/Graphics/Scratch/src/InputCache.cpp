@@ -1,6 +1,6 @@
-#include "InputCache.h"
+#include "../include/InputCache.h"
 #include <GLFW/glfw3.h>
-#include "utils.h"
+#include "../include/utils.h"
 
 namespace InputCache {
     bool initialized = false;
