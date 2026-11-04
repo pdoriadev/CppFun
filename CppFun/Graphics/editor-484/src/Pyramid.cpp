@@ -107,57 +107,6 @@ bool Pyramid::setupPyramid() {
 
     glBindVertexArray(0); // Unbind VAO
 
-    //-////////////////////////////////////////////////////////
-    // ORIGINAL CODE + COMMENTS
-
-     // // TODO(geometry): the pyramid: a square base and four triangular sides
-    // // Build the shape: fill `vertices`, `faces`, and `normals` (directly or
-    // // by calling calculateNormals()). See ASSIGNMENTS.md, A2, for the
-    // // conventions -- roughly one unit across, centred on the origin,
-    // // counter-clockwise winding seen from outside, every face index a valid
-    // // index into `vertices`.
-    // //
-    // // What is here is a placeholder: a single square in the XY plane. It is
-    // // deliberately not the shape you were asked for -- it is here so the
-    // // editor runs, the Insert menu does something visible, and you can see
-    // // your geometry replace it as you write it. Read src/Torus.cpp first;
-    // // it is the worked example of a procedural shape.
-    // // vertices = { {-0.5f, -0.5f, 0.0f}, { 0.5f, -0.5f, 0.0f},
-    // //              { 0.5f,  0.5f, 0.0f}, {-0.5f,  0.5f, 0.0f} };
-    // // normals  = { {0.0f, 0.0f, 1.0f}, {0.0f, 0.0f, 1.0f},
-    // //              {0.0f, 0.0f, 1.0f}, {0.0f, 0.0f, 1.0f} };
-    // // faces    = { {0, 1, 2}, {0, 2, 3} };
-
-    // // Build vertex data and index data for OpenGL
-    
-    // for (size_t i = 0; i < faces.size(); ++i) {
-    
-    //     glm::vec3 normal = normals[i]; // Assign face normal
-    //     glm::vec3 color = (colorIndex == 31) 
-    //         ? glm::vec3(
-    //             customColor[0], 
-    //             customColor[1], 
-    //             customColor[2]
-    //         )
-    //         : glm::vec3(
-    //             colorPresets[colorIndex].color[0], 
-    //             colorPresets[colorIndex].color[1], 
-    //             colorPresets[colorIndex].color[2]
-    //          );
-
-    //     for (int j = 0; j < 3; ++j) {
-    //         int vertexIndex = faces[i][j];
-    //         const glm::vec3& position = vertices[vertexIndex];
-
-    //         // Append position, normal, and color to vertexData
-    //         vertexData.insert(vertexData.end(), {position.x, position.y, position.z});
-    //         vertexData.insert(vertexData.end(), {normal.x, normal.y, normal.z});
-    //         vertexData.insert(vertexData.end(), {color.r, color.g, color.b});
-    //     }
-
-    //     elementData.insert(elementData.end(), {static_cast<unsigned int>(i * 3), static_cast<unsigned int>(i * 3 + 1), static_cast<unsigned int>(i * 3 + 2)});
-    // }
-
     std::cout << "Finished pyramid setup" << std::endl;
     return true;
 }
