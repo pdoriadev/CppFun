@@ -22,13 +22,13 @@ else
     EXE = scratch
 endif
 
-ifeq ([-e ./$(EXE)], 1)
-	rm $(EXE)
-	echo "Removed old executable."
-endif
+# ifeq ([-e ./$(EXE)], 1)
+# 	rm $(EXE)
+# 	echo "Removed old executable."
+# endif
 
-$(EXE) :
-	touch $(EXE)
+# $(EXE) :
+# 	touch $(EXE)
 
 SRC_HEADER = include
 SRC_DIR = src
