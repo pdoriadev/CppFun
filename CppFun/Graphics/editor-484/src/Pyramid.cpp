@@ -23,11 +23,11 @@ bool Pyramid::setupPyramid() {
     normalConfig = NormalConfig::EACH_VERTEX;
 
     glm::vec3 const pos[5] = {   
-        glm::vec3( 0.0f, 0.5f, 0.0f),        // top center. 
-        glm::vec3(-0.5f, -0.5f, -0.5f),      // bottom face. back left
-        glm::vec3( 0.5f, -0.5f, -0.5f),      // bottom face. back right
-        glm::vec3( 0.5f, -0.5f,  0.5f),      // bottom face. front right
-        glm::vec3(-0.5f, -0.5f,  0.5f)       // bottom face. front left
+        glm::vec3( 0.0f,  0.77f,  0.0f),        // top center. 
+        glm::vec3(-0.5f, -0.77f, -0.5f),      // bottom face. back left
+        glm::vec3( 0.5f, -0.77f, -0.5f),      // bottom face. back right
+        glm::vec3( 0.5f, -0.77f,  0.5f),      // bottom face. front right
+        glm::vec3(-0.5f, -0.77f,  0.5f)       // bottom face. front left
     };
 
     glm::vec3 const color = glm::vec3(1.0f, 0.4f, 0.2f);
@@ -35,20 +35,23 @@ bool Pyramid::setupPyramid() {
     std::cout << "Setup pos and color data" << std::endl;
 
     // side tri's
-    std::vector<glm::vec3> tri = {pos[0], pos[2], pos[1]};
-    makeTri(tri, color);
-    tri = {pos[0], pos[3], pos[2]};
-    makeTri(tri, color);
-    tri = {pos[0], pos[4], pos[3]};
-    makeTri(tri, color);
-    tri = {pos[0], pos[1], pos[4]};
-    makeTri(tri, color);
+    makeTri({pos[0], pos[2], pos[1]}, color);
+    makeTri({pos[0], pos[3], pos[2]}, color);
+    makeTri({pos[0], pos[4], pos[3]}, color);
+    makeTri({pos[0], pos[1], pos[4]}, color);
     // bottom plane
-    tri = {pos[4], pos[1], pos[2]};
-    makeTri(tri, color);
-    tri = {pos[2], pos[3], pos[4]};
-    makeTri(tri, color);
+    makeTri({pos[4], pos[1], pos[2]}, color);
+    makeTri({pos[2], pos[3], pos[4]}, color);
     
+    faces = { 
+        {0, 2, 1},
+        {3, 5, 4},
+        {6, 8, 7},
+        {9, 11, 10},
+        {12, 14, 13},
+        {15, 17, 16}
+    };
+
     std::cout << "Total Faces = " << faces.size() << std::endl;
 
     std::vector<float> vertexData;
@@ -68,6 +71,7 @@ bool Pyramid::setupPyramid() {
             elementData.push_back(faces.at(i).at(j));
             if (j >= 3) {
                 std::cerr << "Too many verts for a triangle." << std::endl;
+                return false;
             }
         }
     }
@@ -84,7 +88,7 @@ bool Pyramid::setupPyramid() {
     glGenBuffers(1, &VBO);
     glGenBuffers(1, &EBO);
 
-    glBindVertexArray(VAO);
+    glBindVertexArray(VAO); 
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, vertexData.size() * sizeof(float), vertexData.data(), GL_STATIC_DRAW);

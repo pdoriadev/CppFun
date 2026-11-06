@@ -22,8 +22,11 @@
 // callers. Only the translation unit differs, and `textures_SRC` swaps
 // TexCoords.cpp alone.
 
+
+
 #include "../include/TexCoords.h"
 
+#include <iostream>
 #include <cmath>
 #include <algorithm>
 
@@ -65,9 +68,9 @@ std::vector<glm::vec2> planarPerFace(const std::vector<glm::vec3>& vertices,
         // the dominant axis would collapse the face to a line.
         const float ax = std::fabs(n.x), ay = std::fabs(n.y), az = std::fabs(n.z);
         int uAxis, vAxis;
-        if (az >= ax && az >= ay)      { uAxis = 0; vAxis = 1; } // xy
-        else if (ax >= az && ax >= ay) { uAxis = 2; vAxis = 1; } // yz
-        else                           { uAxis = 0; vAxis = 2; } // xz
+        if (az >= ax && az >= ay)      { uAxis = 0; vAxis = 1; std::cout << "XY" << std::endl;} // xy
+        else if (ax >= ay)             { uAxis = 2; vAxis = 1; std::cout << "ZY" << std::endl;} // yz
+        else                           { uAxis = 0; vAxis = 2; std::cout << "XZ" << std::endl;} // xz
 
         for (int j = 0; j < 3; ++j) {
             // me - bounds of uv coordinates for a face
