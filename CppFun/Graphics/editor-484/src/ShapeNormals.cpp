@@ -17,7 +17,9 @@
 
 #include "../include/Shape.h"
 
+#include <iostream>
 #include <cmath>
+#include <glm/geometric.hpp>
 
 
 //-////////////////////////////////////////////
@@ -60,8 +62,31 @@ bool Shape::calculateNormals() {
     //     glm::vec3 normal = 
     // }
 
-    normals.assign(faces.size(), glm::vec3(0.0f, 1.0f, 0.0f));
+    // iterate through faces. Use it to get the vertex positions in vertices.
+    // calculate the normal for each face.
+    for (size_t f = 0; f < faces.size(); ++f) {
+        if (vertices.size() - 1 < faces.at(f)[2]);
 
+        glm::vec3 const a = vertices.at(faces.at(f)[0]);
+        glm::vec3 const b = vertices.at(faces.at(f)[1]);
+        glm::vec3 const c = vertices.at(faces.at(f)[2]);
+    
+        glm::vec3 firstToCenter = glm::normalize(b - a);
+        glm::vec3 firstToLast = glm::normalize(c - a);
+        glm::vec3 faceNormal = glm::normalize(glm::cross(firstToCenter, firstToLast));
+
+        if (faceNormal.length() < 0.00000000f) { 
+            std::cerr << "Bad normals." << std::endl;
+            return false; 
+        }
+
+        if (normals.size() - 1 < f) {
+            normals.push_back(faceNormal);
+        }
+        else {
+            normals.emplace(normals.begin() + f, faceNormal);
+        }
+    }
 
     return true;
 }

@@ -32,18 +32,18 @@ bool Pyramid::setupPyramid() {
 
     glm::vec3 const color = glm::vec3(1.0f, 0.4f, 0.2f);
 
-    std::cout << "Setup pos and color data" << std::endl;
+    std::cout << "Setup pos and normal data" << std::endl;
 
     // side tri's
-    makeTri({pos[0], pos[2], pos[1]}, color);
-    makeTri({pos[0], pos[3], pos[2]}, color);
-    makeTri({pos[0], pos[4], pos[3]}, color);
-    makeTri({pos[0], pos[1], pos[4]}, color);
-    // bottom plane
-    makeTri({pos[4], pos[1], pos[2]}, color);
-    makeTri({pos[2], pos[3], pos[4]}, color);
-    
-    faces = { 
+    makeTri({pos[0], pos[2], pos[1]});
+    makeTri({pos[0], pos[3], pos[2]});
+    makeTri({pos[0], pos[4], pos[3]});
+    makeTri({pos[0], pos[1], pos[4]});
+    // bottom tri's
+    makeTri({pos[1], pos[2], pos[3]});
+    makeTri({pos[3], pos[4], pos[1]});
+
+    faces = {
         {0, 2, 1},
         {3, 5, 4},
         {6, 8, 7},
@@ -51,7 +51,7 @@ bool Pyramid::setupPyramid() {
         {12, 14, 13},
         {15, 17, 16}
     };
-
+    
     std::cout << "Total Faces = " << faces.size() << std::endl;
 
     std::vector<float> vertexData;
@@ -60,6 +60,14 @@ bool Pyramid::setupPyramid() {
         vertexData.push_back(vertices.at(i)[0]);
         vertexData.push_back(vertices.at(i)[1]);
         vertexData.push_back(vertices.at(i)[2]);
+
+        vertexData.push_back(normals.at(i)[0]);
+        vertexData.push_back(normals.at(i)[1]);
+        vertexData.push_back(normals.at(i)[2]);
+
+        vertexData.push_back(color.x);
+        vertexData.push_back(color.y);
+        vertexData.push_back(color.z);
     }
 
     outputVertices(vertexData, 9);

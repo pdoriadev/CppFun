@@ -76,7 +76,6 @@ std::string getPlaneTypeString(PlaneType type) {
     }
 }
 
-
 Shape::Shape(float x, float y, float z, float uniformScale, int colorIndex, int id,
              float scaleX, float scaleY, float scaleZ, bool useUniformScale) 
     // Order follows Shape.h - see the note in Joint.cpp.
@@ -101,7 +100,7 @@ Shape::Shape(float x, float y, float z, float uniformScale, int colorIndex, int 
 }
 
 // makes a tri and adds it to the vertices list.
-bool Shape::makeTri(std::vector<glm::vec3> const pos, glm::vec3 const col) {
+bool Shape::makeTri(std::vector<glm::vec3> const pos) {
     if (pos.size() != 3) {
         std::cerr << "3 and ONLY 3 positions when constructing triangles." << std::endl; 
         return false; 
@@ -113,8 +112,7 @@ bool Shape::makeTri(std::vector<glm::vec3> const pos, glm::vec3 const col) {
 
     for (size_t i = 0; i < pos.size(); ++i) {
         vertices.push_back(pos.at(i));
-        vertices.push_back(faceNormal);
-        vertices.push_back(col);
+        normals.push_back(faceNormal);
     }
 
     // int startingIndex = (vertices.size() / 3) - 3; // extracts number of elements in vertices. finds 
