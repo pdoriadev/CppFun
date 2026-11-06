@@ -59,6 +59,11 @@ std::vector<glm::vec2> planarPerFace(const std::vector<glm::vec3>& vertices,
         const glm::vec3& b = vertices[static_cast<size_t>(faces[f][1])];
         const glm::vec3& c = vertices[static_cast<size_t>(faces[f][2])];
 
+        std::cout << "face position data" << std::endl;
+        std::cout << "a: " << a.x << ", " << a.y << ", " << a.z << std::endl;
+        std::cout << "b: " << b.x << ", " << b.y << ", " << b.z << std::endl;
+        std::cout << "c: " << c.x << ", " << c.y << ", " << c.z << std::endl;
+
         // The face's own normal. Taking it from the geometry rather than a
         // normals array means this works for any mesh, including ones whose
         // normals are per vertex or absent.
