@@ -240,10 +240,10 @@ bool buildTri(std::vector<float>& out) {
 
 #pragma region SHAPE_VERTEX_CONFIG
 
-vertexConfig::vertexConfig(std::vector<VertexDataType> _vertexDataTypes, std::vector<unsigned int> _dataSizes) 
+vertexConfig::vertexConfig(const std::vector<VertexDataType> _vertexDataTypes, const std::vector<unsigned int> _dataSizes) 
 : vertexDataTypes{_vertexDataTypes}, dataSizes{_dataSizes} { }
 
-shapeConstructionParams::shapeConstructionParams(struct shapeConfig _shapeConfig, struct vertexConfig _vertexConfig) 
+shapeConstructionParams::shapeConstructionParams(const struct shapeConfig _shapeConfig, const struct vertexConfig _vertexConfig) 
 : shapeConfig{_shapeConfig}, vertexConfig{_vertexConfig} { }
 
 #pragma endregion

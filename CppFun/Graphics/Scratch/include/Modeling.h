@@ -90,9 +90,9 @@ struct vertexConfig {
 };
 
 struct shapeConstructionParams {
-    shapeConfig shapeConfig;
-    vertexConfig vertexConfig;
-    shapeConstructionParams(struct shapeConfig _shapeConfig, struct vertexConfig _vertexConfig);
+    struct shapeConfig shapeConfig;
+    struct vertexConfig vertexConfig;
+    shapeConstructionParams(const struct shapeConfig _shapeConfig, const struct vertexConfig _vertexConfig);
 };
 
 //-////////////////////////////////////
