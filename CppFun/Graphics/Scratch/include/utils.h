@@ -1,6 +1,7 @@
+#pragma once
 #ifndef UTILS_H
 #define UTILS_H
-#endif
+
 
 #include <string>
 
@@ -11,3 +12,5 @@
 const bool IsNullPtr(void* pointer, std::string typeStr);
 
 #pragma endregion =====================================================================================================================
+
+#endif

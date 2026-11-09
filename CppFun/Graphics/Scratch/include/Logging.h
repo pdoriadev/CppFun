@@ -1,6 +1,8 @@
+#pragma once
+
 #ifndef LOGGING_H
 #define LOGGING_H
-#endif
+
 
 #include <string>
 #include <assert.h>         // One of the LogType types https://en.cppreference.com/c/error/assert
@@ -46,3 +48,5 @@ namespace Logging
     // 
     bool outputToLogFile(LogType type, std::string logMessage, bool flush);
 }
+
+#endif

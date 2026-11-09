@@ -38,7 +38,7 @@ GLAD_DIR = src/glad
 
 SOURCES = main.cpp
 SOURCES += $(GLAD_DIR)/glad.c
-SOURCES += $(SRC_DIR)/main.cpp $(SRC_DIR)/InputCache.cpp $(SRC_DIR)/Logging.cpp $(SRC_DIR)/Modling.cpp $(SRC_DIR)/shaderSource.cpp $(SRC_DIR)/utils.cpp
+SOURCES += $(SRC_DIR)/main.cpp $(SRC_DIR)/InputCache.cpp $(SRC_DIR)/Logging.cpp $(SRC_DIR)/Modeling.cpp $(SRC_DIR)/shaderSource.cpp $(SRC_DIR)/utils.cpp
 
 # Object files (in obj directory)
 OBJS = $(addprefix $(OBJ_DIR)/, $(addsuffix .o, $(basename $(notdir $(SOURCES)))))
@@ -145,9 +145,8 @@ $(OBJS): | $(OBJ_DIR)
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
-$(EXE): $(OBJS) $(SOLUTION_LIBS)
-	@if [ -n "$(SOLUTION_LIBS)" ]; then echo "  [solution libraries: $(SOLUTION_LIBS)]"; fi
-	$(CXX) -o $@ $(OBJS) $(CXXFLAGS) $(SOLUTION_LINK) $(LIBS)
+$(EXE): $(OBJS)
+	$(CXX) -o $@ $(OBJS) $(CXXFLAGS) $(LIBS)
 
 clean:
 	rm -f $(EXE) $(OBJS) $(OBJS:.o=.d)
@@ -183,4 +182,4 @@ clean:
 
 # Pull in the generated header dependencies (ignored on the first build, when
 # none exist yet).
--include $(OBJS:.o=.d)
+# -include $(OBJS:.o=.d)

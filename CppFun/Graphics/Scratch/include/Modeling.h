@@ -1,8 +1,9 @@
+#pragma once
+
 #ifndef MODELING_H
 #define MODELING_H
-#include <glm/ext/vector_float3.hpp>
-#endif
 
+#include <glm/ext/vector_float3.hpp>
 #include <vector>
 #include <cmath>
 
@@ -168,3 +169,5 @@ bool buildTri(std::vector<float>& out);
 //     // not implemented
 //     return false;
 // }
+
+#endif

@@ -1,6 +1,6 @@
+#pragma once
 #ifndef INPUT_CACHE_H
 #define INPUT_CACHE_H
-#endif
 
 #include <GLFW/glfw3.h>     // Window + Input Library - window/context creation, input, timing
 #include <vector>
@@ -148,3 +148,5 @@ namespace InputCache {
 
 #pragma endregion =====================================================================================================================
 }
+
+#endif
