@@ -23,7 +23,7 @@ bool Pyramid::setupPyramid() {
     normalConfig = NormalConfig::EACH_VERTEX;
 
     glm::vec3 const pos[5] = {   
-        glm::vec3( 0.0f,  0.77f,  0.0f),        // top center. 
+        glm::vec3( 0.0f,  0.77f,  0.0f),      // top center. 
         glm::vec3(-0.5f, -0.77f, -0.5f),      // bottom face. back left
         glm::vec3( 0.5f, -0.77f, -0.5f),      // bottom face. back right
         glm::vec3( 0.5f, -0.77f,  0.5f),      // bottom face. front right
@@ -40,34 +40,39 @@ bool Pyramid::setupPyramid() {
     makeTri({pos[0], pos[4], pos[3]});
     makeTri({pos[0], pos[1], pos[4]});
     // bottom tri's
-    makeTri({pos[1], pos[2], pos[3]});
-    makeTri({pos[3], pos[4], pos[1]});
+    makeTri({pos[1], pos[3], pos[4]});
+    makeTri({pos[3], pos[1], pos[2]});
 
     faces = {
-        {0, 2, 1},
-        {3, 5, 4},
-        {6, 8, 7},
-        {9, 11, 10},
-        {12, 14, 13},
-        {15, 17, 16}
+        {0, 1, 2},
+        {3, 4, 5},
+        {6, 7, 8},
+        {9, 10, 11},
+        {12, 13, 14},
+        {15, 16, 17}
     };
+
+    calculateNormals();
     
     std::cout << "Total Faces = " << faces.size() << std::endl;
+    std::cout << "Total Normals = " << normals.size() << std::endl;
 
     std::vector<float> vertexData;
     vertexData.reserve(6 * 9); // 6 triangles * 9 floats per triangle
-    for (size_t i = 0; i < vertices.size(); ++i) {
-        vertexData.push_back(vertices.at(i)[0]);
-        vertexData.push_back(vertices.at(i)[1]);
-        vertexData.push_back(vertices.at(i)[2]);
-
-        vertexData.push_back(normals.at(i)[0]);
-        vertexData.push_back(normals.at(i)[1]);
-        vertexData.push_back(normals.at(i)[2]);
-
-        vertexData.push_back(color.x);
-        vertexData.push_back(color.y);
-        vertexData.push_back(color.z);
+    for (size_t i = 0; i < vertices.size(); i+=3) {
+        for (size_t j = 0; j < 3; ++j) {
+            vertexData.push_back(vertices.at(i+j)[0]);
+            vertexData.push_back(vertices.at(i+j)[1]);
+            vertexData.push_back(vertices.at(i+j)[2]);
+    
+            vertexData.push_back(normals.at(i / 3)[0]);
+            vertexData.push_back(normals.at(i / 3)[1]);
+            vertexData.push_back(normals.at(i / 3)[2]);
+    
+            vertexData.push_back(color.x);
+            vertexData.push_back(color.y);
+            vertexData.push_back(color.z);
+        }
     }
 
     outputVertices(vertexData, 9);

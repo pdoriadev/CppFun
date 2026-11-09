@@ -106,13 +106,13 @@ bool Shape::makeTri(std::vector<glm::vec3> const pos) {
         return false; 
     }
 
-    glm::vec3 const firstToCenter = glm::normalize(pos.at(1) - pos.at(0));
-    glm::vec3 const firstToLast = glm::normalize(pos.at(2) - pos.at(0));
-    glm::vec3 const faceNormal = glm::normalize(glm::cross(firstToCenter, firstToLast));
+    // glm::vec3 const firstToCenter = glm::normalize(pos.at(1) - pos.at(0));
+    // glm::vec3 const firstToLast = glm::normalize(pos.at(2) - pos.at(0));
+    // glm::vec3 const faceNormal = glm::normalize(glm::cross(firstToCenter, firstToLast));
 
     for (size_t i = 0; i < pos.size(); ++i) {
         vertices.push_back(pos.at(i));
-        normals.push_back(faceNormal);
+        // normals.push_back(faceNormal);
     }
 
     // int startingIndex = (vertices.size() / 3) - 3; // extracts number of elements in vertices. finds 

@@ -65,7 +65,12 @@ bool Shape::calculateNormals() {
     // iterate through faces. Use it to get the vertex positions in vertices.
     // calculate the normal for each face.
     for (size_t f = 0; f < faces.size(); ++f) {
-        if (vertices.size() - 1 < faces.at(f)[2]);
+        for (size_t i = 0; i < 3; ++i) {
+            if (vertices.size() - 1 < faces.at(f)[i]) {
+                std::cerr << "ShapeNormals.cpp - Calculate Normals - Face index exceeds size of vertices array." << std::endl;
+                return false;
+            }
+        }
 
         glm::vec3 const a = vertices.at(faces.at(f)[0]);
         glm::vec3 const b = vertices.at(faces.at(f)[1]);
