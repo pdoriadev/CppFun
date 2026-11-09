@@ -11,7 +11,7 @@
 #CXX = clang++
 
 CC = g++
-CFLAGS = -Iinclude -std=c++11
+CFLAGS = -Iinclude -std=c++17
 
 # MinGW's g++ appends .exe when the -o name has no extension, so the file on
 # disk is editor.exe while EXE said "editor" - and `make clean` then quietly
@@ -39,29 +39,15 @@ GLAD_DIR = src/glad
 SOURCES = main.cpp
 SOURCES += $(GLAD_DIR)/glad.c
 SOURCES += $(SRC_DIR)/main.cpp $(SRC_DIR)/InputCache.cpp $(SRC_DIR)/Logging.cpp $(SRC_DIR)/Modling.cpp $(SRC_DIR)/shaderSource.cpp $(SRC_DIR)/utils.cpp
-# SOURCES += $(SRC_DIR)/ErrorHandling.cpp $(SRC_DIR)/ShaderLoader.cpp <-- Files like this look really useful
-# Ray casting / ray tracing
-# SOURCES += $(SRC_DIR)/Camera.cpp $(SRC_DIR)/SceneLight.cpp $(SRC_DIR)/BVH.cpp $(SRC_DIR)/RayScene.cpp $(SRC_DIR)/RayTracer.cpp $(SRC_DIR)/ImageIO.cpp
-# SOURCES += $(SRC_DIR)/Settings.cpp $(SRC_DIR)/Light.cpp $(SRC_DIR)/SceneIO.cpp $(SRC_DIR)/AnimationController.cpp
-# Keyframe animation (AnimationTimeline is given; Keyframe.cpp is the assignment)
-# SOURCES += $(SRC_DIR)/AnimationTimeline.cpp
-# Texture mapping. TextureCache (decode + GL upload) and TexCoordsGiven
-# (planarPerFace, parametricGrid) are given; the UV generation and sampling in
-# TexCoords.cpp are the assignment. TexCoordsGiven was split out because
-# planarPerFace is the same dominant-axis dispatch the student's cube() needs --
-# see the header comment in that file.
-# SOURCES += $(SRC_DIR)/TextureCache.cpp $(SRC_DIR)/TexCoordsGiven.cpp
-# The given halves of curves and skinning stay in the list above
-# (Curve.cpp, ImportCurve.cpp, SkeletalModel.cpp, Joint.cpp, MatrixStack.cpp,
-# ImportCharacter.cpp). Their student halves -- CurveEval.cpp, Surface.cpp and
-# Skinning.cpp -- are swappable units declared below, so they must NOT appear
-# here or the solution switch would compile them anyway.
 
 # Object files (in obj directory)
 OBJS = $(addprefix $(OBJ_DIR)/, $(addsuffix .o, $(basename $(notdir $(SOURCES)))))
 UNAME_S := $(shell uname -s)
 
-CXXFLAGS = -std=c++11 -I$(SRC_HEADER) -I$(GLAD_HEADER)
+# A literal comma, for use inside $(if ...) where a bare one would split args.
+, := ,
+
+CXXFLAGS = -std=c++17 -I$(SRC_HEADER) -I$(GLAD_HEADER)
 CXXFLAGS += -g -Wall -Wformat
 CXXFLAGS += -DGLM_ENABLE_EXPERIMENTAL
 # Emit a .d file per object listing the headers it includes. Without this,
