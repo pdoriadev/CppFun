@@ -2,8 +2,15 @@
 # FLAGS
 
 # Catalogue of flags and built-in rules: https://www.gnu.org/software/make/manual/make.html#Catalogue-of-Rules
-CC = gcc #Flag for .c file implicit rules
-CFLAGS = -g # Flag for implicit rules. Turn on debug info.
+#Flag for .c file implicit rules
+#CC = gcc 
+
+# Flag for implicit rules. 
+#CFLAGS = -g #Turn on debug info.
+
+# https://gcc.gnu.org/onlinedocs/gcc/Preprocessor-Options.html
+# -M - user dependencies
+#CPPFLAGS = -M
 
 #############################################################################
 # VARIABLES
@@ -30,26 +37,30 @@ OBJS := $(subst .c,.o, $(OBJS))
 #OBJS := $(patsubt $(SRC_DIR)/%.c, $(SRC_DIR)/%.o, src/file1.c) 
 #OBJS := $(patsubt %.c, %.o, $(wildcard $(SRC_DIR)/*.c)) 
 #addprefix $(OBJ_DIR)/, $(
-BUILD := build
-BUILD_DIR := build
+EXE := buildexecutable
+EXE_DIR := build
 
 #############################################################################
 # RULES
 
 # Rule for building *.o files
+# Automatic variables reference (i.e. $<, $@): https://www.gnu.org/software/make/manual/make.html#Automatic-Variables
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c
-	echo "Stem-rule for building .o files from .c files"
-	$(COMPILE.c) $(OUTPUT_OPTION) $<
-	@###$(CC) -o $(BUILD_DIR)/$(BUILD).exe $(OBJ_DIR)/*.o
+	@#@echo "Stem-rule for building .o files from .c files"	
+	gcc --compile $< --output $@
+	@#$(CC) $(CFLAGS) $(CPPFLAGS) -c $<
+	@#$(COMPILE.c) $(OUTPUT_OPTION) $+
+	@#$(CC) -o $(EXE_DIR)/$(BUILD).exe $(OBJ_DIR)/*.o
 
 # Implicit rule #1: object files are built via the C linker implicit rule
 # Implicit rule #2: blah.o is built via the C compilation implicit rule, because blah.c exists
 all: DIRECTORIES_BUILT $(OBJS) 
-	@echo $(SRC_DIR)
-	@echo $(SRCS)
-	@echo $(OBJS)
-	@echo $@
-	@echo "all rule"
+	gcc $(OBJS) --output $(EXE)
+	@#@echo $(SRC_DIR)
+	@#@echo $(SRCS)
+	@#@echo $(OBJS)
+	@#@echo $@
+	@#@echo "all rule"
 
 # order-only prerequisite with pipe operator. \
 	# Creates an obj directory if it doesn't exist. \
@@ -57,22 +68,23 @@ all: DIRECTORIES_BUILT $(OBJS)
 	# Directory's 'last modified' timestamp is updated every time one of \
 	# its files is modified. That means the $(OBJ_DIR)'s matching target \ won't be triggered if $(OBJ_DIR) already exists. \
 	# https://www.gnu.org/software/make/manual/make.html#Prerequisite-Types
-DIRECTORIES_BUILT : | $(OBJ_DIR) $(BUILD_DIR)
-	@echo "DIRECTORIES_BUILT RULE $<"
+DIRECTORIES_BUILT : | $(OBJ_DIR) $(EXE_DIR)
+	@echo "DIRECTORIES_BUILT RULE"
 
 $(OBJ_DIR) :
 	@echo "Create OBJ Directory"
 	mkdir $(OBJ_DIR)/
 
-$(BUILD_DIR) :
+$(EXE_DIR) :
 	@echo "Create Build Directory"
-	mkdir $(BUILD_DIR)/
+	mkdir $(EXE_DIR)/
 
 ##############################################################################
 # PHONY targets
 
 clean:
 	rm -f $(OBJ_DIR)/*.o
+	rm -f $(EXE)
 
 # Reads make file. Assigns immediate-time variables.
 # First target is 'all'. Becomes goal target. 
