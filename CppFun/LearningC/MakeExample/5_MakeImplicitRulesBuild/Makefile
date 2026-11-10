@@ -37,13 +37,14 @@ BUILD_DIR := build
 # RULES
 
 # Rule for building *.o files
-%.o : %.c
+$(OBJ_DIR)/%.o : $(SRC_DIR)/%.c
 	echo "Stem-rule for building .o files from .c files"
-	$(CC) -o $(BUILD_DIR)/$(BUILD).exe $(OBJ_DIR)/*.o
+	$(COMPILE.c) $(OUTPUT_OPTION) $<
+	@###$(CC) -o $(BUILD_DIR)/$(BUILD).exe $(OBJ_DIR)/*.o
 
 # Implicit rule #1: object files are built via the C linker implicit rule
 # Implicit rule #2: blah.o is built via the C compilation implicit rule, because blah.c exists
-all:  | $(OBJ_DIR) $(BUILD_DIR)
+all: DIRECTORIES_BUILT $(OBJS) 
 	@echo $(SRC_DIR)
 	@echo $(SRCS)
 	@echo $(OBJS)
@@ -56,15 +57,15 @@ all:  | $(OBJ_DIR) $(BUILD_DIR)
 	# Directory's 'last modified' timestamp is updated every time one of \
 	# its files is modified. That means the $(OBJ_DIR)'s matching target \ won't be triggered if $(OBJ_DIR) already exists. \
 	# https://www.gnu.org/software/make/manual/make.html#Prerequisite-Types
-#$(OBJS) : 
-#	echo "OBJS target rule"
+DIRECTORIES_BUILT : | $(OBJ_DIR) $(BUILD_DIR)
+	@echo "DIRECTORIES_BUILT RULE $<"
 
 $(OBJ_DIR) :
-	echo "Create OBJ Directory"
+	@echo "Create OBJ Directory"
 	mkdir $(OBJ_DIR)/
 
 $(BUILD_DIR) :
-	echo "Create Build Directory"
+	@echo "Create Build Directory"
 	mkdir $(BUILD_DIR)/
 
 ##############################################################################
