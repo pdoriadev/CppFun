@@ -1,34 +1,75 @@
-CC = gcc #Flag for implicit rules
+#############################################################################
+# FLAGS
+
+# Catalogue of flags and built-in rules: https://www.gnu.org/software/make/manual/make.html#Catalogue-of-Rules
+CC = gcc #Flag for .c file implicit rules
 CFLAGS = -g # Flag for implicit rules. Turn on debug info.
 
-objects := file1.o file2.o file3.o
+#############################################################################
+# VARIABLES
+
+# wildcard function at immediate time to create a list of all .c files in \
+	# the source directory.
+SRC_DIR := src
+SRCS := $(wildcard $(SRC_DIR)/*.c)
+
+
+# OBJ_DIR variable assigned at 'immediate' time. Also known as read time. i
+# https://www.gnu.org/software/make/manual/make.html#Reading-Makefiles
+OBJ_DIR := obj
+# Create a list of .c files in current directory. \
+	# For each list item ending in .c, replace '.c' with '.o'. \
+	# Creates a list of .o files that correspond to each .c file. \
+	# For each list item prepends the OBJ_DIRectory's prefix. \
+	# https://www.gnu.org/software/make/manual/make.html#Prerequisite-Types
+OBJS := $(addprefix $(OBJ_DIR)/, $(patsubt %.c, %.o, SRCS)) 
+
+BUILD := build
+BUILD_DIR := build
+
+#############################################################################
+# RULES
+
+# Rule for building *.o files
+$(OBJ_DIR)/%.o : $(SCR_DIR)/%.c
+	echo "Stem-rule for building .o files from .c files"
+	$(CC) -o $(BUILD_DIR)/$(BUILD).exe $(OBJ_DIR)/*.o
 
 # Implicit rule #1: object files are built via the C linker implicit rule
 # Implicit rule #2: blah.o is built via the C compilation implicit rule, because blah.c exists
-build: build/ $(objects)
-	$(CC) -o build/build.exe build/*.o
+all: $(OBJS)
+	@echo $(SRC_DIR)
+	@echo $(SRCS)
+	@echo $@
+	@echo "all rule"
 
-build/:
-	mkdir build/
+# order-only prerequisite with pipe operator. \
+	# Creates an obj directory if it doesn't exist. \
+	# \
+	# Directory's 'last modified' timestamp is updated every time one of \
+	# its files is modified. That means the $(OBJ_DIR)'s matching target \ won't be triggered if $(OBJ_DIR) already exists. \
+	# https://www.gnu.org/software/make/manual/make.html#Prerequisite-Types
+$(OBJS) : | $(OBJ_DIR) $(BUILD_DIR)
+	echo "OBJS target rule"
 
-file1.o: file1.c
-	make source
-	$(CC) -c file1.c -o build/file1.o
+$(OBJ_DIR) :
+	echo "Create OBJ Directory"
+	mkdir $(OBJ_DIR)/
 
-file2.o: file2.c
-	make source
-	$(CC) -c file2.c -o build/file2.o
+$(BUILD_DIR) :
+	echo "Create Build Directory"
+	mkdir $(BUILD_DIR)/
 
-file3.o: file3.c
-	make source
-	$(CC) -c file3.c -o build/file3.o
-
-sourceFiles := file1.c file2.c file3.c
-source: $(sourceFiles)
-
-$(sourceFiles):
-	touch $@
+##############################################################################
+# PHONY targets
 
 clean:
-	rm -f *.o *.c
+	rm -f $(OBJ_DIR)/*.o
 
+# Reads make file. Assigns immediate-time variables.
+# First target is 'all'. Becomes goal target. 
+# Looks at goal target's pre-reqs. For each *.o file in $(OBJS), runs an \
+	# implicit rule, checks that the *.o file exists and if it is newer than \
+	# its matching sourcefile. If the *.o file doesn't exist, or it \
+	# is older than its matching sourcefile, make will look for a rule \
+	# to build the .o file. It should find one. \
