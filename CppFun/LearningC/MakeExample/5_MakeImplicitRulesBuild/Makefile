@@ -22,8 +22,14 @@ OBJ_DIR := obj
 	# Creates a list of .o files that correspond to each .c file. \
 	# For each list item prepends the OBJ_DIRectory's prefix. \
 	# https://www.gnu.org/software/make/manual/make.html#Prerequisite-Types
-OBJS := $(addprefix $(OBJ_DIR)/, $(patsubt %.c, %.o, SRCS)) 
 
+OBJS := $(subst $(SRC_DIR), $(OBJ_DIR), $(SRCS))
+OBJS := $(subst .c,.o, $(OBJS))
+
+#OBJS := $(subst .c, .o, $(subst $(SRC_DIR), $(OBJ_DIR), $(SRCS)))
+#OBJS := $(patsubt $(SRC_DIR)/%.c, $(SRC_DIR)/%.o, src/file1.c) 
+#OBJS := $(patsubt %.c, %.o, $(wildcard $(SRC_DIR)/*.c)) 
+#addprefix $(OBJ_DIR)/, $(
 BUILD := build
 BUILD_DIR := build
 
@@ -31,15 +37,16 @@ BUILD_DIR := build
 # RULES
 
 # Rule for building *.o files
-$(OBJ_DIR)/%.o : $(SCR_DIR)/%.c
+%.o : %.c
 	echo "Stem-rule for building .o files from .c files"
 	$(CC) -o $(BUILD_DIR)/$(BUILD).exe $(OBJ_DIR)/*.o
 
 # Implicit rule #1: object files are built via the C linker implicit rule
 # Implicit rule #2: blah.o is built via the C compilation implicit rule, because blah.c exists
-all: $(OBJS)
+all:  | $(OBJ_DIR) $(BUILD_DIR)
 	@echo $(SRC_DIR)
 	@echo $(SRCS)
+	@echo $(OBJS)
 	@echo $@
 	@echo "all rule"
 
@@ -49,8 +56,8 @@ all: $(OBJS)
 	# Directory's 'last modified' timestamp is updated every time one of \
 	# its files is modified. That means the $(OBJ_DIR)'s matching target \ won't be triggered if $(OBJ_DIR) already exists. \
 	# https://www.gnu.org/software/make/manual/make.html#Prerequisite-Types
-$(OBJS) : | $(OBJ_DIR) $(BUILD_DIR)
-	echo "OBJS target rule"
+#$(OBJS) : 
+#	echo "OBJS target rule"
 
 $(OBJ_DIR) :
 	echo "Create OBJ Directory"
