@@ -94,4 +94,7 @@ std::vector<glm::vec2> cylindricalPerCorner(const std::vector<glm::vec3>& vertic
 
 } // namespace TexCoords
 
+std::vector<glm::vec3> sample(float u, float v);
+
 #endif // TEXCOORDS_H
+//

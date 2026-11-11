@@ -1,6 +1,6 @@
 // TextureCache -- see include/TextureCache.h. All given to students.
 
-#include "TextureCache.h"
+#include "../include/TextureCache.h"
 
 #include <cmath>
 #include <cstring>
@@ -12,7 +12,7 @@
 // which costs more support time than the header costs anyone.
 #define STB_IMAGE_IMPLEMENTATION
 #define STBI_NO_STDIO_WARNING
-#include "stb_image.h"
+#include "../src/stb/stb_image.h"
 
 namespace {
 
