@@ -30,15 +30,15 @@ endif
 # $(EXE) :
 # 	touch $(EXE)
 
-SRC_HEADER = include
+SRC_HEADER_DIR = include
 SRC_DIR = src
 OBJ_DIR = obj
-GLAD_HEADER = include/glad
+GLAD_HEADER_DIR = include/glad 
 GLAD_DIR = src/glad
 
 SOURCES = main.cpp
 SOURCES += $(GLAD_DIR)/glad.c
-SOURCES += $(SRC_DIR)/main.cpp $(SRC_DIR)/InputCache.cpp $(SRC_DIR)/Logging.cpp $(SRC_DIR)/Modeling.cpp $(SRC_DIR)/shaderSource.cpp $(SRC_DIR)/utils.cpp
+SOURCES += $(wildcard $(SRC_DIR)/*.cpp) 
 
 # Object files (in obj directory)
 OBJS = $(addprefix $(OBJ_DIR)/, $(addsuffix .o, $(basename $(notdir $(SOURCES)))))
@@ -47,7 +47,7 @@ UNAME_S := $(shell uname -s)
 # A literal comma, for use inside $(if ...) where a bare one would split args.
 , := ,
 
-CXXFLAGS = -std=c++17 -I$(SRC_HEADER) -I$(GLAD_HEADER)
+CXXFLAGS = -std=c++17 -I$(SRC_HEADER_DIR) -I$(GLAD_HEADER_DIR)
 CXXFLAGS += -g -Wall -Wformat
 CXXFLAGS += -DGLM_ENABLE_EXPERIMENTAL
 # Emit a .d file per object listing the headers it includes. Without this,
@@ -116,24 +116,26 @@ endif
 ##---------------------------------------------------------------------
 
 $(OBJ_DIR)/%.o:%.cpp
-	$(CXX) $(CXXFLAGS) -c -o $@ $<
-
-$(OBJ_DIR)/%.o:$(IMGUI_DIR)/%.cpp
-	$(CXX) $(CXXFLAGS) -c -o $@ $<
-
-$(OBJ_DIR)/%.o:$(IMGUI_DIR)/backends/%.cpp
-	$(CXX) $(CXXFLAGS) -c -o $@ $<
-
-$(OBJ_DIR)/%.o:$(TINYDIALOG_DIR)/%.c
-	$(CXX) $(CXXFLAGS) -c -o $@ $<
+	$(CXX) $(CXXFLAGS) --compile $< --output $@ 
+	@echo "\n\n\n " $< " " $@ "\n\n\n"
 
 $(OBJ_DIR)/%.o:$(SRC_DIR)/%.cpp
-	$(CXX) $(CXXFLAGS) -c -o $@ $<
+	@echo "\n\n"
+	@echo $(SOURCES) 
+	@echo $(OBJS)
+	@echo "\n\n"
+	$(CXX) $(CXXFLAGS) --compile $< --output $@ 
+	@#$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 $(OBJ_DIR)/%.o:$(GLAD_DIR)/%.c
-	$(CXX) $(CXXFLAGS) -c -o $@ $<
+	$(CXX) $(CXXFLAGS) --compile $< --output $@ 
+	@#$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 all: $(EXE)
+	@echo "\n\n"	
+	@echo $(SOURCES)
+	@echo $(OBJS)
+	@echo "\n\n"
 	@echo Build complete for $(ECHO_MESSAGE)
 
 # obj/ is gitignored, so a fresh clone has no such directory and the
@@ -146,7 +148,8 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
 $(EXE): $(OBJS)
-	$(CXX) -o $@ $(OBJS) $(CXXFLAGS) $(LIBS)
+	$(CXX) -o $(EXE) $(OBJS) $(CXXFLAGS) $(LIBS)
+	@#$(CXX) $(CXXFLAGS) $(OBJS) $(LIBS)
 
 clean:
 	rm -f $(EXE) $(OBJS) $(OBJS:.o=.d)

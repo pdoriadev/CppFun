@@ -1,0 +1,4 @@
+mkdir -p obj
+g++ -std=c++17 -Iinclude -Iinclude/glad -g -Wall -Wformat -DGLM_ENABLE_EXPERIMENTAL -MMD -MP -c -o obj/main.o src/main.cpp
+g++ -std=c++17 -Iinclude -Iinclude/glad -g -Wall -Wformat -DGLM_ENABLE_EXPERIMENTAL -MMD -MP -c -o obj/glad.o src/glad/glad.c
+g++ -o scratch obj/main.o obj/glad.o -std=c++17 -Iinclude -Iinclude/glad -g -Wall -Wformat -DGLM_ENABLE_EXPERIMENTAL -MMD -MP -lGL -lglfw -ldl
