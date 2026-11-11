@@ -52,16 +52,13 @@ HAS_COMPILED_NEW := 0
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c
 	@# Compiles .o from .c files. NO linking. https://gcc.gnu.org/onlinedocs/gcc/Overall-Options.html
 	gcc --compile $< --output $@
-	$(HAS_COMPILED_NEW) += 1 
 
 # Implicit rule #1: object files are built via the C linker implicit rule
 # Implicit rule #2: blah.o is built via the C compilation implicit rule, because blah.c exists
 all: DIRECTORIES_BUILT $(OBJS) 
 	@# Conditional Syntax: https://www.gnu.org/software/make/manual/make.html#Conditional-Syntax
-	ifneq ($HAS_COMPILED_NEW, 0)
-		@# Link options: https://gcc.gnu.org/onlinedocs/gcc/Link-Options.html
-		gcc $(OBJS) --output $(EXE)
-	endif
+	@#
+	gcc $(OBJS) --output $(EXE)
 
 # order-only prerequisite with pipe operator. \
 	# Creates an obj directory if it doesn't exist. \
