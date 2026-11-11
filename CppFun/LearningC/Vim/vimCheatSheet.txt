@@ -6,7 +6,8 @@ Toggle showing line numbers
 - set number
 - set nonnumber
 
-Cut/Paste
+Cut/Paste/Selection
+- Ctrl+Q for visual block mode. Good for selecting columns.
 - v for visual mode.
 - highlight, then press d to cut
 - press p to paste
@@ -56,3 +57,12 @@ Control Flow Keys (terminal, not neovim?)
 - Ctrl-C - Cancel Operation
 - Ctrl-U - Cancel Line
 - Ctrl-D - Signal End of File
+
+----------------
+
+# LazyVim-specific
+
+- <leader>uf - turn off auto-format. https://www.lazyvim.org/configuration/tips
+- <leader>ws - split window
+- <leader>wv - split window vertically
+- <leader>wq - quit window
