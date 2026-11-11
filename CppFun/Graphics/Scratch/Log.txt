@@ -1,1 +1,18 @@
-bird
+LOG: STARTING PROGRAM
+--------------------------
+
+LOG: SETUP FOR WSL: TRUE
+LOG: INITIALIZED: TRUE
+LOG: 
+PROGRAM INFO LOG AFTER LINKING:
+LOG: Passed empty string to logger
+LOG: 
+END OF PROGRAM INFO LOG
+
+LOG: LINK SUCCESSFUL! ID = 3
+LOG: Constructed cube with 216floats and 36 points.
+LOG: 
+--------------------------
+ENDING PROGRAM
+
+LOG: Closing log file
