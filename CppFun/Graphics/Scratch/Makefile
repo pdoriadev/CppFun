@@ -46,7 +46,6 @@ UNAME_S := $(shell uname -s)
 
 # A literal comma, for use inside $(if ...) where a bare one would split args.
 , := ,
-
 CXXFLAGS = -std=c++17 -I$(SRC_HEADER_DIR) -I$(GLAD_HEADER_DIR)
 CXXFLAGS += -g -Wall -Wformat
 CXXFLAGS += -DGLM_ENABLE_EXPERIMENTAL
@@ -127,9 +126,8 @@ $(OBJ_DIR)/%.o:$(SRC_DIR)/%.cpp
 	$(CXX) $(CXXFLAGS) --compile $< --output $@ 
 	@#$(CXX) $(CXXFLAGS) -c -o $@ $<
 
-$(OBJ_DIR)/%.o:$(GLAD_DIR)/%.c
+$(OBJ_DIR)/%.o : $(GLAD_DIR)/%.c
 	$(CXX) $(CXXFLAGS) --compile $< --output $@ 
-	@#$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 all: $(EXE)
 	@echo "\n\n"	
