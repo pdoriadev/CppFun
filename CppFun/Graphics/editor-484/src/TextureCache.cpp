@@ -30,7 +30,6 @@ const Texture* get(const std::string& path) {
     if (it != g_textures.end()) {
         return it->second.valid() ? &it->second : 0;
     }
-
     // v = 0 at the bottom. OpenGL's texture origin is bottom-left while every
     // image format stores the top row first, so without this a texture appears
     // upside down in the viewport -- and, worse, the tracer and the viewport
