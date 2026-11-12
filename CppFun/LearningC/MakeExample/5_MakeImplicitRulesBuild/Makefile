@@ -34,6 +34,10 @@ OBJ_DIR := obj
 	# https://www.gnu.org/software/make/manual/make.html#Prerequisite-Types
 OBJS := $(subst $(SRC_DIR), $(OBJ_DIR), $(SRCS))
 OBJS := $(subst .c,.o, $(OBJS))
+
+DEP = $(OBJS:$.o=%.d)
+-include $(DEPS)
+
 #OBJS := $(subst .c, .o, $(subst $(SRC_DIR), $(OBJ_DIR), $(SRCS)))
 #OBJS := $(patsubt $(SRC_DIR)/%.c, $(SRC_DIR)/%.o, src/file1.c) 
 #OBJS := $(patsubt %.c, %.o, $(wildcard $(SRC_DIR)/*.c)) 
@@ -42,8 +46,6 @@ OBJS := $(subst .c,.o, $(OBJS))
 EXE := buildexecutable
 EXE_DIR := build
 
-HAS_COMPILED_NEW := 0 
-
 #############################################################################
 # RULES
 
@@ -51,13 +53,10 @@ HAS_COMPILED_NEW := 0
 # Automatic variables reference (i.e. $<, $@): https://www.gnu.org/software/make/manual/make.html#Automatic-Variables
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c
 	@# Compiles .o from .c files. NO linking. https://gcc.gnu.org/onlinedocs/gcc/Overall-Options.html
-	gcc --compile $< --output $@
+	@# -MD option. Equivalent to -M -MF but -E is not implied. Generates a %.d dependencies file for each assembled %.o file.
+	gcc --compile -MMD $< --output $@
 
-# Implicit rule #1: object files are built via the C linker implicit rule
-# Implicit rule #2: blah.o is built via the C compilation implicit rule, because blah.c exists
 all: DIRECTORIES_BUILT $(OBJS) 
-	@# Conditional Syntax: https://www.gnu.org/software/make/manual/make.html#Conditional-Syntax
-	@#
 	gcc $(OBJS) --output $(EXE)
 
 # order-only prerequisite with pipe operator. \
