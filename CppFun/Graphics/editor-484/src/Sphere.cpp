@@ -146,7 +146,6 @@ void Sphere::setupSphere() {
                   << std::endl;
       }
       
-      // Am I supposed to call sample() here????? what's supposed to call sample??? 
     }
   }
 
