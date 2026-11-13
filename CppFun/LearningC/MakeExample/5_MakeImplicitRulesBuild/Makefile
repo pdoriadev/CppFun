@@ -35,6 +35,9 @@ OBJ_DIR := obj
 OBJS := $(subst $(SRC_DIR), $(OBJ_DIR), $(SRCS))
 OBJS := $(subst .c,.o, $(OBJS))
 
+# Include the .d makefiles. The - at the front suppresses the errors of missing
+# Makefiles. Initially, all the .d files will be missing, and we don't want those
+# errors to show up.
 DEP = $(OBJS:$.o=%.d)
 -include $(DEPS)
 
@@ -54,7 +57,9 @@ EXE_DIR := build
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c
 	@# Compiles .o from .c files. NO linking. https://gcc.gnu.org/onlinedocs/gcc/Overall-Options.html
 	@# -MD option. Equivalent to -M -MF but -E is not implied. Generates a %.d dependencies file for each assembled %.o file.
-	gcc --compile -MMD $< --output $@
+	@# '-I' - search for headers from this directory in preprocessing. 
+		@#https://gcc.gnu.org/onlinedocs/gcc/Directory-Options.html
+	gcc -I$(INCLUDES_DIR) --compile -MMD $< --output $@
 
 all: DIRECTORIES_BUILT $(OBJS) 
 	gcc $(OBJS) --output $(EXE)
