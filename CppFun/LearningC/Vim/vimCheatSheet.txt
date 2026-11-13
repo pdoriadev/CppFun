@@ -7,7 +7,6 @@ Toggle showing line numbers
 - set nonnumber
 
 Cut/Paste/Selection
-- Ctrl+Q for visual block mode. Good for selecting columns.
 - v for visual mode.
 - highlight, then press d to cut
 - press p to paste
@@ -66,3 +65,5 @@ Control Flow Keys (terminal, not neovim?)
 - <leader>ws - split window
 - <leader>wv - split window vertically
 - <leader>wq - quit window
+
+- Ctrl+Q for visual block mode. Good for selecting columns. Doesn't work as a multi-line cursor.
