@@ -338,7 +338,10 @@ const std::vector<glm::vec2>& Shape::getTexCoords() const {
 // attribute 3 reads as a constant, so shapes that never call this are
 // unaffected.
 void Shape::uploadTexCoords() {
-    if (texCoords.empty()) return;
+    if (texCoords.empty()) {
+      std::cout << "Shape::uploadTexCoords - TexCoords Empty for shape type: " << shapeType << std::endl;
+      return;
+    }
 
     if (texVBO == 0) glGenBuffers(1, &texVBO);
 

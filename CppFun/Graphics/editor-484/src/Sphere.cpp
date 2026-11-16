@@ -139,18 +139,16 @@ void Sphere::setupSphere() {
 
       if (static_cast<size_t>(vertexIndex) < vertexUVs.size()) {
         texCoords.push_back(vertexUVs[vertexIndex]);
-      } 
-      else {
+      } else {
         texCoords.push_back(glm::vec2(0.0f));
         std::cout << "vertexIndex " << vertexIndex << " > vertexUVs.size()"
                   << std::endl;
       }
-      
     }
   }
 
   // outputVertices(vertexData, VALUES_PER_VERTEX);
-  
+
   // Does this even make sense??
   // Vertex Elements are stored in vertexData.
   // Faces stores int arrays of size 3 for each face.
@@ -205,7 +203,7 @@ void Sphere::setupSphere() {
   glEnableVertexAttribArray(2);
 
   // UVs go in their own buffer on attribute 3, while the VAO is still bound.
-  // uploadTexCoords();
+  uploadTexCoords();
 
   glBindVertexArray(0); // Unbind VAO
 

@@ -11,7 +11,7 @@
 #CXX = clang++
 
 CC = g++
-CFLAGS = -Iinclude -std=c++17
+CFLAGS = Iinclude -std=c++17
 
 # MinGW's g++ appends .exe when the -o name has no extension, so the file on
 # disk is editor.exe while EXE said "editor" - and `make clean` then quietly
@@ -128,6 +128,7 @@ $(OBJ_DIR)/%.o:$(SRC_DIR)/%.cpp
 
 $(OBJ_DIR)/%.o : $(GLAD_DIR)/%.c
 	$(CXX) $(CXXFLAGS) --compile $< --output $@ 
+	@#$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 all: $(EXE)
 	@echo "\n\n"	

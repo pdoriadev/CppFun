@@ -27,16 +27,15 @@ std::vector<glm::vec2> sphere(unsigned latSegments, unsigned lonSegments) {
   std::cout << std::endl;
   for (unsigned i = 0; i < latSegments; ++i) {
     float const phi =
-        static_cast<float>(i) / static_cast<float>(latSegments - 1);
+        ((latSegments - 1) - static_cast<float>(i)) / static_cast<float>(latSegments - 1);
     // xz moves on u axis.
     // y moves on v axis.
     // float const v = glm::cos(phi);
     float const v = phi;
     // std::cout << "--\nv = " << v << std::endl;
     for (unsigned j = 0; j < lonSegments; ++j) {
-      float const theta = static_cast<float>(j) / static_cast<float>(latSegments - 1);
-      float const u = theta;
-      uvPerVertex.push_back(glm::vec2(u, v));
+      float const theta = 
+        ((lonSegments - 1) - static_cast<float>(j)) / static_cast<float>(lonSegments - 1); float const u = theta; uvPerVertex.push_back(glm::vec2(u, v));
 
       //std::cout << "u = " << u << std::endl;
     }
@@ -45,16 +44,16 @@ std::vector<glm::vec2> sphere(unsigned latSegments, unsigned lonSegments) {
   return uvPerVertex;
 }
 
+// TODO(textures): generate one UV per cube triangle corner
+// Three per face, in the order the corners appear in `faces`. Project
+// each vertex onto the two axes the face normal is NOT aligned with.
+// faceNormals is indexed faceNormals[i / 2]: two triangles per face.
+//  return vector of uvs for each non-unique vertex.
 std::vector<glm::vec2> cube(const std::vector<glm::vec3> &vertices,
                             const std::vector<std::vector<int>> &faces,
                             const std::vector<glm::vec3> &faceNormals) {
-  // TODO(textures): generate one UV per cube triangle corner
-  // Three per face, in the order the corners appear in `faces`. Project
-  // each vertex onto the two axes the face normal is NOT aligned with.
-  // faceNormals is indexed faceNormals[i / 2]: two triangles per face.
-  
-  // AABB projection. See planarProjection function for reference.
-  // return vector of uvs for each non-unique vertex.
+  // AABB projection. See TexCoordsGiven.cpp's planarPerFace 
+  // function for reference.
   if (vertices.size() == 0) return {};
   if (faces.size() == 0) return {};
   if (faceNormals.size() == 0) return {};
@@ -67,7 +66,6 @@ std::vector<glm::vec2> cube(const std::vector<glm::vec3> &vertices,
   }
 
   glm::vec3 span = boxMax - boxMin;
-
   // ensures a minimum width greater than 1e-6f. Avoids divide by 0.
   for (unsigned s = 0; s < 3; ++s) if (span[s] < 1e-6f) span[s] = 1.0f;
 
@@ -76,17 +74,17 @@ std::vector<glm::vec2> cube(const std::vector<glm::vec3> &vertices,
 
   for(unsigned i = 0; i < faces.size(); ++i) {
     std::vector<int> const face = faces.at(i);
-    
+ 
     glm::vec3 normal = faceNormals.at(face.at(0));
 
     float const ax = std::fabs(normal.x), 
                 ay = std::fabs(normal.y), 
                 az = std::fabs(normal.z);
 
-    std::cout <<
-      "\nCube TexCoords - \nnormal.x = " << normal.x 
-      << "\nnormal.y = "<< normal.y 
-      << "\nnormal.z = "<< normal.z << std::endl;
+    std::cout << "\nCube TexCoords"
+      << "\nnormal.x = " << normal.x
+      << "\nnormal.y = " << normal.y
+      << "\nnormal.z = " << normal.z << std::endl;
     int uAxis, vAxis;
     if (az >= ax && az >= ay) { uAxis = 0; vAxis = 1; std::cout << "XY" << std::endl; }
     else if (ax > ay)         { uAxis = 1; vAxis = 2; std::cout << "YZ" << std::endl; }
