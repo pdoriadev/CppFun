@@ -200,12 +200,13 @@ bool Cube::setupCube() {
   elementsData.shrink_to_fit();
 
   // cache vertex data
-  for (uint i = 0; i < vertexData.size(); i = i + 9) {
+/*  for (uint i = 0; i < vertexData.size(); i = i + 9) {
     vertices.push_back(
         glm::vec3(vertexData[i], vertexData[i + 1], vertexData[i + 2]));
     normals.push_back(
         glm::vec3(vertexData[i + 3], vertexData[i + 4], vertexData[i + 5]));
   }
+*/
 
   texCoords = TexCoords::cube(vertices, faces, normals);
 
@@ -271,6 +272,9 @@ bool Cube::setupCube() {
                         (void *)(6 * sizeof(float))); // color
   glEnableVertexAttribArray(2);
 
+  // UVs go in their own buffer on attribute 3, while the VAO is still bound.
+  uploadTexCoords();
+ 
   // EBO buffer operations. Load in element data.
   // Target - same one we bound the EBO ID matching the corresponding buffer
   // object. This operation is what makes the buffer object an *Element* Buffer
@@ -278,13 +282,9 @@ bool Cube::setupCube() {
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, elementsData.size() * sizeof(uint),
                elementsData.data(), GL_STATIC_DRAW);
 
-  // UVs go in their own buffer on attribute 3, while the VAO is still bound.
-  uploadTexCoords();
-
   glBindVertexArray(0);
 
   std::cout << "SETUP CUBE - COMPLETE" << std::endl;
-
   return true;
 }
 

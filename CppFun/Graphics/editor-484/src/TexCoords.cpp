@@ -80,15 +80,26 @@ std::vector<glm::vec2> cube(const std::vector<glm::vec3> &vertices,
     float const ax = std::fabs(normal.x), 
                 ay = std::fabs(normal.y), 
                 az = std::fabs(normal.z);
-
+    std::cout << "\nCube AABB box Min" 
+      << boxMin.x <<", " 
+      << boxMin.y << ", " 
+      << boxMin.z << std::endl;
+    std::cout << "\nCube AABB box Max" 
+      << boxMax.x <<", " 
+      << boxMax.y << ", " 
+      << boxMax.z << std::endl;
+    std::cout << "\nCube AABB span " 
+      << span.x <<", " 
+      << span.y << ", " 
+      << span.z << std::endl;
     std::cout << "\nCube TexCoords"
       << "\nnormal.x = " << normal.x
       << "\nnormal.y = " << normal.y
       << "\nnormal.z = " << normal.z << std::endl;
     int uAxis, vAxis;
-    if (az >= ax && az >= ay) { uAxis = 0; vAxis = 1; std::cout << "XY" << std::endl; }
-    else if (ax > ay)         { uAxis = 1; vAxis = 2; std::cout << "YZ" << std::endl; }
-    else                      { uAxis = 0; vAxis = 2; std::cout << "XZ" << std::endl; }
+    if (az >= ax && az >= ay) { uAxis = 1; vAxis = 0; std::cout << "XY" << std::endl; }
+    else if (ax > ay)         { uAxis = 2; vAxis = 1; std::cout << "YZ" << std::endl; }
+    else                      { uAxis = 2; vAxis = 0; std::cout << "XZ" << std::endl; }
     
     for (unsigned j = 0; j < 3; ++j) {
       // compute uv bounds. 
