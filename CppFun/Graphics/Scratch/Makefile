@@ -128,7 +128,6 @@ $(OBJ_DIR)/%.o:$(SRC_DIR)/%.cpp
 
 $(OBJ_DIR)/%.o : $(GLAD_DIR)/%.c
 	$(CXX) $(CXXFLAGS) --compile $< --output $@ 
-	@#$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 all: $(EXE)
 	@echo "\n\n"	
