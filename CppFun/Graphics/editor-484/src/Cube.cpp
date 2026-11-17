@@ -27,13 +27,14 @@ Cube::~Cube() {
 
 std::vector<glm::vec3> const standardPositions = {
     {-0.5f, 0.5f, -0.5f},
-    {0.5f, 0.5f, -0.5f},
-    {0.5f, 0.5f, 0.5f},
     {-0.5f, 0.5f, 0.5f},
+    {0.5f, 0.5f, 0.5f},
+    {0.5f, 0.5f, -0.5f},
+
     {-0.5f, -0.5f, -0.5f},
-    {0.5f, -0.5f, -0.5f},
+    {-0.5f, -0.5f, 0.5f},
     {0.5f, -0.5f, 0.5f},
-    {-0.5f, -0.5f, 0.5f}
+    {0.5f, -0.5f, -0.5f}
 };
 
 std::vector<glm::vec3> const standardNormals{
@@ -85,6 +86,7 @@ bool Shape::constructPlane(PlaneConstructionParams params) {
     params.vertexData.push_back(position.y);
     params.vertexData.push_back(position.z);
 
+    // All plane verts have the same normal
     normals.push_back(standardNormals.at(params.normalIndex));
     params.vertexData.push_back(standardNormals.at(params.normalIndex).x);
     params.vertexData.push_back(standardNormals.at(params.normalIndex).y);
@@ -96,16 +98,16 @@ bool Shape::constructPlane(PlaneConstructionParams params) {
   }
 
   // cache faces/element indices.
-  int const topElementIndex = (params.vertexData.size() / 9) - 1;
+  int const lastElementIndex = (params.vertexData.size() / 9) - 1;
   std::vector<std::vector<int>> const TRIS = {
-      {topElementIndex - 3, topElementIndex - 2, topElementIndex - 1},
-      {topElementIndex - 1, topElementIndex, topElementIndex - 3}};
+      {lastElementIndex - 3, lastElementIndex - 2, lastElementIndex - 1},
+      {lastElementIndex - 1, lastElementIndex, lastElementIndex - 3}};
 
   for (std::size_t i = 0; i < TRIS.size(); ++i) {
-    faces.push_back(TRIS[i]);
+    faces.push_back(TRIS.at(i));
 
-    for (std::size_t j = 0; j < TRIS[i].size(); ++j) {
-      params.elementData.push_back(TRIS[i][j]);
+    for (std::size_t j = 0; j < TRIS.at(i).size(); ++j) {
+      params.elementData.push_back(TRIS.at(i).at(j));
     }
   }
 
@@ -151,9 +153,9 @@ bool Cube::setupCube() {
       // bottom plane
       if (i == 2) {
         positionIndices[0] = 4;
-        positionIndices[1] = 5;
+        positionIndices[1] = 7;
         positionIndices[2] = 6;
-        positionIndices[3] = 7;
+        positionIndices[3] = 5;
         normalIndex = 5;
         constructPlane(PlaneConstructionParams(vertexData, elementsData,
                                                positionIndices, normalIndex));
@@ -168,12 +170,12 @@ bool Cube::setupCube() {
         continue;
       }
 
-      // side plane
+      // for 3 side planes
       positionIndices[0] = j - 1;
-      positionIndices[1] = i * ELEMENTS_PER_LOOP + j - 1;
-      positionIndices[2] = i * ELEMENTS_PER_LOOP + j;
+      positionIndices[1] = 4 + j - 1;
+      positionIndices[2] = 4 + j;
       positionIndices[3] = j;
-      normalIndex = i + j - 1;
+      normalIndex = j;
       constructPlane(PlaneConstructionParams(vertexData, elementsData,
                                              positionIndices, normalIndex));
 
@@ -185,7 +187,7 @@ bool Cube::setupCube() {
                   << " is greater than 3. No more than 0-3 elements per loop.";
       }
 
-      // wrap-around plane
+      // 4th wrap-around side-plane
       positionIndices[0] = 3;
       positionIndices[1] = 7;
       positionIndices[2] = 4;
@@ -207,7 +209,8 @@ bool Cube::setupCube() {
         glm::vec3(vertexData[i + 3], vertexData[i + 4], vertexData[i + 5]));
   }
 */
-
+  outputVertices(vertexData, 9);
+  outputElements(elementsData, 3);
   texCoords = TexCoords::cube(vertices, faces, normals);
 
   // Generate an ID for one Vertex Array Object. Caches the ID in the CUBE's VAO

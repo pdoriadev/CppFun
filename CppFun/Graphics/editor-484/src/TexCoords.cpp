@@ -67,7 +67,20 @@ std::vector<glm::vec2> cube(const std::vector<glm::vec3> &vertices,
 
   glm::vec3 span = boxMax - boxMin;
   // ensures a minimum width greater than 1e-6f. Avoids divide by 0.
-  for (unsigned s = 0; s < 3; ++s) if (span[s] < 1e-6f) span[s] = 1.0f;
+  for (unsigned k = 0; k < 3; ++k) if (span[k] < 1e-6f) span[k] = 1.0f;
+
+  std::cout << "\nCube AABB box Min "
+    << boxMin.x <<", "
+    << boxMin.y << ", "
+    << boxMin.z << std::endl;
+  std::cout << "\nCube AABB box Max "
+    << boxMax.x <<", "
+    << boxMax.y << ", "
+    << boxMax.z << std::endl;
+  std::cout << "\nCube AABB span "
+    << span.x <<", "
+    << span.y << ", "
+    << span.z << std::endl;
 
   std::vector<glm::vec2> uvs; 
   uvs.reserve(faces.size() * 3); // uv for each vertex
@@ -77,25 +90,15 @@ std::vector<glm::vec2> cube(const std::vector<glm::vec3> &vertices,
  
     glm::vec3 normal = faceNormals.at(face.at(0));
 
-    float const ax = std::fabs(normal.x), 
-                ay = std::fabs(normal.y), 
+    float const ax = std::fabs(normal.x),
+                ay = std::fabs(normal.y),
                 az = std::fabs(normal.z);
-    std::cout << "\nCube AABB box Min" 
-      << boxMin.x <<", " 
-      << boxMin.y << ", " 
-      << boxMin.z << std::endl;
-    std::cout << "\nCube AABB box Max" 
-      << boxMax.x <<", " 
-      << boxMax.y << ", " 
-      << boxMax.z << std::endl;
-    std::cout << "\nCube AABB span " 
-      << span.x <<", " 
-      << span.y << ", " 
-      << span.z << std::endl;
+
     std::cout << "\nCube TexCoords"
       << "\nnormal.x = " << normal.x
       << "\nnormal.y = " << normal.y
       << "\nnormal.z = " << normal.z << std::endl;
+
     int uAxis, vAxis;
     if (az >= ax && az >= ay) { uAxis = 1; vAxis = 0; std::cout << "XY" << std::endl; }
     else if (ax > ay)         { uAxis = 2; vAxis = 1; std::cout << "YZ" << std::endl; }
@@ -112,6 +115,15 @@ std::vector<glm::vec2> cube(const std::vector<glm::vec3> &vertices,
         position[uAxis] - boxMin[uAxis] / span[uAxis],
         position[vAxis] - boxMin[vAxis] / span[vAxis]
       ));
+
+      std::cout
+        << "\nx pos: " << position.x
+        << "\ny pos: " << position.y
+        << "\nz pos: " << position.z
+        << "\nUVs = "
+        << uvs.at(uvs.size()-1).x
+        << ", "
+        << uvs.at(uvs.size()-1).y;
     }
   }
 
