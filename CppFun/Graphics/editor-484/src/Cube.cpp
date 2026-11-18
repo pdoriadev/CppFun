@@ -27,23 +27,23 @@ Cube::~Cube() {
 
 std::vector<glm::vec3> const standardPositions = {
     // Top-loop
-    {-0.5f, 0.5f, -0.5f},
-    {-0.5f, 0.5f, 0.5f},
-    {0.5f, 0.5f, 0.5f},
-    {0.5f, 0.5f, -0.5f},
+    {-0.5f, 0.5f, 0.5f},  // FL
+    {0.5f, 0.5f, 0.5f},   // FR
+    {0.5f, 0.5f, -0.5f},  // BR
+    {-0.5f, 0.5f, -0.5f}, // BL
     // Bottom-loop
-    {-0.5f, -0.5f, -0.5f},
-    {-0.5f, -0.5f, 0.5f},
-    {0.5f, -0.5f, 0.5f},
-    {0.5f, -0.5f, -0.5f}
+    {-0.5f, -0.5f, 0.5f}, // FL
+    {0.5f, -0.5f, 0.5f},  // FR
+    {0.5f, -0.5f, -0.5f}, // BR
+    {-0.5f, -0.5f, -0.5f},// BL
 };
 
 std::vector<glm::vec3> const standardNormals{
     {0.0f, 1.0f, 0.0f},  // +Y
-    {-1.0f, 0.0f, 0.0f}, // -X
     {0.0f, 0.0f, 1.0f},  // +Z
     {1.0f, 0.0f, 0.0f},  // +X
     {0.0f, 0.0f, -1.0f}, // -Z
+    {-1.0f, 0.0f, 0.0f}, // -X
     {0.0f, -1.0f, 0.0f}  // -Y
 };
 
@@ -172,10 +172,10 @@ bool Cube::setupCube() {
       }
 
       // for 3 side planes
-      positionIndices[0] = j - 1;
-      positionIndices[1] = 4 + j - 1;
-      positionIndices[2] = 4 + j;
-      positionIndices[3] = j;
+      positionIndices[0] = 4 + j - 1;
+      positionIndices[1] = 4 + j;
+      positionIndices[2] = j;
+      positionIndices[3] = j - 1;
       normalIndex = j;
       constructPlane(PlaneConstructionParams(vertexData, elementsData,
                                              positionIndices, normalIndex));
