@@ -26,11 +26,12 @@ Cube::~Cube() {
 }
 
 std::vector<glm::vec3> const standardPositions = {
+    // Top-loop
     {-0.5f, 0.5f, -0.5f},
     {-0.5f, 0.5f, 0.5f},
     {0.5f, 0.5f, 0.5f},
     {0.5f, 0.5f, -0.5f},
-
+    // Bottom-loop
     {-0.5f, -0.5f, -0.5f},
     {-0.5f, -0.5f, 0.5f},
     {0.5f, -0.5f, 0.5f},
@@ -38,12 +39,12 @@ std::vector<glm::vec3> const standardPositions = {
 };
 
 std::vector<glm::vec3> const standardNormals{
-    {0.0f, 1.0f, 0.0f},
-    {0.0f, 0.0f, 1.0f},
-    {1.0f, 0.0f, 0.0f},
-    {0.0f, 0.0f, -1.0f},
-    {-1.0f, 0.0f, 0.0f},
-    {0.0f, -1.0f, 0.0f}
+    {0.0f, 1.0f, 0.0f},  // +Y
+    {-1.0f, 0.0f, 0.0f}, // -X
+    {0.0f, 0.0f, 1.0f},  // +Z
+    {1.0f, 0.0f, 0.0f},  // +X
+    {0.0f, 0.0f, -1.0f}, // -Z
+    {0.0f, -1.0f, 0.0f}  // -Y
 };
 
 glm::vec3 const standardColor{0.77f, 0.77f, 0.77f};
@@ -120,9 +121,9 @@ bool Cube::setupCube() {
   std::cout << "SETUP CUBE - NON-AVERAGED NORMALS " << std::endl;
 
   std::vector<float> vertexData;
+  std::vector<uint> elementsData;
   vertexData.reserve(
       9 * 4 * 6); // 9 floats per element * 4 elements per plane * 6 planes
-  std::vector<uint> elementsData;
   elementsData.reserve(4 * 6); // 4 elements per plane * 6 planes
 
   int const ELEMENTS_PER_LOOP = 4;
