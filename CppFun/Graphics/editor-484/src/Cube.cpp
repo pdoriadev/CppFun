@@ -115,9 +115,128 @@ bool Shape::constructPlane(PlaneConstructionParams params) {
   return true;
 }
 
+
+bool Cube::setupCube() {
+/*
+  std::vector<glm::vec3> positionsByIndex = {
+    // top loop
+    glm::vec3(-0.5, 0.5, 0.5),   // 0
+    glm::vec3(0.5, 0.5, 0.5),    // 1
+    glm::vec3(0.5, 0.5, -0.5),   // 2
+    glm::vec3(-0.5, 0.5, -0.5),  // 3
+    // bottom loop 
+    glm::vec3(-0.5, -0.5, 0.5),  // 4
+    glm::vec3(0.5, -0.5, 0.5),   // 5
+    glm::vec3(0.5, -0.5, -0.5),  // 6
+    glm::vec3(-0.5, -0.5, -0.5), // 7
+  };
+*/
+
+  vertices.reserve(3 * 2 * 6); // 3 vertices per face. 2 faces per plane. 6 planes.
+  normals.reserve(3 * 2 * 6);
+
+  // top plane - plane 1
+  vertices.insert(vertices.end(), {standardPositions.at(0), standardPositions.at(1), standardPositions.at(2)} );
+  vertices.insert(vertices.end(), {standardPositions.at(2), standardPositions.at(3), standardPositions.at(0)} );
+  for (size_t i = 0; i < 6; ++i) { 
+    normals.insert(normals.end(), {standardNormals.at(0)}); 
+  }
+  // front plane - plane 2
+  vertices.insert(vertices.end(), {standardPositions.at(4), standardPositions.at(5), standardPositions.at(1)} );
+  vertices.insert(vertices.end(), {standardPositions.at(1), standardPositions.at(0), standardPositions.at(4)} );
+  for (size_t i = 0; i < 6; ++i) { 
+    normals.insert(normals.end(), {standardNormals.at(1)}); 
+  }
+  // right side plane - plane 3
+  vertices.insert(vertices.end(), {standardPositions.at(5), standardPositions.at(6), standardPositions.at(2)} );
+  vertices.insert(vertices.end(), {standardPositions.at(2), standardPositions.at(1), standardPositions.at(5)} );
+  for (size_t i = 0; i < 6; ++i) { 
+    normals.insert(normals.end(), {standardNormals.at(2)}); 
+  }
+  // back side plane - plane 4
+  vertices.insert(vertices.end(), {standardPositions.at(6), standardPositions.at(7), standardPositions.at(3)} );
+  vertices.insert(vertices.end(), {standardPositions.at(3), standardPositions.at(2), standardPositions.at(6)} );
+  for (size_t i = 0; i < 6; ++i) { 
+    normals.insert(normals.end(), {standardNormals.at(3)}); 
+  }
+  // left side plane - plane 5
+  vertices.insert(vertices.end(), {standardPositions.at(7), standardPositions.at(4), standardPositions.at(0)} );
+  vertices.insert(vertices.end(), {standardPositions.at(0), standardPositions.at(3), standardPositions.at(7)} );
+  for (size_t i = 0; i < 6; ++i) { 
+    normals.insert(normals.end(), {standardNormals.at(4)}); 
+  }
+  // bottom side plane - plane 6
+  vertices.insert(vertices.end(), {standardPositions.at(7), standardPositions.at(6), standardPositions.at(5)} );
+  vertices.insert(vertices.end(), {standardPositions.at(5), standardPositions.at(4), standardPositions.at(7)} );
+  for (size_t i = 0; i < 6; ++i) { 
+    normals.insert(normals.end(), {standardNormals.at(5)}); 
+  }
+
+  // assign vertex data
+  std::vector<float> vertexData;
+  vertexData.reserve(vertices.size()*3 + normals.size()*3 + 3 * 3 * 2 * 6); // added space for color values
+  for (int i = 0; i < vertices.size(); ++i ) {
+    for (int j = 0; j < 3; ++j) { vertexData.push_back(vertices.at(i)[j]); }
+    for (int j = 0; j < 3; ++j) { vertexData.push_back(normals.at(i)[j]); }
+    for (int j = 0; j < 3; ++j) { vertexData.push_back(standardColor[j]); }
+  }
+
+  // assign faces and elmeents data
+  std::vector<uint32_t> elementsData;
+  elementsData.reserve(vertices.size());
+  faces.reserve(vertices.size() / 3);
+  for (uint32_t i = 0; i < vertices.size(); i+=3) {
+    elementsData.insert(elementsData.end(), { i, i+1, i+2 } );
+    faces.insert(faces.end(), { static_cast<int>(i), static_cast<int>(i+1), static_cast<int>(i+2) });
+  }
+
+  outputVertices(vertexData, 9);
+  outputElements(elementsData, 9);
+
+  texCoords = TexCoords::cube(vertices, faces, normals);
+
+  // generate buffer ids. bind buffers. 
+  glGenVertexArrays(1, &VAO);
+  glBindVertexArray(VAO);
+
+  glGenBuffers(1, &VBO);
+  glBindBuffer(GL_ARRAY_BUFFER, VBO);
+
+  glGenBuffers(1, &EBO);
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+
+  glBufferData(GL_ARRAY_BUFFER, vertexData.size() * sizeof(float),
+               vertexData.data(), GL_STATIC_DRAW);
+ 
+  // Assign and activate VAO pointers for VBO
+  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(float),
+                        (void *)0); // pos
+  glEnableVertexAttribArray(0);
+
+  glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(float),
+                        (void *)(3 * sizeof(float))); // normal
+  glEnableVertexAttribArray(1);
+ 
+  glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(float),
+                        (void *)(6 * sizeof(float))); // color
+  glEnableVertexAttribArray(2);
+
+  // uploadTexCoords to a TBO. Assign and activate VAO pointer for TBO.
+  uploadTexCoords();
+
+  // upload elementsData into EBO
+  glBufferData(GL_ELEMENT_ARRAY_BUFFER, elementsData.size() * sizeof(uint),
+               elementsData.data(), GL_STATIC_DRAW);
+
+  // unbind VAO
+  glBindVertexArray(0);
+
+  return true;
+}
+
 //-//////////////////////////////////////////////////////////////////
 //
-bool Cube::setupCube() {
+bool Cube::setupCubeNonAveragedNormals() {
   std::cout << "SETUP CUBE - NON-AVERAGED NORMALS " << std::endl;
 
   std::vector<float> vertexData;
