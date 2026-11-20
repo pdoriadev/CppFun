@@ -57,6 +57,12 @@ std::vector<glm::vec2> cube(const std::vector<glm::vec3> &vertices,
   if (vertices.size() == 0) return {};
   if (faces.size() == 0) return {};
   if (faceNormals.size() == 0) return {};
+
+  std::cout << "\nEntered TexCoords::cube()" << std::endl;
+  std::cout << "\nvertices.size() = " << vertices.size();
+  std::cout << "\nfaces.size() = " << faces.size();
+  std::cout << "\nnormals.size() = " << faceNormals.size();
+  std::cout << std::endl;
   
   glm::vec3 boxMin(INFINITY, INFINITY, INFINITY);
   glm::vec3 boxMax(-INFINITY, -INFINITY, -INFINITY);
@@ -72,20 +78,20 @@ std::vector<glm::vec2> cube(const std::vector<glm::vec3> &vertices,
   std::cout << "\nCube AABB box Min "
     << boxMin.x <<", "
     << boxMin.y << ", "
-    << boxMin.z << std::endl;
+    << boxMin.z << std::flush;
   std::cout << "\nCube AABB box Max "
     << boxMax.x <<", "
     << boxMax.y << ", "
-    << boxMax.z << std::endl;
+    << boxMax.z << std::flush;
   std::cout << "\nCube AABB span "
     << span.x <<", "
     << span.y << ", "
-    << span.z << std::endl;
+    << span.z << std::flush;
 
   std::vector<glm::vec2> uvs; 
   uvs.reserve(faces.size() * 3); // uv for each vertex
 
-  for(unsigned i = 0; i < 2; i+=2) {
+  for(unsigned i = 0; i < faces.size(); i+=2) {
     std::vector<int> const face = faces.at(i);
  
     glm::vec3 normal = faceNormals.at(face.at(0));
@@ -94,54 +100,48 @@ std::vector<glm::vec2> cube(const std::vector<glm::vec3> &vertices,
                 ay = std::fabs(normal.y),
                 az = std::fabs(normal.z);
 
-    std::cout << "\nCube TexCoords"
-      << "\nnormal.x = " << normal.x
-      << "\nnormal.y = " << normal.y
-      << "\nnormal.z = " << normal.z << std::endl;
+    std::cout << "i = " << i << std::endl;
+    std::cout << "\nFace Normal ["
+      << normal.x << ", "
+      << normal.y << ", "
+      << normal.z << "]"
+      << std::endl;
 
     int uAxis, vAxis;
     if (az >= ax && az >= ay) { uAxis = 1; vAxis = 0; std::cout << "XY" << std::endl; }
     else if (ax > ay)         { uAxis = 2; vAxis = 1; std::cout << "YZ" << std::endl; }
     else                      { uAxis = 0; vAxis = 2; std::cout << "XZ" << std::endl; }
 
+    // Manually setting UV values for each triangle
+    std::cout << "TRI 1" << std::endl;
     uvs.push_back(glm::vec2(0, 0));
     uvs.push_back(glm::vec2(1, 0));
     uvs.push_back(glm::vec2(1, 1));
-
-    glm::vec3 const position = vertices.at(faces.at(0).at(0));
-    std::cout
-      << "\n\nx pos: " << position.x
-      << "\ny pos: " << position.y
-      << "\nz pos: " << position.z
-      << "\nUVs = "
-      << uvs.at(uvs.size()-1).x
-      << ", "
-      << uvs.at(uvs.size()-1).y
-      << std::endl;
-    /*
+    std::cout << "TRI 2" << std::endl;
     uvs.push_back(glm::vec2(1, 1));
     uvs.push_back(glm::vec2(0, 1));
     uvs.push_back(glm::vec2(0, 0));
-*/
-// STATICALLY PUSH BACK UV VALUES. SEE IF THAT WORKS. just for the first face, then second face. See what happens..
-//
-/*
+
+
     // tri 1
+/*
+    std::cout << "TRI 1" << std::endl;
     for (unsigned j = 0; j < 3; ++j) {
       // compute uv bounds. 
       // uvs applied with respect to smaller-aligned axes.
       // span captures the axis-aligned bounds of the model  
       // normalizes vertex position wrt U/V axes of boxMin and span.
-
       glm::vec3 const position = vertices.at(faces.at(i).at(j)); 
+
 */
-/*      uvs.push_back(glm::vec2(
+      /*      uvs.push_back(glm::vec
         (position[uAxis] - boxMin[uAxis]) / span[uAxis],
         (position[vAxis] - boxMin[vAxis]) / span[vAxis]
       ));
 */
-/*
-    glm::vec2 newUV;
+
+    /*
+      glm::vec2 newUV;
       switch (j) {
         case 0: newUV = glm::vec2(0, 0); break;
         case 1: newUV = glm::vec2(1, 0); break;
@@ -150,7 +150,7 @@ std::vector<glm::vec2> cube(const std::vector<glm::vec3> &vertices,
       uvs.push_back(newUV);
 
       std::cout
-        << "\n\nx pos: " << position.x
+        << "x pos: " << position.x
         << "\ny pos: " << position.y
         << "\nz pos: " << position.z
         << "\nUVs = "
@@ -160,8 +160,9 @@ std::vector<glm::vec2> cube(const std::vector<glm::vec3> &vertices,
         << "\nj = " << j << std::endl;
     }
 */
-/*
     // tri 2
+/*
+    std::cout << "TRI 2" << std::endl;
     for (unsigned j = 0; j < 3; ++j) {
       glm::vec3 const position = vertices.at(faces.at(i+1).at(j)); 
       glm::vec2 newUV;
@@ -181,13 +182,41 @@ std::vector<glm::vec2> cube(const std::vector<glm::vec3> &vertices,
         << ", "
         << uvs.at(uvs.size()-1).y
         << "\nj = " << j << std::endl;
-
     }
 */
   }
 
+  std::cout << "\nFull UVs List";
+  std::cout << "\nuvs.size() = " << uvs.size() << std::flush;
+  for (size_t i = 0; i < uvs.size() / 3; ++i) {
+    for (size_t j = 0; j < 3; ++j) {
+ 
+      unsigned index = faces.at(i).at(j);
+      glm::vec3 const position = vertices.at(index);
+      glm::vec3 const normal = faceNormals.at(index);
+
+      std::cout << "\n" << i*3 + j << ":   \t(" 
+        << uvs.at(i*3 + j).x << ", "
+        << uvs.at(i*3 + j).y << ")"
+        << "  \t["
+        << position.x << ", "
+        << position.y << ", "
+        << position.z << "]"
+        << "  \t["
+        << normal.x << ", "
+        << normal.y << ", "
+        << normal.z << "]"
+        << "  \tvertex/normal index = " << index
+        << std::flush;
+
+      if ((i*3 + j + 1) % 6 == 0) {
+        std::cout << "\n --- Finished Plane ---" << std::flush;
+      }
+    }
+  }
+  std::cout << std::endl;
+
   return uvs; 
-  
 }
 
 // Cylindrical projection, one UV per triangle corner.
