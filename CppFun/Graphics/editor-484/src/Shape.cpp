@@ -13,8 +13,10 @@ namespace ShapeMath {
 
 bool outputVertices(const std::vector<float>& vertices, uint32_t const VALUES_PER_VERT)
 {
-    std::string verticesString = "Vertex Data\n";
-    verticesString.reserve(vertices.size() * 5);
+    std::cout << "\nVertex Data" << std::endl;
+    std::cout << "vertexData.size() = " << vertices.size() << std::endl;
+    std::cout << "Actual vertices = vertexData.size() / 9 = " << vertices.size() / 9 << std::endl;  
+
     for(uint32_t i = 0; i < vertices.size() / VALUES_PER_VERT; ++i)
     {
         uint32_t offsetIndex = i * VALUES_PER_VERT;
@@ -22,24 +24,22 @@ bool outputVertices(const std::vector<float>& vertices, uint32_t const VALUES_PE
         // assumes vec3's.
         for (uint32_t j = 0; j < VALUES_PER_VERT / 3; ++j) {
             uint32_t const DATA_TYPE_OFFSET = j*(VALUES_PER_VERT / 3);
-            verticesString.append("[");
-            verticesString.append(std::to_string(vertices[DATA_TYPE_OFFSET + offsetIndex  ]) + ", ");
-            verticesString.append(std::to_string(vertices[DATA_TYPE_OFFSET + offsetIndex+1]) + ", ");
-            verticesString.append(std::to_string(vertices[DATA_TYPE_OFFSET + offsetIndex+2]) + " ");
-            verticesString.append("]\t\t");
+            std::cout  << "["
+              << vertices.at(DATA_TYPE_OFFSET + offsetIndex) <<  ", "
+              << vertices.at(DATA_TYPE_OFFSET + offsetIndex+1) << ", "
+              << vertices.at(DATA_TYPE_OFFSET + offsetIndex+2) << "]  \t"
+              << std::flush;
         }
 
-        verticesString.append("\n");
+        std::cout << std::endl;
     }
-
-    std::cout << verticesString << std::endl;
 
     return true;
 }
 
 bool outputElements(const std::vector<uint32_t>& elements, uint32_t const VALUES_PER_ELEMENT)
 {
-    std::string verticesString = "Elements Data\n";
+    std::string verticesString = "\nElements Data\n";
     verticesString.reserve(elements.size() * 5);
 
     uint32_t const VALUES_PER_PLANE = VALUES_PER_ELEMENT * 2;
