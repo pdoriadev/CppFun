@@ -113,77 +113,14 @@ std::vector<glm::vec2> cube(const std::vector<glm::vec3> &vertices,
     else                      { uAxis = 0; vAxis = 2; std::cout << "XZ" << std::endl; }
 
     // Manually setting UV values for each triangle
-    std::cout << "TRI 1" << std::endl;
+ 
     uvs.push_back(glm::vec2(0, 0));
     uvs.push_back(glm::vec2(1, 0));
     uvs.push_back(glm::vec2(1, 1));
-    std::cout << "TRI 2" << std::endl;
+
     uvs.push_back(glm::vec2(1, 1));
     uvs.push_back(glm::vec2(0, 1));
     uvs.push_back(glm::vec2(0, 0));
-
-
-    // tri 1
-/*
-    std::cout << "TRI 1" << std::endl;
-    for (unsigned j = 0; j < 3; ++j) {
-      // compute uv bounds. 
-      // uvs applied with respect to smaller-aligned axes.
-      // span captures the axis-aligned bounds of the model  
-      // normalizes vertex position wrt U/V axes of boxMin and span.
-      glm::vec3 const position = vertices.at(faces.at(i).at(j)); 
-
-*/
-      /*      uvs.push_back(glm::vec
-        (position[uAxis] - boxMin[uAxis]) / span[uAxis],
-        (position[vAxis] - boxMin[vAxis]) / span[vAxis]
-      ));
-*/
-
-    /*
-      glm::vec2 newUV;
-      switch (j) {
-        case 0: newUV = glm::vec2(0, 0); break;
-        case 1: newUV = glm::vec2(1, 0); break;
-        case 2: newUV = glm::vec2(1, 1); break;
-      }
-      uvs.push_back(newUV);
-
-      std::cout
-        << "x pos: " << position.x
-        << "\ny pos: " << position.y
-        << "\nz pos: " << position.z
-        << "\nUVs = "
-        << uvs.at(uvs.size()-1).x
-        << ", "
-        << uvs.at(uvs.size()-1).y
-        << "\nj = " << j << std::endl;
-    }
-*/
-    // tri 2
-/*
-    std::cout << "TRI 2" << std::endl;
-    for (unsigned j = 0; j < 3; ++j) {
-      glm::vec3 const position = vertices.at(faces.at(i+1).at(j)); 
-      glm::vec2 newUV;
-      switch (j) {
-        case 0: newUV = glm::vec2(1, 1); break;
-        case 1: newUV = glm::vec2(0, 1); break;
-        case 2: newUV = glm::vec2(0, 0); break;
-      }
-      uvs.push_back(newUV);
-
-      std::cout
-        << "\n\nx pos: " << position.x
-        << "\ny pos: " << position.y
-        << "\nz pos: " << position.z
-        << "\nUVs = "
-        << uvs.at(uvs.size()-1).x
-        << ", "
-        << uvs.at(uvs.size()-1).y
-        << "\nj = " << j << std::endl;
-    }
-*/
   }
 
   std::cout << "\nFull UVs List";
