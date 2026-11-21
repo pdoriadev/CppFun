@@ -124,6 +124,7 @@ std::vector<glm::vec2> cube(const std::vector<glm::vec3> &vertices,
     uvs.push_back(glm::vec2(0, 0));
   }
 
+  /* FULL UVS LIST DEBUG OUTPUT
   std::cout << "\nFull UVs List";
   std::cout << "\nuvs.size() = " << uvs.size() << std::flush;
   for (size_t i = 0; i < uvs.size() / 3; ++i) {
@@ -153,6 +154,7 @@ std::vector<glm::vec2> cube(const std::vector<glm::vec3> &vertices,
     }
   }
   std::cout << std::endl;
+  */
 
   return uvs; 
 }
@@ -186,6 +188,8 @@ cylindricalPerCorner(const std::vector<glm::vec3> &vertices,
   // per-corner UVs: one point in space needs two different u values
   // depending on which triangle is asking.
 
+  std::cout << "\nEntered TexCoords::cylindericalPerCorner()" << std::flush;
+
   std::vector<glm::vec2> uvs;
   if (vertices.size() == 0) {return uvs;}
   if (faces.size() == 0) {return uvs;}
@@ -201,22 +205,31 @@ cylindricalPerCorner(const std::vector<glm::vec3> &vertices,
   }
 
   float const spanY = maxY - minY > 1e-6f ? maxY - minY : 1.0f;
+  std::cout << "\nspanY = " << spanY << std::endl;
 
   // iterate through all faces. for each vertex in each face, use atan2(x, v) and y - minY / span for unique u and v values. 
+  int totalFaceIndices = 0;
   for (int i = 0; i < faces.size(); ++i) {
     std::vector<int> face = faces.at(i);
 
     for (int j = 0; j < face.size(); ++j) {
       glm::vec2 uv;
       uv.x = glm::atan(vertices.at(face.at(j)).z, vertices.at(face.at(j)).x)
-                / (M_PI * 2) + 0.5; 
-      uv.y = vertices.at(j).y - minY / spanY;
+                / (M_PI * 2) + 0.5;
+      uv.y = (vertices.at(face.at(j)).y - minY) / spanY;
 
       uvs.push_back(uv);
+
+      ++totalFaceIndices;
     }
   }
 
+  std::cout << "totalFaceIndices = " << totalFaceIndices << std::endl;
+  std::cout << "uvs.size() = " << uvs.size() << std::endl;
+
   // Fix wrap seam. iterate uv values to find min/max u's. This is what makes this work *per-corner*
+  float ultimateMinU = 3;
+  float ultimateMaxU = -1;
   for (int i = 0; i < uvs.size(); i+=3) {
     float u0 = uvs.at(i).x;
     float u1 = uvs.at(i+1).x;
@@ -230,6 +243,9 @@ cylindricalPerCorner(const std::vector<glm::vec3> &vertices,
     if (u1 > uvs.at(maxUIndex).x) maxUIndex = 1;
     if (u2 > uvs.at(maxUIndex).x) maxUIndex = 2;
 
+    if (uvs.at(i+maxUIndex).x > ultimateMaxU) ultimateMaxU = uvs.at(i+maxUIndex).x;
+    if (uvs.at(i+minUIndex).x < ultimateMinU) ultimateMinU = uvs.at(i+minUIndex).x;
+
     if (uvs.at(i + maxUIndex).x - uvs.at(i + minUIndex).x < 0.5) continue;
     uvs.at(i + minUIndex).x += 1.0f;
  
@@ -238,7 +254,22 @@ cylindricalPerCorner(const std::vector<glm::vec3> &vertices,
     if (maxUIndex == 1 || minUIndex == 1) ++midU;
     if (uvs.at(i + maxUIndex).x - uvs.at(i + midU).x < 0.5) continue;
     uvs.at(i + midU).x += 1.0f;
+
+    std::cout << "\nUpdated u values for seam:\n" 
+      << "[" 
+      << uvs.at(i).x << ", "
+      << uvs.at(i).y << "]\n"
+      << "[" 
+      << uvs.at(i+1).x << ", "
+      << uvs.at(i+1).y << "]\n"
+      << "[" 
+      << uvs.at(i+2).x << ", "
+      << uvs.at(i+2).y << "]" 
+      << std::flush;
   }
+
+  std::cout << "\nultimate min U = " << ultimateMinU
+    << "\nultimate max U = " << ultimateMaxU << std::endl;
 
   return uvs;
 }
