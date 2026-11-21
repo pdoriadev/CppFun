@@ -6,7 +6,7 @@
 // reference: these two functions must produce the same numbers it does, or the
 // viewport and a ray-traced render of the same scene will disagree.
 
-#include "Lighting.h"
+#include "../include/Lighting.h"
 
 #include <cmath>
 
