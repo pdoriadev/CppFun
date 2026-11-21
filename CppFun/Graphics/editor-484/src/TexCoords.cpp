@@ -10,6 +10,7 @@
 #include <algorithm>
 #include <cmath>
 #include <glm/ext/vector_float2.hpp>
+#include <glm/trigonometric.hpp>
 #include <iostream>
 
 #define _USE_MATH_DEFINES // PI
@@ -184,9 +185,62 @@ cylindricalPerCorner(const std::vector<glm::vec3> &vertices,
   // That repair is only expressible per corner, which is why this returns
   // per-corner UVs: one point in space needs two different u values
   // depending on which triangle is asking.
-  (void)vertices;
-  (void)faces;
-  return std::vector<glm::vec2>();
+
+  std::vector<glm::vec2> uvs;
+  if (vertices.size() == 0) {return uvs;}
+  if (faces.size() == 0) {return uvs;}
+
+  uvs.reserve(faces.size() * 3);
+
+  // max/min y. find y span.
+  float minY = vertices.at(0).y;
+  float maxY = vertices.at(0).y;
+  for (size_t i = 1; i < vertices.size(); ++i) {
+    if      (vertices.at(i).y < minY) minY = vertices.at(i).y;
+    else if (vertices.at(i).y > maxY) maxY = vertices.at(i).y;
+  }
+
+  float const spanY = maxY - minY > 1e-6f ? maxY - minY : 1.0f;
+
+  // iterate through all faces. for each vertex in each face, use atan2(x, v) and y - minY / span for unique u and v values. 
+  for (int i = 0; i < faces.size(); ++i) {
+    std::vector<int> face = faces.at(i);
+
+    for (int j = 0; j < face.size(); ++j) {
+      glm::vec2 uv;
+      uv.x = glm::atan(vertices.at(face.at(j)).z, vertices.at(face.at(j)).x)
+                / (M_PI * 2) + 0.5; 
+      uv.y = vertices.at(j).y - minY / spanY;
+
+      uvs.push_back(uv);
+    }
+  }
+
+  // Fix wrap seam. iterate uv values to find min/max u's. This is what makes this work *per-corner*
+  for (int i = 0; i < uvs.size(); i+=3) {
+    float u0 = uvs.at(i).x;
+    float u1 = uvs.at(i+1).x;
+    float u2 = uvs.at(i+2).x;
+    int minUIndex = 0;
+    int maxUIndex = 0;
+
+    if (u1 < uvs.at(minUIndex).x) minUIndex = 1;
+    if (u2 < uvs.at(minUIndex).x) minUIndex = 2;
+
+    if (u1 > uvs.at(maxUIndex).x) maxUIndex = 1;
+    if (u2 > uvs.at(maxUIndex).x) maxUIndex = 2;
+
+    if (uvs.at(i + maxUIndex).x - uvs.at(i + minUIndex).x < 0.5) continue;
+    uvs.at(i + minUIndex).x += 1.0f;
+ 
+    int midU = 0;
+    if (maxUIndex == 0 || minUIndex == 0) ++midU;
+    if (maxUIndex == 1 || minUIndex == 1) ++midU;
+    if (uvs.at(i + maxUIndex).x - uvs.at(i + midU).x < 0.5) continue;
+    uvs.at(i + midU).x += 1.0f;
+  }
+
+  return uvs;
 }
 
 } // namespace TexCoords
