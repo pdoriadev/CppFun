@@ -214,8 +214,8 @@ cylindricalPerCorner(const std::vector<glm::vec3> &vertices,
 
     for (int j = 0; j < face.size(); ++j) {
       glm::vec2 uv;
-      uv.x = glm::atan(vertices.at(face.at(j)).z, vertices.at(face.at(j)).x)
-                / (M_PI * 2) + 0.5;
+      uv.x = (glm::atan(vertices.at(face.at(j)).x, vertices.at(face.at(j)).z)
+                / (M_PI * 2) + 0.5);
       uv.y = (vertices.at(face.at(j)).y - minY) / spanY;
 
       uvs.push_back(uv);
@@ -230,46 +230,71 @@ cylindricalPerCorner(const std::vector<glm::vec3> &vertices,
   // Fix wrap seam. iterate uv values to find min/max u's. This is what makes this work *per-corner*
   float ultimateMinU = 3;
   float ultimateMaxU = -1;
+  int prevMinUIndex = -1;
+  int prevMaxUIndex = -1;
+  int prevMidUIndex = -1;
+  bool updated = false;
   for (int i = 0; i < uvs.size(); i+=3) {
-    float u0 = uvs.at(i).x;
-    float u1 = uvs.at(i+1).x;
-    float u2 = uvs.at(i+2).x;
-    int minUIndex = 0;
-    int maxUIndex = 0;
+    if (updated ) {
+      updated = false;
+      std::cout << "\nUpdated u values for seam:"
+        << "\nMinIndex = " << prevMinUIndex
+        << "\nMidIndex = " << prevMidUIndex
+        << "\nMaxIndex = " << prevMaxUIndex
+        << "\n[" 
+        << uvs.at(i-3).x << ", "
+        << uvs.at(i-3).y << "]"
+        << "\n[" 
+        << uvs.at(i-2).x << ", "
+        << uvs.at(i-2).y << "]"
+        << "\n[" 
+        << uvs.at(i-1).x << ", "
+        << uvs.at(i-1).y << "]" 
+        << std::flush;
+    }
+  
+    std::vector<float> minMaxMidValues = {10.0f, 10.0f, -10.0f };
+    std::vector<int> minMaxMidIndices = {-1, -1, -1};
+    // min/max loop 
+    for (int j = 0; j < 3; ++j) {
+      float const value = uvs.at(i+j).x;
+      if (value < minMaxMidValues.at(0)) {
+        minMaxMidValues.at(0) = value;
+        minMaxMidIndices.at(0) = i+j;
+      }
+      if (value > minMaxMidValues.at(2)) { 
+        minMaxMidValues.at(2) = value;
+        minMaxMidIndices.at(2) = i+j; 
+      }
+    }
 
-    if (u1 < uvs.at(minUIndex).x) minUIndex = 1;
-    if (u2 < uvs.at(minUIndex).x) minUIndex = 2;
+    // mid loop
+    for (int j = 0; j < 3; ++j) {
+      int const index = i+j;
+      if (index == minMaxMidIndices.at(0)) continue;
+      if (index == minMaxMidIndices.at(2)) continue;
 
-    if (u1 > uvs.at(maxUIndex).x) maxUIndex = 1;
-    if (u2 > uvs.at(maxUIndex).x) maxUIndex = 2;
+      minMaxMidIndices.at(1) = index;
+      minMaxMidValues.at(1) = uvs.at(index).x;
+    }
 
-    if (uvs.at(i+maxUIndex).x > ultimateMaxU) ultimateMaxU = uvs.at(i+maxUIndex).x;
-    if (uvs.at(i+minUIndex).x < ultimateMinU) ultimateMinU = uvs.at(i+minUIndex).x;
+    prevMinUIndex = minMaxMidIndices.at(0) - i;
+    prevMidUIndex = minMaxMidIndices.at(1) - i;
+    prevMaxUIndex = minMaxMidIndices.at(2) - i;
 
-    if (uvs.at(i + maxUIndex).x - uvs.at(i + minUIndex).x < 0.5) continue;
-    uvs.at(i + minUIndex).x += 1.0f;
- 
-    int midU = 0;
-    if (maxUIndex == 0 || minUIndex == 0) ++midU;
-    if (maxUIndex == 1 || minUIndex == 1) ++midU;
-    if (uvs.at(i + maxUIndex).x - uvs.at(i + midU).x < 0.5) continue;
-    uvs.at(i + midU).x += 1.0f;
+    // span tests
 
-    std::cout << "\nUpdated u values for seam:\n" 
-      << "[" 
-      << uvs.at(i).x << ", "
-      << uvs.at(i).y << "]\n"
-      << "[" 
-      << uvs.at(i+1).x << ", "
-      << uvs.at(i+1).y << "]\n"
-      << "[" 
-      << uvs.at(i+2).x << ", "
-      << uvs.at(i+2).y << "]" 
-      << std::flush;
+    float const maxMinSpan = minMaxMidValues.at(2) - minMaxMidValues.at(0);
+    if (maxMinSpan < 0.5f) continue;
+    updated = true;
+    minMaxMidValues.at(0) += 1.0f;
+    uvs.at(minMaxMidIndices.at(0)).x = minMaxMidValues.at(0);
+
+    float const maxMidSpan = minMaxMidValues.at(2) - minMaxMidValues.at(1);
+    if (maxMidSpan < 0.5f) continue;
+    minMaxMidValues.at(1) += 1.0f;
+    uvs.at(minMaxMidIndices.at(1)).x = minMaxMidValues.at(1);
   }
-
-  std::cout << "\nultimate min U = " << ultimateMinU
-    << "\nultimate max U = " << ultimateMaxU << std::endl;
 
   return uvs;
 }
