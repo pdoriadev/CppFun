@@ -8,11 +8,10 @@
 
 #include "../include/Lighting.h"
 
+#include <iostream>
 #include <cmath>
 
 LightGeometry lightGeometry(const SceneLightSample& light, const glm::vec3& point) {
-    LightGeometry g;
-
     // TODO(lighting): light direction, distance and distance falloff
     // Fill in `g` for this light as seen from `point`.
     //
@@ -30,14 +29,48 @@ LightGeometry lightGeometry(const SceneLightSample& light, const glm::vec3& poin
     // Leaving this as the default -- straight up, no falloff -- lights every
     // surface identically from above, which is a recognisable first result
     // rather than a black screen.
-    (void)light; (void)point;
+
+    LightGeometry g;
+    if (light.type != 0 && light.type != 1) {
+        std::cout << "\n" << light.type << " is not a valid light type for Lighting.cpp's lightGeometry()" << std::endl;
+        return g;
+    }
+
+    // directional
+    if (light.type == 1) {
+        g.direction = -glm::normalize(light.direction);
+        g.distance = glm::length(light.direction);
+        g.attenuation = 1.0f;
+
+        return g;
+    }
+
+    // point light
+    glm::vec3 const surfaceToLight = light.position - point;
+
+    g.distance = glm::length(surfaceToLight);
+    if (g.distance < 1e-6f) {
+        g.distance = 0.01f;
+        g.direction = glm::vec3(0.0f, -1.0f, 0.0f);
+    } 
+    else {
+        g.direction = -glm::normalize(surfaceToLight);
+    }
+
+    g.attenuation = 1 / (
+        light.constant +
+        light.linear * g.distance + 
+        light.quadratic * g.distance*g.distance +
+        1e-5f // avoids divide by 0
+    );
+
     return g;
 }
 
 glm::vec3 phongContribution(const SceneLightSample& light,
                             const Material& mat,
                             const glm::vec3& baseColor,
-                            const glm::vec3& n,
+                            const glm::vec3& normal,
                             const glm::vec3& viewDir,
                             const glm::vec3& lightDir,
                             float reach) {
@@ -64,6 +97,14 @@ glm::vec3 phongContribution(const SceneLightSample& light,
     //
     // Returning just the ambient term is a usable checkpoint: flat, unlit
     // silhouettes in roughly the right colours.
-    (void)n; (void)viewDir; (void)lightDir; (void)reach;
-    return light.ambient * mat.ambient * baseColor;
+
+    glm::vec3 const ambient = mat.ambient * light.ambient;
+
+    glm::vec3 const diffuse = mat.diffuse * light.diffuse * glm::max(0.0f, glm::dot(normal, lightDir)) * reach;
+ 
+    glm::vec3 const reflection = lightDir - 2 * glm::dot(normal, lightDir) * normal;
+    float const reflectionViewDot = glm::dot(reflection, viewDir);
+    glm::vec3 const specular = mat.specular * light.specular * std::powf(reflectionViewDot, mat.shininess);
+
+    return (baseColor * (ambient + diffuse)) + specular;
 }
