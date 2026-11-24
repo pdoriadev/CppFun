@@ -1,0 +1,407 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Keyframe Timeline — prototype</title>
+<style>
+  :root {
+    --bg:      #1b1d21;
+    --panel:   #23262b;
+    --panel2:  #2b2f36;
+    --line:    #383d45;
+    --text:    #d6dae0;
+    --dim:     #8a919c;
+    --accent:  #4a8fd4;
+    --key:     #d8b24a;
+    --keysel:  #f2d27a;
+    --play:    #e05c4a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 28px;
+    background: var(--bg); color: var(--text);
+    font: 14px/1.55 -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  .wrap { max-width: 980px; margin: 0 auto; }
+  h1 { font-size: 20px; margin: 0 0 4px; font-weight: 600; }
+  h2 { font-size: 14px; margin: 30px 0 8px; font-weight: 600; color: var(--text); }
+  p  { color: var(--dim); margin: 0 0 12px; max-width: 62ch; }
+  code { background: var(--panel2); padding: 1px 5px; border-radius: 3px;
+         font: 12px ui-monospace, Menlo, Consolas, monospace; color: #cfd6df; }
+
+  .cols { display: flex; gap: 28px; flex-wrap: wrap; align-items: flex-start; }
+
+  /* ---- the panel mock: 360px, the real beginLeftPanel width ---- */
+  .panel {
+    width: 360px; flex: 0 0 360px;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 4px;
+    font: 13px/1.4 -apple-system, "Segoe UI", Roboto, sans-serif;
+    user-select: none;
+  }
+  .titlebar {
+    background: var(--panel2); padding: 5px 9px;
+    border-bottom: 1px solid var(--line); border-radius: 3px 3px 0 0;
+    font-weight: 600; font-size: 12px; letter-spacing: .02em;
+  }
+  .body { padding: 9px; }
+  .hdr {
+    background: var(--panel2); border: 1px solid var(--line); border-radius: 3px;
+    padding: 4px 8px; margin: 0 0 8px; font-size: 12px; font-weight: 600;
+  }
+  .hdr::before { content: "\25BE  "; color: var(--dim); }
+
+  /* ---- timeline strip ---- */
+  .strip { position: relative; margin-bottom: 6px; }
+  .ruler {
+    position: relative; height: 16px;
+    border-bottom: 1px solid var(--line);
+    cursor: ew-resize;
+  }
+  .tick { position: absolute; bottom: 0; width: 1px; background: var(--line); }
+  .tick.major { height: 7px; background: #4c525c; }
+  .tick.minor { height: 4px; }
+  .tlabel {
+    position: absolute; bottom: 7px; font-size: 9px; color: var(--dim);
+    transform: translateX(2px); pointer-events: none;
+  }
+  .tracks { position: relative; cursor: ew-resize; }
+  .row {
+    position: relative; height: 20px;
+    border-bottom: 1px solid #2a2e34;
+    display: flex; align-items: center;
+  }
+  .row.sel { background: #2a323c; }
+  .rowname {
+    position: absolute; left: 5px; font-size: 10px; color: var(--dim);
+    pointer-events: none; z-index: 2;
+    text-shadow: 0 0 4px var(--panel), 0 0 4px var(--panel);
+  }
+  .row.sel .rowname { color: #c8d3e0; }
+  .key {
+    position: absolute; width: 9px; height: 9px; margin-left: -4.5px;
+    background: var(--key); transform: rotate(45deg);
+    border: 1px solid #6b5720;
+  }
+  .row.sel .key { background: var(--keysel); }
+  .playhead {
+    position: absolute; top: 0; bottom: 0; width: 1px;
+    background: var(--play); pointer-events: none; z-index: 3;
+  }
+  .playhead::before {
+    content: ""; position: absolute; top: -1px; left: -4px;
+    border-left: 5px solid transparent; border-right: 5px solid transparent;
+    border-top: 6px solid var(--play);
+  }
+  .empty {
+    height: 40px; display: flex; align-items: center; justify-content: center;
+    font-size: 11px; color: var(--dim); border-bottom: 1px solid #2a2e34;
+  }
+
+  /* ---- transport ---- */
+  .transport { display: flex; gap: 3px; align-items: center; margin-top: 7px; }
+  button {
+    background: var(--panel2); color: var(--text);
+    border: 1px solid var(--line); border-radius: 3px;
+    padding: 3px 0; width: 30px; font-size: 11px; cursor: pointer;
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+  }
+  button:hover { background: #343a43; }
+  button.wide { width: 46px; }
+  button.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .fields { display: flex; gap: 8px; margin-top: 7px; font-size: 11px; }
+  .field { display: flex; align-items: center; gap: 5px; color: var(--dim); }
+  input[type=number] {
+    width: 58px; background: #16181b; color: var(--text);
+    border: 1px solid var(--line); border-radius: 3px; padding: 2px 4px;
+    font: 11px ui-monospace, Menlo, Consolas, monospace;
+  }
+  .hint { font-size: 10px; color: var(--dim); margin-top: 7px; }
+  .sep { height: 1px; background: var(--line); margin: 9px 0; }
+
+  .notes { flex: 1 1 340px; min-width: 300px; }
+  .notes ul { margin: 0 0 14px; padding-left: 18px; color: var(--dim); }
+  .notes li { margin-bottom: 7px; }
+  .notes b { color: var(--text); font-weight: 600; }
+  .q { border-left: 2px solid var(--accent); padding-left: 12px; margin: 16px 0; }
+  .q b { color: var(--text); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Keyframe timeline — interactive prototype</h1>
+<p>The panel below is drawn at 360&nbsp;px, the real <code>beginLeftPanel</code> width, so
+what you see is what fits. <b>Drag anywhere on the ruler or the track rows to scrub.</b>
+The buttons work. Try switching to the empty scene to see the no-tracks state.</p>
+
+<div class="cols">
+
+  <div class="panel">
+    <div class="titlebar">Animation</div>
+    <div class="body">
+      <div class="hdr">Keyframes</div>
+
+      <div class="strip">
+        <div class="ruler" id="ruler"></div>
+        <div class="tracks" id="tracks"></div>
+        <div class="playhead" id="playhead" style="left:0px"></div>
+      </div>
+
+      <div class="transport">
+        <button id="bRewind" title="Rewind to 0">|&lt;</button>
+        <button id="bPrevKey" title="Previous key on the selected track">&lt;&#9670;</button>
+        <button id="bStepBack" title="Back one frame (1/30 s)">&#9666;&#9666;</button>
+        <button id="bPlay" class="wide" title="Play / pause">&#9654;</button>
+        <button id="bStepFwd" title="Forward one frame (1/30 s)">&#9656;&#9656;</button>
+        <button id="bNextKey" title="Next key on the selected track">&#9670;&gt;</button>
+        <button id="bEnd" title="Jump to the end">&gt;|</button>
+      </div>
+
+      <div class="fields">
+        <div class="field">Time <input type="number" id="fTime" step="0.05" min="0" value="0.00"></div>
+        <div class="field">Length <input type="number" id="fLen" step="0.5" min="0.5" value="5.0"></div>
+      </div>
+
+      <div class="hint" id="hint">t = 0.00 s &nbsp;|&nbsp; Cube: between key 1 and 2</div>
+
+      <div class="sep"></div>
+      <div style="font-size:11px;color:var(--dim)">
+        Selected: <span id="selName" style="color:var(--text)">Cube</span> &nbsp;·&nbsp;
+        <span id="keyCount">3</span> keys
+      </div>
+      <div class="transport" style="margin-top:6px">
+        <button class="wide" style="width:80px">Add key</button>
+        <button class="wide" style="width:88px">Remove key</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="notes">
+    <h2 style="margin-top:0">What replaced what</h2>
+    <ul>
+      <li><b>The separate time slider is gone.</b> The strip itself is the control:
+        click or drag on the ruler or any track row and the playhead follows the
+        pointer. That is the "progress the time within it" you asked for — one
+        surface that both shows where you are and sets it.</li>
+      <li><b>Transport, left to right:</b> rewind to 0 · jump to the previous key
+        on the selected track · back one frame · play/pause · forward one frame ·
+        next key · jump to the end. The two key-jump buttons are the ones you will
+        actually use while placing keys; frame stepping is for checking an
+        interpolation.</li>
+      <li><b>Time and Length stay as typeable fields.</b> Scrubbing is fast but not
+        precise, and setting a key at exactly 2.5&nbsp;s needs a number. Length is
+        the existing field, unmoved.</li>
+    </ul>
+
+    <h2>What the strip shows</h2>
+    <ul>
+      <li>One row per animated shape, newest at the bottom. The selected shape's
+        row is highlighted so you can tell which track the key buttons act on.</li>
+      <li>Diamonds are keys, at their time. <b>Read-only in this version</b> —
+        you can look at them, not drag them. Dragging keys means hit-testing,
+        drag thresholds, undo, and collision when two keys land on the same
+        frame; worth doing, but as its own change once the strip is proven.</li>
+      <li>Rows are 20&nbsp;px, so a scene with more than about eight animated
+        shapes will want the strip to scroll. Below that it costs about 60&nbsp;px
+        of panel height total, replacing the ~24&nbsp;px the slider took.</li>
+    </ul>
+
+    <h2>The thing to look at</h2>
+    <p style="margin-bottom:8px">At 360&nbsp;px the whole panel is about 344&nbsp;px
+    of usable width. A 5-second timeline is therefore ~68&nbsp;px per second, and a
+    key at 1.00&nbsp;s sits 4.5&nbsp;px from a key at 0.93&nbsp;s. That is fine for
+    seeing structure and rough scrubbing, and too tight for precise work — which is
+    why the numeric Time field stays.</p>
+
+    <div class="q">
+      <b>Answered, and built that way:</b>
+      <ol style="color:var(--dim);margin:8px 0 0;padding-left:18px">
+        <li style="margin-bottom:6px"><b>All tracks</b>, scrolling once there
+          are more than six. A shape earns its row by being keyed &mdash; it
+          appears when its first keyframe is placed, not when it is selected.</li>
+        <li><b>1/30&nbsp;s</b> frame step.</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<h2>Try a different scene</h2>
+<p>The states worth judging are the ones that are not the happy path.</p>
+<div class="transport" style="max-width:520px">
+  <button class="wide" style="width:auto;padding:4px 12px" onclick="loadScene(0)">3 tracks</button>
+  <button class="wide" style="width:auto;padding:4px 12px" onclick="loadScene(1)">1 track</button>
+  <button class="wide" style="width:auto;padding:4px 12px" onclick="loadScene(2)">8 tracks</button>
+  <button class="wide" style="width:auto;padding:4px 12px" onclick="loadScene(3)">No tracks</button>
+  <button class="wide" style="width:auto;padding:4px 12px" onclick="loadScene(4)">Clustered keys</button>
+</div>
+
+</div>
+
+<script>
+const SCENES = [
+  { sel: 0, tracks: [
+      { name: "Cube",   keys: [0, 1.2, 3.4] },
+      { name: "Sphere", keys: [0.5, 2.0, 4.6] },
+      { name: "Teapot", keys: [1.0, 2.5] } ] },
+  { sel: 0, tracks: [ { name: "Sphere", keys: [0, 2.5, 5.0] } ] },
+  { sel: 3, tracks: [
+      { name: "Cube",        keys: [0, 1.2, 3.4] },
+      { name: "Sphere",      keys: [0.5, 2.0, 4.6] },
+      { name: "Teapot",      keys: [1.0, 2.5] },
+      { name: "Icosahedron", keys: [0, 0.8, 1.6, 2.4, 3.2, 4.0] },
+      { name: "Mobius",      keys: [2.2, 4.8] },
+      { name: "Pyramid",     keys: [0.3, 3.9] },
+      { name: "Custom",      keys: [1.5] },
+      { name: "gargoyle.obj", keys: [0, 5.0] } ] },
+  { sel: -1, tracks: [] },
+  { sel: 0, tracks: [
+      { name: "Cube",   keys: [0.90, 0.97, 1.04, 1.11, 3.0] },
+      { name: "Sphere", keys: [1.0, 1.05] } ] },
+];
+
+let scene = SCENES[0];
+let length = 5.0;
+let time = 0.0;
+let playing = false;
+let raf = null;
+
+const ruler = document.getElementById('ruler');
+const tracks = document.getElementById('tracks');
+const playhead = document.getElementById('playhead');
+const fTime = document.getElementById('fTime');
+const fLen = document.getElementById('fLen');
+const hint = document.getElementById('hint');
+
+function width() { return ruler.clientWidth || 344; }
+function xOf(t) { return (t / length) * width(); }
+function tOf(x) { return Math.max(0, Math.min(length, (x / width()) * length)); }
+
+function drawRuler() {
+  ruler.innerHTML = '';
+  const step = length <= 2 ? 0.25 : (length <= 6 ? 0.5 : 1.0);
+  for (let t = 0; t <= length + 1e-6; t += step) {
+    const major = Math.abs(t - Math.round(t)) < 1e-6;
+    const d = document.createElement('div');
+    d.className = 'tick ' + (major ? 'major' : 'minor');
+    d.style.left = xOf(t) + 'px';
+    ruler.appendChild(d);
+    if (major) {
+      const l = document.createElement('div');
+      l.className = 'tlabel';
+      l.style.left = xOf(t) + 'px';
+      l.textContent = t.toFixed(0) + 's';
+      ruler.appendChild(l);
+    }
+  }
+}
+
+function drawTracks() {
+  tracks.innerHTML = '';
+  if (scene.tracks.length === 0) {
+    const e = document.createElement('div');
+    e.className = 'empty';
+    e.textContent = 'No keyframed shapes — select one and press Add key';
+    tracks.appendChild(e);
+    return;
+  }
+  scene.tracks.forEach((tr, i) => {
+    const row = document.createElement('div');
+    row.className = 'row' + (i === scene.sel ? ' sel' : '');
+    const n = document.createElement('div');
+    n.className = 'rowname';
+    n.textContent = tr.name;
+    row.appendChild(n);
+    tr.keys.forEach(k => {
+      const d = document.createElement('div');
+      d.className = 'key';
+      d.style.left = xOf(k) + 'px';
+      row.appendChild(d);
+    });
+    row.addEventListener('mousedown', e => { scene.sel = i; drawTracks(); scrub(e); });
+    tracks.appendChild(row);
+  });
+}
+
+function status() {
+  playhead.style.left = xOf(time) + 'px';
+  fTime.value = time.toFixed(2);
+  let s = 't = ' + time.toFixed(2) + ' s';
+  const tr = scene.tracks[scene.sel];
+  if (tr) {
+    const before = tr.keys.filter(k => k <= time + 1e-6).length;
+    if (before === 0) s += ' | ' + tr.name + ': before the first key';
+    else if (before >= tr.keys.length) s += ' | ' + tr.name + ': holding the last key';
+    else s += ' | ' + tr.name + ': between key ' + before + ' and ' + (before + 1);
+    document.getElementById('selName').textContent = tr.name;
+    document.getElementById('keyCount').textContent = tr.keys.length;
+  } else {
+    document.getElementById('selName').textContent = '(none)';
+    document.getElementById('keyCount').textContent = '0';
+  }
+  hint.textContent = s;
+}
+
+function redraw() { drawRuler(); drawTracks(); status(); }
+
+function scrub(e) {
+  const r = ruler.getBoundingClientRect();
+  time = tOf(e.clientX - r.left);
+  status();
+}
+let dragging = false;
+function startDrag(e) { dragging = true; scrub(e); e.preventDefault(); }
+ruler.addEventListener('mousedown', startDrag);
+tracks.addEventListener('mousedown', e => { dragging = true; e.preventDefault(); });
+window.addEventListener('mousemove', e => { if (dragging) scrub(e); });
+window.addEventListener('mouseup', () => { dragging = false; });
+
+function setPlaying(p) {
+  playing = p;
+  const b = document.getElementById('bPlay');
+  b.textContent = p ? '⏸' : '▶';
+  b.classList.toggle('on', p);
+  if (p && !raf) { last = performance.now(); raf = requestAnimationFrame(tick); }
+  if (!p && raf) { cancelAnimationFrame(raf); raf = null; }
+}
+let last = 0;
+function tick(now) {
+  const dt = (now - last) / 1000; last = now;
+  time += dt;
+  if (time > length) time -= length;      // loops on length, not on the last key
+  status();
+  raf = requestAnimationFrame(tick);
+}
+
+const FRAME = 1 / 30;
+document.getElementById('bPlay').onclick = () => setPlaying(!playing);
+document.getElementById('bRewind').onclick = () => { time = 0; status(); };
+document.getElementById('bEnd').onclick = () => { time = length; status(); };
+document.getElementById('bStepBack').onclick = () => { time = Math.max(0, time - FRAME); status(); };
+document.getElementById('bStepFwd').onclick = () => { time = Math.min(length, time + FRAME); status(); };
+document.getElementById('bPrevKey').onclick = () => {
+  const tr = scene.tracks[scene.sel]; if (!tr) return;
+  const prev = tr.keys.filter(k => k < time - 1e-4);
+  time = prev.length ? prev[prev.length - 1] : 0;
+  status();
+};
+document.getElementById('bNextKey').onclick = () => {
+  const tr = scene.tracks[scene.sel]; if (!tr) return;
+  const next = tr.keys.filter(k => k > time + 1e-4);
+  time = next.length ? next[0] : length;
+  status();
+};
+fTime.onchange = () => { time = Math.max(0, Math.min(length, parseFloat(fTime.value) || 0)); status(); };
+fLen.onchange = () => {
+  length = Math.max(0.5, parseFloat(fLen.value) || 5);
+  if (time > length) time = length;
+  redraw();
+};
+
+function loadScene(i) { scene = JSON.parse(JSON.stringify(SCENES[i])); time = 0; redraw(); }
+window.loadScene = loadScene;
+
+redraw();
+</script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+editor-scene 1
+# Editor scene file. Plain text on purpose - safe to read and diff.
+
+[scene]
+shapeCounter=8
+
+[camera]
+position=-2.1855695e-07 0 5
+target=0 0 0
+radius=5
+orbit=1.5707964 0
+
+[render]
+mode=1
+background=0.1 0.1 0.1
+width=640
+height=480
+maxDepth=4
+samplesPerPixel=1
+shadows=1
+reflections=1
+refractions=1
+transparentShadows=1
+shadowBias=0.001
+
+[timeline]
+length=5
+loop=1
+
+[shape]
+type=Light
+id=1
+name=Light
+position=1.5 3 4
+rotation=0 0 0
+uniformScaling=1
+scale=1
+scaleXYZ=1 1 1
+colorIndex=30
+customColor=0 0 0
+material=1 1 1 32 0 0 1.5
+lightType=0
+enabled=1
+lightColor=1 1 1
+intensity=1
+scales=0.15 1 1.75
+direction=0 -1 0
+attenuation=1 0 0
+
+[shape]
+type=Sphere
+id=2
+name=Sphere
+position=2.6 2.5 -4.3
+rotation=50 253 0
+uniformScaling=1
+scale=1
+scaleXYZ=1 1 1
+colorIndex=31
+customColor=1 1 1
+material=1 1 0.69 32 0 0 1.5
+texture=data/textures/2k_sun.jpg
+
+[shape]
+type=Teapot
+id=3
+name=Teapot
+position=-1.3 -0.5 -0.6
+rotation=0 57 0
+uniformScaling=1
+scale=2.2
+scaleXYZ=1 1 1
+colorIndex=31
+customColor=1 1 1
+material=1 0.65 1 106.5 0 0 1.5
+texture=data/textures/marble.png
+
+[shape]
+type=Light
+id=4
+name=Light
+position=-20.2 6 12
+rotation=0 0 0
+uniformScaling=1
+scale=1
+scaleXYZ=1 1 1
+colorIndex=30
+customColor=0 0 0
+material=1 1 1 32 0 0 1.5
+lightType=1
+enabled=1
+lightColor=1 1 1
+intensity=0.46
+scales=0.15 1 0.8
+direction=1.24 -1 -1.22
+attenuation=1 0 0
+
+[shape]
+type=Cube
+id=5
+name=Cube
+position=1.5 0 -1.9
+rotation=0 292 0
+uniformScaling=1
+scale=1
+scaleXYZ=1 1 1
+colorIndex=31
+customColor=1 1 1
+material=1 1 1 30 0 0 1.5
+texture=data/textures/gradient.png
+
+[shape]
+type=Cube
+id=6
+name=Cube
+position=1.3 1.4 -4
+rotation=2 25 0
+uniformScaling=1
+scale=1
+scaleXYZ=1 1 1
+colorIndex=31
+customColor=1 1 1
+material=1 1 1 16.5 0 0 1.5
+texture=data/textures/gradient.png
+
+[shape]
+type=Cube
+id=7
+name=Cube
+position=0 3.5 -8.1
+rotation=0 16 0
+uniformScaling=1
+scale=1
+scaleXYZ=1 1 1
+colorIndex=31
+customColor=1 1 1
+material=1 1 1 17.5 0 0 1.5
+texture=data/textures/gradient.png
+
+[shape]
+type=Cube
+id=8
+name=Cube
+position=-2.8 10.4 -25.6
+rotation=0 17 0
+uniformScaling=1
+scale=1
+scaleXYZ=1 1 1
+colorIndex=31
+customColor=1 1 1
+material=1 1 1 37 0 0 1.5
+texture=data/textures/gradient.png
+

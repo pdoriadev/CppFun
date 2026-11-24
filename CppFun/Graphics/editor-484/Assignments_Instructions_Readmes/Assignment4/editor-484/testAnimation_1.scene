@@ -1,0 +1,153 @@
+editor-scene 1
+# Editor scene file. Plain text on purpose - safe to read and diff.
+
+[scene]
+shapeCounter=9
+
+[camera]
+position=-2.1855695e-07 0 5
+target=0 0 0
+radius=5
+orbit=1.5707964 0
+
+[render]
+mode=1
+background=0.1 0.1 0.1
+width=640
+height=480
+maxDepth=4
+samplesPerPixel=1
+shadows=1
+reflections=1
+refractions=1
+transparentShadows=1
+shadowBias=0.001
+
+[timeline]
+length=10.000001
+loop=1
+
+[track]
+shape=2
+loop=1
+key=0 0 0 0 0 0 0 1 1 1 2
+key=3.2000003 0 -1.1 0 0 243 0 1 1 1 4
+key=5.0000005 0 -0.5781396 0 0 298.50696 0 1 1 1 1
+
+[track]
+shape=4
+loop=1
+key=0 1.5 -4.1 -1.7 89 0 263 1 1 1 0
+key=1.1918604 1.5 -1.4955642 -1.7 89 0 340.69165 1 1 1 1
+key=2.7 1.5 1.7999997 -1.7 89 0 79 1 1 1 2
+key=3.226744 1.5 2.3454275 -1.7 89 0 43.19148 1 1 1 3
+key=5.0000005 1.5 4.1 -1.7 89 0 288 1 1 1 1
+
+[track]
+shape=6
+loop=0
+key=0 -9.7 0 0 148.19789 149.88194 211.80211 6.3 6.3 6.3 1
+key=2.6744184 0 0 0 148.19789 149.88194 211.80211 0.1 0.1 0.1 1
+key=5.033334 3.7 0 0 156.198 217.882 342.802 0.5 0.5 0.5 1
+
+[track]
+shape=7
+loop=1
+key=0 0.1 -1.3133962 0 0 159.089 0 0.1 0.1 0.1 1
+key=5.033334 0.1 -1.3133962 0 0 309.089 0 0.3 0.3 0.3 1
+
+[track]
+shape=8
+loop=0
+key=0 0 0 180 0 0 0 1 1 1 1
+key=1.1918604 0 0 0 0 180 180 1 1 1 1
+key=2.6666667 0 0 0 0 359 180 1 1 1 1
+key=5.0000005 0 0 0 0 178 180 1 1 1 3
+key=10.000001 0 0 0 0 299.96057 180 1 1 1 1
+
+[track]
+shape=9
+loop=0
+key=0 -1.5 -1.3 0 6 75 0 1 1 1 4
+key=10.000001 -1.5 -1.3 0 6 250 6 1 1 1 1
+
+[shape]
+type=Cube
+id=2
+name=Cube
+position=0 -1.0518698 0
+rotation=0 248.11931 0
+uniformScaling=1
+scale=1
+scaleXYZ=1 1 1
+colorIndex=2
+customColor=0 0 0
+material=1 1 1 32 0 0 1.5
+
+[shape]
+type=ImportShape
+id=6
+name=Mario
+position=0.7133478 0 0
+rotation=149.74028 162.99213 237.05846
+uniformScaling=1
+scale=0.17711869
+scaleXYZ=1 1 1
+colorIndex=1
+customColor=0 0 0
+material=1 1 1 32 0 0 1.5
+source=data/obj/mario.obj
+
+[shape]
+type=Custom
+id=4
+name=TessellatedSphere
+position=1.5 2.16214 -1.7
+rotation=89 0 55.2247
+uniformScaling=1
+scale=1
+scaleXYZ=1 1 1
+colorIndex=11
+customColor=0 0 0
+material=1 1 1 32 0 0 1.5
+
+[shape]
+type=ImportShape
+id=7
+name=Bunny
+position=0.1 -1.3133962 0
+rotation=0 252.34357 0
+uniformScaling=1
+scale=0.22433946
+scaleXYZ=1 1 1
+colorIndex=1
+customColor=0 0 0
+material=1 1 1 32 0 0 1.5
+source=data/obj/bunny.obj
+
+[shape]
+type=Pyramid
+id=8
+name=Pyramid
+position=0 0 0
+rotation=0 34.483643 180
+uniformScaling=1
+scale=1
+scaleXYZ=1 1 1
+colorIndex=5
+customColor=0 0 0
+material=1 1 1 32 0 0 1.5
+
+[shape]
+type=Teapot
+id=9
+name=Teapot
+position=-1.5 -1.3 0
+rotation=6 115.683365 1.3948584
+uniformScaling=1
+scale=1
+scaleXYZ=1 1 1
+colorIndex=4
+customColor=0 0 0
+material=1 1 1 32 0 0 1.5
+
